@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="關於" description="關於 JTpHR — 攝影師簡介與聯繫方式">
+  <section class="max-w-4xl mx-auto px-6 py-24">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Profile -->
+      <div class="md:col-span-1">
+        <div class="w-48 h-48 rounded-full bg-brand-light mx-auto md:mx-0 flex items-center justify-center text-text-muted/30 mb-6">
+          <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="md:col-span-2">
+        <h1 class="text-4xl font-bold mb-6">關於我</h1>
+        <div class="prose prose-invert max-w-none space-y-4 text-text-muted leading-relaxed">
+          <p>
+            嗨，我是 JTpHR。
+          </p>
+          <p>
+            攝影對我來說是記錄生活的方式 — 旅行中的光影、街頭的瞬間、日常的片段，
+            每一張照片都是一段故事。
+          </p>
+          <p>
+            這個網站是我的個人空間，分享攝影作品、旅行遊記，以及生活中值得記住的時刻。
+          </p>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-white/5">
+          <h2 class="text-lg font-bold mb-4">器材</h2>
+          <ul class="space-y-2 text-text-muted text-sm">
+            <li>待補充...</li>
+          </ul>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-white/5">
+          <h2 class="text-lg font-bold mb-4">聯繫</h2>
+          <div class="flex gap-6">
+            <a href="https://instagram.com" target="_blank" class="text-text-muted hover:text-accent transition-colors">
+              Instagram
+            </a>
+            <a href="https://500px.com" target="_blank" class="text-text-muted hover:text-accent transition-colors">
+              500px
+            </a>
+            <a href="mailto:contact@jtphr.com" class="text-text-muted hover:text-accent transition-colors">
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

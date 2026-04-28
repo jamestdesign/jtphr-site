@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+import '../styles/global.css';
+
+const { title, description = 'JTpHR — 攝影作品集 · 遊記 · 生活紀錄', image } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="zh-TW" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={image} />}
+    <title>{title} | JTpHR</title>
+  </head>
+  <body class="bg-surface text-text min-h-screen flex flex-col">
+    <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold tracking-wider hover:text-accent transition-colors">
+          JTpHR
+        </a>
+        <div class="flex gap-8 text-sm font-medium">
+          <a href="/portfolio" class="hover:text-accent transition-colors">作品集</a>
+          <a href="/blog" class="hover:text-accent transition-colors">遊記</a>
+          <a href="/about" class="hover:text-accent transition-colors">關於</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-1 pt-16">
+      <slot />
+    </main>
+
+    <footer class="border-t border-white/5 py-8">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-text-muted text-sm">
+        <p>&copy; 2026 JTpHR. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="https://instagram.com" target="_blank" class="hover:text-accent transition-colors">Instagram</a>
+          <a href="https://500px.com" target="_blank" class="hover:text-accent transition-colors">500px</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

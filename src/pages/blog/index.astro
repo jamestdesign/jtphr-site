@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="遊記" description="JTpHR 旅行遊記 — 用文字與影像記錄每一趟旅程">
+  <section class="max-w-4xl mx-auto px-6 py-24">
+    <h1 class="text-4xl font-bold mb-2">遊記</h1>
+    <p class="text-text-muted mb-12">旅行中的故事與影像</p>
+
+    <div class="space-y-12">
+      <article class="group">
+        <a href="#" class="block">
+          <div class="aspect-[21/9] rounded-lg overflow-hidden bg-brand-light mb-6 flex items-center justify-center text-text-muted/30">
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xs px-3 py-1 rounded-full border border-white/10 text-text-muted">日本</span>
+            <span class="text-xs text-text-muted">2026 年 3 月 31 日</span>
+          </div>
+          <h2 class="text-2xl font-bold group-hover:text-accent transition-colors mb-2">
+            門真 Mon°Ma — 大阪近郊的秘境散步
+          </h2>
+          <p class="text-text-muted leading-relaxed">
+            即將上線...你的第一篇遊記將會出現在這裡。
+          </p>
+        </a>
+      </article>
+    </div>
+
+    <p class="text-center text-text-muted mt-16 border-t border-white/5 pt-12">
+      寫好遊記後，這裡會自動更新
+    </p>
+  </section>
+</BaseLayout>
