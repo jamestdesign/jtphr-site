@@ -10,16 +10,15 @@
       "目前：iCloud 同步（只支援 Mac + iPhone + iPad）",
       "目標：擴展到 Windows + Android，5 平台無痛同步",
       "方案：Obsidian Sync 官方付費 USD $4/月（年付 $48 ≈ NT$1500/年）",
-      "優點：端對端加密、自動衝突處理、1 年版本歷史",
-      "步驟：",
-      "1. 訂閱 Obsidian Sync 帳號",
-      "2. 把 vault 從 iCloud 資料夾搬出來（避免雙重同步衝突）",
-      "3. 在 Obsidian 設定 → Sync → 啟用並選擇 vault",
-      "4. 在 Win / Android 安裝 Obsidian → 登入相同帳號 → 連接同一個 vault",
-      "5. 驗證跨平台筆記同步無誤後，確認 iCloud 端可移除"
+      "備註：目前已建 JTpHR 網站作為替代閱讀方案（jtphr-site.vercel.app/kb）"
     ],
-    "refs": [],
-    "source": ""
+    "refs": [
+      {
+        "path": "ideas/ai-tools/Obsidian_Claude_Code_第二大腦_Claudian.md",
+        "id": "ideas__ai-tools__Obsidian_Claude_Code_第二大腦_Claudian"
+      }
+    ],
+    "source": "多裝置使用需求（Mac + iPhone + iPad + Win + Android）"
   },
   {
     "category": "Ideas",
@@ -72,7 +71,12 @@
       "待確認：NAS 品牌、容量、與 Mac 的連接方式（SMB / AFP / NFS）",
       "後續：Claude 從 NAS 路徑讀取素材，用 4 種場景流水線剪輯"
     ],
-    "refs": [],
+    "refs": [
+      {
+        "path": "ideas/ai-tools/AI影音創作/教學/個人攝影自動化流水線_4種場景設計.md",
+        "id": "ideas__ai-tools__AI影音創作__教學__個人攝影自動化流水線_4種場景設計"
+      }
+    ],
     "source": ""
   },
   {
@@ -133,13 +137,17 @@
     "doneDate": "",
     "done": false,
     "details": [
-      "靈感：影片裡的 scheduled + subagent 自動值勤模式",
       "設計：每天早上 8 點自動跑 3 個 subagent 蒐集當日財經新聞 → 彙整推送到 Telegram 股票群",
       "需要：macOS launchd / cron 排程、subagent 並行架構、Telegram bot 推送整合",
       "優先順序：股票腳本 v8 穩定後再做"
     ],
-    "refs": [],
-    "source": ""
+    "refs": [
+      {
+        "path": "ideas/ai-tools/Claude_Routines_取代n8n_全自動工作流.md",
+        "id": "ideas__ai-tools__Claude_Routines_取代n8n_全自動工作流"
+      }
+    ],
+    "source": "Claude Cowork 影片 — scheduled + subagent 自動值勤模式"
   },
   {
     "category": "Ideas",
@@ -170,12 +178,16 @@
     "doneDate": "",
     "done": false,
     "details": [
-      "影片裡 Claude.ai 用對話建立客製化 skill",
       "我的環境可以複製：跟 Claude Code 說「幫我為 XXX 建 skill」走互動流程",
       "待測試：實際跑一次完整流程，看輸出品質"
     ],
-    "refs": [],
-    "source": ""
+    "refs": [
+      {
+        "path": "ideas/ai-tools/威森_Claude_Skill_3個實用技能_安裝教學.md",
+        "id": "ideas__ai-tools__威森_Claude_Skill_3個實用技能_安裝教學"
+      }
+    ],
+    "source": "Claude Cowork 影片 — 用對話建立客製化 skill"
   },
   {
     "category": "Ideas",
@@ -185,14 +197,17 @@
     "doneDate": "",
     "done": false,
     "details": [
-      "建立定期讓 Claude 掃描 KnowledgeBase 的指令",
       "執行內容：找出矛盾/過時筆記、孤立筆記、可合併主題",
-      "參考：Karpathy 知識庫編譯理論中的「體檢（Maintenance）」環節",
       "建議頻率：每週一次",
       "後續：可結合 obsidian-cli + obsidian-base skill 實現自動化"
     ],
-    "refs": [],
-    "source": ""
+    "refs": [
+      {
+        "path": "ideas/ai-tools/知識庫編譯理論_Karpathy_NotebookLM_Gemini_Obsidian.md",
+        "id": "ideas__ai-tools__知識庫編譯理論_Karpathy_NotebookLM_Gemini_Obsidian"
+      }
+    ],
+    "source": "Karpathy 知識庫編譯理論 — 「體檢（Maintenance）」環節"
   },
   {
     "category": "股票",
@@ -207,7 +222,12 @@
       "選單 Plan B（含進階子選單）+ 公式可調 + 健康檢查",
       "60+ 檔股票追蹤中"
     ],
-    "refs": [],
+    "refs": [
+      {
+        "path": "stocks/tool/2026趨勢股_追蹤腳本_開發歷程_v7_v8.md",
+        "id": "stocks__tool__2026趨勢股_追蹤腳本_開發歷程_v7_v8"
+      }
+    ],
     "source": ""
   },
   {
@@ -279,13 +299,17 @@
     "doneDate": "",
     "done": false,
     "details": [
-      "起源：YouTube 賺財富看先探影片",
       "已加 watchlist：6257 矽格、3265 台星科、7769 鴻勁、7822 倍利科、6515 穎崴",
       "待補完：產業地圖筆記寫入 stocks/趨勢觀察/CPO封測_五強競爭_產業地圖.md",
       "包含：上中下游分工、各家技術優勢、關鍵客戶、財務體質比較"
     ],
-    "refs": [],
-    "source": ""
+    "refs": [
+      {
+        "path": "stocks/趨勢觀察/矽光子CPO_台廠供應鏈地圖.md",
+        "id": "stocks__趨勢觀察__矽光子CPO_台廠供應鏈地圖"
+      }
+    ],
+    "source": "YouTube 賺財富看先探影片"
   },
   {
     "category": "股票",
