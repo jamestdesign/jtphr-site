@@ -24,8 +24,15 @@ category: "AI影音-教學"
 
 # Claude 自動剪輯影片 — 三大剪輯軟體 MCP 完整整理
 
-> [!important] 一句話結論
-> Claude 透過 **MCP（Model Context Protocol）** 可以直接控制 **Adobe Premiere Pro / Apple Final Cut Pro X / CapCut** 三大主流剪輯軟體，全部都有開源 MCP server 可用。**自動化程度排序：Premiere（最高，269 工具）> FCPX（中，53-100 工具）> CapCut（中，11+ 工具）**。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話結論</p>
+<div class="text-sm text-gray-300">
+
+Claude 透過 **MCP（Model Context Protocol）** 可以直接控制 **Adobe Premiere Pro / Apple Final Cut Pro X / CapCut** 三大主流剪輯軟體，全部都有開源 MCP server 可用。**自動化程度排序：Premiere（最高，269 工具）> FCPX（中，53-100 工具）> CapCut（中，11+ 工具）**。
+
+</div>
+</div>
+
 
 ---
 
@@ -33,13 +40,20 @@ category: "AI影音-教學"
 
 來源：chatvideopro on Instagram
 
-!_attachments/auto-video-editing/01-chatvideopro-claude-premiere.jpg
+![](/images/kb/auto-video-editing/01-chatvideopro-claude-premiere.jpg)
 
 > 「**Claude cuts 2 hours in less than 2 mins**」
 > CTA: Comment "Chat Video Pro" to get Claude to cut...
 
-> [!warning] 又是營銷漏斗
-> chatvideopro 是「留言領教學」模式。**真正的 MCP 工具全部是公開開源的**，下面整理三大平台的選項。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 又是營銷漏斗</p>
+<div class="text-sm text-gray-300">
+
+chatvideopro 是「留言領教學」模式。**真正的 MCP 工具全部是公開開源的**，下面整理三大平台的選項。
+
+</div>
+</div>
+
 
 ---
 
@@ -324,12 +338,19 @@ Buffer / Hootsuite / 自家腳本
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] **不要急著裝**，先想清楚你要不要做影片內容
-> - [ ] 如果決定試 → 先裝 **CapCut + mrbuslov**（門檻最低、免費）
-> - [ ] 如果是長期計畫 → 評估 **FCPX 買斷 + SpliceKit**（最划算）
-> - [ ] **不**留言「Chat Video Pro」（避免營銷漏斗）
-> - [ ] 順便研究 SpliceKit 是不是真的好用（很新但社群評價高）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] **不要急著裝**，先想清楚你要不要做影片內容
+- [ ] 如果決定試 → 先裝 **CapCut + mrbuslov**（門檻最低、免費）
+- [ ] 如果是長期計畫 → 評估 **FCPX 買斷 + SpliceKit**（最划算）
+- [ ] **不**留言「Chat Video Pro」（避免營銷漏斗）
+- [ ] 順便研究 SpliceKit 是不是真的好用（很新但社群評價高）
+
+</div>
+</div>
+
 
 ---
 

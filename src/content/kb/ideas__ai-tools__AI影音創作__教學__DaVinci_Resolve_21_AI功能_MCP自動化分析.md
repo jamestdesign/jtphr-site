@@ -19,17 +19,24 @@ category: "AI影音-教學"
 
 # DaVinci Resolve 21 AI 新功能 + MCP 自動化分析
 
-> [!important] 核心結論
-> DaVinci Resolve Studio（$295 一次買斷）是**性價比最高的自動化剪輯方案**：MCP 工具數最多（342）、Python 原生支援、調色業界第一、新版內建 AI 語音生成（可取代 ElevenLabs）。適合取代 FCPX 成為你的主力剪輯工具。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心結論</p>
+<div class="text-sm text-gray-300">
+
+DaVinci Resolve Studio（$295 一次買斷）是**性價比最高的自動化剪輯方案**：MCP 工具數最多（342）、Python 原生支援、調色業界第一、新版內建 AI 語音生成（可取代 ElevenLabs）。適合取代 FCPX 成為你的主力剪輯工具。
+
+</div>
+</div>
+
 
 ---
 
 ## 📑 原圖
 
-- !_attachments/davinci-resolve-21/01-features.jpg
-- !_attachments/davinci-resolve-21/02-features.jpg
-- !_attachments/davinci-resolve-21/03-features.jpg
-- !_attachments/davinci-resolve-21/04-features.jpg
+- ![](/images/kb/davinci-resolve-21/01-features.jpg)
+- ![](/images/kb/davinci-resolve-21/02-features.jpg)
+- ![](/images/kb/davinci-resolve-21/03-features.jpg)
+- ![](/images/kb/davinci-resolve-21/04-features.jpg)
 
 ---
 
@@ -80,10 +87,17 @@ AI 自動識取場記板上的資訊（鏡頭、碟次、備註），匯入 logg
 
 ### 重要限制
 
-> [!warning]
-> **免費版 DaVinci Resolve 的 Scripting API 非常有限** → MCP 需要 **Studio 版**
-> - 價格：USD $295（約 NT$9,500）**一次買斷**
-> - 不是訂閱制
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Warning</p>
+<div class="text-sm text-gray-300">
+
+**免費版 DaVinci Resolve 的 Scripting API 非常有限** → MCP 需要 **Studio 版**
+- 價格：USD $295（約 NT$9,500）**一次買斷**
+- 不是訂閱制
+
+</div>
+</div>
+
 
 ---
 
@@ -138,12 +152,19 @@ Claude → Kling（影片）→ DaVinci Resolve（剪輯+調色+語音+銳化+�
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] 下載免費版 DaVinci Resolve 試玩介面
-> - [ ] 評估是否買 Studio 版 $295（一次買斷）
-> - [ ] 安裝 samuelgursky/davinci-resolve-mcp（342 工具）
-> - [ ] 更新 個人攝影自動化流水線_4種場景設計 筆記
-> - [ ] 更新 影像工廠_Claude_Kling_ElevenLabs_n8n自動化工作流 — 去掉 ElevenLabs 改用 DaVinci Speech Generator
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 下載免費版 DaVinci Resolve 試玩介面
+- [ ] 評估是否買 Studio 版 $295（一次買斷）
+- [ ] 安裝 samuelgursky/davinci-resolve-mcp（342 工具）
+- [ ] 更新 個人攝影自動化流水線_4種場景設計 筆記
+- [ ] 更新 影像工廠_Claude_Kling_ElevenLabs_n8n自動化工作流 — 去掉 ElevenLabs 改用 DaVinci Speech Generator
+
+</div>
+</div>
+
 
 ---
 

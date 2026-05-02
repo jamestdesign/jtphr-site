@@ -28,6 +28,18 @@ const { Content } = await render(note);
         )}
       </div>
       <h1 class="text-3xl md:text-4xl font-bold leading-tight">{note.data.title}</h1>
+      {(note.data['來源'] || note.data['連結']) && (
+        <div class="mt-3 flex flex-col gap-1">
+          {note.data['來源'] && (
+            <p class="text-xs text-text-muted">來源：{note.data['來源']}</p>
+          )}
+          {note.data['連結'] && (
+            <a href={note.data['連結']} target="_blank" class="text-xs text-accent hover:underline break-all">
+              🔗 {note.data['連結']}
+            </a>
+          )}
+        </div>
+      )}
       {(note.data.tags || []).length > 0 && (
         <div class="flex gap-2 flex-wrap mt-4">
           {(note.data.tags || []).map(tag => (

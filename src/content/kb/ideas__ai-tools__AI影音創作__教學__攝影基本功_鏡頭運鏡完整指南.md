@@ -19,9 +19,16 @@ category: "AI影音-教學"
 
 # 攝影基本功 — 鏡頭運鏡完整指南
 
-> [!important] 這份筆記的角色
-> 把 威森的 universal-video-prompt 八層架構 跟用戶提供的鏡頭術語教學整合成一份**可作為查詢手冊**的完整指南。
-> 用途：寫影片 prompt 之前先翻這份，找出對的鏡頭語言。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 這份筆記的角色</p>
+<div class="text-sm text-gray-300">
+
+把 威森的 universal-video-prompt 八層架構 跟用戶提供的鏡頭術語教學整合成一份**可作為查詢手冊**的完整指南。
+用途：寫影片 prompt 之前先翻這份，找出對的鏡頭語言。
+
+</div>
+</div>
+
 
 ---
 
@@ -57,9 +64,16 @@ category: "AI影音-教學"
 
 ## 第 1 層：Medium（景別 / 鏡位大小）
 
-> [!quote] 核心觀念
-> 景別決定了**觀眾與角色之間的「心理距離」**。
-> 越特寫 → 越親密、越情緒；越遠 → 越客觀、越環境。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 核心觀念</p>
+<div class="text-sm text-gray-300">
+
+景別決定了**觀眾與角色之間的「心理距離」**。
+越特寫 → 越親密、越情緒；越遠 → 越客觀、越環境。
+
+</div>
+</div>
+
 
 ### 8 種標準景別
 
@@ -76,12 +90,19 @@ category: "AI影音-教學"
 
 ### 選擇原則
 
-> [!tip]
-> - **情緒戲** → CU / MCU
-> - **動作戲** → MS / MFS
-> - **建立環境** → WS / EWS
-> - **產品細節** → ECU
-> - **對話戲（標準）** → MCU 是 80% 場景的安全選擇
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 Tip</p>
+<div class="text-sm text-gray-300">
+
+- **情緒戲** → CU / MCU
+- **動作戲** → MS / MFS
+- **建立環境** → WS / EWS
+- **產品細節** → ECU
+- **對話戲（標準）** → MCU 是 80% 場景的安全選擇
+
+</div>
+</div>
+
 
 ### 範例 prompt 寫法
 
@@ -103,8 +124,15 @@ EWS of a lone figure walking through a vast desert at sunset, ...
 
 ### POV (Point of View) — 主觀鏡頭
 
-> [!quote]
-> 將攝影機模擬成角色的「**雙眼**」。觀眾看到的畫面就是角色看到的景物。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Quote</p>
+<div class="text-sm text-gray-300">
+
+將攝影機模擬成角色的「**雙眼**」。觀眾看到的畫面就是角色看到的景物。
+
+</div>
+</div>
+
 
 **特性**：
 - 極大增強代入感
@@ -146,8 +174,15 @@ POV shot of a hand reaching out to open a creaking door, dim light from behind
 
 ## 第 4 層：Movement（運鏡 / 鏡頭運動）
 
-> [!quote] 核心觀念
-> 動態鏡頭能**賦予畫面生命力**，**引導觀眾的注意力**。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 核心觀念</p>
+<div class="text-sm text-gray-300">
+
+動態鏡頭能**賦予畫面生命力**，**引導觀眾的注意力**。
+
+</div>
+</div>
+
 
 ### 11 種運鏡完整教學
 
@@ -174,8 +209,15 @@ POV shot of a hand reaching out to open a creaking door, dim light from behind
 - 效果：讓觀眾更靠近角色心境
 - 範例：Dolly in 進入角色的內心世界
 
-> [!warning] Dolly vs Zoom
-> Dolly 是「腳走過去」，Zoom 是「眼睛瞇起來」。Dolly 透視會變、Zoom 不會。專業片絕大多數選 Dolly。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Dolly vs Zoom</p>
+<div class="text-sm text-gray-300">
+
+Dolly 是「腳走過去」，Zoom 是「眼睛瞇起來」。Dolly 透視會變、Zoom 不會。專業片絕大多數選 Dolly。
+
+</div>
+</div>
+
 
 #### Tracking shot（跟拍鏡頭）
 攝影機**跟隨角色並排移動**。
@@ -212,23 +254,37 @@ POV shot of a hand reaching out to open a creaking door, dim light from behind
 
 ### 運鏡選擇原則
 
-> [!tip]
-> | 想要的效果 | 選什麼運鏡 |
-> |-----------|-----------|
-> | 穩定質感 | Dolly / Crane / Static |
-> | 真實紀錄感 | Handheld |
-> | 戲劇張力 | Slow zoom in |
-> | 動態能量 | Tracking / Orbit |
-> | 循環廣告 | Static（首尾一致才能 loop）|
-> | 揭示空間 | Pan / Tilt |
-> | 強烈轉場 | Whip pan |
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 Tip</p>
+<div class="text-sm text-gray-300">
+
+| 想要的效果 | 選什麼運鏡 |
+|-----------|-----------|
+| 穩定質感 | Dolly / Crane / Static |
+| 真實紀錄感 | Handheld |
+| 戲劇張力 | Slow zoom in |
+| 動態能量 | Tracking / Orbit |
+| 循環廣告 | Static（首尾一致才能 loop）|
+| 揭示空間 | Pan / Tilt |
+| 強烈轉場 | Whip pan |
+
+</div>
+</div>
+
 
 ---
 
 ## 第 5 層：Focus（焦點運用）
 
-> [!quote]
-> 焦點不僅是清晰度，**更是說故事的工具**。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Quote</p>
+<div class="text-sm text-gray-300">
+
+焦點不僅是清晰度，**更是說故事的工具**。
+
+</div>
+</div>
+
 
 ### Rack focus（變焦 / 換焦）
 在同一個畫面中，將**焦點從前景的主體轉移到背景的主體**（或反之）。
@@ -436,9 +492,16 @@ Color: vibrant saturated 或 pastel
 
 ## 🔄 後續擴充
 
-> [!todo] 待補完
-> - [ ] 加入鏡頭組合（剪接邏輯）— 兩個鏡頭如何銜接
-> - [ ] 加入聲音設計（diegetic vs non-diegetic）
-> - [ ] 加入色彩心理學的對應表
-> - [ ] 蒐集 10 個經典電影的鏡頭拆解（學習範例）
-> - [ ] 把 universal-image-prompt 的五層架構也整合一份對應指南
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ 待補完</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 加入鏡頭組合（剪接邏輯）— 兩個鏡頭如何銜接
+- [ ] 加入聲音設計（diegetic vs non-diegetic）
+- [ ] 加入色彩心理學的對應表
+- [ ] 蒐集 10 個經典電影的鏡頭拆解（學習範例）
+- [ ] 把 universal-image-prompt 的五層架構也整合一份對應指南
+
+</div>
+</div>
+

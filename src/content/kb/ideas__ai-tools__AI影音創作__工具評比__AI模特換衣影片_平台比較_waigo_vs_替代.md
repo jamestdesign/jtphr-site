@@ -19,8 +19,15 @@ category: "AI影音-工具評比"
 
 # AI 模特換衣影片 — waigo.ai 與替代方案比較
 
-> [!important] 一句話結論
-> waigo.ai 對於**懶人型台灣電商主**是極好的選擇（操作簡單、中文介面、有針對婚紗電商設計），但若想要更多控制權或更高品質，國際工具如 FASHN.ai、Modelia、Kling AI 都是值得評估的替代方案。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話結論</p>
+<div class="text-sm text-gray-300">
+
+waigo.ai 對於**懶人型台灣電商主**是極好的選擇（操作簡單、中文介面、有針對婚紗電商設計），但若想要更多控制權或更高品質，國際工具如 FASHN.ai、Modelia、Kling AI 都是值得評估的替代方案。
+
+</div>
+</div>
+
 
 ---
 
@@ -38,12 +45,19 @@ category: "AI影音-工具評比"
 
 ### 威森介紹的功能
 
-> [!example] 操作流程
-> 1. 上傳「模特照片」
-> 2. 上傳「衣服照片」
-> 3. 系統自動產出**模特穿上這件衣服的影片**
->
-> 影片含**配樂**，幾分鐘內完成。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 操作流程</p>
+<div class="text-sm text-gray-300">
+
+1. 上傳「模特照片」
+2. 上傳「衣服照片」
+3. 系統自動產出**模特穿上這件衣服的影片**
+
+影片含**配樂**，幾分鐘內完成。
+
+</div>
+</div>
+
 
 威森宣稱「**一部成本不到 100 元**」，主打目標客群：
 - 服飾品牌
@@ -176,8 +190,15 @@ category: "AI影音-工具評比"
 3. 不用寫 prompt，純上傳即可
 4. 可以快速驗證「AI 換衣影片是否符合你的商品」
 
-> [!tip] 試用方法
-> 拿你最賣的 1-2 個商品 + 從威森第一篇文章學到的方法生成 1 個 AI 模特圖 → 上傳到 waigo.ai → 看成果是否能用
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 試用方法</p>
+<div class="text-sm text-gray-300">
+
+拿你最賣的 1-2 個商品 + 從威森第一篇文章學到的方法生成 1 個 AI 模特圖 → 上傳到 waigo.ai → 看成果是否能用
+
+</div>
+</div>
+
 
 ### 🟡 階段 2：發現 waigo 不夠用時
 
@@ -208,12 +229,19 @@ category: "AI影音-工具評比"
 
 ## 待補完
 
-> [!todo]
-> - [ ] 實際註冊 waigo.ai 試用一次，補上實測心得
-> - [ ] 比較 waigo 跟 Kling 的「相同輸入 → 不同輸出」差異
-> - [ ] 確認 waigo.ai 的商用授權條款
-> - [ ] 加入 Kling AI 的詳細評比（獨立筆記）
-> - [ ] 加入 Runway Gen-3/4 的詳細評比
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 實際註冊 waigo.ai 試用一次，補上實測心得
+- [ ] 比較 waigo 跟 Kling 的「相同輸入 → 不同輸出」差異
+- [ ] 確認 waigo.ai 的商用授權條款
+- [ ] 加入 Kling AI 的詳細評比（獨立筆記）
+- [ ] 加入 Runway Gen-3/4 的詳細評比
+
+</div>
+</div>
+
 
 ---
 

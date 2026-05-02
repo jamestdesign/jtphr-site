@@ -33,7 +33,7 @@ Anthropic 官方整理 85 個 Claude 實際使用場景，分 12 大類、5 種�
 ---
 
 ## 原始截圖
-!claude85-01-cover.jpg
-!claude85-02-model-distribution.jpg
-!claude85-03-categories.jpg
-!claude85-04-description.jpg
+![](/images/kb/claude85-01-cover.jpg)
+![](/images/kb/claude85-02-model-distribution.jpg)
+![](/images/kb/claude85-03-categories.jpg)
+![](/images/kb/claude85-04-description.jpg)

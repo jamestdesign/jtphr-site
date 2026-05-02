@@ -18,8 +18,15 @@ category: "AI影音-提示詞"
 
 # 影片提示詞 — AI 模特舉杯聞香（循環）
 
-> [!important] 用途
-> 把 靜態人像圖 變成 5-10 秒**首尾循環**的微動態影片。重點是「自然眨眼 + 呼吸 + 杯子小動作 + 蒸氣連續釋放」，可作為飲品 / 保溫杯 / 茶飲品牌的循環廣告。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+把 靜態人像圖 變成 5-10 秒**首尾循環**的微動態影片。重點是「自然眨眼 + 呼吸 + 杯子小動作 + 蒸氣連續釋放」，可作為飲品 / 保溫杯 / 茶飲品牌的循環廣告。
+
+</div>
+</div>
+
 
 ---
 
@@ -63,16 +70,30 @@ Use the reference image as the subject: profile head-and-shoulders, clean light-
 - **動的是人物本身**：眨眼、呼吸、手指微調
 - **動的是物理元素**：蒸氣連續上升
 
-> [!tip] 循環廣告秘訣
-> 「Match the first and last frame to enable a seamless loop」是這個 prompt 的關鍵句 — 強制 AI 讓首尾畫面一致，這樣可以無限播放不會跳。
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 循環廣告秘訣</p>
+<div class="text-sm text-gray-300">
+
+「Match the first and last frame to enable a seamless loop」是這個 prompt 的關鍵句 — 強制 AI 讓首尾畫面一致，這樣可以無限播放不會跳。
+
+</div>
+</div>
+
 
 ### 🔍 Focus（焦點）
 - **shallow depth of field**（淺景深）
 - **85mm look**（85mm 鏡頭視角，人像專用）
 - **skin highlights are refined and not over-sharpened**（肌膚高光細膩、不過銳）
 
-> [!note] 為什麼用 85mm
-> 85mm 是人像攝影的「黃金焦距」— 透視自然、背景模糊度漂亮、不變形。用在 AI 影片裡能暗示模型「我要的是商業人像感而不是手機快照」。
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 為什麼用 85mm</p>
+<div class="text-sm text-gray-300">
+
+85mm 是人像攝影的「黃金焦距」— 透視自然、背景模糊度漂亮、不變形。用在 AI 影片裡能暗示模型「我要的是商業人像感而不是手機快照」。
+
+</div>
+</div>
+
 
 ### 🎭 Subject（主體）
 動作清單（小但精確）：
@@ -81,8 +102,15 @@ Use the reference image as the subject: profile head-and-shoulders, clean light-
 - **fingers make a tiny adjustment on a matte pastel-blue stainless tumbler**（手指在霧面粉藍不鏽鋼隨行杯上有細小移動）— 產品是焦點
 - **soft steam rises continuously from the rim**（杯口持續釋放柔和熱氣）— 動態元素
 
-> [!warning] 動作要「微」
-> 5-10 秒影片如果動作太大，AI 容易產出不自然的動畫感。「眨眼一次」「呼吸極輕微」「手指微調」這種「克制」的描述能保持商業感。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 動作要「微」</p>
+<div class="text-sm text-gray-300">
+
+5-10 秒影片如果動作太大，AI 容易產出不自然的動畫感。「眨眼一次」「呼吸極輕微」「手指微調」這種「克制」的描述能保持商業感。
+
+</div>
+</div>
+
 
 ### 💡 Lighting（光線）
 - **golden-hour side lighting**（黃金時段側光）

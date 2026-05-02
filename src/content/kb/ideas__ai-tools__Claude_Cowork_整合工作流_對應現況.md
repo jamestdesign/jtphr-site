@@ -17,8 +17,15 @@ category: "AI工具"
 
 # Claude Cowork 整合工作流 vs 現有環境對應
 
-> [!important] 核心結論
-> Anthropic 旗下有兩條 Claude 產品線：Claude.ai（網頁／桌面 App）和 Claude Code（CLI）。兩條線可以**同時並存**（同一帳號、共用 Obsidian vault）。我目前的 setup 是 Claude Code + Telegram + MCP servers，已經涵蓋影片 Cowork 80% 的功能。差別在於 Claude.ai 整合度較高、Claude Code 靈活度極高。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心結論</p>
+<div class="text-sm text-gray-300">
+
+Anthropic 旗下有兩條 Claude 產品線：Claude.ai（網頁／桌面 App）和 Claude Code（CLI）。兩條線可以**同時並存**（同一帳號、共用 Obsidian vault）。我目前的 setup 是 Claude Code + Telegram + MCP servers，已經涵蓋影片 Cowork 80% 的功能。差別在於 Claude.ai 整合度較高、Claude Code 靈活度極高。
+
+</div>
+</div>
+
 
 ---
 
@@ -66,31 +73,66 @@ category: "AI工具"
 
 ### 1. Google Calendar 填行事曆
 
-> [!example] Claude.ai 路線（最簡單）
-> 開 Claude.ai 桌面 App → 設定 → Connectors → 安裝 Google Calendar → OAuth 授權 → 之後直接「幫我加個會議到周三下午 3 點」
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Claude.ai 路線（最簡單）</p>
+<div class="text-sm text-gray-300">
 
-> [!example] Claude Code 路線（接到現有環境）
-> 安裝 google-calendar MCP server（社群有多個版本）
-> 設定 OAuth 認證
-> 之後在 Telegram 對話中就能呼叫
+開 Claude.ai 桌面 App → 設定 → Connectors → 安裝 Google Calendar → OAuth 授權 → 之後直接「幫我加個會議到周三下午 3 點」
+
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Claude Code 路線（接到現有環境）</p>
+<div class="text-sm text-gray-300">
+
+安裝 google-calendar MCP server（社群有多個版本）
+設定 OAuth 認證
+之後在 Telegram 對話中就能呼叫
+
+</div>
+</div>
+
 
 ### 2. 發送 Gmail
 
-> [!example] Claude.ai 路線
-> 同上，Connector 安裝 Gmail，OAuth 授權
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Claude.ai 路線</p>
+<div class="text-sm text-gray-300">
 
-> [!example] Claude Code 路線
-> 安裝 gmail MCP server（GongRzhe 等社群版本）
-> OAuth 設定後可在 Telegram 操作
+同上，Connector 安裝 Gmail，OAuth 授權
+
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Claude Code 路線</p>
+<div class="text-sm text-gray-300">
+
+安裝 gmail MCP server（GongRzhe 等社群版本）
+OAuth 設定後可在 Telegram 操作
+
+</div>
+</div>
+
 
 ### 3. 操作網頁線上填表
 
-> [!success] 已經有了！
-> 你裝的 claude-in-chrome MCP 就能做：
-> - 開網頁、填表單、點按鈕、截圖、跑 JavaScript
-> - 我目前在 Telegram 對話中可直接呼叫
->
-> 之前測試過 tabs_context_mcp 已驗證連線正常
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 已經有了！</p>
+<div class="text-sm text-gray-300">
+
+你裝的 claude-in-chrome MCP 就能做：
+- 開網頁、填表單、點按鈕、截圖、跑 JavaScript
+- 我目前在 Telegram 對話中可直接呼叫
+
+之前測試過 tabs_context_mcp 已驗證連線正常
+
+</div>
+</div>
+
 
 ---
 
@@ -132,8 +174,15 @@ category: "AI工具"
 
 詳見 ideas/TODO.md
 
-> [!todo]
-> - [ ] 研究 Skill Creator 自動建 skill 流程，可否用 Claude Code 內建版實現
-> - [ ] 設計每日早晨自動財經新聞 subagent 任務
-> - [ ] 評估是否安裝 google-calendar-mcp / gmail-mcp 到 Claude Code
-> - [ ] 評估是否同時啟用 Claude.ai 桌面 App（混合架構）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 研究 Skill Creator 自動建 skill 流程，可否用 Claude Code 內建版實現
+- [ ] 設計每日早晨自動財經新聞 subagent 任務
+- [ ] 評估是否安裝 google-calendar-mcp / gmail-mcp 到 Claude Code
+- [ ] 評估是否同時啟用 Claude.ai 桌面 App（混合架構）
+
+</div>
+</div>
+

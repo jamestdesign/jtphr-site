@@ -18,8 +18,15 @@ category: "AI工具"
 
 # Claude Routines — 一句話打造全自動 AI 工作流
 
-> [!important] 核心
-> Claude 發布全新 **Routines** 功能：可在 Claude Code 內直接設定**排程自動化工作流**（每天/每週/每月），用自然語言描述即可建立。作者（李哈利）認為這可以**徹底取代 n8n**。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+Claude 發布全新 **Routines** 功能：可在 Claude Code 內直接設定**排程自動化工作流**（每天/每週/每月），用自然語言描述即可建立。作者（李哈利）認為這可以**徹底取代 n8n**。
+
+</div>
+</div>
+
 
 ---
 
@@ -152,11 +159,18 @@ Routine: 每天晚上 11 點
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] 確認 Routines 是否在 Claude Code CLI 可用（檢查 `claude routine` 指令）
-> - [ ] 如果可用 → 試建一個「每日財經新聞」Routine
-> - [ ] 如果不可用 → 用 Claude 桌面 App 設定
-> - [ ] 評估是否可以取代 ideas/TODO 裡的 n8n 計畫
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 確認 Routines 是否在 Claude Code CLI 可用（檢查 `claude routine` 指令）
+- [ ] 如果可用 → 試建一個「每日財經新聞」Routine
+- [ ] 如果不可用 → 用 Claude 桌面 App 設定
+- [ ] 評估是否可以取代 ideas/TODO 裡的 n8n 計畫
+
+</div>
+</div>
+
 
 ---
 

@@ -8,7 +8,7 @@ const kb = defineCollection({
     date: z.coerce.date().optional(),
     tags: z.array(z.string()).optional().default([]),
     category: z.string().optional().default('未分類'),
-  }),
+  }).passthrough(),
 });
 
 export const collections = { kb };

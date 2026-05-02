@@ -16,11 +16,18 @@ category: "股票-盤後日報"
 
 # 2026-04-15 盤後研究 — 4 大主題
 
-> [!important] 當日四大主軸
-> 1. AI 電力架構革命（HVDC + BBU）→ 台達電獨家到 2028
-> 2. 低軌衛星拉貨潮 → SpaceX IPO 推升需求，二線黑馬燿華
-> 3. AI 儲存技術突破 → Kioxia AiSAQ 用 SSD 取代 DRAM
-> 4. 台股盤後焦點 → 矽光子全面創新高、穎崴挑戰萬元
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 當日四大主軸</p>
+<div class="text-sm text-gray-300">
+
+1. AI 電力架構革命（HVDC + BBU）→ 台達電獨家到 2028
+2. 低軌衛星拉貨潮 → SpaceX IPO 推升需求，二線黑馬燿華
+3. AI 儲存技術突破 → Kioxia AiSAQ 用 SSD 取代 DRAM
+4. 台股盤後焦點 → 矽光子全面創新高、穎崴挑戰萬元
+
+</div>
+</div>
+
 
 ---
 

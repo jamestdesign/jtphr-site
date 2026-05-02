@@ -20,8 +20,15 @@ category: "股票-個股分析"
 
 # 6789 采鈺（VisEra Technologies）深度評估
 
-> [!important] 投資論點摘要
-> 采鈺是 **TSMC 嫡系子公司**，掌握 wafer-level micro-lens / Metalens 製程，被媒體稱為 **「矽光子唯一首選供應商」**。2026 年是 TSMC COUPE（Compact Universal Photonic Engine）量產元年，NVIDIA 與 Broadcom 都已綁定，采鈺直接受惠這波從電轉光的世代轉換。EPS 有翻倍潛力，但股價已部分反映預期。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 投資論點摘要</p>
+<div class="text-sm text-gray-300">
+
+采鈺是 **TSMC 嫡系子公司**，掌握 wafer-level micro-lens / Metalens 製程，被媒體稱為 **「矽光子唯一首選供應商」**。2026 年是 TSMC COUPE（Compact Universal Photonic Engine）量產元年，NVIDIA 與 Broadcom 都已綁定，采鈺直接受惠這波從電轉光的世代轉換。EPS 有翻倍潛力，但股價已部分反映預期。
+
+</div>
+</div>
+
 
 ---
 
@@ -47,15 +54,29 @@ category: "股票-個股分析"
 | 6 個月漲幅 | +31.7% |
 | 位置 | 接近 52 週高點（約 89% 位置）|
 
-> [!warning]
-> 股價已部分反映預期，**不在「便宜」階段**。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Warning</p>
+<div class="text-sm text-gray-300">
+
+股價已部分反映預期，**不在「便宜」階段**。
+
+</div>
+</div>
+
 
 ---
 
 ## 采鈺在矽光子的角色（核心 ✅）
 
-> [!success] 「唯一首選供應商」
-> 工商時報明確報導：「采鈺是矽光子唯一首選供應商，奈米級光學元件是輝達剛需」
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 「唯一首選供應商」</p>
+<div class="text-sm text-gray-300">
+
+工商時報明確報導：「采鈺是矽光子唯一首選供應商，奈米級光學元件是輝達剛需」
+
+</div>
+</div>
+
 
 ### 三項關鍵能力
 
@@ -102,9 +123,16 @@ category: "股票-個股分析"
 3. **CPO 必須化** → NVIDIA 公開規劃 2026 用 silicon photonics
 4. **TSMC 量產確定** → COUPE 2026 量產時程明確
 
-> [!quote] NVIDIA
-> 2026 年使用 silicon photonics 於 AI GPU 之間通訊
-> Co-packaged optics 將成為下世代 AI 資料中心的「必須」
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 NVIDIA</p>
+<div class="text-sm text-gray-300">
+
+2026 年使用 silicon photonics 於 AI GPU 之間通訊
+Co-packaged optics 將成為下世代 AI 資料中心的「必須」
+
+</div>
+</div>
+
 
 ---
 
@@ -112,30 +140,51 @@ category: "股票-個股分析"
 
 ### Pro（看多理由）
 
-> [!success]
-> 1. **TSMC 嫡系，技術綁定** — 不是供應商而是 TSMC 自己人，最深的綁定關係
-> 2. **量產元年確定** — 2026 COUPE 量產是 binary event，要嘛發生要嘛延後一年
-> 3. **客戶名單最強** — NVIDIA、Broadcom 直接驗證
-> 4. **技術門檻極高** — Wafer-level metalens 全球幾乎沒有競爭者
-> 5. **EPS 翻倍預期** — 媒體多家報導 2026 EPS 將翻倍
-> 6. **AI 不可逆趨勢** — 不是炒作，是電轉光的世代轉換
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Success</p>
+<div class="text-sm text-gray-300">
+
+1. **TSMC 嫡系，技術綁定** — 不是供應商而是 TSMC 自己人，最深的綁定關係
+2. **量產元年確定** — 2026 COUPE 量產是 binary event，要嘛發生要嘛延後一年
+3. **客戶名單最強** — NVIDIA、Broadcom 直接驗證
+4. **技術門檻極高** — Wafer-level metalens 全球幾乎沒有競爭者
+5. **EPS 翻倍預期** — 媒體多家報導 2026 EPS 將翻倍
+6. **AI 不可逆趨勢** — 不是炒作，是電轉光的世代轉換
+
+</div>
+</div>
+
 
 ### Con（看空風險）
 
-> [!warning]
-> 1. **股價已大漲** — 6 個月 +31.7%，逼近 52 週高點 376，估值不便宜
-> 2. **量產時程風險** — 若 COUPE 延後（半導體新平台延後 1-2 季是常態）→ 預期落空
-> 3. **單一客戶集中度** — 高度依賴 TSMC 與其客戶（NVIDIA 訂單）
-> 4. **本益比偏高** — TSMC 概念股 + 矽光子題材雙重溢價，已有提前透支可能
-> 5. **技術轉換失敗風險** — 光對位精度若良率不達標，整個 COUPE 量產會卡關
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Warning</p>
+<div class="text-sm text-gray-300">
+
+1. **股價已大漲** — 6 個月 +31.7%，逼近 52 週高點 376，估值不便宜
+2. **量產時程風險** — 若 COUPE 延後（半導體新平台延後 1-2 季是常態）→ 預期落空
+3. **單一客戶集中度** — 高度依賴 TSMC 與其客戶（NVIDIA 訂單）
+4. **本益比偏高** — TSMC 概念股 + 矽光子題材雙重溢價，已有提前透支可能
+5. **技術轉換失敗風險** — 光對位精度若良率不達標，整個 COUPE 量產會卡關
+
+</div>
+</div>
+
 
 ### 待補完的關鍵資訊
 
-> [!todo]
-> - [ ] 采鈺 2026 全年法說會的指引（COUPE 訂單能見度）
-> - [ ] 法人持股趨勢（外資、投信進出狀況）
-> - [ ] TSMC 對采鈺的訂單獨家性（有沒有第二供應商？）
-> - [ ] 與台積電其他子公司（精材、世界先進）的差異化定位
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 采鈺 2026 全年法說會的指引（COUPE 訂單能見度）
+- [ ] 法人持股趨勢（外資、投信進出狀況）
+- [ ] TSMC 對采鈺的訂單獨家性（有沒有第二供應商？）
+- [ ] 與台積電其他子公司（精材、世界先進）的差異化定位
+
+</div>
+</div>
+
 
 ### 已查證的關鍵資訊（2026/04/10 補完）
 
@@ -180,16 +229,23 @@ category: "股票-個股分析"
 
 ## 結論與建議
 
-> [!important] 我的判斷
-> **中長期：強烈看多，但進場點是難題**
->
-> 結構面：✅ TSMC 嫡系、矽光子唯一首選、AI 趨勢直接受惠
-> 籌碼面：⚠️ 股價已部分反映，332~376 區間整理
-> 風險面：⚠️ 單一題材依賴度高，COUPE 延後是最大風險
->
-> **這支跟 3060 銘異不一樣**：銘異是「補漲」邏輯，采鈺是「題材龍頭」邏輯
-> **適合配置在矽光子主題的核心位置**，但需要等回檔（< NT$ 300）才比較好進場
-> **不建議追高到 360+**
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 我的判斷</p>
+<div class="text-sm text-gray-300">
+
+**中長期：強烈看多，但進場點是難題**
+
+結構面：✅ TSMC 嫡系、矽光子唯一首選、AI 趨勢直接受惠
+籌碼面：⚠️ 股價已部分反映，332~376 區間整理
+風險面：⚠️ 單一題材依賴度高，COUPE 延後是最大風險
+
+**這支跟 3060 銘異不一樣**：銘異是「補漲」邏輯，采鈺是「題材龍頭」邏輯
+**適合配置在矽光子主題的核心位置**，但需要等回檔（< NT$ 300）才比較好進場
+**不建議追高到 360+**
+
+</div>
+</div>
+
 
 ### 是否加入 watchlist？
 

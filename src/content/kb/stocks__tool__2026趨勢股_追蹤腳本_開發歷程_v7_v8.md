@@ -15,10 +15,17 @@ category: "股票-工具"
 
 # 2026趨勢股 追蹤腳本 開發歷程
 
-> [!important] 核心
-> 本筆記記錄 Google Sheets「2026趨勢股」自動追蹤腳本（Apps Script）從 v7 穩定版到 v8 大改版的完整開發歷程，包含技術決策、踩過的坑、解決方案。
->
-> 後續所有版本演進請接續寫在這份檔案下方，**不要另開新檔**。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+本筆記記錄 Google Sheets「2026趨勢股」自動追蹤腳本（Apps Script）從 v7 穩定版到 v8 大改版的完整開發歷程，包含技術決策、踩過的坑、解決方案。
+
+後續所有版本演進請接續寫在這份檔案下方，**不要另開新檔**。
+
+</div>
+</div>
+
 
 ---
 
@@ -74,28 +81,49 @@ Google Sheets「2026趨勢股」
 
 ### 關鍵實作細節
 
-> [!note] 資料儲存型別
-> - N、O 用 `parseFloat(Math.max/min.apply(...).toFixed(2))` → 確保存成「數字」
-> - I、L、M 用 `.toFixed(2) + '%'` → 存成「字串」保留 % 符號
-> - P 用 `Math.round()` → 存成「整數」
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 資料儲存型別</p>
+<div class="text-sm text-gray-300">
 
-> [!warning] 顏色判斷邏輯
-> %字串欄位（I、L、M）無法用數值比較，改用首字元判斷：
-> - 負值：`=LEFT(欄,1)="-"`
-> - 正值：`=AND(LEN(欄)>1,LEFT(欄,1)<>"-")`
-> - 避免使用 `IFERROR(VALUE(SUBSTITUTE(...)))` → 在 Apps Script 條件格式不穩定
+- N、O 用 `parseFloat(Math.max/min.apply(...).toFixed(2))` → 確保存成「數字」
+- I、L、M 用 `.toFixed(2) + '%'` → 存成「字串」保留 % 符號
+- P 用 `Math.round()` → 存成「整數」
 
-> [!danger] 條件格式規則管理（最大的坑）
-> **不能**用 `sheet.clearConditionalFormatRules()` → 會清掉所有欄位包含使用者自訂的規則
->
-> **正確做法**：只清除指定欄位的舊規則，用 filter 保留其他規則
->
-> ```javascript
-> var clearCols = [cH, cI, cJ, cK, cL, cM, cO, cP, cAE].filter(c => c > 0);
-> var rules = sheet.getConditionalFormatRules().filter(rule =>
->   rule.getRanges().every(rng => clearCols.indexOf(rng.getColumn()) === -1)
-> );
-> ```
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 顏色判斷邏輯</p>
+<div class="text-sm text-gray-300">
+
+%字串欄位（I、L、M）無法用數值比較，改用首字元判斷：
+- 負值：`=LEFT(欄,1)="-"`
+- 正值：`=AND(LEN(欄)>1,LEFT(欄,1)<>"-")`
+- 避免使用 `IFERROR(VALUE(SUBSTITUTE(...)))` → 在 Apps Script 條件格式不穩定
+
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 條件格式規則管理（最大的坑）</p>
+<div class="text-sm text-gray-300">
+
+**不能**用 `sheet.clearConditionalFormatRules()` → 會清掉所有欄位包含使用者自訂的規則
+
+**正確做法**：只清除指定欄位的舊規則，用 filter 保留其他規則
+
+```javascript
+var clearCols = [cH, cI, cJ, cK, cL, cM, cO, cP, cAE].filter(c => c > 0);
+var rules = sheet.getConditionalFormatRules().filter(rule =>
+  rule.getRanges().every(rng => clearCols.indexOf(rng.getColumn()) === -1)
+);
+```
+
+</div>
+</div>
+
 
 ### v7 解決的歷史問題
 
@@ -242,11 +270,18 @@ Web App 部署：
 
 詳見 stocks/TODO.md 「股票追蹤腳本 v8 開發」項目。
 
-> [!todo] 已知待完成
-> - [ ] 取得 Telegram Bot Token，把選單② 新聞推播實作完成
-> - [ ] 觀察一週後驗證 AE 強弱信號的實用性
-> - [ ] 評估是否再加入「外資連續買超天數」「投信連續買超天數」做副指標
-> - [ ] 興櫃股 7822 倍利科無法抓 Yahoo 資料 → 需要替代資料來源
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ 已知待完成</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 取得 Telegram Bot Token，把選單② 新聞推播實作完成
+- [ ] 觀察一週後驗證 AE 強弱信號的實用性
+- [ ] 評估是否再加入「外資連續買超天數」「投信連續買超天數」做副指標
+- [ ] 興櫃股 7822 倍利科無法抓 Yahoo 資料 → 需要替代資料來源
+
+</div>
+</div>
+
 
 ---
 

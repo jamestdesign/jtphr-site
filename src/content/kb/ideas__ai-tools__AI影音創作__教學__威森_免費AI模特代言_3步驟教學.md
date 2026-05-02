@@ -21,8 +21,15 @@ category: "AI影音-教學"
 
 # 威森 免費 AI 模特代言 3 步驟教學
 
-> [!important] 核心
-> 用 **ChatGPT 寫人物 prompt → Midjourney/Banana 生模特 → Google Banana 合成產品代言圖**，全流程**免費**且**零合約糾紛**，可省下傳統模特拍攝數十萬成本。最後可進一步用 Kling/Veo3 把靜態圖變動態廣告。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+用 **ChatGPT 寫人物 prompt → Midjourney/Banana 生模特 → Google Banana 合成產品代言圖**，全流程**免費**且**零合約糾紛**，可省下傳統模特拍攝數十萬成本。最後可進一步用 Kling/Veo3 把靜態圖變動態廣告。
+
+</div>
+</div>
+
 
 ---
 
@@ -57,8 +64,15 @@ AI 模特優勢：
 - **Midjourney**（威森推薦，他覺得人物比較好看）
 - **Google Imagen / Banana**（記得選圖像模式）
 
-> [!tip] 專業提示
-> 為了方便後續合成，請 AI 一次生成 4 張以上不同角度／表情／姿勢的圖片，後續合成有更多素材可選。
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 專業提示</p>
+<div class="text-sm text-gray-300">
+
+為了方便後續合成，請 AI 一次生成 4 張以上不同角度／表情／姿勢的圖片，後續合成有更多素材可選。
+
+</div>
+</div>
+
 
 ### Step 3：用 Google Banana 合成產品代言圖
 
@@ -102,8 +116,15 @@ AI 模特優勢：
 | 4. 動畫 | Kling AI | 圖轉影片 | 有免費額度 |
 | 4. 動畫 | Google Veo3 | 高質感影片 | 部分免費 |
 
-> [!warning] 補充
-> 文章標題說「免費」，但若要最佳人物質感，建議付費 Midjourney。完全免費路徑：ChatGPT + Google Imagen/Banana + Kling 免費額度
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 補充</p>
+<div class="text-sm text-gray-300">
+
+文章標題說「免費」，但若要最佳人物質感，建議付費 Midjourney。完全免費路徑：ChatGPT + Google Imagen/Banana + Kling 免費額度
+
+</div>
+</div>
+
 
 ---
 
@@ -148,17 +169,31 @@ ad-story-designer skill
 
 ## 注意事項
 
-> [!warning]
-> - AI 模特生成涉及商業使用時，需確認所用平台的商用授權條款
-> - Midjourney / DALL-E 等的商用條款依訂閱方案而異
-> - Google Banana 為實驗性工具，正式商用前建議再確認最新政策
-> - 不可生成真實名人肖像（多數平台禁止）
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Warning</p>
+<div class="text-sm text-gray-300">
+
+- AI 模特生成涉及商業使用時，需確認所用平台的商用授權條款
+- Midjourney / DALL-E 等的商用條款依訂閱方案而異
+- Google Banana 為實驗性工具，正式商用前建議再確認最新政策
+- 不可生成真實名人肖像（多數平台禁止）
+
+</div>
+</div>
+
 
 ---
 
 ## 後續行動
 
-> [!todo]
-> - [ ] 實測 ChatGPT + Midjourney + Banana 流程（驗證可行性）
-> - [ ] 比較 Kling vs Veo3 的影片質感差異 → 寫到 工具評比/_README
-> - [ ] 建立自己的 AI 模特資料庫（不同年齡/風格/種族）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 實測 ChatGPT + Midjourney + Banana 流程（驗證可行性）
+- [ ] 比較 Kling vs Veo3 的影片質感差異 → 寫到 工具評比/_README
+- [ ] 建立自己的 AI 模特資料庫（不同年齡/風格/種族）
+
+</div>
+</div>
+

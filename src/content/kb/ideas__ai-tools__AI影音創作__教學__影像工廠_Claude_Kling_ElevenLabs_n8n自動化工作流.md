@@ -23,17 +23,24 @@ category: "AI影音-教學"
 
 # 影像工廠 — Claude + Kling + ElevenLabs + n8n 全自動工作流
 
-> [!important] 核心
-> @youngster_workflow_ai 用 **n8n**（開源工作流自動化平台）把 Claude（大腦/分鏡）+ Kling AI（攝影師/影片生成）+ ElevenLabs（音樂/音效/配音）**串成一條全自動產線**。
-> 「跟 Claude 確定好分鏡，5 分鐘就可以做好簡單的室內設計影片」。
-> 這是真正的「**影像工廠**」— 輸入指令，自動產出完成影片。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+@youngster_workflow_ai 用 **n8n**（開源工作流自動化平台）把 Claude（大腦/分鏡）+ Kling AI（攝影師/影片生成）+ ElevenLabs（音樂/音效/配音）**串成一條全自動產線**。
+「跟 Claude 確定好分鏡，5 分鐘就可以做好簡單的室內設計影片」。
+這是真正的「**影像工廠**」— 輸入指令，自動產出完成影片。
+
+</div>
+</div>
+
 
 ---
 
 ## 📑 原圖
 
-!_attachments/youngster-workflow-ai/01-workflow-diagram.jpg
-!_attachments/youngster-workflow-ai/02-threads-post.jpg
+![](/images/kb/youngster-workflow-ai/01-workflow-diagram.jpg)
+![](/images/kb/youngster-workflow-ai/02-threads-post.jpg)
 
 ---
 
@@ -247,11 +254,18 @@ Claude Code → CapCut MCP 剪輯 → 匯出 → Telegram 通知你
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] 評估是否安裝 **n8n**（自架在 robin Mac 或未來的 NAS）
-> - [ ] 評估是否申請 **Kling AI API**（從手動貼 prompt 升級為 API 自動化）
-> - [ ] 評估是否加入 **ElevenLabs**（TTS 配音/音效，免費額度 10K 字元/月）
-> - [ ] 如果以上都 yes → 在新的「自動剪輯群」實作完整的影像工廠流水線
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 評估是否安裝 **n8n**（自架在 robin Mac 或未來的 NAS）
+- [ ] 評估是否申請 **Kling AI API**（從手動貼 prompt 升級為 API 自動化）
+- [ ] 評估是否加入 **ElevenLabs**（TTS 配音/音效，免費額度 10K 字元/月）
+- [ ] 如果以上都 yes → 在新的「自動剪輯群」實作完整的影像工廠流水線
+
+</div>
+</div>
+
 
 ---
 

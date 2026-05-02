@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1320px;
+  height: 1650px;
+  font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  background: linear-gradient(135deg, #0A0E27, #1A1F3A);
+  color: #FFFFFF;
+  padding: 100px 90px;
+  position: relative;
+}
+.tag {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #00D4FF;
+  color: #0A0E27;
+  border-radius: 50px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+h1 {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 30px;
+}
+h1 .accent { color: #00D4FF; }
+.subtitle {
+  font-size: 42px;
+  color: #A8B2D1;
+  line-height: 1.4;
+  margin-top: 60px;
+}
+.page { position: absolute; top: 60px; right: 90px; font-size: 36px; color: #A8B2D1; }
+.footer {
+  position: absolute; bottom: 80px; left: 90px; right: 90px;
+  display: flex; justify-content: space-between;
+  padding-top: 40px; border-top: 2px solid #00D4FF;
+  font-size: 28px; color: #A8B2D1;
+}
+.brand { color: #00D4FF; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="page">TEST</div>
+  <div class="tag">#測試</div>
+  <h1>ig-card-generator<br><span class="accent">部署測試</span></h1>
+  <p class="subtitle">如果你能看到這張圖<br>代表 Chrome headless 工作正常</p>
+  <div class="footer">
+    <span class="brand">@robin_test</span>
+    <span>2026-04-12</span>
+  </div>
+</body>
+</html>

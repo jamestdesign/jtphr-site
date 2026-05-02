@@ -18,8 +18,15 @@ category: "股票-趨勢觀察"
 
 # 矽光子 CPO 台廠供應鏈地圖
 
-> [!important] 核心
-> AI 算力爆炸 → GPU 之間電互連到極限 → silicon photonics 與 CPO 成為下世代資料中心**必需品**。NVIDIA 投資 $4B 建立次世代光通訊供應鏈、TSMC COUPE 2026 量產，這是台廠史上最確定的「電轉光」轉換機會。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+AI 算力爆炸 → GPU 之間電互連到極限 → silicon photonics 與 CPO 成為下世代資料中心**必需品**。NVIDIA 投資 $4B 建立次世代光通訊供應鏈、TSMC COUPE 2026 量產，這是台廠史上最確定的「電轉光」轉換機會。
+
+</div>
+</div>
+
 
 ---
 
@@ -129,21 +136,42 @@ category: "股票-趨勢觀察"
 
 ### 第一順位（核心題材龍頭）
 
-> [!success] 強烈關注
-> - **6789 采鈺**：TSMC 嫡系 + Metalens 唯一供應商（深度評估）
-> - **3363 上詮**：FAU 對齊核心，外資喊翻倍
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 強烈關注</p>
+<div class="text-sm text-gray-300">
+
+- **6789 采鈺**：TSMC 嫡系 + Metalens 唯一供應商（深度評估）
+- **3363 上詮**：FAU 對齊核心，外資喊翻倍
+
+</div>
+</div>
+
 
 ### 第二順位（題材確定但部位較小）
 
-> [!note]
-> - **6451 訊芯-KY**：CPO 封裝，鴻海+Broadcom 雙背景
-> - **6442 光聖**：CPO 模組廠，已有營收
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 Note</p>
+<div class="text-sm text-gray-300">
+
+- **6451 訊芯-KY**：CPO 封裝，鴻海+Broadcom 雙背景
+- **6442 光聖**：CPO 模組廠，已有營收
+
+</div>
+</div>
+
 
 ### 第三順位（補漲機會）
 
-> [!info]
-> - 3081 聯亞、3163 波若威、4979 華星光通：第二批受惠
-> - 等核心題材股漲多再輪動到這些
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">ℹ️ Info</p>
+<div class="text-sm text-gray-300">
+
+- 3081 聯亞、3163 波若威、4979 華星光通：第二批受惠
+- 等核心題材股漲多再輪動到這些
+
+</div>
+</div>
+
 
 ### 觀察與測試（吃毛利層）
 
@@ -153,12 +181,19 @@ category: "股票-趨勢觀察"
 
 ## 投資邏輯總結
 
-> [!important]
-> 1. **題材確定性 ★★★★★** — TSMC、NVIDIA、Broadcom 三方都明確 2026 量產
-> 2. **時間表清楚** — 不是「未來幾年」是「2026 H2 起」
-> 3. **供應鏈完整** — 從上游磊晶到下游模組，台廠涵蓋每一層
-> 4. **核心瓶頸** — Wafer-level optics（采鈺）、FAU 對齊（上詮）兩個技術門檻最高
-> 5. **風險** — 量產若延後 1-2 季，整個族群會大跌
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 Important</p>
+<div class="text-sm text-gray-300">
+
+1. **題材確定性 ★★★★★** — TSMC、NVIDIA、Broadcom 三方都明確 2026 量產
+2. **時間表清楚** — 不是「未來幾年」是「2026 H2 起」
+3. **供應鏈完整** — 從上游磊晶到下游模組，台廠涵蓋每一層
+4. **核心瓶頸** — Wafer-level optics（采鈺）、FAU 對齊（上詮）兩個技術門檻最高
+5. **風險** — 量產若延後 1-2 季，整個族群會大跌
+
+</div>
+</div>
+
 
 ---
 

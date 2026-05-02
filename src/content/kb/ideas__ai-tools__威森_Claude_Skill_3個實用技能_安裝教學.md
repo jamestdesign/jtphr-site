@@ -20,8 +20,15 @@ category: "AI工具"
 
 # 威森 Claude Skill 3 個實用技能 安裝教學
 
-> [!important] 核心觀點
-> Skill 就像為 Claude 裝上專家模組。未安裝時 Claude 是通用助理，裝上 Skill 後能自動套用專業架構與格式輸出成品。本文示範安裝 3 個實用 Skill，可串聯成完整廣告產線。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心觀點</p>
+<div class="text-sm text-gray-300">
+
+Skill 就像為 Claude 裝上專家模組。未安裝時 Claude 是通用助理，裝上 Skill 後能自動套用專業架構與格式輸出成品。本文示範安裝 3 個實用 Skill，可串聯成完整廣告產線。
+
+</div>
+</div>
+
 
 ---
 
@@ -31,14 +38,21 @@ category: "AI工具"
 - 需要 **Claude Pro 或 Team 方案**（免費版無法使用）
 - 手機和電腦皆可
 
-> [!warning] 與我現有環境的差異
-> 這篇講的是 Claude.ai 的 Skill 系統，跟我們前一篇 Obsidian_Claude_Code_第二大腦_Claudian 講的 Claude Code skill 是不同產品線。
->
-> | | Claude Code Skills | Claude.ai Skills |
-> |---|---|---|
-> | 安裝位置 | `vault/.claude/skills/` 或 `~/.claude/skills/` | Claude.ai 設定 → Skills 上傳 |
-> | 檔案格式 | SKILL.md + references/ | 單一 .md 檔 |
-> | 觸發方式 | Claude Code 自動讀取 | Claude.ai 對話自動套用 |
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 與我現有環境的差異</p>
+<div class="text-sm text-gray-300">
+
+這篇講的是 Claude.ai 的 Skill 系統，跟我們前一篇 Obsidian_Claude_Code_第二大腦_Claudian 講的 Claude Code skill 是不同產品線。
+
+| | Claude Code Skills | Claude.ai Skills |
+|---|---|---|
+| 安裝位置 | `vault/.claude/skills/` 或 `~/.claude/skills/` | Claude.ai 設定 → Skills 上傳 |
+| 檔案格式 | SKILL.md + references/ | 單一 .md 檔 |
+| 觸發方式 | Claude Code 自動讀取 | Claude.ai 對話自動套用 |
+
+</div>
+</div>
+
 
 ---
 
@@ -52,11 +66,18 @@ category: "AI工具"
    - `ad-story-designer.md`（廣告故事設計）
 4. **確認啟用** — 三個 Skill 都打開
 
-> [!success] 檔案已取得
-> 用戶 2026-04-11 直接在 Telegram 提供 3 個 .md 檔，已存到 vault：
-> - _attachments/wilson-skills/universal-image-prompt.md
-> - _attachments/wilson-skills/universal-video-prompt.md
-> - _attachments/wilson-skills/ad-story-designer.md
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 檔案已取得</p>
+<div class="text-sm text-gray-300">
+
+用戶 2026-04-11 直接在 Telegram 提供 3 個 .md 檔，已存到 vault：
+- _attachments/wilson-skills/universal-image-prompt.md
+- _attachments/wilson-skills/universal-video-prompt.md
+- _attachments/wilson-skills/ad-story-designer.md
+
+</div>
+</div>
+
 
 ---
 
@@ -135,20 +156,27 @@ category: "AI工具"
 
 ## 進階用法：串聯工作流
 
-> [!example] 廣告產線
-> 三個 Skill 可順序連動：
->
-> ```
-> 廣告故事設計 (ad-story-designer)
->         ↓ 產出企劃 + 分鏡
-> 影片提示詞 (universal-video-prompt)
->         ↓ 轉成分鏡語言
-> 圖片提示詞 (universal-image-prompt)
->         ↓ 產出 keyframe 圖片提示
-> 完成 production-ready 素材
-> ```
->
-> Claude 會根據指令自動切換適用的 Skill，不用手動指定。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 廣告產線</p>
+<div class="text-sm text-gray-300">
+
+三個 Skill 可順序連動：
+
+```
+廣告故事設計 (ad-story-designer)
+        ↓ 產出企劃 + 分鏡
+影片提示詞 (universal-video-prompt)
+        ↓ 轉成分鏡語言
+圖片提示詞 (universal-image-prompt)
+        ↓ 產出 keyframe 圖片提示
+完成 production-ready 素材
+```
+
+Claude 會根據指令自動切換適用的 Skill，不用手動指定。
+
+</div>
+</div>
+
 
 ---
 
@@ -163,21 +191,35 @@ category: "AI工具"
 
 ## 對你的價值評估
 
-> [!note] 是否值得安裝？
-> 取決於你要不要做：
-> - **行銷廣告／影音內容** → ⭐⭐⭐ 強烈建議
-> - **自媒體 / IG / 短影片** → ⭐⭐⭐ 強烈建議
-> - **純文字工作 / 知識整理** → ⭐ 用不太到
-> - **個人股票研究 / 開發** → ⭐ 不相關
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 是否值得安裝？</p>
+<div class="text-sm text-gray-300">
+
+取決於你要不要做：
+- **行銷廣告／影音內容** → ⭐⭐⭐ 強烈建議
+- **自媒體 / IG / 短影片** → ⭐⭐⭐ 強烈建議
+- **純文字工作 / 知識整理** → ⭐ 用不太到
+- **個人股票研究 / 開發** → ⭐ 不相關
+
+</div>
+</div>
+
 
 你目前主要工作流程是 Claude Code + Telegram（重度自動化＋知識庫），這 3 個 Skill 屬於 Claude.ai 創意路線，**跟現有工作流不衝突但也不互補**。
 
-> [!tip] 折衷方案
-> 如果你想試但不想付 Claude Pro，可以：
-> 1. 把這 3 個 .md 檔案的內容讀進來
-> 2. 改寫成 Claude Code 的 SKILL.md 格式
-> 3. 放到 `~/.claude/skills/` 變成本機可用的版本
-> 4. 透過 Telegram 跟我說「用 universal-image-prompt 幫我寫一段 Midjourney prompt」即可呼叫
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 折衷方案</p>
+<div class="text-sm text-gray-300">
+
+如果你想試但不想付 Claude Pro，可以：
+1. 把這 3 個 .md 檔案的內容讀進來
+2. 改寫成 Claude Code 的 SKILL.md 格式
+3. 放到 `~/.claude/skills/` 變成本機可用的版本
+4. 透過 Telegram 跟我說「用 universal-image-prompt 幫我寫一段 Midjourney prompt」即可呼叫
+
+</div>
+</div>
+
 
 ---
 
@@ -190,7 +232,14 @@ category: "AI工具"
 
 ## 後續行動
 
-> [!todo]
-> - [ ] 評估是否需要這 3 個 Skill（依目前工作重心）
-> - [ ] 如果要安裝：先找到 .md 檔案下載點（聯繫威森或在他的網站找）
-> - [ ] 替代方案：把核心提示詞模板化後納入 Claude Code 的 skills
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 評估是否需要這 3 個 Skill（依目前工作重心）
+- [ ] 如果要安裝：先找到 .md 檔案下載點（聯繫威森或在他的網站找）
+- [ ] 替代方案：把核心提示詞模板化後納入 Claude Code 的 skills
+
+</div>
+</div>
+

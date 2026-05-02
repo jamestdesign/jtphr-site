@@ -18,8 +18,15 @@ category: "AI影音-提示詞"
 
 # 圖片提示詞 — 亞洲女模特鎖骨特寫
 
-> [!important] 用途
-> 商業代言圖底圖。產出一張可作為後續產品合成基底的「亞洲女模特上半身寫實人像」，重點突顯鎖骨優雅線條，使用柔和側光強化質感。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+商業代言圖底圖。產出一張可作為後續產品合成基底的「亞洲女模特上半身寫實人像」，重點突顯鎖骨優雅線條，使用柔和側光強化質感。
+
+</div>
+</div>
+
 
 ---
 
@@ -51,8 +58,15 @@ A photorealistic, high-definition portrait of an 18-23 year old Asian woman with
 - **表情**：neutral, gentle expression（中性溫柔）
 - **姿態**：relaxed yet graceful（放鬆優雅）
 
-> [!note] 寫法亮點
-> 沒有用「漂亮」「完美」這類抽象詞，而是用「fair, smooth skin」「strapless top」這種具體可視化的描述。
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 寫法亮點</p>
+<div class="text-sm text-gray-300">
+
+沒有用「漂亮」「完美」這類抽象詞，而是用「fair, smooth skin」「strapless top」這種具體可視化的描述。
+
+</div>
+</div>
+
 
 ### 🏞️ Scene（場景）
 - 背景：clean, minimalist soft beige or light gray（簡潔米色或淺灰）
@@ -64,8 +78,15 @@ A photorealistic, high-definition portrait of an 18-23 year old Asian woman with
 - **subtle shadows**（細緻陰影）
 - 目的：強調鎖骨輪廓 → 光線設計直接服務焦點
 
-> [!tip] 光線決定情緒
-> 這個 prompt 用側光是因為要凸顯鎖骨的「立體感」。如果改成正面光會變成證件照感、改成逆光會變成廣告 silhouette。
+<div class="not-prose my-6 bg-green-500/10 border-l-4 border-green-500 rounded-r-lg p-4">
+<p class="font-bold text-green-400 mb-2">💡 光線決定情緒</p>
+<div class="text-sm text-gray-300">
+
+這個 prompt 用側光是因為要凸顯鎖骨的「立體感」。如果改成正面光會變成證件照感、改成逆光會變成廣告 silhouette。
+
+</div>
+</div>
+
 
 ### 🎨 Style（風格）
 - **photorealism style**（寫實主義）

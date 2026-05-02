@@ -18,8 +18,15 @@ category: "AI工具"
 
 # Google Gemini「notebooks」正式推出
 
-> [!important] 核心
-> Google 正式把 **Gemini 聊天介面** 與 **NotebookLM 知識庫工具** 雙向打通。使用者可以在 Gemini 中一鍵建立專屬 notebook，然後跟 NotebookLM **即時同步**（來源、摘要、音檔、Video Overview、Structured Notes、Podcast 朗讀全部互通）。這意味著「**聊天 → 知識庫 → 聊天**」的循環變得無摩擦。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+Google 正式把 **Gemini 聊天介面** 與 **NotebookLM 知識庫工具** 雙向打通。使用者可以在 Gemini 中一鍵建立專屬 notebook，然後跟 NotebookLM **即時同步**（來源、摘要、音檔、Video Overview、Structured Notes、Podcast 朗讀全部互通）。這意味著「**聊天 → 知識庫 → 聊天**」的循環變得無摩擦。
+
+</div>
+</div>
+
 
 ---
 
@@ -133,10 +140,17 @@ Telegram (Claude Code) → Obsidian + memory（我目前用的）
 
 > 用戶 2026-04-12 補充提供的高品質對照表，整理 Gemini Notebook 與 NotebookLM 在各功能上的差異與資料同步行為。
 
-!_attachments/gemini-notebooks/Gemini_Notebook_vs_NotebookLM_工作流對照表.jpg
+![](/images/kb/gemini-notebooks/Gemini_Notebook_vs_NotebookLM_工作流對照表.jpg)
 
-> [!quote] 圖中標題
-> **Gemini Notebook ⇄ NotebookLM 工作流深度解析：資料同步與細節差異**
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 圖中標題</p>
+<div class="text-sm text-gray-300">
+
+**Gemini Notebook ⇄ NotebookLM 工作流深度解析：資料同步與細節差異**
+
+</div>
+</div>
+
 
 對照表結構（**3 欄**）：
 - 左：功能 / 操作
@@ -151,11 +165,25 @@ Telegram (Claude Code) → Obsidian + memory（我目前用的）
 - 🎬 Video Overview（Studio Video）
 - ⚙️ 重要資料管理機制（圖片底部紅框強調）
 
-> [!info] 為什麼這份很關鍵
-> 文字版的描述容易模糊「Gemini 和 NotebookLM 哪個能做什麼」。這張對照表用視覺方式列出每個 Studio 功能（Audio / Notes / Video）在兩邊的差異，是規劃工作流時最有用的速查圖。
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">ℹ️ 為什麼這份很關鍵</p>
+<div class="text-sm text-gray-300">
 
-> [!warning] 圖像解析度限制
-> 原圖解析度有限，部分細節文字較難讀。**這張圖本身就是 source of truth**，需要時請開附件圖檔細看。我的文字摘要只是輔助。
+文字版的描述容易模糊「Gemini 和 NotebookLM 哪個能做什麼」。這張對照表用視覺方式列出每個 Studio 功能（Audio / Notes / Video）在兩邊的差異，是規劃工作流時最有用的速查圖。
+
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 圖像解析度限制</p>
+<div class="text-sm text-gray-300">
+
+原圖解析度有限，部分細節文字較難讀。**這張圖本身就是 source of truth**，需要時請開附件圖檔細看。我的文字摘要只是輔助。
+
+</div>
+</div>
+
 
 來源：salaryman.presentations（Instagram / Threads 帳號）
 
@@ -198,10 +226,17 @@ Telegram (Claude Code) → Obsidian + memory（我目前用的）
 
 ## 後續行動
 
-> [!todo]
-> - [ ] 觀察 Gemini Notebooks 的手機 App 上線時間
-> - [ ] 如果決定試用 Google AI Plus（為了 Veo）時，順手測 Notebooks
-> - [ ] 評估是否需要 Podcast 朗讀功能（這是 NotebookLM 最大特色）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 觀察 Gemini Notebooks 的手機 App 上線時間
+- [ ] 如果決定試用 Google AI Plus（為了 Veo）時，順手測 Notebooks
+- [ ] 評估是否需要 Podcast 朗讀功能（這是 NotebookLM 最大特色）
+
+</div>
+</div>
+
 
 ---
 

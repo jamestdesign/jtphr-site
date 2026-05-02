@@ -18,8 +18,15 @@ category: "股票-個股分析"
 
 # 3060 銘異（Min Aik Technology）深度評估
 
-> [!important] 投資論點摘要
-> 銘異是 Seagate / Western Digital 的台灣 HDD 精密零組件供應商，2026 年正逢 **AI 帶動的 nearline HDD supercycle**：兩大客戶 2026 全年產能已售罄、長約延伸到 2027-2028。短中期業績有跟漲機會，但長期需面對 SSD 取代風險。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 投資論點摘要</p>
+<div class="text-sm text-gray-300">
+
+銘異是 Seagate / Western Digital 的台灣 HDD 精密零組件供應商，2026 年正逢 **AI 帶動的 nearline HDD supercycle**：兩大客戶 2026 全年產能已售罄、長約延伸到 2027-2028。短中期業績有跟漲機會，但長期需面對 SSD 取代風險。
+
+</div>
+</div>
+
 
 ---
 
@@ -54,15 +61,29 @@ category: "股票-個股分析"
 | 2025 全年累計 | 30.59 億 | YoY +7.63% |
 | 2026/02 | 3.37 億 | YoY +14.05%（累計）、MoM -16.76% |
 
-> [!note] 觀察
-> 月營收波動較大，但累計年增持續正向。2025/10 的 +57% MoM 暴衝特別亮眼，可能反映客戶 2026 訂單前置拉貨。
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 觀察</p>
+<div class="text-sm text-gray-300">
+
+月營收波動較大，但累計年增持續正向。2025/10 的 +57% MoM 暴衝特別亮眼，可能反映客戶 2026 訂單前置拉貨。
+
+</div>
+</div>
+
 
 ---
 
 ## 產業大環境（極正面 ✅）
 
-> [!success] HDD Supercycle 已確認
-> AI 資料中心對 nearline / cold storage 的需求，把 HDD 從「夕陽產業」拉回「結構性短缺」。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 HDD Supercycle 已確認</p>
+<div class="text-sm text-gray-300">
+
+AI 資料中心對 nearline / cold storage 的需求，把 HDD 從「夕陽產業」拉回「結構性短缺」。
+
+</div>
+</div>
+
 
 ### 關鍵事實（2025-2026）
 
@@ -92,8 +113,15 @@ category: "股票-個股分析"
 - **可靠性**：HDD 對寫入次數無上限，SSD 有 P/E cycle 限制
 - **規模**：單台 cloud server 需要數十 TB，HDD 仍是經濟解
 
-> [!quote] 類比
-> 「SSD 是熱儲存（hot），HDD 是溫/冷儲存（warm/cold）。AI 需要的不是只有熱資料，而是大量被訓練後的歷史資料。」
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 類比</p>
+<div class="text-sm text-gray-300">
+
+「SSD 是熱儲存（hot），HDD 是溫/冷儲存（warm/cold）。AI 需要的不是只有熱資料，而是大量被訓練後的歷史資料。」
+
+</div>
+</div>
+
 
 ---
 
@@ -101,31 +129,52 @@ category: "股票-個股分析"
 
 ### Pro（看多理由）
 
-> [!success]
-> 1. **直接受惠雙巨頭擴產** — Seagate + WD 都吃滿 2026，銘異作為精密零組件供應商，訂單能見度跟著拉長
-> 2. **產業議價權提升** — 過去 HDD 是 commodity，現在變短缺品，銘異有調漲空間
-> 3. **結構性 supercycle** — 不是一次性訂單，是 2025-2027 至少 2 年的需求週期
-> 4. **股價尚未反映** — 6 個月只漲 26.8%，遠不及 Seagate / WD 美股漲幅
-> 5. **本益比相對低** — HDD 概念長期估值被壓制，現在有重估空間
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 Success</p>
+<div class="text-sm text-gray-300">
+
+1. **直接受惠雙巨頭擴產** — Seagate + WD 都吃滿 2026，銘異作為精密零組件供應商，訂單能見度跟著拉長
+2. **產業議價權提升** — 過去 HDD 是 commodity，現在變短缺品，銘異有調漲空間
+3. **結構性 supercycle** — 不是一次性訂單，是 2025-2027 至少 2 年的需求週期
+4. **股價尚未反映** — 6 個月只漲 26.8%，遠不及 Seagate / WD 美股漲幅
+5. **本益比相對低** — HDD 概念長期估值被壓制，現在有重估空間
+
+</div>
+</div>
+
 
 ### Con（看空風險）
 
-> [!warning]
-> 1. **長期 SSD 取代趨勢未變** — 5 年後 NAND 成本若持續下降，HDD 退場是必然
-> 2. **月營收波動** — 2026/02 MoM -16.76% 顯示出貨節奏不穩
-> 3. **議價能力有限** — 銘異是零件商不是品牌商，毛利率受 OEM 壓力
-> 4. **產能瓶頸** — 如果客戶下大單，銘異的擴產跟得上嗎？
-> 5. **匯率風險** — 客戶都是美系，新台幣若升值會壓縮獲利
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Warning</p>
+<div class="text-sm text-gray-300">
+
+1. **長期 SSD 取代趨勢未變** — 5 年後 NAND 成本若持續下降，HDD 退場是必然
+2. **月營收波動** — 2026/02 MoM -16.76% 顯示出貨節奏不穩
+3. **議價能力有限** — 銘異是零件商不是品牌商，毛利率受 OEM 壓力
+4. **產能瓶頸** — 如果客戶下大單，銘異的擴產跟得上嗎？
+5. **匯率風險** — 客戶都是美系，新台幣若升值會壓縮獲利
+
+</div>
+</div>
+
 
 ### 待補完的關鍵資訊（需深入查證）
 
-> [!todo]
-> - [ ] 銘異主要產品在 HDD BOM 占比（機械臂？磁頭支架？馬達零件？）
-> - [ ] 對 Seagate / WD 各別占比與依賴度
-> - [ ] 最近 2 季毛利率變化
-> - [ ] 法人持股比例與買賣超趨勢
-> - [ ] 大陸子公司營收占比（HDD 多在大陸組裝）
-> - [ ] 2026 全年法說會或財測指引
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 銘異主要產品在 HDD BOM 占比（機械臂？磁頭支架？馬達零件？）
+- [ ] 對 Seagate / WD 各別占比與依賴度
+- [ ] 最近 2 季毛利率變化
+- [ ] 法人持股比例與買賣超趨勢
+- [ ] 大陸子公司營收占比（HDD 多在大陸組裝）
+- [ ] 2026 全年法說會或財測指引
+
+</div>
+</div>
+
 
 ---
 
@@ -148,14 +197,21 @@ category: "股票-個股分析"
 
 ## 結論與建議
 
-> [!important] 我的判斷
-> **短中期（6-12 個月）：謹慎偏多**
->
-> 結構面：HDD supercycle 確認，銘異是直接受惠台廠
-> 籌碼面：股價尚未反映客戶基本面強度
-> 風險面：月營收波動 + 長期 SSD 取代壓力
->
-> 適合作為「AI 基礎建設受惠股」配置的一部分，**不適合重押**（產業天花板存在），但中期有 30-50% 補漲空間。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 我的判斷</p>
+<div class="text-sm text-gray-300">
+
+**短中期（6-12 個月）：謹慎偏多**
+
+結構面：HDD supercycle 確認，銘異是直接受惠台廠
+籌碼面：股價尚未反映客戶基本面強度
+風險面：月營收波動 + 長期 SSD 取代壓力
+
+適合作為「AI 基礎建設受惠股」配置的一部分，**不適合重押**（產業天花板存在），但中期有 30-50% 補漲空間。
+
+</div>
+</div>
+
 
 ### 是否加入 watchlist？
 

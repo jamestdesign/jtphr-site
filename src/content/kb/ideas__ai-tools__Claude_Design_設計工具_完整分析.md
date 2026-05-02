@@ -18,8 +18,15 @@ category: "AI工具"
 
 # Claude Design 正式登場 — Anthropic 的 AI 設計工具
 
-> [!important] 核心
-> Anthropic 於 2026/04/17 發布全新產品 **Claude Design**，搭載 **Claude Opus 4.7**（最新視覺模型）。可直接生成設計稿、原型、簡報、一頁報，並一鍵交棒給 Claude Code 進行開發。**挑戰 Figma + Canva 的地位**。Figma 股價當天下跌。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心</p>
+<div class="text-sm text-gray-300">
+
+Anthropic 於 2026/04/17 發布全新產品 **Claude Design**，搭載 **Claude Opus 4.7**（最新視覺模型）。可直接生成設計稿、原型、簡報、一頁報，並一鍵交棒給 Claude Code 進行開發。**挑戰 Figma + Canva 的地位**。Figma 股價當天下跌。
+
+</div>
+</div>
+
 
 ---
 
@@ -162,13 +169,20 @@ Claude Routines（每日自動執行）
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] **確認 Claude Design 是否已推送到你的帳號**（開 claude.ai 看有沒有 Design 選項）
-> - [ ] 試做一張「每日盤後分析」的精美報告（跟 ig-card-generator 比較品質）
-> - [ ] 試做一份「矽光子供應鏈」的 pitch deck
-> - [ ] 評估是否把高品質場景從 ig-card-generator 遷移到 Design
-> - [ ] 確認 Claude Code CLI 能不能呼叫 Design（無縫串接）
-> - [ ] 確認 Opus 4.7 是否可用（模型升級）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] **確認 Claude Design 是否已推送到你的帳號**（開 claude.ai 看有沒有 Design 選項）
+- [ ] 試做一張「每日盤後分析」的精美報告（跟 ig-card-generator 比較品質）
+- [ ] 試做一份「矽光子供應鏈」的 pitch deck
+- [ ] 評估是否把高品質場景從 ig-card-generator 遷移到 Design
+- [ ] 確認 Claude Code CLI 能不能呼叫 Design（無縫串接）
+- [ ] 確認 Opus 4.7 是否可用（模型升級）
+
+</div>
+</div>
+
 
 ---
 

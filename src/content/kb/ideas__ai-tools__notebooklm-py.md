@@ -56,9 +56,9 @@ notebooklm generate slide-deck
 ---
 
 ## 原始截圖
-!notebooklm-01-cover.jpg
-!notebooklm-02-github.jpg
-!notebooklm-03-features.jpg
-!notebooklm-04-install.jpg
-!notebooklm-05-skill-usage.jpg
-!notebooklm-06-use-cases.jpg
+![](/images/kb/notebooklm-01-cover.jpg)
+![](/images/kb/notebooklm-02-github.jpg)
+![](/images/kb/notebooklm-03-features.jpg)
+![](/images/kb/notebooklm-04-install.jpg)
+![](/images/kb/notebooklm-05-skill-usage.jpg)
+![](/images/kb/notebooklm-06-use-cases.jpg)

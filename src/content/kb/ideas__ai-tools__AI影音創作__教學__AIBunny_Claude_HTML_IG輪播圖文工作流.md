@@ -24,20 +24,27 @@ category: "AI影音-教學"
 
 # AI Bunny — 用 Claude 做 IG 輪播圖文（HTML 卡片 + 截圖工作流）
 
-> [!important] 一句話結論
-> 不用 Canva、不用 PS。用 Claude **寫 HTML 卡片 + 自動截圖**，可以一句話產出**整套 IG 輪播圖文**（5-7 張）+ 高清 PNG（1320×1650）。秘密武器是一份 **SKILL.md 設定檔**，記住你的品牌風格，以後每篇都自動統一。從 1 小時縮短到 5 分鐘。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話結論</p>
+<div class="text-sm text-gray-300">
+
+不用 Canva、不用 PS。用 Claude **寫 HTML 卡片 + 自動截圖**，可以一句話產出**整套 IG 輪播圖文**（5-7 張）+ 高清 PNG（1320×1650）。秘密武器是一份 **SKILL.md 設定檔**，記住你的品牌風格，以後每篇都自動統一。從 1 小時縮短到 5 分鐘。
+
+</div>
+</div>
+
 
 ---
 
 ## 📑 原圖備份
 
-- 01 cover：!_attachments/aibunny-IG輪播圖文/01-cover.jpg
-- 02 how it works：!_attachments/aibunny-IG輪播圖文/02-how-it-works.jpg
-- 03 examples：!_attachments/aibunny-IG輪播圖文/03-examples.jpg
-- 04 get started：!_attachments/aibunny-IG輪播圖文/04-get-started.jpg
-- 05 fan gift：!_attachments/aibunny-IG輪播圖文/05-fan-gift.jpg
-- 06 caption part 1：!_attachments/aibunny-IG輪播圖文/06-caption-1.jpg
-- 07 caption part 2：!_attachments/aibunny-IG輪播圖文/07-caption-2.jpg
+- 01 cover：![](/images/kb/aibunny-IG輪播圖文/01-cover.jpg)
+- 02 how it works：![](/images/kb/aibunny-IG輪播圖文/02-how-it-works.jpg)
+- 03 examples：![](/images/kb/aibunny-IG輪播圖文/03-examples.jpg)
+- 04 get started：![](/images/kb/aibunny-IG輪播圖文/04-get-started.jpg)
+- 05 fan gift：![](/images/kb/aibunny-IG輪播圖文/05-fan-gift.jpg)
+- 06 caption part 1：![](/images/kb/aibunny-IG輪播圖文/06-caption-1.jpg)
+- 07 caption part 2：![](/images/kb/aibunny-IG輪播圖文/07-caption-2.jpg)
 
 ---
 
@@ -101,8 +108,15 @@ AI 工具教學 的圖文
 | 換主題全部重做 | 換主題改一句話 |
 | 一頁一頁下載 | 自動批次匯出 |
 
-> [!quote] META 註記
-> 「你正在看的這組圖文就是用這套方法做的，全程沒開過任何設計軟體」
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 META 註記</p>
+<div class="text-sm text-gray-300">
+
+「你正在看的這組圖文就是用這套方法做的，全程沒開過任何設計軟體」
+
+</div>
+</div>
+
 
 ---
 
@@ -140,8 +154,15 @@ Skill 內建至少 2 種風格：
 2. 🎨 **Skill 品牌設定檔** — 分析你的風格 + 10 種模板可選
 3. 🎓 **手把手教學預約** — 不會設定我直接教你
 
-> [!warning]
-> 跟 mobileeditingclub 同樣的「**留言 + 私訊送禮**」營銷模式。免費 DM 教學品質可能有限，真正的價值通常在後續引導的付費社群或服務。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ Warning</p>
+<div class="text-sm text-gray-300">
+
+跟 mobileeditingclub 同樣的「**留言 + 私訊送禮**」營銷模式。免費 DM 教學品質可能有限，真正的價值通常在後續引導的付費社群或服務。
+
+</div>
+</div>
+
 
 ---
 
@@ -204,11 +225,18 @@ Skill 內建至少 2 種風格：
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] **試做一次**：跟我說「幫我寫一個 ig-card-generator skill，深色科技風」
-> - [ ] **延伸應用**：用同樣概念做「股票分析卡片產生器」（可發 Telegram 股票群）
-> - [ ] **不**追蹤 aibunny.makes / 不留言「圖文」（避免營銷漏斗）
-> - [ ] 看 AI Bunny 的下篇：Cowork 排程自動發圖文（如果他發了）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] **試做一次**：跟我說「幫我寫一個 ig-card-generator skill，深色科技風」
+- [ ] **延伸應用**：用同樣概念做「股票分析卡片產生器」（可發 Telegram 股票群）
+- [ ] **不**追蹤 aibunny.makes / 不留言「圖文」（避免營銷漏斗）
+- [ ] 看 AI Bunny 的下篇：Cowork 排程自動發圖文（如果他發了）
+
+</div>
+</div>
+
 
 ---
 

@@ -21,8 +21,15 @@ category: "AI影音-提示詞"
 
 # 圖片提示詞 — 淺草寺和服女帝
 
-> [!important] 用途
-> 單人高質感人像照片。以「女帝千金」氣勢為核心，突顯和服服裝細節與淺草寺場景氛圍。此 prompt 為**單人版本**，對應的**隊形入場版本**見 圖片_淺草寺女帝隊形入場_Midjourney。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+單人高質感人像照片。以「女帝千金」氣勢為核心，突顯和服服裝細節與淺草寺場景氛圍。此 prompt 為**單人版本**，對應的**隊形入場版本**見 圖片_淺草寺女帝隊形入場_Midjourney。
+
+</div>
+</div>
+
 
 ---
 
@@ -42,9 +49,16 @@ category: "AI影音-提示詞"
 A photorealistic editorial portrait of an elegant young Japanese woman in her early-to-mid 20s, wearing a meticulously detailed formal houmongi kimono in deep crimson with intricate gold chrysanthemum and crane embroidery, paired with a precisely tied obi belt featuring traditional brocade patterns, white tabi socks, and lacquered geta sandals. Her hair is styled in a classical Japanese updo with ornamental kanzashi hairpins. She stands with the regal poise and commanding presence of an empress's daughter — chin slightly lifted, gaze direct yet serene, hands gracefully folded in front. She is at Sensoji Temple in Asakusa, Tokyo, with the iconic vermilion Kaminarimon gate and the towering five-story pagoda visible in the softly blurred background. Wisps of incense smoke drift around her from a nearby bronze incense burner, catching the warm golden hour light. Cinematic side lighting with rim light highlighting the embroidery details. 85mm portrait lens, shallow depth of field, sharp focus on the kimono fabric texture and her composed expression, 8K ultra detailed, editorial photography, soft warm color palette with crimson and gold dominance, photorealism style.
 ```
 
-> [!warning] 注意：這是初版描述
-> 此 prompt 裡的和服描述是 **houmongi 訪問著 + 深紅金繡**，對應**初始文字描述**而非用戶後來上傳的實際照片。
-> 如果你要生成**跟照片裡那位女子同造型**的圖片，請改用 圖片_淺草寺女帝隊形入場_Midjourney 內的校正版描述（黑底大花卉 furisode 振袖）。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 注意：這是初版描述</p>
+<div class="text-sm text-gray-300">
+
+此 prompt 裡的和服描述是 **houmongi 訪問著 + 深紅金繡**，對應**初始文字描述**而非用戶後來上傳的實際照片。
+如果你要生成**跟照片裡那位女子同造型**的圖片，請改用 圖片_淺草寺女帝隊形入場_Midjourney 內的校正版描述（黑底大花卉 furisode 振袖）。
+
+</div>
+</div>
+
 
 ---
 

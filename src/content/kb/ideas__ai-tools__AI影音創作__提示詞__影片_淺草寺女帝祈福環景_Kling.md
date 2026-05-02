@@ -22,8 +22,15 @@ category: "AI影音-提示詞"
 
 # 影片提示詞 — 淺草寺女帝祈福環景
 
-> [!important] 用途
-> 12 秒虔誠鏡頭。主角在廣場中央雙手合十祈禱，**環景 + 推進**複合運鏡從遠景帶入高塔與靜止警戒的隨扈圈，收在她低聲祈禱的中特寫。屬於「淺草寺女帝三部曲」第三組。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+12 秒虔誠鏡頭。主角在廣場中央雙手合十祈禱，**環景 + 推進**複合運鏡從遠景帶入高塔與靜止警戒的隨扈圈，收在她低聲祈禱的中特寫。屬於「淺草寺女帝三部曲」第三組。
+
+</div>
+</div>
+
 
 ---
 
@@ -40,8 +47,8 @@ category: "AI影音-提示詞"
 ## 角色與服裝
 
 延續前兩組的 和服女帝角色，依用戶提供的 4 張參考照片：
-- !_attachments/AI影音範例/淺草寺和服女帝/ref-01-全身櫻花.jpg
-- !_attachments/AI影音範例/淺草寺和服女帝/ref-02-五重塔摺扇.jpg
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-01-全身櫻花.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-02-五重塔摺扇.jpg)
 
 ---
 
@@ -79,8 +86,15 @@ A cinematic 12-second shot at Sensoji Temple main plaza, Asakusa, Tokyo. The sam
 - 速度：緩慢且克制
 - 明確禁止：`no whip pans, no rapid motion`
 
-> [!warning] AI 影片工具挑戰度
-> 這種複合運鏡對 AI 影片工具難度較高。**強烈建議用 image-to-video 模式**，配合明確的英文 prompt 描述（continuous slow orbit-and-push-in combination）。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ AI 影片工具挑戰度</p>
+<div class="text-sm text-gray-300">
+
+這種複合運鏡對 AI 影片工具難度較高。**強烈建議用 image-to-video 模式**，配合明確的英文 prompt 描述（continuous slow orbit-and-push-in combination）。
+
+</div>
+</div>
+
 
 ### 🔍 Focus — Deep focus → Shallow DOF（動態轉換）
 

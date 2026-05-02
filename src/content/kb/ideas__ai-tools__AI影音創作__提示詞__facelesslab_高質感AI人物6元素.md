@@ -20,20 +20,27 @@ category: "AI影音-提示詞"
 
 # facelesslab 高質感 AI 人物 6 元素
 
-> [!important] 核心觀點
-> 一個高質感的 AI 人物 prompt **至少要包含 6 個元素**。缺一個，質感就會掉一個檔次。這 6 個元素直接對應了 universal-image-prompt skill 的 6 層架構（v2 升級正是融入這套思維）。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心觀點</p>
+<div class="text-sm text-gray-300">
+
+一個高質感的 AI 人物 prompt **至少要包含 6 個元素**。缺一個，質感就會掉一個檔次。這 6 個元素直接對應了 universal-image-prompt skill 的 6 層架構（v2 升級正是融入這套思維）。
+
+</div>
+</div>
+
 
 ---
 
 ## 📑 原圖備份
 
-- cover：!_attachments/facelesslab-6elements/01-cover.jpg
-- 01 畫面在幹嘛：!_attachments/facelesslab-6elements/02-scene.jpg
-- 02 人物細節：!_attachments/facelesslab-6elements/03-details.jpg
-- 03 顏色與風格：!_attachments/facelesslab-6elements/04-color-style.jpg
-- 04 畫面構圖：!_attachments/facelesslab-6elements/05-composition.jpg
-- 05 光線：!_attachments/facelesslab-6elements/06-lighting.jpg
-- 06 鏡頭感：!_attachments/facelesslab-6elements/07-camera.jpg
+- cover：![](/images/kb/facelesslab-6elements/01-cover.jpg)
+- 01 畫面在幹嘛：![](/images/kb/facelesslab-6elements/02-scene.jpg)
+- 02 人物細節：![](/images/kb/facelesslab-6elements/03-details.jpg)
+- 03 顏色與風格：![](/images/kb/facelesslab-6elements/04-color-style.jpg)
+- 04 畫面構圖：![](/images/kb/facelesslab-6elements/05-composition.jpg)
+- 05 光線：![](/images/kb/facelesslab-6elements/06-lighting.jpg)
+- 06 鏡頭感：![](/images/kb/facelesslab-6elements/07-camera.jpg)
 
 ---
 

@@ -21,8 +21,15 @@ category: "AI影音-提示詞"
 
 # 影片提示詞 — 淺草寺和服女帝
 
-> [!important] 用途
-> 一段 5 秒的高貴和服女性站在淺草寺的電影感人像影片，主打「女帝千金的氣勢」與服裝細節，適合精品文化／時尚／藝術短片。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+一段 5 秒的高貴和服女性站在淺草寺的電影感人像影片，主打「女帝千金的氣勢」與服裝細節，適合精品文化／時尚／藝術短片。
+
+</div>
+</div>
+
 
 ---
 
@@ -71,8 +78,15 @@ A cinematic 5-second portrait shot of an elegant young Japanese woman in her ear
 - `incense smoke drift continuously`（煙霧是唯一連續動的元素）
 - 衣物完全靜止 → 古典感
 
-> [!warning] 為什麼動作這麼少
-> 5 秒影片如果動作太大會破壞「莊重」氛圍。「微動」才有質感。這是區別「廉價 AI 動畫」與「電影感」的關鍵。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 為什麼動作這麼少</p>
+<div class="text-sm text-gray-300">
+
+5 秒影片如果動作太大會破壞「莊重」氛圍。「微動」才有質感。這是區別「廉價 AI 動畫」與「電影感」的關鍵。
+
+</div>
+</div>
+
 
 ### 💡 Lighting（光線）— golden hour + rim light + smoke catching light
 - 黃金時段暖光是基底

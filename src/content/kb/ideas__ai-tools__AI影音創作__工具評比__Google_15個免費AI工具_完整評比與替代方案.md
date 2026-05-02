@@ -17,21 +17,28 @@ category: "AI影音-工具評比"
 
 # Google 15 個免費 AI 工具完整評比與替代方案
 
-> [!important] 一句話結論
-> Wilson 整理的這 15 個工具**全部來自 Google 一家**，分 5 大類各 3 個。對於不想被綁在單一生態系的人，每一個都有非 Google 的替代方案。本文逐一列出，並標註你（用戶）目前**已有對應方案**的項目。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話結論</p>
+<div class="text-sm text-gray-300">
+
+Wilson 整理的這 15 個工具**全部來自 Google 一家**，分 5 大類各 3 個。對於不想被綁在單一生態系的人，每一個都有非 Google 的替代方案。本文逐一列出，並標註你（用戶）目前**已有對應方案**的項目。
+
+</div>
+</div>
+
 
 ---
 
 ## 📑 原圖備份
 
-cover：!_attachments/wilson-15-google-ai/01-cover.jpg
+cover：![](/images/kb/wilson-15-google-ai/01-cover.jpg)
 
 5 個分類頁：
-- 影片：!_attachments/wilson-15-google-ai/02-video.jpg
-- 設計：!_attachments/wilson-15-google-ai/03-design.jpg
-- 程式開發：!_attachments/wilson-15-google-ai/04-code.jpg
-- 研究：!_attachments/wilson-15-google-ai/05-research.jpg
-- 模型：!_attachments/wilson-15-google-ai/06-models.jpg
+- 影片：![](/images/kb/wilson-15-google-ai/02-video.jpg)
+- 設計：![](/images/kb/wilson-15-google-ai/03-design.jpg)
+- 程式開發：![](/images/kb/wilson-15-google-ai/04-code.jpg)
+- 研究：![](/images/kb/wilson-15-google-ai/05-research.jpg)
+- 模型：![](/images/kb/wilson-15-google-ai/06-models.jpg)
 
 ---
 
@@ -45,8 +52,15 @@ cover：!_attachments/wilson-15-google-ai/01-cover.jpg
 | 🔬 研究 | NotebookLM | Pomelli | AI Mode |
 | 🧠 模型 | Gemini 3 Pro | Gemini 3 Flash | Gemma |
 
-> [!note] 觀察
-> 這份「免費 15 個」其實全都需要 Google 帳號（部分需要 Google AI Plus / Pro / Ultra 訂閱才能完整使用）。「免費」的定義是有試用額度，不是完全無限制。
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 觀察</p>
+<div class="text-sm text-gray-300">
+
+這份「免費 15 個」其實全都需要 Google 帳號（部分需要 Google AI Plus / Pro / Ultra 訂閱才能完整使用）。「免費」的定義是有試用額度，不是完全無限制。
+
+</div>
+</div>
+
 
 ---
 
@@ -129,8 +143,15 @@ cover：!_attachments/wilson-15-google-ai/01-cover.jpg
 
 ## 💻 第 3 類：程式開發
 
-> [!warning] 直接競爭你目前的 Claude Code
-> 這 3 個工具是 Google 用來跟 Anthropic Claude Code 對抗的武器。你現在用的 Claude Code 是這個賽道的「老大哥」之一。
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 直接競爭你目前的 Claude Code</p>
+<div class="text-sm text-gray-300">
+
+這 3 個工具是 Google 用來跟 Anthropic Claude Code 對抗的武器。你現在用的 Claude Code 是這個賽道的「老大哥」之一。
+
+</div>
+</div>
+
 
 ### Google 提供
 
@@ -306,12 +327,19 @@ Wilson 這篇貼文的價值是「**讓你知道 Google 有哪些工具**」，�
 
 ## ⚙️ 後續建議動作
 
-> [!todo]
-> - [ ] **試 Veo 3.1 免費版**（已在 ideas/TODO.md，配合 Google AI Plus 評估）
-> - [ ] 觀察 Antigravity 的多 agent 開發是否值得研究（純技術好奇）
-> - [ ] 評估是否用 Perplexity 補上「AI 搜尋引擎」這塊（這是 NotebookLM 替代）
-> - [ ] **不**安裝 Gemini CLI（與 Claude Code 完全重疊）
-> - [ ] **不**切換到 Gemini 3 Pro（Claude 在你目前任務上更強）
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] **試 Veo 3.1 免費版**（已在 ideas/TODO.md，配合 Google AI Plus 評估）
+- [ ] 觀察 Antigravity 的多 agent 開發是否值得研究（純技術好奇）
+- [ ] 評估是否用 Perplexity 補上「AI 搜尋引擎」這塊（這是 NotebookLM 替代）
+- [ ] **不**安裝 Gemini CLI（與 Claude Code 完全重疊）
+- [ ] **不**切換到 Gemini 3 Pro（Claude 在你目前任務上更強）
+
+</div>
+</div>
+
 
 ---
 

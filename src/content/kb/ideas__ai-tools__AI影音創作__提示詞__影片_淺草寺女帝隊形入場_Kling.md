@@ -21,8 +21,15 @@ category: "AI影音-提示詞"
 
 # 影片提示詞 — 淺草寺女帝隊形入場
 
-> [!important] 用途
-> 10 秒超寬電影級 establishing shot。中央和服女子（依照片角色）＋12 人西裝保鏢楔形隊形，緩緩穿過淺草寺雷門前進。dolly-back tracking 保持楔形構圖。像日本政治劇開場。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+10 秒超寬電影級 establishing shot。中央和服女子（依照片角色）＋12 人西裝保鏢楔形隊形，緩緩穿過淺草寺雷門前進。dolly-back tracking 保持楔形構圖。像日本政治劇開場。
+
+</div>
+</div>
+
 
 ---
 
@@ -34,10 +41,10 @@ category: "AI影音-提示詞"
 
 ## 參考照片（vault 內）
 
-- !_attachments/AI影音範例/淺草寺和服女帝/ref-01-全身櫻花.jpg
-- !_attachments/AI影音範例/淺草寺和服女帝/ref-02-五重塔摺扇.jpg
-- !_attachments/AI影音範例/淺草寺和服女帝/ref-03-和傘特寫.jpg
-- !_attachments/AI影音範例/淺草寺和服女帝/ref-04-側面櫻花.jpg
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-01-全身櫻花.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-02-五重塔摺扇.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-03-和傘特寫.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-04-側面櫻花.jpg)
 
 角色與服裝詳細分析見 圖片_淺草寺女帝隊形入場_Midjourney。
 

@@ -22,21 +22,28 @@ category: "AI影音-教學"
 
 # Nano Banana × Claude — 電商產品攝影 4 大應用工作流
 
-> [!important] 一句話結論
-> 把 **Google Nano Banana**（圖片生成 / 編輯）跟 **Claude**（對話 / 流程編排）組合起來，可以在**不生產實體產品**的情況下完成 4 種電商必備工作：色彩變體測試、客戶回饋視覺化、價格定位測試、產品照背景一致化。對電商賣家是省下數十萬攝影成本的工具。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話結論</p>
+<div class="text-sm text-gray-300">
+
+把 **Google Nano Banana**（圖片生成 / 編輯）跟 **Claude**（對話 / 流程編排）組合起來，可以在**不生產實體產品**的情況下完成 4 種電商必備工作：色彩變體測試、客戶回饋視覺化、價格定位測試、產品照背景一致化。對電商賣家是省下數十萬攝影成本的工具。
+
+</div>
+</div>
+
 
 ---
 
 ## 📑 原圖備份
 
-cover：!_attachments/mobileeditingclub-nanobanana-claude/01-cover.jpg
+cover：![](/images/kb/mobileeditingclub-nanobanana-claude/01-cover.jpg)
 
 5 個應用場景：
-- 02 顏色變體：!_attachments/mobileeditingclub-nanobanana-claude/02-color-variants.jpg
-- 03 客戶回饋循環：!_attachments/mobileeditingclub-nanobanana-claude/03-feedback-loops.jpg
-- 04 價格定位測試：!_attachments/mobileeditingclub-nanobanana-claude/04-price-points.jpg
-- 05 產品照美感更新：!_attachments/mobileeditingclub-nanobanana-claude/05-pack-shots.jpg
-- 06 CTA：!_attachments/mobileeditingclub-nanobanana-claude/06-cta.jpg
+- 02 顏色變體：![](/images/kb/mobileeditingclub-nanobanana-claude/02-color-variants.jpg)
+- 03 客戶回饋循環：![](/images/kb/mobileeditingclub-nanobanana-claude/03-feedback-loops.jpg)
+- 04 價格定位測試：![](/images/kb/mobileeditingclub-nanobanana-claude/04-price-points.jpg)
+- 05 產品照美感更新：![](/images/kb/mobileeditingclub-nanobanana-claude/05-pack-shots.jpg)
+- 06 CTA：![](/images/kb/mobileeditingclub-nanobanana-claude/06-cta.jpg)
 
 ---
 
@@ -225,11 +232,18 @@ Progress
 
 ## 📝 後續行動
 
-> [!todo]
-> - [ ] 如果有電商需求 → 試做一次「同一個產品 3 個顏色變體」測試流程
-> - [ ] 評估 Nano Banana 在你 Claude Code 工作流的角色（透過 Google API 或瀏覽器 MCP 操作）
-> - [ ] **不**追蹤 mobileeditingclub（避免被營銷漏斗）
-> - [ ] 如果想學完整流程，直接跟我說，我用 universal-image-prompt 演示
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ Todo</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 如果有電商需求 → 試做一次「同一個產品 3 個顏色變體」測試流程
+- [ ] 評估 Nano Banana 在你 Claude Code 工作流的角色（透過 Google API 或瀏覽器 MCP 操作）
+- [ ] **不**追蹤 mobileeditingclub（避免被營銷漏斗）
+- [ ] 如果想學完整流程，直接跟我說，我用 universal-image-prompt 演示
+
+</div>
+</div>
+
 
 ---
 

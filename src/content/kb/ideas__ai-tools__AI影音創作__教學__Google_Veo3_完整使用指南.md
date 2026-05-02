@@ -20,8 +20,15 @@ category: "AI影音-教學"
 
 # Google Veo 3 完整使用指南
 
-> [!important] 核心重點
-> Veo 3.1 是 Google DeepMind 最新的 AI 影片生成模型，**2026 年 4 月開始對所有 Gmail 帳號免費開放**（每日 50-180 credits）。支援文字生影片、圖生影片、原生音訊生成、首尾幀轉場。對亞洲用戶來說，最簡單的進入點是 Google Flow（labs.google/fx）。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 核心重點</p>
+<div class="text-sm text-gray-300">
+
+Veo 3.1 是 Google DeepMind 最新的 AI 影片生成模型，**2026 年 4 月開始對所有 Gmail 帳號免費開放**（每日 50-180 credits）。支援文字生影片、圖生影片、原生音訊生成、首尾幀轉場。對亞洲用戶來說，最簡單的進入點是 Google Flow（labs.google/fx）。
+
+</div>
+</div>
+
 
 ---
 
@@ -76,8 +83,15 @@ Google Veo 是 Google DeepMind 開發的進階 AI 影片生成模型，可從文
 | Google AI Pro | USD $19.99/月 | Veo 3 Fast |
 | Google AI Ultra | USD $249.99/月 | Veo 3 完整版 |
 
-> [!success] 重點
-> **Google AI Plus $7.99/月** 是 2026 年初推出的新方案，**已經能用到 Veo 3.1 Fast**。以前要 $19.99 才能碰到 Veo。現在只要 NT$240/月就能玩。
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 重點</p>
+<div class="text-sm text-gray-300">
+
+**Google AI Plus $7.99/月** 是 2026 年初推出的新方案，**已經能用到 Veo 3.1 Fast**。以前要 $19.99 才能碰到 Veo。現在只要 NT$240/月就能玩。
+
+</div>
+</div>
+
 
 ### API 定價（2026/03）
 
@@ -90,11 +104,18 @@ Google Veo 是 Google DeepMind 開發的進階 AI 影片生成模型，可從文
 
 ### 🎁 完全免費路徑（2026/04 最新）
 
-> [!success] 重大消息
-> **2026/04/02 Google 宣布 Veo 3.1 對所有 Gmail 用戶免費開放！**
-> 網址：https://labs.google/fx
-> 免費 daily credits：**50-180 credits/天**（依地區）
-> 一部影片約消耗 10-15 credits → 每天可生成 **5-12 部影片**
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 重大消息</p>
+<div class="text-sm text-gray-300">
+
+**2026/04/02 Google 宣布 Veo 3.1 對所有 Gmail 用戶免費開放！**
+網址：https://labs.google/fx
+免費 daily credits：**50-180 credits/天**（依地區）
+一部影片約消耗 10-15 credits → 每天可生成 **5-12 部影片**
+
+</div>
+</div>
+
 
 ---
 

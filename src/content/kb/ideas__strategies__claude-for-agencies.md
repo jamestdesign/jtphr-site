@@ -33,8 +33,8 @@ category: "策略"
 ---
 
 ## 原始截圖
-!agencies-01-cover.jpg
-!agencies-02-social-calendar.jpg
-!agencies-03-campaign.jpg
-!agencies-04-brand-guidelines.jpg
-!agencies-05-repurposing.jpg
+![](/images/kb/agencies-01-cover.jpg)
+![](/images/kb/agencies-02-social-calendar.jpg)
+![](/images/kb/agencies-03-campaign.jpg)
+![](/images/kb/agencies-04-brand-guidelines.jpg)
+![](/images/kb/agencies-05-repurposing.jpg)

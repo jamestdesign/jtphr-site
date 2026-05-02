@@ -22,15 +22,22 @@ category: "AI影音-教學"
 
 # 個人攝影自動化流水線 — 4 種生活影片場景設計
 
-> [!important] 用戶情境
-> - 攝影是**休閒娛樂**，不做專業節目
-> - 主要工具：**手機攝錄**（素材零碎且量大）
-> - 已有：**CapCut + Final Cut Pro X**
-> - 平台：Mac
-> - 目標：IG 分享、生活記憶、旅遊回憶
-> - 痛點：零碎素材太多、需要整理分類
->
-> 這份文件設計 4 條流水線對應 4 種典型生活影片場景。
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用戶情境</p>
+<div class="text-sm text-gray-300">
+
+- 攝影是**休閒娛樂**，不做專業節目
+- 主要工具：**手機攝錄**（素材零碎且量大）
+- 已有：**CapCut + Final Cut Pro X**
+- 平台：Mac
+- 目標：IG 分享、生活記憶、旅遊回憶
+- 痛點：零碎素材太多、需要整理分類
+
+這份文件設計 4 條流水線對應 4 種典型生活影片場景。
+
+</div>
+</div>
+
 
 ---
 
@@ -466,20 +473,41 @@ Step 8: 存到回憶資料庫
 
 ## 📝 後續行動
 
-> [!todo] 立即可做
-> - [ ] 跟我說「**幫我裝個人攝影流水線**」→ 我跑階段 1+2 的安裝
-> - [ ] 安裝後試跑第一支日常生活集錦
-> - [ ] 評估效果決定要不要做場景 2-4
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ 立即可做</p>
+<div class="text-sm text-gray-300">
 
-> [!todo] 中期 (1 週內)
-> - [ ] 試 SpliceKit + FCPX
-> - [ ] 跑一支 MTV 試試
-> - [ ] 決定是否做自動排程（launchd 每天 11 PM）
+- [ ] 跟我說「**幫我裝個人攝影流水線**」→ 我跑階段 1+2 的安裝
+- [ ] 安裝後試跑第一支日常生活集錦
+- [ ] 評估效果決定要不要做場景 2-4
 
-> [!todo] 長期
-> - [ ] 為每種場景寫專用 skill
-> - [ ] 建立旅行模板資料庫
-> - [ ] 整合 ig-card-generator 做文字片段（介紹卡 / 結尾卡）
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ 中期 (1 週內)</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 試 SpliceKit + FCPX
+- [ ] 跑一支 MTV 試試
+- [ ] 決定是否做自動排程（launchd 每天 11 PM）
+
+</div>
+</div>
+
+
+<div class="not-prose my-6 bg-purple-500/10 border-l-4 border-purple-500 rounded-r-lg p-4">
+<p class="font-bold text-purple-400 mb-2">☑️ 長期</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 為每種場景寫專用 skill
+- [ ] 建立旅行模板資料庫
+- [ ] 整合 ig-card-generator 做文字片段（介紹卡 / 結尾卡）
+
+</div>
+</div>
+
 
 ---
 
