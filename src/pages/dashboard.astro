@@ -22,11 +22,11 @@ const recentNotes = allNotes
   .slice(0, 8);
 
 // Note stats by category
-const notesByCategory = allNotes.reduce((acc, n) => {
+const notesByCategory: Record<string, number> = {};
+allNotes.forEach(n => {
   const cat = n.data.category || '未分類';
-  acc[cat] = (acc[cat] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
+  notesByCategory[cat] = (notesByCategory[cat] || 0) + 1;
+});
 ---
 
 <BaseLayout title="儀表板" description="JTpHR 個人儀表板">
@@ -63,7 +63,7 @@ const notesByCategory = allNotes.reduce((acc, n) => {
           const catPending = catTodos.filter(t => !t.done).length;
           const sections = [...new Set(catTodos.map(t => t.section))];
 
-          const catColors: Record<string, string> = {
+          const catColors = {
             '基建': 'border-blue-500',
             'Ideas': 'border-purple-500',
             '股票': 'border-green-500',
