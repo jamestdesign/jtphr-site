@@ -1,0 +1,226 @@
+---
+title: 影片 — 淺草寺女帝祈福環景（Kling）
+date: 2026-04-11
+來源: 用戶於 Telegram Ideas 群測試 universal-video-prompt skill（第三組 prompt）
+連結:
+平台: Kling AI / Google Veo3 / Runway / 即夢 Seedance
+類型: 影片 / image-to-video
+tags:
+  - AI影音
+  - 提示詞
+  - 影片prompt
+  - 電影感
+  - 和服
+  - 祈福
+  - 環景鏡頭
+  - 複合運鏡
+aliases:
+  - 女帝祈福環景
+  - 第三組女帝prompt
+category: "AI影音-提示詞"
+---
+
+# 影片提示詞 — 淺草寺女帝祈福環景
+
+> [!important] 用途
+> 12 秒虔誠鏡頭。主角在廣場中央雙手合十祈禱，**環景 + 推進**複合運鏡從遠景帶入高塔與靜止警戒的隨扈圈，收在她低聲祈禱的中特寫。屬於「淺草寺女帝三部曲」第三組。
+
+---
+
+## 來源
+
+用戶於 Telegram Ideas 群（chat_id -5231583145, msg 870）提出的**第三組 prompt**：
+
+> 「主角在廣場中央面對世廟內 雙手誠心祈福，環景鏡頭 由遠轉近，遠的時候帶入周邊景色高塔，以及周遭隨扈的嚴肅警備，拉後看到半身正臉或側臉 口述細語」
+
+由 Claude 透過 universal-video-prompt skill 套用八層架構產出。
+
+---
+
+## 角色與服裝
+
+延續前兩組的 和服女帝角色，依用戶提供的 4 張參考照片：
+- !_attachments/AI影音範例/淺草寺和服女帝/ref-01-全身櫻花.jpg
+- !_attachments/AI影音範例/淺草寺和服女帝/ref-02-五重塔摺扇.jpg
+
+---
+
+## Prompt 全文（英文，主版本）
+
+```
+A cinematic 12-second shot at Sensoji Temple main plaza, Asakusa, Tokyo. The same young Japanese woman from the reference images — early 20s, round face, warm brown updo with a large pink floral kanzashi hairpin, wearing a traditional formal furisode kimono with a deep black base covered in bold large-scale crimson chrysanthemums, golden peonies, pale pink cherry blossoms and white floral accents, cream-and-gold brocade obi with pink decorative cord, white tabi and black lacquered geta — stands alone at the visual center of the plaza, facing the Hondo main temple hall, both hands gently clasped at chest level in sincere prayer, eyes closed, lips moving subtly as she whispers a silent prayer. Positioned at a respectful distance around her in a loose protective circle stand six to eight men in sharp black tailored suits, white shirts, black ties, and dark sunglasses, bodies still, hands folded in front, heads slightly turned outward in alert stationary guard posture (not walking, not marching — just watching, unmoving sentries). Camera executes a continuous slow orbit-and-push-in combination: starts at an extreme wide shot from behind and far to the left, revealing the full plaza, the five-story pagoda looming tall in the background, the distant silhouette of Hondo temple, and the entire protective circle of bodyguards framing her. As the camera arcs clockwise around the scene, it simultaneously dollies inward, gradually transitioning from extreme wide shot to wide shot to medium full shot, ending at a medium close-up from a slight front-three-quarter angle revealing her composed profile and then her serene full face with her lips moving in whispered prayer. Cinematic wide-to-telephoto transition, deep focus on wide shots keeping all bodyguards crisp, transitioning to shallow depth of field in the final medium close-up with 85mm cinematic look. Lighting is dramatic late golden hour with strong warm rim light from behind the pagoda, casting long elegant shadows across the stone plaza. Wisps of incense smoke drift from bronze burners on the sides. Color palette: deep crimson and gold kimono, stark black suits, vermilion pagoda, warm amber sunlight, cool blue ground shadows, high contrast cinematic. Editorial cinematic style, like a Japanese political drama reverent moment or an international prestige film opening. No whip pans, no rapid motion — only the steady reverent orbit-push and her subtle whispered prayer. The shot breathes with patient dignity.
+```
+
+---
+
+## 八層架構拆解
+
+### 📐 Medium — EWS → WS → MFS → MCU（四層景別連續轉換）
+
+這個鏡頭的**核心亮點**：不是單一景別，而是 12 秒內連續收斂四層景別。
+- **0-3 秒**：Extreme Wide Shot 大遠景
+- **3-7 秒**：Wide Shot 遠景
+- **7-10 秒**：Medium Full Shot 中全景
+- **10-12 秒**：Medium Close-Up 中特寫
+
+### 📷 Shot Type — Reverent establishing → Reverent close-up
+從「環境建立 + 儀式性 reveal」到「人物情感特寫」。屬於 reverent shot（虔誠鏡頭）。
+
+### 📐 Angle — slight low → front three-quarter
+- 開始：微仰角（展示高塔與隨扈威嚴）
+- 結束：front three-quarter（正面偏斜，看得到臉和側面輪廓）
+
+### 🎥 Movement — **Orbit + Dolly-in 組合**（核心）
+
+用戶原句「環景鏡頭 由遠轉近」的英文翻譯：
+- **Orbit（環繞）**：順時針弧形移動
+- **Push-in（推進）**：同時向內逼近
+- **結果**：像無人機環繞 + 電影推軌的結合
+- 速度：緩慢且克制
+- 明確禁止：`no whip pans, no rapid motion`
+
+> [!warning] AI 影片工具挑戰度
+> 這種複合運鏡對 AI 影片工具難度較高。**強烈建議用 image-to-video 模式**，配合明確的英文 prompt 描述（continuous slow orbit-and-push-in combination）。
+
+### 🔍 Focus — Deep focus → Shallow DOF（動態轉換）
+
+跟前兩組最大的差異：**焦點在鏡頭進行中轉換**
+- 遠景時：deep focus（隨扈、高塔、本堂都銳利）
+- 特寫時：shallow DOF（85mm 淺景深，只有她的臉清晰）
+
+### 🎭 Subject — 虔誠微動作 + 靜止警戒
+
+**她**：
+- 雙手胸前合十
+- 閉眼
+- **嘴唇微動口述細語**（whispered prayer）
+- 身體完全靜止
+
+**隨扈（6-8 人）**：
+- 鬆散保護圈（loose protective circle）
+- **站立不動**（像雕像 sentries）
+- 雙手交握胸前
+- 頭微朝外警戒
+- **不是行進中**（跟第二組 prompt 最大差異）
+
+### 💡 Lighting — golden hour + rim light from behind pagoda
+- 黃金時段晚期
+- 背後逆光從五重塔後面透出
+- 長影子投射在石板廣場
+- 戲劇性但虔誠
+
+### 🎨 Color — 延續三部曲視覺
+- 深紅金和服（主角）
+- 純黑西裝（隨扈）
+- 朱紅高塔
+- 暖琥珀陽光
+- 冷藍地面陰影
+- 保持與 第一組 和 第二組 的視覺連續性
+
+---
+
+## 預期成果（逐秒描述）
+
+🎬 **12 秒虔誠環景鏡頭**：
+
+**0-3 秒**：Extreme wide shot，相機從廣場後方遠處偏左的位置出發。觀眾首先看到五重塔聳立背景、本堂輪廓、整個廣場、環繞站立的 8 名黑衣警衛，中間遠處有一個嬌小的和服身影 — 那是她。黃金陽光籠罩整個畫面，長影子拖曳在石板上。
+
+**3-6 秒**：相機順時針弧形移動 + 逐漸推進。畫面轉為 Wide shot，她的身影變大，可以看到她雙手合十面向本堂。隨扈的身影更清晰，全部站立不動，像雕像一樣警戒。五重塔仍在背景。
+
+**6-9 秒**：相機繼續繞圈 + 推進。現在是 Medium Full Shot，她的和服花紋開始清晰可見，黑底金紅大花樣搶眼。背景的隨扈開始柔焦，焦點漸漸鎖定她。
+
+**9-11 秒**：Medium Close-Up，相機停在她的 front-three-quarter 位置。可以清楚看到她的側臉輪廓（髮飾、耳朵的線條）與正面（閉著的眼睛、微動的嘴唇）。
+
+**11-12 秒**：停在她臉上特寫，嘴唇微微開合 — 能看出她在低聲細語祈禱。畫面結束。
+
+整體像一個「**從上帝視角慢慢走進她內心**」的鏡頭。
+
+---
+
+## 多平台適配版本
+
+### ▸ Kling AI 版本（強烈推薦 — 支援長鏡頭與複合運鏡）
+
+```
+Cinematic 12-second reverent shot at Sensoji Temple main plaza. A young Japanese woman in black furisode with crimson-gold-pink florals stands alone at the center, hands clasped in prayer, eyes closed, lips whispering. Six to eight men in black suits and sunglasses form a stationary protective circle around her, standing still as sentries. Camera executes a slow continuous orbit-and-push-in: starts at extreme wide shot from behind-and-far-left revealing the pagoda, temple and full bodyguard circle; arcs clockwise while dollying inward; ends at medium close-up of her profile transitioning to her serene face with lips moving in whispered prayer. Deep focus on wide shots, shallow depth of field at the end, 85mm look. Golden hour rim light from behind the pagoda, long shadows, incense smoke drifting. High contrast cinematic palette. No rapid motion.
+```
+
+設定：
+- Mode: **image-to-video**
+- Duration: 10-12 秒（選最長可用）
+- Motion strength: Medium
+- Camera control: **Orbit + Zoom In**（如介面支援）
+- Reference image: Midjourney 先生成 靜態圖 或類似
+
+### ▸ Google Veo3 版本（結構化）
+
+```
+Subject: a young Japanese woman in a deep black furisode with crimson and gold floral patterns, standing alone at Sensoji Temple plaza with hands clasped in sincere prayer, eyes closed, lips whispering. Surrounding her at a respectful distance are six to eight men in black suits and sunglasses in stationary guard posture.
+Action: she remains still in prayer throughout the shot, her lips moving subtly in whispered prayer. The bodyguards stand still as sentries, not walking.
+Camera: continuous slow orbit-and-push-in combination, starting at extreme wide shot revealing the five-story pagoda and full plaza, arcing clockwise while dollying inward, ending at medium close-up of her face from a slight front-three-quarter angle. Duration 12 seconds.
+Setting: Sensoji Temple Asakusa Tokyo main plaza, five-story pagoda looming in the background, Hondo temple in the distance, bronze incense burners on the sides.
+Lighting: dramatic late golden hour with strong warm rim light from behind the pagoda, long elegant shadows on the stone plaza.
+Style: editorial cinematic, like a Japanese political drama reverent moment, photorealistic, no rapid motion.
+```
+
+### ▸ Runway Gen-3/4 版本
+
+直接用主版本 prompt，加：
+`Style reference: reverent moment from Wong Kar-wai meets prestige political film, continuous orbital push-in camera work`
+
+### ▸ 即夢 Seedance / Pika 簡化版
+
+```
+Japanese woman in black gold kimono praying at Sensoji Temple, eyes closed hands clasped lips whispering, eight bodyguards in black suits in still guard circle around her, slow orbit and push-in from extreme wide to medium close-up, deep focus to shallow DOF, 85mm, golden hour rim light, long shadows, cinematic reverent, 12s
+```
+
+---
+
+## 變體建議
+
+### 變體 A — 純 orbit 不推進
+把 `orbit + push-in` 改成 `pure 360-degree orbit keeping the same distance`。
+- 效果：她始終在中心、觀眾 360 度環繞觀察
+- 適合：史詩電影英雄時刻
+- 缺點：特寫細節會少
+
+### 變體 B — Reverse push（由近到遠）
+顛倒方向：從她的臉部特寫開始 → 慢慢退後 + 環繞 → 揭示整個場景。
+- 效果：「從私密走向壯麗」，情緒遞增結尾
+- 適合：廣告結尾或 reveal 鏡頭
+
+### 變體 C — 雙人物版
+加入另一個角色：
+```
+... a second figure, an elderly man in traditional dark kimono
+stands respectfully a few steps behind her — perhaps her mentor
+or master, hands folded, head bowed slightly ...
+```
+- 效果：多了傳承感、兩代對話的隱含敘事
+
+---
+
+## 三部曲視覺連續性
+
+這支 prompt 是「淺草寺女帝三部曲」的第三組：
+
+| 組別 | 動作 | 運鏡 | 景別趨勢 |
+|------|------|------|---------|
+| 第一組 | 單人靜立 | Slow dolly-in | MS → MCU |
+| 第二組 | 隊形前進 | Slow dolly-back tracking | WS 固定 |
+| **第三組（此）** | 廣場祈禱 | **Orbit + Push-in** | EWS → MCU |
+
+**剪輯建議**：三組可以無縫剪在一起，形成 30+ 秒的電影感序列。
+- 共同視覺元素：深紅金和服、黃金時段、朱紅雷門/五重塔、冷藍地面陰影
+- 情緒遞進：入場（威嚴）→ 行進（儀式）→ 祈禱（虔誠）
+
+---
+
+## 相關筆記
+
+- 影片_淺草寺和服女帝_Kling — 第一組（單人靜立）
+- 影片_淺草寺女帝隊形入場_Kling — 第二組（隊形前進）
+- 圖片_淺草寺女帝隊形入場_Midjourney — 第二組的靜態版（可用作此 prompt 的 reference image）
+- 攝影基本功_鏡頭運鏡完整指南 — Orbit + Dolly 的運鏡教學
+- 威森_Claude_Skill_3個實用技能_安裝教學 — universal-video-prompt skill
+- AI影音創作 INDEX

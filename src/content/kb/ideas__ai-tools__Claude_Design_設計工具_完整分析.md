@@ -1,0 +1,180 @@
+---
+title: Claude Design 正式登場 — Anthropic 的 AI 設計工具完整分析
+date: 2026-04-18
+來源: brewbytes.ai + TechCrunch + VentureBeat + Inc + 9to5Mac 等多家媒體
+連結: https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/
+tags:
+  - AI工具
+  - Claude
+  - ClaudeDesign
+  - 設計
+  - Figma替代
+  - Opus4.7
+aliases:
+  - Claude Design
+  - Anthropic Design Tool
+category: "AI工具"
+---
+
+# Claude Design 正式登場 — Anthropic 的 AI 設計工具
+
+> [!important] 核心
+> Anthropic 於 2026/04/17 發布全新產品 **Claude Design**，搭載 **Claude Opus 4.7**（最新視覺模型）。可直接生成設計稿、原型、簡報、一頁報，並一鍵交棒給 Claude Code 進行開發。**挑戰 Figma + Canva 的地位**。Figma 股價當天下跌。
+
+---
+
+## 🆕 5 大亮點
+
+### 1. 核心動力：Claude Opus 4.7
+- Anthropic **最新最強**的視覺模型
+- 比 Opus 4.6（你目前用的）更強
+- 專門為設計視覺任務優化
+
+### 2. 品牌系統自動導入 ⭐⭐⭐
+- Claude 能**讀取程式碼或設計檔**
+- 自動建立**專屬設計系統**
+- 生成符合公司的**配色、字體、組件規範**
+- 所有輸出自動套用品牌一致性
+
+→ 對你的 ig-card-generator skill 意味著：**Claude Design 可能內建就能做到一樣的事，而且更漂亮**
+
+### 3. 精細微調控制 ⭐⭐
+- 不只對話修改（「把標題放大」）
+- **畫面上直接編輯**
+- **留言標註**
+- **自動生成拉桿** 微調間距和佈局
+
+→ 比純 HTML 的 ig-card-generator 更直觀
+
+### 4. 無縫接軌開發 ⭐⭐⭐
+- 設計完稿後 **一鍵打包交棒 Claude Code**
+- Claude Code 直接拿到設計規格進行實作
+- **從設計到程式碼的閉環**完全在 Anthropic 生態內
+
+→ Design → Code → Deploy 全自動
+
+### 5. 多格式支援
+**匯入**：文件、圖片、網頁擷取（直接抓現有網站元素）
+**匯出**：PDF、URL、PPTX、standalone HTML、**一鍵送 Canva**（完全可編輯）
+
+---
+
+## 📊 產出類型
+
+| 類型 | 說明 |
+|------|------|
+| **原型（Prototype）** | 互動式 UI 原型 |
+| **簡報（Slides / Pitch Deck）** | 投影片 |
+| **一頁報（One-pager）** | 單頁摘要 |
+| **設計稿（Mockup）** | 靜態設計圖 |
+| **IG / 社群圖文** | 可匯出 HTML 或 PNG |
+
+---
+
+## 💰 可用性
+
+| 方案 | 可用？ |
+|------|--------|
+| Claude Pro | ✅（Research Preview，逐步推送）|
+| Claude Max | ✅ |
+| Claude Team | ✅ |
+| Claude Enterprise | ✅ |
+| Claude Free | ❌ |
+
+你目前有 Claude Pro 訂閱（透過 Claude Code）→ **應該可以用** ✅
+
+---
+
+## 🆚 Claude Design vs 現有工具
+
+### vs Figma
+| | Claude Design | Figma |
+|---|---|---|
+| 設定 | **自然語言** | 手動拖拉 |
+| 品牌系統 | **自動讀取** | 手動設定 |
+| 開發交接 | **一鍵 Claude Code** | Dev Mode + 手動 |
+| 協作 | 對話式 | 多人即時協作 ⭐ |
+| 成熟度 | Research Preview | 業界標準 |
+
+### vs Canva
+| | Claude Design | Canva |
+|---|---|---|
+| 設定 | 自然語言 | 模板選擇 |
+| 品牌系統 | 自動讀取 | Brand Kit |
+| 匯出 | PDF/PPTX/HTML/**直接送 Canva** | 原生 |
+| 價格 | Claude 訂閱 | 免費 / Pro $12.99/月 |
+
+### vs 你的 ig-card-generator skill
+| | Claude Design | ig-card-generator |
+|---|---|---|
+| 生成方式 | **視覺介面 + 對話** | HTML 模板 + Chrome 截圖 |
+| 品質 | **設計師級** | 工程師級（模板化）|
+| 彈性 | 無限 | 預設 3 種風格 |
+| 速度 | 需切換到 Design 介面 | **Telegram 直接產出** |
+| 適合 | 需要高品質視覺 | 快速批次產出 |
+
+→ **兩者互補**：快速批次用 ig-card-generator，高品質精緻用 Claude Design
+
+---
+
+## 🎯 對你的工作流影響
+
+### 直接受影響的現有工具
+
+| 工具 | 受影響程度 | 怎麼變 |
+|------|----------|--------|
+| **ig-card-generator** | ⚠️ 中度 | 高品質場景被 Design 取代，快速批次仍用 ig-card-generator |
+| **universal-image-prompt** | ❌ 不影響 | 這是 AI 圖片生成 prompt，不是設計工具 |
+| **攝影基本功指南** | ❌ 不影響 | 鏡頭語言仍然重要 |
+
+### 新開啟的可能性
+
+1. **股票分析報告視覺化**
+   Claude Design 做精美的每日/每週股票報告（比 ig-card-generator 更漂亮），一鍵匯出 PDF 或 PPTX
+
+2. **品牌系統一鍵建立**
+   如果你之後做個人品牌（攝影 / 股票分析），Claude Design 可以讀你的 Obsidian vault 風格 → 自動建立品牌設計系統
+
+3. **簡報自動生成**
+   把你的股票研究筆記 → 一鍵變成 pitch deck 風格簡報
+
+4. **社群圖文升級**
+   從 ig-card-generator 的「工程師模板」升級到 Claude Design 的「設計師品質」
+
+---
+
+## 🔗 Claude Design + Claude Code + Routines 的完整生態
+
+```
+Claude Design（設計）
+    ↓ 一鍵交棒
+Claude Code（開發 + 自動化）
+    ↓ Routines 排程
+Claude Routines（每日自動執行）
+    ↓ Connectors / MCP
+外部服務（Gmail / Slack / Telegram / Kling / DaVinci）
+```
+
+→ **Anthropic 正在打造從設計到部署的完整閉環**
+→ 你在這個生態裡已經有 Claude Code + Skills + MCPs，加上 Design 只差一步
+
+---
+
+## 📝 後續行動
+
+> [!todo]
+> - [ ] **確認 Claude Design 是否已推送到你的帳號**（開 claude.ai 看有沒有 Design 選項）
+> - [ ] 試做一張「每日盤後分析」的精美報告（跟 ig-card-generator 比較品質）
+> - [ ] 試做一份「矽光子供應鏈」的 pitch deck
+> - [ ] 評估是否把高品質場景從 ig-card-generator 遷移到 Design
+> - [ ] 確認 Claude Code CLI 能不能呼叫 Design（無縫串接）
+> - [ ] 確認 Opus 4.7 是否可用（模型升級）
+
+---
+
+## 🔗 相關筆記
+
+- Claude_Routines_取代n8n_全自動工作流 — Routines 功能
+- Claude_Cowork_整合工作流_對應現況 — Claude.ai 功能對照
+- AIBunny_Claude_HTML_IG輪播圖文工作流 — ig-card-generator 的參考來源
+- Google_15個免費AI工具_完整評比與替代方案 — 設計類工具對比

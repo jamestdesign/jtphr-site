@@ -1,0 +1,113 @@
+---
+title: "Claude 資料夾結構教學 leadgenman"
+category: "AI工具"
+---
+# `.claude` 資料夾結構教學
+來源：@leadgenman（Instagram）
+儲存日期：2026/04/07
+
+---
+
+## 核心概念
+
+把你的工作流程「編碼」進 Claude 的設定裡，讓它自動按照你的規則工作，而不是每次都重新解釋。
+
+---
+
+## 📁 資料夾結構
+
+```
+.claude/
+├── agents/        # AI 自動幫手
+├── commands/      # 一鍵自動化指令
+├── hooks/         # Commit 前自動執行腳本
+├── skills/        # 自訂技能定義
+├── settings.json  # 權限與模型設定
+└── CLAUDE.md      # Claude 行為規則說明書
+```
+
+---
+
+## 🤖 agents/ — AI 自動幫手
+
+建立自訂 AI 代理（如 `code-reviewer.md`），設定好後 Claude 會自動執行：
+
+- 每個 PR 做安全掃描、API key 洩漏檢查、SQL 注入偵測
+- TypeScript 型別驗證、效能分析、錯誤邊界確認
+- 5 步驟 review 流程（理解 diff → 安全檢查 → 效能 → 程式品質 → 報告）
+
+範例設定：
+```yaml
+name: code-reviewer
+description: Review code for bugs, security issues, and performance problems
+tools: Read, Glob, Grep, Bash
+model: sonnet
+memory: project
+```
+
+---
+
+## ⚡ commands/ — 一個指令搞定複雜流程
+
+寫好 slash command（如 `/deploy`），一鍵執行多步驟任務：
+
+**`/deploy` 範例流程：**
+1. 部署前檢查（git status、zero uncommitted changes）
+2. 跑測試（npm run build、npm run test）
+3. Git push origin main
+4. 等待 Vercel build 完成
+5. 驗證部署（首頁載入、Stripe webhook、編輯器模板）
+6. 回傳 redirects、驗證 returns 200
+
+> 不用記命令，不用重複說明
+
+---
+
+## 🔗 hooks/ — 每次 Commit 前自動執行
+
+設定 `pre-commit.sh`，commit 之前自動：
+
+**Step 1：TypeScript 型別檢查**
+```bash
+tsc --noEmit
+# 有錯誤 → 阻擋 commit
+```
+
+**Step 2：掃描暫存檔案**
+```bash
+git diff --cached --name-only --diff-filter=d
+# 超過 15 個檔案 → 警告
+```
+
+**Step 3：跑測試套件**
+```bash
+npm test --silent
+# 測試失敗 → 阻擋 commit
+```
+
+> 任何一個失敗就擋住 commit，確保程式碼品質
+
+---
+
+## 📝 CLAUDE.md — Claude 的行為規則說明書
+
+寫下你的專案規則、偏好、禁止事項，Claude 每次都會遵守：
+- Guardrants（禁止行為）
+- Vibes（風格偏好）
+- 專案慣例
+
+---
+
+## ⚙️ settings.json — 權限與模型設定
+
+控制：
+- permissions（存取權限）
+- model selection（模型選擇）
+- the control panel（控制面板）
+
+---
+
+## 💡 適用對象
+
+想要讓 Claude Code 更有效率、更符合自己工作習慣的開發者。
+透過這套結構，Claude 能像一個真正了解你專案的隊友一樣運作。

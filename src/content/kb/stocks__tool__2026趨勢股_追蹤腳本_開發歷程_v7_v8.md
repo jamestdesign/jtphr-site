@@ -1,0 +1,259 @@
+---
+title: 2026趨勢股 追蹤腳本 開發歷程（v7 → v8）
+date: 2026-04-10
+tags:
+  - 股票
+  - tool
+  - 開發紀錄
+  - GAS
+  - GoogleSheets
+aliases:
+  - stock_tracker_v8
+  - 股票追蹤腳本開發
+category: "股票-工具"
+---
+
+# 2026趨勢股 追蹤腳本 開發歷程
+
+> [!important] 核心
+> 本筆記記錄 Google Sheets「2026趨勢股」自動追蹤腳本（Apps Script）從 v7 穩定版到 v8 大改版的完整開發歷程，包含技術決策、踩過的坑、解決方案。
+>
+> 後續所有版本演進請接續寫在這份檔案下方，**不要另開新檔**。
+
+---
+
+## 🎯 專案目標
+
+打造一個 Google Sheets 自動追蹤腳本，將 watchlist 內的個股資料自動化更新：
+- 股價、漲跌、24週高低點、本益比、目標價、殖利率
+- 持倉漲跌幅、週/月漲跌幅
+- 三大法人近 5 日買賣超
+- 強弱信號綜合評分（多維度量化）
+- 新聞摘要 + Telegram 推播
+- 條件格式（顏色標示強弱）
+
+---
+
+## 📦 系統架構
+
+```
+Google Sheets「2026趨勢股」
+├── 主表單：個股欄位（A~AE）
+├── 追蹤記錄分頁：歷史討論熱度
+└── Apps Script
+    ├── 選單 ① 立即更新股價
+    ├── 選單 ② 更新最新新聞摘要
+    ├── 選單 ③ 回填建倉當日收盤價
+    ├── 選單 ④ 立即/設定每日完整更新
+    └── 選單 ⑤ Web App 網址
+```
+
+外部 API 來源：
+- Yahoo Finance（股價、本益比、目標價、殖利率）
+- TWSE T86（上市股法人買賣超）
+- TPEX 3insti（上櫃股法人買賣超）
+- Google News RSS（新聞）
+
+---
+
+## 🏗️ v7 完成的工作（穩定版）
+
+### 欄位格式整合
+
+| 欄位 | 內容 | 格式規則 |
+|------|------|---------|
+| J（目前股價）| 數字 | 0.00 + J>K 紅、J<K 綠 |
+| K（昨日收盤價）| 數字 | 0.00，無顏色 |
+| N（24週高點）| 數字 | 0.00，無顏色 |
+| O（24週低點）| 數字 | 0.00，無顏色 |
+| I（持倉漲跌幅%）| %字串 | 負綠正紅（首字元判斷）|
+| L（週漲跌幅%）| %字串 | 同上 |
+| M（月漲跌幅%）| %字串 | 同上 |
+| P（本益比 P/E）| 整數 | 無格式無顏色 |
+| AE（強弱信號）| 數值 | 色階：綠 → 黃 → 紅 |
+
+### 關鍵實作細節
+
+> [!note] 資料儲存型別
+> - N、O 用 `parseFloat(Math.max/min.apply(...).toFixed(2))` → 確保存成「數字」
+> - I、L、M 用 `.toFixed(2) + '%'` → 存成「字串」保留 % 符號
+> - P 用 `Math.round()` → 存成「整數」
+
+> [!warning] 顏色判斷邏輯
+> %字串欄位（I、L、M）無法用數值比較，改用首字元判斷：
+> - 負值：`=LEFT(欄,1)="-"`
+> - 正值：`=AND(LEN(欄)>1,LEFT(欄,1)<>"-")`
+> - 避免使用 `IFERROR(VALUE(SUBSTITUTE(...)))` → 在 Apps Script 條件格式不穩定
+
+> [!danger] 條件格式規則管理（最大的坑）
+> **不能**用 `sheet.clearConditionalFormatRules()` → 會清掉所有欄位包含使用者自訂的規則
+>
+> **正確做法**：只清除指定欄位的舊規則，用 filter 保留其他規則
+>
+> ```javascript
+> var clearCols = [cH, cI, cJ, cK, cL, cM, cO, cP, cAE].filter(c => c > 0);
+> var rules = sheet.getConditionalFormatRules().filter(rule =>
+>   rule.getRanges().every(rng => clearCols.indexOf(rng.getColumn()) === -1)
+> );
+> ```
+
+### v7 解決的歷史問題
+
+1. N/O 格式無效：`.toFixed(2)` 回傳字串、`setNumberFormat('0.00')` 對字串無效 → 改 `parseFloat()`
+2. 清除規則太徹底：`clearConditionalFormatRules()` 一併清掉 L、M、AE → 改精準清除
+3. %字串顏色失效：`IFERROR(VALUE(SUBSTITUTE(...)))` 在 Apps Script 不穩定 → 改 `LEFT()` 首字元判斷
+4. 殘留舊規則：歷史版本在 H、O、P 欄留下條件格式 → 納入清除清單
+5. updateAllNews 起始欄過小：col() 回傳 -1 沒攔截 → 改為預先計算欄位索引 + 防呆檢查
+
+---
+
+## 🚀 v8 大改版
+
+### 改版動機
+
+v7 的 AD 欄是「熱度趨勢」（↑↓→ 符號），但與 AE「強弱信號」功能重疊且訊號偏弱。改版目標：
+- 把 AD 欄改為**近 5 日三大法人買賣超（張）**，提供量化數據
+- AE 強弱信號加入法人面，從原本只看討論熱度升級為**多維度綜合評分**
+- 選單流程重新設計，分離「即時更新」和「每日完整更新」
+
+### v8 的新欄位設計
+
+| 欄位 | v7 | v8 |
+|------|----|----|
+| AD | 熱度趨勢（↑/↓/→ 符號）| **近5日法人買賣超(張)** — TWSE+TPEX 即時數據 |
+| AE | 討論熱度衍生 | **強弱信號 -5~+9 分** — Z(熱度) + L/M(技術面) + 24週位置 + AD(法人) 綜合 |
+
+### AE 強弱信號評分公式
+
+```
+score = z4(0~4) + monthly(-2~+2) + weekly(-1~+1) + price_position(-1~+1) + inst_net(-1~+1)
+範圍：-5 ~ +9
+```
+
+| 維度 | 規則 |
+|------|------|
+| Z 近4週提及週數 | 直接 0~4 分 |
+| M 月漲跌幅 | ≥5% +2 / ≥2% +1 / ≤-5% -2 / ≤-2% -1 |
+| L 週漲跌幅 | ≥3% +1 / ≤-3% -1 |
+| 24週相對位置 | (price-low)/(high-low) ≥0.8 +1 / ≤0.2 -1 |
+| AD 法人買賣超（張） | >2000 +1 / <-2000 -1 |
+
+### v8 選單重新設計
+
+| 選單 | 動作 | 用途 |
+|------|------|------|
+| ① 立即更新股價 | 只跑股價相關 | 盤中快速看價 |
+| ② 更新最新新聞摘要 | Google News RSS | 待擴展：推播 Telegram |
+| ③ 回填建倉當日收盤價 | 歷史補資料 | 新加入時用 |
+| ④ 立即完整更新 | 股價＋熱度＋法人＋AE | 手動觸發完整 |
+| ④ 設定每日3:30自動 | 觸發器 | 每日 3:30 PM 自動跑 |
+
+---
+
+## 🐛 v8 開發踩過的坑
+
+### 坑 1：Write 工具無法新建檔案
+
+開發時想直接 Write 一個 stock_tracker_v8.gs，但 Write 工具規定「必須先 Read 才能 Write」。
+**解法**：先用 Bash `touch` 建空檔 → Read 一次 → 再 Write 內容
+
+### 坑 2：TWSE T86 數值單位誤判
+
+最初以為「最後一欄是三大法人買賣超(千股)」可以直接寫入。
+**實際**：是**股**為單位，例如台積電 5 日合計 26,949,024 股 = 26,949 張。
+**解法**：所有 TWSE 數值都要 `Math.round(net / 1000)` 換算成張。
+
+```javascript
+// v8 修正版：
+var netShares = parseInt(String(last).replace(/,/g, ''), 10);
+cache[code] = (cache[code] || 0) + Math.round(netShares / 1000);
+```
+
+### 坑 3：TPEX JSON 端點失效
+
+原本用：
+```
+https://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge_result.php?l=zh-tw&se=EW&t=D&d=...&_=...
+```
+診斷顯示：上櫃股全部抓不到（6640 均華 → ❌找不到）
+
+**解法**：改用 CSV 下載端點，搭配 `Utilities.parseCsv` 解析：
+```
+https://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge_download.php?l=zh-tw&d=RRR/MM/DD&t=D
+```
+新增 `fetchTpexDailyNet_(dateStr)` 獨立函式處理 CSV 解析。
+
+注意：CSV 編碼是 Big5，需要 `getContentText('Big5')`，並 fallback 到預設編碼。
+
+### 坑 4：updateAllStockDataDaily_ 沒有 UI 回饋
+
+第一版函式跑完沒任何提示，使用者無法知道是否成功。
+**解法**：拉出 `runFullUpdateNow()` 做為 UI 觸發版本，加上：
+- 開始時的 alert（提示「請稍候 2~5 分鐘」）
+- 結尾顯示更新統計（股價幾支 / 法人查到幾檔 / 強弱信號幾支）
+- AD 欄找不到時直接秀前 30 欄表頭，提示用戶確認欄位名稱
+
+### 坑 5：Web App addEntries 的 % 字元 URL 編碼問題
+
+Python 端送字串含 `%` 符號（例如「漲幅 99%」）→ `urllib.parse.quote('%')` → `%25` → 伺服器自動解一次變回 `%` → Apps Script `decodeURIComponent('%99')` 失敗 → URI malformed。
+**解法**：寫入熱度紀錄前，剔除文字內的 `%` 符號（或改用 base64）
+
+### 坑 6：股票代碼匹配問題
+
+診斷時發現 TWSE API 抓到 1317 檔，但 watchlist 全部寫入 0。
+**根因**：api 回應時好時壞（rate limit / API 暫時失效）；以及 build cache 後 codes 未對到。
+**解法**：加上更詳細的診斷函式（debugCodeMatch、debugTwseApi）逐步追蹤：
+- 列出 cache 前 5 個 key
+- 列出 sheet 前 5 個 code
+- 逐一比對
+
+---
+
+## 🔑 v8 關鍵函式索引
+
+| 函式 | 用途 |
+|------|------|
+| `runFullUpdateNow()` | 手動觸發完整更新（含 UI 回饋）|
+| `updateAllStockDataDaily_()` | 觸發器呼叫的完整更新（無 UI）|
+| `getRecentTradingDates_(n)` | 取得近 n 個交易日（YYYYMMDD）|
+| `buildInstitutionalCache_(dates)` | 批次抓 TWSE+TPEX 法人，回傳 {code: 5日合計} |
+| `fetchTpexDailyNet_(dateStr)` | TPEX CSV 端點解析 |
+| `twseToRocDate_(yyyymmdd)` | YYYYMMDD → 民國年 RRR/MM/DD |
+| `calcSignalScore_(sheet, row, col, instNet)` | AE 強弱信號計分 |
+| `applyColumnFormatting_()` | 套用所有條件格式 + 顏色 |
+| `setupDailyTrigger()` | 設定每日 3:30 PM 觸發 |
+
+---
+
+## 📁 檔案位置
+
+- 主程式：`/Users/james.t/Desktop/stock_tracker_v8.gs`
+- v7 穩定備份：`/Users/james.t/Desktop/stock_tracker_v7_stable.gs`
+- v7 格式筆記：2026趨勢股_v7格式整合筆記
+
+Web App 部署：
+- URL：`https://script.google.com/macros/s/AKfycbww1GGp749dJNXntE6HC8HAkc_P24egmJI1qK5nxsKMRLXXrU4Ab7igJWO9ZP3ho6ew/exec`
+- Token：`stock2026james`
+- Actions：`addEntries`、`addMainEntries`
+
+---
+
+## 🔮 後續開發 TODO
+
+詳見 stocks/TODO.md 「股票追蹤腳本 v8 開發」項目。
+
+> [!todo] 已知待完成
+> - [ ] 取得 Telegram Bot Token，把選單② 新聞推播實作完成
+> - [ ] 觀察一週後驗證 AE 強弱信號的實用性
+> - [ ] 評估是否再加入「外資連續買超天數」「投信連續買超天數」做副指標
+> - [ ] 興櫃股 7822 倍利科無法抓 Yahoo 資料 → 需要替代資料來源
+
+---
+
+## 🔄 版本演進歷史
+
+- **v7** `2026-04-08` 穩定版 — 條件格式 + I/L/M %字串顏色 + AE 色階完成
+- **v8** `2026-04-10` 大改版 — AD 改法人買賣超 + AE 改多維度評分 + TPEX CSV 端點
+  - 修正 TWSE 單位（÷1000 換張）
+  - 新增 runFullUpdateNow UI 觸發版本
+  - 設定 3:30 PM 每日完整更新觸發器

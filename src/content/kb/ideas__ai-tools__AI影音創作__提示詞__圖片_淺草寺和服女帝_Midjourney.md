@@ -1,0 +1,127 @@
+---
+title: 圖片 — 淺草寺和服女帝（Midjourney）
+date: 2026-04-11
+來源: 用戶於 Telegram Ideas 群測試 universal-image-prompt skill
+連結:
+平台: Midjourney / Flux / DALL-E
+類型: 圖片
+tags:
+  - AI影音
+  - 提示詞
+  - 圖片prompt
+  - 人像
+  - 文化
+  - 和服
+  - 日本
+aliases:
+  - 淺草寺和服女帝圖片
+  - 和服女帝prompt
+category: "AI影音-提示詞"
+---
+
+# 圖片提示詞 — 淺草寺和服女帝
+
+> [!important] 用途
+> 單人高質感人像照片。以「女帝千金」氣勢為核心，突顯和服服裝細節與淺草寺場景氛圍。此 prompt 為**單人版本**，對應的**隊形入場版本**見 圖片_淺草寺女帝隊形入場_Midjourney。
+
+---
+
+## 來源
+
+用戶於 Telegram Ideas 群（chat_id -5231583145, msg 844）測試 universal-image-prompt skill 時提供的描述：
+
+> 「測試一下 照片中的和服女孩 服裝細節完整，在日本淺草寺參拜，有女帝千金的氣勢」
+
+由 Claude 透過 universal-image-prompt skill 自動套用五層架構產出。
+
+---
+
+## Prompt 全文（英文，可直接複製）
+
+```
+A photorealistic editorial portrait of an elegant young Japanese woman in her early-to-mid 20s, wearing a meticulously detailed formal houmongi kimono in deep crimson with intricate gold chrysanthemum and crane embroidery, paired with a precisely tied obi belt featuring traditional brocade patterns, white tabi socks, and lacquered geta sandals. Her hair is styled in a classical Japanese updo with ornamental kanzashi hairpins. She stands with the regal poise and commanding presence of an empress's daughter — chin slightly lifted, gaze direct yet serene, hands gracefully folded in front. She is at Sensoji Temple in Asakusa, Tokyo, with the iconic vermilion Kaminarimon gate and the towering five-story pagoda visible in the softly blurred background. Wisps of incense smoke drift around her from a nearby bronze incense burner, catching the warm golden hour light. Cinematic side lighting with rim light highlighting the embroidery details. 85mm portrait lens, shallow depth of field, sharp focus on the kimono fabric texture and her composed expression, 8K ultra detailed, editorial photography, soft warm color palette with crimson and gold dominance, photorealism style.
+```
+
+> [!warning] 注意：這是初版描述
+> 此 prompt 裡的和服描述是 **houmongi 訪問著 + 深紅金繡**，對應**初始文字描述**而非用戶後來上傳的實際照片。
+> 如果你要生成**跟照片裡那位女子同造型**的圖片，請改用 圖片_淺草寺女帝隊形入場_Midjourney 內的校正版描述（黑底大花卉 furisode 振袖）。
+
+---
+
+## 五層架構拆解
+
+### 🎯 Subject（主體）
+- 20 歲出頭日本女性
+- 深紅 houmongi 和服 + 金色菊花鶴刺繡
+- 傳統錦緞腰帶 + 白足袋 + 漆面木屐
+- 古典盤髮 + 簪子裝飾
+- 姿態：下巴微抬、眼神直接但平靜、雙手交握
+- **氣勢關鍵字**：regal poise、commanding presence of an empress's daughter
+
+### 🏞️ Scene（場景）
+- 淺草寺雷門（Kaminarimon）+ 五重塔柔焦背景
+- 前景：青銅香爐 + 煙霧
+- 三層景深結構
+
+### 💡 Lighting（光線）
+- 黃金時段暖光
+- 戲劇性側光 + rim light 強調刺繡
+- 煙霧散射光效
+
+### 🎨 Style（風格）
+- editorial photography
+- cinematic
+- 暖紅金色調
+- photorealism
+
+### 📷 Technical（技術）
+- 85mm portrait lens
+- shallow depth of field
+- 8K ultra detailed
+
+---
+
+## 預期成果
+
+一張**胸口以上**的和服女性寫實人像，主色深紅金，背景柔焦淺草寺，光線黃金時段，整體像 Vogue Japan 文化專題的封面照。
+
+---
+
+## 平台建議
+
+| 平台 | 參數 | 備註 |
+|------|------|------|
+| Midjourney v6.1 | `--ar 2:3 --s 350 --c 5` | 抽象「empress's daughter」概念 MJ 最會解讀 |
+| Flux 1.1 Pro | guidance scale 3.5 | 寫實細節（刺繡）強項 |
+| DALL-E 3 | 直接貼 prompt | 日式細節有時不夠精準 |
+
+---
+
+## 變體建議
+
+### A：雨後夕陽
+`after-rain dusk light reflecting off wet stone steps` — 濕潤地面反射光，更孤高神秘。
+
+### B：仰角威嚴
+`low angle shot from below` — 更顯威嚴，與五重塔形成視覺對位。
+
+### C：雪景孤高
+`snow falling gently on Sensoji Temple, breath visible in the cold air` — 從「黃金時段」變「雪中孤高」。
+
+---
+
+## 後續演進
+
+這個 prompt 是**第一輪測試**（純文字描述）。後來用戶上傳了 4 張真實照片，產出了：
+- 圖片_淺草寺女帝隊形入場_Midjourney — 加入 12 人西裝保鏢楔形隊形的**史詩級寬景**版本
+- 影片_淺草寺女帝隊形入場_Kling — 配對的影片版本
+
+---
+
+## 相關筆記
+
+- 影片_淺草寺和服女帝_Kling — 配對的初版影片 prompt
+- 圖片_淺草寺女帝隊形入場_Midjourney — 校正版（依實際照片）+ 隊形入場
+- 威森_Claude_Skill_3個實用技能_安裝教學 — universal-image-prompt skill 安裝
+- 攝影基本功_鏡頭運鏡完整指南 — 八層公式完整教學
+- AI影音創作 INDEX
