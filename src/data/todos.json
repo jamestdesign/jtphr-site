@@ -15,7 +15,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/Obsidian_Claude_Code_第二大腦_Claudian.md",
-        "id": "ideas__ai-tools__Obsidian_Claude_Code_第二大腦_Claudian"
+        "id": "ideas__ai-tools__obsidian_claude_code_第二大腦_claudian"
       }
     ],
     "source": "多裝置使用需求（Mac + iPhone + iPad + Win + Android）"
@@ -37,7 +37,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/Obsidian_Claude_Code_第二大腦_Claudian.md",
-        "id": "ideas__ai-tools__Obsidian_Claude_Code_第二大腦_Claudian"
+        "id": "ideas__ai-tools__obsidian_claude_code_第二大腦_claudian"
       }
     ],
     "source": ""
@@ -74,7 +74,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/AI影音創作/教學/個人攝影自動化流水線_4種場景設計.md",
-        "id": "ideas__ai-tools__AI影音創作__教學__個人攝影自動化流水線_4種場景設計"
+        "id": "ideas__ai-tools__ai影音創作__教學__個人攝影自動化流水線_4種場景設計"
       }
     ],
     "source": ""
@@ -124,7 +124,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/Claude_Cowork_整合工作流_對應現況.md",
-        "id": "ideas__ai-tools__Claude_Cowork_整合工作流_對應現況"
+        "id": "ideas__ai-tools__claude_cowork_整合工作流_對應現況"
       }
     ],
     "source": "Claude Cowork 影片啟發"
@@ -144,7 +144,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/Claude_Routines_取代n8n_全自動工作流.md",
-        "id": "ideas__ai-tools__Claude_Routines_取代n8n_全自動工作流"
+        "id": "ideas__ai-tools__claude_routines_取代n8n_全自動工作流"
       }
     ],
     "source": "Claude Cowork 影片 — scheduled + subagent 自動值勤模式"
@@ -165,7 +165,7 @@
     "refs": [
       {
         "path": "Google_Veo3_完整使用指南",
-        "id": "ideas__ai-tools__AI影音創作__教學__Google_Veo3_完整使用指南"
+        "id": "ideas__ai-tools__ai影音創作__教學__google_veo3_完整使用指南"
       }
     ],
     "source": "ideas/ai-tools/AI影音創作/教學/Google_Veo3_完整使用指南.md"
@@ -184,7 +184,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/威森_Claude_Skill_3個實用技能_安裝教學.md",
-        "id": "ideas__ai-tools__威森_Claude_Skill_3個實用技能_安裝教學"
+        "id": "ideas__ai-tools__威森_claude_skill_3個實用技能_安裝教學"
       }
     ],
     "source": "Claude Cowork 影片 — 用對話建立客製化 skill"
@@ -204,7 +204,7 @@
     "refs": [
       {
         "path": "ideas/ai-tools/知識庫編譯理論_Karpathy_NotebookLM_Gemini_Obsidian.md",
-        "id": "ideas__ai-tools__知識庫編譯理論_Karpathy_NotebookLM_Gemini_Obsidian"
+        "id": "ideas__ai-tools__知識庫編譯理論_karpathy_notebooklm_gemini_obsidian"
       }
     ],
     "source": "Karpathy 知識庫編譯理論 — 「體檢（Maintenance）」環節"
@@ -286,7 +286,7 @@
     "refs": [
       {
         "path": "stocks/趨勢觀察/軟體定義車輛_SDV_趨勢分析.md",
-        "id": "stocks__趨勢觀察__軟體定義車輛_SDV_趨勢分析"
+        "id": "stocks__趨勢觀察__軟體定義車輛_sdv_趨勢分析"
       }
     ],
     "source": "軟體定義車輛 YouTube 教育影片"
@@ -306,7 +306,7 @@
     "refs": [
       {
         "path": "stocks/趨勢觀察/矽光子CPO_台廠供應鏈地圖.md",
-        "id": "stocks__趨勢觀察__矽光子CPO_台廠供應鏈地圖"
+        "id": "stocks__趨勢觀察__矽光子cpo_台廠供應鏈地圖"
       }
     ],
     "source": "YouTube 賺財富看先探影片"

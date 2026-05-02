@@ -18,13 +18,16 @@ for md in glob.glob(os.path.join(KB, '**/*.md'), recursive=True):
         continue
     if os.path.basename(rel) in ('TODO.md', 'INDEX.md', '_README.md'):
         continue
-    flat = rel.replace('/', '__')
+    flat = rel.replace('/', '__').lower()  # Astro glob loader lowercases IDs
+    note_id = flat.replace('.md', '')
     # Index by various name patterns
     basename = os.path.basename(rel).replace('.md', '')
-    note_lookup[basename] = flat.replace('.md', '')
-    note_lookup[rel] = flat.replace('.md', '')
-    # Also without extension
-    note_lookup[rel.replace('.md', '')] = flat.replace('.md', '')
+    note_lookup[basename] = note_id
+    note_lookup[basename.lower()] = note_id
+    note_lookup[rel] = note_id
+    note_lookup[rel.lower()] = note_id
+    note_lookup[rel.replace('.md', '')] = note_id
+    note_lookup[rel.replace('.md', '').lower()] = note_id
 
 todo_files = {
     '基建': os.path.join(KB, 'TODO.md'),
