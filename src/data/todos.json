@@ -1,0 +1,121 @@
+[
+  {
+    "category": "基建",
+    "section": "基建",
+    "title": "遷移 Obsidian 到 Obsidian Sync（5 平台同步）",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "工具導入",
+    "title": "研究安裝 Claudian + 5 Obsidian Skills",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "個人攝影自動化（新規劃）",
+    "title": "建立「自動剪輯」專用 Telegram 群",
+    "date": "2026-04-12",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "個人攝影自動化（新規劃）",
+    "title": "添購 NAS（iCloud 空間升級）",
+    "date": "2026-04-12",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "個人攝影自動化（新規劃）",
+    "title": "個人攝影自動化流水線實作",
+    "date": "",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "Claude 整合擴展",
+    "title": "影像工廠：n8n + ElevenLabs + Kling API 評估",
+    "date": "2026-04-14",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "Claude 整合擴展",
+    "title": "評估安裝 google-calendar-mcp / gmail-mcp",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "Claude 整合擴展",
+    "title": "設計每日早晨自動財經新聞 Subagent",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "Claude 整合擴展",
+    "title": "實測 Google Veo 3.1 免費版",
+    "date": "2026-04-11",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "Claude 整合擴展",
+    "title": "研究 Skill Creator 互動式建技能流程",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "Ideas",
+    "section": "知識庫機制",
+    "title": "知識庫體檢機制（/review-kb）",
+    "date": "2026-04-08",
+    "done": false
+  },
+  {
+    "category": "股票",
+    "section": "技術開發",
+    "title": "股票追蹤腳本 v8 開發",
+    "date": "2026-04-09",
+    "done": false
+  },
+  {
+    "category": "股票",
+    "section": "技術開發",
+    "title": "元大點精靈自選股同步",
+    "date": "2026-04-08",
+    "done": false
+  },
+  {
+    "category": "股票",
+    "section": "技術分析開發（新規劃）",
+    "title": "程式化技術分析模組（路徑 C）",
+    "date": "2026-04-14",
+    "done": false
+  },
+  {
+    "category": "股票",
+    "section": "個股研究",
+    "title": "SDV 概念股深度研究",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "股票",
+    "section": "產業查詢待辦",
+    "title": "CPO 封測五強競爭格局深度補完",
+    "date": "2026-04-10",
+    "done": false
+  },
+  {
+    "category": "股票",
+    "section": "產業查詢待辦",
+    "title": "晶圓翹曲（warpage）供應鏈拆解",
+    "date": "2026-04-10",
+    "done": false
+  }
+]
