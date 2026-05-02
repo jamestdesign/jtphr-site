@@ -1,0 +1,62 @@
+<!-- Hover preview for internal note links -->
+<div id="note-preview" class="fixed z-50 hidden max-w-sm w-80 bg-brand border border-white/10 rounded-lg shadow-2xl p-4 pointer-events-none">
+  <div id="np-category" class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-text-muted inline-block mb-2"></div>
+  <h4 id="np-title" class="font-bold text-sm text-text mb-2 leading-snug"></h4>
+  <p id="np-excerpt" class="text-xs text-text-muted leading-relaxed line-clamp-4"></p>
+  <div id="np-tags" class="flex gap-1 flex-wrap mt-2"></div>
+</div>
+
+<script is:inline>
+  // Build a lookup of all notes from data attributes on the page
+  const noteData = {};
+  document.querySelectorAll('[data-note-id]').forEach(el => {
+    noteData[el.dataset.noteId] = {
+      title: el.dataset.noteTitle || '',
+      category: el.dataset.noteCategory || '',
+      excerpt: el.dataset.noteExcerpt || '',
+      tags: el.dataset.noteTags || '',
+      url: el.dataset.noteUrl || '',
+    };
+  });
+
+  const preview = document.getElementById('note-preview');
+  let hideTimeout;
+
+  document.querySelectorAll('a[href^="/kb/"]').forEach(link => {
+    // Extract note id from href
+    const href = link.getAttribute('href');
+    const noteId = href.replace('/kb/', '').replace(/\/$/, '');
+    const info = noteData[noteId];
+
+    if (!info) return;
+
+    link.addEventListener('mouseenter', (e) => {
+      clearTimeout(hideTimeout);
+      document.getElementById('np-title').textContent = info.title;
+      document.getElementById('np-category').textContent = info.category;
+      document.getElementById('np-excerpt').textContent = info.excerpt;
+
+      const tagsEl = document.getElementById('np-tags');
+      tagsEl.innerHTML = '';
+      if (info.tags) {
+        info.tags.split(',').slice(0, 3).forEach(tag => {
+          const span = document.createElement('span');
+          span.className = 'text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-text-muted/60';
+          span.textContent = '#' + tag.trim();
+          tagsEl.appendChild(span);
+        });
+      }
+
+      // Position
+      const rect = link.getBoundingClientRect();
+      const previewEl = preview;
+      previewEl.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+      previewEl.style.left = Math.min(rect.left, window.innerWidth - 340) + 'px';
+      previewEl.classList.remove('hidden');
+    });
+
+    link.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => preview.classList.add('hidden'), 200);
+    });
+  });
+</script>

@@ -1,21 +1,46 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import NotePreview from '../../components/NotePreview.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const notes = await getCollection('kb');
   return notes.map(note => ({
     params: { id: note.id },
-    props: { note },
+    props: { note, allNotes: notes },
   }));
 }
 
-const { note } = Astro.props;
+const { note, allNotes } = Astro.props;
 const { Content } = await render(note);
+
+// Build note lookup for preview + linking
+const noteLookup = allNotes.map(n => ({
+  id: n.id,
+  title: n.data.title,
+  category: n.data.category || '',
+  tags: (n.data.tags || []).join(','),
+  // First 100 chars of body as excerpt (strip markdown)
+  excerpt: n.body?.replace(/^---[\s\S]*?---\n?/, '').replace(/[#*`>\[\]!_|]/g, '').replace(/\n+/g, ' ').trim().slice(0, 120) || '',
+}));
 ---
 
 <BaseLayout title={note.data.title} description={`${note.data.title} — JTpHR 知識庫`}>
+  <!-- Hidden data for note preview -->
+  <div class="hidden">
+    {noteLookup.map(n => (
+      <span
+        data-note-id={n.id}
+        data-note-title={n.title}
+        data-note-category={n.category}
+        data-note-excerpt={n.excerpt}
+        data-note-tags={n.tags}
+        data-note-url={`/kb/${n.id}`}
+      ></span>
+    ))}
+  </div>
+
   <article class="max-w-4xl mx-auto px-6 py-24">
     <!-- Header -->
     <div class="mb-8 pb-8 border-b border-white/5">
@@ -71,4 +96,61 @@ const { Content } = await render(note);
     </div>
   </article>
   <Lightbox />
+  <NotePreview />
+
+  <!-- Convert related note references to clickable links with preview -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Build title → id lookup from data attributes
+      const titleToId = {};
+      document.querySelectorAll('[data-note-id]').forEach(el => {
+        const title = el.dataset.noteTitle || '';
+        const id = el.dataset.noteId || '';
+        // Index by various possible reference formats
+        titleToId[title] = id;
+        // Also index by filename-like patterns (without path prefix)
+        const parts = id.split('__');
+        const shortName = parts[parts.length - 1];
+        titleToId[shortName] = id;
+      });
+
+      // Find related notes section and convert text references to links
+      const prose = document.querySelector('.prose');
+      if (!prose) return;
+
+      // Walk through all list items in the "相關筆記" section
+      const headings = prose.querySelectorAll('h2');
+      headings.forEach(h2 => {
+        if (!h2.textContent.includes('相關筆記')) return;
+
+        // Get the next sibling UL
+        let ul = h2.nextElementSibling;
+        while (ul && ul.tagName !== 'UL') ul = ul.nextElementSibling;
+        if (!ul) return;
+
+        ul.querySelectorAll('li').forEach(li => {
+          const text = li.textContent.trim();
+          // Try to match "NoteName — description" or just "NoteName"
+          const parts = text.split('—').map(s => s.trim());
+          const refName = parts[0];
+          const desc = parts[1] || '';
+
+          // Find matching note
+          let matchedId = null;
+          for (const [key, id] of Object.entries(titleToId)) {
+            // Fuzzy match: reference name contained in title or filename
+            if (key.toLowerCase().includes(refName.toLowerCase().replace(/\s/g, '_')) ||
+                refName.toLowerCase().replace(/\s/g, '_').includes(key.toLowerCase())) {
+              matchedId = id;
+              break;
+            }
+          }
+
+          if (matchedId) {
+            li.innerHTML = `<a href="/kb/${matchedId}" class="text-accent hover:underline">${refName}</a>${desc ? ' — ' + desc : ''}`;
+          }
+        });
+      });
+    });
+  </script>
 </BaseLayout>
