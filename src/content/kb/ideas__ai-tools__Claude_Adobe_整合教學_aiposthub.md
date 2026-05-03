@@ -19,6 +19,16 @@ category: AI工具
 
 # Claude × Adobe 整合教學
 
+## 📑 原圖
+
+![](/images/kb/claude-adobe-aiposthub/01-cover.jpg)
+![](/images/kb/claude-adobe-aiposthub/02-what.jpg)
+![](/images/kb/claude-adobe-aiposthub/03-scenarios.jpg)
+![](/images/kb/claude-adobe-aiposthub/04-setup.jpg)
+![](/images/kb/claude-adobe-aiposthub/05-cta.jpg)
+
+---
+
 <div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
 <p class="font-bold text-red-400 mb-2">🔴 核心</p>
 <div class="text-sm text-gray-300">
