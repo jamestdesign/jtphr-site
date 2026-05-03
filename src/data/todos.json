@@ -211,6 +211,28 @@
   },
   {
     "category": "Ideas",
+    "section": "Claude 整合擴展",
+    "title": "攝影批次修圖自動化（300-500張一次處理）",
+    "date": "2026-05-03",
+    "doneDate": "",
+    "done": false,
+    "details": [
+      "**Phase 1：建立 Lightroom 6 組 Preset**（回國後）",
+      "用一趟旅行的照片手動測試調整到滿意",
+      "**Phase 2：AI 自動分類腳本**",
+      "**Phase 3：串接 Lightroom 批次套用**",
+      "**Phase 4：整合到自動剪輯群**"
+    ],
+    "refs": [
+      {
+        "path": "ideas/ai-tools/Claude_Adobe_整合教學_aiposthub.md",
+        "id": "ideas__ai-tools__claude_adobe_整合教學_aiposthub"
+      }
+    ],
+    "source": "旅遊攝影實際需求 — 每趟旅行 300-500 張照片需快速初修到 70-80 分"
+  },
+  {
+    "category": "Ideas",
     "section": "知識庫機制",
     "title": "知識庫體檢機制（/review-kb）",
     "date": "2026-04-08",
