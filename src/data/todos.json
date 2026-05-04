@@ -4,21 +4,15 @@
     "section": "基建",
     "title": "遷移 Obsidian 到 Obsidian Sync（5 平台同步）",
     "date": "2026-04-10",
-    "doneDate": "",
-    "done": false,
+    "doneDate": "2026-05-04",
+    "done": true,
     "details": [
-      "目前：iCloud 同步（只支援 Mac + iPhone + iPad）",
-      "目標：擴展到 Windows + Android，5 平台無痛同步",
-      "方案：Obsidian Sync 官方付費 USD $4/月（年付 $48 ≈ NT$1500/年）",
-      "備註：目前已建 JTpHR 網站作為替代閱讀方案（jtphr-site.vercel.app/kb）"
+      "已用 JTpHR 網站（jtphr-site.vercel.app）取代 Obsidian Sync 需求",
+      "網站提供：知識庫閱讀 + 儀表板 + 每日日報 + Podcast，手機/電腦都能看",
+      "不再需要 Obsidian Sync"
     ],
-    "refs": [
-      {
-        "path": "ideas/ai-tools/Obsidian_Claude_Code_第二大腦_Claudian.md",
-        "id": "ideas__ai-tools__obsidian_claude_code_第二大腦_claudian"
-      }
-    ],
-    "source": "多裝置使用需求（Mac + iPhone + iPad + Win + Android）"
+    "refs": [],
+    "source": ""
   },
   {
     "category": "Ideas",
