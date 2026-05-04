@@ -134,12 +134,12 @@
     "section": "Claude 整合擴展",
     "title": "設計每日早晨自動財經新聞 Subagent",
     "date": "2026-04-10",
-    "doneDate": "",
-    "done": false,
+    "doneDate": "2026-05-04",
+    "done": true,
     "details": [
-      "設計：每天早上 8 點自動跑 3 個 subagent 蒐集當日財經新聞 → 彙整推送到 Telegram 股票群",
-      "需要：macOS launchd / cron 排程、subagent 並行架構、Telegram bot 推送整合",
-      "優先順序：股票腳本 v8 穩定後再做"
+      "已完成：NotebookLM 影音轉文字 → ~/Desktop/每日股票訊息/ → Claude 自動讀取整理 → 推到股票群 + JTpHR 網站日報頁面",
+      "每日 8:30 launchd 排程已設定",
+      "日報網頁含 TTS podcast（Edge TTS 繁中女聲）+ 分段播放 + 播放清單"
     ],
     "refs": [
       {
@@ -147,7 +147,7 @@
         "id": "ideas__ai-tools__claude_routines_取代n8n_全自動工作流"
       }
     ],
-    "source": "Claude Cowork 影片 — scheduled + subagent 自動值勤模式"
+    "source": ""
   },
   {
     "category": "Ideas",
