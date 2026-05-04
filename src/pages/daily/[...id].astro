@@ -79,14 +79,24 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
         <div class="sticky top-24">
           <p class="text-xs font-bold text-text-muted/50 uppercase tracking-wider mb-4">目錄</p>
           <nav class="space-y-1">
-            {headings.filter(h => h.depth === 2).map(h => (
-              <a
-                href={`#${h.slug}`}
-                class="toc-link block text-sm text-text-muted/60 hover:text-accent transition-colors py-1.5 border-l-2 border-transparent hover:border-accent pl-3"
-                data-slug={h.slug}
-              >
-                {h.text}
-              </a>
+            {headings.filter(h => h.depth === 2).map((h, i) => (
+              <div class="flex items-center gap-1">
+                <button
+                  class="section-play flex-shrink-0 w-6 h-6 rounded-full bg-white/5 hover:bg-accent/20 text-text-muted/40 hover:text-accent transition-colors flex items-center justify-center text-[10px]"
+                  data-section={h.slug}
+                  data-index={i + 1}
+                  title={`播放：${h.text}`}
+                >
+                  ▶
+                </button>
+                <a
+                  href={`#${h.slug}`}
+                  class="toc-link block text-sm text-text-muted/60 hover:text-accent transition-colors py-1.5 border-l-2 border-transparent hover:border-accent pl-2"
+                  data-slug={h.slug}
+                >
+                  {h.text}
+                </a>
+              </div>
             ))}
           </nav>
 
@@ -123,6 +133,59 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
           btn.classList.add('bg-accent', 'text-white');
           btn.classList.remove('bg-white/5', 'text-text-muted');
         });
+      });
+
+      // Section audio player
+      const sectionPlayer = new Audio();
+      let currentSection = null;
+      const sectionBtns = document.querySelectorAll('.section-play');
+
+      // Build section audio map from headings
+      const h2s = document.querySelectorAll('.prose h2[id]');
+      const sectionSlugs = Array.from(h2s).map(h => h.id);
+
+      // Audio base path: /audio/YYYY-MM-DD/
+      const audioBase = mainPlayer ? mainPlayer.querySelector('source')?.src.replace('.mp3', '') + '/' : '';
+      const dateMatch = window.location.pathname.match(/(\d{4}-\d{2}-\d{2})/);
+      const dateStr = dateMatch ? dateMatch[1] : '';
+      const sectionAudioBase = `/audio/${dateStr}/`;
+
+      sectionBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const idx = parseInt(btn.dataset.index);
+          const slug = btn.dataset.section;
+          const paddedIdx = String(idx).padStart(2, '0');
+
+          // Find matching audio file
+          const audioSrc = `${sectionAudioBase}${paddedIdx}-${slug}.mp3`;
+
+          if (currentSection === slug && !sectionPlayer.paused) {
+            sectionPlayer.pause();
+            btn.textContent = '▶';
+            currentSection = null;
+            return;
+          }
+
+          // Stop all other buttons
+          sectionBtns.forEach(b => b.textContent = '▶');
+          if (mainPlayer) mainPlayer.pause();
+
+          sectionPlayer.src = audioSrc;
+          sectionPlayer.playbackRate = mainPlayer ? mainPlayer.playbackRate : 1;
+          sectionPlayer.play();
+          btn.textContent = '⏸';
+          currentSection = slug;
+
+          // Scroll to section
+          const target = document.getElementById(slug);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      sectionPlayer.addEventListener('ended', () => {
+        sectionBtns.forEach(b => b.textContent = '▶');
+        currentSection = null;
       });
 
       // Sync side player with main player
