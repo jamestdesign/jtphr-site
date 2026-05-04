@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const dailies = await getCollection('daily');
+  return dailies.map(d => ({
+    params: { id: d.id },
+    props: { entry: d },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
+  year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
+});
+---
+
+<BaseLayout title={`${dateStr} — 每日財經日報`} description={`${dateStr} 台股盤後分析`}>
+  <div class="max-w-5xl mx-auto px-6 py-24">
+    <div class="lg:grid lg:grid-cols-[1fr_240px] lg:gap-12">
+      <!-- Main Content -->
+      <article>
+        <!-- Header -->
+        <div class="mb-8 pb-8 border-b border-white/5">
+          <a href="/daily" class="text-xs text-text-muted hover:text-accent transition-colors mb-4 inline-block">&larr; 所有日報</a>
+          <p class="text-sm text-accent mb-2">{dateStr}</p>
+          <h1 class="text-3xl md:text-4xl font-bold">{entry.data.title}</h1>
+          {entry.data.source && (
+            <p class="text-xs text-text-muted/50 mt-2">來源：{entry.data.source}</p>
+          )}
+        </div>
+
+        <!-- Audio Player -->
+        {entry.data.audio && (
+          <div class="mb-8 p-4 rounded-lg bg-brand-light border border-white/5">
+            <p class="text-sm font-medium mb-3">🎙 Podcast 播放</p>
+            <audio controls class="w-full" preload="metadata">
+              <source src={entry.data.audio} type="audio/mpeg" />
+              你的瀏覽器不支援音檔播放
+            </audio>
+          </div>
+        )}
+
+        <!-- Content -->
+        <div class="prose prose-invert prose-lg max-w-none
+          prose-headings:text-text prose-headings:font-bold prose-headings:scroll-mt-20
+          prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/5
+          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+          prose-p:text-text-muted prose-p:leading-relaxed
+          prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-text
+          prose-code:text-accent prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+          prose-blockquote:border-accent prose-blockquote:bg-white/3 prose-blockquote:rounded-r-lg prose-blockquote:py-1
+          prose-li:text-text-muted
+          prose-hr:border-white/5
+        ">
+          <Content />
+        </div>
+      </article>
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24">
+          <p class="text-xs font-bold text-text-muted/50 uppercase tracking-wider mb-4">目錄</p>
+          <nav class="space-y-1">
+            {headings.filter(h => h.depth === 2).map(h => (
+              <a
+                href={`#${h.slug}`}
+                class="toc-link block text-sm text-text-muted/60 hover:text-accent transition-colors py-1.5 border-l-2 border-transparent hover:border-accent pl-3"
+                data-slug={h.slug}
+              >
+                {h.text}
+              </a>
+            ))}
+          </nav>
+
+          {entry.data.audio && (
+            <div class="mt-8 pt-8 border-t border-white/5">
+              <p class="text-xs font-bold text-text-muted/50 uppercase tracking-wider mb-3">快速聽</p>
+              <audio controls class="w-full" preload="metadata" style="height: 36px;">
+                <source src={entry.data.audio} type="audio/mpeg" />
+              </audio>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Highlight active TOC item on scroll -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tocLinks = document.querySelectorAll('.toc-link');
+      const headings = document.querySelectorAll('.prose h2[id]');
+
+      if (!headings.length || !tocLinks.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              tocLinks.forEach(link => {
+                link.classList.remove('text-accent', 'border-accent');
+                link.classList.add('text-text-muted/60', 'border-transparent');
+              });
+              const active = document.querySelector(`.toc-link[data-slug="${entry.target.id}"]`);
+              if (active) {
+                active.classList.add('text-accent', 'border-accent');
+                active.classList.remove('text-text-muted/60', 'border-transparent');
+              }
+            }
+          });
+        },
+        { rootMargin: '-80px 0px -60% 0px' }
+      );
+
+      headings.forEach(h => observer.observe(h));
+    });
+  </script>
+</BaseLayout>

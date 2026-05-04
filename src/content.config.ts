@@ -11,4 +11,14 @@ const kb = defineCollection({
   }).passthrough(),
 });
 
-export const collections = { kb };
+const daily = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/daily' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    source: z.string().optional(),
+    audio: z.string().optional(),
+  }).passthrough(),
+});
+
+export const collections = { kb, daily };
