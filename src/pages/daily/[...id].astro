@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButton from '../../components/ShareButton.astro';
 import { getCollection, render } from 'astro:content';
+import shareMap from '../../data/share-map.json';
 
 export async function getStaticPaths() {
   const dailies = await getCollection('daily');
@@ -12,6 +14,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+const shareId = (shareMap as Record<string, string>)[`daily/${entry.id}`] || '';
 
 const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
   year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
@@ -26,7 +29,10 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
         <!-- Header -->
         <div class="mb-8 pb-8 border-b border-white/5">
           <a href="/daily" class="text-xs text-text-muted hover:text-accent transition-colors mb-4 inline-block">&larr; 所有日報</a>
-          <p class="text-sm text-accent mb-2">{dateStr}</p>
+          <div class="flex items-center gap-3 mb-2">
+            <p class="text-sm text-accent">{dateStr}</p>
+            {shareId && <ShareButton shareId={shareId} />}
+          </div>
           <h1 class="text-3xl md:text-4xl font-bold">{entry.data.title}</h1>
           {entry.data.source && (
             <p class="text-xs text-text-muted/50 mt-2">來源：{entry.data.source}</p>
