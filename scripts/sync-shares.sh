@@ -60,7 +60,7 @@ for md in sorted(glob.glob(os.path.join(KB_DIR, '*.md'))):
     with open(os.path.join(SHARE_DIR, f'{share_id}.md'), 'w') as f:
         f.write(content)
 
-    share_map[f'kb/{note_id}'] = share_id
+    share_map[f'kb/{note_id.lower()}'] = share_id
 
 # Process daily notes
 for md in sorted(glob.glob(os.path.join(DAILY_DIR, '*.md'))):
