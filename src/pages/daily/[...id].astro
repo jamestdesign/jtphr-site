@@ -36,8 +36,21 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
         <!-- Audio Player -->
         {entry.data.audio && (
           <div class="mb-8 p-4 rounded-lg bg-brand-light border border-white/5">
-            <p class="text-sm font-medium mb-3">🎙 Podcast 播放</p>
-            <audio controls class="w-full" preload="metadata">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-sm font-medium">🎙 Podcast 播放</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] text-text-muted/50">速度</span>
+                {[0.75, 1, 1.25, 1.5, 2].map(speed => (
+                  <button
+                    class={`speed-btn text-[11px] px-2 py-0.5 rounded transition-colors ${speed === 1 ? 'bg-accent text-white' : 'bg-white/5 text-text-muted hover:bg-accent/20 hover:text-accent'}`}
+                    data-speed={speed}
+                  >
+                    {speed}x
+                  </button>
+                ))}
+              </div>
+            </div>
+            <audio id="main-player" controls class="w-full" preload="metadata">
               <source src={entry.data.audio} type="audio/mpeg" />
               你的瀏覽器不支援音檔播放
             </audio>
@@ -90,9 +103,38 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
     </div>
   </div>
 
-  <!-- Highlight active TOC item on scroll -->
+  <!-- Speed control + Highlight active TOC item on scroll -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
+      // Speed control
+      const mainPlayer = document.getElementById('main-player');
+      const sidePlayer = document.querySelector('aside audio');
+      const speedBtns = document.querySelectorAll('.speed-btn');
+
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const speed = parseFloat(btn.dataset.speed);
+          if (mainPlayer) mainPlayer.playbackRate = speed;
+          if (sidePlayer) sidePlayer.playbackRate = speed;
+          speedBtns.forEach(b => {
+            b.classList.remove('bg-accent', 'text-white');
+            b.classList.add('bg-white/5', 'text-text-muted');
+          });
+          btn.classList.add('bg-accent', 'text-white');
+          btn.classList.remove('bg-white/5', 'text-text-muted');
+        });
+      });
+
+      // Sync side player with main player
+      if (mainPlayer && sidePlayer) {
+        mainPlayer.addEventListener('timeupdate', () => {
+          if (Math.abs(sidePlayer.currentTime - mainPlayer.currentTime) > 1) {
+            sidePlayer.currentTime = mainPlayer.currentTime;
+          }
+        });
+        sidePlayer.addEventListener('play', () => { mainPlayer.currentTime = sidePlayer.currentTime; mainPlayer.play(); });
+        sidePlayer.addEventListener('pause', () => mainPlayer.pause());
+      }
       const tocLinks = document.querySelectorAll('.toc-link');
       const headings = document.querySelectorAll('.prose h2[id]');
 
