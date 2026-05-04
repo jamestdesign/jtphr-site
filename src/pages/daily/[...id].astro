@@ -74,38 +74,58 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
         </div>
       </article>
 
-      <!-- Sidebar: Table of Contents -->
+      <!-- Sidebar: Playlist Panel -->
       <aside class="hidden lg:block">
         <div class="sticky top-24">
-          <p class="text-xs font-bold text-text-muted/50 uppercase tracking-wider mb-4">目錄</p>
-          <nav class="space-y-1">
-            {headings.filter(h => h.depth === 2).map((h, i) => (
+          <!-- Now Playing -->
+          <div class="mb-4 p-3 rounded-lg bg-brand-light border border-white/5">
+            <p class="text-[10px] text-text-muted/40 uppercase tracking-wider mb-1">正在播放</p>
+            <p id="now-playing-title" class="text-sm font-medium text-accent truncate">尚未播放</p>
+            <audio id="section-audio" class="w-full mt-2" controls preload="metadata" style="height: 32px;"></audio>
+            <div class="flex items-center justify-between mt-2">
               <div class="flex items-center gap-1">
-                <button
-                  class="section-play flex-shrink-0 w-6 h-6 rounded-full bg-white/5 hover:bg-accent/20 text-text-muted/40 hover:text-accent transition-colors flex items-center justify-center text-[10px]"
-                  data-section={h.slug}
-                  data-index={i + 1}
-                  title={`播放：${h.text}`}
-                >
-                  ▶
-                </button>
-                <a
-                  href={`#${h.slug}`}
-                  class="toc-link block text-sm text-text-muted/60 hover:text-accent transition-colors py-1.5 border-l-2 border-transparent hover:border-accent pl-2"
-                  data-slug={h.slug}
-                >
-                  {h.text}
-                </a>
+                {[0.75, 1, 1.25, 1.5, 2].map(speed => (
+                  <button
+                    class={`speed-btn text-[10px] px-1.5 py-0.5 rounded transition-colors ${speed === 1 ? 'bg-accent text-white' : 'bg-white/5 text-text-muted/50 hover:bg-accent/20 hover:text-accent'}`}
+                    data-speed={speed}
+                  >
+                    {speed}x
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Playlist -->
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-xs font-bold text-text-muted/50 uppercase tracking-wider">播放清單</p>
+            <button id="mark-all-unread" class="text-[10px] text-text-muted/30 hover:text-accent transition-colors">全部標為未聽</button>
+          </div>
+          <div class="space-y-0.5" id="playlist">
+            {headings.filter(h => h.depth === 2).map((h, i) => (
+              <div
+                class="playlist-item flex items-center gap-2 p-2.5 rounded-lg cursor-pointer transition-all hover:bg-white/5 group"
+                data-index={i}
+                data-slug={h.slug}
+                data-title={h.text}
+              >
+                <div class="flex-shrink-0 w-5 h-5 rounded-full bg-white/5 group-hover:bg-accent/20 flex items-center justify-center">
+                  <span class="play-icon text-[9px] text-text-muted/40 group-hover:text-accent">▶</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="item-title text-xs font-medium text-text-muted/70 group-hover:text-text truncate">{h.text}</p>
+                </div>
+                <span class="listen-badge text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-text-muted/30 hidden">已聽</span>
               </div>
             ))}
-          </nav>
+          </div>
 
+          <!-- Full version -->
           {entry.data.audio && (
-            <div class="mt-8 pt-8 border-t border-white/5">
-              <p class="text-xs font-bold text-text-muted/50 uppercase tracking-wider mb-3">快速聽</p>
-              <audio controls class="w-full" preload="metadata" style="height: 36px;">
-                <source src={entry.data.audio} type="audio/mpeg" />
-              </audio>
+            <div class="mt-4 pt-4 border-t border-white/5">
+              <button id="play-full" class="w-full text-xs text-center py-2 rounded-lg bg-white/5 text-text-muted/50 hover:bg-accent/10 hover:text-accent transition-colors">
+                🎙 播放完整版
+              </button>
             </div>
           )}
         </div>
@@ -113,116 +133,191 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
     </div>
   </div>
 
-  <!-- Speed control + Highlight active TOC item on scroll -->
+  <!-- Playlist controller -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
-      // Speed control
+      const audio = document.getElementById('section-audio');
       const mainPlayer = document.getElementById('main-player');
-      const sidePlayer = document.querySelector('aside audio');
+      const nowPlaying = document.getElementById('now-playing-title');
+      const items = document.querySelectorAll('.playlist-item');
       const speedBtns = document.querySelectorAll('.speed-btn');
+      const playFullBtn = document.getElementById('play-full');
+      const markAllBtn = document.getElementById('mark-all-unread');
 
-      speedBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const speed = parseFloat(btn.dataset.speed);
-          if (mainPlayer) mainPlayer.playbackRate = speed;
-          if (sidePlayer) sidePlayer.playbackRate = speed;
-          speedBtns.forEach(b => {
-            b.classList.remove('bg-accent', 'text-white');
-            b.classList.add('bg-white/5', 'text-text-muted');
-          });
-          btn.classList.add('bg-accent', 'text-white');
-          btn.classList.remove('bg-white/5', 'text-text-muted');
-        });
-      });
-
-      // Section audio player
-      const sectionPlayer = new Audio();
-      let currentSection = null;
-      const sectionBtns = document.querySelectorAll('.section-play');
-
-      // Build section audio map from headings
-      const h2s = document.querySelectorAll('.prose h2[id]');
-      const sectionSlugs = Array.from(h2s).map(h => h.id);
-
-      // Audio base path: /audio/YYYY-MM-DD/
-      const audioBase = mainPlayer ? mainPlayer.querySelector('source')?.src.replace('.mp3', '') + '/' : '';
       const dateMatch = window.location.pathname.match(/(\d{4}-\d{2}-\d{2})/);
       const dateStr = dateMatch ? dateMatch[1] : '';
-      const sectionAudioBase = `/audio/${dateStr}/`;
+      const audioBase = '/audio/' + dateStr + '/';
 
-      sectionBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const idx = parseInt(btn.dataset.index);
-          const slug = btn.dataset.section;
-          const paddedIdx = String(idx).padStart(2, '0');
+      let currentIndex = -1;
+      let playbackSpeed = 1;
+      let listened = new Set();
 
-          // Find matching audio file
-          const audioSrc = `${sectionAudioBase}${paddedIdx}-${slug}.mp3`;
+      // Load listened state from localStorage
+      const storageKey = 'daily-listened-' + dateStr;
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        saved.forEach(i => listened.add(i));
+        updateListenedUI();
+      } catch(e) {}
 
-          if (currentSection === slug && !sectionPlayer.paused) {
-            sectionPlayer.pause();
-            btn.textContent = '▶';
-            currentSection = null;
+      function buildAudioSrc(idx) {
+        const item = items[idx];
+        if (!item) return '';
+        const slug = item.dataset.slug;
+        const padded = String(idx + 1).padStart(2, '0');
+        return audioBase + padded + '-' + slug + '.mp3';
+      }
+
+      function playIndex(idx) {
+        if (idx < 0 || idx >= items.length) return;
+        currentIndex = idx;
+        const item = items[idx];
+        const title = item.dataset.title;
+
+        // Update UI
+        items.forEach(it => {
+          it.classList.remove('bg-accent/10', 'border-l-2', 'border-accent');
+          it.querySelector('.play-icon').textContent = '▶';
+        });
+        item.classList.add('bg-accent/10', 'border-l-2', 'border-accent');
+        item.querySelector('.play-icon').textContent = '⏸';
+        nowPlaying.textContent = title;
+
+        // Play
+        audio.src = buildAudioSrc(idx);
+        audio.playbackRate = playbackSpeed;
+        audio.play();
+
+        // Scroll content to section
+        const target = document.getElementById(item.dataset.slug);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Pause main player if playing
+        if (mainPlayer && !mainPlayer.paused) mainPlayer.pause();
+      }
+
+      function markListened(idx) {
+        listened.add(idx);
+        localStorage.setItem(storageKey, JSON.stringify([...listened]));
+        updateListenedUI();
+      }
+
+      function updateListenedUI() {
+        items.forEach((item, i) => {
+          const badge = item.querySelector('.listen-badge');
+          const titleEl = item.querySelector('.item-title');
+          if (listened.has(i)) {
+            badge.classList.remove('hidden');
+            titleEl.classList.add('text-text-muted/40');
+          } else {
+            badge.classList.add('hidden');
+            titleEl.classList.remove('text-text-muted/40');
+          }
+        });
+      }
+
+      // Click playlist item
+      items.forEach((item, i) => {
+        item.addEventListener('click', () => {
+          if (currentIndex === i && !audio.paused) {
+            audio.pause();
+            item.querySelector('.play-icon').textContent = '▶';
             return;
           }
-
-          // Stop all other buttons
-          sectionBtns.forEach(b => b.textContent = '▶');
-          if (mainPlayer) mainPlayer.pause();
-
-          sectionPlayer.src = audioSrc;
-          sectionPlayer.playbackRate = mainPlayer ? mainPlayer.playbackRate : 1;
-          sectionPlayer.play();
-          btn.textContent = '⏸';
-          currentSection = slug;
-
-          // Scroll to section
-          const target = document.getElementById(slug);
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          playIndex(i);
         });
       });
 
-      sectionPlayer.addEventListener('ended', () => {
-        sectionBtns.forEach(b => b.textContent = '▶');
-        currentSection = null;
+      // Auto-advance: when one section ends, wait 2s then play next
+      audio.addEventListener('ended', () => {
+        markListened(currentIndex);
+        items[currentIndex].querySelector('.play-icon').textContent = '✓';
+
+        if (currentIndex < items.length - 1) {
+          // Wait 2 seconds then play next
+          nowPlaying.textContent = '下一段即將播放...';
+          setTimeout(() => playIndex(currentIndex + 1), 2000);
+        } else {
+          nowPlaying.textContent = '全部播放完畢';
+          items[currentIndex].classList.remove('bg-accent/10');
+        }
       });
 
-      // Sync side player with main player
-      if (mainPlayer && sidePlayer) {
-        mainPlayer.addEventListener('timeupdate', () => {
-          if (Math.abs(sidePlayer.currentTime - mainPlayer.currentTime) > 1) {
-            sidePlayer.currentTime = mainPlayer.currentTime;
-          }
-        });
-        sidePlayer.addEventListener('play', () => { mainPlayer.currentTime = sidePlayer.currentTime; mainPlayer.play(); });
-        sidePlayer.addEventListener('pause', () => mainPlayer.pause());
-      }
-      const tocLinks = document.querySelectorAll('.toc-link');
-      const headings = document.querySelectorAll('.prose h2[id]');
-
-      if (!headings.length || !tocLinks.length) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              tocLinks.forEach(link => {
-                link.classList.remove('text-accent', 'border-accent');
-                link.classList.add('text-text-muted/60', 'border-transparent');
-              });
-              const active = document.querySelector(`.toc-link[data-slug="${entry.target.id}"]`);
-              if (active) {
-                active.classList.add('text-accent', 'border-accent');
-                active.classList.remove('text-text-muted/60', 'border-transparent');
-              }
-            }
+      // Speed control
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          playbackSpeed = parseFloat(btn.dataset.speed);
+          audio.playbackRate = playbackSpeed;
+          if (mainPlayer) mainPlayer.playbackRate = playbackSpeed;
+          speedBtns.forEach(b => {
+            b.classList.remove('bg-accent', 'text-white');
+            b.classList.add('bg-white/5', 'text-text-muted/50');
           });
-        },
-        { rootMargin: '-80px 0px -60% 0px' }
-      );
+          btn.classList.add('bg-accent', 'text-white');
+          btn.classList.remove('bg-white/5', 'text-text-muted/50');
+        });
+      });
 
-      headings.forEach(h => observer.observe(h));
+      // Mark all as unread
+      markAllBtn.addEventListener('click', () => {
+        listened.clear();
+        localStorage.removeItem(storageKey);
+        updateListenedUI();
+      });
+
+      // Play full version
+      if (playFullBtn && mainPlayer) {
+        playFullBtn.addEventListener('click', () => {
+          audio.pause();
+          items.forEach(it => {
+            it.classList.remove('bg-accent/10', 'border-l-2', 'border-accent');
+            it.querySelector('.play-icon').textContent = '▶';
+          });
+          nowPlaying.textContent = '完整版播放中';
+          mainPlayer.playbackRate = playbackSpeed;
+          mainPlayer.currentTime = 0;
+          mainPlayer.play();
+        });
+      }
+
+      // Listen badge click to toggle
+      items.forEach((item, i) => {
+        const badge = item.querySelector('.listen-badge');
+        badge.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (listened.has(i)) {
+            listened.delete(i);
+          } else {
+            listened.add(i);
+          }
+          localStorage.setItem(storageKey, JSON.stringify([...listened]));
+          updateListenedUI();
+        });
+      });
+
+      // Scroll highlight
+      const proseH2s = document.querySelectorAll('.prose h2[id]');
+      if (proseH2s.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const slug = entry.target.id;
+                items.forEach(item => {
+                  const t = item.querySelector('.item-title');
+                  if (item.dataset.slug === slug) {
+                    t.classList.add('text-text');
+                  } else if (!listened.has(parseInt(item.dataset.index))) {
+                    t.classList.remove('text-text');
+                  }
+                });
+              }
+            });
+          },
+          { rootMargin: '-80px 0px -60% 0px' }
+        );
+        proseH2s.forEach(h => observer.observe(h));
+      }
     });
   </script>
 </BaseLayout>
