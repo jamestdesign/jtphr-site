@@ -21,4 +21,13 @@ const daily = defineCollection({
   }).passthrough(),
 });
 
-export const collections = { kb, daily };
+const share = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/share' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date().optional(),
+    sourceNote: z.string().optional(),
+  }).passthrough(),
+});
+
+export const collections = { kb, daily, share };
