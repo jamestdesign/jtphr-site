@@ -21,9 +21,9 @@ const { Content } = await render(note);
 // Multi-agent collaboration credits (v1 schema)
 const creatorLabels: Record<string, string> = {
   james: 'James',
-  claude_robin: 'Claude（管理）',
+  claude_robin: 'Robin',
   robert: 'Robert',
-  external: '外部來源',
+  external: 'External',
 };
 const data = note.data as Record<string, any>;
 const creator: string | undefined = data.creator;
