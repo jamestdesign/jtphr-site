@@ -4,16 +4,27 @@ date: 2026-04-11
 來源: 用戶整理 + universal-video-prompt skill 八層架構
 連結: https://wilson-men.tw/3-skill/
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - 攝影基礎
-  - 鏡頭語言
-  - 運鏡
+- AI工具
+- AI影音
+- 教學
+- 攝影基礎
+- 鏡頭語言
+- 運鏡
 aliases:
-  - 鏡頭運鏡指南
-  - 攝影術語
-  - 鏡頭語言基本功
+- 鏡頭運鏡指南
+- 攝影術語
+- 鏡頭語言基本功
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

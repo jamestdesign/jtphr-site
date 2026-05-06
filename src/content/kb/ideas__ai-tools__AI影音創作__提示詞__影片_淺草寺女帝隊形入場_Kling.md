@@ -2,20 +2,31 @@
 title: 影片 — 淺草寺女帝隊形入場（Kling）
 date: 2026-04-11
 來源: 用戶於 Telegram Ideas 群 + 上傳 4 張真實照片
-連結:
+連結: null
 平台: Kling AI / Google Veo3 / Runway
 類型: 影片
 tags:
-  - AI影音
-  - 提示詞
-  - 影片prompt
-  - 電影感
-  - 和服
-  - 政治劇風
-  - 史詩級寬景
+- AI影音
+- 提示詞
+- 影片prompt
+- 電影感
+- 和服
+- 政治劇風
+- 史詩級寬景
 aliases:
-  - 女帝隊形入場影片
-  - 和服女帝保鏢影片
+- 女帝隊形入場影片
+- 和服女帝保鏢影片
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-提示詞"
 ---
 

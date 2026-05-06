@@ -7,15 +7,26 @@ date: 2026-04-11
 原文更新: 2025-12-05
 分類: AI學習資源
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - 行銷
-  - AI模特
-  - 提示詞
+- AI工具
+- AI影音
+- 教學
+- 行銷
+- AI模特
+- 提示詞
 aliases:
-  - AI模特教學
-  - 威森AI代言
+- AI模特教學
+- 威森AI代言
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

@@ -6,13 +6,24 @@ date: 2026-04-11
 平台: Midjourney / Google Imagen / DALL-E
 類型: 圖片
 tags:
-  - AI影音
-  - 提示詞
-  - 圖片prompt
-  - 人像
-  - 商業攝影
+- AI影音
+- 提示詞
+- 圖片prompt
+- 人像
+- 商業攝影
 aliases:
-  - 鎖骨人像prompt
+- 鎖骨人像prompt
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-提示詞"
 ---
 

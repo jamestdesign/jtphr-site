@@ -1,7 +1,21 @@
 ---
-title: "軟體定義車輛 SDV 趨勢分析"
+title: 軟體定義車輛（SDV）趨勢分析
+date: '2026-04-10'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "股票-趨勢觀察"
 ---
+
 # 軟體定義車輛（SDV）趨勢分析
 
 **日期：** 2026-04-10

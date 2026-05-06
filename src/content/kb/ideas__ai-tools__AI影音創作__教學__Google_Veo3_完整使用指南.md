@@ -4,17 +4,28 @@ date: 2026-04-11
 來源: Google 官方 + 多個第三方教學整理
 連結: https://deepmind.google/models/veo/prompt-guide/
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - Veo
-  - Google
-  - 文字生影片
-  - 圖生影片
+- AI工具
+- AI影音
+- 教學
+- Veo
+- Google
+- 文字生影片
+- 圖生影片
 aliases:
-  - Veo使用
-  - Veo教學
-  - Veo3指南
+- Veo使用
+- Veo教學
+- Veo3指南
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

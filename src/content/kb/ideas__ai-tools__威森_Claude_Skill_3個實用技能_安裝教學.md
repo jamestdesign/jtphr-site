@@ -6,15 +6,26 @@ date: 2026-04-11
 作者: 理工威森
 原文發布: 2026-04-08
 tags:
-  - AI工具
-  - Claude
-  - Skills
-  - ClaudeAI
-  - 行銷
-  - 提示詞工程
+- AI工具
+- Claude
+- Skills
+- ClaudeAI
+- 行銷
+- 提示詞工程
 aliases:
-  - 威森Skill教學
-  - Claude Skill 安裝
+- 威森Skill教學
+- Claude Skill 安裝
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI工具"
 ---
 

@@ -2,21 +2,32 @@
 title: 個人攝影自動化流水線 — 4 種生活影片場景設計
 date: 2026-04-12
 來源: 用戶於 Telegram Ideas 群描述需求
-連結:
+連結: null
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - 個人攝影
-  - 生活紀錄
-  - 自動化
-  - CapCut
-  - FCPX
-  - 工作流設計
+- AI工具
+- AI影音
+- 教學
+- 個人攝影
+- 生活紀錄
+- 自動化
+- CapCut
+- FCPX
+- 工作流設計
 aliases:
-  - 個人攝影流水線
-  - 4 種影片設計
-  - 生活影片自動化
+- 個人攝影流水線
+- 4 種影片設計
+- 生活影片自動化
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

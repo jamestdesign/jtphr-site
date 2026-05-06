@@ -18,6 +18,19 @@ const { note, allNotes } = Astro.props;
 const shareId = (shareMap as Record<string, string>)[`kb/${note.id}`] || '';
 const { Content } = await render(note);
 
+// Multi-agent collaboration credits (v1 schema)
+const creatorLabels: Record<string, string> = {
+  james: 'James',
+  claude_robin: 'Claude（管理）',
+  robert: 'Robert',
+  external: '外部來源',
+};
+const data = note.data as Record<string, any>;
+const creator: string | undefined = data.creator;
+const coCreators: string[] = Array.isArray(data.co_creators) ? data.co_creators : [];
+const allCreators = [creator, ...coCreators].filter(Boolean) as string[];
+const version: number = typeof data.version === 'number' ? data.version : 1;
+
 // Build note lookup for preview + linking
 const noteLookup = allNotes.map(n => ({
   id: n.id,
@@ -69,6 +82,12 @@ const noteLookup = allNotes.map(n => ({
             </a>
           )}
         </div>
+      )}
+      {allCreators.length > 0 && (
+        <p class="text-xs text-text-muted/70 mt-2">
+          ✍️ {allCreators.map(c => creatorLabels[c] || c).join(' × ')}
+          {version > 1 && <span class="ml-2 text-text-muted/50">· 第 {version} 版</span>}
+        </p>
       )}
       {(note.data.tags || []).length > 0 && (
         <div class="flex gap-2 flex-wrap mt-4">

@@ -4,15 +4,26 @@ date: 2026-04-17
 來源: YouTube — 李哈利 Harry Lee
 連結: https://youtu.be/DRgkh8IRk9k?si=vX59KNwMHRscN6zm
 tags:
-  - AI工具
-  - Claude
-  - 自動化
-  - Routines
-  - n8n替代
-  - 工作流
+- AI工具
+- Claude
+- 自動化
+- Routines
+- n8n替代
+- 工作流
 aliases:
-  - Claude Routines
-  - Routines 取代 n8n
+- Claude Routines
+- Routines 取代 n8n
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI工具"
 ---
 

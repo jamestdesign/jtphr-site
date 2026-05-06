@@ -5,20 +5,31 @@ date: 2026-04-12
 來源: chatvideopro Instagram + 多個 GitHub repo + 技術文章整理
 連結: 用戶於 Telegram Ideas 群分享 chatvideopro 截圖
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - Claude
-  - Premiere
-  - FCPX
-  - CapCut
-  - MCP
-  - 自動剪輯
-  - 影片剪輯
+- AI工具
+- AI影音
+- 教學
+- Claude
+- Premiere
+- FCPX
+- CapCut
+- MCP
+- 自動剪輯
+- 影片剪輯
 aliases:
-  - Claude 自動剪輯
-  - 三大剪輯軟體 MCP
-  - Premiere FCPX CapCut MCP
+- Claude 自動剪輯
+- 三大剪輯軟體 MCP
+- Premiere FCPX CapCut MCP
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

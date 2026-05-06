@@ -1,7 +1,21 @@
 ---
-title: "Obsidian Claude Code 第二大腦 Claudian"
+title: Obsidian + Claude Code = 第二大腦（Claudian + 5 Skills）
+date: '2026-04-10'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI工具"
 ---
+
 # Obsidian + Claude Code = 第二大腦（Claudian + 5 Skills）
 
 **日期：** 2026-04-10

@@ -1,7 +1,21 @@
 ---
-title: "claude-85-use-cases"
+title: Claude 85 官方使用場景
+date: '2026-04-05'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "策略"
 ---
+
 # Claude 85 官方使用場景
 
 > 來源：@aiposthub（Instagram）

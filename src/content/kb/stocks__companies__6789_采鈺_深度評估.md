@@ -4,17 +4,28 @@ date: 2026-04-10
 來源: 用戶詢問 + Web 研究
 連結: https://money.udn.com/money/story/5612/8982177
 tags:
-  - 股票
-  - 個股研究
-  - 矽光子
-  - CPO
-  - TSMC供應鏈
-  - AI基礎建設
+- 股票
+- 個股研究
+- 矽光子
+- CPO
+- TSMC供應鏈
+- AI基礎建設
 aliases:
-  - 6789
-  - 采鈺
-  - VisEra
-  - Chuyu
+- 6789
+- 采鈺
+- VisEra
+- Chuyu
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "股票-個股分析"
 ---
 

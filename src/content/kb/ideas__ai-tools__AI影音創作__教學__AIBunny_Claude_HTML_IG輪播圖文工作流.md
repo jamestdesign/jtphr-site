@@ -8,17 +8,28 @@ date: 2026-04-12
 系列: 挑戰 100 個小工具
 篇章: 上篇 → 基礎流程
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - Claude
-  - IG
-  - 社群經營
-  - SKILL
-  - HTML截圖工作流
+- AI工具
+- AI影音
+- 教學
+- Claude
+- IG
+- 社群經營
+- SKILL
+- HTML截圖工作流
 aliases:
-  - AI Bunny IG圖文
-  - Claude IG輪播
+- AI Bunny IG圖文
+- Claude IG輪播
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

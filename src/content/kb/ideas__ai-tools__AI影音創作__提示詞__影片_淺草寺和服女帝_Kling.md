@@ -2,20 +2,31 @@
 title: 影片 — 淺草寺和服女帝（Kling）
 date: 2026-04-11
 來源: 用戶於 Telegram Ideas 群測試 universal-video-prompt skill
-連結:
+連結: null
 平台: Kling AI / Google Veo3 / Runway / 即夢 Seedance
 類型: 影片 / text-to-video
 tags:
-  - AI影音
-  - 提示詞
-  - 影片prompt
-  - 人像
-  - 文化
-  - 和服
-  - 日本
+- AI影音
+- 提示詞
+- 影片prompt
+- 人像
+- 文化
+- 和服
+- 日本
 aliases:
-  - 淺草寺和服女帝
-  - 和服女帝影片prompt
+- 淺草寺和服女帝
+- 和服女帝影片prompt
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-提示詞"
 ---
 

@@ -2,14 +2,25 @@
 title: 2026趨勢股 追蹤腳本 開發歷程（v7 → v8）
 date: 2026-04-10
 tags:
-  - 股票
-  - tool
-  - 開發紀錄
-  - GAS
-  - GoogleSheets
+- 股票
+- tool
+- 開發紀錄
+- GAS
+- GoogleSheets
 aliases:
-  - stock_tracker_v8
-  - 股票追蹤腳本開發
+- stock_tracker_v8
+- 股票追蹤腳本開發
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "股票-工具"
 ---
 

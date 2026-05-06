@@ -6,17 +6,28 @@ date: 2026-04-12
 作者: mobileeditingclub
 互動: 5,243 讚、6,369 留言、87 分享、26+ 收藏
 tags:
-  - AI工具
-  - AI影音
-  - 教學
-  - 電商
-  - 產品攝影
-  - NanoBanana
-  - Claude
-  - 工作流
+- AI工具
+- AI影音
+- 教學
+- 電商
+- 產品攝影
+- NanoBanana
+- Claude
+- 工作流
 aliases:
-  - Nano Banana 電商
-  - Claude 產品攝影
+- Nano Banana 電商
+- Claude 產品攝影
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-教學"
 ---
 

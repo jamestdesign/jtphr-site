@@ -6,15 +6,26 @@ date: 2026-04-12
 作者: facelesslab_
 互動: 131 讚 / 116 留言 / 5 分享 / 201 收藏
 tags:
-  - AI工具
-  - AI影音
-  - 提示詞
-  - 教學
-  - 人物
-  - 質感
+- AI工具
+- AI影音
+- 提示詞
+- 教學
+- 人物
+- 質感
 aliases:
-  - facelesslab 6 元素
-  - 高質感 AI 人物
+- facelesslab 6 元素
+- 高質感 AI 人物
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-提示詞"
 ---
 

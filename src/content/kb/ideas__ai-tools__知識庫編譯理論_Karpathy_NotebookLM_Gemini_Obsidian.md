@@ -1,7 +1,21 @@
 ---
-title: "知識庫編譯理論 Karpathy NotebookLM Gemini Obsidian"
+title: 知識庫「編譯」理論：Karpathy × NotebookLM × Gemini × Obsidian
+date: '2026-04-08'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI工具"
 ---
+
 # 知識庫「編譯」理論：Karpathy × NotebookLM × Gemini × Obsidian
 
 **日期：** 2026-04-08  

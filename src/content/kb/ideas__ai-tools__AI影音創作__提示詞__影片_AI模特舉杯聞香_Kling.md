@@ -6,13 +6,24 @@ date: 2026-04-11
 平台: Kling AI / Google Veo3 / Runway
 類型: 影片 / image-to-video
 tags:
-  - AI影音
-  - 提示詞
-  - 影片prompt
-  - 商業廣告
-  - 循環影片
+- AI影音
+- 提示詞
+- 影片prompt
+- 商業廣告
+- 循環影片
 aliases:
-  - 舉杯聞香影片prompt
+- 舉杯聞香影片prompt
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI影音-提示詞"
 ---
 

@@ -1,7 +1,21 @@
 ---
-title: "Claude 資料夾結構教學 leadgenman"
+title: '`.claude` 資料夾結構教學'
+date: '2026-04-07'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 category: "AI工具"
 ---
+
 # `.claude` 資料夾結構教學
 來源：@leadgenman（Instagram）
 儲存日期：2026/04/07

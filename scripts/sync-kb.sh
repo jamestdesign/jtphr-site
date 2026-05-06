@@ -48,6 +48,7 @@ find "$KB_SRC" -name "*.md" \
 
   python3 << PYEOF
 import re
+import sys
 
 with open('$file', 'r') as f:
     content = f.read()
@@ -59,6 +60,11 @@ fm_match = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
 if fm_match:
     fm = fm_match.group(1)
     body = content[fm_match.end():]
+
+    # Skip private notes (multi-agent v1 schema)
+    if re.search(r'^\s*private:\s*true\s*$', fm, re.MULTILINE):
+        sys.exit(0)
+
     if 'category:' not in fm:
         fm += '\ncategory: "' + category + '"'
     if 'title:' not in fm:

@@ -2,19 +2,30 @@
 title: Claude × Adobe 整合教學 — 用對話驅動 50+ 專業工具
 date: 2026-05-03
 來源: IG @aiposthub 輪播圖文（5張）
-連結:
+連結: null
 tags:
-  - AI工具
-  - Claude
-  - Adobe
-  - Photoshop
-  - Lightroom
-  - 修圖
-  - 社群素材
+- AI工具
+- Claude
+- Adobe
+- Photoshop
+- Lightroom
+- 修圖
+- 社群素材
 aliases:
-  - Claude Adobe 整合
-  - Adobe Plugin
+- Claude Adobe 整合
+- Adobe Plugin
 category: AI工具
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 ---
 
 # Claude × Adobe 整合教學
