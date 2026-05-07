@@ -6,6 +6,36 @@ KB_SRC="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/KnowledgeBas
 KB_DEST="$(dirname "$0")/../src/content/kb"
 IMG_DEST="$(dirname "$0")/../public/images/kb"
 
+# Safety guard: refuse to wipe destination unless source is readable and non-trivial.
+# Without this, a permission failure (e.g. launchd lacking Full Disk Access on iCloud)
+# returns 0 notes and silently deletes everything in $KB_DEST.
+MIN_NOTES=10
+
+if [ ! -r "$KB_SRC" ]; then
+  echo "ERROR: KB source not readable: $KB_SRC" >&2
+  echo "ABORT: refusing to wipe destination." >&2
+  exit 1
+fi
+
+SRC_COUNT=$(find "$KB_SRC" -name "*.md" \
+  -not -path "*/.obsidian/*" \
+  -not -path "*/.claude*/*" \
+  -not -path "*/.claudian/*" \
+  -not -path "*/_meta/*" \
+  -not -path "*/sessions/*" \
+  -not -path "*/_attachments/*" \
+  -not -name "TODO.md" \
+  -not -name "INDEX.md" \
+  -not -name "_README.md" 2>/dev/null | wc -l | tr -d ' ')
+
+if [ "${SRC_COUNT:-0}" -lt "$MIN_NOTES" ]; then
+  echo "ERROR: source has only ${SRC_COUNT:-0} notes (expected >= $MIN_NOTES)." >&2
+  echo "ABORT: likely permission issue; refusing to wipe destination." >&2
+  exit 1
+fi
+
+echo "Source check OK: $SRC_COUNT candidate notes. Proceeding."
+
 rm -rf "$KB_DEST"
 mkdir -p "$KB_DEST" "$IMG_DEST"
 
