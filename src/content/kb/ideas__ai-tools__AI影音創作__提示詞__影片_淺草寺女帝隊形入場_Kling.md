@@ -1,0 +1,219 @@
+---
+title: 影片 — 淺草寺女帝隊形入場（Kling）
+date: 2026-04-11
+來源: 用戶於 Telegram Ideas 群 + 上傳 4 張真實照片
+連結: null
+平台: Kling AI / Google Veo3 / Runway
+類型: 影片
+tags:
+- AI影音
+- 提示詞
+- 影片prompt
+- 電影感
+- 和服
+- 政治劇風
+- 史詩級寬景
+aliases:
+- 女帝隊形入場影片
+- 和服女帝保鏢影片
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
+category: "AI影音-提示詞"
+---
+
+# 影片提示詞 — 淺草寺女帝隊形入場
+
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 用途</p>
+<div class="text-sm text-gray-300">
+
+10 秒超寬電影級 establishing shot。中央和服女子（依照片角色）＋12 人西裝保鏢楔形隊形，緩緩穿過淺草寺雷門前進。dolly-back tracking 保持楔形構圖。像日本政治劇開場。
+
+</div>
+</div>
+
+
+---
+
+## 來源
+
+用戶於 Telegram Ideas 群（chat_id -5231583145, msg 849）提出的進階場景升級，並於 msg 852-855 上傳 4 張真實參考照片。
+
+---
+
+## 參考照片（vault 內）
+
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-01-全身櫻花.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-02-五重塔摺扇.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-03-和傘特寫.jpg)
+- ![](/images/kb/AI影音範例/淺草寺和服女帝/ref-04-側面櫻花.jpg)
+
+角色與服裝詳細分析見 圖片_淺草寺女帝隊形入場_Midjourney。
+
+---
+
+## Prompt 全文（英文，主版本）
+
+```
+A cinematic 10-second wide establishing shot at Sensoji Temple, Asakusa, Tokyo. A young Japanese woman in her early 20s with a round face, warm brown updo, and a large pink floral kanzashi hairpin walks slowly forward through the Kaminarimon gate at the visual center. She wears a traditional formal furisode kimono — deep black base covered in bold large-scale crimson chrysanthemums, golden peonies, pale pink cherry blossoms and white floral accents — with a cream-and-gold brocade obi tied with a pink decorative cord. White tabi socks, black lacquered geta. She holds a small white hardshell handbag. Her chin is held high, expression composed and commanding, projecting the regal aura of an empress's daughter. Surrounding her in a precise wedge formation are twelve men in sharp black tailored suits, white shirts, black ties, and dark sunglasses, walking in perfectly synchronized step extending from foreground to deep background. Camera is on a slow dolly-back tracking shot, retreating just slightly faster than they advance, keeping the wedge composition framed throughout. Slight low angle for maximum imposing effect. Wide 24mm cinematic look with deep focus so all bodyguards remain crisp from foreground to deep background. The vermilion Kaminarimon gate and its massive red lantern dominate the upper background. Wisps of incense smoke drift continuously from a bronze burner on the side. Long elegant shadows cast across the ancient stone path. Lighting is dramatic late golden hour with warm rim light from behind, casting cool blue shadows on the ground. Color palette: black-and-floral kimono, stark black suits, vermilion red gate, warm amber sunlight, high contrast cinematic. Editorial cinematic style like a Japanese political drama opening or modern yakuza film entrance scene. The woman walks at a measured dignified pace; bodyguards in synchronized step. No zooms, no whip pans, no rapid motion — only the steady forward procession and the camera's matching slow retreat.
+```
+
+---
+
+## 八層架構拆解
+
+### 📐 Medium — Wide Shot (WS)
+寬景，整個隊形都入鏡，環境（雷門、五重塔）佔大比例。
+
+### 📷 Shot Type — Tracking shot + Establishing shot
+跟拍鏡頭 + 環境建立鏡頭並用。介紹整個淺草寺場景。
+
+### 📐 Angle — slight low angle
+微仰角強化威嚴。整群保鏢加女帝從仰角看下去。
+
+### 🎥 Movement — slow dolly-back tracking（關鍵）
+- **她們向前走** + **相機向後退**
+- 退的速度**比她們前進略快一點點** → 她們會在畫面中逐漸縮小
+- 效果：創造「緩緩逼近又永遠在遠方」的儀式感
+- **prompt 明確禁止**：`no zooms, no whip pans, no rapid motion`
+
+### 🔍 Focus — DEEP FOCUS（全域對焦）
+**這是跟單人版 prompt 最大的差異**：
+- 單人版：shallow DOF 淺景深（強調一個人）
+- 此版：deep focus（強調整個隊形）
+- 從最前面的保鏢到最後面的保鏢**都要銳利**
+- 楔形隊形的視覺力量需要每個保鏢都看得見
+
+### 🎭 Subject（主體動作）
+- 女子：measured dignified pace、chin held high、eyes forward
+- 保鏢：**perfect synchronized step**（軍事級紀律感）
+- 動作節奏：**緩慢但堅定**
+- 香爐煙霧持續飄散
+
+### 💡 Lighting — golden hour + rim light + long shadows
+- 黃金時段晚期
+- 背後逆光輪廓光 → 所有人物金邊
+- 長影子投射在石板路上
+
+### 🎨 Color — high contrast cinematic
+- 和服黑+花樣（主角）
+- 保鏢純黑
+- 雷門朱紅
+- 暖琥珀陽光
+- **冷藍地面陰影**（電影感關鍵）
+
+---
+
+## 預期成果
+
+🎬 **10 秒超寬電影級 establishing shot**：
+
+**0-2 秒**：廣角畫面已建立，隊形從中央進入觀眾視線。雷門紅燈籠懸掛在上方。煙霧開始飄動。
+
+**3-5 秒**：相機緩緩 dolly-back，隊形維持楔形前進。女帝的和服在中央格外搶眼。保鏢們步伐同步。
+
+**6-8 秒**：相機繼續後退，長影子拖曳在石板路上。整體構圖像一幅會動的油畫。
+
+**9-10 秒**：畫面穩定在中景構圖，隊形繼續前進，結尾準備接下一個鏡頭（切進特寫或淡出）。
+
+📐 **整體視覺特性**：
+- 觀眾會感覺自己是「被注視的普通人」看著這個儀式隊伍走來
+- 動作很少但每個元素都在動（煙霧、步伐、鏡頭）
+- 像是電影開場第一個鏡頭，帶出主角的氣勢
+
+---
+
+## 多平台適配版本
+
+### ▸ Kling AI 版本（強烈推薦，搭配 image-to-video）
+
+**最佳流程**：
+1. 先用 Midjourney 生成 這張靜態圖
+2. 把靜態圖上傳到 Kling 作為 reference image
+3. 用下面的 prompt 做 image-to-video
+4. Kling 基於那張圖讓畫面動起來
+
+```
+Cinematic 10-second wide establishing shot. Empress-like young Japanese woman in black furisode with crimson-gold-pink floral patterns, walking slowly forward through Kaminarimon gate, surrounded by twelve men in black suits and sunglasses in precise wedge formation. Slow dolly-back tracking shot keeping wedge composition. Slight low angle, wide 24mm deep focus, late golden hour rim light from behind, long shadows on stone path. Vermilion Kaminarimon gate dominates background. Continuous incense smoke drift. No zooms, no rapid motion, measured dignified pace.
+```
+
+設定：
+- Mode: image-to-video
+- Duration: 10 秒
+- Motion strength: Medium
+- Reference image: Midjourney 靜態圖
+
+### ▸ Google Veo3 版本（結構化）
+
+```
+Subject: an empress-like Japanese woman in black furisode with large crimson and gold floral patterns at the center, surrounded by twelve men in matching black suits and sunglasses in wedge formation.
+Action: the group walks slowly forward through the Kaminarimon gate of Sensoji Temple at a measured dignified pace, bodyguards in perfectly synchronized step.
+Camera: slow dolly-back tracking shot, slight low angle, wide 24mm with deep focus.
+Setting: Sensoji Temple Asakusa Tokyo, vermilion Kaminarimon gate and red lantern dominate background, ancient stone path with long shadows, bronze incense burner on the side.
+Lighting: dramatic late golden hour with strong backlit rim light, cool blue ground shadows.
+Style: editorial cinematic, like Japanese political drama opening or yakuza film entrance, photorealistic, no rapid motion.
+```
+
+### ▸ Runway Gen-3/4 版本
+
+直接用主版本 prompt，加：
+`Style reference: Wong Kar-wai × Takeshi Kitano yakuza film entrance scene`
+
+### ▸ 即夢 / Pika 簡化版
+
+```
+Empress in black gold kimono walking through Sensoji Temple Kaminarimon gate, twelve bodyguards in black suits in wedge formation, slow dolly-back tracking, deep focus, low angle, golden hour rim light, long shadows, cinematic, 10s
+```
+
+---
+
+## 變體建議
+
+### A：雨後夜晚版
+```
+... at Sensoji Temple at night, rain-soaked stone path reflecting vermilion lantern light,
+neon-like reflections of the red lantern on wet stones, cool blue night ambience,
+warm lantern glow mixing with cold rain atmosphere ...
+```
+更黑幫片風格、更孤獨感。
+
+### B：環繞鏡頭版
+把 `slow dolly-back tracking` 改成 `slow orbit shot circling 90 degrees around the wedge formation`。保鏢隊形不變但相機環繞展示。
+
+### C：分段節奏版（15 秒）
+- 前 5 秒：相機固定，隊形從畫面外走進來（emergence）
+- 中 5 秒：dolly-back 跟拍（procession）
+- 後 5 秒：相機停下，他們繼續走遠（recede）
+
+---
+
+## 生圖/影片流程總結
+
+```
+Step 1: Midjourney 上傳 4 張參考照片
+Step 2: Midjourney 用圖片 prompt + --cref 生成靜態圖（隊形入場畫面）
+Step 3: 選最佳 still
+Step 4: 上傳到 Kling AI
+Step 5: 用影片 prompt 做 image-to-video
+Step 6: 10 秒影片完成
+```
+
+---
+
+## 相關筆記
+
+- 圖片_淺草寺女帝隊形入場_Midjourney — 配對的靜態圖 prompt
+- 影片_淺草寺和服女帝_Kling — 初版單人影片
+- 圖片_淺草寺和服女帝_Midjourney — 初版單人圖片
+- 攝影基本功_鏡頭運鏡完整指南 — 八層架構教學（特別是 deep focus vs shallow DOF 差異）
+- 威森_Claude_Skill_3個實用技能_安裝教學 — universal-video-prompt skill
+- AI影音創作 INDEX
