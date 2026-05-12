@@ -1,0 +1,259 @@
+---
+title: LR Catalog SQL 寫入安全
+date: 2026-05-12
+creator: robert
+co_creators: []
+tags:
+  - AI影音創作
+  - 修圖
+  - skill
+  - LR
+  - SQL
+  - 安全規範
+aliases:
+  - LR catalog SQL safety
+  - SQL 寫入鐵則
+來源: photo-grade KB v1 (2026-05-08~2026-05-12)
+連結: _attachments/photo_grade_kb_2026-05-11.html
+version: 1
+category: "其他"
+---
+
+# LR Catalog SQL 寫入安全
+
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話定義</p>
+<div class="text-sm text-gray-300">
+
+對 Lightroom Classic catalog (`.lrcat`) 跑任何 SQL UPDATE / DELETE 前後,必須遵守 8 條鐵則的安全工作流;違反任一條都可能造成全 catalog 評分清空或 SQLite tree corruption。
+
+</div>
+</div>
+
+
+## 適用情境
+
+- 用 SQL 批次寫入評分 / Pick / colorLabels / develop settings 進 LR catalog
+- 用 SQL 寫入 keyword / caption(走 v4 metadata schema)
+- 從 VLM 結果產出 master CSV 後注入 catalog
+- 任何「我覺得這條 SQL 應該不會炸」的場合 — 越覺得安全越要走完整 SOP
+
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 2026-05-11 重災事件(本 skill 由此誕生)</p>
+<div class="text-sm text-gray-300">
+
+- **錯誤 A**:`UPDATE Adobe_images SET rating=NULL, colorLabels='', pick=0.0` 沒加 `WHERE` → 把門司港 671 張原本 5/8 跑的評分全清光,只剩 backlog 1280 被 master_v3 覆蓋。James 在 LR 看到「前面一半不評分」才發現。
+- **錯誤 B**:多輪 SQL 寫入 + ExFAT 上 `cp` 來回 → catalog `database disk image is malformed`(SQLite tree corruption)。從 `backup_pick_20260511_2030` 復原並改在 `/tmp` 工作才救回。
+- 失敗成本:catalog 復原 + 重新跑 SQL + 信任損失。
+
+</div>
+</div>
+
+
+---
+
+## 鐵則 8 條(全部遵守,缺一不可)
+
+### 鐵則 1 — UPDATE 必加 WHERE,永遠
+
+- ❌ `UPDATE Adobe_images SET pick=0.0` — 影響全 catalog 所有照片
+- ✅ `UPDATE Adobe_images SET pick=0.0 WHERE id_local IN (SELECT ai.id_local FROM ... WHERE alf.baseName IN (...))`
+- ✅ 或先 build baseName 白名單,for-loop UPDATE 每張(rowcount 必須 == 期望)
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 思考陷阱</p>
+<div class="text-sm text-gray-300">
+
+「全表 reset」一律 wrong — catalog 可能含其他 trip / 其他工作流的 photos,**不要假設**「我的 master_csv 涵蓋全 catalog」。
+
+</div>
+</div>
+
+
+### 鐵則 2 — ExFAT 上 SQLite 寫入必走 `/tmp` 副本
+
+- ❌ 直接對 `/Volumes/X10 Pro2/.../*.lrcat` 跑 sqlite3 連線 + UPDATE
+- ✅ `cp catalog → /tmp/work.lrcat` → 在 `/tmp` 跑 SQL → `PRAGMA integrity_check` → 通過才 `cp /tmp/work.lrcat → SSD`
+- 原因:ExFAT 對 SQLite 不友善(no atomic rename / no fsync semantics),多輪寫入容易 tree corruption
+- 如果 SSD catalog 已壞 → 從最近一個乾淨 backup 復原(integrity_check 確認)+ 重新在 `/tmp` 跑
+
+### 鐵則 3 — 寫前 always backup + integrity_check
+
+```bash
+backup="$CAT_SSD.backup_$(reason)_$(date +%Y%m%d_%H%M)"
+cp "$CAT_SSD" "$backup"
+sqlite3 "$backup" "PRAGMA integrity_check;" | head -2
+# 必須 'ok' 才繼續
+```
+
+### 鐵則 4 — 寫後 integrity_check 才 `cp` 回 SSD
+
+```python
+result = conn.execute("PRAGMA integrity_check;").fetchone()
+if result[0] != 'ok':
+    raise RuntimeError(f"Corruption: {result}")
+shutil.copy2(TMP, CAT_SSD)
+```
+
+### 鐵則 5 — 多個 SQL 操作合併成單一 transaction
+
+- 別連續「`cp` → 修 → `cp` → 再修 → 再 `cp`」(每次 `cp` 都有 ExFAT corruption 風險)
+- 一次 `cp` → `/tmp` 跑完所有 UPDATE / INSERT / DELETE → integrity_check → 一次 `cp` 回 SSD
+
+### 鐵則 6 — LR 必須關閉(catalog lock 釋出)
+
+```bash
+lsof | grep .lrcat
+ps aux | grep "Lightroom Classic.app"
+```
+
+如果 LR 開著:**不要動 catalog**,等 user 關 LR(`Cmd+Q`)。
+
+### 鐵則 6.5 — 後處理計算別漏
+
+改了 `Adobe_imageDevelopSettings.text` 後要重算 MD5 digest 寫回 `digest` 欄位 — 漏這步 LR 不認新的 develop settings。
+
+### 鐵則 7 — user-visible 變動 = "all-or-nothing"
+
+- 別「先寫 evaluation A,再 patch B,再修 C」這種反覆 → 容易 corruption + user 信任損失
+- 一次到位:準備 master CSV → 寫入 → 通報 user
+- user 反饋有 bug → 修整批 CSV → 一次重寫,**不要做 catalog-level patch**
+
+### 鐵則 8 — UPDATE 範圍要明確 print 出來
+
+跑 SQL 前印:
+
+```
+I'm going to UPDATE N rows matching WHERE ...
+```
+
+確認 N 在預期範圍才執行。如果 N 比預期大 10 倍 → 立刻停。
+
+---
+
+## 標準操作流程(SOP)
+
+```
+[0] 跑前確認 LR 已 Cmd+Q
+    └ lsof | grep .lrcat → 空 = OK
+
+[1] backup
+    └ cp /Volumes/X10\ Pro2/.../cat.lrcat \
+         /Volumes/X10\ Pro2/.../cat.lrcat.backup_${reason}_$(date +%Y%m%d_%H%M)
+    └ sqlite3 $backup "PRAGMA integrity_check;" → 必須 'ok'
+
+[2] 複製到 /tmp 工作
+    └ cp $backup /tmp/work.lrcat
+
+[3] 跑 SQL(在 /tmp/work.lrcat)
+    └ 開 transaction
+    └ 印「將 UPDATE N rows」確認 N
+    └ UPDATE ... WHERE id_local IN (master CSV 限定範圍)
+    └ commit
+    └ PRAGMA integrity_check → 'ok' 才往下
+
+[4] cp 回 SSD
+    └ cp /tmp/work.lrcat $CAT_SSD
+    └ sqlite3 $CAT_SSD "PRAGMA integrity_check;" → 再確認一次
+
+[5] LR 重開驗證
+    └ 開 LR → 看評分 / Pick / keyword 有沒有正常顯示
+    └ 抽 3-5 張人工確認
+```
+
+---
+
+## 範例 — master_v3 寫 1280 backlog 評分(2026-05-11 修復版)
+
+```python
+import sqlite3, shutil
+from pathlib import Path
+from datetime import datetime
+
+CAT_SSD = Path("/Volumes/X10 Pro2/lr/2026.lrcat")
+TMP = Path("/tmp/work.lrcat")
+MASTER = "/Users/james/Desktop/Claude-Workspace/photo-grade/_master_stage_b_rating.csv"
+
+# Step 1: backup
+backup = CAT_SSD.with_suffix(f".lrcat.backup_master_v3_{datetime.now():%Y%m%d_%H%M}")
+shutil.copy2(CAT_SSD, backup)
+assert sqlite3.connect(backup).execute("PRAGMA integrity_check;").fetchone()[0] == "ok"
+
+# Step 2: cp 到 /tmp
+shutil.copy2(backup, TMP)
+
+# Step 3: 建白名單 + UPDATE
+basenames = load_master_csv(MASTER)  # 1280 baseName
+print(f"I'm going to UPDATE {len(basenames)} photos in 1280 backlog scope")
+
+conn = sqlite3.connect(TMP)
+conn.execute("BEGIN")
+for bn, rating, pick, colorlabels in basenames:
+    cur = conn.execute("""
+      UPDATE Adobe_images
+         SET rating=?, pick=?, colorLabels=?
+       WHERE id_local IN (
+         SELECT ai.id_local
+           FROM Adobe_images ai
+           JOIN AgLibraryFile alf ON alf.id_local = ai.rootFile
+          WHERE alf.baseName = ?
+       )
+    """, (rating, pick, colorlabels, bn))
+    assert cur.rowcount <= 5, f"baseName {bn} 影響 {cur.rowcount} 列,超出預期"
+conn.commit()
+
+# Step 4: integrity_check + cp 回
+assert conn.execute("PRAGMA integrity_check;").fetchone()[0] == "ok"
+conn.close()
+shutil.copy2(TMP, CAT_SSD)
+assert sqlite3.connect(CAT_SSD).execute("PRAGMA integrity_check;").fetchone()[0] == "ok"
+
+print("✅ done — 開 LR 抽 3-5 張人工確認")
+```
+
+---
+
+## 已驗證的 lesson
+
+| 時間 | 操作 | 結果 |
+|------|------|------|
+| 2026-05-11 12:30 | SQL 寫 v2 picks(用 `WHERE id_local IN ... baseName == ...`) | ✅ 只影響 1280 backlog |
+| 2026-05-11 21:47 | SQL 寫 v3(`UPDATE ... SET rating=NULL` 沒 WHERE) | ❌ 影響 2248 全 catalog(門司港被殃及) |
+| 2026-05-11 23:50 | 修復:從 `backup_pick_20260511_2030` 復原 + 改用 WHERE 限定 master_v3 1280 張 | ✅ integrity ok + 門司港評分回來 |
+
+---
+
+## 紅線清單(違反 = 立即停手)
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 跑 SQL 前自我檢查</p>
+<div class="text-sm text-gray-300">
+
+- [ ] LR 已 `Cmd+Q`?(`lsof | grep .lrcat` 空)
+- [ ] 有 backup + integrity_check 'ok'?
+- [ ] 在 `/tmp/work.lrcat` 操作不在 SSD 直接寫?
+- [ ] 每條 UPDATE 都有 `WHERE`?
+- [ ] WHERE 限制了範圍到 master CSV 的 baseName 白名單?
+- [ ] 跑前印「將 UPDATE N rows」確認 N 在預期?
+- [ ] 寫完 integrity_check 'ok' 才 `cp` 回 SSD?
+- [ ] LR 重開抽 3-5 張人工確認?
+
+</div>
+</div>
+
+
+任一沒勾 → 不要按 enter。
+
+---
+
+## 相關技能
+
+- v4 metadata schema 的 SQL 寫入規格 → 等 Week 1 #2 產出後 wikilink 過來
+- LR AutoTone SQL 觸發機制 → 等 LR_AutoTone_SQL觸發 寫好後連結
+- Backlog 5 階段 SOP 第 4 階段(catalog SQL 注入)→ 等 Backlog_5階段SOP 寫好後連結
+
+---
+
+## 修訂歷史
+
+- **2026-05-12**:初版。從 `feedback_lr_catalog_sql_safety.md` memory + 2026-05-11 重災實證萃取。

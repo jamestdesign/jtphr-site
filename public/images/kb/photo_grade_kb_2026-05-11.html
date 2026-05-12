@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo-Grade 知識庫 v1 | 2026-05-08 ~ 2026-05-12</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1f2933;
+    --muted: #5c6773;
+    --accent: #d4441f;
+    --accent-2: #1e6b8f;
+    --green: #2d7a4e;
+    --red: #c74343;
+    --yellow: #b8830f;
+    --purple: #7340a0;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --code-bg: #f3efe6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "PingFang TC", "Noto Sans TC", "Heiti TC", system-ui, sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 28px 80px;
+  }
+  header.hero {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+  header.hero .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+  }
+  header.hero h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  header.hero .subtitle {
+    font-size: 17px;
+    color: var(--muted);
+    margin: 0;
+  }
+  header.hero .meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  header.hero .meta strong { color: var(--fg); }
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 24px;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+  nav.toc h3 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    columns: 2;
+    gap: 24px;
+  }
+  nav.toc li {
+    margin: 4px 0;
+    break-inside: avoid;
+  }
+  nav.toc a {
+    color: var(--accent-2);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+  h2 {
+    font-size: 24px;
+    color: var(--accent);
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin: 48px 0 18px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 19px;
+    color: var(--accent-2);
+    margin: 32px 0 12px;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 16px;
+    margin: 22px 0 8px;
+    font-weight: 600;
+    color: #2c3a47;
+  }
+  p { margin: 10px 0; }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", "Consolas", monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 16px 18px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+    border-left: 3px solid var(--accent-2);
+  }
+  pre code { background: none; padding: 0; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .card.callout-red { border-left: 5px solid var(--red); background: #fff7f6; }
+  .card.callout-green { border-left: 5px solid var(--green); background: #f5fbf7; }
+  .card.callout-yellow { border-left: 5px solid var(--yellow); background: #fdf9ec; }
+  .card.callout-purple { border-left: 5px solid var(--purple); background: #f9f4fc; }
+  .card.callout-blue { border-left: 5px solid var(--accent-2); background: #f3f9fb; }
+  .card .label {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .label.red { background: var(--red); color: #fff; }
+  .label.green { background: var(--green); color: #fff; }
+  .label.yellow { background: var(--yellow); color: #fff; }
+  .label.purple { background: var(--purple); color: #fff; }
+  .label.blue { background: var(--accent-2); color: #fff; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0ece0;
+    font-weight: 600;
+    color: #3a4651;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  tr:hover td { background: #faf7ee; }
+  .pill {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .pill.red { background: #fde0d8; color: var(--red); }
+  .pill.green { background: #d4ecdc; color: var(--green); }
+  .pill.yellow { background: #f7ebc6; color: var(--yellow); }
+  .pill.purple { background: #ebd9f4; color: var(--purple); }
+  .pill.blue { background: #d2e8ef; color: var(--accent-2); }
+  .pill.muted { background: #e8e4d8; color: var(--muted); }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 16px 0;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    line-height: 1.2;
+  }
+  .stat .lbl {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    margin: 14px 0;
+    padding: 4px 18px;
+    background: #f5f9fb;
+    color: #34495e;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+  }
+  .timeline {
+    border-left: 3px solid var(--border);
+    padding-left: 24px;
+    margin: 20px 0;
+  }
+  .timeline .entry {
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .timeline .entry::before {
+    content: "";
+    position: absolute;
+    left: -32px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+  }
+  .timeline .date {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .timeline .title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 4px 0 6px;
+  }
+  .timeline .desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .anchor-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.7em;
+    margin-left: 6px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  h2:hover .anchor-link, h3:hover .anchor-link { opacity: 1; }
+  footer {
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    padding-top: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  .key-list { padding-left: 22px; margin: 10px 0; }
+  .key-list li { margin: 4px 0; }
+  .kbd {
+    display: inline-block;
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    background: var(--card);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SF Mono", monospace;
+    font-size: 0.85em;
+  }
+  ul.checklist { list-style: none; padding-left: 0; }
+  ul.checklist li::before {
+    content: "✓ ";
+    color: var(--green);
+    font-weight: bold;
+    margin-right: 4px;
+  }
+  ul.crosslist { list-style: none; padding-left: 0; }
+  ul.crosslist li::before {
+    content: "✗ ";
+    color: var(--red);
+    font-weight: bold;
+    margin-right: 4px;
+  }
+  .key-fact {
+    background: linear-gradient(to right, #fffbed, #fff);
+    border-left: 4px solid var(--yellow);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .key-fact strong { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">Knowledge Base v1.0</span>
+  <h1>Photo-Grade 知識庫</h1>
+  <p class="subtitle">門司港 671 → Backlog 1280 一條完整 pipeline 的演進史</p>
+  <div class="meta">
+    <span>📅 涵蓋: <strong>2026-05-08 ~ 2026-05-12</strong></span>
+    <span>👤 總指揮: <strong>James</strong></span>
+    <span>🤖 執行: <strong>Robert (Claude Opus 4.7)</strong></span>
+    <span>📁 工作目錄: <strong>~/Desktop/Claude-Workspace/photo-grade/</strong></span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h3>目錄</h3>
+  <ol>
+    <li><a href="#overview">0. 一頁式概覽</a></li>
+    <li><a href="#timeline">1. 4 天時間軸</a></li>
+    <li><a href="#pipeline">2. Pipeline 演進史</a><br><span style="font-size:12px;color:var(--muted);padding-left:14px;">└ <a href="#v4-metadata-schema">2.1 v4 LR Metadata Schema</a></span></li>
+    <li><a href="#skill">3. SKILL 規則庫版本</a></li>
+    <li><a href="#redlines">4. VLM 防幻覺紅線</a></li>
+    <li><a href="#workflow">5. Backlog 5 階段 SOP</a></li>
+    <li><a href="#evoto">6. Evoto Round-trip</a></li>
+    <li><a href="#autotone">7. LR AutoTone SQL</a></li>
+    <li><a href="#fcp">8. FCP Marker Workflow</a></li>
+    <li><a href="#validation">9. 驗證效果與量化</a></li>
+    <li><a href="#files">10. 產出檔案總清單</a></li>
+    <li><a href="#open">11. 待辦與 Open Issues</a></li>
+  </ol>
+</nav>
+
+<!-- =================== 0. 概覽 =================== -->
+<h2 id="overview">0. 一頁式概覽 <a href="#overview" class="anchor-link">#</a></h2>
+
+<div class="card callout-blue">
+<p><strong>三句話總結:</strong></p>
+<ol>
+  <li>2026-05-08 用門司港 671 張完成 SKILL v1+v2 訓練(全 30 條規則+19 視覺錨點)+ LR AutoTone SQL 觸發機制定版 → 變成 production pipeline 基底。</li>
+  <li>2026-05-09 ~ 05-10 把這套 pipeline 擴展為「Evoto round-trip B-flow + 子資料夾 + Pick 轉移」+ 出片/雲端三軌備份規劃。</li>
+  <li>2026-05-11 用這套 pipeline 一條龍跑完 4 趟 backlog 共 1280 張 — Stage A 標籤 + Stage B 評分 + 1112 子場景拆分 + 10 張廢片黑標,等 catalog 寫入。</li>
+</ol>
+</div>
+
+<h3>關鍵數字</h3>
+<div class="grid-3">
+  <div class="stat"><span class="num">671</span><span class="lbl">門司港 (訓練集)</span></div>
+  <div class="stat"><span class="num">1280</span><span class="lbl">Backlog 4 趟 (production)</span></div>
+  <div class="stat"><span class="num">30+</span><span class="lbl">SKILL v2 規則</span></div>
+  <div class="stat"><span class="num">6</span><span class="lbl">VLM 防幻覺紅線</span></div>
+  <div class="stat"><span class="num">14</span><span class="lbl">1112 拆分子場景</span></div>
+  <div class="stat"><span class="num">10</span><span class="lbl">廢片黑標</span></div>
+  <div class="stat"><span class="num">~$48</span><span class="lbl">/天 (600 張全 Opus)</span></div>
+  <div class="stat"><span class="num">82</span><span class="lbl">5★ Pick (1280 中)</span></div>
+  <div class="stat"><span class="num">98.2%</span><span class="lbl">XMP 配對成功率</span></div>
+</div>
+
+<h3>三大支柱</h3>
+<div class="grid-3">
+  <div class="card callout-red">
+    <span class="label red">支柱 1</span>
+    <h4 style="margin-top: 0;">評分系統</h4>
+    <p>SKILL_robert_portrait_rating.md (v1 → v2 → v3 防幻覺) — 4 軸 Label (紅黃綠紫) + 1-5★ + Pick 三道把關。</p>
+  </div>
+  <div class="card callout-green">
+    <span class="label green">支柱 2</span>
+    <h4 style="margin-top: 0;">工作流程</h4>
+    <p>Backlog SOP 5 階段:GPS+VLM 場景命名 → Label → 評分 → catalog SQL → AutoTone trigger。</p>
+  </div>
+  <div class="card callout-purple">
+    <span class="label purple">支柱 3</span>
+    <h4 style="margin-top: 0;">Catalog 工具鏈</h4>
+    <p>LR SQL 注入 (9 張 lookup tables) + AutoTone 觸發 + Evoto round-trip B-flow + XMP sidecar 寫入。</p>
+  </div>
+</div>
+
+<!-- =================== 1. 時間軸 =================== -->
+<h2 id="timeline">1. 4 天時間軸 <a href="#timeline" class="anchor-link">#</a></h2>
+
+<div class="timeline">
+
+  <div class="entry">
+    <div class="date">2026-05-08 (週四) — 訓練日</div>
+    <div class="title">門司港 671 張 SKILL 訓練 + AutoTone 機制定版</div>
+    <div class="desc">
+      早班:訓練 Green 軸(17 規則 + 19 視覺錨點),跑 230 張 Green production(92 P)。<br>
+      晚班:user audit 14 張 1★ + 30+ 周邊 → 浮現 13 條 calibration → SKILL v2 升級(30 條完整規則)。<br>
+      技術:EXIF orientation 修預覽 bug(113 ARW + 18 HEIC);R+Y 慷慨原則 v2 跑 379 張(212 P);catalog label 中文化(紅/黃/綠/紫)。<br>
+      驗證:VLM vs user QC 165 張改動率 27.5%(4→3 拉回 42 + 2→3 升 28 + Pick 過給 -18)。
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="date">2026-05-09 (週五) — Catalog 機制日</div>
+    <div class="title">Robert_AT_P preset + 全歸零 + XMP tag-name 踩坑</div>
+    <div class="desc">
+      跑 Robert_AT_P 130 張紅+Pick → 發現 HSL/Color Grading 殘留 → 學到「重跑前先問是否全歸零」feedback。<br>
+      LR Develop preset 設計筆記(暫存,等進階階段實作):三段式 = AutoTone (per-photo) + Adaptive Mask + 氛圍 Preset (全組統一)。<br>
+      XMP 寫入踩坑紀錄:ColorGrade 反用 SplitToning 舊 tag names、`crs:Saturation` 在 `-o` sidecar 模式會消失、PickLabel non-portable、NFC/NFD 路徑歸一化。
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="date">2026-05-10 (週六) — 整合日</div>
+    <div class="title">Evoto round-trip v3 + 出片 pipeline + Backlog SOP 寫死</div>
+    <div class="desc">
+      <strong>晨間發現</strong>:Evoto 不接 LR AI Remove(生成式 cache 不還原)→ SOP 順序對調:LR 純參數 → Evoto 質感肌 → 回 LR 做 AI Remove。<br>
+      <strong>v3 升級</strong>:Evoto 修完不再回 `<scene>/Evotofu/`,直接到 `_export/<scene_top>/`(出片軌)。完整 KB 寫成獨立 markdown。<br>
+      <strong>Orientation 大坑修補</strong>:不要抄 ARW orientation flag 給 Evoto JPG,要讀 JPG 實際 dims 設 "AB"。<br>
+      <strong>1280 張 backlog v1 完成</strong>:Sonnet 跑 4 趟共 ~2 小時/595K tokens,結果 794/1280 = 62% Pick。<br>
+      <strong>1057 場景幻覺事件</strong>:Sonnet 在 1057(133 張)幻覺率 70-80%(空沙發→搞怪/酒瓶→風景/熊本熊合照→木雕)→ user 花 90 分鐘 calibration → 制定 6 條防幻覺紅線。<br>
+      <strong>SOP 寫死</strong>:Backlog 旅遊 trip 必走 5 階段,GPS+VLM 雙來源命名,HHMM-only 不算交付。
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="date">2026-05-11 (週日) — 一條龍 production 日</div>
+    <div class="title">Stage A+B 1280 張全跑完 + 1112 拆 14 子場景</div>
+    <div class="desc">
+      凌晨:用 Opus 4.7 重跑 backlog Stage A 標籤(包含 1057),拆兩階段執行,完整覆蓋 1280/1280。<br>
+      上午:Stage B 評分 + 1112 場景拆 14 子場景(動線 A~O) + 10 張廢片黑標(2 張非行程+8 張糊片/截圖)。<br>
+      工具產出:`_master_stage_b_rating.csv`、`1112_subscene_mapping.json`、`_apply_rating_to_xmp.sh`(dry-run 98.2% 配對率)。<br>
+      決策修正:James 確認「Excire 不再當 gate」(因 face/people 兩道閘都漏),維持全 Opus 三步分跑。<br>
+      角色定位:James = 總指揮、Robin = 秘書、Robert = 執行(三方分工確認)。
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="date">2026-05-12 (週一) — 寫入端定版日</div>
+    <div class="title">v4 LR Catalog Metadata Schema 拍板</div>
+    <div class="desc">
+      <strong>背景</strong>:實測發現 LR Classic 13+ 對 <code>altTextAccessibility</code> / <code>extDescrAccessibility</code> 兩個 IPTC 2017 新欄位,SQL 直寫 column 不會進 search index、UI 不顯示。<br>
+      <strong>拍板</strong>:VLM 結果改用 SQL 一定吃的欄位 — 關鍵字承載 <code>objective_description</code>(用 <code>+</code> 切);註解承載機器 tag + 雙方對話日誌(<code>|</code> 數標輪次);評等/旗標/色標 維持 v3。<br>
+      <strong>對話日誌規則</strong>:Robert 初寫 → James 加註(單 <code>|</code>)→ Robert 回應(雙 <code>||</code>)→ append-only,永不覆蓋。<br>
+      <strong>Smart Collection</strong>:可從註解的 <code>[需補tag]</code> / <code>[需複查]</code> / <code> || </code> 篩出狀態子集,取代之前的 XMP round-trip 思路。<br>
+      <strong>下一步</strong>:KB 同步到 Obsidian.app (iCloud) → Robin 取得 schema 後接續整理到正式區。
+    </div>
+  </div>
+
+</div>
+
+<!-- =================== 2. Pipeline 演進史 =================== -->
+<h2 id="pipeline">2. Pipeline 演進史 <a href="#pipeline" class="anchor-link">#</a></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>版本</th>
+      <th>日期</th>
+      <th>主要變更</th>
+      <th>取代原因</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>v0.5</strong><br>Excire-as-gate</td>
+      <td>2026-05-07</td>
+      <td>Excire 預先分類 + VLM 細評</td>
+      <td>face/people 兩道閘漏報率高(後腦勺/側臉/逆光剪影)</td>
+    </tr>
+    <tr>
+      <td><strong>v1</strong><br>SKILL 17 規則</td>
+      <td>2026-05-08 早</td>
+      <td>Green 軸 17 規則 + 19 視覺錨點;Excire 信號當「先驗」不當 gate</td>
+      <td>規則 10「大組擇優+餘降 2★」太嚴,被 user 校為「沒大瑕疵=3★」</td>
+    </tr>
+    <tr>
+      <td><strong>v2</strong><br>SKILL 30 規則</td>
+      <td>2026-05-08 晚</td>
+      <td>13 條 calibration 修正:雷同處理、唯一性 6 維度、抽象 mood/街頭紀念、1★ 門檻精煉</td>
+      <td>Sonnet 大批量幻覺率高(1057 場景 70-80%)</td>
+    </tr>
+    <tr>
+      <td><strong>v3</strong><br>SKILL + 防幻覺紅線</td>
+      <td>2026-05-10</td>
+      <td>6 條紅線:objective_description 必填、Label 由主體唯一決定、同場景同 label、conf&lt;0.7 flag、Opus only、拆兩階段</td>
+      <td>當前生效版本</td>
+    </tr>
+    <tr>
+      <td><strong>Production 確定版</strong></td>
+      <td>2026-05-08 確認</td>
+      <td>場景分組 → 標籤 → 評分 三步分跑全 Opus,~$48/天(600 張)</td>
+      <td>當前 production</td>
+    </tr>
+    <tr>
+      <td><strong>Stage A+B 分跑</strong></td>
+      <td>2026-05-11</td>
+      <td>拆 Label-only pass(含 objective_description) + Rating pass — 不准合併</td>
+      <td>已被 v4 LR Catalog Metadata Schema 接續(寫入端定版)</td>
+    </tr>
+    <tr>
+      <td><strong>v4</strong><br>LR Catalog Metadata Schema</td>
+      <td>2026-05-12</td>
+      <td>VLM 結果→LR catalog 的<strong>欄位分工拍板</strong>:關鍵字承載 <code>objective_description</code> (用 <code>+</code> 切);註解承載機器 tag + 雙方對話日誌(<code>|</code> 數標輪次);替代文字 / 延伸描述<strong>暫不用</strong>(LR 13+ 對這兩欄 SQL 直寫不進 search index、UI 不顯示)</td>
+      <td><strong>當前 production(寫入端)</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="key-fact">
+  <strong>定版決策(2026-05-08):</strong>「全程 Opus 換精準」— user 要求精準度優先,省時間避免反覆校正。成本 ~$48/天 vs Sonnet ~$9/天,但 Sonnet 在 1057 場景證實大批量幻覺率 70-80%,不適合 production。Sonnet 只能用於 dev/sample audit。
+</div>
+
+<h3 id="v4-metadata-schema">2.1 v4 LR Catalog Metadata Schema(2026-05-12 James 拍板) <a href="#v4-metadata-schema" class="anchor-link">#</a></h3>
+
+<div class="card callout-blue">
+  <span class="label blue">寫入端定版</span>
+  <p><strong>Why:</strong> 實測 LR Classic 13+ 對 <code>altTextAccessibility</code> / <code>extDescrAccessibility</code> 兩個 IPTC 2017 新欄位,<strong>直接 SQL 寫入 column 不會在 UI 顯示</strong>(LR 同時檢查 <code>AgMetadataSearchIndex</code> 是否同步;走 LR-native UI 寫入或 XMP Read Metadata 才正常)。為了避免 XMP round-trip,改用 SQL 一定吃的欄位重新配置中繼資料分工。</p>
+
+  <h4 style="margin-top: 18px;">欄位分工(VLM CSV → LR catalog)</h4>
+  <table>
+    <thead>
+      <tr><th>LR UI</th><th>SQL 表 / 欄位</th><th>內容</th><th>主用者</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>關鍵字</strong></td>
+        <td><code>AgLibraryKeyword.name</code> + <code>AgLibraryKeywordImage</code></td>
+        <td><code>objective_description</code> 用 <code>+</code> 切分,每段一個 keyword</td>
+        <td>Robert(VLM 寫入)</td>
+      </tr>
+      <tr>
+        <td><strong>註解</strong></td>
+        <td><code>AgLibraryIPTC.caption</code></td>
+        <td>機器 tag + 雙方對話日誌</td>
+        <td>雙方共用</td>
+      </tr>
+      <tr>
+        <td>替代文字</td>
+        <td><code>AgLibraryIPTC.altTextAccessibility</code></td>
+        <td><span class="pill muted">暫不用</span> LR SQL 直寫不顯示</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>延伸描述</td>
+        <td><code>AgLibraryIPTC.extDescrAccessibility</code></td>
+        <td><span class="pill muted">暫不用</span> LR SQL 直寫不顯示</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>評等 / 旗標 / 色標</td>
+        <td><code>Adobe_images.rating / pick / colorLabels</code></td>
+        <td>標準 v3 評分</td>
+        <td>Robert</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>註解格式(共用對話日誌,<code>|</code> 數標輪次)</h4>
+<pre><code>turn 0 (Robert 初寫):
+[表情:big_laughing] [動作:hugging_mascot_full_joy] [主體:human_face_clear] [conf:0.92]
+
+turn 1 (James 加註,單 |):
+[表情:...] [動作:...] [主體:...] [conf:0.92] | 大笑表情完美,主體判斷正確 ★★★★★
+
+turn 2 (Robert 回應,雙 ||):
+[表情:...] ... ★★★★★ || 已加入 SKILL hugging_mascot 權重 ✓
+
+turn 3 (James 再加,三 |||):
+... ✓ ||| 確認 SKILL update</code></pre>
+
+  <ul class="key-list">
+    <li>數 <code>|</code> 個數判斷輪次,新內容永遠 append 在最末</li>
+    <li><strong>永不覆蓋既有內容</strong> — UPDATE 前先讀 caption,在原文後 append</li>
+    <li>缺機器 tag 的照片(312/1280 v2 schema)→ 註解寫 <code>[需補tag]</code> 標記,Smart Collection 可篩出待補</li>
+  </ul>
+
+  <h4>關鍵字寫入規則(符合 LR 規範)</h4>
+  <ul class="key-list">
+    <li>用 <code>+</code> 切 <code>objective_description</code></li>
+    <li>每段 <code>strip()</code> 前後空白</li>
+    <li>跳過空字串、跳過 1 字元雜訊、跳過純標點</li>
+    <li><strong>不重複既有 keyword</strong>(查 <code>AgLibraryKeyword.lc_name</code> 確認)</li>
+    <li>既有 scene / 人物 tag(<code>1112_N</code>, <code>女A</code>, <code>男A</code> 等)保留不動</li>
+    <li>範例:<code>熊本城石碑+石牆+樹+施工鷹架+陰天</code> → 5 個獨立 keyword</li>
+  </ul>
+
+  <h4>Smart Collection 篩選範例</h4>
+  <ul class="key-list">
+    <li><code>關鍵字 包含 "施工鷹架"</code> → 所有有施工背景的照片</li>
+    <li><code>註解 包含 "[需複查]"</code> → Robert 標記要 James audit 的</li>
+    <li><code>註解 包含 "[需補tag]"</code> → 缺 v3 tag 的 312 張</li>
+    <li><code>註解 包含 " || "</code> → 已經有對話往返的照片</li>
+  </ul>
+
+  <h4>為什麼這樣分?</h4>
+  <ol class="key-list">
+    <li><strong>關鍵字</strong> = scene 描繪的天然容器,每段獨立 = LR keyword filter / Smart Collection 都能用</li>
+    <li><strong>註解</strong> = 唯一同時滿足「SQL 直寫即顯示」+「文字長」+「Smart Collection 文字搜尋」的欄位 → 適合放機器 tag + 對話日誌</li>
+    <li><strong>延伸描述 / 替代文字</strong> = LR Classic 13+ 加的新欄位,需要走 XMP 或 LR-UI 寫入才會顯示,SQL 直寫只進 column 不進 index → 避開</li>
+    <li>未來如要救活替代文字 / 延伸描述,得寫 XMP sidecar + LR 觸發「中繼資料 → 從檔案讀取」</li>
+  </ol>
+
+  <h4>已驗證的 SQL 寫入 pattern</h4>
+<pre><code># 清除舊註解 + 寫新內容(僅限 master scope 1280 baseName)
+cur.execute("""
+  UPDATE AgLibraryIPTC SET caption=? WHERE image=?
+""", (new_caption, img_id))
+
+# 新增 keyword(若 lc_name 不存在則建,再 link 到照片)
+cur.execute("INSERT OR IGNORE INTO AgLibraryKeyword (id_global, name, lc_name, ...) VALUES (?, ?, ?, ...)")
+cur.execute("INSERT OR IGNORE INTO AgLibraryKeywordImage (image, tag) VALUES (?, ?)")</code></pre>
+
+  <p><strong>前置安全:</strong> LR 必須 <span class="kbd">Cmd+Q</span>;backup → <code>/tmp</code> 副本 → SQL → <code>integrity_check</code> → <code>cp</code> 回 SSD(遵守 <code>feedback_lr_catalog_sql_safety.md</code> 鐵則)。</p>
+</div>
+
+<!-- =================== 3. SKILL 規則庫 =================== -->
+<h2 id="skill">3. SKILL 規則庫版本 <a href="#skill" class="anchor-link">#</a></h2>
+
+<p><strong>Source of truth:</strong> <code>~/Desktop/Claude-Workspace/photo-grade/SKILL_robert_portrait_rating.md</code></p>
+
+<h3>3.1 四軸 Label 對應(2026-05-08 重要)</h3>
+
+<p>Label <strong>不是視覺分類</strong>,是<strong>評分軸切換 / 工作流程分類</strong>:</p>
+
+<table>
+  <thead>
+    <tr><th>Label</th><th>主體</th><th>評分主軸</th><th>後續工作流</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="pill red">Red</span></td>
+      <td>人臉清楚可辨(正面/3-4 側/部分遮蔽)</td>
+      <td>眼神 + 表情 + 笑容(三道把關)</td>
+      <td>會跑 Evoto AI 人臉精修</td>
+    </tr>
+    <tr>
+      <td><span class="pill yellow">Yellow</span></td>
+      <td>人但臉不可辨(背影/剪影/太遠)</td>
+      <td>故事情節 + 氛圍 + 構圖</td>
+      <td>不跑 Evoto,LR 純參數</td>
+    </tr>
+    <tr>
+      <td><span class="pill green">Green</span></td>
+      <td>風光 / 室內空間 / 無人</td>
+      <td>構圖切割 + 場景唯一 + 動態事件</td>
+      <td>LR 直接出片(無人臉)</td>
+    </tr>
+    <tr>
+      <td><span class="pill purple">Purple</span></td>
+      <td>食物 / 藝術品 / 商品</td>
+      <td>創作物視覺</td>
+      <td>LR 直接出片</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.2 Red 軸三道把關</h3>
+<div class="card callout-red">
+  <p>三道任一掛了 → 直接 <strong>2★</strong>:</p>
+  <ol>
+    <li><strong>表情</strong> — 自然 vs 僵硬</li>
+    <li><strong>笑容</strong> — 起來 vs 收攏(笑累了) vs 太用力</li>
+    <li><strong>眼神</strong> — 有神 vs 疲憊 vs 失焦 vs 上吊</li>
+  </ol>
+  <p><strong>5★ 鐵三角</strong>:(a) 看鏡頭 + (b) 燦爛真笑 + (c) 構圖到位 + (d) 氛圍加分 → 缺一頂多 4★。</p>
+  <p><strong>4★ 門檻</strong>:4 軸有 3 個到位 + 表情不僵。</p>
+  <p><strong>v2 慷慨原則</strong>:同場景 burst 都笑+看鏡頭時可以都 4★,不必強制「擇優扣分」。</p>
+</div>
+
+<h3>3.3 Green 軸完整規則 v2(30 條精選)</h3>
+
+<div class="grid-2">
+  <div class="card callout-green">
+    <h4 style="margin-top: 0;">A. 評分基本面</h4>
+    <ul class="key-list">
+      <li>場景唯一+合焦+工整 → 3★+P (default 保留層)</li>
+      <li>沒明顯瑕疵的雷同 → 3★ default (v2 校正,不再降 2★)</li>
+      <li>1★ 真正門檻嚴格:失焦/HDR反曝光/主體消失/構圖凌亂無法後製</li>
+      <li>構圖鬆 ≠ 1★ (最多 2★);平光無戲劇 ≠ 1★ (最多 3★)</li>
+    </ul>
+  </div>
+  <div class="card callout-green">
+    <h4 style="margin-top: 0;">B. 4★ 觸發點</h4>
+    <ul class="key-list">
+      <li>完美對稱構圖</li>
+      <li>風光課本式三段式 (天-中-地)</li>
+      <li>微裁切後即達標</li>
+      <li>慢快門技法成功 (動靜分離)</li>
+      <li>同主題擇優代表</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card callout-green">
+  <h4 style="margin-top: 0;">C. 唯一性 6 維度判斷(v2 重點)</h4>
+  <p>判定兩張是否「真雷同」: <strong>焦段 / 拍攝角度 / 視角位置 / 前景元素 / 構圖意圖 / 動態瞬間</strong>。任一維度顯著不同 = 獨立視覺單位 = 可獨立 P。必須多維度都一致才算真雷同。</p>
+  <p><strong>真雷同擇優依據優先順序:</strong>① 畫面乾淨度(無玻璃反光/雨滴/路人)⭐ 首要 → ② 構圖切割品質 → ③ 動態瞬間捕捉</p>
+</div>
+
+<h3>3.4 Pick (P) 決策公式</h3>
+<pre><code># Red / Yellow 軸
+P = (rating >= 4)
+   OR (rating == 3 AND 場景內 4 軸 profile 唯一無重複)
+
+# Green 軸特殊(更寬鬆)
+P_green = (rating >= 4)
+   OR (rating == 3 AND 場景唯一 OR 動態事件 OR 不同取景單位)</code></pre>
+
+<h3>3.5 同場景情境 4 軸</h3>
+<table>
+  <thead><tr><th>軸</th><th>類別</th></tr></thead>
+  <tbody>
+    <tr><td><strong>動作類型</strong></td><td>靜止站 / 行進中 / 互動觸物 / 坐 / 手勢</td></tr>
+    <tr><td><strong>視線方向</strong></td><td>看鏡頭 / 看物件 / 凝視遠方 / 閉眼低頭</td></tr>
+    <tr><td><strong>環境互動</strong></td><td>主動互動 / 被動經過 / 純擺拍靜態</td></tr>
+    <tr><td><strong>構圖意圖</strong></td><td>正中對稱 / 動態流動 / 紀念紀錄</td></tr>
+  </tbody>
+</table>
+<p><strong>判定</strong>:≥2 軸類別不同 → 兩張都 P(情境並列);4 軸全同只差微表情 → 走擇優 N+(N-1)。</p>
+
+<!-- =================== 4. 防幻覺紅線 =================== -->
+<h2 id="redlines">4. VLM 防幻覺紅線(2026-05-10 calibration) <a href="#redlines" class="anchor-link">#</a></h2>
+
+<div class="card callout-red">
+  <p><strong>背景:</strong> 2026-05-10 Sonnet agent 跑 1280 張 backlog,1057 場景出現 70-80% 幻覺。User 花 90 分鐘逐張校對(等於從零做一次)。後制定 6 條 hard constraint,違反即整批退回。</p>
+</div>
+
+<h3>幻覺實證案例</h3>
+<table>
+  <thead>
+    <tr><th>filename</th><th>實際畫面</th><th>Sonnet 錯誤輸出</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>IMG_5361</td><td>女子坐單人沙發正面笑容</td><td>「大廳熊本熊布偶陳設」+ Label=Purple</td></tr>
+    <tr><td>IMG_5364</td><td>空沙發無人</td><td>「搞怪姿勢稀有」+ Label=Red</td></tr>
+    <tr><td>IMG_5365</td><td>男人+熊本熊合照</td><td>「木雕陶偶藝術品」+ Label=Purple</td></tr>
+    <tr><td>IMG_5356</td><td>酒瓶+杯子(主體=酒)</td><td>Label=Green</td></tr>
+  </tbody>
+</table>
+
+<h3>6 條紅線</h3>
+
+<div class="card callout-red">
+  <span class="label red">紅線 1</span>
+  <h4>禁止編造畫面描述</h4>
+  <p>每張先輸出 <code>objective_description</code> 欄位(≤30 字)— 客觀描述「畫面實際看到」,不能含揣測 / 聯想 / 場景假設。</p>
+  <p><strong>規則:</strong>先描述 → 再 label → 再 rating。順序顛倒 = 幻覺溫床。</p>
+</div>
+
+<div class="card callout-red">
+  <span class="label red">紅線 2</span>
+  <h4>Label 由主體唯一決定</h4>
+  <p>沒有「綜合判斷」、沒有「氛圍考量」、沒有「除非...」例外:</p>
+  <ul class="key-list">
+    <li>人臉清楚可辨 → <span class="pill red">Red</span>(背景再多藝術品都不變)</li>
+    <li>商品/酒/食物為主體 → <span class="pill purple">Purple</span>(旁邊有杯子也不變)</li>
+    <li>人但臉完全看不到 → <span class="pill yellow">Yellow</span></li>
+    <li>空間/風景/室內無人 → <span class="pill green">Green</span></li>
+  </ul>
+</div>
+
+<div class="card callout-red">
+  <span class="label red">紅線 3</span>
+  <h4>同場景同主體 → 同 label</h4>
+  <p>三張酒瓶不能拆 Purple+Purple+Green;三張自拍不能拆 Red+Red+Purple。Label 由主體決定,Pick 由場景代表權決定。</p>
+</div>
+
+<div class="card callout-red">
+  <span class="label red">紅線 4</span>
+  <h4>confidence &lt; 0.7 → 一律 flag human review</h4>
+  <p>不可以「猜不準就隨便給分」。confidence &lt; 0.7 → JSON 必須有 <code>"needs_human_review": true</code>,不寫 catalog SQL(先 flag 給 user)。</p>
+</div>
+
+<div class="card callout-red">
+  <span class="label red">紅線 5</span>
+  <h4>縮圖 ≥1024px / Opus only / 拆兩階段</h4>
+  <ul class="key-list">
+    <li>縮圖不可低於 1024px 長邊(之前 512px 是幻覺源頭)</li>
+    <li>Production 跑 backlog <strong>Opus 4.7 only</strong>;Sonnet 只能用於 dev/sample audit</li>
+    <li>Label-only pass(含 objective_description)→ user audit 10 張 → OK 才跑 Rating pass。<strong>不准合併</strong></li>
+  </ul>
+</div>
+
+<div class="card callout-red">
+  <span class="label red">紅線 6</span>
+  <h4>JSON 欄位必填</h4>
+<pre><code>{
+  "filename": "IMG_5361.JPG",
+  "objective_description": "女子坐單人沙發 正面笑容 黃調燈光",
+  "subject_type": "human_face_clear" | "human_no_face" | "product" | "space_no_human",
+  "label": "Red" | "Yellow" | "Green" | "Purple",
+  "rating": 1-5,
+  "rating_range": [N-1, N+1],
+  "pick": true | false,
+  "scene_id": "&lt;HHMM 場景名&gt;",
+  "scene_role": "unique" | "representative" | "alternate" | "redundant",
+  "confidence": 0.0-1.0,
+  "needs_human_review": false,
+  "notes": "≤15 字中文"
+}</code></pre>
+  <p><code>subject_type</code> 必須跟 <code>label</code> 對齊,Audit 工具自動檢查不一致 → 整 batch 退回。</p>
+</div>
+
+<!-- =================== 5. Backlog SOP =================== -->
+<h2 id="workflow">5. Backlog 5 階段 SOP <a href="#workflow" class="anchor-link">#</a></h2>
+
+<div class="card callout-yellow">
+  <p><strong>User 2026-05-10 確認:</strong> 把多趟 backlog 丟給我時:「全權處理」「明天看結果」。我必須做完 1-4 步、user 才接手第 5 步。</p>
+</div>
+
+<h3>順序(2026-05-10 final 版)</h3>
+
+<div class="grid-2">
+  <div class="card">
+    <h4>① 場景分類 + GPS 命名(先做)</h4>
+    <ul class="key-list">
+      <li>時區檢查(Sony vs iPhone EXIF 對齊)</li>
+      <li>時間聚類(gap &gt; 30 分鐘 = 新場景)</li>
+      <li>iPhone GPS → Nominatim 反向地理編碼</li>
+      <li>ARW 借時間就近 iPhone GPS</li>
+      <li>VLM 視覺驗證地名跟畫面</li>
+      <li>命名格式:<code>HHMM 4-12 字地點/活動</code></li>
+    </ul>
+    <p class="key-fact"><strong>⚠️ HHMM-only 不算交付!</strong> 必須做到 GPS+VLM 雙來源命名才算完成。2026-05-10 已踩雷一次。</p>
+  </div>
+  <div class="card">
+    <h4>② Label 分類</h4>
+    <p>VLM 一次決定 4-way(Red/Yellow/Green/Purple),不再用 Excire face/people 當 gate。寫入 catalog 的 <code>Adobe_images.colorLabels</code> 用<strong>繁中字串</strong>(紅色/黃色/綠色/紫色)。</p>
+  </div>
+  <div class="card">
+    <h4>③ 評分(Rating + Pick)</h4>
+    <ul class="key-list">
+      <li>讀 SKILL_robert_portrait_rating.md(v2)</li>
+      <li>rating 1-5 + pick true/false + ≤15 字 notes</li>
+      <li>4★ ceiling,5★ 罕見</li>
+      <li>Green default 3★+P(場景唯一)</li>
+      <li>慷慨原則:burst 都好就都保留高分</li>
+    </ul>
+    <p><strong>雷同擇優必走 SKILL §C 規則 11/13/14/15</strong> — 不能在 prompt 簡化掉。</p>
+  </div>
+  <div class="card">
+    <h4>④ Catalog SQL 寫入 + AutoTone</h4>
+    <ul class="key-list">
+      <li>LR 必須關閉(避免 catalog lock)</li>
+      <li>建 AgLibraryRootFolder + AgLibraryFolder</li>
+      <li>寫 9+ 張 lookup tables(Evoto 那套)</li>
+      <li>rating / colorLabel / pick 寫進 Adobe_images</li>
+      <li>INSERT develop history step <code>calculate</code> → 觸發 AutoTone</li>
+    </ul>
+  </div>
+</div>
+
+<h3>⑤ User 階段</h3>
+<div class="card callout-blue">
+  <ol>
+    <li>開 LR Classic</li>
+    <li>看每張的 AutoTone 結果(自動帶曝光)</li>
+    <li>進入手動 RAW 精修流程</li>
+  </ol>
+</div>
+
+<h3>執行紀律</h3>
+<div class="grid-2">
+  <div>
+    <h4>不要做這些事</h4>
+    <ul class="crosslist">
+      <li>把 4 步切片發 Telegram 問用戶</li>
+      <li>寫 XMP sidecar 後讓 user 手動 LR Import(user 要 SQL 直接寫)</li>
+      <li>漏掉 AutoTone trigger</li>
+      <li>跳過 label 分類</li>
+    </ul>
+  </div>
+  <div>
+    <h4>要做這些事</h4>
+    <ul class="checklist">
+      <li>4 階段一條龍跑完才 Telegram 報告</li>
+      <li>跑前確認 LR 關閉(lsof / ps 檢查)</li>
+      <li>跑完報告各階段數量、每色標多少 P、有無錯誤</li>
+      <li>所有 JSON / XMP / SQL log 存在 workspace</li>
+    </ul>
+  </div>
+</div>
+
+<!-- =================== 6. Evoto round-trip =================== -->
+<h2 id="evoto">6. Evoto Round-trip B-flow v3 <a href="#evoto" class="anchor-link">#</a></h2>
+
+<p><strong>完整 KB:</strong> <code>~/Desktop/Claude-Workspace/photo-grade/2026-05-10_evoto_roundtrip_kb.md</code></p>
+
+<div class="card callout-purple">
+<h4>v3 SOP(2026-05-10 最終版)</h4>
+<pre><code>LR:
+  1. 評分 + 色標 + Pick (Red + P)
+  2. 完整 RAW 處理(全部燒進 pixel):
+     - 曝光/對比/HSL/色彩分級/白平衡
+     - 鏡頭校正 + Upright + AI Remove ← 必須做完才送
+  3. Export TIFF → /&lt;trip&gt;/to_evoto/(flat)
+     • Format: TIFF 16-bit, ProPhoto RGB, no compression
+     • Preset: to_Evoto.lrtemplate
+  4. 關閉 LR
+
+Evoto:
+  5. 拖 to_evoto/ 整個 folder 進 Evoto
+  6. 套質感肌01 → Sync 全部
+  7. ⚠️ 匯出前確認 panel = 精修/臉部
+  8. 匯出 JPG Larger Print A3 → to_evoto/Evotofu/(flat)
+
+Python 一條龍:
+  9. python 2026-05-10_evoto_to_export.py
+     ├─ Step 1: 解析 -2 重複(保留新版)
+     ├─ Step 2: 每張 JPG 對 catalog 找 ARW scene
+     ├─ Step 3: 移動 JPG → _export/&lt;scene_top&gt;/
+     ├─ Step 4: 註冊 JPG 到 catalog(9 張表)
+     ├─ Step 5: ARW Pick=1 維持
+     └─ Step 6: 清掉 to_evoto/
+
+LR:
+  10. 開啟 → Folder Tree 多了 _export/&lt;scene&gt;/
+  11. 出片直接從 _export/ 拿,雲端三軌備份</code></pre>
+</div>
+
+<h3>子資料夾命名約定</h3>
+<table>
+  <thead><tr><th>編輯器</th><th>子資料夾名</th></tr></thead>
+  <tbody>
+    <tr><td>Evoto</td><td><code>Evotofu/</code> ⚠️ <strong>不是</strong> <code>evoto/</code>(Evoto 預設名)</td></tr>
+    <tr><td>Photoshop</td><td><code>psd/</code></td></tr>
+    <tr><td>Luminar</td><td><code>luminar/</code></td></tr>
+    <tr><td>Capture One</td><td><code>c1/</code></td></tr>
+  </tbody>
+</table>
+
+<h3>四大踩坑紀錄</h3>
+
+<div class="card callout-yellow">
+  <h4>① Orientation 反向(2026-05-10 修補)</h4>
+  <p>不要抄 ARW 的 orientation flag(DA/BC) 給 Evoto JPG。Evoto 已轉正 pixel + EXIF=1。</p>
+  <p><strong>修法:</strong>讀 JPG 實際 dims → <code>orientation = "AB"</code> + <code>fileWidth/Height = JPG 實際</code> + <code>aspectRatioCache = max/min</code>。</p>
+</div>
+
+<div class="card callout-yellow">
+  <h4>② Evoto 不接 LR AI Remove(2026-05-10 實測)</h4>
+  <p>LR 的 Generative Remove 存在 catalog 的 generative cache,Evoto 讀 .lrcat 不還原。</p>
+  <p><strong>對策:</strong>順序對調 — LR 純參數調整 → Evoto 質感肌 → 回 LR 後再做 AI Remove。</p>
+</div>
+
+<div class="card callout-yellow">
+  <h4>③ Evoto 匯出 panel 狀態</h4>
+  <p>按匯出前<strong>必須確認 active panel 在「精修 → 臉部」</strong>,否則 AI 修改不會套用。曾在錯誤 panel 按匯出 → 整批 JPG 沒臉部修改。</p>
+</div>
+
+<div class="card callout-yellow">
+  <h4>④ XMP tag-name 陷阱(2026-05-07)</h4>
+  <p>Color Grading 的 shadow/highlight Hue/Sat <strong>反用 SplitToning</strong> 舊 tag names。Midtone 用新 ColorGrade* names。<br>
+  <code>crs:Saturation</code> 在 <code>-o sidecar.xmp source.arw</code> 模式會<strong>silently disappear</strong>,要兩階段寫入。<br>
+  <code>XMP-lr:PickLabel</code> 不可寫入(non-portable),LR 只從 catalog 讀 Pick。</p>
+</div>
+
+<!-- =================== 7. LR AutoTone =================== -->
+<h2 id="autotone">7. LR AutoTone SQL 觸發機制 <a href="#autotone" class="anchor-link">#</a></h2>
+
+<div class="card callout-blue">
+<p><strong>原理:</strong> AutoTone 是 LR 的「自動」按鈕功能,根據照片內容算出 Exposure/Contrast/Highlights/Shadows/Whites/Blacks 6 個 tone 軸最佳值。但用 SQL 直接設 <code>crs:AutoTone="true"</code> 而留著現成 Exposure2012 等值,LR 不會重算。</p>
+</div>
+
+<h3>正確步驟</h3>
+<ol>
+  <li><strong>關閉 LR</strong>(no -wal/-shm/-lock files)</li>
+  <li>在 <code>Adobe_imageDevelopSettings.text</code>(Lua 序列化字串)裡:
+    <ul>
+      <li><strong>移除</strong>:Exposure2012, Contrast2012, Highlights2012, Shadows2012, Whites2012, Blacks2012, ParametricShadows, ParametricHighlights, ParametricLights, ParametricDarks, AutoToneDigest, AutoToneDigestNoSat</li>
+      <li><strong>加入</strong>:<code>AutoTone = true,</code> 在最後 <code>}</code> 前</li>
+      <li>重算 MD5 digest 寫回 <code>digest</code> 欄位</li>
+    </ul>
+  </li>
+  <li>INSERT 新的 history step:
+<pre><code>INSERT INTO Adobe_libraryImageDevelopHistoryStep (
+  id_global, image, dateCreated, name, valueString, hasDevelopAdjustments
+) VALUES (uuid, image_id, now_cocoa, '從中繼資料', 'calculate', 'calculate');</code></pre>
+    <code>valueString='calculate'</code> 是<strong>關鍵</strong> — LR 看到才會重新讀 develop text。
+  </li>
+</ol>
+
+<h3>已驗證</h3>
+<p>2026-05-08 對門司港 627 張照片成功 — LR 重開後每張顯示不同的 Exposure/Contrast(自動算的值),色調仍是 Style A/B/C/D 的設定。</p>
+
+<h3>LR 不認的格式</h3>
+<ul class="crosslist">
+  <li><code>AutoTone = "true"</code>(字串)→ LR 視為 false</li>
+  <li><code>AutoTone = 1</code>(數字)→ 失敗</li>
+</ul>
+<ul class="checklist">
+  <li><code>AutoTone = true</code>(Lua boolean)→ 成功</li>
+</ul>
+
+<h3>三段式工作流哲學(2026-05-09 暫存設計)</h3>
+<div class="card callout-green">
+<pre><code>1️⃣ AutoTone(per-photo 自動)
+    └─ Exposure / Contrast / Highlights / Shadows / Whites / Blacks
+
+2️⃣ Adaptive Preset(per-photo AI mask,可選)
+    └─ Red 套「自適應:主體」→ 提亮膚色+加銳臉部
+    └─ Green 風光含天空套「自適應:天空」
+    └─ Yellow 視構圖選
+
+3️⃣ 氛圍 Preset(全組統一)
+    └─ HSL / Color Grading / Tone Curve / Detail / Effects / Calibration</code></pre>
+<p><strong>哲學:</strong>旅遊現場 = 變數(每張光源不同)→ AutoTone per-photo 處理曝光;氛圍感 = 常數(全組統一風格)→ Preset 處理風格層。「讓機器處理變數,人類處理常數風格」的智慧分工。</p>
+</div>
+
+<!-- =================== 8. FCP Marker =================== -->
+<h2 id="fcp">8. FCP Marker Workflow(影片端) <a href="#fcp" class="anchor-link">#</a></h2>
+
+<p><strong>完整 KB:</strong> <code>~/Desktop/Claude-Workspace/photo-grade/2026-05-10_fcp_marker_workflow_kb.md</code></p>
+
+<div class="card callout-blue">
+<p><strong>流程:</strong></p>
+<pre><code>LR 完成照片端 → 影片進 FCP → 你邊看邊 M → 我讀 marker → ffmpeg 抽 4K 幀 → _MOV/&lt;scene&gt;/stills/</code></pre>
+</div>
+
+<h3>Marker 顏色約定</h3>
+<table>
+  <thead><tr><th>顏色</th><th>意義</th><th>抽幀對應</th></tr></thead>
+  <tbody>
+    <tr><td>🔵 藍(預設)</td><td>一般 still 候選</td><td>抽 → <code>&lt;clip&gt;_t&lt;秒&gt;.jpg</code></td></tr>
+    <tr><td>🔴 紅(Standard "to do")</td><td>hero / flagship 鏡頭</td><td>抽 + 加 <code>_hero</code> 後綴</td></tr>
+    <tr><td>🟢 綠(Standard "complete")</td><td>剪片用點(暫不抽 still)</td><td>略過(之後剪片用)</td></tr>
+  </tbody>
+</table>
+
+<h3>關鍵鍵盤快捷</h3>
+<div class="grid-2">
+  <div>
+    <h4>導覽</h4>
+    <table>
+      <tr><td>播 / 暫停</td><td><span class="kbd">Space</span></td></tr>
+      <tr><td>前進 1 幀</td><td><span class="kbd">→</span></td></tr>
+      <tr><td>後退 1 幀</td><td><span class="kbd">←</span></td></tr>
+      <tr><td>JKL 速控</td><td><span class="kbd">J</span> <span class="kbd">K</span> <span class="kbd">L</span></td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>標記</h4>
+    <table>
+      <tr><td>加 marker</td><td><span class="kbd">M</span></td></tr>
+      <tr><td>加 marker + 編輯框</td><td><span class="kbd">M</span> 連按 / <span class="kbd">⌥M</span></td></tr>
+      <tr><td>刪除最近 marker</td><td><span class="kbd">⌘⇧M</span></td></tr>
+      <tr><td>Reject clip</td><td><span class="kbd">R</span> / unmark <span class="kbd">U</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>Note 後綴轉換</h3>
+<table>
+  <thead><tr><th>你打的</th><th>我輸出的檔名</th></tr></thead>
+  <tbody>
+    <tr><td>(空)</td><td><code>C0855_t7.20.jpg</code></td></tr>
+    <tr><td>smile</td><td><code>C0855_t7.20_smile.jpg</code></td></tr>
+    <tr><td>rain ground</td><td><code>IMG_5680_t45.50_rain-ground.jpg</code>(空格→<code>-</code>)</td></tr>
+  </tbody>
+</table>
+
+<!-- =================== 9. 驗證效果 =================== -->
+<h2 id="validation">9. 驗證效果與量化 <a href="#validation" class="anchor-link">#</a></h2>
+
+<h3>9.1 門司港 671 張 SKILL 訓練成果(2026-05-08)</h3>
+
+<table>
+  <thead><tr><th>階段</th><th>1★</th><th>2★</th><th>3★</th><th>4★</th><th>Picks</th></tr></thead>
+  <tbody>
+    <tr><td>VLM 跑完(修正前)</td><td>14</td><td>97</td><td>87</td><td>32</td><td>92</td></tr>
+    <tr><td>User audit 33 張(修正後)</td><td>4</td><td>86</td><td>100</td><td>31</td><td>~100</td></tr>
+  </tbody>
+</table>
+<p><strong>誤判改善幅度:</strong>~10%(30/230 照片)— Green 軸 v2 calibration 主要校正「過度降星」、「誤判雷同」、「未識別抽象/紀念類」、「過度 P」四類。</p>
+
+<h3>9.2 VLM vs User QC Diff(2026-05-08 全 599 張)</h3>
+
+<table>
+  <thead><tr><th>類型</th><th>數量</th><th>方向</th></tr></thead>
+  <tbody>
+    <tr><td>VLM 總評分</td><td>599 張</td><td>—</td></tr>
+    <tr><td>User QC 修改</td><td>165 張(27.5%)</td><td>—</td></tr>
+    <tr><td>評分異動</td><td>96 張</td><td>—</td></tr>
+    <tr><td>Pick 異動</td><td>150 張</td><td>—</td></tr>
+    <tr><td>Label 異動</td><td>5 張(紅→黃 4 + 綠→黃 1)</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h4>評分具體分布</h4>
+<table>
+  <thead><tr><th>變動</th><th>張數</th><th>方向</th></tr></thead>
+  <tbody>
+    <tr><td>4 → 3</td><td>42</td><td>👇 慷慨原則 over-applied</td></tr>
+    <tr><td>2 → 3</td><td>28</td><td>👆 「沒大瑕疵=3★」套不夠</td></tr>
+    <tr><td>1 → 3</td><td>10</td><td>👆</td></tr>
+    <tr><td>4 → None</td><td>7</td><td>移除</td></tr>
+    <tr><td>3 → 1</td><td>5</td><td>👇</td></tr>
+  </tbody>
+</table>
+
+<h3>9.3 Backlog 1280 張 v1 (Sonnet, 2026-05-10)</h3>
+
+<table>
+  <thead><tr><th>Trip</th><th>照片</th><th>5★</th><th>4★</th><th>3★</th><th>2★</th><th>1★</th><th>Picks</th></tr></thead>
+  <tbody>
+    <tr><td>2026-04-29 原水考察</td><td>91</td><td>0</td><td>23</td><td>47</td><td>14</td><td>7</td><td>49</td></tr>
+    <tr><td>2026-04-30 熊本城</td><td>454</td><td>5</td><td>179</td><td>264</td><td>4</td><td>2</td><td>258</td></tr>
+    <tr><td>2026-05-01 高千穗峽</td><td>576</td><td>2</td><td>166</td><td>401</td><td>7</td><td>0</td><td>395</td></tr>
+    <tr><td>2026-05-02 熊本往福岡</td><td>159</td><td>0</td><td>42</td><td>108</td><td>9</td><td>0</td><td>92</td></tr>
+    <tr><td><strong>總計</strong></td><td><strong>1280</strong></td><td><strong>7</strong></td><td><strong>410</strong></td><td><strong>820</strong></td><td><strong>34</strong></td><td><strong>9</strong></td><td><strong>794 (62%)</strong></td></tr>
+  </tbody>
+</table>
+<p><strong>成本:</strong>Sonnet ~2 小時 / ~595K tokens ≈ Opus 1/5。但 1057 場景證實大批量 Sonnet 幻覺率 70-80% → 拍板 production 走 Opus。</p>
+
+<h3>9.4 Backlog 1280 張 v2(Opus, 2026-05-11)</h3>
+
+<table>
+  <thead><tr><th>類別</th><th>數量</th></tr></thead>
+  <tbody>
+    <tr><td>Stage A 標籤完成</td><td>1280/1280</td></tr>
+    <tr><td>Stage B 評分完成</td><td>1280/1280</td></tr>
+    <tr><td>5★ Pick</td><td>82</td></tr>
+    <tr><td>4★ keepers</td><td>417</td></tr>
+    <tr><td>3★ medium</td><td>541</td></tr>
+    <tr><td>2★ weak</td><td>230</td></tr>
+    <tr><td>Reject(黑標)</td><td>10</td></tr>
+    <tr><td>1112 場景拆分</td><td>14 子場景 + 1 reject</td></tr>
+    <tr><td>XMP 配對率</td><td>1257/1280 = 98.2%</td></tr>
+  </tbody>
+</table>
+
+<h3>9.5 模型精度比較(本地 vs 雲端)</h3>
+
+<table>
+  <thead><tr><th>模型</th><th>大小</th><th>硬體</th><th>精度 vs Opus</th><th>速度 / 張</th></tr></thead>
+  <tbody>
+    <tr><td>Qwen2.5-VL-7B</td><td>7B</td><td>16GB Mac</td><td>~40%</td><td>30s</td></tr>
+    <tr><td>Qwen2.5-VL-32B</td><td>32B</td><td>32GB+ M Pro</td><td>~65%</td><td>2min</td></tr>
+    <tr><td>Qwen2.5-VL-72B</td><td>72B</td><td>64GB+ M Max</td><td>~75%</td><td>5min</td></tr>
+    <tr><td>InternVL3-78B</td><td>78B</td><td>64GB+</td><td>~70%</td><td>6min</td></tr>
+    <tr><td>GPT-4o(雲)</td><td>—</td><td>—</td><td>~95%</td><td>5s</td></tr>
+    <tr><td><strong>Opus 4.7(現用)</strong></td><td>—</td><td>—</td><td><strong>100%</strong></td><td>10s</td></tr>
+  </tbody>
+</table>
+<p class="key-fact"><strong>結論:</strong> 1280 張用 Qwen-72B 跑 = 5min × 1280 = 107 小時,不切實際。本地化暫時不切換,維持 Opus 4.7 全程。</p>
+
+<!-- =================== 10. 檔案清單 =================== -->
+<h2 id="files">10. 產出檔案總清單 <a href="#files" class="anchor-link">#</a></h2>
+
+<h3>10.1 Memory(~/.claude/projects/-Users-james/memory/)</h3>
+
+<table>
+  <thead><tr><th>檔名</th><th>類型</th><th>內容</th></tr></thead>
+  <tbody>
+    <tr><td>project_photo_pipeline_design.md</td><td>project</td><td>600 張/日 production pipeline 設計</td></tr>
+    <tr><td>project_photo_session_2026_05_08_eod.md</td><td>project</td><td>2026-05-08 EOD checkpoint</td></tr>
+    <tr><td>project_photo_preset_design_advanced.md</td><td>project</td><td>進階階段三段式 preset 設計</td></tr>
+    <tr><td>project_photo_delivery_pipeline.md</td><td>project</td><td>出片 + 雲端三軌備份</td></tr>
+    <tr><td>project_robin_robert_roles.md</td><td>project</td><td>James(總指揮)+Robin+Robert 三方角色</td></tr>
+    <tr><td>feedback_aesthetic_rules.md</td><td>feedback</td><td>SKILL v1 30+ 條規則</td></tr>
+    <tr><td>feedback_aesthetic_rules_v2_audit.md</td><td>feedback</td><td>SKILL v2 13 條 calibration</td></tr>
+    <tr><td>feedback_vlm_hallucination_redlines.md</td><td>feedback</td><td>VLM 6 條防幻覺紅線</td></tr>
+    <tr><td>feedback_backlog_trip_sop.md</td><td>feedback</td><td>Backlog 5 階段 SOP</td></tr>
+    <tr><td>feedback_external_editor_subfolder_sop.md</td><td>feedback</td><td>外部編輯器 round-trip SOP</td></tr>
+    <tr><td>feedback_full_reset_before_rerun.md</td><td>feedback</td><td>重跑前先問是否全歸零</td></tr>
+    <tr><td>feedback_telegram_replies.md</td><td>feedback</td><td>🚨 永遠用 Telegram 回覆</td></tr>
+    <tr><td>reference_lr_autotone.md</td><td>reference</td><td>LR AutoTone SQL 觸發機制</td></tr>
+    <tr><td>reference_lr_xmp_dev.md</td><td>reference</td><td>LR XMP tag-name 陷阱</td></tr>
+    <tr><td>reference_evoto_automation.md</td><td>reference</td><td>Evoto AI 自動化入口</td></tr>
+  </tbody>
+</table>
+
+<h3>10.2 Workspace(~/Desktop/Claude-Workspace/photo-grade/)</h3>
+
+<h4>主 SKILL + KB</h4>
+<table>
+  <tbody>
+    <tr><td><code>SKILL_robert_portrait_rating.md</code></td><td>SKILL 主檔(v2, 30 規則 + 6 紅線)</td></tr>
+    <tr><td><code>2026-05-10_evoto_roundtrip_kb.md</code></td><td>Evoto round-trip 完整 KB(v3 SOP)</td></tr>
+    <tr><td><code>2026-05-10_fcp_marker_workflow_kb.md</code></td><td>FCP marker workflow 完整 SOP</td></tr>
+    <tr><td><code>2026-05-10_backlog_status.md</code></td><td>4 趟 backlog 整理完成報告(v1)</td></tr>
+    <tr><td><code>2026-05-08_diff_user_vs_vlm_report.md</code></td><td>VLM vs User QC 165 張 diff 分析</td></tr>
+    <tr><td><code>2026-05-08_agent_prompt_template.md</code></td><td>VLM agent prompt 模板</td></tr>
+    <tr><td><code>2026-05-11_knowledge_base_v1.html</code></td><td>本份 HTML 知識庫(你正在看)</td></tr>
+  </tbody>
+</table>
+
+<h4>2026-05-11 Stage A+B 產出</h4>
+<table>
+  <tbody>
+    <tr><td><code>2026-05-11_stage_a_label/_master_stage_b_rating.csv</code></td><td>1280 張完整評分表</td></tr>
+    <tr><td><code>2026-05-11_stage_a_label/1112_subscene_mapping.json</code></td><td>1112 場景 14 子場景拆分</td></tr>
+    <tr><td><code>2026-05-11_stage_a_label/_apply_rating_to_xmp.sh</code></td><td>XMP sidecar 套用腳本(dry-run 模式)</td></tr>
+    <tr><td><code>2026-05-11_stage_a_label/_README_for_James.md</code></td><td>給 James 看的執行說明</td></tr>
+    <tr><td><code>2026-05-11_stage_a_label/*.json</code> (130+ 檔)</td><td>Stage A label batch 結果</td></tr>
+  </tbody>
+</table>
+
+<h4>2026-05-08 ~ 2026-05-10 production 產出</h4>
+<table>
+  <tbody>
+    <tr><td><code>2026-05-08_labels_v2.json</code></td><td>門司港 label v2 重評</td></tr>
+    <tr><td><code>2026-05-08_ratings_v2.json</code></td><td>門司港 rating v2 重評</td></tr>
+    <tr><td><code>2026-05-08_ratings_final.json</code></td><td>門司港 627 張 final ratings</td></tr>
+    <tr><td><code>2026-05-08_mojiko_catalog_record.json</code></td><td>門司港 catalog snapshot</td></tr>
+    <tr><td><code>2026-05-08_validation_set.json</code></td><td>46 張 ground truth</td></tr>
+    <tr><td><code>2026-05-08_hdr_brackets.json</code></td><td>HDR bracket 偵測結果</td></tr>
+    <tr><td><code>2026-05-10_score_2026-04-29.json</code></td><td>backlog Trip 1 評分</td></tr>
+    <tr><td><code>2026-05-10_score_2026-04-30.json</code></td><td>backlog Trip 2 評分</td></tr>
+    <tr><td><code>2026-05-10_score_2026-05-01.json</code></td><td>backlog Trip 3 評分</td></tr>
+    <tr><td><code>2026-05-10_score_2026-05-02.json</code></td><td>backlog Trip 4 評分</td></tr>
+  </tbody>
+</table>
+
+<!-- =================== 11. 待辦 =================== -->
+<h2 id="open">11. 待辦與 Open Issues <a href="#open" class="anchor-link">#</a></h2>
+
+<h3>Pending Tasks(未完成)</h3>
+<table>
+  <thead><tr><th>#</th><th>內容</th><th>狀態</th></tr></thead>
+  <tbody>
+    <tr><td>#27</td><td>訓練 VLM Purple 軸(食物 / 藝術品)</td><td>pending</td></tr>
+    <tr><td>#28</td><td>Evoto AI Culling 衝突比對(門司港 671 張)</td><td>pending</td></tr>
+    <tr><td>#33</td><td>VLM 評分時同步輸出 develop preset baseline</td><td>pending</td></tr>
+    <tr><td>#34</td><td>FCP 影片 marker workflow 建置(門司港)</td><td>in_progress</td></tr>
+    <tr><td>#35</td><td>16:9 + 9:16 混合剪片策略前置討論</td><td>pending</td></tr>
+    <tr><td>#41</td><td>1057 場景(133 張)一起進 Stage A/B 重跑</td><td>pending</td></tr>
+    <tr><td>#42</td><td>Catalog 重寫 + AutoTone retrigger</td><td>pending(待 James 確認執行 DRY_RUN=0)</td></tr>
+    <tr><td>#43</td><td>Backlog SOP KB 完整版(pipeline 收尾)</td><td>pending</td></tr>
+    <tr><td>#44</td><td>與 Robin 討論發佈知識庫步驟</td><td>pending</td></tr>
+  </tbody>
+</table>
+
+<h3>已知問題</h3>
+<div class="card callout-yellow">
+  <h4>XMP 配對 missing 23 張</h4>
+  <p>Stage B 套用腳本 dry-run 1257/1280=98.2% 配對成功率,23 張找不到對應 xmp sidecar。主要是 IMG_E*(iPhone Live Photo 編輯版)+ IMG_5222 Gmail 截圖。需後續手動處理或接受不寫入。</p>
+</div>
+
+<div class="card callout-yellow">
+  <h4>5★ 偏少(只有 82 張在 1112)</h4>
+  <p>Stage B 評分中 5★ Pick 集中在 1112 場景(75 張)+ 1738/1857/1938(4 張)。其他 trip 場景因 Stage A 沒寫 picks_summary,strong 只到 4★。如想補 5★,需要 cherry-pick。</p>
+</div>
+
+<div class="card callout-yellow">
+  <h4>1057 場景需重跑</h4>
+  <p>1057(133 張)用 Sonnet 跑時幻覺率 70-80%,雖然 user 已 calibration 過,但建議用 Opus + Stage A/B 重跑一輪以保證精準度。</p>
+</div>
+
+<h3>下一階段方向</h3>
+<ol>
+  <li><strong>Catalog 寫入</strong>(Task #42)— James 確認後執行 <code>DRY_RUN=0</code> 套 XMP + AutoTone SQL trigger</li>
+  <li><strong>1057 重跑</strong>(Task #41)— 用 Opus 跑 Stage A/B</li>
+  <li><strong>Purple 軸訓練</strong>(Task #27)— 食物/藝術品評分規則(目前是 Green 軸延伸,沒專屬規則)</li>
+  <li><strong>Develop preset baseline</strong>(Task #33)— VLM 評分時同步輸出對應 preset</li>
+  <li><strong>FCP marker workflow</strong>(Task #34)— 門司港 44 段影片抽幀</li>
+  <li><strong>SOP KB 完整版</strong>(Task #43)— 整理當前 5 階段 pipeline 為可發佈知識庫</li>
+</ol>
+
+<!-- =================== Footer =================== -->
+<footer>
+  <p>Knowledge Base v1.0 · 整理日 2026-05-11 · 涵蓋 2026-05-08 ~ 2026-05-11</p>
+  <p>產出者: Robert(Claude Opus 4.7) · 服務於 James(總指揮)</p>
+  <p>下一版預計加入: Catalog 寫入結果 + Purple 軸訓練 + FCP marker workflow 實作結果</p>
+</footer>
+
+</div>
+</body>
+</html>
