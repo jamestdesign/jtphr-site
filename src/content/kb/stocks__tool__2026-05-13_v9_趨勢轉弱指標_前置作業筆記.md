@@ -1,0 +1,184 @@
+---
+title: v9 趨勢轉弱指標 — 前置作業筆記
+date: 2026-05-13
+tags:
+  - 股票
+  - v9
+  - 趨勢轉弱
+  - 規劃
+  - 前置作業
+  - watchlist 健康管理
+aliases:
+  - v9 planning
+  - 趨勢轉弱指標規劃
+
+# 創作朔源
+creator: claude_robin
+co_creators:
+  - james
+contribution_note: |
+  James：提出「v9 從法人當日買賣超改為趨勢轉弱指標」+ 「個股層 vs 產業層」雙層概念
+  Claude (Robin)：規劃 5 維度框架 + 警示分級 + Phase 1 MVP / Phase 2 進階範圍
+
+# 管理標記
+managed_by: claude_robin
+managed_at: 2026-05-13
+transformed: false
+
+# 發佈標記
+private: false
+published: true
+
+# 版本管理
+version: 1
+last_revised: 2026-05-13
+
+# 狀態
+status: planning（等 James 拍板 Phase 1 範圍後開發）
+category: "股票-工具"
+---
+
+# v9 趨勢轉弱指標 — 前置作業筆記
+
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話定義</p>
+<div class="text-sm text-gray-300">
+
+把 主板塊分類表 v4 的「演進 / 剔除」生命週期管理機制變成**自動化警示系統**。從「人肉判斷某檔該不該移除」升級到「系統觸發信號 → Robin/James 拍板」的工作流。
+
+</div>
+</div>
+
+
+## 背景脈絡（2026-05-13 股票群對話）
+
+**起點**：v9 patch 原本是「外資/投信/自營商當日買賣超 + 16:00 trigger」（功能性補強），已寫好 `~/Desktop/stock_tracker_v9_patch.gs` 但 Robin 改變想法暫停。
+
+**轉折**：
+- Robin 1805：「V9 先取消 我想好邏輯再規劃」
+- Robin 1807：「V9 我想改成趨勢轉弱指標 幫我規劃一下 如何判斷產業趨勢轉落」
+- Robin 1808：「或或個股趨勢轉弱 好用來評估移除觀察的指標」
+
+**新目標**：v9 = 趨勢轉弱指標系統 → 餵 watchlist 健康管理（主板塊分類表#生命週期管理-v4-擴充-2026-05-13）
+
+---
+
+## 🏗️ 雙層架構（James 2026-05-13 拍板）
+
+### 🏢 產業層轉弱（用來降類別權重 / 整類警示）
+
+**動作**：類別內**所有檔**重新審視、可能整類「演進」或集體降星等
+
+**指標**：
+- 同類股 ETF 6 個月跑輸大盤 ≥ 20%
+- Google Trends 產業關鍵字 6 個月斜率 < 0
+- 媒體覆蓋月減 ≥ 50%
+- 主流分析師覆蓋家數連降
+- 競爭技術取代訊號（新聞「被替代 / 規格淘汰」）
+
+**範例**：元宇宙 2023 → 2024 整類弱 → 演進為「AR / 智慧眼鏡」
+
+### 📈 個股層轉弱（用來剔除單檔）
+
+**動作**：這檔從 watchlist 移除（或降到「待觀察區」）；類別不受影響
+
+**指標**：
+- 法人連續賣超 ≥ 5 天
+- 連續 3 個月營收年增轉負
+- Q 毛利率連續 2 季 -2pp
+- 跌破 24 週均線 + 量縮跌
+- 個股 vs 產業 ETF 相對弱（產業活但你死 = 公司問題不是題材問題）
+- 同板塊內排名月降 ≥ 10 名
+
+---
+
+## 🚦 警示組合邏輯
+
+| 觸發 | 影響 | 建議動作 |
+|---|---|---|
+| 只有產業層 | 類別整體 derate | 類別所有檔重新審視、可能演進或降星等 |
+| 只有個股層 | 單檔 weakening | 移除這檔（其他同類保留）|
+| 產業 + 個股都觸發 | 雙重利空 | **急剔除**：個股先移除 + 類別警示 review |
+
+### 命中維度分級
+
+| 命中數 | 等級 | Sheets 顯示 | 建議動作 |
+|---|---|---|---|
+| 1 維度 | 🟢 觀察 | 綠色 | 持續監控、不動 |
+| 2 維度 | 🟡 警示 | 黃色 | watchlist 加註、下次盤後重點看 |
+| 3 維度 | 🟠 嚴重 | 橘色 | Robin/James 拍板：演進 or 剔除？ |
+| 4+ 維度 | 🔴 急剔除 | 紅色 | 自動提案從 watchlist 移除 |
+
+---
+
+## 🛠️ Phase 1 MVP（既有 Sheets + Apps Script 能做）
+
+5 個個股層 + 1 個產業層共 **6 個指標**，可以立刻動工：
+
+| # | 指標 | 屬層 | 資料源 | 計算方式 |
+|---|---|---|---|---|
+| ① | 外資連續賣超天數 ≥ 5 | 個股 | TWSE T86 | 累加最近 N 天賣超 |
+| ② | 連續 3 個月營收年增轉負 | 個股 | 鉅亨網月營收 | 簡單比較 |
+| ③ | 跌破 24 週均線 | 個股 | 既有 24W 高/低欄位 | 加均線計算 |
+| ④ | 6 個月跑輸大盤 ≥ 20% | 個股 | 既有 L 週 / M 月漲跌延伸 | 加權指數對比 |
+| ⑤ | 量縮跌（量月減 ≥ 30% 同時跌）| 個股 | 既有今日量 + 五日均量 | 30 天滑動比較 |
+| ⑥ | 同類股 ETF 跌幅 > 大盤 | 產業 | TWSE ETF 資料 | 要新建 ETF 對應表 |
+
+**Sheets 加 1 欄**：`AF 趨勢強弱` → 顯示「🟢/🟡/🟠/🔴 + 命中維度說明」
+
+**Apps Script 函數設計**（規劃中、尚未開發）：
+- `evalTrendWeakness_(code, sheet, headers)` — 對單一股票跑 6 指標 → 回傳 {level, hits[]}
+- `runWeaknessCheck()` — 全 watchlist 跑一次 → 寫 AF 欄
+- 整合進既有 `runFullUpdateNow` 流程 Step 6（在 AE 強弱信號之後）
+
+---
+
+## 🌐 Phase 2（要新建資料源）
+
+**題材面 / Narrative 指標**（產業層為主）：
+- **Google Trends API** — 產業關鍵字 6 個月斜率
+- **新聞 mentions 爬蟲** — RSS / news API 抓題材月覆蓋
+- **同業 ETF 比較彙整** — 完整建立 11 類 → 對應 ETF 映射表
+
+技術上需要：
+- Google Trends 沒官方 API，要用 pytrends 或第三方
+- 新聞 mentions 可用 RSS 聚合（鉅亨、ETtoday、MoneyDJ）
+- ETF 映射表手動建（11 類各對應 1-2 檔代表 ETF）
+
+---
+
+## 📌 v9 patch 法人當日買賣超的處置
+
+`~/Desktop/stock_tracker_v9_patch.gs` **檔案保留**，邏輯**部分復用**到 v9 新方向：
+- `buildInstDailyCache_()` → 仍會用到（外資連續賣超天數要每日資料）
+- `fetchTpexDailyInst_()` → 同上
+- `setupDailyTrigger_()` → 16:00 trigger 設計**直接沿用**
+- 「3 個 Sheets 新欄位」**不做**（外資/投信/自營商當日買賣超），改成內部累加用、結果只在 AF 欄顯示
+
+→ patch 檔不需要重寫，**deploy 範圍縮小**（不加 3 個欄位 header、不寫 3 欄資料；只跑 `setupDailyTrigger_` 設 16:00 + 內部用 `buildInstDailyCache_` 跑連續賣超計算）。
+
+---
+
+## ❓ 等 James 拍板的決策點
+
+1. **5 維度框架**先這樣？要加 / 改維度嗎？
+2. **Phase 1 6 個指標**先做？還是要加什麼 / 拿掉什麼？
+3. **警示分級**閾值（1/2/3/4 維度）OK 嗎？還是要調？
+4. **AF 欄顯示格式**：用 emoji + 簡短描述（🟠 嚴重 / 法人賣 7 天 + 跌破 24W）夠嗎？還是要更詳細？
+5. **個股 vs 產業層的 ETF 映射表**何時建？要不要 Robin 先給 11 類各對應 ETF？
+
+---
+
+## 相關連結
+
+- 主板塊分類表 — v4 的「歸類 / 回拉 / 演進 / 剔除」生命週期管理是本系統的上游邏輯
+- 2026趨勢股_追蹤腳本_開發歷程_v7_v8 — Apps Script 開發歷程，v9 接續
+- reference_apps_script_sheets — Web App URL + Token + 既有 API
+- 2026-05-13_5大趨勢_18檔新標的彙整 — 觸發本次規劃的股票群討論起點
+- `~/Desktop/stock_tracker_v9_patch.gs` — 已寫好的 v9 patch 檔（部分可復用）
+
+---
+
+## 修訂歷史
+
+- **2026-05-13 v1**：claude_robin 從股票群 1807-1810 對話整理建檔。狀態 = planning（等 James 拍板 Phase 1 範圍後開發）。
