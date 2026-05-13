@@ -1,6 +1,21 @@
 ---
-title: "notebooklm-py"
+title: notebooklm-py
+date: '2026-04-05'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 ---
+sourceNote: "ideas__ai-tools__notebooklm-py"
+
 # notebooklm-py
 
 > 來源：@aiwithanushka（Instagram）
@@ -53,7 +68,6 @@ notebooklm generate slide-deck
 ⭐⭐☆ 中等
 
 ---
-sourceNote: "ideas__ai-tools__notebooklm-py"
 
 ## 原始截圖
 ![](/images/kb/notebooklm-01-cover.jpg)

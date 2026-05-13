@@ -1,13 +1,27 @@
 ---
-title: "2026趨勢股 v7格式整合筆記"
+title: 2026趨勢股 Google Sheets v7 格式整合筆記
+date: '2026-04-08'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 ---
+sourceNote: "stocks__2026趨勢股_v7格式整合筆記"
+
 # 2026趨勢股 Google Sheets v7 格式整合筆記
 
 **日期：** 2026-04-08  
 **版本：** stock_tracker_v7_stable.gs  
 
 ---
-sourceNote: "stocks__2026趨勢股_v7格式整合筆記"
 
 ## 完成的格式設定
 

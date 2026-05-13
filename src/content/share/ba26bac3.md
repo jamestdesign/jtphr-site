@@ -4,14 +4,25 @@ date: 2026-04-12
 來源: Instagram — wilson_pro_ai（理工威森）@ NEIKED, Portugal
 連結: 用戶於 Telegram Ideas 群分享 6 張截圖（無原文 URL）
 tags:
-  - AI工具
-  - Google
-  - 工具評比
-  - 替代方案
-  - 完整地圖
+- AI工具
+- Google
+- 工具評比
+- 替代方案
+- 完整地圖
 aliases:
-  - Google 15 工具
-  - Wilson 15 AI 工具
+- Google 15 工具
+- Wilson 15 AI 工具
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
 ---
 sourceNote: "ideas__ai-tools__AI影音創作__工具評比__Google_15個免費AI工具_完整評比與替代方案"
 
