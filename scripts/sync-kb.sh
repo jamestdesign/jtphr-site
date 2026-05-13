@@ -24,6 +24,8 @@ SRC_COUNT=$(find "$KB_SRC" -name "*.md" \
   -not -path "*/_meta/*" \
   -not -path "*/sessions/*" \
   -not -path "*/_attachments/*" \
+  -not -path "*/robert/raw/*" \
+  -not -path "*/robert/開發筆記本/*" \
   -not -name "TODO.md" \
   -not -name "INDEX.md" \
   -not -name "_README.md" 2>/dev/null | wc -l | tr -d ' ')
@@ -53,6 +55,8 @@ find "$KB_SRC" -name "*.md" \
   -not -path "*/_meta/*" \
   -not -path "*/sessions/*" \
   -not -path "*/_attachments/*" \
+  -not -path "*/robert/raw/*" \
+  -not -path "*/robert/開發筆記本/*" \
   -not -name "TODO.md" \
   -not -name "INDEX.md" \
   -not -name "_README.md" | while read -r file; do
