@@ -1,0 +1,311 @@
+---
+title: LR AutoTone SQL 觸發機制
+date: 2026-05-12
+creator: robert
+co_creators: []
+tags:
+  - 攝影
+  - LR
+  - SQL
+  - 自動化
+  - skill
+aliases:
+  - LR AutoTone trigger
+  - calculate history step
+來源: photo-grade KB v1 (2026-05-08~2026-05-12) + reference_lr_autotone.md memory
+連結: _attachments/photo_grade_kb_2026-05-11.html
+version: 1
+category: "其他"
+---
+
+# LR AutoTone SQL 觸發機制
+
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話定義</p>
+<div class="text-sm text-gray-300">
+
+用 SQL 直接寫 LR catalog 時要讓 LR 對每張照片自動計算 Exposure / Contrast / Highlights / Shadows / Whites / Blacks 6 個 tone 軸最佳值,**必須**做兩件事:從 `Adobe_imageDevelopSettings.text` 移除這 6 個既有值 + INSERT 一筆 history step `name='從中繼資料' valueString='calculate'`。漏任何一步 LR 都不會重算,結果是「自動按鈕沒按到」。
+
+</div>
+</div>
+
+
+## 適用情境
+
+- 用 SQL 批次注入 develop settings 到 LR catalog 後,要 LR 自動算曝光
+- 把 VLM 評分結果寫入 catalog 完一條龍要 user 開 LR 即可看到「自動」的初步調整
+- 設計三段式工作流(AutoTone + Adaptive Mask + 氛圍 Preset)的第一段
+- 任何「SQL 寫 develop settings + 想讓 LR 重算 tone」的場合
+
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">ℹ️ 為什麼 LR 的 `crs:AutoTone="true"` 不夠</p>
+<div class="text-sm text-gray-300">
+
+AutoTone 是 LR「自動」按鈕的功能,根據照片內容算 6 軸最佳值。
+但如果你用 SQL 設 `crs:AutoTone="true"` 而留著現成 `Exposure2012` 等值,LR 視為「已有 develop settings,不用算」 → AutoTone 不會觸發。
+正確做法是**先把 6 軸值移除 + 加 history step `calculate`** → LR 看到才會重讀 develop text 重新算。
+
+</div>
+</div>
+
+
+---
+
+## 正確步驟(3 步驟)
+
+### Step 1 — 關閉 LR
+
+```bash
+ps aux | grep "Lightroom Classic.app"
+lsof | grep .lrcat
+```
+
+兩個都要空(no `-wal` / `-shm` / `-lock` files)。
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 若 LR 開著就動 catalog</p>
+<div class="text-sm text-gray-300">
+
+SQLite lock 抓不到 → SQL 失敗,或更糟:catalog corruption。完整 SQL 安全 SOP 見 LR_Catalog_SQL寫入安全。
+
+</div>
+</div>
+
+
+### Step 2 — 改 `Adobe_imageDevelopSettings.text`
+
+`text` 欄位是 Lua serialized table。要做 3 件事:
+
+#### A. 移除 6 個 tone 軸 + 4 個 parametric + 2 個 digest
+
+從 Lua text 移除這 12 個 key:
+
+```
+Exposure2012
+Contrast2012
+Highlights2012
+Shadows2012
+Whites2012
+Blacks2012
+ParametricShadows
+ParametricHighlights
+ParametricLights
+ParametricDarks
+AutoToneDigest
+AutoToneDigestNoSat
+```
+
+留下:HSL / SplitToning / ColorGrade / ToneCurve / Vibrance / Saturation / WhiteBalance / 鏡頭校正 等。**AutoTone 只動 6 個 tone 軸,不影響色彩**。
+
+#### B. 加 `AutoTone = true,` 在最後 `}` 前
+
+```lua
+s = { ...,
+ColorGradeMidtoneSat = 0,
+AutoTone = true,         -- ← 加在這裡
+orientation = "AB" }
+```
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 LR 不認的格式</p>
+<div class="text-sm text-gray-300">
+
+- ❌ `AutoTone = "true"`(字串)→ LR 視為 false
+- ❌ `AutoTone = 1`(數字)→ 失敗
+- ✅ `AutoTone = true`(Lua boolean,**不加引號 / 不加數字**)
+
+</div>
+</div>
+
+
+#### C. 重算 MD5 digest 寫回 `digest` 欄位
+
+`Adobe_imageDevelopSettings.digest` 是 `text` 內容的 MD5。改完 text 必須重算:
+
+```python
+import hashlib
+digest = hashlib.md5(new_text.encode()).hexdigest()
+cursor.execute("UPDATE Adobe_imageDevelopSettings SET text=?, digest=? WHERE id_local=?",
+               (new_text, digest, dev_id))
+```
+
+**漏這步 LR 不認新 text** — 它檢查 digest match 才接受新內容。
+
+### Step 3 — INSERT history step `calculate`
+
+```sql
+INSERT INTO Adobe_libraryImageDevelopHistoryStep (
+  id_global, image, dateCreated, name, valueString, hasDevelopAdjustments
+) VALUES (
+  '<uuid-v4>',
+  <image_id>,
+  <now_cocoa_time>,
+  '從中繼資料',
+  'calculate',
+  'calculate'
+);
+```
+
+`valueString = 'calculate'` 是**關鍵** — LR 看到這個 history step 才會重新讀 develop text 觸發 AutoTone 重算。
+
+#### Cocoa epoch 時間
+
+```python
+EPOCH_DIFF = 978307200  # 2001-01-01
+cocoa_time = unix_time - EPOCH_DIFF
+```
+
+---
+
+## Regex 注入陷阱(寫腳本時注意)
+
+`Adobe_imageDevelopSettings.text` 是 Lua serialized,key/value pairs 用逗號分隔、最後一個 key 結尾是 `}`:
+
+```python
+import re
+
+# ❌ 錯:第一個 key 跟 'A' 不在行首,^ 抓不到
+re.sub(r'^AutoLateralCA\s*=...', ..., lua, flags=re.MULTILINE)
+
+# ❌ 錯:[^,\n] 會吃掉最後一個 key 的 } 結尾
+re.sub(r'orientation\s*=\s*[^,\n]+,?', ..., lua)
+
+# ✅ 對:用 \b + [^,\n}]
+pattern = rf'\b{re.escape(key)}\s*=\s*[^,\n}}]+,?'
+re.sub(pattern, '', lua)
+```
+
+實作參考:`~/Desktop/Claude-Workspace/photo-grade/2026-05-09_inject_preset.py`
+
+---
+
+## 已驗證
+
+**2026-05-08 門司港 627 張照片**:
+- 套上 Style A/B/C/D 色調 preset(HSL / ColorGrade / ToneCurve)
+- 移除 6 tone 軸 + parametric + digest
+- 加 `AutoTone = true`
+- INSERT history step `calculate`
+- LR 重開:每張顯示不同的 Exposure / Contrast / Highlights / Shadows / Whites / Blacks(LR 自動算的值)
+- 色調仍是 Style A/B/C/D 的設定(沒被 AutoTone 蓋掉)
+- 100% 觸發成功
+
+---
+
+## 三段式工作流哲學(2026-05-09 設計)
+
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">ℹ️ 為什麼是三段而不是一個大 preset</p>
+<div class="text-sm text-gray-300">
+
+
+
+</div>
+</div>
+
+
+```
+1️⃣ AutoTone(per-photo 自動)
+    └─ Exposure / Contrast / Highlights / Shadows / Whites / Blacks
+
+2️⃣ Adaptive Preset(per-photo AI mask,可選)
+    └─ Red 套「自適應:主體」→ 提亮膚色 + 加銳臉部
+    └─ Green 風光含天空套「自適應:天空」
+    └─ Yellow 視構圖選
+
+3️⃣ 氛圍 Preset(全組統一)
+    └─ HSL / Color Grading / Tone Curve / Detail / Effects / Calibration
+```
+
+**哲學**:
+- 旅遊現場 = 變數(每張光源不同)→ AutoTone per-photo 處理曝光
+- 氛圍感 = 常數(全組統一風格)→ Preset 處理風格層
+- 「讓機器處理變數,人類處理常數風格」的智慧分工
+
+本 skill 解決三段式中的 **1️⃣ AutoTone** 觸發。2️⃣ 3️⃣ 走 LR 既有 Develop preset 系統。
+
+---
+
+## 紅線清單(SQL 注入前對照)
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 寫 AutoTone 觸發 SQL 前自我檢查</p>
+<div class="text-sm text-gray-300">
+
+- [ ] LR 已 `Cmd+Q`?(`lsof` / `ps` 雙確認)
+- [ ] 12 個 key 已從 `Adobe_imageDevelopSettings.text` 移除?(6 tone + 4 parametric + 2 digest)
+- [ ] `AutoTone = true`(boolean,**沒加引號 / 沒加數字**)?
+- [ ] MD5 digest 重算寫回 `Adobe_imageDevelopSettings.digest`?
+- [ ] INSERT 一筆 history step `name='從中繼資料' valueString='calculate'`?
+- [ ] Cocoa epoch 轉換(`unix_time - 978307200`)用了沒?
+- [ ] SQL UPDATE 加了 WHERE 限定範圍?(LR_Catalog_SQL寫入安全 鐵則 1)
+- [ ] backup + integrity_check 走過?
+
+</div>
+</div>
+
+
+任一沒勾 → 不要按 enter。
+
+---
+
+## 範例 Python pattern
+
+```python
+import sqlite3, hashlib, re, time, uuid
+
+EPOCH_DIFF = 978307200
+KEYS_TO_REMOVE = [
+    "Exposure2012", "Contrast2012", "Highlights2012", "Shadows2012",
+    "Whites2012", "Blacks2012",
+    "ParametricShadows", "ParametricHighlights", "ParametricLights", "ParametricDarks",
+    "AutoToneDigest", "AutoToneDigestNoSat",
+]
+
+def trigger_autotone(conn, image_id):
+    # 1. 撈 text
+    cur = conn.execute(
+        "SELECT id_local, text FROM Adobe_imageDevelopSettings WHERE image=?",
+        (image_id,)
+    )
+    dev_id, text = cur.fetchone()
+
+    # 2. 移除 12 個 key
+    for key in KEYS_TO_REMOVE:
+        text = re.sub(rf'\b{re.escape(key)}\s*=\s*[^,\n}}]+,?\s*', '', text)
+
+    # 3. 加 AutoTone = true(在最後 } 前)
+    text = re.sub(r'(\s*})\s*$', r'\nAutoTone = true,\1', text, count=1)
+
+    # 4. 重算 digest
+    digest = hashlib.md5(text.encode("utf-8")).hexdigest()
+    conn.execute(
+        "UPDATE Adobe_imageDevelopSettings SET text=?, digest=? WHERE id_local=?",
+        (text, digest, dev_id)
+    )
+
+    # 5. INSERT history step
+    now_cocoa = time.time() - EPOCH_DIFF
+    conn.execute("""
+        INSERT INTO Adobe_libraryImageDevelopHistoryStep
+        (id_global, image, dateCreated, name, valueString, hasDevelopAdjustments)
+        VALUES (?, ?, ?, '從中繼資料', 'calculate', 'calculate')
+    """, (str(uuid.uuid4()).upper(), image_id, now_cocoa))
+```
+
+完整 production 版本見 `~/Desktop/Claude-Workspace/photo-grade/2026-05-07_add_history_step.py`。
+
+---
+
+## 相關技能
+
+- LR_Catalog_SQL寫入安全 — 跑這個 SQL 前必走的 backup / /tmp / integrity_check SOP
+- Backlog_5階段SOP — ④ Catalog SQL 寫入 + AutoTone trigger 階段
+- Evoto_RoundTrip_B-flow_v3 — sync script 註冊新 JPG 時可以同步觸發 AutoTone
+- LR_Catalog_v4_Metadata_Schema — VLM 結果寫 catalog 的欄位分工(尚未建立)
+
+---
+
+## 修訂歷史
+
+- **2026-05-12**:初版。從 `reference_lr_autotone.md` memory + photo-grade KB v1 §7 + 門司港 627 張實證萃取。
