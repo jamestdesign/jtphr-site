@@ -2,7 +2,8 @@
 title: LR Catalog v4 Metadata Schema 規範
 date: 2026-05-13
 creator: robert
-co_creators: []
+co_creators:
+  - claude_robin
 tags:
   - 攝影
   - 規範
@@ -16,9 +17,21 @@ aliases:
 來源: photo-grade KB v1 (2026-05-08~2026-05-12) §2.1 + feedback_lr_metadata_schema.md memory (2026-05-12 James 拍板)
 連結: _attachments/photo_grade_kb_2026-05-11.html
 version: 1
-note_to_robin: |
-  這份是「規範」不是「技能」,依你的指示放 robert/raw/(不放 skills/)。
-  轉化目的地建議:_meta/ 或 ideas/ai-tools/規範/(你決定)。
+
+# 管理標記（claude_robin transform 後補）
+managed_by: claude_robin
+managed_at: 2026-05-13
+transformed: true
+transform_note: |
+  Robert 寫於 robert/raw/LR_Catalog_v4_Metadata_Schema.md，claude_robin 轉化：
+  - 檔案類型 = 「規範」非「技能」→ 不放 robert/skills/，新建 robert/規範/ 子資料夾
+  - co_creators 補 claude_robin（管理者署名）
+  - 原 raw 檔已刪除（multi-agent 架構「轉化後刪 raw」原則）
+  - Robert 寫的「✋ 留給 Robin 的轉化指示」已執行完成（決定置於 robert/規範/）
+
+# 發佈標記
+private: false
+published: true
 category: "其他"
 ---
 
@@ -222,13 +235,7 @@ conn.execute("UPDATE AgLibraryIPTC SET caption=? WHERE image=?", (new_caption, i
 
 ## 修訂歷史
 
-- **2026-05-13**:初版(寫到 `robert/raw/` 等 Robin 轉化)。從 2026-05-12 James 拍板事件 + `feedback_lr_metadata_schema.md` memory + photo-grade KB v1 §2.1 萃取。
+- **2026-05-13 v1**：Robert 初版寫於 `robert/raw/`，從 2026-05-12 James 拍板事件 + `feedback_lr_metadata_schema.md` memory + photo-grade KB v1 §2.1 萃取。
+- **2026-05-13 v1（transform）**：claude_robin 轉化到 `robert/規範/` 並補管理層 frontmatter，原 raw 檔刪除。
 
----
-
-## ✋ 留給 Robin 的轉化指示
-
-- **檔案類型**:這是「規範」不是「技能」,**不要**進 `robert/skills/`
-- **建議去處**:`_meta/規範/LR_Catalog_v4_Metadata_Schema.md` 或 `ideas/ai-tools/規範/LR_Catalog_v4_Metadata_Schema.md`,你決定哪個比較合 KB 編目
-- **wikilink 更新**:`robert/skills/` 裡 6 份檔案都有 `LR_Catalog_v4_Metadata_Schema` 連結指向這份,轉化後請確認 wikilink 仍然 resolve
-- **append-only 邏輯**:這份 v4 schema 是 production 寫入規範,**未來改版 (v5) 必走 schema 規範的 revision_history append 流程**,不要另開新檔
+**未來改版（v5+）必走 KB schema 規範 的 `revision_history` append 流程**，不另開新檔。
