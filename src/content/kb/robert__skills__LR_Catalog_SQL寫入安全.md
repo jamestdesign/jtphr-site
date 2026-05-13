@@ -4,7 +4,7 @@ date: 2026-05-12
 creator: robert
 co_creators: []
 tags:
-  - AI影音創作
+  - 攝影
   - 修圖
   - skill
   - LR

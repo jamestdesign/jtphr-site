@@ -1,0 +1,237 @@
+---
+title: VLM 評分防幻覺紅線
+date: 2026-05-12
+creator: robert
+co_creators: []
+tags:
+  - VLM
+  - 防幻覺
+  - 規範
+  - skill
+aliases:
+  - VLM hallucination redlines
+  - VLM 6 條紅線
+來源: photo-grade KB v1 (2026-05-08~2026-05-12) + feedback_vlm_hallucination_redlines.md
+連結: _attachments/photo_grade_kb_2026-05-11.html
+version: 1
+category: "其他"
+---
+
+# VLM 評分防幻覺紅線
+
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話定義</p>
+<div class="text-sm text-gray-300">
+
+VLM 跑大批量照片評分(label + rating)時必須遵守的 6 條 hard constraint,**每條都是 0/1 不允許「視情況」**;違反即整批退回重跑。本紅線誕生於 2026-05-10 的 Sonnet 1057 場景幻覺事件 — 90 分鐘逐張校對後拍板的鐵則。
+
+</div>
+</div>
+
+
+## 適用情境
+
+- 寫 VLM agent prompt 跑 backlog 批次評分
+- 設計 Stage A (Label) / Stage B (Rating) 分跑 pipeline
+- audit 別人(或之前自己)寫的 VLM 評分 SKILL 是否符合紅線
+- 跨 VLM 模型對比實驗(Opus vs Sonnet vs Haiku)
+- 任何「要 VLM 看圖給 structured output」的任務,不限攝影評分
+
+## 背景 — 1057 場景幻覺事件(2026-05-10)
+
+<div class="not-prose my-6 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-lg p-4">
+<p class="font-bold text-yellow-400 mb-2">⚠️ 為什麼這 6 條紅線存在</p>
+<div class="text-sm text-gray-300">
+
+2026-05-10 用 Sonnet agent 跑 1280 張 backlog,1057 場景(133 張)出現 **~70-80% 幻覺**。User 花 90 分鐘逐張校對,從中淬煉出這 6 條紅線。
+
+</div>
+</div>
+
+
+### 三個經典幻覺案例
+
+| 實際畫面 | Sonnet 編造的 description | label 錯誤 |
+|---|---|---|
+| 女子坐單人沙發正面笑容 | 「大廳熊本熊布偶陳設」 | Red → Purple(錯) |
+| 空沙發(無人) | 「搞怪姿勢稀有」 | Green → Red(錯) |
+| 男人+熊本熊合照(臉清楚) | 「木雕陶偶藝術品」 | Red → Purple(錯) |
+
+**根因**:Sonnet 在大批量時編造畫面描述 + label 套錯規則。**不是視覺看不清,是模型編造**。order matter:description 順序顛倒 = 幻覺溫床。
+
+---
+
+## 🚨 6 條紅線
+
+### 🔴 紅線 1 — 每張先 `objective_description` 再 label / rating
+
+每張照片必須先輸出 `objective_description` 欄位(≤30 字),客觀描述「畫面實際看到了什麼」,**不能**加任何揣測、聯想、或場景假設。
+
+**順序鐵則**:`objective_description` → `subject_type` → `label` → `rating` → `pick`。
+順序顛倒 = 模型先決定要給什麼 label 再「補敘述」 = 幻覺溫床。
+
+**錯誤示範**:
+```
+IMG_5361(實際=女子坐沙發正面笑容)
+❌ objective_description: "大廳熊本熊布偶陳設"  ← 整段編造
+✅ objective_description: "女子坐單人沙發 正面笑容 黃調燈光"
+```
+
+### 🔴 紅線 2 — Label 由主體唯一決定(hard mapping)
+
+**這條沒有「綜合判斷」、沒有「氛圍考量」、沒有「除非...」例外。** Label 由「畫面主體是什麼」唯一決定。
+
+| 主體類型 | Label | 反例(2026-05-10 實證幻覺) |
+|---|---|---|
+| 人臉清楚可辨(自拍/合照/走拍/坐拍,正面/3-4 側/側臉看得到五官) | **Red** | IMG_5351-5353 三張自拍 → Sonnet 標 Purple(錯);IMG_5365 男+熊本熊合照 → Sonnet 標 Purple「木雕藝術品」(錯) |
+| 人但臉完全看不到(純背影/剪影/動態糊/太遠看不清五官) | **Yellow** | — |
+| 商品/酒/食物/藝術品 為主體(即使旁邊有杯子/餐具/裝飾陪襯) | **Purple** | IMG_5356(酒瓶+杯子)→ Sonnet 標 Green(錯) |
+| 空間 / 風景 / 室內無人(主體=環境) | **Green** | IMG_5364 空沙發 → Sonnet 標 Red「搞怪姿勢」(錯) |
+
+完整 4 軸評分主軸見 人像評分_4軸法。
+
+### 🔴 紅線 3 — 同場景同主體 → 同 label
+
+**「同一場景一定同 label」鐵律**:
+
+- 三張酒瓶(5354 直構/5355 橫構+杯/5356 直構+杯)→ **三張都 Purple**,不能因 5356「有杯子」就改 Green
+- 三張人臉合照(5351/5352/5353)→ **三張都 Red**,不能因「沒特別好看」就降 Purple/Yellow
+- 同場景同主角不同 pose(5360-5363 女子在沙發)→ **四張都 Red**
+
+**重點**:不可以為了「避免重複 P」就把同類照片改成不同 label 來繞過 Pick 上限。Label 由主體決定,Pick 由場景代表權決定(見 人像評分_4軸法 的「Pick 決策公式」)。
+
+### 🔴 紅線 4 — `confidence < 0.7` → 一律 flag `needs_human_review: true`
+
+不可以「猜不準就隨便給分」。confidence 欄位低於 0.7 → JSON 必須有 `"needs_human_review": true`,該張**不寫進 catalog SQL**,先 flag 給 user 看。
+
+**信心門檻參考**:
+- 0.9+ 自信:畫面清楚、主體無歧義、評分有明確錨點
+- 0.7-0.9 可寫入但留 notes:畫面有解讀空間但有把握
+- < 0.7 必 flag:畫面看不清、主體判斷有歧義、評分位於兩級之間搖擺
+
+### 🔴 紅線 5 — Production 用 Opus 4.7、縮圖 ≥1024px、拆兩階段
+
+- **模型限制**:Production 跑 backlog **必須用 Opus 4.7**(含 1M context)。Sonnet 在大批量時容易幻覺(實證 1057 場景 70-80%),只能用於 dev / sample audit
+- **縮圖最低 1024px** 長邊(512px 是幻覺源頭之一)
+- **兩階段**:Label 跟 Rating **不可合併在同一 pass**。先跑 label-only pass(連同 `objective_description`),給 user audit 10 張 → OK 才跑 rating pass
+
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">ℹ️ 成本說明</p>
+<div class="text-sm text-gray-300">
+
+全程 Opus ~$48/天(600 張)vs Sonnet ~$9/天。James 拍板「全程 Opus 換精準」 — 省時間避免反覆校正、避免信任崩盤。
+
+</div>
+</div>
+
+
+### 🔴 紅線 6 — JSON 欄位必填
+
+每張照片的 JSON entry 必須包含全部欄位,Audit 自動檢查不一致 → 整 batch 退回重跑:
+
+```json
+{
+  "filename": "IMG_5361.JPG",
+  "objective_description": "女子坐單人沙發 正面笑容 黃調燈光",
+  "subject_type": "human_face_clear",
+  "label": "Red",
+  "rating": 4,
+  "rating_range": [3, 5],
+  "pick": true,
+  "scene_id": "1430_kumamon_lobby",
+  "scene_role": "representative",
+  "confidence": 0.92,
+  "needs_human_review": false,
+  "notes": "正面真笑+構圖好,場景代表"
+}
+```
+
+`subject_type` 取值與對應 label:
+
+| subject_type | label |
+|---|---|
+| `human_face_clear` | Red |
+| `human_no_face` | Yellow |
+| `product` | Purple |
+| `space_no_human` | Green |
+
+**必須對齊**。Audit 工具會自動檢查 — 不一致整 batch 退回。
+
+---
+
+## Stage A / Stage B 分跑流程
+
+```
+[Stage A: Label-only pass]
+  - input: 1024+px 縮圖批次 + SKILL prompt
+  - model: Opus 4.7
+  - output: filename / objective_description / subject_type / label / scene_id / confidence
+
+  ↓ User audit 10 張隨機抽樣 → OK 才往下
+
+[Stage B: Rating pass]
+  - input: Stage A 結果 + 同批縮圖
+  - model: Opus 4.7
+  - output: rating / rating_range / pick / scene_role / needs_human_review / notes
+
+  ↓ 寫入 master CSV → 走 catalog SQL 注入流程
+```
+
+詳見 Backlog_5階段SOP。
+
+---
+
+## 驗證紀錄
+
+### 1057 場景幻覺前後對比
+
+| 模型 | 樣本 | 幻覺率 | 結論 |
+|---|---|---|---|
+| Sonnet | 1057 場景(133 張) | ~70-80% | 不適合 production |
+| Opus 4.7 | 同 1057 場景重跑(2026-05-11) | 0% 重大幻覺 | production OK |
+
+### 6 條紅線實證
+
+- **紅線 1**:Sonnet 沒走「先 desc 再 label」流程 → 直接幻覺;Opus 加上紅線後幻覺消失
+- **紅線 2**:hard mapping 表格貼進 SKILL → label 錯誤從 70% 降到 <5%
+- **紅線 3**:跑 1057 重評時三張酒瓶都正確 Purple
+- **紅線 5**:512px 縮圖 → 1024px 縮圖,VLM 對細節辨識力顯著提升
+- **紅線 6**:audit 工具抓出 12 張 `subject_type` ≠ `label` → 整 batch 退回 → 重跑後通過
+
+---
+
+## 紅線清單(寫 VLM prompt 時對照)
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 寫 prompt 前自我檢查</p>
+<div class="text-sm text-gray-300">
+
+- [ ] 有寫「先 objective_description 才 label」順序鐵則?
+- [ ] 有貼 4 軸主體映射表(human_face_clear / human_no_face / product / space_no_human)?
+- [ ] 有寫「同場景同主體同 label」鐵律 + 至少 1 個反例?
+- [ ] 有寫 confidence < 0.7 → flag 機制?
+- [ ] 有限定 model = Opus 4.7?
+- [ ] 縮圖管線 ≥1024px 長邊?
+- [ ] 拆 Stage A + Stage B,不准合併?
+- [ ] JSON schema 12 個欄位都列?subject_type ↔ label 對齊檢查有寫進 audit?
+
+</div>
+</div>
+
+
+任一沒勾 → 不要按 enter。
+
+---
+
+## 相關技能
+
+- 人像評分_4軸法 — 4 軸 Label 的詳細評分主軸與星等規則(本紅線的配套主體)
+- Backlog_5階段SOP — 完整 backlog pipeline 中 Stage A / Stage B 跑法
+- LR_Catalog_v4_Metadata_Schema — VLM 結果寫入 LR catalog 的欄位分工(尚未建立)
+- LR_Catalog_SQL寫入安全 — 把評分結果寫進 catalog 時的 SQL 鐵則
+
+---
+
+## 修訂歷史
+
+- **2026-05-12**:初版。從 `feedback_vlm_hallucination_redlines.md` memory + 2026-05-10 calibration + 1057 場景實證萃取。
