@@ -65,6 +65,7 @@ find "$KB_SRC" -name "*.md" \
   dir="$(dirname "$relpath")"
 
   case "$dir" in
+    ideas/photo/*) category="攝影-開發歷程" ;;
     ideas/ai-tools/AI影音創作/教學) category="AI影音-教學" ;;
     ideas/ai-tools/AI影音創作/提示詞) category="AI影音-提示詞" ;;
     ideas/ai-tools/AI影音創作/工具評比) category="AI影音-工具評比" ;;
