@@ -166,8 +166,53 @@
     <span>📅 日期: <strong>2026-05-16</strong></span>
     <span>📄 配套 SOP: <strong>影片素材_VLM抽幀_腳本剪輯_SOP.md</strong></span>
     <span>👤 拍板: <strong>James + Robert(1-on-1 msg 1833~1852)</strong></span>
+    <span>🎯 sample run: <strong>2026-05-16 永漢高爾夫球場(7 影片 + 29 照片 = 101 張)</strong></span>
   </div>
 </header>
+
+<h2>📍 永漢 sample run 進度卡(2026-05-16)</h2>
+<div class="key-fact" style="border-left-color: #2d7a4e;">
+  <strong>已跑完 Step 0 → Step 8</strong>(永漢實拍 → LR Import + SQL UPDATE → James audit override 13 個 + caption append turn)<br>
+  <strong>下一步 ⏳ Step 9 起</strong>:分流 batch / FCP marker 回寫 / 導演腳本 / FCPXML / 剪輯 / 出片 / 上雲
+</div>
+
+<table>
+  <thead>
+    <tr><th>Step</th><th>名稱</th><th>狀態</th><th>備註</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>拍攝</td><td>✅</td><td>iPhone 17 Pro Max + OPPO X9 Ultra(2 設備混用,GPS+時間定錨)</td></tr>
+    <tr><td>1</td><td>結構化 mv</td><td>✅</td><td>5 場景資料夾 + <code>_MOV/</code> + <code>_STILL/</code></td></tr>
+    <tr><td>2</td><td>GPS+場景命名</td><td>✅</td><td>5 cluster 確認(1146 開場 / 1206 高點觀景 / 1300 球場高點 / 1340 會所 / 1544 後半)</td></tr>
+    <tr><td>3a</td><td>ffmpeg 抽幀</td><td>✅</td><td>fps=1 跑 72 張。<strong>scene-detect 雙保險方案實驗:fps=0.33+scene 0.1 砍 54%(72→33)</strong>,關鍵幀仍抓到</td></tr>
+    <tr><td>3b</td><td>1080p 縮圖</td><td>✅</td><td>72 張 1080p preview</td></tr>
+    <tr><td>4</td><td>Stage A Label</td><td>✅</td><td>101 張(29 photo + 72 STILL)R=10 / Y=58 / G=33 / P=0</td></tr>
+    <tr><td>4.5</td><td>James audit 10 張</td><td>⏭️</td><td>本次跳過,改在 Step 8 一次性 audit 全部</td></tr>
+    <tr><td>5</td><td>Stage B Rating+Pick</td><td>✅</td><td>1=1 / 2=52 / 3=33 / 4=15 / 5=0,pick 15/101=14.9%</td></tr>
+    <tr><td>6</td><td>LR catalog SQL 寫入</td><td>✅</td><td>SQL UPDATE 101 張(<strong>v4 schema v2 三紅線</strong>:colorLabels 繁中 / pick float / caption 4 短 tag + reason)</td></tr>
+    <tr><td>7</td><td>AutoTone trigger</td><td>⏳</td><td>本批未跑(STILL 不需 AutoTone)</td></tr>
+    <tr><td>8</td><td>James LR review</td><td>✅</td><td>13 個 override(12 P + 1 r)+ caption append turn,master.csv override 欄回填</td></tr>
+    <tr><td>9</td><td>分流 batch</td><td>⏳</td><td>四象限分流(紅 P=1 / 黃 P=1 / P=0)</td></tr>
+    <tr><td>10</td><td>軌 🅒 marker 回寫</td><td>⏳</td><td>Pick=1 → FCP 藍色 marker</td></tr>
+    <tr><td>11</td><td>FCP 細修(選用)</td><td>⏳</td><td>James 在 FCP 調 marker / keyword</td></tr>
+    <tr><td>12</td><td>導演視角腳本</td><td>⏳</td><td>HTML director script</td></tr>
+    <tr><td>13</td><td>James review HTML</td><td>⏳</td><td>annotate / 通過</td></tr>
+    <tr><td>14</td><td>FCPXML 生成</td><td>⏳</td><td>給 FCP import</td></tr>
+    <tr><td>15</td><td>FCP 剪輯</td><td>⏳</td><td>精修出片</td></tr>
+    <tr><td>16</td><td>出片 export</td><td>⏳</td><td>1080p H.265 + faststart</td></tr>
+    <tr><td>17</td><td>上雲</td><td>⏳</td><td>_export → GPhotos / Drive</td></tr>
+  </tbody>
+</table>
+
+<div class="key-fact">
+  <strong>2026-05-16 sample run 拍板事項</strong>:
+  <ul style="margin: 6px 0 0 0; padding-left: 20px;">
+    <li><strong>Step 3a 雙保險方案</strong>:fps=0.33 + scene 0.1(砍 54%,關鍵幀不漏) — 待寫進 production SOP</li>
+    <li><strong>Step 6 v4 schema v2 三紅線</strong>:colorLabels 必繁中 / pick float (1.0/0.0/-1.0) / caption 4 短 tag + reason 無 obj</li>
+    <li><strong>Pick 原則修正</strong>:沒亮點不擠 P,「真挑不到就是沒用 video」也合法</li>
+    <li><strong>override 用語</strong>:自由心證 = free / 代表幀 / [override] 跟 r:X→Y 結構</li>
+  </ul>
+</div>
 
 <h2>🎨 角色 / 工具色卡(Legend)</h2>
 <div class="legend">
@@ -188,31 +233,31 @@ flowchart TD
     classDef tool fill:#e9ecef,stroke:#495057,color:#495057
     classDef storage fill:#d4edda,stroke:#155724,color:#155724
 
-    S0[📷 Step 0<br/>拍攝<br/>Sony A7R V / iPhone]:::james
-    S1[💾 Step 1<br/>匯入 NAS<br/>_MOV/&lt;scene&gt;/]:::james
-    S2[🌏 Step 2<br/>GPS + 場景命名<br/>VLM + Nominatim]:::robert
-    S3a[🎞️ Step 3a<br/>ffmpeg fps=1 抽幀<br/>4K 原寬 → _STILL/]:::robert
-    S3b[🖼️ Step 3b<br/>sips 生 1080p 縮圖<br/>VLM 判讀用]:::robert
-    S4[🤖 Step 4<br/>Stage A Label-only<br/>label / objective_description]:::opus
-    S4audit{Step 4.5<br/>James audit<br/>10 張抽查}:::james
-    S5[🤖 Step 5<br/>Stage B Rating + Pick<br/>1-5★ / P / scene_role]:::opus
-    S6[🗄️ Step 6<br/>LR catalog SQL 寫入<br/>v4 schema 關鍵字+註解]:::robert
-    S7[⚡ Step 7<br/>AutoTone trigger<br/>INSERT calculate step]:::robert
-    S8[🎨 Step 8<br/>James LR review<br/>色標 / Pick / NG caption]:::james
-    S9{Step 9<br/>分流 batch<br/>讀 colorLabel + Pick + NG}:::robert
+    S0[✅ Step 0<br/>拍攝<br/>iPhone / OPPO / Sony]:::james
+    S1[✅ Step 1<br/>匯入 NAS<br/>_MOV/&lt;scene&gt;/]:::james
+    S2[✅ Step 2<br/>GPS + 場景命名<br/>VLM + Nominatim]:::robert
+    S3a[✅ Step 3a<br/>ffmpeg 抽幀<br/>fps=0.33 + scene 0.1]:::robert
+    S3b[✅ Step 3b<br/>sips 生 1080p 縮圖<br/>VLM 判讀用]:::robert
+    S4[✅ Step 4<br/>Stage A Label-only<br/>label / obj_desc / conf]:::opus
+    S4audit{⏭️ Step 4.5<br/>James audit 10 張<br/>本批跳過,Step 8 整合 audit}:::james
+    S5[✅ Step 5<br/>Stage B Rating + Pick<br/>1-5★ / P]:::opus
+    S6[✅ Step 6<br/>LR catalog SQL 寫入<br/>v4 v2 三紅線]:::robert
+    S7[⏳ Step 7<br/>AutoTone trigger<br/>INSERT calculate step]:::robert
+    S8[✅ Step 8<br/>James LR review<br/>13 override + caption turn]:::james
+    S9{⏳ Step 9<br/>分流 batch<br/>讀 colorLabel + Pick + NG}:::robert
     S9a[🟥 紅 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
     S9b[☁️ 紅 P=1<br/>→ _export/highlights/<br/>1080p H.265 8Mbps]:::storage
     S9c[🟨 黃 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
     S9d[🟨 黃 P=1 沒 NG<br/>FCP import _MOV]:::storage
     S9e[❌ P=0<br/>不動 _MOV 保留]:::storage
-    S10[📍 Step 10 軌 🅒<br/>回寫 FCP marker<br/>Pick=1 → 藍色 marker]:::robert
-    S11[🎬 Step 11 選用<br/>James 在 FCP 細修<br/>marker / keyword 調整]:::james
-    S12[📜 Step 12<br/>導演視角腳本生成<br/>HTML director script]:::robert
-    S13{Step 13<br/>James review HTML<br/>annotate / 通過}:::james
-    S14[📑 Step 14<br/>FCPXML 生成<br/>給 FCP import]:::robert
-    S15[✂️ Step 15<br/>FCP 剪輯<br/>精修出片]:::james
-    S16[💎 Step 16<br/>出片 export<br/>1080p H.265 + faststart]:::storage
-    S17[☁️ Step 17<br/>上雲<br/>_export → GPhotos/Drive]:::storage
+    S10[⏳ Step 10 軌 🅒<br/>回寫 FCP marker<br/>Pick=1 → 藍色 marker]:::robert
+    S11[⏳ Step 11 選用<br/>James 在 FCP 細修<br/>marker / keyword 調整]:::james
+    S12[⏳ Step 12<br/>導演視角腳本生成<br/>HTML director script]:::robert
+    S13{⏳ Step 13<br/>James review HTML<br/>annotate / 通過}:::james
+    S14[⏳ Step 14<br/>FCPXML 生成<br/>給 FCP import]:::robert
+    S15[⏳ Step 15<br/>FCP 剪輯<br/>精修出片]:::james
+    S16[⏳ Step 16<br/>出片 export<br/>1080p H.265 + faststart]:::storage
+    S17[⏳ Step 17<br/>上雲<br/>_export → GPhotos/Drive]:::storage
 
     S0 --> S1
     S1 --> S2
@@ -288,11 +333,11 @@ flowchart TD
     </tr>
     <tr>
       <td>3a</td>
-      <td>ffmpeg 抽幀(4K 原寬)</td>
+      <td>ffmpeg 抽幀(4K 原寬,雙保險)</td>
       <td><span class="pill robert">Robert</span></td>
-      <td><code>ffmpeg -vf fps=1</code></td>
+      <td><code>ffmpeg -vf "select='isnan(prev_selected_t)+gte(t-prev_selected_t,3)+gt(scene,0.1)'" -vsync vfr</code><br>(2026-05-16 永漢 sample 拍板:fps=0.33 + scene 0.1)</td>
       <td><code>_MOV/&lt;scene&gt;/&lt;clip&gt;.MP4</code></td>
-      <td><code>_MOV/&lt;scene&gt;/_STILL/&lt;clip&gt;_t&lt;秒&gt;.jpg</code></td>
+      <td><code>_MOV/&lt;scene&gt;/_STILL/&lt;clip&gt;_s&lt;NN&gt;.jpg</code></td>
     </tr>
     <tr>
       <td>3b</td>
@@ -328,9 +373,9 @@ flowchart TD
     </tr>
     <tr>
       <td>6</td>
-      <td>LR catalog SQL 寫入</td>
+      <td>LR catalog SQL 寫入(v4 v2)</td>
       <td><span class="pill robert">Robert</span></td>
-      <td>SQLite + Python(走 v4 schema)</td>
+      <td>SQLite + Python(<strong>三紅線</strong>:colorLabels 必繁中 / pick float 1.0/0.0/-1.0 / caption 4 短 tag + reason 無 obj)</td>
       <td>master CSV</td>
       <td>Adobe_images.rating/pick/colorLabels + AgLibraryKeyword + AgLibraryIPTC.caption</td>
     </tr>
