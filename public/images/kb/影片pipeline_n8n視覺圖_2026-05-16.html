@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>影片素材 Pipeline · n8n 視覺圖 | 2026-05-16</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1f2933;
+    --muted: #5c6773;
+    --accent: #d4441f;
+    --accent-2: #1e6b8f;
+    --james: #b8830f;
+    --robert: #1e6b8f;
+    --opus: #7340a0;
+    --tool: #5c6773;
+    --storage: #2d7a4e;
+    --card: #ffffff;
+    --border: #e3e0d6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 40px 28px 80px; }
+  header.hero {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+  header.hero .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  header.hero h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  header.hero .subtitle { color: var(--muted); font-size: 17px; margin: 0; }
+  header.hero .meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  header.hero .meta strong { color: var(--fg); }
+  h2 {
+    font-size: 24px;
+    color: var(--accent);
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin: 48px 0 18px;
+  }
+  h3 {
+    font-size: 18px;
+    color: var(--accent-2);
+    margin: 28px 0 10px;
+  }
+  .legend {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 14px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legend-swatch {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .sw-james    { background: #fff3cd; }
+  .sw-robert   { background: #cce5ff; }
+  .sw-opus     { background: #e2d4f0; }
+  .sw-tool     { background: #e9ecef; }
+  .sw-storage  { background: #d4edda; }
+  .mermaid-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  th, td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0ece0;
+    font-weight: 600;
+    color: #3a4651;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  tr:hover td { background: #faf7ee; }
+  .pill {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill.james    { background: #fff3cd; color: #856404; }
+  .pill.robert   { background: #cce5ff; color: #004085; }
+  .pill.opus     { background: #e2d4f0; color: #5a32a3; }
+  .pill.tool     { background: #e9ecef; color: #495057; }
+  .pill.storage  { background: #d4edda; color: #155724; }
+  code {
+    background: #f3efe6;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", monospace;
+    font-size: 0.92em;
+  }
+  .key-fact {
+    background: linear-gradient(to right, #fffbed, #fff);
+    border-left: 4px solid var(--james);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">Pipeline Visualization · n8n 概念圖</span>
+  <h1>影片素材 → 自動剪輯 · 完整 Pipeline</h1>
+  <p class="subtitle">從 input 到出片上雲,17 個 step 各自分工(James / Robert / Opus / Tool / Storage)</p>
+  <div class="meta">
+    <span>📅 日期: <strong>2026-05-16</strong></span>
+    <span>📄 配套 SOP: <strong>影片素材_VLM抽幀_腳本剪輯_SOP.md</strong></span>
+    <span>👤 拍板: <strong>James + Robert(1-on-1 msg 1833~1852)</strong></span>
+  </div>
+</header>
+
+<h2>🎨 角色 / 工具色卡(Legend)</h2>
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch sw-james"></span><strong>James</strong> — 拍攝 / 評分微調 / FCP 細修 / 精修出片</div>
+  <div class="legend-item"><span class="legend-swatch sw-robert"></span><strong>Robert</strong> — 抽幀 / SQL / 分流 / 腳本 / marker 回寫</div>
+  <div class="legend-item"><span class="legend-swatch sw-opus"></span><strong>Opus 4.7 VLM</strong> — Stage A label / Stage B rating</div>
+  <div class="legend-item"><span class="legend-swatch sw-tool"></span><strong>Tool</strong> — ffmpeg / sqlite / SpliceKit / Nominatim / sips</div>
+  <div class="legend-item"><span class="legend-swatch sw-storage"></span><strong>Storage</strong> — _MOV / _FCPX / _export / NAS / 雲端</div>
+</div>
+
+<h2>🗺️ 整體 Pipeline 視覺圖</h2>
+<div class="mermaid-container">
+<pre class="mermaid">
+flowchart TD
+    classDef james fill:#fff3cd,stroke:#856404,color:#856404,stroke-width:2px
+    classDef robert fill:#cce5ff,stroke:#004085,color:#004085,stroke-width:2px
+    classDef opus fill:#e2d4f0,stroke:#5a32a3,color:#5a32a3,stroke-width:2px
+    classDef tool fill:#e9ecef,stroke:#495057,color:#495057
+    classDef storage fill:#d4edda,stroke:#155724,color:#155724
+
+    S0[📷 Step 0<br/>拍攝<br/>Sony A7R V / iPhone]:::james
+    S1[💾 Step 1<br/>匯入 NAS<br/>_MOV/&lt;scene&gt;/]:::james
+    S2[🌏 Step 2<br/>GPS + 場景命名<br/>VLM + Nominatim]:::robert
+    S3a[🎞️ Step 3a<br/>ffmpeg fps=1 抽幀<br/>4K 原寬 → _STILL/]:::robert
+    S3b[🖼️ Step 3b<br/>sips 生 1080p 縮圖<br/>VLM 判讀用]:::robert
+    S4[🤖 Step 4<br/>Stage A Label-only<br/>label / objective_description]:::opus
+    S4audit{Step 4.5<br/>James audit<br/>10 張抽查}:::james
+    S5[🤖 Step 5<br/>Stage B Rating + Pick<br/>1-5★ / P / scene_role]:::opus
+    S6[🗄️ Step 6<br/>LR catalog SQL 寫入<br/>v4 schema 關鍵字+註解]:::robert
+    S7[⚡ Step 7<br/>AutoTone trigger<br/>INSERT calculate step]:::robert
+    S8[🎨 Step 8<br/>James LR review<br/>色標 / Pick / NG caption]:::james
+    S9{Step 9<br/>分流 batch<br/>讀 colorLabel + Pick + NG}:::robert
+    S9a[🟥 紅 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
+    S9b[☁️ 紅 P=1<br/>→ _export/highlights/<br/>1080p H.265 8Mbps]:::storage
+    S9c[🟨 黃 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
+    S9d[🟨 黃 P=1 沒 NG<br/>FCP import _MOV]:::storage
+    S9e[❌ P=0<br/>不動 _MOV 保留]:::storage
+    S10[📍 Step 10 軌 🅒<br/>回寫 FCP marker<br/>Pick=1 → 藍色 marker]:::robert
+    S11[🎬 Step 11 選用<br/>James 在 FCP 細修<br/>marker / keyword 調整]:::james
+    S12[📜 Step 12<br/>導演視角腳本生成<br/>HTML director script]:::robert
+    S13{Step 13<br/>James review HTML<br/>annotate / 通過}:::james
+    S14[📑 Step 14<br/>FCPXML 生成<br/>給 FCP import]:::robert
+    S15[✂️ Step 15<br/>FCP 剪輯<br/>精修出片]:::james
+    S16[💎 Step 16<br/>出片 export<br/>1080p H.265 + faststart]:::storage
+    S17[☁️ Step 17<br/>上雲<br/>_export → GPhotos/Drive]:::storage
+
+    S0 --> S1
+    S1 --> S2
+    S2 --> S3a
+    S3a --> S3b
+    S3b --> S4
+    S4 --> S4audit
+    S4audit -- pass --> S5
+    S4audit -- fail --> S4
+    S5 --> S6
+    S6 --> S7
+    S7 --> S8
+    S8 --> S9
+    S9 -- 🔴紅 P=1 有 NG --> S9a
+    S9a --> S9b
+    S9 -- 🔴紅 P=1 沒 NG --> S9b
+    S9 -- 🟡黃 P=1 有 NG --> S9c
+    S9 -- 🟡黃 P=1 沒 NG --> S9d
+    S9 -- P=0 --> S9e
+    S9b --> S17
+    S9c --> S10
+    S9d --> S10
+    S9a --> S10
+    S10 --> S11
+    S10 -.no manual.-> S12
+    S11 --> S12
+    S12 --> S13
+    S13 -- 改 v2 --> S12
+    S13 -- 通過 --> S14
+    S14 --> S15
+    S15 --> S16
+    S16 --> S17
+</pre>
+</div>
+
+<h2>📋 各 Step 詳細(誰做 / 工具 / 輸入輸出)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>名稱</th>
+      <th>Executor</th>
+      <th>Tool</th>
+      <th>Input</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>拍攝</td>
+      <td><span class="pill james">James</span></td>
+      <td>Sony A7R V / iPhone</td>
+      <td>(現場)</td>
+      <td>ARW / HEIC / MP4 / MOV</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>匯入 NAS</td>
+      <td><span class="pill james">James</span></td>
+      <td>Finder / SD reader</td>
+      <td>SD card / iPhone</td>
+      <td><code>/Volumes/X10 Pro2/input/&lt;trip&gt;/_MOV/&lt;scene&gt;/</code></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>GPS + VLM 場景命名</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>VLM (Opus 4.7) + Nominatim API + 時區對齊</td>
+      <td>ARW EXIF + iPhone GPS</td>
+      <td><code>scene_naming.json</code></td>
+    </tr>
+    <tr>
+      <td>3a</td>
+      <td>ffmpeg 抽幀(4K 原寬)</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td><code>ffmpeg -vf fps=1</code></td>
+      <td><code>_MOV/&lt;scene&gt;/&lt;clip&gt;.MP4</code></td>
+      <td><code>_MOV/&lt;scene&gt;/_STILL/&lt;clip&gt;_t&lt;秒&gt;.jpg</code></td>
+    </tr>
+    <tr>
+      <td>3b</td>
+      <td>1080p 縮圖生成(VLM 判讀用)</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td><code>sips -Z 1080</code></td>
+      <td>4K STILL</td>
+      <td>1080p preview JPG</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Stage A: Label-only pass</td>
+      <td><span class="pill opus">Opus 4.7</span></td>
+      <td>Anthropic API + SKILL prompt</td>
+      <td>1080p 縮圖 + scene 資訊</td>
+      <td>label / objective_description / subject_type / confidence</td>
+    </tr>
+    <tr>
+      <td>4.5</td>
+      <td>James audit 10 張</td>
+      <td><span class="pill james">James</span></td>
+      <td>LR / 縮圖</td>
+      <td>Stage A 隨機抽樣</td>
+      <td>pass / fail(fail 則整批退回 Stage A 重跑)</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Stage B: Rating + Pick</td>
+      <td><span class="pill opus">Opus 4.7</span></td>
+      <td>Anthropic API</td>
+      <td>Stage A 結果 + 縮圖</td>
+      <td><code>master_stage_b_rating.csv</code></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>LR catalog SQL 寫入</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>SQLite + Python(走 v4 schema)</td>
+      <td>master CSV</td>
+      <td>Adobe_images.rating/pick/colorLabels + AgLibraryKeyword + AgLibraryIPTC.caption</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>AutoTone trigger</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>SQLite INSERT history step <code>calculate</code></td>
+      <td>catalog</td>
+      <td>LR 開檔自動算 Exposure/Contrast 6 軸</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>James LR review</td>
+      <td><span class="pill james">James</span></td>
+      <td>LR Classic</td>
+      <td>LR catalog</td>
+      <td>調整 rating / pick / colorLabel + caption 寫 NG 段</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>自動分流 batch(四象限)</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>bash + ffmpeg(讀 LR catalog)</td>
+      <td>colorLabel + Pick + NG caption</td>
+      <td>見下方四象限分流表</td>
+    </tr>
+    <tr>
+      <td>9a</td>
+      <td>紅 P=1 有 NG → trim + 壓縮</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td><code>ffmpeg -c copy</code> + H.265</td>
+      <td>_MOV + NG 段</td>
+      <td><code>_FCPX/&lt;clean&gt;.mp4</code> + <code>_export/highlights/&lt;cloud&gt;.mp4</code></td>
+    </tr>
+    <tr>
+      <td>9b</td>
+      <td>紅 P=1 沒 NG → 直接壓縮上雲</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td>ffmpeg H.265 8Mbps + faststart</td>
+      <td>_MOV/&lt;clip&gt;</td>
+      <td><code>_export/highlights/&lt;cloud&gt;.mp4</code></td>
+    </tr>
+    <tr>
+      <td>9c</td>
+      <td>黃 P=1 有 NG → trim 待剪輯</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td>ffmpeg lossless trim</td>
+      <td>_MOV + NG 段</td>
+      <td><code>_FCPX/&lt;clean&gt;.mp4</code>(進 FCP)</td>
+    </tr>
+    <tr>
+      <td>9d</td>
+      <td>黃 P=1 沒 NG → FCP 直接讀 _MOV</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td>FCP 雙資料夾 import</td>
+      <td>_MOV/&lt;clip&gt;</td>
+      <td>FCP event 加 keyword <code>original</code></td>
+    </tr>
+    <tr>
+      <td>9e</td>
+      <td>P=0 → 不動</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td>—</td>
+      <td>—</td>
+      <td>_MOV 保留(未來可能 cleanup,暫不實作)</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>軌 🅒:回寫 FCP marker</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>SpliceKit MCP</td>
+      <td>Pick=1 STILL 集合</td>
+      <td>FCP 內藍色 marker 寫進對應 clip 時間點</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>James 在 FCP 細修(選用)</td>
+      <td><span class="pill james">James</span></td>
+      <td>FCP Classic + SpliceKit dylib</td>
+      <td>FCP timeline + marker</td>
+      <td>自訂 marker / keyword adjustment</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>導演視角腳本生成</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>Opus 4.7 + Python</td>
+      <td>Pick=1 STILL + 母檔 metadata</td>
+      <td>HTML director script(縮圖+時間軸+運鏡腳本)</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>James review HTML 腳本</td>
+      <td><span class="pill james">James</span></td>
+      <td>瀏覽器</td>
+      <td>HTML script</td>
+      <td>annotation / comment / 通過 or 改 v2</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>FCPXML 生成</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>Python(FCPXML 1.x format)</td>
+      <td>通過的腳本</td>
+      <td><code>&lt;trip&gt;_timeline.fcpxml</code></td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>FCP 剪輯(精修出片)</td>
+      <td><span class="pill james">James</span></td>
+      <td>FCP</td>
+      <td>FCPXML + _MOV/ + _FCPX/</td>
+      <td>FCP project(剪輯完成)</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>出片 export</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td>FCP / ffmpeg H.265 + faststart</td>
+      <td>FCP project</td>
+      <td><code>_export/&lt;memoirs/highlights&gt;/&lt;edited&gt;.mp4</code></td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>上雲</td>
+      <td><span class="pill storage">Storage</span></td>
+      <td>rclone / GPhotos API / 手動</td>
+      <td>_export/</td>
+      <td>雲端可瀏覽(GPhotos / Drive / pCloud)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>🎯 四象限分流邏輯(Step 9 細節)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>色標</th>
+      <th>Pick</th>
+      <th>有 NG?</th>
+      <th>動作</th>
+      <th>結果檔案</th>
+      <th>上雲?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🔴 紅(精彩瞬間)</td>
+      <td>P=1</td>
+      <td>有</td>
+      <td>ffmpeg trim → clean + ffmpeg 壓縮</td>
+      <td>_FCPX/&lt;clean&gt;.mp4(NAS)+ _export/highlights/&lt;cloud&gt;.mp4</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>🔴 紅</td>
+      <td>P=1</td>
+      <td>沒</td>
+      <td>ffmpeg 從 _MOV 直接壓縮</td>
+      <td>_export/highlights/&lt;cloud&gt;.mp4</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>🔴 紅</td>
+      <td>P=0</td>
+      <td>—</td>
+      <td>不動</td>
+      <td>_MOV/&lt;clip&gt; 保留</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>🟡 黃(長篇紀錄)</td>
+      <td>P=1</td>
+      <td>有</td>
+      <td>ffmpeg trim → clean</td>
+      <td>_FCPX/&lt;clean&gt;.mp4(進剪輯)</td>
+      <td>剪輯後</td>
+    </tr>
+    <tr>
+      <td>🟡 黃</td>
+      <td>P=1</td>
+      <td>沒</td>
+      <td>FCP 直接讀 _MOV</td>
+      <td>(沒 _FCPX 版本)</td>
+      <td>剪輯後</td>
+    </tr>
+    <tr>
+      <td>🟡 黃</td>
+      <td>P=0</td>
+      <td>—</td>
+      <td>不動</td>
+      <td>_MOV/&lt;clip&gt; 保留</td>
+      <td>❌</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>🔁 雙軌設計(Step 10 / 11 / 12)</h2>
+
+<div class="key-fact">
+<strong>軌 🅐 / 🅑 / 🅒 可以混合 — 同一 trip 重要 clip 走軌 🅐,其他全交給 🅑+🅒</strong>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>軌</th>
+      <th>誰做</th>
+      <th>何時</th>
+      <th>輸出</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🅐 James 在 FCP 手動標</td>
+      <td><span class="pill james">James</span></td>
+      <td>有時間 + 對某段有特別意向</td>
+      <td>FCP Marker(時間點)+ Keyword(clip 層)</td>
+    </tr>
+    <tr>
+      <td>🅑 Robert 自動抽幀 + VLM 評分</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>預設 / 99% 情境</td>
+      <td>STILL + Pick</td>
+    </tr>
+    <tr>
+      <td>🅒 Robert 回寫 FCP marker</td>
+      <td><span class="pill robert">Robert</span></td>
+      <td>每次 Step 9 跑完自動觸發</td>
+      <td>Pick=1 frame → FCP 內藍色 marker</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>📂 三層儲存對應</h2>
+
+<table>
+  <thead>
+    <tr><th>路徑</th><th>內容</th><th>媒介</th><th>上雲?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>_MOV/&lt;scene&gt;/</code></td><td>母檔全集</td><td>原解析度 / 原 codec</td><td>❌ NAS only</td></tr>
+    <tr><td><code>_MOV/&lt;scene&gt;/_STILL/</code></td><td>VLM 抽幀(4K)+ 1080p 縮圖</td><td>JPG</td><td>❌ NAS only</td></tr>
+    <tr><td><code>_FCPX/&lt;scene&gt;/&lt;clean&gt;.mp4</code></td><td>有 NG 切過的乾淨版</td><td>原寬 H.264/H.265 lossless trim</td><td>❌ NAS only</td></tr>
+    <tr><td><code>_FCPX/&lt;scene&gt;/MANIFEST.md</code></td><td>哪些 clip 已 trim / 哪些用原檔</td><td>Markdown</td><td>❌</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/photos/</code></td><td>LR 精修照片</td><td>JPG</td><td>✅</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/highlights/&lt;cloud&gt;.mp4</code></td><td>紅 P=1 短片(壓縮版)</td><td>1080p H.265 8Mbps + faststart</td><td>✅</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/memoirs/&lt;edited&gt;.mp4</code></td><td>黃 P=1 剪輯完成版</td><td>同上</td><td>✅</td></tr>
+  </tbody>
+</table>
+
+<h2>🚀 啟動順序(實作 roadmap)</h2>
+
+<ol>
+  <li><strong>Stage 1 — 基礎抽幀 + 評分</strong> Step 1~7(已 cover by [[Backlog_5階段SOP]] 大部分,差 Step 3 抽幀)</li>
+  <li><strong>Stage 2 — 自動分流 batch</strong> Step 9(四象限分流,ffmpeg 規格已寫好)</li>
+  <li><strong>Stage 3 — 軌 🅒 回寫 FCP marker</strong> Step 10(SpliceKit MCP 既有能力,一個函式)</li>
+  <li><strong>Stage 4 — 導演腳本 + HTML 輸出</strong> Step 12(新 capability,Opus 為 director,Python 產 HTML)</li>
+  <li><strong>Stage 5 — FCPXML 生成 + FCP import 自動化</strong> Step 14(技術可行,需測試 FCPXML schema)</li>
+  <li><strong>Stage 6 — 上雲自動化</strong> Step 17(rclone or GPhotos API,看你選哪個雲)</li>
+</ol>
+
+<h2>📚 配套文件</h2>
+
+<ul>
+  <li><strong>SOP 文字版</strong>: <code>robert/raw/影片素材_VLM抽幀_腳本剪輯_SOP.md</code>(本視覺圖的 textual spec)</li>
+  <li><strong>相關技能</strong>: [[Backlog_5階段SOP]] / [[人像評分_4軸法]] / [[VLM評分_防幻覺紅線]] / [[LR_Catalog_v4_Metadata_Schema]] / [[LR_Catalog_SQL寫入安全]] / [[LR_AutoTone_SQL觸發]] / [[FCP_Marker_Workflow]] / [[Evoto_RoundTrip_B-flow_v3]]</li>
+</ul>
+
+<footer style="margin-top:60px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px;text-align:center;">
+2026-05-16 · photo-grade · 影片 pipeline n8n 視覺圖 v1
+</footer>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { curve: 'basis', padding: 20 }
+  });
+</script>
+
+</body>
+</html>
