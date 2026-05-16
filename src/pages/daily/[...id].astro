@@ -28,7 +28,7 @@ const dateStr = new Date(entry.data.date).toLocaleDateString('zh-TW', {
       <article>
         <!-- Header -->
         <div class="mb-8 pb-8 border-b border-white/5">
-          <a href="/daily" class="text-xs text-text-muted hover:text-accent transition-colors mb-4 inline-block">&larr; 所有日報</a>
+          <a href="/daily" class="text-xs text-text-muted hover:text-accent transition-colors mb-4 inline-block">&larr; 每日產經資訊</a>
           <div class="flex items-center gap-3 mb-2">
             <p class="text-sm text-accent">{dateStr}</p>
             {shareId && <ShareButton shareId={shareId} />}

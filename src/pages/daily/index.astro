@@ -2,41 +2,181 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+// 每日財經日報（NotebookLM / Podcast 整合產製）
 const allDaily = await getCollection('daily');
-const dailies = allDaily.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const dailies = allDaily.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// 產經新聞 = 所有股票財金相關的知識庫分類（個股 / 工具 / 盤後 / 趨勢 / 股票）
+const STOCK_CATS = ['股票', '股票-個股分析', '股票-工具', '股票-盤後日報', '股票-趨勢觀察'];
+const allNotes = await getCollection('kb');
+const stockNotes = allNotes.filter(n => STOCK_CATS.includes(n.data.category));
+
+// 統一清單（每日財經日報 + 股票財金筆記），依日期新到舊
+type Item = {
+  href: string; title: string; date: Date | null; category: string;
+  podcast: boolean; tags: string[];
+};
+const items: Item[] = [
+  ...dailies.map(d => ({
+    href: `/daily/${d.id}`, title: d.data.title,
+    date: d.data.date ? new Date(d.data.date) : null,
+    category: '每日財經日報', podcast: !!d.data.audio, tags: [] as string[],
+  })),
+  ...stockNotes.map(n => ({
+    href: `/kb/${n.id}`, title: n.data.title,
+    date: n.data.date ? new Date(n.data.date) : null,
+    category: n.data.category, podcast: false,
+    tags: (n.data.tags || []) as string[],
+  })),
+].sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0));
+
+// 獨立儀表板統計（範圍僅限產經）
+const totalItems = items.length;
+const totalDaily = dailies.length;
+const totalStock = stockNotes.length;
+const byCat: Record<string, number> = {};
+items.forEach(i => { byCat[i.category] = (byCat[i.category] || 0) + 1; });
+const latest = items.find(i => i.date)?.date || null;
+const filterCats = ['每日財經日報', ...STOCK_CATS].filter(c => byCat[c]);
 ---
 
-<BaseLayout title="每日財經日報" description="JTpHR 每日財經日報 — AI 整理的台股盤後分析">
-  <section class="max-w-4xl mx-auto px-6 py-24">
-    <h1 class="text-4xl font-bold mb-2">每日財經日報</h1>
-    <p class="text-text-muted mb-12">AI 整理，方便閱讀與聆聽</p>
+<BaseLayout title="每日產經資訊" description="JTpHR 每日產經資訊 — 整合台股財金、盤後分析、個股研究、趨勢觀察與每日財經日報">
+  <section class="max-w-6xl mx-auto px-6 py-24">
+    <h1 class="text-4xl font-bold mb-2">每日產經資訊</h1>
+    <p class="text-text-muted mb-10">整合資訊產製（非討論輸出）— 每日財經日報、台股盤後、個股研究、趨勢觀察、工具，集中於此</p>
 
-    <div class="space-y-4">
-      {dailies.map(d => (
-        <a href={`/daily/${d.id}`} class="block p-6 rounded-lg bg-brand-light border border-white/5 hover:border-accent/30 transition-all group">
+    <!-- 獨立儀表板 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-brand-light border border-white/5 rounded-lg p-5">
+        <p class="text-3xl font-bold text-accent">{totalItems}</p>
+        <p class="text-sm text-text-muted mt-1">總篇數</p>
+      </div>
+      <div class="bg-brand-light border border-white/5 rounded-lg p-5">
+        <p class="text-3xl font-bold text-yellow-400">{totalDaily}</p>
+        <p class="text-sm text-text-muted mt-1">每日財經日報</p>
+      </div>
+      <div class="bg-brand-light border border-white/5 rounded-lg p-5">
+        <p class="text-3xl font-bold text-green-400">{totalStock}</p>
+        <p class="text-sm text-text-muted mt-1">股票財金筆記</p>
+      </div>
+      <div class="bg-brand-light border border-white/5 rounded-lg p-5">
+        <p class="text-lg font-bold text-text">{latest ? latest.toLocaleDateString('zh-TW') : '—'}</p>
+        <p class="text-sm text-text-muted mt-1">最新更新</p>
+      </div>
+    </div>
+
+    <!-- 分類統計 -->
+    <div class="bg-brand-light border border-white/5 rounded-lg p-5 mb-10">
+      <p class="text-sm font-bold mb-3 text-text-muted">分類統計</p>
+      <div class="space-y-2">
+        {Object.entries(byCat).sort((a, b) => b[1] - a[1]).map(([cat, count]) => (
           <div class="flex items-center justify-between">
-            <div>
-              <p class="text-xs text-text-muted/50 mb-1">
-                {new Date(d.data.date).toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}
-              </p>
-              <h2 class="text-lg font-bold group-hover:text-accent transition-colors">{d.data.title}</h2>
-              {d.data.source && (
-                <p class="text-xs text-text-muted/40 mt-1">來源：{d.data.source}</p>
-              )}
+            <span class="text-sm text-text-muted">{cat}</span>
+            <div class="flex items-center gap-2">
+              <div class="w-32 h-1.5 bg-white/5 rounded-full overflow-hidden">
+                <div class="h-full bg-accent rounded-full" style={`width:${(count / totalItems) * 100}%`}></div>
+              </div>
+              <span class="text-xs text-text-muted/50 w-6 text-right">{count}</span>
             </div>
-            <div class="flex items-center gap-3">
-              {d.data.audio && (
-                <span class="text-xs px-2 py-1 rounded bg-accent/10 text-accent">🎙 Podcast</span>
-              )}
-              <span class="text-text-muted/30 group-hover:text-accent transition-colors text-xl">→</span>
-            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 獨立搜尋 -->
+    <div class="mb-6">
+      <input
+        type="text"
+        id="pe-search"
+        placeholder="搜尋產經資訊（標題 / 分類 / 標籤）..."
+        class="w-full px-4 py-3 bg-brand-light border border-white/10 rounded-lg text-text placeholder-text-muted/50 focus:border-accent focus:outline-none"
+      />
+    </div>
+
+    <!-- 分類篩選 -->
+    <div class="flex gap-2 mb-8 flex-wrap">
+      <button class="pe-filter active px-4 py-1.5 rounded-full text-sm font-medium bg-accent text-white" data-category="all">
+        全部 ({totalItems})
+      </button>
+      {filterCats.map(cat => (
+        <button class="pe-filter px-4 py-1.5 rounded-full text-sm font-medium border border-white/15 text-text-muted hover:border-accent hover:text-accent transition-colors" data-category={cat}>
+          {cat} ({byCat[cat]})
+        </button>
+      ))}
+    </div>
+
+    <!-- 統一卡片牆 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="pe-grid">
+      {items.map(it => (
+        <a
+          href={it.href}
+          class="pe-card block p-5 rounded-lg bg-brand-light border border-white/5 hover:border-accent/30 transition-all group"
+          data-category={it.category}
+          data-title={it.title.toLowerCase()}
+          data-tags={it.tags.join(' ').toLowerCase()}
+        >
+          <div class="flex items-start justify-between mb-2">
+            <span class="text-xs px-2 py-0.5 rounded bg-white/5 text-text-muted">{it.category}</span>
+            {it.date && (
+              <span class="text-xs text-text-muted/50">{it.date.toLocaleDateString('zh-TW')}</span>
+            )}
+          </div>
+          <h3 class="font-medium text-sm leading-snug group-hover:text-accent transition-colors mb-2 line-clamp-2">
+            {it.title}
+          </h3>
+          <div class="flex gap-1 flex-wrap items-center">
+            {it.podcast && (
+              <span class="text-[10px] px-2 py-0.5 rounded bg-accent/10 text-accent">🎙 Podcast</span>
+            )}
+            {it.tags.slice(0, 3).map(tag => (
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-text-muted/60">#{tag}</span>
+            ))}
           </div>
         </a>
       ))}
     </div>
 
-    {dailies.length === 0 && (
-      <p class="text-center text-text-muted py-12">尚無日報</p>
+    {totalItems === 0 && (
+      <p class="text-center text-text-muted py-12">尚無產經資訊</p>
     )}
+    <p id="pe-empty" class="text-center text-text-muted py-12 hidden">沒有符合的結果</p>
   </section>
+
+  <script>
+    const search = document.getElementById('pe-search') as HTMLInputElement;
+    const cards = document.querySelectorAll('.pe-card') as NodeListOf<HTMLElement>;
+    const btns = document.querySelectorAll('.pe-filter') as NodeListOf<HTMLButtonElement>;
+    const empty = document.getElementById('pe-empty');
+    let activeCat = 'all';
+
+    function apply() {
+      const q = (search?.value || '').toLowerCase();
+      let shown = 0;
+      cards.forEach(c => {
+        const t = c.dataset.title || '';
+        const tg = c.dataset.tags || '';
+        const cat = c.dataset.category || '';
+        const matchQ = t.includes(q) || tg.includes(q) || cat.toLowerCase().includes(q);
+        const matchC = activeCat === 'all' || cat === activeCat;
+        const ok = matchQ && matchC;
+        c.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+      if (empty) empty.classList.toggle('hidden', shown !== 0);
+    }
+
+    search?.addEventListener('input', apply);
+    btns.forEach(b => b.addEventListener('click', () => {
+      btns.forEach(x => {
+        x.classList.remove('active', 'bg-accent', 'text-white');
+        x.classList.add('border', 'border-white/15', 'text-text-muted');
+      });
+      b.classList.add('active', 'bg-accent', 'text-white');
+      b.classList.remove('border', 'border-white/15', 'text-text-muted');
+      activeCat = b.dataset.category || 'all';
+      apply();
+    }));
+  </script>
 </BaseLayout>
