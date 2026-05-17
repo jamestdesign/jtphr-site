@@ -153,6 +153,37 @@
     margin: 14px 0;
     border-radius: 0 6px 6px 0;
   }
+  .tip {
+    background: #fff9e6;
+    border-left: 3px solid #f0b400;
+    padding: 7px 11px;
+    margin: 8px 0 2px;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+    color: #4a3d00;
+    line-height: 1.55;
+  }
+  .tip strong { color: #8a6b00; }
+  .tip .tip-label {
+    display: inline-block;
+    background: #f0b400;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+  }
+  .tip ul { margin: 4px 0 0 0; padding-left: 18px; }
+  .tip li { margin: 1px 0; }
+  .tip code {
+    background: #f3eecf;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-size: 11px;
+  }
 </style>
 </head>
 <body>
@@ -171,48 +202,440 @@
 </header>
 
 <h2>📍 永漢 sample run 進度卡(2026-05-16)</h2>
+
+<div class="legend" style="background: #fffbed;">
+  <div class="legend-item"><strong>種類圖示</strong>:</div>
+  <div class="legend-item">🔀 <strong>共用</strong> — 照片+影片都跑這步</div>
+  <div class="legend-item">📸 <strong>照片 only</strong> — 含 STILL 走照片流程</div>
+  <div class="legend-item">🎬 <strong>影片 only</strong> — MOV 本體獨有</div>
+</div>
+
 <div class="key-fact" style="border-left-color: #2d7a4e;">
-  <strong>已跑完 Step 0 → Step 8</strong>(永漢實拍 → LR Import + SQL UPDATE → James audit override 13 個 + caption append turn)<br>
-  <strong>下一步 ⏳ Step 9 起</strong>:分流 batch / FCP marker 回寫 / 導演腳本 / FCPXML / 剪輯 / 出片 / 上雲
+  <strong>已跑完 Step 0 → Step 8</strong>(共用 + 影片 + 照片三條流交織完成 Stage A/B 評分 + LR Import + audit override)<br>
+  <strong>下一步</strong>:<br>
+  &nbsp;&nbsp;📸 Step 7 / 9-P-a/b/c(AutoTone → Evoto → preset → Photo Export)<br>
+  &nbsp;&nbsp;🎬 Step 9-V-a/b/c → Step 10-14(NG/KP/HL 標記 → HL 切片出片 → FCP marker → 行前劇本討論 → FCPXML → 剪輯)<br>
+  &nbsp;&nbsp;🔀 Step 16/17(共同 export + 上雲)
+</div>
+
+<div class="legend" style="background: #f8f6ee; margin: 10px 0;">
+  <div class="legend-item"><strong>角色標示</strong>:</div>
+  <div class="legend-item">👤 <strong>James</strong> — 創意 / 拍板 / 手動操作</div>
+  <div class="legend-item">🤖 <strong>Robert</strong> — 程式自動化(Python SQL / shell / API)</div>
+  <div class="legend-item">🧠 <strong>Opus 4.7</strong> — VLM 視覺判讀(Anthropic API)</div>
 </div>
 
 <table>
   <thead>
-    <tr><th>Step</th><th>名稱</th><th>狀態</th><th>備註</th></tr>
+    <tr><th>Step</th><th>種類</th><th>誰做</th><th>用什麼工具</th><th>做什麼事</th><th>狀態</th></tr>
   </thead>
   <tbody>
-    <tr><td>0</td><td>拍攝</td><td>✅</td><td>iPhone 17 Pro Max + OPPO X9 Ultra(2 設備混用,GPS+時間定錨)</td></tr>
-    <tr><td>1</td><td>結構化 mv</td><td>✅</td><td>5 場景資料夾 + <code>_MOV/</code> + <code>_STILL/</code></td></tr>
-    <tr><td>2</td><td>GPS+場景命名</td><td>✅</td><td>5 cluster 確認(1146 開場 / 1206 高點觀景 / 1300 球場高點 / 1340 會所 / 1544 後半)</td></tr>
-    <tr><td>3a</td><td>ffmpeg 抽幀</td><td>✅</td><td>fps=1 跑 72 張。<strong>scene-detect 雙保險方案實驗:fps=0.33+scene 0.1 砍 54%(72→33)</strong>,關鍵幀仍抓到</td></tr>
-    <tr><td>3b</td><td>1080p 縮圖</td><td>✅</td><td>72 張 1080p preview</td></tr>
-    <tr><td>4</td><td>Stage A Label</td><td>✅</td><td>101 張(29 photo + 72 STILL)R=10 / Y=58 / G=33 / P=0</td></tr>
-    <tr><td>4.5</td><td>James audit 10 張</td><td>⏭️</td><td>本次跳過,改在 Step 8 一次性 audit 全部</td></tr>
-    <tr><td>5</td><td>Stage B Rating+Pick</td><td>✅</td><td>1=1 / 2=52 / 3=33 / 4=15 / 5=0,pick 15/101=14.9%</td></tr>
-    <tr><td>6</td><td>LR catalog SQL 寫入</td><td>✅</td><td>SQL UPDATE 101 張(<strong>v4 schema v2 三紅線</strong>:colorLabels 繁中 / pick float / caption 4 短 tag + reason)</td></tr>
-    <tr><td>7</td><td>AutoTone trigger</td><td>⏳</td><td>本批未跑(STILL 不需 AutoTone)</td></tr>
-    <tr><td>8</td><td>James LR review</td><td>✅</td><td>13 個 override(12 P + 1 r)+ caption append turn,master.csv override 欄回填</td></tr>
-    <tr><td>9</td><td>分流 batch</td><td>⏳</td><td>四象限分流(紅 P=1 / 黃 P=1 / P=0)</td></tr>
-    <tr><td>10</td><td>軌 🅒 marker 回寫</td><td>⏳</td><td>Pick=1 → FCP 藍色 marker</td></tr>
-    <tr><td>11</td><td>FCP 細修(選用)</td><td>⏳</td><td>James 在 FCP 調 marker / keyword</td></tr>
-    <tr><td>12</td><td>導演視角腳本</td><td>⏳</td><td>HTML director script</td></tr>
-    <tr><td>13</td><td>James review HTML</td><td>⏳</td><td>annotate / 通過</td></tr>
-    <tr><td>14</td><td>FCPXML 生成</td><td>⏳</td><td>給 FCP import</td></tr>
-    <tr><td>15</td><td>FCP 剪輯</td><td>⏳</td><td>精修出片</td></tr>
-    <tr><td>16</td><td>出片 export</td><td>⏳</td><td>1080p H.265 + faststart</td></tr>
-    <tr><td>17</td><td>上雲</td><td>⏳</td><td>_export → GPhotos / Drive</td></tr>
+    <tr><td>0</td><td>🔀</td><td>👤 James</td><td>iPhone / OPPO / Sony</td><td>👤 James / 相機:拍照 / 拍影片</td><td>✅</td></tr>
+    <tr><td>1</td><td>🔀</td><td>🤖 Robert</td><td>shell + exiftool</td><td><strong>來源檔結構化 mv</strong>:
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>exiftool</strong>:讀每檔 GPS + 時間戳</li>
+        <li>🤖 Robert / <strong>shell mv</strong>:照片依「時間+場景」mv 進 <code>&lt;trip&gt;/&lt;scene&gt;/</code>;影片進 <code>&lt;trip&gt;/_MOV/&lt;scene&gt;/</code></li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>exiftool</strong>:不開圖就能讀 EXIF(GPS / 時間 / 相機型號 / 鏡頭)。<strong>shell mv</strong>:搬檔不複製,搬完原位置就沒了(怕誤搬先 backup)。</div></td><td>✅</td></tr>
+    <tr><td>2</td><td>🔀</td><td>🤖 Robert + 🧠 Opus</td><td>Nominatim + Opus VLM</td><td><strong>場景命名「時間_主題」</strong>:
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>Nominatim API</strong>:GPS lat/lon → 地名 cluster</li>
+        <li>🧠 Opus / <strong>Anthropic API + 縮圖</strong>:看每 cluster 縮圖 → 判斷主題(自拍 / 球場 / 高點觀景 等)</li>
+        <li>👤 James 拍板場景名(例:1146 開場球洞_自拍)</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>Nominatim</strong> = 免費 OpenStreetMap 反查 API(GPS → 地名,免 API key)。<strong>VLM 比 GPS 準</strong>:GPS 只給「在哪」(經緯度),VLM 看縮圖給「在幹嘛」(自拍 / 球場 / 全景),場景名才有意義。</div></td><td>✅</td></tr>
+    <tr><td>3a</td><td>🎬</td><td>🤖 Robert</td><td>ffmpeg select filter</td><td><strong>MOV 雙保險抽幀</strong>(fps=0.33 + scene 0.1):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>ffmpeg</strong>:跑 <code>select='isnan(prev_selected_t)+gte(t-prev_selected_t,3)+gt(scene,0.1)',showinfo</code></li>
+        <li>🤖 Robert / <strong>Python</strong>:解析 stderr 抓 pts_time → 重命名為 <code>IMG_&lt;src&gt;_s&lt;NN&gt;_t&lt;秒.秒&gt;.jpg</code></li>
+        <li>🤖 Robert / <strong>shell mv</strong>:輸出到 <code>_STILL/&lt;scene&gt;/</code></li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>雙保險方案</strong>(2026-05-16 永漢拍板):
+        <ul>
+          <li><strong>fps 保底</strong>(<code>gte(t-prev_selected_t,3)</code>)= 每 3 秒至少抓 1 張(怕漏靜止場景,如長時間定鏡)</li>
+          <li><strong>scene 加碼</strong>(<code>gt(scene,0.1)</code>)= ffmpeg 自動算相鄰幀像素差 &gt;10% 加抓(揮桿頂點 / 鏡頭切換)</li>
+          <li><strong>實證</strong>:永漢 7 部 75 秒影片,72 張 → 33 張砍 54%,關鍵幀(揮桿頂點 / 球車 transition)沒漏</li>
+          <li><strong>檔名 timestamp</strong>:<code>IMG_6230_s03_t03.02.jpg</code> 直接告訴你「第 3.02 秒」,審片時 LR 一邊看 MOV 一邊看 STILL 對得起來</li>
+          <li><strong>定期 review</strong>:每 3 個月看有沒有新工具替代(PySceneDetect / VLM 直接抽 / face detection)— 完整工具卡見 <code>robert/raw/2026-05-16_自動化工具_ffmpeg_scene_filter.md</code></li>
+        </ul>
+      </div></td><td>✅</td></tr>
+    <tr><td>3b</td><td>🎬</td><td>🤖 Robert</td><td>ffmpeg scale</td><td>🤖 Robert / <strong>ffmpeg</strong>:4K STILL → 1080p preview(scale=1920:1080),輸出到 workspace 給 Opus VLM 吃
+      <div class="tip"><span class="tip-label">💡 小貼士</span>VLM 看 1080p 就夠,4K 浪費 token 又慢(每張 ~3x token + ~2x 延遲)。輸出存 workspace,不寫進 vault(VLM 用完即丟)。</div></td><td>✅</td></tr>
+    <tr><td>4</td><td>🔀</td><td>🧠 Opus</td><td>Anthropic API + SKILL prompt</td><td><strong>Stage A Label-only</strong>(對 photo + STILL):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>shell</strong>:gen 1080p preview for photo(DNG → sips -Z 1920)</li>
+        <li>🧠 Opus / <strong>Anthropic API</strong>:看每張 1080p 預覽 → 標 <code>label</code>(R/Y/G/P)+ <code>objective_description</code> + <code>conf</code></li>
+        <li>🤖 Robert / <strong>Python</strong>:寫 <code>stage_A.csv</code></li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>拆兩階段 = 防 VLM 幻覺</strong>(2026-05-10 紅線):
+        <ul>
+          <li>Stage A 只判 <strong>label</strong>(R 精彩 / Y 紀錄 / G 風景 / P 純物)+ <strong>客觀描述</strong>(必填,防幻覺最強武器 — 強迫 VLM 先看清楚再下判斷)+ <strong>confidence</strong></li>
+          <li>一張一張獨立看,<strong>不抄旁邊那張答案</strong>(每張獨立 API call)</li>
+          <li><strong>conf &lt;0.7 → flag</strong> 等 James audit 介入</li>
+          <li><strong>Opus only</strong>(Sonnet 評分有幻覺)— 完整紅線見 <code>[[VLM評分_防幻覺紅線]]</code></li>
+        </ul>
+      </div></td><td>✅</td></tr>
+    <tr style="opacity: 0.4; text-decoration: line-through;"><td>4.5</td><td>🔀</td><td>—</td><td>—</td><td>抽 10 張 spot check — <strong>已廢除(Step 8 取代)</strong></td><td>❌</td></tr>
+    <tr><td>5</td><td>🔀</td><td>🧠 Opus</td><td>Anthropic API</td><td><strong>Stage B Rating+Pick</strong>:
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🧠 Opus / <strong>Anthropic API</strong>:每張看預覽 → 評 <code>rating</code>(1-5★)+ <code>pick</code>(0/1)+ <code>reason</code></li>
+        <li>🤖 Robert / <strong>Python</strong>:寫 <code>stage_B.csv</code>,join master.csv(含 override 4 欄)</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>Pick 不是越多越好</strong>(2026-05-16 永漢拍板):
+        <ul>
+          <li><strong>Pick=1 = 這場景代表幀</strong>(後續會出片 / 反推 MOV 關鍵幀)</li>
+          <li><strong>「真挑不到就是沒用 video」也合法</strong> — 整場景沒亮點就不擠 P,別硬挑</li>
+          <li><strong>同場景同 label</strong>:不要同場景 6 張 label 跳來跳去(主體沒變,label 就不變)</li>
+          <li><strong>reason 必填</strong>:Stage B 不只給分,還要寫「為什麼這分數」(Robert 寫 caption 用)</li>
+        </ul>
+      </div></td><td>✅</td></tr>
+    <tr><td>6</td><td>🔀</td><td>🤖 Robert</td><td>Python + SQLite → LR catalog</td><td><strong>LR catalog SQL 寫入</strong>(v4 schema v2 三紅線):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>shell</strong>:check LR Cmd+Q(<code>lsof &lt;catalog&gt;</code> 空)</li>
+        <li>🤖 Robert / <strong>shell</strong>:backup catalog + cp <code>/tmp/work.lrcat</code> + integrity_check</li>
+        <li>🤖 Robert / <strong>Python SQLite</strong>:UPDATE <code>Adobe_images</code>(rating / pick / colorLabels 必繁中);UPDATE <code>AgLibraryIPTC.caption</code>(4 短 tag + reason);INSERT <code>AgLibraryKeyword</code>(obj_desc 用 <code>+</code> 切);對 MOV 額外寫關鍵幀 keyword 清單(從 STILL P=1 反推)</li>
+        <li>🤖 Robert / <strong>shell</strong>:integrity_check + cp 回 SSD + integrity_check</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>LR catalog = SQLite DB</strong>,Robert 直接 SQL 寫入(不開 LR UI)。<strong>v4 schema v2 三紅線</strong>:
+        <ul>
+          <li>① <strong>colorLabels 必繁中</strong>(藍/綠/紅/紫/黃)— 英文 LR 不顯示</li>
+          <li>② <strong>pick</strong> 用 <code>1.0</code> / <code>0.0</code> / <code>-1.0</code> 浮點(不是 int)</li>
+          <li>③ <strong>caption</strong> = 4 短 tag + reason(<strong>不放客觀描述</strong> — 那是 keyword 的事)</li>
+        </ul>
+        <strong>ExFAT 走 /tmp 副本</strong>(SSD 直寫會壞 catalog),寫前後 <code>PRAGMA integrity_check</code> 各跑 1 次。完整 SOP 見 <code>[[LR_Catalog_SQL寫入安全]]</code>。
+      </div></td><td>✅</td></tr>
+    <tr style="background: #fff8dc;"><td><strong>7</strong></td><td>📸</td><td><strong>👤 James</strong></td><td><strong>LR Develop「自動」按鈕</strong></td><td><strong>AutoTone trigger</strong>(2026-05-17 拍板改 James 做):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>👤 James / <strong>LR Library</strong>:全選 photo + STILL(只 跳 MOV)</li>
+        <li>👤 James / <strong>LR Develop</strong>:切到 Develop 模組(快捷 D)</li>
+        <li>👤 James / <strong>LR</strong>:點「自動」按鈕 或 Shift+W → LR 對選中的圖跑 AutoTone 6 軸 → catalog persist</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>AutoTone</strong> = LR Develop 右上角「自動」按鈕(快捷 <code>Shift+W</code>):
+        <ul>
+          <li>LR 看亮度直方圖,1 秒內幫你算 <strong>6 軸建議值</strong>:曝光 / 對比 / 高光 / 陰影 / 白色色階 / 黑色色階</li>
+          <li><strong>STILL 也跑</strong>(P=1 是出片關鍵幀,跟 photo 同地位 — 2026-05-17 最高原則)</li>
+          <li><strong>MOV 跳過</strong>(影片沒 Develop 模組)</li>
+          <li><strong>JPG 比 RAW 灰</strong>:JPG STILL 的 AutoTone 結果通常較小,但仍有效果(別誤判「沒跑到」)</li>
+          <li><strong>為什麼 James 做不是 Robert 寫 SQL</strong>(2026-05-17 拍板):SQL 觸發 AutoTone 試了 5 個 bug 才搞定,人按 1 鍵更穩</li>
+        </ul>
+      </div></td><td>⏳</td></tr>
+    <tr style="background: #fff8dc;"><td><strong>8</strong></td><td>🔀</td><td><strong>👤 James</strong></td><td><strong>LR Library + Develop</strong></td><td><strong>audit + override</strong>(2026-05-17 拍板改 James 做):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>👤 James / <strong>LR Library</strong>:Filter rating / pick / colorLabel → 比對 VLM 評分對不對</li>
+        <li>👤 James / <strong>LR</strong>:要 override 直接改 rating / pick / colorLabel(catalog 直接生效)</li>
+        <li>👤 James / <strong>LR caption</strong>:append turn 用 <code>|</code> 分隔,例:<code>| [override] r:4→3 [reason:...]</code> / <code>| P:1 free</code> / <code>| 同場景取一張Ｐ</code></li>
+        <li>🤖 Robert(audit 後):回填 master.csv 的 override 4 欄(<code>override_rating / override_pick / override_label / override_reason</code>),audit log 永久保留</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>caption turn 結構</strong>(LR 註解欄):
+        <ul>
+          <li><strong>用 <code>|</code> 分段</strong>,每段是一個 turn(Robert 寫 turn 0,你 audit 寫 turn 1, 2, ...)</li>
+          <li><strong>override 用語固化</strong>(2026-05-13):<code>[override]</code> + <code>r:X→Y</code> 結構 / <code>P:1 free</code>(自由心證) / <code>同場景取一張Ｐ</code></li>
+          <li><strong>catalog 直接生效</strong>:LR Library 內改 rating / pick / colorLabel 不用 export — Robert 後續直接讀 catalog 就拿到 override</li>
+          <li><strong>audit log 永久保留</strong>:master.csv 4 個 override 欄 + caption turn 雙軌記錄,以後翻得回來「為什麼這張改成 3 星」</li>
+        </ul>
+      </div></td><td>⏳</td></tr>
+    <tr style="background: #fff4e6;"><td>9-P-a</td><td>📸</td><td>👤 James</td><td>LR + Evoto</td><td>🔴 <strong>紅 P=1 人像精修</strong>(全程 James 做):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>👤 James / <strong>LR</strong>:紅 P=1 在 LR 選 → 右鍵「在 Evoto 中編輯」→ LR 輸出 TIFF 16-bit ProPhoto → <code>&lt;trip&gt;/to_evoto/to_evoto/*.tif</code></li>
+        <li>👤 James / <strong>Evoto Retouch UI</strong>:人像精修(膚質 / 牙齒 / 眼睛 / 修瑕疵)— Evoto AI 自動 + 手動微調</li>
+        <li>👤 James / <strong>Evoto Export</strong>(設 file name suffix <code>-EVT</code>):出 JPG → <code>&lt;trip&gt;/to_evoto/to_evoto/Evotofu/IMG_XXXX-EVT.jpg</code></li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>Evoto</strong> = 專做人像精修的 AI 軟體(膚質 / 牙齒 / 眼睛 / 瑕疵):
+        <ul>
+          <li><strong>TIFF 16-bit ProPhoto</strong>(不要 JPG):色階多 65,536 階,精修不爆色</li>
+          <li><strong>-EVT 後綴</strong>(2026-05-17 拍板):一眼識別「這張 Evoto 精修過」,跟原檔 / LR Develop 出片區別。<strong>設定位置</strong>:Evoto Export → File name suffix → 填 <code>-EVT</code></li>
+          <li><strong>暫存路徑</strong>:<code>&lt;trip&gt;/to_evoto/to_evoto/Evotofu/</code>(雙層 <code>to_evoto/</code> 是 LR 預設,別動)</li>
+          <li><strong>原檔保留</strong>:<code>&lt;scene&gt;/*.DNG</code> 跟 _export JPG 並存於 catalog,以後可篩選</li>
+          <li><strong>SOP 完整版</strong>:見 <code>[[Evoto_RoundTrip_B-flow_v3]]</code></li>
+        </ul>
+      </div></td><td>✅</td></tr>
+    <tr style="background: #fff4e6;"><td>9-P-b</td><td>📸</td><td>👤 James</td><td>LR Develop + Export</td><td>🟡🟢🟣 <strong>黃綠紫 P=1 細調出片</strong>(全程 James 做):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>👤 James / <strong>LR Develop UI</strong>:套對應 preset(HarborDiary v1 等)+ 微調 slider</li>
+        <li>👤 James / <strong>LR Export</strong>:<strong>直接出圖到</strong> <code>&lt;trip&gt;/to_export/IMG_XXXX.jpg</code>(無 -EVT 後綴,跟 Evoto 出來的區別)</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>preset</strong> = LR Develop 預設值(一鍵套整套 slider 配置):
+        <ul>
+          <li><strong>HarborDiary v1</strong>(港邊日誌)= Robert 自訂 preset,套了再微調最快(別從 0 拉)</li>
+          <li><strong>直接 Export</strong>:不再經過 Evoto(黃綠紫 P=1 = 風景 / 食物 / 純物件,不用人像精修)</li>
+          <li><strong>無 <code>-EVT</code> 後綴</strong>:跟 Evoto 出片區別,看檔名就知道走哪條路徑</li>
+          <li><strong>9-P-c 會自動接手</strong>:Robert 從 <code>to_export/</code> 撈進 <code>_export/&lt;scene&gt;/</code>,你不用搬</li>
+        </ul>
+      </div></td><td>✅</td></tr>
+    <tr style="background: #fff4e6;"><td>9-P-c</td><td>📸</td><td>🤖 Robert</td><td>Python + SQLite + shell</td><td><strong>整理 2 個暫存來源 → 出片區</strong>(全程 Robert 做):
+      <p style="margin: 4px 0;"><strong>① 來源 1:<code>to_evoto/Evotofu/</code>(9-P-a 紅 -EVT JPG)→ 出片區</strong></p>
+      <ol style="margin: 0 0 6px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>shell cp</strong>:掃 <code>&lt;trip&gt;/to_evoto/to_evoto/Evotofu/*.jpg</code> → cp 到 <code>&lt;trip&gt;/_export/&lt;scene&gt;/IMG_XXXX-EVT.jpg</code>(scene 從 master.csv 查)</li>
+        <li>🤖 Robert / <strong>Python SQLite</strong>:對每張 INSERT 9 表 + cache pointers + history step</li>
+        <li>🤖 Robert / <strong>shell rm</strong>:砍 <code>to_evoto/</code> 整個</li>
+      </ol>
+      <p style="margin: 4px 0;"><strong>② 來源 2:<code>to_export/</code>(9-P-b 黃綠紫無後綴 JPG)→ 出片區</strong></p>
+      <ol style="margin: 0 0 6px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>shell cp</strong>:掃 <code>&lt;trip&gt;/to_export/*.jpg</code> → cp 到 <code>&lt;trip&gt;/_export/&lt;scene&gt;/IMG_XXXX.jpg</code>(scene 從 master.csv 查)</li>
+        <li>🤖 Robert / <strong>Python SQLite</strong>:對每張 INSERT 9 表(同上 schema)</li>
+        <li>🤖 Robert / <strong>shell rm</strong>:砍 <code>to_export/</code> 整個</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>SQL 9 表</strong>(產一張「LR catalog 認得的新照片」要寫的 9 張表):
+        <ul>
+          <li><code>AgLibraryFile</code>(檔案資訊)/ <code>Adobe_images</code>(圖片本體)/ <code>Adobe_imageDevelopSettings</code>(Develop 設定 + cache)/ <code>Adobe_imageProperties</code>(屬性 + cache)/ <code>Adobe_AdditionalMetadata</code>(EXIF/IPTC 索引)/ <code>AgLibraryIPTC</code>(IPTC 資料)/ <code>AgHarvestedExifMetadata</code>(EXIF 索引)+ cache pointers(<code>developSettingsIDCache</code> / <code>propertiesCache</code>,漏 = Develop 模組打不開)+ history step(<code>從中繼資料</code>)</li>
+          <li><strong>走 <code>[[LR_Catalog_SQL寫入安全]]</code> SOP</strong>:backup → /tmp 副本 → <code>PRAGMA integrity_check</code> → 寫 → 再 integrity_check → cp 回 SSD → 再 integrity_check(三次保險,2026-05-11 重災後固化)</li>
+          <li><strong>實作 reference</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/2026-05-10_evoto_to_export.py</code>(production 可 reuse)</li>
+          <li><strong>scene 解析</strong>:用 <code>master.csv</code> 的 baseName→scene 對應,<strong>不要</strong>從 catalog <code>pathFromRoot</code> 解析 — STILL 路徑第一層是 <code>_STILL/</code> 不是 scene 名,會解錯</li>
+          <li><strong>永漢實證</strong>(2026-05-17):27 張一次跑完(① 7 Evoto-EVT + ② 20 LR Develop)→ 全進 <code>_export/&lt;scene&gt;/</code> + LR catalog 註冊成功 ✅</li>
+        </ul>
+      </div></td><td>✅</td></tr>
+    <tr style="background: #e6f4ff;"><td>9-V-a</td><td>🎬</td><td>👤 James</td><td>LR Library(看 MOV caption + 評星)</td><td>看 MOV 關鍵幀 keyword 跳秒數檢視 → 評 rating 1-5★(類型)+ caption append <code>| NG:s-e</code> / <code>| KP:s-e</code> / <code>| HL:s-e</code> + 複查 P 需不需要
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>2026-05-17 重新拍板</strong>:
+        <ul>
+          <li><strong>HP → HL</strong>(High Light)改名 — 全用 HL,別再寫 HP</li>
+          <li><strong>NG 不切原檔</strong>:只標註,劇本不寫該段(節省時間 — 之前切 clean 太費時放棄)</li>
+          <li><strong>KP 是剪輯素材</strong>:跟 STILL+P 關鍵幀同地位,Robert 會抽段中間 1 幀進劇本縮圖</li>
+          <li><strong>rating 1-5★ = 類型</strong>:1 專題 / 2 活動 / 3 生活 / 4 精彩 / 5 保留(史詩級)</li>
+          <li><strong>caption 精簡格式</strong>(2026-05-17 拍板):<code>[label:Y] [confidence:0.93 投票 14/15]</code>(浮點 confidence + 比例,**關鍵幀去 keyword 欄查**,caption 不重複)</li>
+          <li><strong>關鍵幀 keyword 新命名</strong>:<code>KF:XX.XX</code>(KF = Key Frame 業界縮寫,跟 NG/HL/KP 同冒號分隔風格)— 例 <code>KF:06.00</code> <code>KF:13.00</code></li>
+          <li><strong>STILL P → MOV P</strong>:自動同步(任一 STILL P=1 → MOV P=1)</li>
+        </ul>
+      </div></td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>9-V-b</td><td>🎬</td><td>🤖 Robert</td><td>Python + ffmpeg</td><td><strong>HL 段切獨立 clip + 4★ 整段壓縮出片</strong>(2026-05-17 修正:把 4★ 直接出片也歸 9-V-b):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>Python SQL</strong>:從 catalog 找 rating≥4 OR caption 含 <code>HL:s-e</code> 的 MOV</li>
+        <li>🤖 Robert / <strong>ffmpeg</strong>:對 4★ 整段壓縮 → <code>_export/&lt;scene&gt;/出片/&lt;clip&gt;_4star.mp4</code></li>
+        <li>🤖 Robert / <strong>ffmpeg</strong>:對每段 HL 切片 → <code>_export/&lt;scene&gt;/出片/&lt;clip&gt;_hlNN.mp4</code></li>
+        <li>🤖 Robert / <strong>SQL UPDATE</strong>:MOV caption append <code>| 已出片</code> 註記(劇本 Step 11 解析用)</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>編碼規格</strong>(2026-05-17 v3,LR 預覽相容版):
+        <pre style="margin:4px 0;padding:6px 10px;background:#f3eecf;border-radius:3px;font-size:11px;">ffmpeg -i &lt;src&gt; -vf "scale=-2:1080,format=yuv420p" \
+  -c:v libx264 -pix_fmt yuv420p \
+  -crf 20 -preset slow \
+  -c:a aac -b:a 192k \
+  -movflags +faststart &lt;dst&gt;.mp4</pre>
+        <ul>
+          <li><strong>1080p</strong>(scale=-2:1080):雲端 / 手機觀看標準解析度,4K 上傳慢且大多手機螢幕看不出差別</li>
+          <li><strong>H.264 (AVC)</strong>(2026-05-17 v3 改用):**LR Classic 預覽相容**(HEVC 在 LR 顯示灰畫面)— 檔案比 H.265 大 ~30% 但 LR 一定能播</li>
+          <li><strong>8-bit(<code>format=yuv420p</code>)</strong>:強制 8-bit 色深 — 原 MOV 是 10-bit 但所有預覽工具(QuickTime / LR / Quick Look)都吃 8-bit</li>
+          <li><strong>CRF 20</strong>:H.264 的 CRF 20 約等於 H.265 CRF 22(視覺接近無損)</li>
+          <li><strong>preset slow</strong>:編碼較慢但壓縮率好(壓出小檔)— 出片不在乎時間</li>
+          <li><strong>+faststart</strong>:MP4 metadata 移到檔頭,網頁 / 雲端串流可**邊載邊播**(不用全載完才能看)</li>
+          <li><strong>AAC 192k</strong>:立體聲清晰、通用音訊 codec,所有平台都認</li>
+          <li><strong>NG 不切</strong>(2026-05-17 廢掉),原檔母片永遠保留在 <code>_MOV/</code></li>
+          <li><strong>HL ⊆ KP</strong>:HL 出片同時自動納入 Step 11 劇本 KP 池,同段不重複切</li>
+          <li><strong>輸出位置平層</strong>(2026-05-17 v2):<code>_export/&lt;scene&gt;/&lt;clip&gt;.mp4</code> 直接放在場景資料夾下,**不用 <code>出片/</code> 子層</strong></li>
+          <li><strong>同時 INSERT LR catalog</strong>:出片完直接寫進 catalog,James 在 LR 看得到管理(不用 sync folder)</li>
+          <li><strong>📝 為什麼不用 H.265</strong>(踩坑紀錄):2026-05-17 first try H.265 10-bit → QuickTime 不解 video。改 8-bit + hvc1 tag → QuickTime 通了,但 LR 還是灰畫面。**LR Classic HEVC bug 已知,直接 H.264**。檔案大 ~30% 是必要的相容稅。</li>
+        </ul>
+      </div></td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>9-V-c</td><td>🎬</td><td>🤖 Robert</td><td>Python + ffmpeg</td><td>解析 MOV caption 抓 KP 段 → 段中間秒數 ffmpeg 抽 1 幀代表 → <code>_KP_preview/&lt;clip&gt;_kpNN_tXX.XX.jpg</code> 進劇本縮圖區
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>KP 抽 1 幀代表</strong>(2026-05-17 拍板 Q3 A):<code>ffmpeg -ss &lt;中間秒&gt; -i clip.MOV -vframes 1 ...</code>,讓 KP 段在劇本中跟 STILL+P 同視覺地位。劇本上會註記 <code>KP:0-5s 轉場候選</code> + 縮圖。</div></td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>10</td><td>🎬</td><td>🤖 Robert</td><td>SpliceKit MCP → FCP</td><td>P=1 STILL timestamp 反推 → FCP 藍色 marker(軌 🅒)寫進 MOV</td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>11</td><td>🎬</td><td>👤 James</td><td>FCP UI(選用)</td><td>FCP 對 marker / keyword 細修</td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>12</td><td>🎬</td><td>🤖 Robert + 👤 James</td><td>Python + HTML template + 瀏覽器</td><td><strong>行前劇本討論</strong>(2026-05-17 拍板 Q6:Step 12-13 合一):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>Python + HTML</strong>:依素材給劇本建議
+          <ul style="margin: 2px 0 2px 16px; padding: 0;">
+            <li><strong>4-5★ P=1</strong>:純壓縮,不剪輯(已在 9-V-b 出片)</li>
+            <li><strong>3/2/1★ P=1</strong>:整合 STILL+P 關鍵幀 + KP 抽幀代表 + 照片 + (未來)剪輯模板</li>
+          </ul>
+        </li>
+        <li>👤 James / <strong>瀏覽器</strong>:review HTML 劇本 → 通過(去 Step 14)/ 改 v2 / 自帶想法直接給</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>行前劇本討論</strong>(2026-05-17 新):合併舊 Step 12 + 13。
+        <ul>
+          <li>導演視角:Robert 是「副導建議」,James 是「總導拍板」</li>
+          <li>James 若已有劇本想法直接給,Robert 接著整合</li>
+          <li><strong>剪輯模板</strong>(MTV / 故事性 / 演唱會)— 留專門 session 累積實證後固化,本次不涵蓋</li>
+        </ul>
+      </div></td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;text-decoration:line-through;opacity:0.4;"><td>13</td><td>🎬</td><td>—</td><td>—</td><td>已合進 Step 12(行前劇本討論 = 副導建議 + 總導 review)</td><td>❌</td></tr>
+    <tr style="background: #e6f4ff;"><td>14</td><td>🎬</td><td>🤖 Robert</td><td>Python → FCPXML</td><td>通過的 HTML 生成 FCPXML 給 FCP import</td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>15</td><td>🎬</td><td>👤 James</td><td>FCP UI</td><td>FCP 內精修(調速/轉場/音樂/字幕)→ 出片</td><td>⏳</td></tr>
+    <tr><td>16</td><td>🔀</td><td>👤 James</td><td>FCP Export / LR Export</td><td>影片 1080p H.265 + faststart;照片已在 9-P-c 出過</td><td>⏳</td></tr>
+    <tr><td>17</td><td>🔀</td><td>🤖 Robert</td><td>rclone / GPhotos API</td><td><code>_export/</code> 上雲(GPhotos / Drive / Synology)</td><td>⏳</td></tr>
   </tbody>
 </table>
 
 <div class="key-fact">
-  <strong>2026-05-16 sample run 拍板事項</strong>:
+  <strong>2026-05-16 / 17 拍板事項</strong>:
   <ul style="margin: 6px 0 0 0; padding-left: 20px;">
-    <li><strong>Step 3a 雙保險方案</strong>:fps=0.33 + scene 0.1(砍 54%,關鍵幀不漏) — 待寫進 production SOP</li>
+    <li><strong>Step 3a 雙保險方案</strong>:fps=0.33 + scene 0.1(砍 54%,關鍵幀不漏)</li>
+    <li><strong>Step 3a STILL 命名</strong>:<code>IMG_&lt;src&gt;_s&lt;NN&gt;_t&lt;秒.秒&gt;.jpg</code>(timestamp 寫進檔名,審片直接對照秒數)</li>
     <li><strong>Step 6 v4 schema v2 三紅線</strong>:colorLabels 必繁中 / pick float (1.0/0.0/-1.0) / caption 4 短 tag + reason 無 obj</li>
-    <li><strong>Pick 原則修正</strong>:沒亮點不擠 P,「真挑不到就是沒用 video」也合法</li>
+    <li><strong>Step 7 AutoTone 最高原則(2026-05-17 拍板)</strong>:全部照片(含 STILL)都跑 AutoTone,STILL P=1 是出片關鍵幀。**改 James LR 按 Shift+W**(原 Robert SQL 觸發改廢)</li>
+    <li><strong>Step 9-P 分工(2026-05-17 拍板)</strong>:James 做 9-P-a/b(LR + Evoto 精修);Robert 做 9-P-c(SQL 註冊 _export);Evoto 出 JPG 加 <code>-EVT</code> 後綴</li>
+    <li><strong>Step 9-V 重新拍板(2026-05-17)</strong>:
+      <ul style="margin: 2px 0 0 18px; padding: 0;">
+        <li><strong>HP → HL</strong>(High Light)改名</li>
+        <li><strong>NG 不切原檔</strong>,只標註,劇本不寫入</li>
+        <li><strong>HL 切獨立 clip 直接出片</strong>(<code>_export/&lt;scene&gt;/出片/&lt;clip&gt;_hlNN.mp4</code>)</li>
+        <li><strong>KP 抽 1 幀代表</strong>進劇本縮圖區(跟 STILL+P 同地位)</li>
+        <li><strong>MOV rating 1-5★ = 影片類型</strong>(1 專題 / 2 活動 / 3 生活 / 4 精彩 / 5 保留)— 跟 STILL rating「品質」同欄不同義</li>
+        <li><strong>colorLabel 保留</strong>:VLM 看主體(R 人像清楚 / Y 人像不清楚 / G 風景 / P 物件)— 跟 rating 雙維度</li>
+        <li><strong>出片規則</strong>:只有 4-5★ 且 P=1 直接壓縮出片;3/2/1★ 即使 P=1 也只進剪輯</li>
+        <li><strong>_FCPX/ 暫存廢掉</strong>(NG 不切就不需要),FCP 直接讀 <code>_MOV/</code></li>
+        <li><strong>caption 精簡 + 關鍵幀分離</strong>(2026-05-17):caption = <code>[label:Y] [confidence:0.93 投票 14/15]</code>(精簡 only label + confidence);關鍵幀去 keyword 欄 <code>KF:XX.XX</code> 命名(KF 縮寫 + 冒號分隔 + zero-pad,無 @ 無 s)</li>
+        <li><strong>Step 12-13 合一</strong>:行前劇本討論(Robert 副導建議 + James 總導 review)</li>
+      </ul>
+    </li>
+    <li><strong>影片 keyword 自動回填 KF 關鍵幀</strong>:從 STILL P=1 反推時間點,寫 keyword <code>KF:XX.XX</code>(每張 P=1 STILL 一個 KF keyword)</li>
+    <li><strong>Label 自動投票</strong>:MOV colorLabel 從 STILL 多數決</li>
+    <li><strong>Pick 原則</strong>:沒亮點不擠 P,「真挑不到就是沒用 video」也合法。STILL P=1 → MOV P=1 自動同步</li>
     <li><strong>override 用語</strong>:自由心證 = free / 代表幀 / [override] 跟 r:X→Y 結構</li>
   </ul>
 </div>
+
+<h2>📝 Step 9-V MOV 標記 + 評星 schema(2026-05-17 永漢拍板修訂版)</h2>
+
+<h3>🌟 MOV rating 0-5★(類型,2026-05-17 v2 偏移)</h3>
+
+<div class="tip"><span class="tip-label">💡 v2 修正</span>9-V-a 實作後發現「不特別」的影片佔大多數,讓**不評星 = 生活紀錄**省你按鍵動作。整 scheme 偏移 +1。</div>
+
+<table>
+  <thead>
+    <tr><th>★</th><th>類型</th><th>說明</th><th>出片規則</th></tr>
+  </thead>
+  <tbody>
+    <tr style="background:#fff5f5;">
+      <td><strong>5★</strong></td>
+      <td>史詩級保留</td>
+      <td>婚禮 / 作品集 / 首映</td>
+      <td>P=1 → <strong>直接壓縮出片</strong> + 二次剪輯</td>
+    </tr>
+    <tr style="background:#fff5f5;">
+      <td><strong>4★</strong></td>
+      <td>精彩瞬間</td>
+      <td>單一精彩片段(揮桿頂點全錄 / 表演高潮)</td>
+      <td>P=1 → <strong>直接壓縮出片</strong> + 二次剪輯</td>
+    </tr>
+    <tr style="background:#fffbed;">
+      <td><strong>3★</strong></td>
+      <td>保留</td>
+      <td>(二級類型待定義)</td>
+      <td>進剪輯流程</td>
+    </tr>
+    <tr style="background:#fffbed;">
+      <td><strong>2★</strong></td>
+      <td>活動攝影</td>
+      <td>演唱會 / 說明會 — 段素材長</td>
+      <td>直接剪在一起放雲端保存(不精修)</td>
+    </tr>
+    <tr style="background:#fffbed;">
+      <td><strong>1★</strong></td>
+      <td>專題報導</td>
+      <td>課程整片 / 單一專題完整性</td>
+      <td>整片保留 + NG 註記版剪輯出片</td>
+    </tr>
+    <tr style="background:#f0f4f8;">
+      <td><strong>0★</strong> 預設</td>
+      <td><strong>生活紀錄</strong>(永漢揮桿練習屬此)</td>
+      <td>不評星就是這個 — 日常活動長影片</td>
+      <td>即使 P=1 也<strong>不直接出片</strong>;KF + KP 仍可進劇本</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>🗑️ Pick=-1(Reject)→ 物理刪除(2026-05-17 拍板)</h3>
+
+<table>
+  <thead>
+    <tr><th>項目</th><th>規則</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>觸發</td><td>你 LR 標 MOV Pick=-1(Reject 旗標)</td></tr>
+    <tr><td>刪除範圍</td><td>✅ 刪 MOV 本體 <code>_MOV/&lt;scene&gt;/&lt;clip&gt;.MOV</code><br>❌ 不刪 STILL(已有 KF 關鍵幀 → 保留 STILL 不剪輯該段)</td></tr>
+    <tr><td>catalog 處理</td><td>DELETE Adobe_images / AgLibraryFile / AgLibraryKeywordImage(MOV image_id);若 KF keyword 變 0 引用 → 連 keyword 一起 GC</td></tr>
+    <tr><td>安全機制</td><td>quarantine:先搬 <code>_TRASH/&lt;scene&gt;/&lt;clip&gt;.MOV</code>,7 天後真刪(誤標 -1 可救回)</td></tr>
+    <tr><td>觸發時機</td><td><strong>explicit</strong> 跑 cleanup script(不在 9-V-a 自動觸發)— TBD `~/Desktop/Claude-Workspace/photo-grade/cleanup_rejects.py`</td></tr>
+  </tbody>
+</table>
+
+<h3>🎨 MOV colorLabel(視覺主體,2026-05-17 拍板保留)</h3>
+
+<p style="font-size:13px;color:var(--muted);margin:8px 0;">跟 rating 是<strong>獨立兩個維度</strong>:rating = 內容類型,colorLabel = 視覺主體。例:永漢 IMG_6232 = <strong>3★ Y</strong>(生活紀錄 + 人像背影)</p>
+
+<table>
+  <thead>
+    <tr><th>colorLabel</th><th>意思(VLM 看主體)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>🔴 <strong>R</strong></td><td>人像五官明顯多(臉清楚)</td></tr>
+    <tr><td>🟡 <strong>Y</strong></td><td>看不到五官的人像(背影 / 側臉 / 動作)</td></tr>
+    <tr><td>🟢 <strong>G</strong></td><td>風景</td></tr>
+    <tr><td>🟣 <strong>P</strong></td><td>食物 / 藝術品 / 物件</td></tr>
+    <tr style="opacity:0.5;"><td>🔵 B</td><td>(暫未啟用)</td></tr>
+  </tbody>
+</table>
+
+<h3>🚩 三標記 NG / KP / HL(2026-05-17 重新拍板)</h3>
+
+<table>
+  <thead>
+    <tr><th>標記</th><th>意思</th><th>寫法(影片 caption append turn)</th><th>處理</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🚫 <strong>NG</strong></td>
+      <td>No Good - 失誤段</td>
+      <td><code>| NG:5.0-7.0,12.5-13.5  對焦失誤</code></td>
+      <td><strong>只標註,不切原檔</strong>(劇本生成不寫入該段,2026-05-17 簡化 — 之前 trim 太費時放棄)</td>
+    </tr>
+    <tr>
+      <td>📌 <strong>KP</strong></td>
+      <td>Keep - 剪輯素材</td>
+      <td><code>| KP:0.0-5.0  開場跑桿可作轉場</code></td>
+      <td><strong>抽段中間 1 幀代表</strong> → <code>_KP_preview/&lt;clip&gt;_kpNN_tXX.XX.jpg</code> 進劇本縮圖(2026-05-17 拍板)</td>
+    </tr>
+    <tr>
+      <td>⭐ <strong>HL</strong></td>
+      <td>High Light - 獨立切片出片 + 劇本 KP 候選</td>
+      <td><code>| HL:9.0-10.5  揮桿頂點精彩</code></td>
+      <td>切獨立 clip → <code>_export/&lt;scene&gt;/出片/&lt;clip&gt;_hlNN.mp4</code>(1080p H.265 直接上雲)<strong>+ HL ⊆ KP</strong>(2026-05-17):自動納入 Step 12 劇本 KP 候選池,同一段只切一次</td>
+    </tr>
+    <tr>
+      <td>❌ <strong>P=0</strong></td>
+      <td>沒挑中(任何 Label)</td>
+      <td>(無 STILL P=1)</td>
+      <td>不動,留 <code>_MOV/</code> 母檔備份</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="tip"><span class="tip-label">💡 小貼士</span><strong>HP → HL 改名 + HL ⊆ KP 規則</strong>(2026-05-17):
+  <ul>
+    <li>全 vault 替換 — 影片 schema 內 HP → HL,High Point → High Light</li>
+    <li><strong>HL ⊆ KP</strong>:你標 HL 自動就是 KP 候選(劇本 Step 12 會 reference)— 不用重複寫 HL + KP</li>
+    <li>同一段只切一次:HL 獨立 clip + 劇本 reference 同一 clip</li>
+    <li>注意:**照片人像 P=1 的 P 不是 HP**,那是 Pick=1,別動</li>
+  </ul>
+</div>
+
+<div class="key-fact">
+<strong>完整 walkthrough 範例 — IMG_6230.MOV(永漢 15.37s 揮桿練習)2026-05-17 修訂版</strong>:
+<pre style="background:#f3efe6;padding:10px;border-radius:4px;margin-top:8px;font-size:12px;overflow-x:auto;">
+turn 0 (Robert 自動寫,精簡版):
+caption: [label:Y] [confidence:1.00 投票 15/15]
+keyword: KF:01.00, KF:08.00, KF:13.00  (從 STILL P=1 反推)
+→ rating: 3★(生活紀錄,James audit 時評)
+→ colorLabel: Y(VLM 投票主體判定,15/15 全 Y)
+→ pick: 1.0(STILL P=1 → MOV 自動同步)
+
+turn 1 (你 LR 9-V-a audit 加 NG):
+... | NG:4.0-5.0  對焦失誤
+
+turn 2 (你加 HL):
+... | NG:4.0-5.0  對焦失誤 | HL:8.5-10.0  揮桿頂點
+
+turn 3 (你加 KP):
+... | NG:4.0-5.0  對焦失誤 | HL:8.5-10.0  揮桿頂點 | KP:0.0-5.0  開場跑桿轉場素材
+
+Robert 處理(2026-05-17 修訂版):
+→ NG:4.0-5.0:**不切**,僅標註(劇本跳過該段)
+→ HL:8.5-10.0:ffmpeg 切 → _export/1300 球場高點_自拍/出片/IMG_6230_hl01.mp4
+→ KP:0.0-5.0:ffmpeg -ss 2.5 抽 1 幀 → _KP_preview/IMG_6230_kp01_t2.5.jpg
+→ 因為 rating=3★(生活紀錄)→ 整片不直接壓縮上雲,進 Step 12 行前劇本討論
+→ _MOV/.../IMG_6230.MOV **保留**(NG 不切)
+</pre>
+</div>
+
+<p style="color: var(--muted); font-size: 13px;">完整 schema 規範見 <code>robert/raw/2026-05-17_9-V-a_HL_NG_KP_重新拍板.md</code>(2026-05-17 取代部分 2026-05-16 v1)+ ffmpeg scene filter 工具卡 <code>robert/raw/2026-05-16_自動化工具_ffmpeg_scene_filter.md</code></p>
 
 <h2>🎨 角色 / 工具色卡(Legend)</h2>
 <div class="legend">
@@ -220,10 +643,13 @@
   <div class="legend-item"><span class="legend-swatch sw-robert"></span><strong>Robert</strong> — 抽幀 / SQL / 分流 / 腳本 / marker 回寫</div>
   <div class="legend-item"><span class="legend-swatch sw-opus"></span><strong>Opus 4.7 VLM</strong> — Stage A label / Stage B rating</div>
   <div class="legend-item"><span class="legend-swatch sw-tool"></span><strong>Tool</strong> — ffmpeg / sqlite / SpliceKit / Nominatim / sips</div>
-  <div class="legend-item"><span class="legend-swatch sw-storage"></span><strong>Storage</strong> — _MOV / _FCPX / _export / NAS / 雲端</div>
+  <div class="legend-item"><span class="legend-swatch sw-storage"></span><strong>Storage</strong> — _MOV / _export / NAS / 雲端(2026-05-17:<code>_FCPX/</code> 廢掉)</div>
 </div>
 
 <h2>🗺️ 整體 Pipeline 視覺圖</h2>
+
+<div class="tip" style="margin: 12px 0 16px;"><span class="tip-label">⚠️ 注意</span><strong>下方 mermaid 為 2026-05-16 v1 舊版</strong>:仍顯示 _FCPX/clean trim、Step 12/13 分立、Step 9 四象限分流。<strong>2026-05-17 已修訂</strong>(NG 不切 / _FCPX/ 廢掉 / Step 12-13 合一 / HP→HL / MOV rating=類型)— 以**上方表格 + 9-V schema**為準。Mermaid 待專門 session 重畫。</div>
+
 <div class="mermaid-container">
 <pre class="mermaid">
 flowchart TD
@@ -242,11 +668,11 @@ flowchart TD
     S4audit{⏭️ Step 4.5<br/>James audit 10 張<br/>本批跳過,Step 8 整合 audit}:::james
     S5[✅ Step 5<br/>Stage B Rating + Pick<br/>1-5★ / P]:::opus
     S6[✅ Step 6<br/>LR catalog SQL 寫入<br/>v4 v2 三紅線]:::robert
-    S7[⏳ Step 7<br/>AutoTone trigger<br/>INSERT calculate step]:::robert
+    S7[⏳ Step 7<br/>AutoTone trigger<br/>James LR Shift+W 自動]:::james
     S8[✅ Step 8<br/>James LR review<br/>13 override + caption turn]:::james
     S9{⏳ Step 9<br/>分流 batch<br/>讀 colorLabel + Pick + NG}:::robert
     S9a[🟥 紅 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
-    S9b[☁️ 紅 P=1<br/>→ _export/highlights/<br/>1080p H.265 8Mbps]:::storage
+    S9b[☁️ 紅 P=1<br/>→ _export/出片/<br/>1080p H.265 8Mbps]:::storage
     S9c[🟨 黃 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
     S9d[🟨 黃 P=1 沒 NG<br/>FCP import _MOV]:::storage
     S9e[❌ P=0<br/>不動 _MOV 保留]:::storage
@@ -409,7 +835,7 @@ flowchart TD
       <td><span class="pill storage">Storage</span></td>
       <td><code>ffmpeg -c copy</code> + H.265</td>
       <td>_MOV + NG 段</td>
-      <td><code>_FCPX/&lt;clean&gt;.mp4</code> + <code>_export/highlights/&lt;cloud&gt;.mp4</code></td>
+      <td><code>_FCPX/&lt;clean&gt;.mp4</code> + <code>_export/出片/&lt;cloud&gt;.mp4</code></td>
     </tr>
     <tr>
       <td>9b</td>
@@ -417,7 +843,7 @@ flowchart TD
       <td><span class="pill storage">Storage</span></td>
       <td>ffmpeg H.265 8Mbps + faststart</td>
       <td>_MOV/&lt;clip&gt;</td>
-      <td><code>_export/highlights/&lt;cloud&gt;.mp4</code></td>
+      <td><code>_export/出片/&lt;cloud&gt;.mp4</code></td>
     </tr>
     <tr>
       <td>9c</td>
@@ -497,7 +923,7 @@ flowchart TD
       <td><span class="pill storage">Storage</span></td>
       <td>FCP / ffmpeg H.265 + faststart</td>
       <td>FCP project</td>
-      <td><code>_export/&lt;memoirs/highlights&gt;/&lt;edited&gt;.mp4</code></td>
+      <td><code>_export/&lt;memoirs/出片&gt;/&lt;edited&gt;.mp4</code></td>
     </tr>
     <tr>
       <td>17</td>
@@ -510,9 +936,11 @@ flowchart TD
   </tbody>
 </table>
 
-<h2>🎯 四象限分流邏輯(Step 9 細節)</h2>
+<h2 style="text-decoration:line-through;opacity:0.5;">🎯 四象限分流邏輯(Step 9 細節)</h2>
 
-<table>
+<div class="tip" style="margin: 12px 0 16px;"><span class="tip-label">⚠️ 廢除</span><strong>本段 2026-05-17 廢掉</strong> — NG 不切原檔了(節省時間放棄 trim),也不再用「colorLabel 分流」決定出片。新規則:**只看 MOV rating 1-5★ + HL 標註**(見上方 §Step 9-V schema)。下表保留作 audit 記錄。</div>
+
+<table style="opacity:0.4;">
   <thead>
     <tr>
       <th>色標</th>
@@ -529,7 +957,7 @@ flowchart TD
       <td>P=1</td>
       <td>有</td>
       <td>ffmpeg trim → clean + ffmpeg 壓縮</td>
-      <td>_FCPX/&lt;clean&gt;.mp4(NAS)+ _export/highlights/&lt;cloud&gt;.mp4</td>
+      <td>_FCPX/&lt;clean&gt;.mp4(NAS)+ _export/出片/&lt;cloud&gt;.mp4</td>
       <td>✅</td>
     </tr>
     <tr>
@@ -537,7 +965,7 @@ flowchart TD
       <td>P=1</td>
       <td>沒</td>
       <td>ffmpeg 從 _MOV 直接壓縮</td>
-      <td>_export/highlights/&lt;cloud&gt;.mp4</td>
+      <td>_export/出片/&lt;cloud&gt;.mp4</td>
       <td>✅</td>
     </tr>
     <tr>
@@ -612,20 +1040,22 @@ flowchart TD
   </tbody>
 </table>
 
-<h2>📂 三層儲存對應</h2>
+<h2>📂 儲存對應(2026-05-17 簡化版)</h2>
 
 <table>
   <thead>
     <tr><th>路徑</th><th>內容</th><th>媒介</th><th>上雲?</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>_MOV/&lt;scene&gt;/</code></td><td>母檔全集</td><td>原解析度 / 原 codec</td><td>❌ NAS only</td></tr>
-    <tr><td><code>_MOV/&lt;scene&gt;/_STILL/</code></td><td>VLM 抽幀(4K)+ 1080p 縮圖</td><td>JPG</td><td>❌ NAS only</td></tr>
-    <tr><td><code>_FCPX/&lt;scene&gt;/&lt;clean&gt;.mp4</code></td><td>有 NG 切過的乾淨版</td><td>原寬 H.264/H.265 lossless trim</td><td>❌ NAS only</td></tr>
-    <tr><td><code>_FCPX/&lt;scene&gt;/MANIFEST.md</code></td><td>哪些 clip 已 trim / 哪些用原檔</td><td>Markdown</td><td>❌</td></tr>
-    <tr><td><code>_export/&lt;scene&gt;/photos/</code></td><td>LR 精修照片</td><td>JPG</td><td>✅</td></tr>
-    <tr><td><code>_export/&lt;scene&gt;/highlights/&lt;cloud&gt;.mp4</code></td><td>紅 P=1 短片(壓縮版)</td><td>1080p H.265 8Mbps + faststart</td><td>✅</td></tr>
-    <tr><td><code>_export/&lt;scene&gt;/memoirs/&lt;edited&gt;.mp4</code></td><td>黃 P=1 剪輯完成版</td><td>同上</td><td>✅</td></tr>
+    <tr><td><code>_MOV/&lt;scene&gt;/&lt;clip&gt;.MOV</code></td><td>母檔全集(永遠不切)</td><td>原解析度 / 原 codec</td><td>❌ NAS only</td></tr>
+    <tr><td><code>_STILL/&lt;scene&gt;/&lt;clip&gt;_sNN_tXX.XX.jpg</code></td><td>VLM 抽幀(4K)+ 1080p 縮圖</td><td>JPG</td><td>❌ NAS only</td></tr>
+    <tr><td><code>_KP_preview/&lt;clip&gt;_kpNN_tXX.XX.jpg</code></td><td>KP 段中間秒抽 1 幀代表(2026-05-17 新)</td><td>JPG</td><td>❌ NAS only(劇本縮圖用)</td></tr>
+    <tr style="text-decoration:line-through;opacity:0.4;"><td><code>_FCPX/&lt;scene&gt;/&lt;clean&gt;.mp4</code></td><td>有 NG 切過的乾淨版</td><td>原寬 H.264/H.265 lossless trim</td><td>2026-05-17 廢掉</td></tr>
+    <tr style="text-decoration:line-through;opacity:0.4;"><td><code>_FCPX/&lt;scene&gt;/MANIFEST.md</code></td><td>哪些 clip 已 trim / 哪些用原檔</td><td>Markdown</td><td>2026-05-17 廢掉</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/&lt;photo&gt;.jpg</code></td><td>LR 精修照片(9-P-c 寫入)</td><td>JPG</td><td>✅</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/&lt;clip&gt;_hlNN.mp4</code></td><td>HL 段獨立切片(2026-05-17 v2:平層,廢 <code>出片/</code> 子層)</td><td>1080p H.265 8-bit + faststart</td><td>✅</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/&lt;clip&gt;_4star.mp4</code></td><td>4★/5★ 整段直接出片(2026-05-17 v2:9-V-b 加碼)</td><td>1080p H.265 8-bit + faststart</td><td>✅</td></tr>
+    <tr><td><code>_export/&lt;scene&gt;/memoirs/&lt;edited&gt;.mp4</code></td><td>剪輯完成版(3/2/1★ 走剪輯流程出片)</td><td>1080p H.265 + faststart</td><td>✅</td></tr>
   </tbody>
 </table>
 
