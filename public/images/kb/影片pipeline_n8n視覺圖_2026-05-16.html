@@ -446,7 +446,23 @@
         </ul>
       </div></td><td>⏳</td></tr>
     <tr style="background: #e6f4ff;text-decoration:line-through;opacity:0.4;"><td>13</td><td>🎬</td><td>—</td><td>—</td><td>已合進 Step 12(行前劇本討論 = 副導建議 + 總導 review)</td><td>❌</td></tr>
-    <tr style="background: #e6f4ff;"><td>14</td><td>🎬</td><td>🤖 Robert</td><td>Python → FCPXML</td><td>通過的 HTML 生成 FCPXML 給 FCP import</td><td>⏳</td></tr>
+    <tr style="background: #e6f4ff;"><td>14</td><td>🎬</td><td>🤖 Robert + 👤 James</td><td>Python → FCPXML → FCP import</td><td><strong>FCPXML 生成 + 初剪</strong>(2026-05-17 實證):
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>🤖 Robert / <strong>Python gen_fcpxml.py</strong>:讀 storyboard JSON → 生 .fcpxml(18 clips frame-aligned 60p + BGM + title gap 佔位)</li>
+        <li>👤 James / <strong>FCP 檔案 → 匯入 → XML</strong>:選 .fcpxml → FCP 自動建 event + project + timeline</li>
+      </ol>
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>FCPXML 1.10 才是 FCP build-from-scratch 標準路徑</strong>(2026-05-17 永漢實證,踩過 MCP 坑後固化):
+        <ul>
+          <li><strong>為什麼不用 SpliceKit MCP</strong>:per-clip append + trim = 50+ MCP calls,每 call 回 5KB debug,慢且 context 爆炸。FCPXML 一次匯入完成。</li>
+          <li><strong>DaVinci Resolve</strong> 有原生 Python API,FCP 沒有 → 用 FCPXML 補位(行業標準)</li>
+          <li><strong>FCPXML 能控制的精度</strong>:frame-level(1/60s),trim / 轉場 / 標題 / 慢動作 / 色調 / Ken Burns 全可寫</li>
+          <li><strong>schema 坑</strong>:<code>src</code> 必須在 <code>&lt;media-rep&gt;</code> 子元素內(直接放 <code>&lt;asset src=""&gt;</code> 會 DTD validation failed)</li>
+          <li><strong>路徑含中文 / 空格</strong>:必須 URL encode(<code>urllib.parse.quote</code>)</li>
+          <li><strong>Title 佔位</strong>:標題卡用 <code>&lt;gap&gt;</code> 預留,匯入後 James 加 Basic Title 蓋上(generator 寫死太複雜)</li>
+          <li><strong>Python template</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/2026-05-17_永漢_storyboard/gen_fcpxml.py</code> reusable for 其他 trip</li>
+          <li><strong>完整規範</strong>:<code>robert/raw/2026-05-17_Step12_FCPXML_初剪_實證.md</code></li>
+        </ul>
+      </div></td><td>✅</td></tr>
     <tr style="background: #e6f4ff;"><td>15</td><td>🎬</td><td>👤 James</td><td>FCP UI</td><td>FCP 內精修(調速/轉場/音樂/字幕)→ 出片</td><td>⏳</td></tr>
     <tr><td>16</td><td>🔀</td><td>👤 James</td><td>FCP Export / LR Export</td><td>影片 1080p H.265 + faststart;照片已在 9-P-c 出過</td><td>⏳</td></tr>
     <tr><td>17</td><td>🔀</td><td>🤖 Robert</td><td>rclone / GPhotos API</td><td><code>_export/</code> 上雲(GPhotos / Drive / Synology)</td><td>⏳</td></tr>
