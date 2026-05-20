@@ -99,6 +99,7 @@
   .sw-opus     { background: #e2d4f0; }
   .sw-tool     { background: #e9ecef; }
   .sw-storage  { background: #d4edda; }
+  .sw-both     { background: #d1ecf1; }
   .mermaid-container {
     background: var(--card);
     border: 1px solid var(--border);
@@ -219,10 +220,12 @@
 </div>
 
 <div class="legend" style="background: #f8f6ee; margin: 10px 0;">
-  <div class="legend-item"><strong>角色標示</strong>:</div>
-  <div class="legend-item">👤 <strong>James</strong> — 創意 / 拍板 / 手動操作</div>
-  <div class="legend-item">🤖 <strong>Robert</strong> — 程式自動化(Python SQL / shell / API)</div>
-  <div class="legend-item">🧠 <strong>Opus 4.7</strong> — VLM 視覺判讀(Anthropic API)</div>
+  <div class="legend-item"><strong>角色標示 + 流程圖顏色</strong>:</div>
+  <div class="legend-item"><span class="legend-swatch sw-james"></span>👤 <strong>James</strong> — 創意 / 拍板 / 手動操作</div>
+  <div class="legend-item"><span class="legend-swatch sw-robert"></span>🤖 <strong>Robert</strong> — 程式自動化(Python SQL / shell / API)</div>
+  <div class="legend-item"><span class="legend-swatch sw-opus"></span>🧠 <strong>Opus 4.7</strong> — VLM 視覺判讀(Anthropic API)</div>
+  <div class="legend-item"><span class="legend-swatch sw-both"></span>🔷 <strong>協作</strong> — 雙方共用討論台(如 Storyboard v5)</div>
+  <div class="legend-item"><span class="legend-swatch sw-storage"></span>☁️ <strong>儲存 / 雲端</strong> — 出片 / 上雲</div>
 </div>
 
 <table>
@@ -444,6 +447,18 @@
           <li>James 若已有劇本想法直接給,Robert 接著整合</li>
           <li><strong>剪輯模板</strong>(MTV / 故事性 / 演唱會)— 留專門 session 累積實證後固化,本次不涵蓋</li>
         </ul>
+      </div>
+      <div class="tip"><span class="tip-label">🆕 v5 升級(2026-05-19)</span><strong>互動式 Storyboard v5</strong>:全功能 HTML 剪輯討論台
+        <ul>
+          <li><strong>版型</strong>:4 欄 grid + 1:1 正方形縮圖 + 白底裱框 → 拖移時上下兩列同畫面可見</li>
+          <li><strong>Per-clip 摺疊工具</strong>(每個 + / − 開合):🪟 Split Screen 拼貼(7 版型:2H/2V/2x2/3H/3V/3x3/PIP)/ 🎯 Transform / ✂️ Crop / 🎞️ 轉場 / 🔊 Audio Fade / ✋ Stabilize / 🚩 Marker</li>
+          <li><strong>字幕</strong>:7 種樣式 dropdown(Lower Third A/B/C/D + 中央覆蓋 + 上方標題)</li>
+          <li><strong>場景色調</strong>:per-scene dropdown(沿用主調 / 9 個色調預設)</li>
+          <li><strong>Project Setting</strong>:名稱 / 解析度(1080p/4K × 16:9/9:16/1:1)/ 主色調 / Beat Snap</li>
+          <li><strong>Split Screen UX</strong>:版型 dropdown 自動跳子素材 slot + mini grid 預覽 + 被引用 chip</li>
+          <li><strong>💾 下載 settings.json</strong>:一鍵存檔 → 直接餵給 <code>gen_fcpxml_v3.py</code> 自動生 FCPXML</li>
+          <li><strong>檔案</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/2026-05-17_永漢_storyboard/gen_storyboard.py</code></li>
+        </ul>
       </div></td><td>⏳</td></tr>
     <tr style="background: #e6f4ff;text-decoration:line-through;opacity:0.4;"><td>13</td><td>🎬</td><td>—</td><td>—</td><td>已合進 Step 12(行前劇本討論 = 副導建議 + 總導 review)</td><td>❌</td></tr>
     <tr style="background: #e6f4ff;"><td>14</td><td>🎬</td><td>🤖 Robert + 👤 James</td><td>Python → FCPXML → FCP import</td><td><strong>FCPXML 生成 + 初剪</strong>(2026-05-17 實證):
@@ -456,11 +471,25 @@
           <li><strong>為什麼不用 SpliceKit MCP</strong>:per-clip append + trim = 50+ MCP calls,每 call 回 5KB debug,慢且 context 爆炸。FCPXML 一次匯入完成。</li>
           <li><strong>DaVinci Resolve</strong> 有原生 Python API,FCP 沒有 → 用 FCPXML 補位(行業標準)</li>
           <li><strong>FCPXML 能控制的精度</strong>:frame-level(1/60s),trim / 轉場 / 標題 / 慢動作 / 色調 / Ken Burns 全可寫</li>
-          <li><strong>schema 坑</strong>:<code>src</code> 必須在 <code>&lt;media-rep&gt;</code> 子元素內(直接放 <code>&lt;asset src=""&gt;</code> 會 DTD validation failed)</li>
+          <li><strong>schema 坑 1</strong>(2026-05-17):<code>src</code> 必須在 <code>&lt;media-rep&gt;</code> 子元素內</li>
           <li><strong>路徑含中文 / 空格</strong>:必須 URL encode(<code>urllib.parse.quote</code>)</li>
-          <li><strong>Title 佔位</strong>:標題卡用 <code>&lt;gap&gt;</code> 預留,匯入後 James 加 Basic Title 蓋上(generator 寫死太複雜)</li>
-          <li><strong>Python template</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/2026-05-17_永漢_storyboard/gen_fcpxml.py</code> reusable for 其他 trip</li>
-          <li><strong>完整規範</strong>:<code>robert/raw/2026-05-17_Step12_FCPXML_初剪_實證.md</code></li>
+        </ul>
+      </div>
+      <div class="tip"><span class="tip-label">🆕 v3 升級(2026-05-20)</span><strong>FCPXML v3 全自動生成器</strong>:讀 settings.json → 自動產所有效果
+        <ul>
+          <li><strong>自動處理</strong>:timeline 順序 + source trim + Ken Burns transform 動畫 + Title 字幕 + Split Screen 拼貼 + BGM + Marker</li>
+          <li><strong>FCPXML 1.10 schema 5 大坑</strong>(全 2026-05-19/20 收齊):
+            <ol style="margin: 2px 0 2px 18px; padding: 0;">
+              <li><code>&lt;param&gt;</code> 不接受裸 <code>&lt;keyframe&gt;</code> — 要 <code>&lt;keyframeAnimation&gt;</code> 包裹層</li>
+              <li>Basic Title UID 路徑是 <code>Bumper:Opener</code> 不是 <code>Build In:Out</code>(從 FCP app bundle 搜尋確認)</li>
+              <li><code>&lt;transition&gt;</code> Cross Dissolve 沒公開 UID — 寫死會失敗,emit marker 標位置 FCP 內 cmd+T 套</li>
+              <li><strong>px 不是實際像素</strong>!Position 用 FCP unit(1 unit = 1% canvas 高度,1080p = 10.8 actual px);Crop trim-rect 用 normalized 0-1 fraction</li>
+              <li>Stabilize / Lower Third 各樣式同理無公開 UID → marker only</li>
+            </ol>
+          </li>
+          <li><strong>Split Screen 拼貼自組</strong>:FCP 沒單一 effect → lane-stacked 連接 clip + Crop>Trim 對稱往內裁 + Position 對齊 cell 中心;不用 compound media(lane 1 在 compound 內 render 異常)</li>
+          <li><strong>檔案</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/2026-05-17_永漢_storyboard/gen_fcpxml_v3.py</code></li>
+          <li><strong>完整規範</strong>:<code>robert/raw/2026-05-20_Storyboard_v5_FCPXML_v3_實證.md</code></li>
         </ul>
       </div></td><td>✅</td></tr>
     <tr style="background: #e6f4ff;"><td>15</td><td>🎬</td><td>👤 James</td><td>FCP UI</td><td>FCP 內精修(調速/轉場/音樂/字幕)→ 出片</td><td>⏳</td></tr>
@@ -664,71 +693,89 @@ Robert 處理(2026-05-17 修訂版):
 
 <h2>🗺️ 整體 Pipeline 視覺圖</h2>
 
-<div class="tip" style="margin: 12px 0 16px;"><span class="tip-label">⚠️ 注意</span><strong>下方 mermaid 為 2026-05-16 v1 舊版</strong>:仍顯示 _FCPX/clean trim、Step 12/13 分立、Step 9 四象限分流。<strong>2026-05-17 已修訂</strong>(NG 不切 / _FCPX/ 廢掉 / Step 12-13 合一 / HP→HL / MOV rating=類型)— 以**上方表格 + 9-V schema**為準。Mermaid 待專門 session 重畫。</div>
+<div class="tip" style="margin: 12px 0 16px;"><span class="tip-label">🔄 2026-05-20 重畫</span>反映最新 pipeline:9-P / 9-V 分流、Storyboard v5、FCPXML v3。<strong>顏色分類</strong>:🟡 James / 🔵 Robert / 🟣 Opus VLM / 🟢 出片或雲端 / 🔷 雙方協作(Storyboard 討論台 + FCP review)</div>
 
 <div class="mermaid-container">
 <pre class="mermaid">
 flowchart TD
-    classDef james fill:#fff3cd,stroke:#856404,color:#856404,stroke-width:2px
-    classDef robert fill:#cce5ff,stroke:#004085,color:#004085,stroke-width:2px
-    classDef opus fill:#e2d4f0,stroke:#5a32a3,color:#5a32a3,stroke-width:2px
-    classDef tool fill:#e9ecef,stroke:#495057,color:#495057
-    classDef storage fill:#d4edda,stroke:#155724,color:#155724
+    classDef james fill:#fff3cd,stroke:#b8830f,color:#856404,stroke-width:2px
+    classDef robert fill:#cce5ff,stroke:#1e6b8f,color:#004085,stroke-width:2px
+    classDef opus fill:#e2d4f0,stroke:#7340a0,color:#5a32a3,stroke-width:2px
+    classDef both fill:#d1ecf1,stroke:#0c5460,color:#0c5460,stroke-width:2px
+    classDef storage fill:#d4edda,stroke:#155724,color:#155724,stroke-width:2px
 
-    S0[✅ Step 0<br/>拍攝<br/>iPhone / OPPO / Sony]:::james
-    S1[✅ Step 1<br/>匯入 NAS<br/>_MOV/&lt;scene&gt;/]:::james
-    S2[✅ Step 2<br/>GPS + 場景命名<br/>VLM + Nominatim]:::robert
-    S3a[✅ Step 3a<br/>ffmpeg 抽幀<br/>fps=0.33 + scene 0.1]:::robert
-    S3b[✅ Step 3b<br/>sips 生 1080p 縮圖<br/>VLM 判讀用]:::robert
-    S4[✅ Step 4<br/>Stage A Label-only<br/>label / obj_desc / conf]:::opus
-    S4audit{⏭️ Step 4.5<br/>James audit 10 張<br/>本批跳過,Step 8 整合 audit}:::james
-    S5[✅ Step 5<br/>Stage B Rating + Pick<br/>1-5★ / P]:::opus
-    S6[✅ Step 6<br/>LR catalog SQL 寫入<br/>v4 v2 三紅線]:::robert
-    S7[⏳ Step 7<br/>AutoTone trigger<br/>James LR Shift+W 自動]:::james
-    S8[✅ Step 8<br/>James LR review<br/>13 override + caption turn]:::james
-    S9{⏳ Step 9<br/>分流 batch<br/>讀 colorLabel + Pick + NG}:::robert
-    S9a[🟥 紅 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
-    S9b[☁️ 紅 P=1<br/>→ _export/出片/<br/>1080p H.265 8Mbps]:::storage
-    S9c[🟨 黃 P=1 有 NG<br/>→ _FCPX/&lt;clean&gt;.mp4]:::storage
-    S9d[🟨 黃 P=1 沒 NG<br/>FCP import _MOV]:::storage
-    S9e[❌ P=0<br/>不動 _MOV 保留]:::storage
-    S10[⏳ Step 10 軌 🅒<br/>回寫 FCP marker<br/>Pick=1 → 藍色 marker]:::robert
-    S11[⏳ Step 11 選用<br/>James 在 FCP 細修<br/>marker / keyword 調整]:::james
-    S12[⏳ Step 12<br/>導演視角腳本生成<br/>HTML director script]:::robert
-    S13{⏳ Step 13<br/>James review HTML<br/>annotate / 通過}:::james
-    S14[⏳ Step 14<br/>FCPXML 生成<br/>給 FCP import]:::robert
-    S15[⏳ Step 15<br/>FCP 剪輯<br/>精修出片]:::james
-    S16[⏳ Step 16<br/>出片 export<br/>1080p H.265 + faststart]:::storage
-    S17[⏳ Step 17<br/>上雲<br/>_export → GPhotos/Drive]:::storage
+    %% === 拍攝 + 匯入 ===
+    S0["👤 Step 0<br/>拍攝<br/>iPhone / Sony / OPPO"]:::james
+    S1["👤 Step 1<br/>匯入 NAS<br/>_MOV / _DNG / _ARW"]:::james
 
+    %% === Pre-process(全自動)===
+    S2["🤖 Step 2<br/>GPS + VLM 場景命名<br/>scene_naming.json"]:::robert
+    S3a["🤖 Step 3a<br/>ffmpeg 抽幀<br/>fps=0.33 + scene 0.1"]:::robert
+    S3b["🤖 Step 3b<br/>sips 縮 1080p<br/>VLM 判讀用"]:::robert
+
+    %% === VLM 兩階段評分(Opus 4.7)===
+    S4["🧠 Step 4<br/>Stage A VLM Label<br/>label / obj_desc / conf"]:::opus
+    S5["🧠 Step 5<br/>Stage B Rating + Pick<br/>0-5★ / P / NG/HL/KP caption"]:::opus
+    S6["🤖 Step 6<br/>LR catalog SQL 寫入<br/>v4 v2 三紅線"]:::robert
+
+    %% === LR 內 ===
+    S7["👤 Step 7<br/>AutoTone trigger<br/>LR Shift+W"]:::james
+    S8["👤 Step 8<br/>LR review<br/>13 override / caption turn"]:::james
+
+    %% === 9-P 照片精修 ===
+    S9Pa["👤 Step 9-P-a<br/>LR Develop preset"]:::james
+    S9Pb["👤 Step 9-P-b<br/>Evoto round-trip<br/>-EVT 後綴"]:::james
+    S9Pc["🤖 Step 9-P-c<br/>SQL 註冊 _export<br/>+ keyword 整理"]:::robert
+
+    %% === 9-V 影片標記 + 切片 ===
+    S9Va["👤 Step 9-V-a<br/>LR 評影片<br/>rating + Pick + NG/HL/KP caption"]:::james
+    S9Vb["🤖 Step 9-V-b<br/>HL+4★ 切片出片<br/>_export/&lt;scene&gt;/&lt;clip&gt;.mp4<br/>(H.264 60fps 8-bit)"]:::storage
+    S9Vc["🤖 Step 9-V-c<br/>KP 抽 1 幀代表<br/>_KP_preview/&lt;clip&gt;_kpNN.jpg"]:::robert
+
+    %% === Step 10 marker(選用)===
+    S10["🤖 Step 10<br/>FCP marker 寫入(選用)<br/>SpliceKit MCP"]:::robert
+
+    %% === Step 12 Storyboard v5 互動討論 ===
+    S12["🔷 Step 12<br/>Storyboard v5 互動腳本<br/>4-col + 7 工具群組 + Split Screen<br/>(行前劇本討論台)"]:::both
+
+    %% === Step 14 FCPXML v3 ===
+    S14["🤖 Step 14<br/>FCPXML v3 全自動<br/>讀 settings.json → 產 .fcpxml<br/>Ken Burns / Title / Split Screen 內建"]:::robert
+
+    %% === Step 15-17 FCP 精修 + 出片 + 雲 ===
+    S15["👤 Step 15<br/>FCP 內精修<br/>調色 + Stabilize + Transition cmd+T"]:::james
+    S16["☁️ Step 16<br/>Export H.264<br/>1080p + faststart"]:::storage
+    S17["☁️ Step 17<br/>上雲<br/>GPhotos / Drive / Synology"]:::storage
+
+    %% === Edges ===
     S0 --> S1
     S1 --> S2
     S2 --> S3a
     S3a --> S3b
     S3b --> S4
-    S4 --> S4audit
-    S4audit -- pass --> S5
-    S4audit -- fail --> S4
+    S4 --> S5
     S5 --> S6
     S6 --> S7
     S7 --> S8
-    S8 --> S9
-    S9 -- 🔴紅 P=1 有 NG --> S9a
-    S9a --> S9b
-    S9 -- 🔴紅 P=1 沒 NG --> S9b
-    S9 -- 🟡黃 P=1 有 NG --> S9c
-    S9 -- 🟡黃 P=1 沒 NG --> S9d
-    S9 -- P=0 --> S9e
-    S9b --> S17
-    S9c --> S10
-    S9d --> S10
-    S9a --> S10
-    S10 --> S11
-    S10 -.no manual.-> S12
-    S11 --> S12
-    S12 --> S13
-    S13 -- 改 v2 --> S12
-    S13 -- 通過 --> S14
+
+    %% 9-P 照片分支
+    S8 -- 照片(含 STILL) --> S9Pa
+    S9Pa --> S9Pb
+    S9Pb --> S9Pc
+    S9Pc --> S12
+
+    %% 9-V 影片分支
+    S8 -- 影片 MOV --> S9Va
+    S9Va --> S9Vb
+    S9Va --> S9Vc
+    S9Vb --> S12
+    S9Vc --> S12
+
+    %% optional FCP marker
+    S9Va -. 選用 .-> S10
+    S10 --> S12
+
+    %% Storyboard → FCPXML → FCP → 出片 → 雲
+    S12 --> S14
     S14 --> S15
     S15 --> S16
     S16 --> S17
