@@ -365,26 +365,32 @@
           <li><strong>9-P-c 會自動接手</strong>:Robert 從 <code>to_export/</code> 撈進 <code>_export/&lt;scene&gt;/</code>,你不用搬</li>
         </ul>
       </div></td><td>✅</td></tr>
-    <tr style="background: #fff4e6;"><td>9-P-c</td><td>📸</td><td>🤖 Robert</td><td>Python + SQLite + shell</td><td><strong>整理 2 個暫存來源 → 出片區</strong>(全程 Robert 做):
-      <p style="margin: 4px 0;"><strong>① 來源 1:<code>to_evoto/Evotofu/</code>(9-P-a 紅 -EVT JPG)→ 出片區</strong></p>
-      <ol style="margin: 0 0 6px 18px; padding: 0;">
-        <li>🤖 Robert / <strong>shell cp</strong>:掃 <code>&lt;trip&gt;/to_evoto/to_evoto/Evotofu/*.jpg</code> → cp 到 <code>&lt;trip&gt;/_export/&lt;scene&gt;/IMG_XXXX-EVT.jpg</code>(scene 從 master.csv 查)</li>
-        <li>🤖 Robert / <strong>Python SQLite</strong>:對每張 INSERT 9 表 + cache pointers + history step</li>
-        <li>🤖 Robert / <strong>shell rm</strong>:砍 <code>to_evoto/</code> 整個</li>
+    <tr style="background: #fff4e6;"><td>9-P-d</td><td>📸</td><td>🤖 Robert</td><td>2 隻 Python(<code>publish_to_export.py</code> + <code>register_published_to_catalog.py</code>)</td><td><strong>Robert 協同發佈出片</strong>(2026-05-24 拍板 + 同日 2 trip 實證 OK)— 兩階段:
+      <ol style="margin: 4px 0 4px 18px; padding: 0;">
+        <li>👤 James / <strong>LR Export</strong>:人像匯到 <code>&lt;trip&gt;/Evotofu/</code> · 其他「標籤保留」照匯到 <code>&lt;trip&gt;/to_export/</code></li>
+        <li>🤖 Robert /  <strong>① 搬檔</strong>:<code>python3 publish_to_export.py "&lt;trip&gt;"</code><br/>
+          ↳ 讀兩個 buffer + macOS `._*` skip + 巢狀資料夾 rglob<br/>
+          ↳ scene index 走 trip root scene/ + _MOV/scene/(支援 sub-sub-folder)<br/>
+          ↳ basename strip <code>-EVT</code> / <code>-編輯</code> / <code>_(N)</code> 直到底<br/>
+          ↳ mv 到 <code>__export/&lt;scene&gt;/</code> · 衝突 _v2 · unmatched 進 _unmatched/</li>
+        <li>👤 James:<strong>關 LR</strong></li>
+        <li>🤖 Robert / <strong>② SQL 寫入 catalog</strong>:<code>python3 register_published_to_catalog.py "&lt;trip&gt;"</code><br/>
+          ↳ 走 <strong>LR_Catalog_SQL寫入安全</strong> 7 步 SOP:Backup → /tmp 工作副本 → integrity_check #1 → INSERT 9 表 × N 張 → integrity_check #2 → cp 回 SSD → integrity_check #3<br/>
+          ↳ 每張寫 9 個表 + Develop/Properties cache pointers + history step<br/>
+          ↳ 從原檔 copy:rating / colorLabels / captureTime / EXIF / orientation="AB" + 實際 dims(sips)</li>
+        <li>👤 James:<strong>重開 LR</strong> → 新照片在 <code>__export/&lt;scene&gt;/</code> 自動 cataloged(不需 Synchronize Folder)</li>
       </ol>
-      <p style="margin: 4px 0;"><strong>② 來源 2:<code>to_export/</code>(9-P-b 黃綠紫無後綴 JPG)→ 出片區</strong></p>
-      <ol style="margin: 0 0 6px 18px; padding: 0;">
-        <li>🤖 Robert / <strong>shell cp</strong>:掃 <code>&lt;trip&gt;/to_export/*.jpg</code> → cp 到 <code>&lt;trip&gt;/_export/&lt;scene&gt;/IMG_XXXX.jpg</code>(scene 從 master.csv 查)</li>
-        <li>🤖 Robert / <strong>Python SQLite</strong>:對每張 INSERT 9 表(同上 schema)</li>
-        <li>🤖 Robert / <strong>shell rm</strong>:砍 <code>to_export/</code> 整個</li>
-      </ol>
-      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>SQL 9 表</strong>(產一張「LR catalog 認得的新照片」要寫的 9 張表):
+      <div class="tip"><span class="tip-label">💡 小貼士</span><strong>James 2026-05-24 拍板規則 + 同日實證</strong>:
         <ul>
-          <li><code>AgLibraryFile</code>(檔案資訊)/ <code>Adobe_images</code>(圖片本體)/ <code>Adobe_imageDevelopSettings</code>(Develop 設定 + cache)/ <code>Adobe_imageProperties</code>(屬性 + cache)/ <code>Adobe_AdditionalMetadata</code>(EXIF/IPTC 索引)/ <code>AgLibraryIPTC</code>(IPTC 資料)/ <code>AgHarvestedExifMetadata</code>(EXIF 索引)+ cache pointers(<code>developSettingsIDCache</code> / <code>propertiesCache</code>,漏 = Develop 模組打不開)+ history step(<code>從中繼資料</code>)</li>
-          <li><strong>走 <code>[[LR_Catalog_SQL寫入安全]]</code> SOP</strong>:backup → /tmp 副本 → <code>PRAGMA integrity_check</code> → 寫 → 再 integrity_check → cp 回 SSD → 再 integrity_check(三次保險,2026-05-11 重災後固化)</li>
-          <li><strong>實作 reference</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/2026-05-10_evoto_to_export.py</code>(production 可 reuse)</li>
-          <li><strong>scene 解析</strong>:用 <code>master.csv</code> 的 baseName→scene 對應,<strong>不要</strong>從 catalog <code>pathFromRoot</code> 解析 — STILL 路徑第一層是 <code>_STILL/</code> 不是 scene 名,會解錯</li>
-          <li><strong>永漢實證</strong>(2026-05-17):27 張一次跑完(① 7 Evoto-EVT + ② 20 LR Develop)→ 全進 <code>_export/&lt;scene&gt;/</code> + LR catalog 註冊成功 ✅</li>
+          <li><strong>出片資料夾</strong>:<code>__export/</code>(**雙底線**,新 trip 統一標準)</li>
+          <li><strong>同名衝突</strong>:加 <code>_v2</code> / <code>_v3</code> 後綴</li>
+          <li><strong>同 basename 多變體</strong>(<code>-EVT</code> / <code>-編輯</code> / <code>-編輯-編輯</code>):**全部都搬**(都是 James 轉後輸出版本)</li>
+          <li><strong>找不到原檔場景</strong>:進 <code>__export/_unmatched/</code>(James LR 內手動再分,反正最後都會 review)</li>
+          <li><strong>Scene 反查</strong>:用 <strong>folder-based</strong>(掃 trip 各 scene 子資料夾的檔名 basename → scene name)+ <code>_MOV/&lt;scene&gt;/</code> 也走一輪</li>
+          <li><strong>保留 metadata</strong>:rating / colorLabels / captureTime / EXIF 由 SQL register 從原檔 copy(不靠 LR Synchronize)</li>
+          <li><strong>實證 #1(2026-04-30 熊本城一日遊)</strong>:**236 張 / 4 scenes / 0 unmatched / 7 步 SOP 3 次 integrity 全綠 ✅**</li>
+          <li><strong>腳本</strong>:<code>~/Desktop/Claude-Workspace/photo-grade/publish_to_export.py</code> + <code>register_published_to_catalog.py</code> reusable for 每個 trip</li>
+          <li><strong>完整規範</strong>:<code>robert/raw/2026-05-24_Step9-P-d_Robert協同發佈出片_拍板.md</code></li>
         </ul>
       </div></td><td>✅</td></tr>
     <tr style="background: #e6f4ff;"><td>9-V-a</td><td>🎬</td><td>👤 James</td><td>LR Library(看 MOV caption + 評星)</td><td>看 MOV 關鍵幀 keyword 跳秒數檢視 → 評 rating 1-5★(類型)+ caption append <code>| NG:s-e</code> / <code>| KP:s-e</code> / <code>| HL:s-e</code> + 複查 P 需不需要
@@ -724,8 +730,11 @@ flowchart TD
 
     %% === 9-P 照片精修 ===
     S9Pa["👤 Step 9-P-a<br/>LR Develop preset"]:::james
-    S9Pb["👤 Step 9-P-b<br/>Evoto round-trip<br/>-EVT 後綴"]:::james
-    S9Pc["🤖 Step 9-P-c<br/>SQL 註冊 _export<br/>+ keyword 整理"]:::robert
+    S9Pb["👤 Step 9-P-b<br/>Evoto round-trip → Evotofu/<br/>+ LR Export → to_export/"]:::james
+    S9Pd1["🤖 Step 9-P-d ①<br/>publish_to_export.py<br/>搬檔 → __export/&lt;scene&gt;/"]:::robert
+    S9Pclose["👤 關 LR"]:::james
+    S9Pd2["🤖 Step 9-P-d ②<br/>register_published_to_catalog.py<br/>7 步 SOP + INSERT 9 表"]:::robert
+    S9Popen["👤 重開 LR<br/>(catalog 已含新照片)"]:::james
 
     %% === 9-V 影片標記 + 切片 ===
     S9Va["👤 Step 9-V-a<br/>LR 評影片<br/>rating + Pick + NG/HL/KP caption"]:::james
@@ -757,11 +766,14 @@ flowchart TD
     S6 --> S7
     S7 --> S8
 
-    %% 9-P 照片分支
+    %% 9-P 照片分支 + Robert 協同發佈出片(2 階段)
     S8 -- 照片(含 STILL) --> S9Pa
     S9Pa --> S9Pb
-    S9Pb --> S9Pc
-    S9Pc --> S12
+    S9Pb --> S9Pd1
+    S9Pd1 --> S9Pclose
+    S9Pclose --> S9Pd2
+    S9Pd2 --> S9Popen
+    S9Popen --> S12
 
     %% 9-V 影片分支
     S8 -- 影片 MOV --> S9Va
