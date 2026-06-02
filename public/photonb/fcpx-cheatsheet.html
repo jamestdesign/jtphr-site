@@ -486,7 +486,7 @@
 
     <h2 id="export-xml">⑨ Export XML 三步</h2>
 
-    <p><strong>FCPXML 是什麼？</strong>FCPX 把所有 keyword / Reject / Marker / clip path 匯出成的 XML 文字檔。類比 LR 的 XMP sidecar。Robert 腳本讀這個檔來知道 James 標了什麼。</p>
+    <p><strong>FCPXML 是什麼？</strong>FCPX 把所有 keyword / Reject / Marker / clip path 匯出成的 XML metadata。類比 LR 的 XMP sidecar。Robert 腳本讀這個檔來知道 James 標了什麼。</p>
 
     <h3>三步</h3>
     <ol>
@@ -497,8 +497,35 @@
           <li>XML Version：選最新（1.10 或更新）</li>
         </ul>
       </li>
-      <li><strong>儲存</strong>：命名 <code>&lt;trip 名&gt;_&lt;日期&gt;.fcpxml</code>，放 trip 根目錄或 Library 同層</li>
+      <li><strong>儲存</strong>：命名 <code>&lt;trip 名&gt;_&lt;日期&gt;.fcpxml</code> 或 <code>.fcpxmld</code>，放 <code>_MOV/</code> 跟 Library 同層</li>
     </ol>
+
+    <h3>兩種輸出格式（FCPX 新版預設 .fcpxmld）</h3>
+    <table>
+      <thead>
+        <tr><th>副檔名</th><th>性質</th><th>內容</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>.fcpxml</code></td>
+          <td>純 XML 文字檔</td>
+          <td>單一檔案，文字編輯器打得開</td>
+        </tr>
+        <tr>
+          <td><code>.fcpxmld</code></td>
+          <td><strong>Package / Bundle</strong>（看起來是檔案實際是資料夾）</td>
+          <td>內含 <code>Info.fcpxml</code> + 縮圖 / poster 等資源</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>💡 Robert 腳本兩種都吃：</strong>自動偵測副檔名 — <code>.fcpxmld</code> 進 bundle 找 <code>Info.fcpxml</code> 再 parse；<code>.fcpxml</code> 直接 parse。你不用管選哪個，FCPX 預設給什麼就用什麼。
+    </div>
+
+    <div class="tip">
+      <strong>💡 想看 .fcpxmld 內 XML 內容：</strong>Finder 內對 <code>.fcpxmld</code> 右鍵 → <strong>「顯示套件內容」</strong> → 進去看到 <code>Info.fcpxml</code>。
+    </div>
 
     <div class="tip">
       <strong>💡 小貼士：</strong>每次 export 都是<strong>當下狀態</strong>的快照。標完一輪 → export 一次 → 跑腳本。中途又改了標記要再 export。
