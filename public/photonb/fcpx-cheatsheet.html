@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FCPX 撿片操作 Cheat Sheet</title>
+  <meta name="description" content="從匯入到 export XML，一頁可查的 FCPX 撿片操作筆記。" />
+  <meta name="date" content="2026-06-02" />
+  <style>
+    :root {
+      --surface:#0f0f23; --brand:#1a1a2e; --accent:#e94560;
+      --text:#eaeaea; --muted:#a0a0a0;
+      --tip-bg:#1f1a3a; --tip-border:#7340a0;
+      --warn-bg:#2a1e1e; --warn-border:#e94560;
+      --ok-bg:#1a2a23; --ok-border:#2d7a4e;
+      --code-bg:#2a2a44; --kbd-bg:#3a3a55;
+      --border:#2a2a44;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; background:var(--surface); color:var(--text);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif; line-height:1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width:720px; margin:0 auto; padding:3.5rem 1.25rem 6rem; }
+    a.back { color:var(--accent); text-decoration:none; font-size:.85rem; }
+    h1 { font-size:1.9rem; margin:1.5rem 0 .25rem; }
+    .date { color:var(--muted); font-size:.85rem; }
+    .lead { color:var(--muted); margin-top:.5rem; font-size:.95rem; }
+    h2 {
+      color:var(--accent); margin-top:2.5rem; font-size:1.3rem;
+      border-bottom:1px solid var(--border); padding-bottom:.4rem;
+    }
+    h3 { color:var(--text); margin-top:1.8rem; font-size:1.05rem; }
+    p { margin:.8rem 0; }
+    ul, ol { padding-left:1.5rem; }
+    li { margin:.3rem 0; }
+    code {
+      background:var(--code-bg); padding:.15em .4em; border-radius:5px;
+      font-size:.88em; font-family:'SF Mono','Consolas',monospace;
+    }
+    pre {
+      background:var(--code-bg); padding:1rem 1.2rem; border-radius:8px;
+      overflow-x:auto; font-size:.82rem; line-height:1.6;
+      border-left:3px solid var(--accent);
+    }
+    pre code { background:none; padding:0; font-size:inherit; }
+    kbd {
+      display:inline-block; background:var(--kbd-bg); color:var(--text);
+      padding:.1em .55em; border-radius:5px;
+      font-family:'SF Mono','Consolas',monospace; font-size:.78em;
+      font-weight:600; box-shadow:0 2px 0 #000; margin:0 1px;
+      vertical-align:1px;
+    }
+    hr { border:none; border-top:1px solid var(--border); margin:2.5rem 0; }
+    table {
+      width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem;
+    }
+    th, td {
+      padding:.6rem .7rem; text-align:left; vertical-align:top;
+      border-bottom:1px solid var(--border);
+    }
+    th {
+      color:var(--accent); font-weight:600; font-size:.82rem;
+      letter-spacing:.04em; text-transform:uppercase;
+    }
+    tr:hover td { background:rgba(233,69,96,0.05); }
+    .tip {
+      background:var(--tip-bg); border-left:4px solid var(--tip-border);
+      border-radius:4px; padding:.85rem 1.1rem; margin:1.1rem 0;
+      font-size:.92rem;
+    }
+    .tip strong { color:#c8a0ff; }
+    .warn {
+      background:var(--warn-bg); border-left:4px solid var(--warn-border);
+      border-radius:4px; padding:.85rem 1.1rem; margin:1.1rem 0;
+      font-size:.92rem;
+    }
+    .warn strong { color:var(--accent); }
+    .ok {
+      background:var(--ok-bg); border-left:4px solid var(--ok-border);
+      border-radius:4px; padding:.85rem 1.1rem; margin:1.1rem 0;
+      font-size:.92rem;
+    }
+    .ok strong { color:#7fc99f; }
+    .pill {
+      display:inline-block; padding:.1em .55em; border-radius:10px;
+      font-size:.75em; font-weight:600;
+    }
+    .pill.red { background:rgba(233,69,96,0.2); color:#ff8aa0; }
+    .pill.green { background:rgba(45,122,78,0.25); color:#7fc99f; }
+    .pill.yellow { background:rgba(184,131,15,0.25); color:#f0c860; }
+    .pill.blue { background:rgba(30,107,143,0.25); color:#7fc4e6; }
+    .pill.purple { background:rgba(115,64,160,0.25); color:#c8a0ff; }
+    .toc {
+      background:var(--brand); border:1px solid var(--border);
+      border-radius:10px; padding:1rem 1.3rem; margin:1.5rem 0 2.5rem;
+      font-size:.88rem;
+    }
+    .toc h3 {
+      margin:0 0 .5rem; color:var(--muted); font-size:.75rem;
+      text-transform:uppercase; letter-spacing:.1em;
+    }
+    .toc ol { margin:0; columns:2; column-gap:1.5rem; }
+    .toc li { break-inside:avoid; margin:.2rem 0; }
+    .toc a { color:var(--accent); text-decoration:none; }
+    .toc a:hover { text-decoration:underline; }
+    .flow {
+      background:var(--brand); border:1px dashed var(--border);
+      border-radius:8px; padding:1.2rem 1.4rem; margin:1.3rem 0;
+      font-family:'SF Mono','Consolas',monospace; font-size:.78rem;
+      line-height:1.9; white-space:pre; overflow-x:auto;
+      color:#d0d0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="./">← 攝影筆記本</a>
+    <h1>FCPX 撿片操作 Cheat Sheet</h1>
+    <p class="date">2026-06-02</p>
+    <p class="lead">從匯入到 export XML — 撿片流程一頁可查，不用翻網路。對應正式 schema：NG / KP / HL / KF。</p>
+
+    <nav class="toc">
+      <h3>目錄</h3>
+      <ol>
+        <li><a href="#tldr">① 一頁流程速覽</a></li>
+        <li><a href="#import">② 匯入注意事項</a></li>
+        <li><a href="#structure">③ 資料夾結構</a></li>
+        <li><a href="#shortcuts">④ 快捷鍵總表</a></li>
+        <li><a href="#keyword">⑤ Keyword 設定</a></li>
+        <li><a href="#marker">⑥ Marker 用法</a></li>
+        <li><a href="#schema-map">⑦ Schema 對應</a></li>
+        <li><a href="#export-xml">⑧ Export XML</a></li>
+        <li><a href="#nas">⑨ 搬 NAS SOP</a></li>
+        <li><a href="#cleanup">⑩ 暫存清理</a></li>
+        <li><a href="#checklist">⑪ 動手前 checklist</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="tldr">① 一頁流程速覽</h2>
+    <div class="flow">匯入素材到 Event（Leave files in place）→ 標 Favorite / Keyword / Marker
+                ↓
+    Smart Collection 篩出 KP / HL / NG
+                ↓
+    File → Export XML → 拿到 .fcpxml
+                ↓
+    Robert 腳本讀 fcpxml → ffmpeg 抽 HL 片段 + KP 單禎
+                ↓
+    出到 _HL/&lt;scene&gt;/ 和 _KP/&lt;scene&gt;/</div>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>你的工作只有「判斷」（哪段 HL、哪幀 KP），剩下的命名、抽片段、進資料夾全部腳本自動跑。FCPX 標完 → export XML → 丟給腳本 → 結束。
+    </div>
+
+    <h2 id="import">② 匯入注意事項</h2>
+
+    <h3>HDR 對話框：選 Keep as Standard (SDR)</h3>
+    <div class="warn">
+      <strong>⚠️ 第一次匯入 HDR 素材會跳出</strong>
+      <p style="margin:.5rem 0 0;">FCPX 會問「Would you like to switch the library to HDR?」<br><strong>答：Keep as Standard (SDR)</strong></p>
+      <ul>
+        <li>撿片用不到 HDR colorspace</li>
+        <li>SDR Library 一樣能匯 HDR clip，FCPX 不會擋</li>
+        <li>之後出 SDR 給 IG / YouTube / LINE 比較單純</li>
+        <li>真的要 HDR 出片時，另外開新 Library 設成 HDR 就好</li>
+      </ul>
+    </div>
+
+    <h3>Library 匯入模式：Leave files in place</h3>
+    <table>
+      <thead>
+        <tr><th>模式</th><th>搬硬碟會斷？</th><th>Library 大小</th><th>推薦</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Copy to library</strong></td>
+          <td>❌ 永遠不斷</td>
+          <td>巨大（含素材）</td>
+          <td>⚠️ 不推（影片太肥）</td>
+        </tr>
+        <tr>
+          <td><strong>Leave files in place</strong></td>
+          <td>⚠️ 路徑變要 reconnect 一次</td>
+          <td>小（&lt; 100MB）</td>
+          <td><span class="pill green">✅ 推</span></td>
+        </tr>
+        <tr>
+          <td>Symlink</td>
+          <td>⚠️ 同上</td>
+          <td>小</td>
+          <td>❌ 沒必要</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>選 <strong>Leave files in place</strong> 並把 <code>_MOV/</code> 跟 Library 都放在 trip 資料夾內。搬 NAS 後第一次開啟會跳「missing files」，按 <strong>Locate All...</strong> 指向新的 <code>_MOV/</code> 路徑，FCPX 一次重連全部 clip。
+    </div>
+
+    <h2 id="structure">③ 資料夾結構</h2>
+<pre><code>2026-MM-DD &lt;trip 名&gt;/
+├── 2026-MM-DD &lt;trip&gt;_LR/              ← LR catalog（主管理）
+├── _MOV/                              ← 影片素材實體放這
+│   ├── &lt;場景 A&gt;/IMG_xxxx.mov
+│   └── &lt;場景 B&gt;/IMG_yyyy.mov
+├── 2026-MM-DD &lt;trip&gt;_FCP/             ← FCPX library 獨立放
+│   └── Library.fcpbundle              ← 只記引用，素材不複製
+├── _HL/                               ← 腳本輸出：精選片段
+│   └── &lt;場景&gt;/IMG_xxxx_HL02-04.mp4
+├── _KP/                               ← 腳本輸出：抽單禎
+│   └── &lt;場景&gt;/IMG_xxxx_KP02.jpg
+└── _export/                           ← photo 出片（既有）
+    └── &lt;場景&gt;/</code></pre>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>LR catalog 跟 FCP Library <strong>放在獨立子資料夾</strong>，不要塞同一層。它們各自會頻繁讀寫、各自要備份、各自暫存檔位置不同，分開管理最乾淨。
+    </div>
+
+    <h2 id="shortcuts">④ 快捷鍵總表</h2>
+
+    <h3>走片 / 預覽（最常用）</h3>
+    <table>
+      <tbody>
+        <tr><td><kbd>J</kbd></td><td>後退（按多次加速）</td></tr>
+        <tr><td><kbd>K</kbd></td><td>停</td></tr>
+        <tr><td><kbd>L</kbd></td><td>前進（按多次加速）</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>播放 / 暫停（1x）</td></tr>
+        <tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>逐禎前後</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>←</kbd>/<kbd>→</kbd></td><td>跳 10 禎</td></tr>
+      </tbody>
+    </table>
+
+    <h3>標範圍 / 入點出點</h3>
+    <table>
+      <tbody>
+        <tr><td><kbd>I</kbd></td><td>標入點（範圍開始）</td></tr>
+        <tr><td><kbd>O</kbd></td><td>標出點（範圍結束）</td></tr>
+        <tr><td><kbd>X</kbd></td><td>選整支 clip 當範圍</td></tr>
+        <tr><td><kbd>Option</kbd>+<kbd>X</kbd></td><td>清除入出點</td></tr>
+      </tbody>
+    </table>
+
+    <h3>標記 / 評選</h3>
+    <table>
+      <tbody>
+        <tr><td><kbd>F</kbd></td><td>Favorite（入選）</td></tr>
+        <tr><td><kbd>Delete</kbd></td><td>Reject（不要）</td></tr>
+        <tr><td><kbd>U</kbd></td><td>清除 Favorite / Reject</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd></td><td>套 Keyword（綁定見第 ⑤ 節）</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>0</kbd></td><td>移除選範圍所有 keyword</td></tr>
+        <tr><td><kbd>M</kbd></td><td>加 Marker（單一時間點）</td></tr>
+        <tr><td><kbd>Option</kbd>+<kbd>M</kbd></td><td>加 Marker + 開命名框</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>M</kbd></td><td>刪除 marker</td></tr>
+      </tbody>
+    </table>
+
+    <h3>瀏覽 / 顯示</h3>
+    <table>
+      <tbody>
+        <tr><td><kbd>Cmd</kbd>+<kbd>K</kbd></td><td>開 Keyword Editor</td></tr>
+        <tr><td><kbd>Cmd</kbd>+<kbd>1</kbd></td><td>跳到 Libraries sidebar</td></tr>
+        <tr><td><kbd>Cmd</kbd>+<kbd>2</kbd></td><td>跳到 Browser</td></tr>
+        <tr><td><kbd>Control</kbd>+<kbd>H</kbd></td><td>切換 Filmstrip / List view</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>最常用的 7 個快捷鍵就 <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> <kbd>I</kbd> <kbd>O</kbd> <kbd>F</kbd> <kbd>M</kbd> — 練到肌肉記憶，撿片速度跟 LR 評星級一樣快。
+    </div>
+
+    <h2 id="keyword">⑤ Keyword 設定（Cmd+K 綁快捷鍵）</h2>
+
+    <h3>建議綁定</h3>
+    <table>
+      <thead>
+        <tr><th>快捷鍵</th><th>Keyword</th><th>意義</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>1</kbd></td>
+          <td><span class="pill red">HL</span></td>
+          <td><strong>High Light</strong> — 精彩瞬間（範圍 keyword，腳本切獨立 mp4 出片）</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>2</kbd></td>
+          <td><span class="pill green">KP</span></td>
+          <td><strong>Keep</strong> — 整段剪輯保留（劇本素材，HL ⊆ KP）</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>3</kbd></td>
+          <td><span class="pill yellow">NG</span></td>
+          <td><strong>No Good</strong> — 失誤段（只標不切，劇本跳過）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>綁定步驟（一次性設好）</h3>
+    <ol>
+      <li>選任一 clip 範圍（<kbd>I</kbd> 入點 + <kbd>O</kbd> 出點），按 <kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor</li>
+      <li>第 1 格打 <code>HL</code>、第 2 格打 <code>KP</code>、第 3 格打 <code>NG</code> → 自動綁 <kbd>Ctrl</kbd>+<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd></li>
+      <li>關閉 Keyword Editor，之後撿片：<kbd>I</kbd>/<kbd>O</kbd> 標範圍 → 按綁定鍵 → 一秒套用</li>
+    </ol>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>之後想加新 keyword（例如場景名）直接打第 4 格、第 5 格，FCPX 自動綁 <kbd>Ctrl</kbd>+<kbd>4</kbd>、<kbd>Ctrl</kbd>+<kbd>5</kbd>。最多 9 格。
+    </div>
+
+    <h3>Smart Collection 自動聚合</h3>
+    <p>側邊欄 Event 底下會出現 <strong>HL / KP / NG</strong> 三個自動聚合的 Smart Collection。點任一個 → 只看到那批 keyword 標過的範圍，<strong>不用搜尋、不用篩選，一鍵到位</strong>。</p>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>Keyword 跟 Favorite 是<strong>獨立兩層</strong>，不會打架。一段可以同時是 Favorite + KP keyword + HL keyword，三層各自獨立篩。
+    </div>
+
+    <h2 id="marker">⑥ Marker 用法（M + 顏色 / 命名）</h2>
+
+    <h3>Marker 是「單一時間點」</h3>
+    <p>用途：標<strong>抽單禎</strong>的位置（KP — 你想要這一禎當靜態圖出）。按 <kbd>M</kbd> 在 playhead 位置打 marker。</p>
+
+    <h3>Marker 顏色限制</h3>
+    <table>
+      <thead>
+        <tr><th>顏色</th><th>FCPX 語意</th><th>用於這個 cheat sheet</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🔵 藍</td><td>Standard</td><td>預設，按 <kbd>M</kbd> 直接是這個</td></tr>
+        <tr><td>🔴 紅</td><td>To Do</td><td>標「待後製」</td></tr>
+        <tr><td>🟢 綠</td><td>Completed</td><td>標「已 OK」</td></tr>
+        <tr><td>🟠 橘</td><td>Chapter</td><td>不建議（會跑章節列表）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn">
+      <strong>⚠️ 沒有黃色 marker</strong>
+      <p style="margin:.5rem 0 0;">如果你要紅黃綠三色分級 KP，FCPX <strong>沒有黃色</strong>。<br><strong>解法：用 Marker 名稱帶顏色 tag</strong>，不靠 marker 本身顏色。</p>
+    </div>
+
+    <h3>命名方案（推薦）</h3>
+    <table>
+      <thead>
+        <tr><th>Marker 名稱</th><th>意義</th><th>腳本抽圖檔名</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>KP_R</code> 或 <code>KP_精選</code></td><td>最高優先</td><td><code>IMG_xxx_KP02_R.jpg</code></td></tr>
+        <tr><td><code>KP_Y</code> 或 <code>KP_次選</code></td><td>次優先</td><td><code>IMG_xxx_KP05_Y.jpg</code></td></tr>
+        <tr><td><code>KP_G</code> 或 <code>KP_候補</code></td><td>備案</td><td><code>IMG_xxx_KP07_G.jpg</code></td></tr>
+        <tr><td><code>KP</code></td><td>單純標位置</td><td><code>IMG_xxx_KP02.jpg</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>連續看片時優先按 <kbd>Option</kbd>+<kbd>M</kbd>，一個動作完成「打 + 命名」。事後再回頭逐個命名很容易漏。
+    </div>
+
+    <h2 id="schema-map">⑦ FCPX 操作 ↔ Schema 對應</h2>
+    <p>你在 FCPX 用 Favorite / Keyword / Marker 三層操作，對應到 schema 的 NG / KP / HL / KF 概念如下：</p>
+
+    <table>
+      <thead>
+        <tr><th>Schema</th><th>FCPX 操作</th><th>用途</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill red">HL</span> High Light</td>
+          <td>Keyword <code>HL</code>（範圍）<br><kbd>I</kbd>/<kbd>O</kbd> + <kbd>Ctrl</kbd>+<kbd>1</kbd></td>
+          <td>精彩段 → ffmpeg 切獨立 mp4 出片</td>
+        </tr>
+        <tr>
+          <td><span class="pill green">KP</span> Keep</td>
+          <td>Keyword <code>KP</code>（範圍）<br><kbd>I</kbd>/<kbd>O</kbd> + <kbd>Ctrl</kbd>+<kbd>2</kbd></td>
+          <td>剪輯保留段 → 段中間抽 1 幀代表（劇本縮圖）</td>
+        </tr>
+        <tr>
+          <td><span class="pill yellow">NG</span> No Good</td>
+          <td>Keyword <code>NG</code>（範圍）<br><kbd>I</kbd>/<kbd>O</kbd> + <kbd>Ctrl</kbd>+<kbd>3</kbd></td>
+          <td>失誤段，只標不切（劇本跳過）</td>
+        </tr>
+        <tr>
+          <td><span class="pill purple">KF</span> Key Frame</td>
+          <td><strong>不在 FCPX 標</strong></td>
+          <td>LR STILL Pick=1 反推回 MOV 時間點，腳本自動寫進 MOV keyword（<code>KF:XX.XX</code>）</td>
+        </tr>
+        <tr>
+          <td>Marker（單禎抽圖）</td>
+          <td><kbd>M</kbd> 或 <kbd>Option</kbd>+<kbd>M</kbd></td>
+          <td>指定哪一禎抽出來當 STILL（手動補位）</td>
+        </tr>
+        <tr>
+          <td>Favorite（F 鍵）</td>
+          <td><kbd>F</kbd></td>
+          <td>「入選」單獨一層，跟 keyword 並存。可選用，腳本目前不抓。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong><strong>KF 不用你標</strong>。你只標 NG / KP / HL（範圍 keyword）+ Marker（單禎位置），KF 是 LR 那邊評完 STILL 後腳本自動反推回來的。
+    </div>
+
+    <h2 id="export-xml">⑧ Export XML 三步</h2>
+
+    <p><strong>FCPXML 是什麼？</strong>FCPX 把所有 Favorite / Keyword / Marker / clip path 匯出成的 XML 文字檔。類比：跟 LR 的 XMP sidecar 同概念，但範圍是整個 Event。腳本讀這個檔來知道你標了什麼。</p>
+
+    <h3>三步</h3>
+    <ol>
+      <li><strong>選中 Event</strong>（側邊欄 Libraries → 點 Event，不是 Project / 不是 Library 最上層）</li>
+      <li><strong>File → Export XML...</strong>
+        <ul>
+          <li>Metadata view：選 General 或 All</li>
+          <li>XML Version：選最新（1.10 或更新）</li>
+        </ul>
+      </li>
+      <li><strong>儲存</strong>：命名 <code>&lt;trip 名&gt;_&lt;日期&gt;.fcpxml</code>，放 trip 根目錄或 Library 同層</li>
+    </ol>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>每次 export 都是<strong>當下狀態</strong>的快照，不會自動同步。標完一輪 → export 一次 → 跑腳本。中途又改了標記要再 export 一次。
+    </div>
+
+    <h2 id="nas">⑨ 搬 NAS reconnect SOP</h2>
+
+    <div class="warn">
+      <strong>⚠️ FCPX 沒有真正的相對路徑</strong>
+      <p style="margin:.5rem 0 0;">Library 記的是<strong>絕對路徑</strong>。從 X10 Pro 搬到 NAS 後第一次開啟會跳「missing files」。但 FCPX 有<strong>智能 reconnect</strong>，一次指認資料夾就全好。</p>
+    </div>
+
+    <h3>搬 NAS 5 步</h3>
+    <ol>
+      <li>FCPX 關閉</li>
+      <li>整個 trip 資料夾搬到 NAS（<code>_MOV/</code>、LR catalog、FCP Library 一起搬）</li>
+      <li>從 NAS 雙擊開 <code>Library.fcpbundle</code></li>
+      <li>跳出「missing files」對話框 → 點 <strong>Locate All...</strong></li>
+      <li>選 NAS 上的 <code>_MOV/</code> 資料夾 → FCPX 自動把所有 clip 重連</li>
+    </ol>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>關鍵在於 <code>_MOV/</code> 跟 Library 的<strong>相對結構不變</strong>。如果你搬完後 <code>_MOV/</code> 改名或拆散，Locate 就要逐個指，會非常痛苦。整個 trip 資料夾原樣搬，最省事。
+    </div>
+
+    <h2 id="cleanup">⑩ 暫存清理 SOP（瘦身 Library）</h2>
+
+    <h3>三類暫存可清</h3>
+    <table>
+      <thead>
+        <tr><th>類型</th><th>可重建？</th><th>清掉影響</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Render files（背景渲染）</td><td>✅</td><td>下次播放時自動重建</td></tr>
+        <tr><td>Cache files（縮圖/波形）</td><td>✅</td><td>下次瀏覽時自動重建</td></tr>
+        <tr><td>Optimized / Proxy Media</td><td>✅</td><td>切回原檔播放，需要時可重新轉碼</td></tr>
+      </tbody>
+    </table>
+
+    <h3>清理步驟</h3>
+    <ol>
+      <li>FCPX 內，選中 Library（最上層那個圖示）</li>
+      <li><strong>File → Delete Generated Library Files...</strong></li>
+      <li>勾選 Delete All Render Files / Optimized Media / Proxy Media</li>
+      <li>按 Delete → 通常可瘦 <strong>30~70%</strong></li>
+    </ol>
+
+    <h3>清理時機</h3>
+    <ul>
+      <li>出完片、要搬 NAS 前 → 清一次</li>
+      <li>Library 超過 50GB → 清一次</li>
+      <li>季度封存時 → 清光 + 壓縮整個 trip 資料夾</li>
+    </ul>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong><strong>不會刪你的剪輯、keyword、marker</strong>。FCPX 只清「衍生暫存」，工作成果 100% 保留。
+    </div>
+
+    <h2 id="checklist">⑪ 動手前 checklist</h2>
+
+    <div class="ok">
+      <strong>✅ 新 trip 開工前確認</strong>
+      <ul>
+        <li>☐ Trip 資料夾結構就位（<code>_MOV/</code> 場景分好）</li>
+        <li>☐ 新建 FCP Library 在 <code>trip/&lt;trip&gt;_FCP/</code></li>
+        <li>☐ 匯入 <code>_MOV/</code> → <strong>取消勾「Copy to library」</strong></li>
+        <li>☐ 遇到 HDR 對話框 → <strong>Keep as Standard (SDR)</strong></li>
+        <li>☐ Keyword 三格綁好（HL / KP / NG → <kbd>Ctrl</kbd>+<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd>）</li>
+        <li>☐ List view 或 Filmstrip 切到你順手的（<kbd>Ctrl</kbd>+<kbd>H</kbd>）</li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <strong>📤 撿完一輪要交給 Robert</strong>
+      <ul>
+        <li>☐ 選中 Event → File → Export XML... → 最新版本</li>
+        <li>☐ 命名 <code>&lt;trip 名&gt;_&lt;日期&gt;.fcpxml</code></li>
+        <li>☐ 把 <code>.fcpxml</code> 路徑 + <code>_MOV/</code> 路徑傳給 Robert</li>
+        <li>☐ Robert 跑腳本 → 輸出到 <code>_HL/&lt;scene&gt;/</code> + <code>_KP/&lt;scene&gt;/</code></li>
+      </ul>
+    </div>
+
+    <div class="warn">
+      <strong>🚨 千萬不要</strong>
+      <ul>
+        <li>❌ 不要勾「Copy to library」（影片素材會重複，硬碟爆掉）</li>
+        <li>❌ 不要選 Switch to HDR（撿片用不到）</li>
+        <li>❌ 搬硬碟後不要逐個 clip 手動 reconnect（用 Locate All... 一次搞定）</li>
+        <li>❌ 不要把 LR catalog 跟 FCP Library 放同一個子資料夾</li>
+        <li>❌ <code>_MOV/</code> 結構移動完不要改名（會破壞 Library 重連邏輯）</li>
+      </ul>
+    </div>
+
+    <hr />
+    <p style="color:var(--muted); font-size:.8rem;">
+      整理：Robert ／ 對應正式 schema：<code>NG / KP / HL / KF</code>（2026-05-17 拍板）<br>
+      下一步：Robert 寫 <code>fcpxml_extract.py</code> 腳本（讀 .fcpxml → ffmpeg 抽 HL + KP）。
+    </p>
+
+  </div>
+</body>
+</html>
