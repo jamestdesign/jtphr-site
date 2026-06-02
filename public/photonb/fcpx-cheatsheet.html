@@ -376,6 +376,11 @@
       <strong>💡 小貼士：</strong>Favorite 是 1-bit 沒分級。如果 Star3/4/5 全加 F 後視覺都一樣綠，分不出 3 4 5 哪個更精彩。所以建議<strong>只給最高優先級的 Star4/5</strong> 用 F 強化。
     </div>
 
+    <div class="warn">
+      <strong>⚠️ F 是視覺輔助，Star keyword 才是 source of truth</strong>
+      <p style="margin:.5rem 0 0;"><strong>Robert 腳本判斷「必出片候選」時看的是 <code>Star4</code> / <code>Star5</code> keyword，不是 F。</strong> 即使 James 撿片時忘了加 F，只要 keyword 有標 Star4/Star5 → 腳本一樣會識別 → 走必出片流程。F 純粹是給 James 自己 Browser 內視覺掃片用，<strong>不影響任何自動化判斷</strong>。</p>
+    </div>
+
     <h2 id="kp">⑥ KP_R/Y/G/P（抽禎指令）</h2>
 
     <p>KP_R/Y/G/P keyword 是「<strong>James 給 Robert 的抽禎指令</strong>」：「這個時點請抽一張禎當 STILL，主題分類是 R/Y/G/P」。</p>
