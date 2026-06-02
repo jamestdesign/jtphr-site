@@ -255,8 +255,9 @@
     <h3>標記</h3>
     <table>
       <tbody>
+        <tr><td><kbd>F</kbd></td><td>Favorite（建議只給 Star4 / Star5 視覺強化）— 詳見 ⑤</td></tr>
         <tr><td><kbd>Delete</kbd></td><td><strong>Reject = NG 失誤段</strong></td></tr>
-        <tr><td><kbd>U</kbd></td><td>清除 Reject</td></tr>
+        <tr><td><kbd>U</kbd></td><td>清除 Favorite / Reject</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd></td><td>套 Star1~Star5（整支 MOV 類型）— 詳見 ⑤</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>6</kbd>~<kbd>9</kbd></td><td>套 KP_R/Y/G/P（抽禎指令）— 詳見 ⑥</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>0</kbd></td><td>移除選範圍所有 keyword</td></tr>
@@ -328,6 +329,51 @@
 
     <div class="tip">
       <strong>💡 小貼士：</strong>Star 是<strong>整支 MOV 一個</strong>，不是分段標。選整支 clip 再按 <kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd>，整支套上 keyword。同一支 MOV 不該有兩個 Star。
+    </div>
+
+    <h3>視覺強化：Star4 / Star5 加 Favorite (F)</h3>
+
+    <p>匯入時 FCPX 自動把場景名標成 keyword → 整支 clip 已是<strong>藍色條</strong>。再標 Star1~5 還是藍色條（藍色不分 keyword 種類），<strong>無法視覺分辨</strong>哪些是精彩級。</p>
+
+    <p><strong>解法：Star4 / Star5 加 <kbd>F</kbd>（Favorite）→ 多一條綠色覆蓋藍色 → 一眼分辨「必出片候選」</strong>。</p>
+
+    <h4>條色疊加邏輯</h4>
+    <table>
+      <thead>
+        <tr><th>屬性</th><th>條色</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Keyword（任何 keyword，含場景 / Star / KP）</td><td>藍色條</td></tr>
+        <tr><td><strong>Favorite</strong>（<kbd>F</kbd>）</td><td><strong>綠色條</strong>（覆蓋藍色上）</td></tr>
+        <tr><td>Reject（<kbd>Delete</kbd>）</td><td>紅斜線</td></tr>
+        <tr><td>Marker</td><td>中間白色小三角</td></tr>
+      </tbody>
+    </table>
+
+    <h4>F 的關鍵特性</h4>
+    <ul>
+      <li><strong>布林狀態，不會疊加</strong>：對同一範圍按 F 多次 = 標一次，內部只有一個 Favorite 標記</li>
+      <li><strong>F 鍵不會 toggle off</strong>：要清除 Favorite 用 <kbd>U</kbd>（Unrate），再按 F 沒效果</li>
+      <li><strong>跟 keyword 並存</strong>：F 不影響任何 keyword，兩者各自獨立</li>
+    </ul>
+
+    <h4>建議分配</h4>
+    <table>
+      <thead>
+        <tr><th>Star</th><th>加 F？</th><th>視覺</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Star5</strong>（史詩）</td><td>✅ 加</td><td>綠 + 藍</td></tr>
+        <tr><td><strong>Star4</strong>（精彩瞬間）</td><td>✅ 加</td><td>綠 + 藍</td></tr>
+        <tr><td><strong>Star3</strong>（保留）</td><td>❌ 不加</td><td>純藍</td></tr>
+        <tr><td>Star2 / Star1</td><td>❌ 不加</td><td>純藍</td></tr>
+      </tbody>
+    </table>
+
+    <p>Browser 內快速掃過 → <strong>綠色條 = 必出片候選</strong>（Star4+5），藍色條 = 一般保留 / NG / 場景。</p>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>Favorite 是 1-bit 沒分級。如果 Star3/4/5 全加 F 後視覺都一樣綠，分不出 3 4 5 哪個更精彩。所以建議<strong>只給最高優先級的 Star4/5</strong> 用 F 強化。
     </div>
 
     <h2 id="kp">⑥ KP_R/Y/G/P（抽禎指令）</h2>
@@ -520,6 +566,7 @@
       <strong>📤 撿片每支 MOV 的動作</strong>
       <ul>
         <li>☐ 看完整支 → 判類型 → <kbd>X</kbd> 選整支 + <kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd> 標 Star</li>
+        <li>☐ <strong>Star4 / Star5 加 <kbd>F</kbd></strong>（綠色條視覺強化，Browser 快掃辨識）</li>
         <li>☐ 想抽禎 → <kbd>I</kbd>/<kbd>O</kbd> 同位置 + <kbd>Ctrl</kbd>+<kbd>6</kbd>~<kbd>9</kbd> 標 KP_R/Y/G/P</li>
         <li>☐ 失誤段 → <kbd>I</kbd>/<kbd>O</kbd> 框範圍 + <kbd>Delete</kbd> 標 NG</li>
         <li>☐ 全部撿完 → File → Export XML... → 傳給 Robert</li>
