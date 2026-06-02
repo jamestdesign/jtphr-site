@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FCPX 撿片操作 Cheat Sheet</title>
-  <meta name="description" content="從匯入到 export XML，一頁可查的 FCPX 撿片操作筆記。" />
+  <meta name="description" content="James 撿片工具：Star1~5（整支 MOV 類型）+ KP_R/Y/G/P（抽禎指令）+ Delete（NG）。自動化骨幹見影片 Schema 紀錄。" />
   <meta name="date" content="2026-06-02" />
   <style>
     :root {
@@ -112,6 +112,14 @@
       line-height:1.9; white-space:pre; overflow-x:auto;
       color:#d0d0e0;
     }
+    .layer-box {
+      background:var(--brand); border:1px solid var(--border);
+      border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;
+    }
+    .layer-box h4 {
+      margin:0 0 .5rem; color:var(--accent); font-size:.95rem;
+    }
+    .layer-box p { margin:.3rem 0; font-size:.9rem; }
   </style>
 </head>
 <body>
@@ -119,7 +127,13 @@
     <a class="back" href="./">← 攝影筆記本</a>
     <h1>FCPX 撿片操作 Cheat Sheet</h1>
     <p class="date">2026-06-02</p>
-    <p class="lead">從匯入到 export XML — 撿片流程一頁可查，不用翻網路。對應正式 schema：NG / KP / HL / KF。</p>
+    <p class="lead">James 撿片工具：Star1~5（整支 MOV 類型）+ KP_R/Y/G/P（抽禎指令）+ Delete（NG）。<strong>自動化骨幹見 <a href="./video-schema.html" style="color:var(--accent);">影片 Schema 紀錄</a></strong>。兩層分開、互不干擾。</p>
+
+    <div class="layer-box">
+      <h4>🧠 兩層架構速覽</h4>
+      <p><strong>自動化層（不變）：</strong>VLM 抽幀 → 評 STILL 品質 + colorLabel 投票 → 反推 KF → 走 schema NG/KP/HL/KF</p>
+      <p><strong>James 撿片層（本文）：</strong>FCPX 內手動標 <strong>Star1~5 整支 MOV 類型</strong> + <strong>KP_R/Y/G/P 抽禎指令</strong> + <strong>Delete NG 段</strong></p>
+    </div>
 
     <nav class="toc">
       <h3>目錄</h3>
@@ -128,29 +142,33 @@
         <li><a href="#import">② 匯入注意事項</a></li>
         <li><a href="#structure">③ 資料夾結構</a></li>
         <li><a href="#shortcuts">④ 快捷鍵總表</a></li>
-        <li><a href="#keyword">⑤ Keyword 設定</a></li>
-        <li><a href="#marker">⑥ Marker 用法</a></li>
-        <li><a href="#schema-map">⑦ Schema 對應</a></li>
-        <li><a href="#export-xml">⑧ Export XML</a></li>
-        <li><a href="#nas">⑨ 搬 NAS SOP</a></li>
-        <li><a href="#cleanup">⑩ 暫存清理</a></li>
-        <li><a href="#checklist">⑪ 動手前 checklist</a></li>
+        <li><a href="#star">⑤ Star1~5（整支 MOV 類型）</a></li>
+        <li><a href="#kp">⑥ KP_R/Y/G/P（抽禎指令）</a></li>
+        <li><a href="#ng">⑦ Delete = NG 失誤段</a></li>
+        <li><a href="#marker">⑧ Marker 用法</a></li>
+        <li><a href="#export-xml">⑨ Export XML</a></li>
+        <li><a href="#nas">⑩ 搬 NAS SOP</a></li>
+        <li><a href="#cleanup">⑪ 暫存清理</a></li>
+        <li><a href="#checklist">⑫ 動手前 checklist</a></li>
       </ol>
     </nav>
 
     <h2 id="tldr">① 一頁流程速覽</h2>
-    <div class="flow">匯入素材到 Event（Leave files in place）→ 標 Favorite / Keyword / Marker
+    <div class="flow">匯入素材到 Event（Leave files in place）→ HDR 對話框選 SDR
                 ↓
-    Smart Collection 篩出 KP / HL / NG
+    撿片：看整支 MOV 判類型 → Ctrl+1~5 標 Star
+            ↓
+    中途看到精彩禎 → I/O 標位置 + Ctrl+6~9 標 KP_R/Y/G/P
+            ↓
+    看到失誤段 → I/O 框範圍 + Delete (NG)
                 ↓
-    File → Export XML → 拿到 .fcpxml
+    File → Export XML → 拿到 .fcpxml（給 Robert 腳本讀）
                 ↓
-    Robert 腳本讀 fcpxml → ffmpeg 抽 HL 片段 + KP 單禎
-                ↓
-    出到 _HL/&lt;scene&gt;/ 和 _KP/&lt;scene&gt;/</div>
+    Robert 自動化：抽 KP 禎 + 寫 LR catalog + 走 schema 流程
+    （評分品質在 LR 內補）</div>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>你的工作只有「判斷」（哪段 HL、哪幀 KP），剩下的命名、抽片段、進資料夾全部腳本自動跑。FCPX 標完 → export XML → 丟給腳本 → 結束。
+      <strong>💡 小貼士：</strong>FCPX 撿片<strong>不評分品質</strong>（評分轉 LR 對 STILL 做）。FCPX 只標：① 整支 MOV 屬哪種類型、② 哪些禎要抽出來、③ 哪段是失誤要跳過。
     </div>
 
     <h2 id="import">② 匯入注意事項</h2>
@@ -163,7 +181,6 @@
         <li>撿片用不到 HDR colorspace</li>
         <li>SDR Library 一樣能匯 HDR clip，FCPX 不會擋</li>
         <li>之後出 SDR 給 IG / YouTube / LINE 比較單純</li>
-        <li>真的要 HDR 出片時，另外開新 Library 設成 HDR 就好</li>
       </ul>
     </div>
 
@@ -177,7 +194,7 @@
           <td><strong>Copy to library</strong></td>
           <td>❌ 永遠不斷</td>
           <td>巨大（含素材）</td>
-          <td>⚠️ 不推（影片太肥）</td>
+          <td>⚠️ 不推</td>
         </tr>
         <tr>
           <td><strong>Leave files in place</strong></td>
@@ -185,17 +202,11 @@
           <td>小（&lt; 100MB）</td>
           <td><span class="pill green">✅ 推</span></td>
         </tr>
-        <tr>
-          <td>Symlink</td>
-          <td>⚠️ 同上</td>
-          <td>小</td>
-          <td>❌ 沒必要</td>
-        </tr>
       </tbody>
     </table>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>選 <strong>Leave files in place</strong> 並把 <code>_MOV/</code> 跟 Library 都放在 trip 資料夾內。搬 NAS 後第一次開啟會跳「missing files」，按 <strong>Locate All...</strong> 指向新的 <code>_MOV/</code> 路徑，FCPX 一次重連全部 clip。
+      <strong>💡 小貼士：</strong>選 <strong>Leave files in place</strong> 並把 <code>_MOV/</code> 跟 Library 都放在 trip 資料夾內。搬 NAS 後第一次開啟會跳「missing files」，按 <strong>Locate All...</strong> 一次重連全部 clip。
     </div>
 
     <h2 id="structure">③ 資料夾結構</h2>
@@ -206,20 +217,20 @@
 │   └── &lt;場景 B&gt;/IMG_yyyy.mov
 ├── 2026-MM-DD &lt;trip&gt;_FCP/             ← FCPX library 獨立放
 │   └── Library.fcpbundle              ← 只記引用，素材不複製
-├── _HL/                               ← 腳本輸出：精選片段
-│   └── &lt;場景&gt;/IMG_xxxx_HL02-04.mp4
-├── _KP/                               ← 腳本輸出：抽單禎
-│   └── &lt;場景&gt;/IMG_xxxx_KP02.jpg
-└── _export/                           ← photo 出片（既有）
+├── _STILL/                            ← VLM 抽幀（自動化層輸出）
+│   └── &lt;場景&gt;/IMG_xxxx_sNN_tXX.XX.jpg
+├── _KP_preview/                       ← KP 抽禎（James 指令觸發）
+│   └── &lt;clip&gt;_kpNN_tXX.XX.jpg
+└── _export/                           ← 出片區
     └── &lt;場景&gt;/</code></pre>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>LR catalog 跟 FCP Library <strong>放在獨立子資料夾</strong>，不要塞同一層。它們各自會頻繁讀寫、各自要備份、各自暫存檔位置不同，分開管理最乾淨。
+      <strong>💡 小貼士：</strong>LR catalog 跟 FCP Library <strong>放在獨立子資料夾</strong>，各自頻繁讀寫、各自備份、各自暫存檔位置不同，分開管理最乾淨。
     </div>
 
     <h2 id="shortcuts">④ 快捷鍵總表</h2>
 
-    <h3>走片 / 預覽（最常用）</h3>
+    <h3>走片 / 預覽</h3>
     <table>
       <tbody>
         <tr><td><kbd>J</kbd></td><td>後退（按多次加速）</td></tr>
@@ -234,24 +245,22 @@
     <h3>標範圍 / 入點出點</h3>
     <table>
       <tbody>
-        <tr><td><kbd>I</kbd></td><td>標入點（範圍開始）</td></tr>
-        <tr><td><kbd>O</kbd></td><td>標出點（範圍結束）</td></tr>
-        <tr><td><kbd>X</kbd></td><td>選整支 clip 當範圍</td></tr>
+        <tr><td><kbd>I</kbd></td><td>標入點</td></tr>
+        <tr><td><kbd>O</kbd></td><td>標出點</td></tr>
+        <tr><td><kbd>X</kbd></td><td>選整支 clip 當範圍（Star 標整支用）</td></tr>
         <tr><td><kbd>Option</kbd>+<kbd>X</kbd></td><td>清除入出點</td></tr>
       </tbody>
     </table>
 
-    <h3>標記 / 評選</h3>
+    <h3>標記</h3>
     <table>
       <tbody>
-        <tr><td><kbd>F</kbd></td><td>Favorite（入選）</td></tr>
-        <tr><td><kbd>Delete</kbd></td><td>Reject（不要）</td></tr>
-        <tr><td><kbd>U</kbd></td><td>清除 Favorite / Reject</td></tr>
-        <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd></td><td>套 Keyword（綁定見第 ⑤ 節）</td></tr>
+        <tr><td><kbd>Delete</kbd></td><td><strong>Reject = NG 失誤段</strong></td></tr>
+        <tr><td><kbd>U</kbd></td><td>清除 Reject</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd></td><td>套 Star1~Star5（整支 MOV 類型）— 詳見 ⑤</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>6</kbd>~<kbd>9</kbd></td><td>套 KP_R/Y/G/P（抽禎指令）— 詳見 ⑥</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>0</kbd></td><td>移除選範圍所有 keyword</td></tr>
-        <tr><td><kbd>M</kbd></td><td>加 Marker（單一時間點）</td></tr>
-        <tr><td><kbd>Option</kbd>+<kbd>M</kbd></td><td>加 Marker + 開命名框</td></tr>
-        <tr><td><kbd>Ctrl</kbd>+<kbd>M</kbd></td><td>刪除 marker</td></tr>
+        <tr><td><kbd>M</kbd></td><td>加 Marker（純標位置用）</td></tr>
       </tbody>
     </table>
 
@@ -265,142 +274,165 @@
       </tbody>
     </table>
 
-    <div class="tip">
-      <strong>💡 小貼士：</strong>最常用的 7 個快捷鍵就 <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> <kbd>I</kbd> <kbd>O</kbd> <kbd>F</kbd> <kbd>M</kbd> — 練到肌肉記憶，撿片速度跟 LR 評星級一樣快。
-    </div>
+    <h2 id="star">⑤ Star1~5（整支 MOV 類型，對應原 schema）</h2>
 
-    <h2 id="keyword">⑤ Keyword 設定（Cmd+K 綁快捷鍵）</h2>
+    <p>Star1~Star5 keyword 標的是「<strong>整支 MOV 屬於哪個類型</strong>」，對應原 schema 的 MOV rating 0~5★。標法：選整支 clip（<kbd>X</kbd>）→ <kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd>。</p>
 
-    <h3>建議綁定</h3>
+    <h3>5 種類型 + 出片規則</h3>
     <table>
       <thead>
-        <tr><th>快捷鍵</th><th>Keyword</th><th>意義</th></tr>
+        <tr><th>快捷鍵</th><th>Keyword</th><th>類型</th><th>出片規則</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><kbd>Ctrl</kbd>+<kbd>1</kbd></td>
-          <td><span class="pill red">HL</span></td>
-          <td><strong>High Light</strong> — 精彩瞬間（範圍 keyword，腳本切獨立 mp4 出片）</td>
+          <td><kbd>Ctrl</kbd>+<kbd>5</kbd></td>
+          <td><strong>Star5</strong></td>
+          <td><strong>史詩級保留</strong>（婚禮 / 作品集 / 首映）</td>
+          <td>P=1 → 直接壓縮出片 + 評估進入剪輯</td>
         </tr>
         <tr>
-          <td><kbd>Ctrl</kbd>+<kbd>2</kbd></td>
-          <td><span class="pill green">KP</span></td>
-          <td><strong>Keep</strong> — 整段剪輯保留（劇本素材，HL ⊆ KP）</td>
+          <td><kbd>Ctrl</kbd>+<kbd>4</kbd></td>
+          <td><strong>Star4</strong></td>
+          <td><strong>精彩瞬間</strong></td>
+          <td>P=1 → 直接壓縮出片 + 二次剪輯</td>
         </tr>
         <tr>
           <td><kbd>Ctrl</kbd>+<kbd>3</kbd></td>
-          <td><span class="pill yellow">NG</span></td>
-          <td><strong>No Good</strong> — 失誤段（只標不切，劇本跳過）</td>
+          <td><strong>Star3</strong></td>
+          <td><strong>保留</strong>（暫共用 FCPX 預設片段 F 功能）</td>
+          <td>進剪輯流程</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>2</kbd></td>
+          <td><strong>Star2</strong></td>
+          <td><strong>活動攝影</strong>（演唱會 / 說明會 / 實境秀）</td>
+          <td>把 NG 去掉後整場剪出做紀錄觀看，不精修</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>1</kbd></td>
+          <td><strong>Star1</strong></td>
+          <td><strong>專題報導</strong>（課程整段）</td>
+          <td>雖枯燥但要聽教學 + NG 註記切除版剪輯出片</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td>（不標）</td>
+          <td><strong>0★ 生活紀錄</strong>（預設）</td>
+          <td>即使 P=1 也不直接出片，KF + KP 仍可進劇本</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>綁定步驟（一次性設好）</h3>
+    <h3>分水嶺</h3>
+    <p><strong>直接出片 vs 剪輯出片</strong>的分界在 <strong>Star4</strong> ✓</p>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>Star 是<strong>整支 MOV 一個</strong>，不是分段標。選整支 clip 再按 <kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd>，整支套上 keyword。同一支 MOV 不該有兩個 Star。
+    </div>
+
+    <h2 id="kp">⑥ KP_R/Y/G/P（抽禎指令）</h2>
+
+    <p>KP_R/Y/G/P keyword 是「<strong>James 給 Robert 的抽禎指令</strong>」：「這個時點請抽一張禎當 STILL，主題分類是 R/Y/G/P」。</p>
+
+    <h3>4 種主題</h3>
+    <table>
+      <thead>
+        <tr><th>快捷鍵</th><th>Keyword</th><th>主題</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>6</kbd></td>
+          <td><span class="pill red">KP_R</span></td>
+          <td>人像五官明顯（臉清楚）</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>7</kbd></td>
+          <td><span class="pill yellow">KP_Y</span></td>
+          <td>背影 / 側臉 / 動作</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>8</kbd></td>
+          <td><span class="pill green">KP_G</span></td>
+          <td>風景</td>
+        </tr>
+        <tr>
+          <td><kbd>Ctrl</kbd>+<kbd>9</kbd></td>
+          <td><span class="pill purple">KP_P</span></td>
+          <td>食物 / 藝術品 / 物件</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>標法：I/O 同一禎（單點）</h3>
     <ol>
-      <li>選任一 clip 範圍（<kbd>I</kbd> 入點 + <kbd>O</kbd> 出點），按 <kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor</li>
-      <li>第 1 格打 <code>HL</code>、第 2 格打 <code>KP</code>、第 3 格打 <code>NG</code> → 自動綁 <kbd>Ctrl</kbd>+<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd></li>
-      <li>關閉 Keyword Editor，之後撿片：<kbd>I</kbd>/<kbd>O</kbd> 標範圍 → 按綁定鍵 → 一秒套用</li>
+      <li>看片到想抽的那禎 → 按 <kbd>I</kbd> 標入點</li>
+      <li><strong>不移動 playhead</strong> → 按 <kbd>O</kbd> 標出點（同位置 = 單禎範圍）</li>
+      <li>按 <kbd>Ctrl</kbd>+<kbd>6</kbd>~<kbd>9</kbd> 套 KP 分類</li>
     </ol>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>之後想加新 keyword（例如場景名）直接打第 4 格、第 5 格，FCPX 自動綁 <kbd>Ctrl</kbd>+<kbd>4</kbd>、<kbd>Ctrl</kbd>+<kbd>5</kbd>。最多 9 格。
+      <strong>💡 手滑救援：</strong>如果 I/O 不小心錯位變成範圍（例：第 5.2 秒到第 5.4 秒）— 沒關係，<strong>腳本自動抽範圍第一禎</strong>。標完不必回去修。
     </div>
 
-    <h3>Smart Collection 自動聚合</h3>
-    <p>側邊欄 Event 底下會出現 <strong>HL / KP / NG</strong> 三個自動聚合的 Smart Collection。點任一個 → 只看到那批 keyword 標過的範圍，<strong>不用搜尋、不用篩選，一鍵到位</strong>。</p>
+    <h3>腳本動作</h3>
+<pre><code>看到 keyword="KP_R" 範圍 (start, end):
+  if start == end:
+    抽 t=start 那一禎
+  else:
+    抽 t=start 第一禎（手滑救援）
 
-    <div class="tip">
-      <strong>💡 小貼士：</strong>Keyword 跟 Favorite 是<strong>獨立兩層</strong>，不會打架。一段可以同時是 Favorite + KP keyword + HL keyword，三層各自獨立篩。
-    </div>
-
-    <h2 id="marker">⑥ Marker 用法（M + 顏色 / 命名）</h2>
-
-    <h3>Marker 是「單一時間點」</h3>
-    <p>用途：標<strong>抽單禎</strong>的位置（KP — 你想要這一禎當靜態圖出）。按 <kbd>M</kbd> 在 playhead 位置打 marker。</p>
-
-    <h3>Marker 顏色限制</h3>
-    <table>
-      <thead>
-        <tr><th>顏色</th><th>FCPX 語意</th><th>用於這個 cheat sheet</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>🔵 藍</td><td>Standard</td><td>預設，按 <kbd>M</kbd> 直接是這個</td></tr>
-        <tr><td>🔴 紅</td><td>To Do</td><td>標「待後製」</td></tr>
-        <tr><td>🟢 綠</td><td>Completed</td><td>標「已 OK」</td></tr>
-        <tr><td>🟠 橘</td><td>Chapter</td><td>不建議（會跑章節列表）</td></tr>
-      </tbody>
-    </table>
+→ 寫進 _KP_preview/&lt;clip&gt;_kpNN_tXX.XX.jpg
+→ 寫進 LR catalog:
+  - STILL 自帶 keyword "R"（主題分類）
+  - Pick=1（自動標保留）
+  - rating 留空 → James 進 LR 補評分</code></pre>
 
     <div class="warn">
-      <strong>⚠️ 沒有黃色 marker</strong>
-      <p style="margin:.5rem 0 0;">如果你要紅黃綠三色分級 KP，FCPX <strong>沒有黃色</strong>。<br><strong>解法：用 Marker 名稱帶顏色 tag</strong>，不靠 marker 本身顏色。</p>
+      <strong>⚠️ FCPX 不給 STILL 評分</strong>
+      <p style="margin:.5rem 0 0;">FCPX 內<strong>沒辦法給抽禎品質評分</strong>（FCPX 的 rating 系統只有 Favorite/Reject 兩個 bit）。評分轉到 <strong>LR 內補</strong>：抽出來的 STILL 進 LR 後你看圖評 1~5★。FCPX 端只負責「分類分標籤 + 標 Pick」。</p>
     </div>
 
-    <h3>命名方案（推薦）</h3>
+    <h2 id="ng">⑦ Delete = NG 失誤段</h2>
+
+    <p>FCPX 內建 Reject 鍵 <kbd>Delete</kbd> 直接拿來標 NG（失誤段，劇本生成跳過）。</p>
+
+    <h3>標法</h3>
+    <ol>
+      <li>看到失誤段（對焦不準 / 穿幫 / 拍壞）→ <kbd>I</kbd>/<kbd>O</kbd> 框範圍</li>
+      <li>按 <kbd>Delete</kbd> → 整段標 Reject（橫線符號顯示）</li>
+      <li><kbd>U</kbd> 可還原（如果標錯）</li>
+    </ol>
+
+    <h3>腳本動作</h3>
+    <ul>
+      <li>看到 Reject 範圍 → 視為 NG → <strong>劇本生成跳過</strong></li>
+      <li>原 MOV 不切（schema 拍板：NG 只註記不切）</li>
+    </ul>
+
+    <div class="tip">
+      <strong>💡 小貼士：</strong>Reject 在 Smart Collection 內可篩「All / Hide Rejected / Rejected Only」三種視角，撿片時隨時切換看。
+    </div>
+
+    <h2 id="marker">⑧ Marker 用法（純時間點標記）</h2>
+
+    <p>Marker 是「<strong>單一時間點</strong>」，跟 keyword（範圍）是兩個系統。撿片時用途：標一個特別的時間點給自己留註記，不觸發任何自動化。</p>
+
+    <h3>Marker 快捷鍵</h3>
     <table>
-      <thead>
-        <tr><th>Marker 名稱</th><th>意義</th><th>腳本抽圖檔名</th></tr>
-      </thead>
       <tbody>
-        <tr><td><code>KP_R</code> 或 <code>KP_精選</code></td><td>最高優先</td><td><code>IMG_xxx_KP02_R.jpg</code></td></tr>
-        <tr><td><code>KP_Y</code> 或 <code>KP_次選</code></td><td>次優先</td><td><code>IMG_xxx_KP05_Y.jpg</code></td></tr>
-        <tr><td><code>KP_G</code> 或 <code>KP_候補</code></td><td>備案</td><td><code>IMG_xxx_KP07_G.jpg</code></td></tr>
-        <tr><td><code>KP</code></td><td>單純標位置</td><td><code>IMG_xxx_KP02.jpg</code></td></tr>
+        <tr><td><kbd>M</kbd></td><td>打藍色 standard marker</td></tr>
+        <tr><td><kbd>Option</kbd>+<kbd>M</kbd></td><td>打 marker + 開命名框</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>M</kbd></td><td>刪 marker（playhead 在 marker 上時）</td></tr>
       </tbody>
     </table>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>連續看片時優先按 <kbd>Option</kbd>+<kbd>M</kbd>，一個動作完成「打 + 命名」。事後再回頭逐個命名很容易漏。
+      <strong>💡 重要區分：</strong>Marker 是「<strong>純標位置</strong>」用，<strong>不用來標 NG/KP/HL/KF</strong>。NG/KP/HL/KF 是 schema 概念：NG 用 Delete、KP 用 Ctrl+6~9 keyword、HL/KF 都是自動化層的事，跟 marker 無關。
     </div>
 
-    <h2 id="schema-map">⑦ FCPX 操作 ↔ Schema 對應</h2>
-    <p>你在 FCPX 用 Favorite / Keyword / Marker 三層操作，對應到 schema 的 NG / KP / HL / KF 概念如下：</p>
+    <h2 id="export-xml">⑨ Export XML 三步</h2>
 
-    <table>
-      <thead>
-        <tr><th>Schema</th><th>FCPX 操作</th><th>用途</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="pill red">HL</span> High Light</td>
-          <td>Keyword <code>HL</code>（範圍）<br><kbd>I</kbd>/<kbd>O</kbd> + <kbd>Ctrl</kbd>+<kbd>1</kbd></td>
-          <td>精彩段 → ffmpeg 切獨立 mp4 出片</td>
-        </tr>
-        <tr>
-          <td><span class="pill green">KP</span> Keep</td>
-          <td>Keyword <code>KP</code>（範圍）<br><kbd>I</kbd>/<kbd>O</kbd> + <kbd>Ctrl</kbd>+<kbd>2</kbd></td>
-          <td>剪輯保留段 → 段中間抽 1 幀代表（劇本縮圖）</td>
-        </tr>
-        <tr>
-          <td><span class="pill yellow">NG</span> No Good</td>
-          <td>Keyword <code>NG</code>（範圍）<br><kbd>I</kbd>/<kbd>O</kbd> + <kbd>Ctrl</kbd>+<kbd>3</kbd></td>
-          <td>失誤段，只標不切（劇本跳過）</td>
-        </tr>
-        <tr>
-          <td><span class="pill purple">KF</span> Key Frame</td>
-          <td><strong>不在 FCPX 標</strong></td>
-          <td>LR STILL Pick=1 反推回 MOV 時間點，腳本自動寫進 MOV keyword（<code>KF:XX.XX</code>）</td>
-        </tr>
-        <tr>
-          <td>Marker（單禎抽圖）</td>
-          <td><kbd>M</kbd> 或 <kbd>Option</kbd>+<kbd>M</kbd></td>
-          <td>指定哪一禎抽出來當 STILL（手動補位）</td>
-        </tr>
-        <tr>
-          <td>Favorite（F 鍵）</td>
-          <td><kbd>F</kbd></td>
-          <td>「入選」單獨一層，跟 keyword 並存。可選用，腳本目前不抓。</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="tip">
-      <strong>💡 小貼士：</strong><strong>KF 不用你標</strong>。你只標 NG / KP / HL（範圍 keyword）+ Marker（單禎位置），KF 是 LR 那邊評完 STILL 後腳本自動反推回來的。
-    </div>
-
-    <h2 id="export-xml">⑧ Export XML 三步</h2>
-
-    <p><strong>FCPXML 是什麼？</strong>FCPX 把所有 Favorite / Keyword / Marker / clip path 匯出成的 XML 文字檔。類比：跟 LR 的 XMP sidecar 同概念，但範圍是整個 Event。腳本讀這個檔來知道你標了什麼。</p>
+    <p><strong>FCPXML 是什麼？</strong>FCPX 把所有 keyword / Reject / Marker / clip path 匯出成的 XML 文字檔。類比 LR 的 XMP sidecar。Robert 腳本讀這個檔來知道 James 標了什麼。</p>
 
     <h3>三步</h3>
     <ol>
@@ -415,10 +447,10 @@
     </ol>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>每次 export 都是<strong>當下狀態</strong>的快照，不會自動同步。標完一輪 → export 一次 → 跑腳本。中途又改了標記要再 export 一次。
+      <strong>💡 小貼士：</strong>每次 export 都是<strong>當下狀態</strong>的快照。標完一輪 → export 一次 → 跑腳本。中途又改了標記要再 export。
     </div>
 
-    <h2 id="nas">⑨ 搬 NAS reconnect SOP</h2>
+    <h2 id="nas">⑩ 搬 NAS reconnect SOP</h2>
 
     <div class="warn">
       <strong>⚠️ FCPX 沒有真正的相對路徑</strong>
@@ -435,10 +467,10 @@
     </ol>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>關鍵在於 <code>_MOV/</code> 跟 Library 的<strong>相對結構不變</strong>。如果你搬完後 <code>_MOV/</code> 改名或拆散，Locate 就要逐個指，會非常痛苦。整個 trip 資料夾原樣搬，最省事。
+      <strong>💡 小貼士：</strong>關鍵在 <code>_MOV/</code> 跟 Library 的<strong>相對結構不變</strong>。整個 trip 資料夾原樣搬，最省事。
     </div>
 
-    <h2 id="cleanup">⑩ 暫存清理 SOP（瘦身 Library）</h2>
+    <h2 id="cleanup">⑪ 暫存清理 SOP（瘦身 Library）</h2>
 
     <h3>三類暫存可清</h3>
     <table>
@@ -446,8 +478,8 @@
         <tr><th>類型</th><th>可重建？</th><th>清掉影響</th></tr>
       </thead>
       <tbody>
-        <tr><td>Render files（背景渲染）</td><td>✅</td><td>下次播放時自動重建</td></tr>
-        <tr><td>Cache files（縮圖/波形）</td><td>✅</td><td>下次瀏覽時自動重建</td></tr>
+        <tr><td>Render files</td><td>✅</td><td>下次播放時自動重建</td></tr>
+        <tr><td>Cache files</td><td>✅</td><td>下次瀏覽時自動重建</td></tr>
         <tr><td>Optimized / Proxy Media</td><td>✅</td><td>切回原檔播放，需要時可重新轉碼</td></tr>
       </tbody>
     </table>
@@ -468,10 +500,10 @@
     </ul>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong><strong>不會刪你的剪輯、keyword、marker</strong>。FCPX 只清「衍生暫存」，工作成果 100% 保留。
+      <strong>💡 小貼士：</strong><strong>不會刪 keyword / marker / Reject 標記</strong>。FCPX 只清「衍生暫存」，James 撿片成果 100% 保留。
     </div>
 
-    <h2 id="checklist">⑪ 動手前 checklist</h2>
+    <h2 id="checklist">⑫ 動手前 checklist</h2>
 
     <div class="ok">
       <strong>✅ 新 trip 開工前確認</strong>
@@ -480,36 +512,36 @@
         <li>☐ 新建 FCP Library 在 <code>trip/&lt;trip&gt;_FCP/</code></li>
         <li>☐ 匯入 <code>_MOV/</code> → <strong>取消勾「Copy to library」</strong></li>
         <li>☐ 遇到 HDR 對話框 → <strong>Keep as Standard (SDR)</strong></li>
-        <li>☐ Keyword 三格綁好（HL / KP / NG → <kbd>Ctrl</kbd>+<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd>）</li>
-        <li>☐ List view 或 Filmstrip 切到你順手的（<kbd>Ctrl</kbd>+<kbd>H</kbd>）</li>
+        <li>☐ Keyword 9 格綁好：<code>Star1~Star5</code> + <code>KP_R/Y/G/P</code></li>
       </ul>
     </div>
 
     <div class="tip">
-      <strong>📤 撿完一輪要交給 Robert</strong>
+      <strong>📤 撿片每支 MOV 的動作</strong>
       <ul>
-        <li>☐ 選中 Event → File → Export XML... → 最新版本</li>
-        <li>☐ 命名 <code>&lt;trip 名&gt;_&lt;日期&gt;.fcpxml</code></li>
-        <li>☐ 把 <code>.fcpxml</code> 路徑 + <code>_MOV/</code> 路徑傳給 Robert</li>
-        <li>☐ Robert 跑腳本 → 輸出到 <code>_HL/&lt;scene&gt;/</code> + <code>_KP/&lt;scene&gt;/</code></li>
+        <li>☐ 看完整支 → 判類型 → <kbd>X</kbd> 選整支 + <kbd>Ctrl</kbd>+<kbd>1</kbd>~<kbd>5</kbd> 標 Star</li>
+        <li>☐ 想抽禎 → <kbd>I</kbd>/<kbd>O</kbd> 同位置 + <kbd>Ctrl</kbd>+<kbd>6</kbd>~<kbd>9</kbd> 標 KP_R/Y/G/P</li>
+        <li>☐ 失誤段 → <kbd>I</kbd>/<kbd>O</kbd> 框範圍 + <kbd>Delete</kbd> 標 NG</li>
+        <li>☐ 全部撿完 → File → Export XML... → 傳給 Robert</li>
       </ul>
     </div>
 
     <div class="warn">
       <strong>🚨 千萬不要</strong>
       <ul>
-        <li>❌ 不要勾「Copy to library」（影片素材會重複，硬碟爆掉）</li>
-        <li>❌ 不要選 Switch to HDR（撿片用不到）</li>
-        <li>❌ 搬硬碟後不要逐個 clip 手動 reconnect（用 Locate All... 一次搞定）</li>
+        <li>❌ 不要勾「Copy to library」</li>
+        <li>❌ 不要選 Switch to HDR</li>
+        <li>❌ 搬硬碟後不要逐個 clip 手動 reconnect（用 Locate All...）</li>
         <li>❌ 不要把 LR catalog 跟 FCP Library 放同一個子資料夾</li>
-        <li>❌ <code>_MOV/</code> 結構移動完不要改名（會破壞 Library 重連邏輯）</li>
+        <li>❌ <strong>不要在 FCPX 內幫 STILL 評分</strong>（轉 LR 評）</li>
+        <li>❌ <strong>不要把這層 keyword 跟 schema NG/KP/HL/KF 混淆</strong> — 自動化照走，這層是 James 撿片工具</li>
       </ul>
     </div>
 
     <hr />
     <p style="color:var(--muted); font-size:.8rem;">
-      整理：Robert ／ 對應正式 schema：<code>NG / KP / HL / KF</code>（2026-05-17 拍板）<br>
-      下一步：Robert 寫 <code>fcpxml_extract.py</code> 腳本（讀 .fcpxml → ffmpeg 抽 HL + KP）。
+      撰寫：Robert ／ 對接：James ／ 對應自動化 schema：<a href="./video-schema.html" style="color:var(--accent);">影片 NG / KP / HL / KF Schema 紀錄</a><br>
+      本文：James 撿片工具（FCPX 9 格 keyword + Delete + Marker），FCPX 不評分品質（轉 LR 對 STILL 補評）。
     </p>
 
   </div>
