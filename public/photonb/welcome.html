@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>攝影筆記本啟用</title>
+  <meta name="description" content="這個筆記本現在會直接發佈到網站，外出時用任何瀏覽器就能讀。" />
+  <meta name="date" content="2026-06-02" />
+  <style>
+    :root { --surface:#0f0f23; --brand:#1a1a2e; --accent:#e94560; --text:#eaeaea; --muted:#a0a0a0; }
+    body {
+      margin:0; background:var(--surface); color:var(--text);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif; line-height:1.75;
+    }
+    .wrap { max-width:720px; margin:0 auto; padding:3.5rem 1.25rem 6rem; }
+    a.back { color:var(--accent); text-decoration:none; font-size:.85rem; }
+    h1 { font-size:1.9rem; margin:1.5rem 0 .25rem; }
+    .date { color:var(--muted); font-size:.85rem; }
+    h2 { color:var(--accent); margin-top:2.2rem; }
+    code { background:#2a2a44; padding:.15em .4em; border-radius:5px; font-size:.9em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="./">← 攝影筆記本</a>
+    <h1>攝影筆記本啟用</h1>
+    <p class="date">2026-06-02</p>
+
+    <p>這個資料夾的筆記現在會直接發佈到網站，外出時用手機或任何電腦的瀏覽器就能讀，不用再開桌面。</p>
+
+    <h2>新增 / 更新一篇筆記</h2>
+    <p>把 <code>.html</code> 檔放進 <code>public/photonb/</code>，然後執行 <code>./scripts/publish-photonb.sh</code> 就會自動上線。可以直接複製 <code>_template.html</code> 當起點。</p>
+  </div>
+</body>
+</html>
