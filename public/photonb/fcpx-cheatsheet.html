@@ -212,11 +212,10 @@
     <h2 id="structure">③ 資料夾結構</h2>
 <pre><code>2026-MM-DD &lt;trip 名&gt;/
 ├── 2026-MM-DD &lt;trip&gt;_LR/              ← LR catalog（主管理）
-├── _MOV/                              ← 影片素材實體放這
+├── _MOV/                              ← 影片素材 + FCP Library 一起放
 │   ├── &lt;場景 A&gt;/IMG_xxxx.mov
-│   └── &lt;場景 B&gt;/IMG_yyyy.mov
-├── 2026-MM-DD &lt;trip&gt;_FCP/             ← FCPX library 獨立放
-│   └── Library.fcpbundle              ← 只記引用，素材不複製
+│   ├── &lt;場景 B&gt;/IMG_yyyy.mov
+│   └── Library.fcpbundle              ← FCPX library 放這（2026-06-02 拍板）
 ├── _STILL/                            ← VLM 抽幀（自動化層輸出）
 │   └── &lt;場景&gt;/IMG_xxxx_sNN_tXX.XX.jpg
 ├── _KP_preview/                       ← KP 抽禎（James 指令觸發）
@@ -225,7 +224,11 @@
     └── &lt;場景&gt;/</code></pre>
 
     <div class="tip">
-      <strong>💡 小貼士：</strong>LR catalog 跟 FCP Library <strong>放在獨立子資料夾</strong>，各自頻繁讀寫、各自備份、各自暫存檔位置不同，分開管理最乾淨。
+      <strong>💡 2026-06-02 拍板：</strong>FCP Library 放進 <code>_MOV/</code> 跟素材同層，<strong>一起搬就一起搬不分離</strong>。Library 用「Leave files in place」模式引用同層的 <code>&lt;場景&gt;/&lt;clip&gt;.mov</code>，相對路徑距離最短，reconnect 最穩。
+    </div>
+
+    <div class="tip">
+      <strong>💡 為什麼不放 trip 根層或獨立子層：</strong>放 trip 根層 → 跟 LR catalog 同層容易混淆。放獨立 <code>&lt;trip&gt;_FCP/</code> → 多一層、且 Library 跟素材<strong>跨資料夾引用</strong>，搬移後 reconnect 路徑距離較遠。放 <code>_MOV/</code> 內 = 影片相關的東西全在一處，搬硬碟最省事。
     </div>
 
     <h2 id="shortcuts">④ 快捷鍵總表</h2>
@@ -560,7 +563,7 @@
       <strong>✅ 新 trip 開工前確認</strong>
       <ul>
         <li>☐ Trip 資料夾結構就位（<code>_MOV/</code> 場景分好）</li>
-        <li>☐ 新建 FCP Library 在 <code>trip/&lt;trip&gt;_FCP/</code></li>
+        <li>☐ 新建 FCP Library 在 <code>trip/_MOV/Library.fcpbundle</code>（跟素材同層）</li>
         <li>☐ 匯入 <code>_MOV/</code> → <strong>取消勾「Copy to library」</strong></li>
         <li>☐ 遇到 HDR 對話框 → <strong>Keep as Standard (SDR)</strong></li>
         <li>☐ Keyword 9 格綁好：<code>Star1~Star5</code> + <code>KP_R/Y/G/P</code></li>
@@ -584,7 +587,7 @@
         <li>❌ 不要勾「Copy to library」</li>
         <li>❌ 不要選 Switch to HDR</li>
         <li>❌ 搬硬碟後不要逐個 clip 手動 reconnect（用 Locate All...）</li>
-        <li>❌ 不要把 LR catalog 跟 FCP Library 放同一個子資料夾</li>
+        <li>❌ 不要把 LR catalog 放進 <code>_MOV/</code>（FCP Library 在 <code>_MOV/</code> 是 OK 的）</li>
         <li>❌ <strong>不要在 FCPX 內幫 STILL 評分</strong>（轉 LR 評）</li>
         <li>❌ <strong>不要把這層 keyword 跟 schema NG/KP/HL/KF 混淆</strong> — 自動化照走，這層是 James 撿片工具</li>
       </ul>
