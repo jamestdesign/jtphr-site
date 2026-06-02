@@ -325,14 +325,22 @@ IMG_6230_s07_t15.02.jpg     ← 15.02 秒</code></pre>
 
     <h4>寫入欄位（exiftool 命令範例）</h4>
 <pre><code>exiftool \
+  -overwrite_original \
+  -codedcharacterset=utf8 \
   -DateTimeOriginal="2026:05:15 11:46:28" \
   -Source="IMG_6230.MOV @ t=03.02" \
   -Keywords="KP_R" -Keywords="Star5" -Keywords="&lt;scene&gt;" \
   -Caption-Abstract="[label:Y] [confidence:1.00 投票 8/8]" \
+  -XMP-dc:Description="[label:Y] [confidence:1.00 投票 8/8]" \
   -XMP-lr:hierarchicalSubject="影片來源|IMG_6230" \
   IMG_6230_s03_t03.02.jpg
 
-# 注意：沒有 -o 旗標 = 直接寫進原 JPG 內，不產 sidecar</code></pre>
+# 注意：
+# • 沒有 -o 旗標 = 直接寫進原 JPG 內嵌，不產 sidecar
+# • -codedcharacterset=utf8 = 強制 IPTC Caption-Abstract 用 UTF-8
+#   （IPTC 預設 Latin-1，不加這條中文 caption 會亂碼，2026-06-02 九州 trip 踩過）
+# • XMP-dc:Description 跟 IPTC Caption-Abstract 同步雙寫
+#   （XMP 原生 UTF-8，更穩；IPTC 給舊版工具相容）</code></pre>
 
     <h4>欄位 → LR 顯示對照</h4>
     <table>
