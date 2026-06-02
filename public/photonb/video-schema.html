@@ -311,6 +311,53 @@ IMG_6230_s07_t15.02.jpg     ← 15.02 秒</code></pre>
       <strong>💡 2026-05-17 B 案拍板：</strong>手動 STILL 不走 LR stack，直接搬到 <code>_STILL/&lt;場景&gt;/</code>，9-P-c extension 腳本會處理 catalog folder pointer 更新。
     </div>
 
+    <h3>JPG metadata 內嵌（2026-06-02 拍板，雙寫鐵則）</h3>
+
+    <p>所有 STILL（自動抽 + 手動截圖）的 metadata <strong>全部塞進 JPG 本身的 EXIF/IPTC/XMP 區段</strong>，<strong>不出 <code>.xmp</code> sidecar</strong>、不出 <code>.txt</code> 副檔。</p>
+
+    <h4>為什麼內嵌</h4>
+    <ul>
+      <li><strong>檔案 self-contained</strong>：搬到任何地方都帶著資訊</li>
+      <li><strong>跨 catalog 攜帶</strong>：LR Classic / LR 雲端 / Apple Photos / iCloud / Bridge 全認</li>
+      <li><strong>沒有 sidecar 走失風險</strong>：.xmp 可能跟主檔分離，內嵌不會</li>
+      <li><strong>對齊既有「metadata 雙寫鐵則」</strong>（2026-05-31 拍板）：catalog SQL + JPG 內嵌 XMP 雙寫，catalog 崩才能 import 從 XMP 讀回</li>
+    </ul>
+
+    <h4>寫入欄位（exiftool 命令範例）</h4>
+<pre><code>exiftool \
+  -DateTimeOriginal="2026:05:15 11:46:28" \
+  -Source="IMG_6230.MOV @ t=03.02" \
+  -Keywords="KP_R" -Keywords="Star5" -Keywords="&lt;scene&gt;" \
+  -Caption-Abstract="[label:Y] [confidence:1.00 投票 8/8]" \
+  -XMP-lr:hierarchicalSubject="影片來源|IMG_6230" \
+  IMG_6230_s03_t03.02.jpg
+
+# 注意：沒有 -o 旗標 = 直接寫進原 JPG 內，不產 sidecar</code></pre>
+
+    <h4>欄位 → LR 顯示對照</h4>
+    <table>
+      <thead><tr><th>欄位</th><th>內容</th><th>LR 哪裡看</th></tr></thead>
+      <tbody>
+        <tr><td><code>DateTimeOriginal</code></td><td>原 MOV 時間 + 抽禎秒偏移</td><td>時間軸排序</td></tr>
+        <tr><td><code>Source</code></td><td><code>&lt;MOV 檔名&gt; @ t=&lt;秒.秒&gt;</code></td><td>Metadata 面板</td></tr>
+        <tr><td><code>Keywords</code></td><td>KP 分類 / Star / 場景</td><td>關鍵字面板</td></tr>
+        <tr><td><code>Caption-Abstract</code></td><td>機器 tag + <code>|</code> + 對話日誌（caption 格式 C）</td><td>註解面板</td></tr>
+        <tr><td><code>Rating</code></td><td><strong>留空</strong>，James 進 LR 後評</td><td>星級</td></tr>
+        <tr><td><code>XMP:Label</code> (Pick)</td><td><strong>留空</strong>，VLM/James 決定</td><td>Pick 旗標 / Color Label</td></tr>
+        <tr><td><code>XMP-lr:hierarchicalSubject</code></td><td><code>影片來源|&lt;MOV 檔名&gt;</code></td><td>階層關鍵字</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn">
+      <strong>🚨 鐵則</strong>
+      <ul>
+        <li>❌ 不出 <code>.xmp</code> sidecar（除非 LR Develop 設定需要，那是另一回事）</li>
+        <li>❌ 不出 <code>.txt</code> / <code>.json</code> 副檔</li>
+        <li>✅ 全部走 JPG 內嵌（exiftool 不加 <code>-o</code> 旗標）</li>
+        <li>✅ catalog SQL 同步寫（雙寫鐵則）</li>
+      </ul>
+    </div>
+
     <h2 id="path">⑧ 路徑結構（v2 平層）</h2>
 <pre><code>&lt;trip&gt;/
 ├── 1146 開場球洞_自拍/                ← 照片場景（ARW + Evotofu/）
