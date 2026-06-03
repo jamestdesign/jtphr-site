@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>影片剪輯知識庫 V2.1 完整版 | 2026-06-03</title>
+<meta name="description" content="從素材到出片的完整影片工序：智慧抽幀減量、FCPX 撿片、KP/HL 批次出圖、效率改善 6 條。">
+<meta name="date" content="2026-06-03">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1f2933;
+    --muted: #5c6773;
+    --accent: #d4441f;
+    --accent-2: #1e6b8f;
+    --green: #2d7a4e;
+    --red: #c74343;
+    --yellow: #b8830f;
+    --purple: #7340a0;
+    --card: #ffffff;
+    --border: #e3e0d6;
+    --code-bg: #f3efe6;
+    --tip-bg: #fdf6d6;
+    --tip-border: #e5c441;
+    --kbd-bg: #2c3a47;
+    --kbd-fg: #fafaf7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "PingFang TC", "Noto Sans TC", "Heiti TC", system-ui, sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 28px 80px; }
+  header.hero {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+  header.hero .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+  }
+  header.hero h1 { font-size: 30px; margin: 0 0 8px; color: var(--accent); font-weight: 700; }
+  header.hero .subtitle { font-size: 16px; color: var(--muted); margin: 0; }
+  header.hero .meta {
+    margin-top: 20px; display: flex; gap: 24px; flex-wrap: wrap;
+    font-size: 13px; color: var(--muted);
+  }
+  header.hero .meta strong { color: var(--fg); }
+  nav.toc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 18px 24px; margin-bottom: 40px; font-size: 14px;
+  }
+  nav.toc h3 {
+    margin: 0 0 12px; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--muted);
+  }
+  nav.toc ol { margin: 0; padding-left: 20px; columns: 2; gap: 24px; }
+  nav.toc li { margin: 4px 0; break-inside: avoid; }
+  nav.toc a { color: var(--accent-2); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  h2 {
+    font-size: 23px; color: var(--accent); border-left: 5px solid var(--accent);
+    padding-left: 14px; margin: 48px 0 18px; font-weight: 700;
+  }
+  h3 { font-size: 18px; color: var(--accent-2); margin: 32px 0 12px; font-weight: 600; }
+  h4 { font-size: 15px; margin: 22px 0 8px; font-weight: 600; color: #2c3a47; }
+  p { margin: 10px 0; }
+  code {
+    background: var(--code-bg); padding: 2px 6px; border-radius: 3px;
+    font-family: "SF Mono", "Consolas", monospace; font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg); padding: 16px 18px; border-radius: 6px;
+    overflow-x: auto; font-size: 13px; line-height: 1.55;
+    border-left: 3px solid var(--accent-2);
+  }
+  pre code { background: none; padding: 0; }
+  kbd {
+    display: inline-block; background: var(--kbd-bg); color: var(--kbd-fg);
+    padding: 2px 8px; border-radius: 4px;
+    font-family: "SF Mono", "Consolas", monospace; font-size: 12px;
+    font-weight: 600; box-shadow: 0 2px 0 #000; margin: 0 2px; vertical-align: 2px;
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px 24px; margin: 18px 0;
+  }
+  .card.callout-red { border-left: 5px solid var(--red); background: #fff7f6; }
+  .card.callout-green { border-left: 5px solid var(--green); background: #f5fbf7; }
+  .card.callout-yellow { border-left: 5px solid var(--yellow); background: #fdf9ec; }
+  .card.callout-purple { border-left: 5px solid var(--purple); background: #f9f4fc; }
+  .card.callout-blue { border-left: 5px solid var(--accent-2); background: #f3f9fb; }
+  .card .label {
+    display: inline-block; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 2px 8px; border-radius: 3px;
+    margin-bottom: 8px; font-weight: 600;
+  }
+  .label.red { background: var(--red); color: #fff; }
+  .label.green { background: var(--green); color: #fff; }
+  .label.yellow { background: var(--yellow); color: #fff; }
+  .label.purple { background: var(--purple); color: #fff; }
+  .label.blue { background: var(--accent-2); color: #fff; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: var(--card); }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th {
+    background: #f0ece0; font-weight: 600; color: #3a4651; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.3px;
+  }
+  tr:hover td { background: #faf7ee; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-right: 4px; }
+  .pill.red { background: #fde0d8; color: var(--red); }
+  .pill.green { background: #d4ecdc; color: var(--green); }
+  .pill.yellow { background: #f7ebc6; color: var(--yellow); }
+  .pill.purple { background: #ebd9f4; color: var(--purple); }
+  .pill.blue { background: #d2e8ef; color: var(--accent-2); }
+  .pill.muted { background: #e8e4d8; color: var(--muted); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 16px 0; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0; }
+  .tip {
+    background: var(--tip-bg); border-left: 4px solid var(--tip-border); border-radius: 4px;
+    padding: 12px 16px; margin: 14px 0; font-size: 14px; color: #4a3a0a;
+  }
+  .tip strong { color: #8a6500; }
+  .flow {
+    background: #fdfcf6; border: 1px dashed #d4c890; border-radius: 8px;
+    padding: 22px 26px; margin: 22px 0;
+    font-family: "SF Mono", "Consolas", monospace; font-size: 13px;
+    line-height: 1.85; white-space: pre; overflow-x: auto;
+  }
+  .step { border: 1px solid var(--border); border-radius: 8px; background: var(--card); margin: 18px 0; overflow: hidden; }
+  .step .head { background: linear-gradient(90deg, #1e6b8f, #2885af); color: #fff; padding: 12px 18px; font-weight: 600; font-size: 15px; }
+  .step .head .num { display: inline-block; background: rgba(255,255,255,0.25); border-radius: 3px; padding: 1px 8px; margin-right: 10px; font-size: 13px; }
+  .step .head .who { float: right; font-size: 12px; font-weight: 600; background: rgba(0,0,0,0.18); padding: 2px 10px; border-radius: 10px; }
+  .step .body { padding: 16px 22px; }
+  .shortcut-tbl td:first-child { width: 200px; font-family: "SF Mono", "Consolas", monospace; white-space: nowrap; }
+  .shortcut-tbl td:nth-child(2) { width: 130px; color: var(--accent-2); font-weight: 600; }
+  .swatch { display: inline-block; width: 16px; height: 16px; border-radius: 3px; vertical-align: middle; margin-right: 6px; border: 1px solid rgba(0,0,0,0.1); }
+  blockquote { border-left: 4px solid var(--accent-2); margin: 14px 0; padding: 4px 18px; background: #f5f9fb; color: #34495e; }
+  .new { display:inline-block; background: var(--green); color:#fff; font-size:10px; padding:1px 7px; border-radius:10px; vertical-align:3px; margin-left:6px; letter-spacing:0.5px; }
+  footer { border-top: 1px solid var(--border); margin-top: 60px; padding-top: 24px; color: var(--muted); font-size: 13px; }
+  .source-list { font-size: 13px; color: var(--muted); }
+  .source-list li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">影片剪輯 KB · V2.1 完整版 · 2026-06-03</span>
+  <h1>影片剪輯知識庫 V2.1</h1>
+  <p class="subtitle">從素材到出片的完整工序 — 整合 schema、FCPX 撿片、智慧抽幀、批次出圖、效率改善</p>
+  <div class="meta">
+    <span><strong>發布日：</strong>2026-06-03</span>
+    <span><strong>對接：</strong>James（撿片 + 剪輯）／ Robert（抽幀 + 評分 + 批次出圖）</span>
+    <span><strong>狀態：</strong>V2.1 — 新增 FCPX 撿片工序 + 智慧抽幀減量</span>
+  </div>
+</header>
+
+<div class="card callout-blue">
+  <span class="label blue">這份是什麼</span>
+  <p>把散落在 5 份文件的影片知識整合成<strong>一份完整可查的 V2.1</strong>。內容承襲 2026-05-27 拍板 schema（NG/KP/HL/KF）+ 2026-06-02 FCPX cheatsheet，再加上你這次（2026-06-03）定的<strong>兩個新方向</strong>：</p>
+  <ol>
+    <li><strong>智慧抽幀減量</strong> — still 抽太多但可用性低，改成「只在敏感動作 / 轉場抽，靜態無變化不抽」，評分重點轉成「<strong>這個場景是幹嘛用的</strong>」。</li>
+    <li><strong>FCPX 撿片工序（你的部分）</strong> — 你撿片 → 喜歡的畫面 KP 給我 → HL 範圍給我批次出圖 → 你剪輯出片。</li>
+  </ol>
+  <p>來源文件：<code>2026-05-27_yonghan_video_schema_record.html</code>、<code>2026-06-02_fcpx_operation_cheatsheet.html</code>、<code>robert/skills/影片素材_VLM抽幀_腳本剪輯_SOP.md</code>、<code>FCP_Marker_Workflow.md</code>、<code>reference_fcpxml_schema_gotchas</code>。</p>
+</div>
+
+<nav class="toc">
+  <h3>目錄</h3>
+  <ol>
+    <li><a href="#whatsnew">① V2.1 改了什麼</a></li>
+    <li><a href="#overview">② 一頁全流程圖</a></li>
+    <li><a href="#terms">③ 名詞表（NG/KP/HL/KF）</a></li>
+    <li><a href="#extract">④ 智慧抽幀 V2.1（減量）</a></li>
+    <li><a href="#rating">⑤ 評分系統（用途 + 主體）</a></li>
+    <li><a href="#markers">⑥ 三標記 + KF 自動回填</a></li>
+    <li><a href="#caption">⑦ Caption / Keyword 格式</a></li>
+    <li><a href="#fcpx">⑧ FCPX 撿片操作精華</a></li>
+    <li><a href="#batch">⑨ Robert 批次出圖（KP + HL）</a></li>
+    <li><a href="#path">⑩ 路徑結構（平層）</a></li>
+    <li><a href="#encode">⑪ 編碼規格（MP4 / JPG）</a></li>
+    <li><a href="#cleanup">⑫ Pick=-1 清理</a></li>
+    <li><a href="#efficiency">⑬ 效率改善建議（給 James）</a></li>
+    <li><a href="#checklist">⑭ 紅線 + checklist</a></li>
+    <li><a href="#open">⑮ 待你確認的事項</a></li>
+  </ol>
+</nav>
+
+<!-- ===================== 1 What's new ===================== -->
+<h2 id="whatsnew">① V2.1 改了什麼</h2>
+
+<table>
+<thead><tr><th style="width:160px;">項目</th><th>V2（之前）</th><th>V2.1（這次 2026-06-03）</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>抽幀密度</strong></td>
+  <td>每 3 秒保底 1 張 + scene-detect 加碼（永漢 72→33）</td>
+  <td><span class="new">NEW</span> 大幅減量：<strong>以 scene-detect 為主</strong>，靜態無變化區段不抽，保底拉長到 ~10 秒 1 張只為「看得懂這段」</td>
+</tr>
+<tr>
+  <td><strong>抽幀目的</strong></td>
+  <td>找 keeper 幀 + 評品質 + 場景分類</td>
+  <td><span class="new">NEW</span> 重點轉向「<strong>這個場景是幹嘛用的</strong>」（場景用途分類），keeper 改由你 FCPX 親手挑</td>
+</tr>
+<tr>
+  <td><strong>keeper 靜照來源</strong></td>
+  <td>Robert 抽 + 你 LR 補 Pick</td>
+  <td><span class="new">NEW</span> <strong>你在 FCPX 撿片時親手挑</strong>（KP marker / 截圖）→ 給 Robert 出圖</td>
+</tr>
+<tr>
+  <td><strong>HL 精彩段</strong></td>
+  <td>你 LR caption 標 <code>HL:9.0-10.5</code></td>
+  <td><span class="new">NEW</span> 改在 <strong>FCPX 標 HL keyword 範圍</strong> → Robert 批次切片 / 出圖</td>
+</tr>
+<tr>
+  <td><strong>出片末端</strong></td>
+  <td>Robert 自動分流上雲</td>
+  <td>你剪輯出片 + Robert 批次出圖支援（不變，更明確分工）</td>
+</tr>
+</tbody>
+</table>
+
+<div class="tip">
+<strong>💡 一句話：</strong>V2.1 把「找好畫面」這件需要藝術判斷的事<strong>還給你</strong>（你在 FCPX 撿），Robert 退到「<strong>幫你看懂素材（智慧抽幀 + 場景用途評分）</strong>」+「<strong>幫你把你挑的東西批次出圖 / 切片 / 命名 / 歸檔</strong>」。人做判斷，機器做勞動。
+</div>
+
+<!-- ===================== 2 Overview ===================== -->
+<h2 id="overview">② 一頁全流程圖</h2>
+
+<div class="flow">┌─ 照片端（V2 已穩定）────────────────────────────┐
+│  Robert 評分→分類→場景→catalog 寫入               │
+│       ↓                                           │
+│  James 檢查 + 出片到 _to_export                    │
+│       ↓                                           │
+│  Robert 發佈 / 搬到 _export/&lt;scene&gt;/（或你自己搬）  │
+└───────────────────────────────────────────────────┘
+
+┌─ 影片端（V2.1 新工序）──────────────────────────┐
+│ ① Robert：智慧抽幀（減量）+ 場景用途評分           │
+│       ↓  讓你在 LR/FCPX 看得懂每段影片是什麼        │
+│ ② James：FCPX 撿片                                 │
+│       ├─ 喜歡的畫面 → KP（marker / 截圖）           │
+│       └─ 精彩段     → HL keyword 範圍              │
+│       ↓  File → Export XML                         │
+│ ③ Robert：批次出圖                                 │
+│       ├─ KP → 4K 單禎抽圖 → _export/&lt;scene&gt;/        │
+│       └─ HL → 切片 mp4 + 抽圖 → _export/&lt;scene&gt;/    │
+│       ↓                                           │
+│ ④ James：剪輯影片 → 出片 → _export/&lt;scene&gt;/memoirs/ │
+└───────────────────────────────────────────────────┘</div>
+
+<div class="tip">
+<strong>💡 小貼士：</strong>照片端跟影片端最後都匯到<strong>同一個 <code>_export/&lt;scene&gt;/</code> 平層</strong>，你在 LR 一個資料夾就能看完那個場景的所有照片 + 影片切片 + 剪輯成品。
+</div>
+
+<!-- ===================== 3 Terms ===================== -->
+<h2 id="terms">③ 名詞表（NG/KP/HL/KF）</h2>
+
+<table>
+<thead><tr><th style="width:80px;">縮寫</th><th>全名</th><th>意思 / 用途</th></tr></thead>
+<tbody>
+<tr><td><strong>MOV</strong></td><td>影片本體</td><td>原始 .MOV/.mov/.mp4，<code>_MOV/&lt;scene&gt;/IMG_XXXX.MOV</code> — <strong>永遠不切</strong></td></tr>
+<tr><td><strong>STILL</strong></td><td>抽幀靜畫</td><td>ffmpeg 從 MOV 抽出的 JPG，給你看懂 + 評場景用途用</td></tr>
+<tr><td><span class="pill yellow">NG</span></td><td>No Good</td><td>失誤段（對焦 / 穿幫）— <strong>只標不切</strong>，劇本 / 剪輯跳過</td></tr>
+<tr><td><span class="pill green">KP</span></td><td>Keep</td><td>你想保留的<strong>單禎好畫面</strong>（V2.1：你在 FCPX 親手挑）→ Robert 抽 4K 圖出片</td></tr>
+<tr><td><span class="pill red">HL</span></td><td>High Light</td><td>精彩<strong>片段範圍</strong> → Robert 切獨立 mp4 + 抽圖。<strong>HL ⊆ KP 概念</strong></td></tr>
+<tr><td><span class="pill purple">KF</span></td><td>Key Frame</td><td>從 STILL 評分結果<strong>自動回填</strong>到 MOV keyword 的時間點（你不用標）</td></tr>
+</tbody>
+</table>
+
+<div class="tip">
+<strong>💡 KP 在 V2.1 的微調：</strong>原本 KP 是「Robert 在保留段中間抽 1 幀」。V2.1 因為你<strong>自己在 FCPX 撿片挑畫面</strong>，KP 變成「<strong>你指定要的那一禎</strong>」，比機器抽的準。（這點我列在 §15 待你確認，怕和舊定義混淆。）
+</div>
+
+<!-- ===================== 4 Extract ===================== -->
+<h2 id="extract">④ 智慧抽幀 V2.1（減量）</h2>
+
+<div class="card callout-green">
+  <span class="label green">V2.1 核心改動</span>
+  <p>你回饋：<em>「still 抽太多但可用性太少」</em>。所以抽幀目的<strong>不再是找 keeper</strong>（keeper 你 FCPX 自己挑），而是：</p>
+  <ul>
+    <li>讓 Robert 跟你<strong>看得懂這段影片在拍什麼</strong>（場景用途評分）</li>
+    <li>抓住<strong>敏感動作 / 轉場</strong>那幾個關鍵瞬間</li>
+    <li>靜態、環境沒大變化的區段 → <strong>不抽</strong>（省得一堆雷同廢圖）</li>
+  </ul>
+</div>
+
+<h3>抽幀邏輯：scene-detect 為主、時間保底拉長</h3>
+
+<pre><code>ffmpeg -nostdin -loglevel info \
+  -i _MOV/&lt;scene&gt;/IMG_XXXX.MOV \
+  -vf "select='isnan(prev_selected_t)+gte(t-prev_selected_t\,10)+gt(scene\,0.4)',showinfo" \
+  -vsync vfr -q:v 2 \
+  /tmp/_extract_IMG_XXXX_%04d.jpg</code></pre>
+
+<table>
+<thead><tr><th style="width:200px;">參數</th><th>V2 舊值</th><th>V2.1 新值</th><th>意義</th></tr></thead>
+<tbody>
+<tr><td>時間保底 <code>gte(t-prev,N)</code></td><td>3 秒</td><td><strong>10 秒</strong></td><td>靜態長鏡頭最少每 10 秒留 1 張「能看懂」，不再每 3 秒灌</td></tr>
+<tr><td>scene 門檻 <code>gt(scene,X)</code></td><td>0.1</td><td><strong>0.4</strong></td><td>只在<strong>明顯</strong>動作 / 轉場（球桿揮動、鏡頭切換、人物進出）才加抽，小晃動不抽</td></tr>
+<tr><td>首幀 <code>isnan(prev)</code></td><td>留</td><td>留</td><td>永遠抽 t=0 起始幀（代表這段開頭）</td></tr>
+</tbody>
+</table>
+
+<div class="tip">
+<strong>💡 兩個參數怎麼調：</strong>scene 門檻 <code>0.4</code> 是起點 — 如果發現轉場漏抓就降到 <code>0.3</code>，如果還是太多雷同圖就升到 <code>0.5</code>。時間保底 <code>10</code> 秒對「靜態訪談 / 風景定鏡」夠用；動態運動類可降回 <code>6</code> 秒。<strong>每個 trip 第一支先試跑一張看抽幾張，再定參數。</strong>
+</div>
+
+<div class="card callout-yellow">
+  <span class="label yellow">⚠️ 預期效果</span>
+  <p>永漢實證 V2 是 72→33（砍 54%）。V2.1 參數預估再砍一半，<strong>大約 72→15 上下</strong>（砍 ~80%）。代價：純靜態時段可能只剩開頭 1 張 — 但那正是你要的（那種時段本來就沒 keeper）。</p>
+</div>
+
+<h3>評分重點：從「品質」改成「場景用途」</h3>
+
+<p>抽出來的 STILL 進 LR 後，Robert 的 VLM 評分<strong>主要回答一個問題</strong>：</p>
+
+<blockquote>
+這段影片<strong>是幹嘛用的</strong>？→ 對應 MOV rating 類型（見 §5）+ colorLabel 主體 + 一句 <code>objective_description</code>。
+</blockquote>
+
+<p>不再花力氣替每張 STILL 評 keeper 星等（那是你 FCPX 撿片的事）。VLM 仍遵守 <strong>防幻覺 6 條紅線</strong>（<code>objective_description</code> 必填、Opus only、拆兩階段、confidence&lt;0.7 flag…）。</p>
+
+<!-- ===================== 5 Rating ===================== -->
+<h2 id="rating">⑤ 評分系統（用途 + 主體 兩個獨立維度）</h2>
+
+<h3>MOV rating 0–5★ = 影片「類型 / 用途」</h3>
+
+<div class="tip">
+<strong>💡 重點：</strong>STILL rating 是「品質」，<strong>MOV rating 是「類型」</strong> — 同一欄、不同意義，LR 按檔案類型自然區分。這就是「這個場景幹嘛用的」答案。
+</div>
+
+<table>
+<thead><tr><th style="width:60px;">★</th><th>類型</th><th>出片規則</th></tr></thead>
+<tbody>
+<tr><td><strong>0★</strong></td><td><strong>生活紀錄</strong>（預設不評就是）</td><td>即使 P=1 也不直接出片 — KF + KP 仍可進劇本</td></tr>
+<tr><td><strong>1★</strong></td><td><strong>專題報導</strong>（課程整片 / 單一專題）</td><td>整片保留 + NG 註記切除版剪輯出片</td></tr>
+<tr><td><strong>2★</strong></td><td><strong>活動攝影</strong>（演唱會 / 說明會）</td><td>直接剪在一起放雲端保存（不精修）</td></tr>
+<tr><td><strong>3★</strong></td><td>保留（待定義二級類型）</td><td>進剪輯流程</td></tr>
+<tr><td><strong>4★</strong></td><td><strong>精彩瞬間</strong></td><td>P=1 → 直接壓縮出片 + 二次剪輯</td></tr>
+<tr><td><strong>5★</strong></td><td><strong>史詩級保留</strong>（婚禮 / 作品集 / 首映）</td><td>P=1 → 直接壓縮出片 + 二次剪輯</td></tr>
+</tbody>
+</table>
+<p><strong>分水嶺：</strong>直接出片 vs 剪輯出片 在 <strong>4★</strong>。</p>
+
+<h3>MOV colorLabel = VLM 主體分類（跟 rating 獨立）</h3>
+
+<table>
+<thead><tr><th style="width:80px;">label</th><th>意思（VLM 看主體判定）</th></tr></thead>
+<tbody>
+<tr><td><span class="swatch" style="background:#c74343;"></span><strong>R</strong></td><td>人像五官明顯（臉清楚）</td></tr>
+<tr><td><span class="swatch" style="background:#b8830f;"></span><strong>Y</strong></td><td>看不到五官的人像（背影 / 側臉 / 動作）</td></tr>
+<tr><td><span class="swatch" style="background:#2d7a4e;"></span><strong>G</strong></td><td>風景</td></tr>
+<tr><td><span class="swatch" style="background:#7340a0;"></span><strong>P</strong></td><td>食物 / 藝術品 / 物件</td></tr>
+</tbody>
+</table>
+<p><strong>判定來源：</strong>該 MOV 抽出的所有 STILL → 對每張 label 多數決 → MOV label。<br>
+<strong>例：</strong>永漢 IMG_6232 抽 18 張，14 Y + 4 G → MOV = <strong>3★ Y</strong>（生活紀錄 + 人像背影）。</p>
+
+<!-- ===================== 6 Markers ===================== -->
+<h2 id="markers">⑥ 三標記 + KF 自動回填</h2>
+
+<table>
+<thead><tr><th style="width:90px;">標記</th><th>意義</th><th>誰標</th><th>處理</th></tr></thead>
+<tbody>
+<tr>
+  <td><span class="pill red">HL</span></td>
+  <td>精彩片段範圍（可獨立出片的小片段）</td>
+  <td>James（FCPX keyword）</td>
+  <td>ffmpeg 切 <code>&lt;clip&gt;_hlNN.mp4</code> + 抽代表圖 → <code>_export/&lt;scene&gt;/</code></td>
+</tr>
+<tr>
+  <td><span class="pill green">KP</span></td>
+  <td>你親手挑的單禎好畫面</td>
+  <td>James（FCPX marker / 截圖）</td>
+  <td>抽 4K 單禎 JPG → <code>_export/&lt;scene&gt;/</code></td>
+</tr>
+<tr>
+  <td><span class="pill yellow">NG</span></td>
+  <td>失誤段（對焦 / 穿幫 / 拍壞）</td>
+  <td>James（FCPX keyword）</td>
+  <td><strong>只標不切</strong>，劇本 / 剪輯跳過</td>
+</tr>
+<tr style="background:#f9f4fc;">
+  <td><span class="pill purple">KF</span></td>
+  <td>關鍵幀時間點</td>
+  <td><strong>自動</strong>（不用標）</td>
+  <td>從 STILL 評分反推回 MOV，寫進 MOV keyword <code>KF:XX.XX</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="card callout-red">
+  <span class="label red">⚠️ HL ⊆ KP 規則 — 不要重複標</span>
+  <p>標 <code>HL</code> 的段，Robert 同時視為：① 獨立切片出片 + ② 劇本 KP 候選。<strong>HL 自帶 KP 屬性</strong>，不用再對同段補標 KP。同一片段只切一次。</p>
+</div>
+
+<div class="tip">
+<strong>💡 KF 不用你標：</strong>你只標 <strong>NG / KP / HL</strong>。KF 是 LR 那邊 STILL 評完後 Robert 自動反推回 MOV keyword 的（搜尋 <code>KF</code> 就抓到時間點）。
+</div>
+
+<!-- ===================== 7 Caption ===================== -->
+<h2 id="caption">⑦ Caption / Keyword 格式</h2>
+
+<h4>Robert 寫的 turn 0（自動，進 LR caption）</h4>
+<pre><code>[label:&lt;R/Y/G/P&gt;] [confidence:&lt;X.XX&gt; 投票 &lt;得票&gt;/&lt;總票&gt;]</code></pre>
+
+<h4>你 audit / 標註後 append（用 <code>|</code> 分隔；若改在 FCPX 標則由 XML 帶）</h4>
+<pre><code>[label:Y] [confidence:0.93 投票 14/15] | HL:9.0-10.5 揮桿頂點 | KP:3.20 開場好神情 | NG:7.0-8.5 對焦失誤</code></pre>
+
+<h4>KF 獨立到 keyword 欄（LR 搜尋 <code>KF</code> 抓得到）</h4>
+<pre><code>IMG_6230.MOV keyword:  KF:03.02   KF:15.02</code></pre>
+
+<div class="tip">
+<strong>💡 zero-pad：</strong>時間一律 2 位小數（<code>KF:06.00</code> 排在 <code>KF:12.00</code> 前），caption 永遠 <strong>append 不覆寫</strong>（它同時是對話日誌容器）。
+</div>
+
+<!-- ===================== 8 FCPX ===================== -->
+<h2 id="fcpx">⑧ FCPX 撿片操作精華</h2>
+
+<h3>一次性設定（每個新 Library 做一次）</h3>
+<div class="card callout-green">
+  <span class="label green">✅ 開工前</span>
+  <ol>
+    <li>匯入 <code>_MOV/</code> → <strong>取消勾 Copy to library</strong>（選 Leave files in place，影片太肥不複製）</li>
+    <li>HDR 對話框 → <strong>Keep as Standard (SDR)</strong></li>
+    <li><kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor → 第 1/2/3 格打 <code>HL</code> / <code>KP</code> / <code>NG</code>（自動綁 <kbd>Ctrl</kbd>+<kbd>1/2/3</kbd>）</li>
+  </ol>
+</div>
+
+<h3>撿片快捷鍵（練成肌肉記憶）</h3>
+<table class="shortcut-tbl">
+<thead><tr><th>快捷鍵</th><th>動作</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td><kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd></td><td>倒 / 停 / 進</td><td>多按加速</td></tr>
+<tr><td><kbd>I</kbd> / <kbd>O</kbd></td><td>標入 / 出點</td><td>選 HL 範圍用</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>1/2/3</kbd></td><td>套 HL / KP / NG</td><td>對選取範圍</td></tr>
+<tr><td><kbd>M</kbd></td><td>加 Marker</td><td>單一時間點（KP 單禎）</td></tr>
+<tr><td><kbd>Option</kbd>+<kbd>M</kbd></td><td>加 Marker + 命名</td><td>直接打 <code>KP_R</code>/<code>KP_Y</code>/<code>KP_G</code> Enter</td></tr>
+</tbody>
+</table>
+
+<div class="tip">
+<strong>💡 KP 標法二選一：</strong>① 範圍 keyword <code>Ctrl+2</code>（一段保留）；② 單禎 <kbd>M</kbd> marker（指定那一禎抽圖）。<strong>挑「要當靜照出的好畫面」用 marker</strong>（精準到那一禎），<strong>挑「剪輯要保留的段」用 keyword 範圍</strong>。
+</div>
+
+<h3>交件：Export XML 三步</h3>
+<ol>
+  <li>側邊欄選中 <strong>Event</strong>（不是 Project / 不是 Library 最上層）</li>
+  <li>File → Export XML… → 版本選最新（1.10+）</li>
+  <li>命名 <code>&lt;trip&gt;_&lt;日期&gt;.fcpxml</code> → 把 <code>.fcpxml</code> + <code>_MOV/</code> 路徑丟給 Robert</li>
+</ol>
+
+<div class="tip">
+<strong>💡 一次 export 驅動全部：</strong>KP marker + HL keyword + NG keyword 全在同一個 XML 裡，Robert 一支腳本全處理。<strong>你只交一次 XML，不用分 KP / HL 兩次給。</strong>（這是 §13 效率建議的核心。）
+</div>
+
+<!-- ===================== 9 Batch ===================== -->
+<h2 id="batch">⑨ Robert 批次出圖（讀 XML 自動跑）</h2>
+
+<div class="step">
+  <div class="head"><span class="num">A</span>KP → 4K 單禎抽圖<span class="who">Robert</span></div>
+  <div class="body">
+    <p>讀 XML 裡的 KP marker 時間點 → ffmpeg 抽該禎 4K JPG：</p>
+    <pre><code>ffmpeg -ss &lt;t&gt; -i &lt;clip&gt;.MOV -frames:v 1 -q:v 2 \
+  _export/&lt;scene&gt;/&lt;clip&gt;_KP&lt;NN&gt;_t&lt;秒.秒&gt;.jpg</code></pre>
+    <p>marker 名帶 <code>_R/_Y/_G</code> → 檔名帶等級，方便你排序挑選。</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="head"><span class="num">B</span>HL → 切片 mp4 + 代表圖<span class="who">Robert</span></div>
+  <div class="body">
+    <p>讀 XML 裡的 HL keyword 範圍 → ffmpeg 切獨立 mp4（H.264 LR 相容）+ 段中抽 1 代表圖：</p>
+    <pre><code># 切片（精準到幀重編碼，不用 -c copy 避免關鍵幀對不齊）
+ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
+  -vf "scale=-2:1080,format=yuv420p" -c:v libx264 -crf 20 -preset slow \
+  -c:a aac -b:a 192k -movflags +faststart \
+  _export/&lt;scene&gt;/&lt;clip&gt;_hl&lt;NN&gt;.mp4</code></pre>
+  </div>
+</div>
+
+<div class="step">
+  <div class="head"><span class="num">C</span>NG → 只記錄不切<span class="who">Robert</span></div>
+  <div class="body"><p>NG 段寫進 metadata 供劇本 / 剪輯跳過，<strong>原檔不動</strong>。</p></div>
+</div>
+
+<div class="tip">
+<strong>💡 命名全自動：</strong>檔名（場景 / clip / 等級 / 時間）全由腳本依 XML 生成，你不用手動命名、不用手動搬檔。出完直接進 <code>_export/&lt;scene&gt;/</code> 等你剪輯。
+</div>
+
+<!-- ===================== 10 Path ===================== -->
+<h2 id="path">⑩ 路徑結構（V2 平層，沿用）</h2>
+
+<pre><code>&lt;trip&gt;/
+├── &lt;場景&gt;/                          ← 照片場景（ARW + Evotofu/）
+├── _MOV/&lt;scene&gt;/&lt;clip&gt;.MOV           ← 影片母檔（永遠不切）
+├── _STILL/&lt;scene&gt;/...               ← 智慧抽幀（看懂 + 評用途）
+├── &lt;trip&gt;_FCP/Library.fcpbundle     ← FCP library（Leave in place，只記引用）
+├── &lt;trip&gt;_LR/                       ← LR catalog（主管理）
+├── _to_evoto/  _to_export/          ← 暫存（Evoto TIFF / LR 出 JPG）
+└── _export/&lt;scene&gt;/                 ← 出片區（平層）
+    ├── &lt;photo&gt;.jpg / &lt;photo&gt;-EVT.jpg  ← 照片出片
+    ├── &lt;clip&gt;_KP&lt;NN&gt;_t&lt;秒&gt;.jpg        ← KP 單禎（V2.1）
+    ├── &lt;clip&gt;_hl&lt;NN&gt;.mp4              ← HL 切片
+    └── memoirs/&lt;edited&gt;.mp4           ← 你剪輯完成版</code></pre>
+
+<div class="tip">
+<strong>💡 為什麼平層：</strong>你要在 LR 內<strong>一個資料夾看完 photo + video</strong>。LR catalog 跟 FCP Library 各放獨立子資料夾（各自頻繁讀寫 + 備份，分開最乾淨）。
+</div>
+
+<!-- ===================== 11 Encode ===================== -->
+<h2 id="encode">⑪ 編碼規格</h2>
+
+<h3>出片 MP4（H.264，LR 預覽相容）</h3>
+<pre><code>ffmpeg -i &lt;src.MOV&gt; -vf "scale=-2:1080,format=yuv420p" \
+  -c:v libx264 -pix_fmt yuv420p -crf 20 -preset slow \
+  -c:a aac -b:a 192k -movflags +faststart &lt;dst.mp4&gt;</code></pre>
+
+<div class="card callout-red">
+  <span class="label red">🔥 必踩坑：別用 HEVC</span>
+  <p>LR Classic 預覽 <strong>HEVC（H.265）會顯示灰畫面</strong>（known bug）。10-bit 直編 QuickTime / Quick Look 也不解。<strong>出片走 H.264 + yuv420p 8-bit</strong>，檔案大 ~30% 但相容稅必付。</p>
+</div>
+
+<h3>單禎 JPG</h3>
+<p><code>-frames:v 1 -q:v 2</code>，抽 4K 原寬（之後可 re-frame / 印刷）。</p>
+
+<!-- ===================== 12 Cleanup ===================== -->
+<h2 id="cleanup">⑫ Pick=-1 清理（釋出空間）</h2>
+<ul>
+  <li>你在 LR 把 MOV 標 <strong>Pick=-1</strong> → Robert explicit 跑 <code>cleanup_rejects.py</code> 才處理</li>
+  <li>安全機制：先搬 <code>_TRASH/&lt;scene&gt;/</code> quarantine，<strong>7 天後</strong>才真刪（誤標可救回）</li>
+  <li>刪 MOV 本體；<strong>不刪</strong>已抽出的 STILL / KP</li>
+</ul>
+
+<!-- ===================== 13 Efficiency ===================== -->
+<h2 id="efficiency">⑬ 效率改善建議（給 James）</h2>
+
+<div class="card callout-blue">
+  <span class="label blue">你的瓶頸在哪</span>
+  <p>V2.1 之後，<strong>判斷工作全集中在你身上</strong>：照片要檢查 + 出片，影片要撿片 + KP + HL + 剪輯。事情變多。下面 6 條照「省你最多動作」排序。</p>
+</div>
+
+<h3>建議 1 ⭐ — KP 別截圖，改打 marker（最大省力）</h3>
+<div class="card callout-green">
+  <p>手動截圖的 3 個隱形成本：<strong>畫質低</strong>（螢幕解析非 4K）、<strong>要自己命名</strong>、<strong>要自己搬檔</strong>。</p>
+  <p><strong>改成：</strong>看到喜歡的畫面 → <kbd>M</kbd> 打 marker（要分級就 <kbd>Option</kbd>+<kbd>M</kbd> 打 <code>KP_R</code>）。Robert 從 XML 抽<strong>原片 4K 那一禎</strong>，畫質最高、命名自動、自動歸檔。<strong>你只按一個鍵。</strong></p>
+</div>
+
+<h3>建議 2 — 一次 Export XML 驅動全部</h3>
+<p>KP / HL / NG 全在 FCPX 一輪標完 → <strong>只 export 一次 XML</strong> → Robert 一支腳本全跑（KP 抽圖 + HL 切片 + NG 記錄）。不要分「KP 給一次、HL 給一次」，減少你的交付動作。</p>
+
+<h3>建議 3 — 工具不要來回跳</h3>
+<p>影片端「人的判斷」全集中在 <strong>FCPX 一次做完</strong>，照片端全集中在 <strong>LR</strong>。在一個工具裡把該做的判斷一次做滿，再交給腳本，比邊看邊跳工具快很多。</p>
+
+<h3>建議 4 — Robert 多吃「分類勞動」，你只做「藝術判斷」</h3>
+<p>場景用途分類、NG 偵測、轉場偵測、主體分類 → 全部 VLM 先做完。你進 FCPX 時，<strong>每段已經有標籤告訴你「這是幹嘛的」</strong>，你只挑「哪段精彩、哪禎好看」。</p>
+
+<h3>建議 5 — 發佈搬檔自動化（沿用照片端）</h3>
+<p><code>_to_export</code> → <code>_export/&lt;scene&gt;/</code> 的搬移由 Robert 腳本一次做（你不用自己搬，除非你想自己搬）。影片切片 / KP 出圖直接落 <code>_export/</code>。</p>
+
+<h3>建議 6 — Trip 開工模板腳本</h3>
+<p>一個 <code>new_trip.sh</code>：自動建好資料夾結構（<code>_MOV/_STILL/_export/...</code>）+ 新建 FCP Library + 提示 keyword 綁定。你開工直接進撿片，不用每次手搭結構。</p>
+
+<div class="tip">
+<strong>💡 整體心法：</strong>你做的事該<strong>只剩「不可外包的藝術判斷」</strong> — 哪段精彩、哪禎好看、怎麼剪。所有「分類、命名、抽圖、切片、轉檔、搬檔、上雲」都是勞動，全歸 Robert 腳本。每多一個你手動做的勞動動作，就是一個可以拿掉的瓶頸。
+</div>
+
+<!-- ===================== 14 Checklist ===================== -->
+<h2 id="checklist">⑭ 紅線 + checklist</h2>
+
+<div class="card callout-red">
+  <span class="label red">🚨 千萬不要</span>
+  <ul>
+    <li>❌ 匯入勾「Copy to library」（影片重複，硬碟爆）</li>
+    <li>❌ 選 Switch to HDR（撿片用不到）</li>
+    <li>❌ 出片用 HEVC（LR 預覽灰畫面）</li>
+    <li>❌ <code>_MOV/</code> 搬完改名（破壞 FCP 重連）</li>
+    <li>❌ LR catalog 跟 FCP Library 放同一子資料夾</li>
+    <li>❌ NG 段切原檔（V2.1：只標不切）</li>
+  </ul>
+</div>
+
+<div class="card callout-green">
+  <span class="label green">✅ catalog 寫入安全（沿用照片端鐵則）</span>
+  <ul>
+    <li>LR <kbd>Cmd</kbd>+<kbd>Q</kbd> → backup + <code>integrity_check</code> 'ok'</li>
+    <li>ExFAT 走 /tmp 副本；UPDATE <strong>必加 WHERE</strong></li>
+    <li>keyword / rating / label 一律 <strong>SQL + exiftool 雙寫</strong>（catalog 崩可從 XMP 重 import）</li>
+  </ul>
+</div>
+
+<!-- ===================== 15 Open ===================== -->
+<h2 id="open">⑮ 待你確認的事項（我先按最合理版本寫，你回正）</h2>
+
+<div class="card callout-yellow">
+  <span class="label yellow">⚠️ 3 個地方我做了假設，怕跟你的意思有出入</span>
+  <ol>
+    <li><strong>KP 定義變了。</strong>舊 schema KP =「Robert 在保留段中間抽 1 幀」；V2.1 我改成「<strong>你在 FCPX 親手挑的單禎好畫面</strong>」。如果你說的 KP 還是指「整段保留素材」、好畫面另算，跟我說，我把名詞分開。</li>
+    <li><strong>「KP 截圖」vs「KP 打 marker」。</strong>你說「把喜歡的照片 KP 給你截圖」— 我建議改打 marker 由腳本抽 4K（建議 1）。如果你就是想用截圖（例如手機 / 別台看片），我也支援，只是畫質 / 命名要你配合。你選哪個？</li>
+    <li><strong>「HL 批次出圖」出的是什麼。</strong>我假設 = HL 範圍切成 mp4 片段 + 抽代表靜照。如果你要的「出圖」是<strong>整段 HL 每隔 N 秒抽一系列靜照</strong>（做圖集 / 選圖用），參數不同，跟我說間隔。</li>
+  </ol>
+</div>
+
+<footer>
+  <p>整理者：Robert ／ 對接：James ／ 版本：V2.1（2026-06-03）</p>
+  <p>檔案：<code>~/Desktop/Claude-Workspace/photo-grade/2026-06-03_video_editing_kb_v2.1.html</code></p>
+  <p>承襲：<code>2026-05-27_yonghan_video_schema_record.html</code>（schema）、<code>2026-06-02_fcpx_operation_cheatsheet.html</code>（操作）、<code>robert/skills/影片素材_VLM抽幀_腳本剪輯_SOP.md</code>（7 步 pipeline）</p>
+  <p>下一步：① 你回 §15 三個確認 → ② Robert 寫 <code>fcpxml_extract.py</code>（讀 XML → KP 抽圖 + HL 切片）→ ③ 你給一支 demo .fcpxml 動工驗證。</p>
+</footer>
+
+</div>
+</body>
+</html>
