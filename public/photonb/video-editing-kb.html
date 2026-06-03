@@ -217,12 +217,12 @@
 <tr>
   <td><strong>keeper 靜照來源</strong></td>
   <td>Robert 抽 + 你 LR 補 Pick</td>
-  <td><span class="new">NEW</span> <strong>你在 FCPX 撿片時親手挑</strong>（KP marker / 截圖）→ 給 Robert 出圖</td>
+  <td><span class="new">NEW</span> 你在 FCPX <code>i/o 單禎 + keyword KP_R/Y/G/P</code> → Robert 抽 4K + 分類寫進 XMP</td>
 </tr>
 <tr>
   <td><strong>HL 精彩段</strong></td>
   <td>你 LR caption 標 <code>HL:9.0-10.5</code></td>
-  <td><span class="new">NEW</span> 改在 <strong>FCPX 標 HL keyword 範圍</strong> → Robert 批次切片 / 出圖</td>
+  <td><span class="new">NEW</span> = 4★/5★ + Favorite(<kbd>F</kbd>) → Robert 切短片段 → 網路相簿動態照片</td>
 </tr>
 <tr>
   <td><strong>出片末端</strong></td>
@@ -377,15 +377,15 @@
 <tbody>
 <tr>
   <td><span class="pill red">HL</span></td>
-  <td>精彩片段範圍（可獨立出片的小片段）</td>
-  <td>James（FCPX keyword）</td>
-  <td>ffmpeg 切 <code>&lt;clip&gt;_hlNN.mp4</code> + 抽代表圖 → <code>_export/&lt;scene&gt;/</code></td>
+  <td>精彩瞬間（= rating 4★/5★）— 動態照片用短片段</td>
+  <td>James（FCPX：<kbd>I</kbd>/<kbd>O</kbd> 範圍 + Favorite <kbd>F</kbd> 顯綠 + 4★/5★）</td>
+  <td>Robert 切短片段 <code>&lt;clip&gt;_hlNN.mp4</code>（1080p H.264 faststart）→ 網路相簿動態照片</td>
 </tr>
 <tr>
   <td><span class="pill green">KP</span></td>
-  <td>你親手挑的單禎好畫面</td>
-  <td>James（FCPX marker / 截圖）</td>
-  <td>抽 4K 單禎 JPG → <code>_export/&lt;scene&gt;/</code></td>
+  <td>你親手挑的單禎好畫面 + 主體分類</td>
+  <td>James（FCPX：<kbd>I</kbd>/<kbd>O</kbd> 同一禎 + keyword <code>KP_R/Y/G/P</code>）</td>
+  <td>Robert 抽 4K 單禎 JPG，R/Y/G/P 寫進 XMP（LR 色標 + 關鍵字）→ <code>_export/&lt;scene&gt;/</code></td>
 </tr>
 <tr>
   <td><span class="pill yellow">NG</span></td>
@@ -436,7 +436,7 @@
   <ol>
     <li>匯入 <code>_MOV/</code> → <strong>取消勾 Copy to library</strong>（選 Leave files in place，影片太肥不複製）</li>
     <li>HDR 對話框 → <strong>Keep as Standard (SDR)</strong></li>
-    <li><kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor → 第 1/2/3 格打 <code>HL</code> / <code>KP</code> / <code>NG</code>（自動綁 <kbd>Ctrl</kbd>+<kbd>1/2/3</kbd>）</li>
+    <li><kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor → 綁 <code>NG</code>(Ctrl+1) + <code>KP_R</code>/<code>KP_Y</code>/<code>KP_G</code>/<code>KP_P</code>(Ctrl+2~5)。<strong>HL 不用 keyword</strong>（用 Favorite <kbd>F</kbd> + 星等 4★/5★）</li>
   </ol>
 </div>
 
@@ -445,15 +445,15 @@
 <thead><tr><th>快捷鍵</th><th>動作</th><th>說明</th></tr></thead>
 <tbody>
 <tr><td><kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd></td><td>倒 / 停 / 進</td><td>多按加速</td></tr>
-<tr><td><kbd>I</kbd> / <kbd>O</kbd></td><td>標入 / 出點</td><td>選 HL 範圍用</td></tr>
-<tr><td><kbd>Ctrl</kbd>+<kbd>1/2/3</kbd></td><td>套 HL / KP / NG</td><td>對選取範圍</td></tr>
-<tr><td><kbd>M</kbd></td><td>加 Marker</td><td>單一時間點（KP 單禎）</td></tr>
-<tr><td><kbd>Option</kbd>+<kbd>M</kbd></td><td>加 Marker + 命名</td><td>直接打 <code>KP_R</code>/<code>KP_Y</code>/<code>KP_G</code> Enter</td></tr>
+<tr><td><kbd>I</kbd> / <kbd>O</kbd></td><td>標入 / 出點</td><td>HL 框範圍；KP 則 <kbd>I</kbd>/<kbd>O</kbd> 同一禎</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>2~5</kbd></td><td>套 KP_R/Y/G/P</td><td>單禎 keeper + 主體分類一鍵（位置+分類）</td></tr>
+<tr><td><kbd>F</kbd></td><td>Favorite = HL</td><td>精彩段顯綠辨識，配 rating 4★/5★</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>套 NG</td><td>失誤段（只標不切）</td></tr>
 </tbody>
 </table>
 
 <div class="tip">
-<strong>💡 KP 標法二選一：</strong>① 範圍 keyword <code>Ctrl+2</code>（一段保留）；② 單禎 <kbd>M</kbd> marker（指定那一禎抽圖）。<strong>挑「要當靜照出的好畫面」用 marker</strong>（精準到那一禎），<strong>挑「剪輯要保留的段」用 keyword 範圍</strong>。
+<strong>💡 KP 一鍵搞定：</strong><kbd>I</kbd>/<kbd>O</kbd> 框到那一禎 → 按 <code>KP_R/Y/G/P</code> keyword（依主體：臉清楚 R / 背影 Y / 風景 G / 物件 P）。<strong>一個動作同時標「位置 + 分類」</strong>，畫質無損（Robert 從原片抽 4K）。比打 marker 省 —— marker 要「位置 + 分類」兩個註記。
 </div>
 
 <h3>交件：Export XML 三步</h3>
@@ -464,31 +464,36 @@
 </ol>
 
 <div class="tip">
-<strong>💡 一次 export 驅動全部：</strong>KP marker + HL keyword + NG keyword 全在同一個 XML 裡，Robert 一支腳本全處理。<strong>你只交一次 XML，不用分 KP / HL 兩次給。</strong>（這是 §13 效率建議的核心。）
+<strong>💡 一次 export 驅動全部：</strong>KP keyword + HL（Favorite + 4★/5★）+ NG keyword 全在同一個 XML 裡，Robert 一支腳本全處理。<strong>你只交一次 XML，不用分 KP / HL 兩次給。</strong>（這是 §13 效率建議的核心。）
 </div>
 
 <!-- ===================== 9 Batch ===================== -->
 <h2 id="batch">⑨ Robert 批次出圖（讀 XML 自動跑）</h2>
 
 <div class="step">
-  <div class="head"><span class="num">A</span>KP → 4K 單禎抽圖<span class="who">Robert</span></div>
+  <div class="head"><span class="num">A</span>KP → 4K 單禎抽圖 + 分類寫進 XMP<span class="who">Robert</span></div>
   <div class="body">
-    <p>讀 XML 裡的 KP marker 時間點 → ffmpeg 抽該禎 4K JPG：</p>
+    <p>讀 XML 裡 <code>KP_R/Y/G/P</code> keyword 的時間點（<kbd>I</kbd>/<kbd>O</kbd> 單禎）→ ffmpeg 從原片抽該禎 4K JPG，再把分類寫進 XMP：</p>
     <pre><code>ffmpeg -ss &lt;t&gt; -i &lt;clip&gt;.MOV -frames:v 1 -q:v 2 \
-  _export/&lt;scene&gt;/&lt;clip&gt;_KP&lt;NN&gt;_t&lt;秒.秒&gt;.jpg</code></pre>
-    <p>marker 名帶 <code>_R/_Y/_G</code> → 檔名帶等級，方便你排序挑選。</p>
+  _export/&lt;scene&gt;/&lt;clip&gt;_KP&lt;NN&gt;_t&lt;秒.秒&gt;.jpg
+
+# R/Y/G/P 寫進 XMP，LR import 直接讀到色標 + 關鍵字
+exiftool -XMP:Label=&lt;Red/Yellow/Green/Purple&gt; \
+  -XMP-dc:Subject+=&lt;KP_R/Y/G/P&gt; &lt;out.jpg&gt;</code></pre>
+    <p>→ 你 import LR 直接看到<strong>色標</strong>（紅臉 / 黃背影 / 綠風景 / 紫物件）+ 關鍵字，不用再標一次。</p>
   </div>
 </div>
 
 <div class="step">
-  <div class="head"><span class="num">B</span>HL → 切片 mp4 + 代表圖<span class="who">Robert</span></div>
+  <div class="head"><span class="num">B</span>HL（4★/5★ + Favorite）→ 動態照片短片段<span class="who">Robert</span></div>
   <div class="body">
-    <p>讀 XML 裡的 HL keyword 範圍 → ffmpeg 切獨立 mp4（H.264 LR 相容）+ 段中抽 1 代表圖：</p>
-    <pre><code># 切片（精準到幀重編碼，不用 -c copy 避免關鍵幀對不齊）
+    <p>讀 XML 裡 Favorite + rating 4★/5★ 的範圍 → ffmpeg 切短片段（H.264 1080p faststart）→ 放網路相簿當動態照片觀賞：</p>
+    <pre><code># 切片段（精準到幀重編碼，不用 -c copy 避免關鍵幀對不齊）
 ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
   -vf "scale=-2:1080,format=yuv420p" -c:v libx264 -crf 20 -preset slow \
   -c:a aac -b:a 192k -movflags +faststart \
   _export/&lt;scene&gt;/&lt;clip&gt;_hl&lt;NN&gt;.mp4</code></pre>
+    <p>段邊界 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（暫定，待你最終確認；見 §15）。</p>
   </div>
 </div>
 
@@ -553,14 +558,14 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
   <p>V2.1 之後，<strong>判斷工作全集中在你身上</strong>：照片要檢查 + 出片，影片要撿片 + KP + HL + 剪輯。事情變多。下面 6 條照「省你最多動作」排序。</p>
 </div>
 
-<h3>建議 1 ⭐ — KP 別截圖，改打 marker（最大省力）</h3>
+<h3>建議 1 ⭐ — KP 維持 i/o 單禎 + keyword（你現行做法已最佳）</h3>
 <div class="card callout-green">
-  <p>手動截圖的 3 個隱形成本：<strong>畫質低</strong>（螢幕解析非 4K）、<strong>要自己命名</strong>、<strong>要自己搬檔</strong>。</p>
-  <p><strong>改成：</strong>看到喜歡的畫面 → <kbd>M</kbd> 打 marker（要分級就 <kbd>Option</kbd>+<kbd>M</kbd> 打 <code>KP_R</code>）。Robert 從 XML 抽<strong>原片 4K 那一禎</strong>，畫質最高、命名自動、自動歸檔。<strong>你只按一個鍵。</strong></p>
+  <p>2026-06-03 釐清：James 現行 = <code>I/O 同一禎 + keyword KP_R/Y/G/P</code>，<strong>畫質完全無損</strong>（那只是標時間點，4K 那一禎由 Robert 從原片抽）。一個 keyword 同時做「位置 + 主體分類」，比 marker 省（marker 需位置 + 分類兩個註記）。<strong>維持此法，不改 marker。</strong></p>
+  <p style="color:#5c6773;font-size:13px;">（先前草稿我寫「改 marker」，是把「i/o + keyword」誤當成「螢幕截圖」才會有畫質疑慮 — 已更正並道歉。）</p>
 </div>
 
 <h3>建議 2 — 一次 Export XML 驅動全部</h3>
-<p>KP / HL / NG 全在 FCPX 一輪標完 → <strong>只 export 一次 XML</strong> → Robert 一支腳本全跑（KP 抽圖 + HL 切片 + NG 記錄）。不要分「KP 給一次、HL 給一次」，減少你的交付動作。</p>
+<p>KP keyword + HL（Favorite + 4★/5★）+ NG 全在 FCPX 一輪標完 → <strong>只 export 一次 XML</strong> → Robert 一支腳本全跑（KP 抽 4K 圖 + 寫 XMP / HL 切短片段 / NG 記錄）。不要分「KP 給一次、HL 給一次」，減少你的交付動作。</p>
 
 <h3>建議 3 — 工具不要來回跳</h3>
 <p>影片端「人的判斷」全集中在 <strong>FCPX 一次做完</strong>，照片端全集中在 <strong>LR</strong>。在一個工具裡把該做的判斷一次做滿，再交給腳本，比邊看邊跳工具快很多。</p>
@@ -603,15 +608,20 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
 </div>
 
 <!-- ===================== 15 Open ===================== -->
-<h2 id="open">⑮ 待你確認的事項（我先按最合理版本寫，你回正）</h2>
+<h2 id="open">⑮ 確認狀態（2026-06-03 James 回覆）</h2>
+
+<div class="card callout-green">
+  <span class="label green">✅ 已確認</span>
+  <ol>
+    <li><strong>KP 定義</strong> = 你親手挑的單禎好畫面。✅</li>
+    <li><strong>KP 操作</strong> = <kbd>I</kbd>/<kbd>O</kbd> 同一禎 + keyword <code>KP_R/Y/G/P</code>（位置 + 主體分類一鍵）。畫質無損；Robert 抽 4K + 把 R/Y/G/P 寫進 XMP（LR 色標 + 關鍵字）。✅ 維持此法，不改 marker。</li>
+    <li><strong>HL</strong> = 精彩瞬間 = rating 4★/5★ + Favorite（<kbd>F</kbd>，FCPX 顯綠辨識）。Robert 針對 4★/5★ 做影片分段輸出 → 短片段放網路相簿當動態照片。✅</li>
+  </ol>
+</div>
 
 <div class="card callout-yellow">
-  <span class="label yellow">⚠️ 3 個地方我做了假設，怕跟你的意思有出入</span>
-  <ol>
-    <li><strong>KP 定義變了。</strong>舊 schema KP =「Robert 在保留段中間抽 1 幀」；V2.1 我改成「<strong>你在 FCPX 親手挑的單禎好畫面</strong>」。如果你說的 KP 還是指「整段保留素材」、好畫面另算，跟我說，我把名詞分開。</li>
-    <li><strong>「KP 截圖」vs「KP 打 marker」。</strong>你說「把喜歡的照片 KP 給你截圖」— 我建議改打 marker 由腳本抽 4K（建議 1）。如果你就是想用截圖（例如手機 / 別台看片），我也支援，只是畫質 / 命名要你配合。你選哪個？</li>
-    <li><strong>「HL 批次出圖」出的是什麼。</strong>我假設 = HL 範圍切成 mp4 片段 + 抽代表靜照。如果你要的「出圖」是<strong>整段 HL 每隔 N 秒抽一系列靜照</strong>（做圖集 / 選圖用），參數不同，跟我說間隔。</li>
-  </ol>
+  <span class="label yellow">🔸 唯一待你最終點頭</span>
+  <p><strong>HL 段邊界</strong>：每段輸出 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（你框多長出多長），暫定如此。若你要「整支 favorite clip 原樣出」或別的切法，跟我說。</p>
 </div>
 
 <footer>
