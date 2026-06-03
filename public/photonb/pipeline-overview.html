@@ -210,107 +210,65 @@
 flowchart TD
     classDef james fill:#fff3cd,stroke:#856404,color:#856404,stroke-width:2px
     classDef robert fill:#cce5ff,stroke:#004085,color:#004085,stroke-width:2px
-    classDef opus fill:#e2d4f0,stroke:#5a32a3,color:#5a32a3,stroke-width:2px
     classDef photo fill:#fde0d8,stroke:#c74343,color:#c74343,stroke-width:2px
     classDef video fill:#ebd9f4,stroke:#7340a0,color:#7340a0,stroke-width:2px
     classDef shared fill:#d4edda,stroke:#2d7a4e,color:#2d7a4e,stroke-width:3px
     classDef storage fill:#d4edda,stroke:#155724,color:#155724
 
-    %% INPUT
     IP[📷 照片 input<br/>ARW / HEIC]:::photo
     IV[🎬 影片 input<br/>MP4 / MOV]:::video
 
-    %% IMPORT
-    S1[💾 Step 1 匯入 NAS<br/>James + Finder<br/>_MOV / _RAW / _PIC 結構]:::james
+    S1[S1 匯入 NAS<br/>James + Finder]:::james
     IP --> S1
     IV --> S1
 
-    %% NAMING - shared
-    S2[🌏 Step 2 場景命名<br/>共用 — GPS + VLM + Nominatim<br/>Robert + Opus + 時區對齊]:::shared
+    S2[S2 場景命名<br/>GPS + VLM + Nominatim<br/>Robert + Opus]:::shared
     S1 --> S2
 
-    %% Photo / Video fork
-    S3a[🎞️ Step 3a 影片抽幀<br/>ffmpeg fps=1 4K 原寬<br/>Robert + ffmpeg]:::video
-    S3b[🖼️ Step 3b 1080p 縮圖<br/>VLM 判讀用<br/>Robert + sips]:::video
-    S2 -- 影片 --> S3a
-    S3a --> S3b
+    S3[S3 影片智慧抽幀<br/>scene-detect 為主・減量<br/>Robert + ffmpeg]:::video
+    S2 -- 影片 --> S3
 
-    %% VLM evaluation - shared
-    S4[🤖 Step 4 Stage A Label<br/>共用 — label / objective_description<br/>Opus 4.8 API]:::shared
+    S4[S4 Stage A 標籤<br/>label + objective_description<br/>Opus 4.8]:::shared
     S2 -- 照片 --> S4
-    S3b --> S4
+    S3 --> S4
 
-    S4a{🟨 Step 4.5<br/>James audit 10 張<br/>共用 audit}:::james
-    S4 --> S4a
-    S4a -- pass --> S5
-    S4a -- fail --> S4
+    S5[S5 Stage B 評分 + Pick<br/>照片=品質 / 影片=場景用途<br/>Opus 4.8]:::shared
+    S4 --> S5
 
-    S5[🤖 Step 5 Stage B Rating + Pick<br/>共用 — 1-5★ + P<br/>Opus 4.8 API]:::shared
-
-    %% LR catalog - shared
-    S6[🗄️ Step 6 LR catalog SQL<br/>共用 — v4 schema<br/>關鍵字 + 註解<br/>Robert + SQLite]:::shared
+    S6[S6 LR catalog 寫入<br/>v4 schema・SQL + XMP 雙寫<br/>Robert]:::shared
     S5 --> S6
 
-    S7[⚡ Step 7 AutoTone trigger<br/>共用 — INSERT calculate<br/>Robert + SQLite]:::shared
+    S7[S7 AutoTone trigger<br/>Robert + SQLite]:::shared
     S6 --> S7
 
-    %% Review - shared
-    S8[🎨 Step 8 James LR review<br/>共用 — 色標 / Pick / 微調<br/>+ 影片 caption 寫 NG<br/>James + LR]:::james
+    S8[S8 James LR review<br/>看懂素材 / 色標 / Pick<br/>影片給 rating 類型<br/>James + LR]:::james
     S7 --> S8
 
-    %% PHOTO branch
-    P9[📸 P9 Red+P 走 Evoto<br/>round-trip B-flow v3<br/>James + Evoto]:::photo
-    S8 -- 照片 Red+P --> P9
+    %% PHOTO 9P
+    P_a[9P-a Red+P 走 Evoto 精修<br/>James + Evoto]:::photo
+    S8 -- 照片 Red+P --> P_a
+    P_b[9P-b LR Develop 套色 preset<br/>James + LR]:::photo
+    P_a --> P_b
+    S8 -- 照片 非Red --> P_b
+    P_c[9P-c 出片 _export/&lt;場景&gt;/<br/>James]:::photo
+    P_b --> P_c
 
-    P10[🎨 P10 LR Develop preset<br/>套色調 — HarborDiary / 其他<br/>James + LR]:::photo
-    P9 --> P10
-    S8 -- 照片(非 Red 軌) --> P10
+    %% VIDEO 9V
+    V_a[9V-a FCPX 撿片<br/>KP i/o+keyword・HL+4★5★・NG<br/>James + FCPX]:::james
+    S8 -- 影片 --> V_a
+    V_b[9V-b Export XML<br/>James + FCPX]:::james
+    V_a --> V_b
+    V_c[9V-c Robert 批次出圖<br/>KP抽4K+XMP・HL短片段・1★去NG拼接<br/>Robert + ffmpeg]:::video
+    V_b --> V_c
+    V_d[9V-d James 剪輯<br/>James + FCPX]:::james
+    V_c --> V_d
+    V_e[9V-e 出片 _export/&lt;場景&gt;/memoirs/<br/>H.264 1080p + faststart]:::storage
+    V_d --> V_e
 
-    P11[💎 P11 出片 _export/photos/<br/>JPG export<br/>James]:::photo
-    P10 --> P11
-
-    %% VIDEO branch
-    V9{🎬 V9 分流 batch<br/>四象限<br/>Robert + bash + ffmpeg}:::video
-    S8 -- 影片 --> V9
-
-    V9a[🟥 紅 P=1 有 NG<br/>→ _FCPX/clean + _export/highlights]:::storage
-    V9b[☁️ 紅 P=1 沒 NG<br/>→ _export/highlights 直接壓縮]:::storage
-    V9c[🟨 黃 P=1 → _FCPX 待剪]:::storage
-    V9e[❌ P=0 → _MOV 留 NAS]:::storage
-    V9 -- 🔴紅 有 NG --> V9a
-    V9 -- 🔴紅 沒 NG --> V9b
-    V9 -- 🟡黃 --> V9c
-    V9 -- P=0 --> V9e
-
-    V10[📍 V10 軌 🅒 marker 回寫<br/>Pick=1 → 藍色 marker<br/>Robert + SpliceKit MCP]:::video
-    V9a --> V10
-    V9c --> V10
-
-    V11[🎬 V11 James FCP 細修<br/>選用<br/>James + FCP]:::james
-    V10 --> V11
-
-    V12[📜 V12 導演視角腳本<br/>HTML director script<br/>Robert + Opus]:::video
-    V10 -.no manual.-> V12
-    V11 --> V12
-
-    V13{📖 V13 James review HTML<br/>annotate / 通過<br/>James + 瀏覽器}:::james
-    V12 --> V13
-    V13 -- 改 v2 --> V12
-    V13 -- 通過 --> V14
-
-    V14[📑 V14 FCPXML 生成<br/>Robert + Python]:::video
-
-    V15[✂️ V15 FCP 剪輯 (精修出片)<br/>James + FCP]:::james
-    V14 --> V15
-
-    V16[💎 V16 出片<br/>_export/highlights/<br/>_export/memoirs/<br/>1080p H.265 8Mbps + faststart]:::storage
-    V15 --> V16
-    V9b --> V16
-
-    %% CLOUD - shared output
-    C[☁️ 上雲 共用<br/>_export → GPhotos / Drive / iCloud<br/>Robert + rclone]:::storage
-    P11 --> C
-    V16 --> C
+    C[☁️ 上雲 共用<br/>_export → GPhotos / Drive / iCloud<br/>Robert]:::storage
+    P_c --> C
+    V_e --> C
+    V_c -. 動態照片短片 .-> C
 </pre>
 </div>
 
@@ -348,17 +306,10 @@ flowchart TD
       <td>✅ 完全共用</td>
     </tr>
     <tr>
-      <td>3a</td>
-      <td>ffmpeg 抽幀</td>
-      <td>—(不抽)</td>
-      <td>fps=1 4K 原寬</td>
-      <td>影片獨有</td>
-    </tr>
-    <tr>
-      <td>3b</td>
-      <td>1080p 縮圖生成</td>
-      <td>—</td>
-      <td>VLM 判讀用</td>
+      <td>S3</td>
+      <td>影片智慧抽幀</td>
+      <td>—（不抽）</td>
+      <td>scene-detect 為主・減量（評場景用途，非找 keeper）</td>
       <td>影片獨有</td>
     </tr>
     <tr>
@@ -395,84 +346,63 @@ flowchart TD
       <td>8</td>
       <td>James LR review</td>
       <td>色標 / Pick / 評分微調</td>
-      <td>+ caption 寫 NG 段 + clip 色標(紅/黃)</td>
-      <td>✅ 共用 LR 介面,影片多 NG 注記步驟</td>
+      <td>+ 看懂素材 / 給 MOV rating 類型 + colorLabel</td>
+      <td>✅ 共用 LR 介面</td>
     </tr>
     <tr>
-      <td>P9</td>
-      <td>Red+P → Evoto round-trip</td>
-      <td>✅ 走 [[Evoto_RoundTrip_B-flow_v3]]</td>
+      <td>9P-a</td>
+      <td>Red+P → Evoto 精修</td>
+      <td>✅ Evoto round-trip</td>
       <td>—</td>
       <td>照片獨有</td>
     </tr>
     <tr>
-      <td>P10</td>
-      <td>LR Develop preset 套色調</td>
-      <td>✅ HarborDiary / 其他色調庫</td>
-      <td>—</td>
-      <td>照片獨有(影片色調不在本 pipeline)</td>
-    </tr>
-    <tr>
-      <td>P11</td>
-      <td>出片 _export/photos/</td>
-      <td>✅ JPG export</td>
+      <td>9P-b</td>
+      <td>LR Develop 套色 preset</td>
+      <td>✅ HarborDiary / 色調庫</td>
       <td>—</td>
       <td>照片獨有</td>
     </tr>
     <tr>
-      <td>V9</td>
-      <td>影片分流 batch</td>
+      <td>9P-c</td>
+      <td>出片</td>
+      <td>✅ JPG → _export/&lt;場景&gt;/</td>
       <td>—</td>
-      <td>✅ 四象限(色標 × P × NG)</td>
-      <td>影片獨有</td>
+      <td>照片獨有</td>
     </tr>
     <tr>
-      <td>V10</td>
-      <td>軌 🅒 marker 回寫</td>
+      <td>9V-a</td>
+      <td>FCPX 撿片</td>
       <td>—</td>
-      <td>✅ SpliceKit MCP</td>
-      <td>影片獨有</td>
+      <td>✅ KP(i/o+keyword) / HL(4★5★) / NG</td>
+      <td>影片獨有（James）</td>
     </tr>
     <tr>
-      <td>V11</td>
-      <td>James FCP 細修(選用)</td>
+      <td>9V-b</td>
+      <td>Export XML</td>
       <td>—</td>
-      <td>✅</td>
-      <td>影片獨有</td>
+      <td>✅ 一次交件驅動全部</td>
+      <td>影片獨有（James）</td>
     </tr>
     <tr>
-      <td>V12</td>
-      <td>導演視角腳本(HTML)</td>
+      <td>9V-c</td>
+      <td>Robert 批次出圖</td>
       <td>—</td>
-      <td>✅ Opus 寫 + HTML 輸出</td>
-      <td>影片獨有</td>
+      <td>✅ KP抽4K+XMP / HL短片段 / 1★去NG拼接</td>
+      <td>影片獨有（Robert）</td>
     </tr>
     <tr>
-      <td>V13</td>
-      <td>James review HTML</td>
+      <td>9V-d</td>
+      <td>James 剪輯</td>
       <td>—</td>
-      <td>✅ annotate / 通過</td>
-      <td>影片獨有</td>
+      <td>✅ FCPX</td>
+      <td>影片獨有（James）</td>
     </tr>
     <tr>
-      <td>V14</td>
-      <td>FCPXML 生成</td>
+      <td>9V-e</td>
+      <td>出片</td>
       <td>—</td>
-      <td>✅ Robert + Python</td>
-      <td>影片獨有</td>
-    </tr>
-    <tr>
-      <td>V15</td>
-      <td>FCP 剪輯</td>
-      <td>—</td>
-      <td>✅ James 精修</td>
-      <td>影片獨有</td>
-    </tr>
-    <tr>
-      <td>V16</td>
-      <td>出片 _export/highlights+memoirs/</td>
-      <td>—</td>
-      <td>✅ 1080p H.265 8Mbps + faststart</td>
+      <td>✅ H.264 1080p → _export/memoirs/</td>
       <td>影片獨有</td>
     </tr>
     <tr>
@@ -487,17 +417,17 @@ flowchart TD
 <h2>🔁 共用核心邏輯(綠色節點)</h2>
 
 <div class="key-fact">
-<strong>9 個共用節點</strong>:Step 1 / 2 / 4 / 4.5 / 5 / 6 / 7 / 8(部分)/ C(上雲)
+<strong>共用核心 S1–S8</strong>：場景命名 / VLM 標籤 / VLM 評分 / catalog 寫入 / AutoTone / LR review — 照片 + 影片都走同一套，最後一起上雲。
 </div>
 
-**為什麼這 9 個共用很關鍵**:
-1. **一份 catalog 管 photo + STILL** — LR 不必區分,評分軸完全一樣
-2. **一份 SKILL 評 photo + STILL** — VLM 不必為影片另寫 prompt
-3. **一份 v4 schema 寫入** — 關鍵字 + 對話日誌格式統一
-4. **一份 master CSV** — 多 `source_video` + `timestamp_sec` 兩欄就涵蓋影片端
-5. **共用 GPS+VLM 場景命名** — 影片跟照片同場景自動配對
-
-—
+<p><strong>為什麼共用很關鍵</strong>：</p>
+<ul>
+  <li>一份 catalog 管 photo + STILL —— LR 不必區分，評分軸一樣</li>
+  <li>一份 VLM 評 photo + STILL —— 不必為影片另寫 prompt</li>
+  <li>一份 v4 schema 寫入 —— 關鍵字 + 對話日誌格式統一</li>
+  <li>STILL 帶 source_video + timestamp，跟原片對應</li>
+  <li>共用 GPS + VLM 場景命名 —— 影片跟照片同場景自動配對</li>
+</ul>
 
 <h2>📊 兩條流的並排比較</h2>
 
@@ -505,24 +435,24 @@ flowchart TD
   <div class="card photo">
     <h3 style="margin-top:0; color: var(--photo);">📷 照片端(成熟)</h3>
     <ul>
-      <li><strong>SOP</strong>:[[Backlog_5階段SOP]] — 5 階段已寫</li>
-      <li><strong>評分</strong>:[[人像評分_4軸法]] 紅黃綠紫</li>
-      <li><strong>後製</strong>:[[Evoto_RoundTrip_B-flow_v3]] Red+P 精修</li>
-      <li><strong>色調</strong>:[[Robert_HarborDiary_v1]] + 未來色調庫</li>
-      <li><strong>輸出</strong>:JPG → _export/photos/ → 上雲</li>
-      <li><strong>實作狀態</strong>:✅ Stage A/B/SQL 都已 production</li>
+      <li><strong>流程</strong>：評分 → 分類 → 場景 → catalog → 出片（9P-a~c）</li>
+      <li><strong>評分</strong>：人像 4 軸法（紅黃綠紫）</li>
+      <li><strong>後製</strong>：Evoto round-trip（Red+P 精修）</li>
+      <li><strong>色調</strong>：HarborDiary + 色調庫</li>
+      <li><strong>輸出</strong>：JPG → _export/&lt;場景&gt;/ → 上雲</li>
+      <li><strong>實作狀態</strong>：✅ 評分 / catalog / 出片都 production</li>
     </ul>
   </div>
   <div class="card video">
-    <h3 style="margin-top:0; color: var(--video);">🎬 影片端(剛設計)</h3>
+    <h3 style="margin-top:0; color: var(--video);">🎬 影片端（V2.1）</h3>
     <ul>
-      <li><strong>SOP</strong>:[[影片素材_VLM抽幀_腳本剪輯_SOP]] — 2026-05-16 拍板</li>
-      <li><strong>抽幀</strong>:ffmpeg fps=1 4K + 1080p 縮圖</li>
-      <li><strong>評分</strong>:**共用照片 SKILL**(STILL = 影片產出的照片)</li>
-      <li><strong>剪輯</strong>:雙軌(James FCP 手動 / VLM 自動)+ 軌 🅒 marker 回寫</li>
-      <li><strong>腳本</strong>:導演視角 HTML → FCPXML → FCP 剪輯</li>
-      <li><strong>輸出</strong>:MP4 → _export/highlights+memoirs/ → 上雲</li>
-      <li><strong>實作狀態</strong>:📐 SOP 已寫,腳本實作 0%(待動工)</li>
+      <li><strong>攻略</strong>：影片剪輯攻略書 V2.1（撿片為核心）</li>
+      <li><strong>抽幀</strong>：智慧抽幀 scene-detect 為主・減量（評場景用途）</li>
+      <li><strong>評分</strong>：共用照片 VLM（STILL = 影片抽出的幀）</li>
+      <li><strong>撿片</strong>：James FCPX 標 KP(i/o+keyword) / HL(4★5★) / NG</li>
+      <li><strong>出圖</strong>：Robert 批次 KP 抽 4K + HL 短片段 + 1★ 去 NG 拼接</li>
+      <li><strong>輸出</strong>：H.264 1080p → _export/&lt;場景&gt;/ → 上雲</li>
+      <li><strong>實作狀態</strong>：📐 schema 定稿，<code>fcpxml_extract.py</code> 待寫（9V-c）</li>
     </ul>
   </div>
 </div>
@@ -544,85 +474,34 @@ flowchart TD
 <p><strong>差異點</strong>:</p>
 <ul>
   <li>影片 clip 本身也進 catalog(LR 支援影片 import),但 LR 對影片只能 clip-level 評分(色標 / Pick / caption),沒 frame-level marker</li>
-  <li>所以 frame-level 操作要進 FCP 做(軌 🅐),或讓 VLM 抽幀後當 STILL 處理(軌 🅑)</li>
-  <li>master CSV 加 `source_video` + `timestamp_sec` 兩欄,讓 STILL 跟原片建立對應</li>
+  <li>所以 frame-level 操作（挑 keeper 那一禎、框精彩段）由 James 在 FCPX 做（9V-a），Robert 從 XML 抽 4K / 切片</li>
+  <li>STILL 帶 source_video + timestamp 兩個資訊，跟原片建立對應</li>
 </ul>
 </div>
 
-<h2>🚀 實作 Roadmap(從現況到完整 production)</h2>
+<h2>🚀 實作狀態</h2>
 
 <table>
-  <thead>
-    <tr><th>Stage</th><th>內容</th><th>狀態</th><th>需要寫?</th></tr>
-  </thead>
+  <thead><tr><th>區塊</th><th>狀態</th></tr></thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>📷 照片端 Backlog SOP(Step 1-7)</td>
-      <td>✅ Production</td>
-      <td>—</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>🎬 影片 Step 3a/3b 抽幀</td>
-      <td>📐 設計完成</td>
-      <td>ffmpeg + sips 腳本</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>🎬 影片 Step 4/5(共用照片 SKILL)</td>
-      <td>📐 設計完成</td>
-      <td>STILL 補進 batch 跑(技術已 ready)</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>🎬 影片 Step 9 分流 batch</td>
-      <td>📐 設計完成</td>
-      <td>bash + ffmpeg 腳本</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>🎬 影片 Step 10 軌 🅒 marker 回寫</td>
-      <td>📐 設計完成</td>
-      <td>SpliceKit MCP 一個函式</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>🎬 影片 Step 12 導演腳本 + HTML</td>
-      <td>📐 設計完成</td>
-      <td>Opus + Python 產 HTML</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>🎬 影片 Step 14 FCPXML 生成</td>
-      <td>📐 設計完成</td>
-      <td>Python(FCPXML 1.x format)</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>☁️ Step C 上雲自動化</td>
-      <td>—</td>
-      <td>rclone / GPhotos API(看 James 選哪個雲)</td>
-    </tr>
+    <tr><td>📷 照片端 S1–S8 + 9P-a~c</td><td>✅ Production（評分 / catalog SQL / Evoto / 套色 都在跑）</td></tr>
+    <tr><td>🤝 共用核心 S1–S8（場景命名 / VLM / catalog / AutoTone）</td><td>✅ Production</td></tr>
+    <tr><td>🎬 影片 S3 智慧抽幀 + S4/S5 評分</td><td>✅ 可跑（共用照片 VLM）</td></tr>
+    <tr><td>🎬 影片 9V-c 批次出圖腳本 <code>fcpxml_extract.py</code></td><td>📐 schema 定稿，待寫（James 給 demo .fcpxml 即動工）</td></tr>
+    <tr><td>☁️ 上雲自動化</td><td>— 待選雲（GPhotos / Drive / iCloud）</td></tr>
   </tbody>
 </table>
 
-<h2>📚 配套文件</h2>
+<h2>📚 配套文件（PhotoNB）</h2>
 
 <ul>
-  <li><strong>照片端 SOP</strong>:[[Backlog_5階段SOP]] — 5 階段流程 + [[人像評分_4軸法]] + [[VLM評分_防幻覺紅線]] + [[Evoto_RoundTrip_B-flow_v3]] + [[LR_Catalog_v4_Metadata_Schema]] + [[LR_AutoTone_SQL觸發]] + [[LR_Catalog_SQL寫入安全]]</li>
-  <li><strong>影片端 SOP</strong>:[[影片素材_VLM抽幀_腳本剪輯_SOP]] — 7 步 pipeline + 雙軌設計 + 四象限分流</li>
-  <li><strong>視覺圖兄弟</strong>:
-    <ul>
-      <li>影片獨立版:<code>_attachments/影片pipeline_n8n視覺圖_2026-05-16.html</code>(17 step 詳細版)</li>
-      <li>本份(整合版):<code>_attachments/全pipeline_n8n整合視覺圖_2026-05-16.html</code></li>
-    </ul>
-  </li>
-  <li><strong>preset 庫</strong>:[[Robert_HarborDiary_v1]] + 未來色調庫(Task #20 deferred)</li>
+  <li><strong>影片細節</strong>：<a href="./video-editing-kb.html">影片剪輯攻略書 V2.1</a>（含每步 9V 代號 + FCPX 操作 + 批次出圖規格）</li>
+  <li><strong>更新紀錄</strong>：<a href="./_video-editing-kb-changelog.html">版本演變</a>（影片 schema、FCPX cheatsheet 等歷史版收在這）</li>
+  <li><strong>照片端</strong>：評分 4 軸法 / VLM 防幻覺紅線 / Evoto round-trip / LR catalog 寫入 — 詳見 vault 對應 skills（Robert 內部維護）</li>
 </ul>
 
 <footer style="margin-top:60px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px;text-align:center;">
-2026-05-16 · photo-grade · 全 pipeline n8n 整合視覺圖 v1
+全 Pipeline 總覽地圖 · 架構 2026-05-16 · 影片端對齊 V2.1（2026-06-03）· Robert
 </footer>
 
 </div>

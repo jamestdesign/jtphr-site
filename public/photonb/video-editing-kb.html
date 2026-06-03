@@ -183,12 +183,12 @@
     <li><a href="#whatsnew">① 這本攻略書怎麼用</a></li>
     <li><a href="#overview">② 一頁全流程圖</a></li>
     <li><a href="#terms">③ 名詞表（NG/KP/HL/KF）</a></li>
-    <li><a href="#extract">④ 智慧抽幀</a></li>
-    <li><a href="#rating">⑤ 評分系統（用途 + 主體）</a></li>
+    <li><a href="#extract">④ 智慧抽幀（S3）</a></li>
+    <li><a href="#rating">⑤ 評分系統（S4–S5）</a></li>
     <li><a href="#markers">⑥ 三標記 + KF 自動回填</a></li>
     <li><a href="#caption">⑦ Caption / Keyword 格式</a></li>
-    <li><a href="#fcpx">⑧ FCPX 撿片操作精華</a></li>
-    <li><a href="#batch">⑨ Robert 批次出圖（KP + HL）</a></li>
+    <li><a href="#fcpx">⑧ FCPX 撿片操作（9V-a / 9V-b）</a></li>
+    <li><a href="#batch">⑨ Robert 批次出圖（9V-c）</a></li>
     <li><a href="#path">⑩ 路徑結構（平層）</a></li>
     <li><a href="#encode">⑪ 編碼規格（MP4 / JPG）</a></li>
     <li><a href="#cleanup">⑫ Pick=-1 清理</a></li>
@@ -217,27 +217,40 @@
 <!-- ===================== 2 Overview ===================== -->
 <h2 id="overview">② 一頁全流程圖</h2>
 
-<div class="flow">┌─ 照片端 ──────────────────────────────────────────┐
-│  Robert 評分→分類→場景→catalog 寫入               │
-│       ↓                                           │
-│  James 檢查 + 出片到 _to_export                    │
-│       ↓                                           │
-│  Robert 發佈 / 搬到 _export/&lt;scene&gt;/（或你自己搬）  │
-└───────────────────────────────────────────────────┘
+<div class="flow">┌─ S1–S8 共用段（照片 + 影片都走）──────────────────┐
+│ S1 匯入 → S2 場景命名 → S3 影片抽幀 →              │
+│ S4 VLM 標籤 → S5 VLM 評分+Pick → S6 catalog 寫入 →  │
+│ S7 AutoTone → S8 你在 LR review（看懂素材）         │
+└──────────────────────────┬────────────────────────┘
+              ┌────────────┴────────────┐
+              ▼                          ▼
+┌─ 📷 照片 9P ─────────────┐  ┌─ 🎬 影片 9V ──────────────────┐
+│ 9P-a Evoto 精修           │  │ 9V-a FCPX 撿片                 │
+│ 9P-b LR Develop 套色      │  │   ├ 好畫面→KP(i/o單禎+KP_R/Y/G/P)│
+│ 9P-c 出片                 │  │   └ 精彩瞬間→HL(i/o範圍+4★/5★) │
+│   ↓ 你檢查→_to_export     │  │ 9V-b Export XML                │
+│  Robert 搬→_export/&lt;場景&gt;/│  │ 9V-c Robert 批次出圖           │
+└───────────────────────────┘  │   ├ KP→4K 單禎抽圖             │
+                                │   └ HL→切短片段（動態照片）     │
+                                │ 9V-d James 剪輯                │
+                                │ 9V-e 出片 _export/&lt;場景&gt;/memoirs/│
+                                └────────────────────────────────┘
+              └────────────┬────────────┘
+                           ▼  ☁️ 上雲 GPhotos / Drive / iCloud</div>
 
-┌─ 影片端 ──────────────────────────────────────────┐
-│ ① Robert：智慧抽幀 + 場景用途評分                  │
-│       ↓  讓你在 LR/FCPX 看得懂每段影片是什麼        │
-│ ② James：FCPX 撿片                                 │
-│       ├─ 好畫面 → KP（i/o 單禎 + keyword KP_R/Y/G/P）│
-│       └─ 精彩瞬間 → HL（i/o 範圍 + keyword，4★/5★） │
-│       ↓  File → Export XML                         │
-│ ③ Robert：批次出圖                                 │
-│       ├─ KP → 4K 單禎抽圖 → _export/&lt;scene&gt;/        │
-│       └─ HL → 切短片段（動態照片）→ _export/&lt;scene&gt;/ │
-│       ↓                                           │
-│ ④ James：剪輯影片 → 出片 → _export/&lt;scene&gt;/memoirs/ │
-└───────────────────────────────────────────────────┘</div>
+<h3>步驟代號對照（跟我說你在哪一步，報代號就好）</h3>
+<table>
+<thead><tr><th style="width:90px;">代號</th><th>誰做</th><th>在幹嘛</th></tr></thead>
+<tbody>
+<tr><td><strong>S1–S8</strong></td><td>共用</td><td>匯入→場景命名→抽幀→VLM 評分→catalog→AutoTone→你 LR review</td></tr>
+<tr><td><strong>9P-a/b/c</strong></td><td>照片</td><td>Evoto 精修 → 套色 preset → 出片</td></tr>
+<tr><td><span class="pill red">9V-a</span></td><td>James</td><td>FCPX 撿片（標 KP / HL / NG）— 見 §8</td></tr>
+<tr><td><span class="pill red">9V-b</span></td><td>James</td><td>Export XML 交給 Robert</td></tr>
+<tr><td><span class="pill blue">9V-c</span></td><td>Robert</td><td>批次出圖（KP 抽 4K / HL 短片段 / 1★ 去 NG 拼接）— 見 §9</td></tr>
+<tr><td><span class="pill red">9V-d</span></td><td>James</td><td>FCPX 剪輯</td></tr>
+<tr><td><strong>9V-e</strong></td><td>—</td><td>出片 → <code>_export/&lt;scene&gt;/memoirs/</code></td></tr>
+</tbody>
+</table>
 
 <div class="tip">
 <strong>💡 小貼士：</strong>照片端跟影片端最後都匯到<strong>同一個 <code>_export/&lt;scene&gt;/</code> 平層</strong>，你在 LR 一個資料夾就能看完那個場景的所有照片 + 影片切片 + 剪輯成品。
@@ -263,7 +276,7 @@
 </div>
 
 <!-- ===================== 4 Extract ===================== -->
-<h2 id="extract">④ 智慧抽幀</h2>
+<h2 id="extract">④ 智慧抽幀 <span style="font-size:15px;color:#5c6773;">· S3</span></h2>
 
 <div class="card callout-green">
   <span class="label green">抽幀的目的</span>
@@ -312,7 +325,7 @@
 <p>不再花力氣替每張 STILL 評 keeper 星等（那是你 FCPX 撿片的事）。VLM 仍遵守 <strong>防幻覺 6 條紅線</strong>（<code>objective_description</code> 必填、Opus only、拆兩階段、confidence&lt;0.7 flag…）。</p>
 
 <!-- ===================== 5 Rating ===================== -->
-<h2 id="rating">⑤ 評分系統（用途 + 主體 兩個獨立維度）</h2>
+<h2 id="rating">⑤ 評分系統（用途 + 主體）<span style="font-size:15px;color:#5c6773;">· S4–S5</span></h2>
 
 <h3>MOV rating 0–5★ = 影片「類型 / 用途」</h3>
 
@@ -420,7 +433,7 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 </div>
 
 <!-- ===================== 8 FCPX ===================== -->
-<h2 id="fcpx">⑧ FCPX 撿片操作精華</h2>
+<h2 id="fcpx">⑧ FCPX 撿片操作 <span style="font-size:15px;color:#5c6773;">· 9V-a（標記）+ 9V-b（Export XML）</span></h2>
 
 <h3>一次性設定（每個新 Library 做一次）</h3>
 <div class="card callout-green">
@@ -460,8 +473,27 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 <strong>💡 一次 export 驅動全部：</strong>KP keyword + HL（Favorite + 4★/5★）+ NG keyword 全在同一個 XML 裡，Robert 一支腳本全處理。<strong>你只交一次 XML，不用分 KP / HL 兩次給。</strong>（這是 §13 效率建議的核心。）
 </div>
 
+<h3>維運 ①：搬 NAS 後 reconnect</h3>
+<div class="card callout-yellow">
+  <span class="label yellow">⚠️ FCPX 記絕對路徑</span>
+  <p>Library 記的是絕對路徑，從 X10 Pro 搬到 NAS 後第一次開會跳「missing files」。但有智能 reconnect，一次指認資料夾就全好：</p>
+  <ol>
+    <li>FCPX 關閉 → 整個 trip 資料夾原樣搬 NAS（<code>_MOV/</code>、LR catalog、FCP Library 一起搬）</li>
+    <li>從 NAS 開 <code>Library.fcpbundle</code> → 跳 missing files → 點 <strong>Locate All…</strong></li>
+    <li>選 NAS 上的 <code>_MOV/</code> → FCPX 自動把所有 clip 重連</li>
+  </ol>
+  <div class="tip"><strong>💡</strong> 關鍵是「<code>_MOV/</code> 跟 Library 的相對結構不變」。搬完別改 <code>_MOV/</code> 名字，否則要逐個重連很痛苦。</div>
+</div>
+
+<h3>維運 ②：Library 暫存清理（瘦身 30–70%）</h3>
+<div class="card callout-green">
+  <span class="label green">✅ 不會刪你的成果</span>
+  <p>選中 Library → <strong>File → Delete Generated Library Files…</strong> → 勾 Render / Optimized / Proxy → Delete。只清「衍生暫存」（可重建），<strong>Keyword / Favorite / Marker / Timeline 100% 保留</strong>。</p>
+  <p>時機：出完片要搬 NAS 前 / Library &gt; 50GB / 季度封存時。</p>
+</div>
+
 <!-- ===================== 9 Batch ===================== -->
-<h2 id="batch">⑨ Robert 批次出圖（讀 XML 自動跑）</h2>
+<h2 id="batch">⑨ Robert 批次出圖（讀 XML 自動跑）<span style="font-size:15px;color:#5c6773;">· 9V-c</span></h2>
 
 <div class="step">
   <div class="head"><span class="num">A</span>KP → 4K 單禎抽圖 + 分類寫進 XMP<span class="who">Robert</span></div>
