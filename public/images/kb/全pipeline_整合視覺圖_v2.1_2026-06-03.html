@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全 Pipeline 總覽 · 照片 + 影片（James / Robert / Opus 分工）</title>
+<meta name="description" content="三方分工全景地圖：照片+影片兩條流的共用核心與分歧分流，從 input 到雲端。">
+<meta name="date" content="2026-05-16">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1f2933;
+    --muted: #5c6773;
+    --accent: #d4441f;
+    --accent-2: #1e6b8f;
+    --photo: #c74343;
+    --video: #7340a0;
+    --shared: #2d7a4e;
+    --james: #b8830f;
+    --robert: #1e6b8f;
+    --opus: #7340a0;
+    --storage: #2d7a4e;
+    --card: #ffffff;
+    --border: #e3e0d6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 40px 28px 80px; }
+  header.hero {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+  header.hero .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  header.hero h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  header.hero .subtitle { color: var(--muted); font-size: 17px; margin: 0; }
+  header.hero .meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  header.hero .meta strong { color: var(--fg); }
+  h2 {
+    font-size: 24px;
+    color: var(--accent);
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin: 48px 0 18px;
+  }
+  h3 {
+    font-size: 18px;
+    color: var(--accent-2);
+    margin: 28px 0 10px;
+  }
+  .legend {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 14px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-swatch {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .sw-photo   { background: #fde0d8; }
+  .sw-video   { background: #ebd9f4; }
+  .sw-shared  { background: #d4edda; }
+  .sw-james   { background: #fff3cd; }
+  .sw-robert  { background: #cce5ff; }
+  .sw-opus    { background: #e2d4f0; }
+  .sw-storage { background: #d4edda; }
+  .mermaid-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  th, td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0ece0;
+    font-weight: 600;
+    color: #3a4651;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  tr:hover td { background: #faf7ee; }
+  .pill {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill.photo   { background: #fde0d8; color: var(--photo); }
+  .pill.video   { background: #ebd9f4; color: var(--video); }
+  .pill.shared  { background: #d4edda; color: var(--shared); }
+  .pill.james   { background: #fff3cd; color: #856404; }
+  .pill.robert  { background: #cce5ff; color: #004085; }
+  .pill.opus    { background: #e2d4f0; color: #5a32a3; }
+  code {
+    background: #f3efe6;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", monospace;
+    font-size: 0.92em;
+  }
+  .key-fact {
+    background: linear-gradient(to right, #f5fbf7, #fff);
+    border-left: 4px solid var(--shared);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 16px 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+  }
+  .card.photo { border-left: 5px solid var(--photo); background: #fff7f6; }
+  .card.video { border-left: 5px solid var(--video); background: #f9f4fc; }
+  .card.shared { border-left: 5px solid var(--shared); background: #f5fbf7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">All Pipeline Integrated · n8n 整合視覺</span>
+  <h1>全 Pipeline 整合視覺圖</h1>
+  <p class="subtitle">照片 + 影片兩條流的共用核心 + 分歧分流,從 input 到雲端</p>
+  <div class="meta">
+    <span>📅 架構日期: <strong>2026-05-16</strong></span>
+    <span>📄 配套: 照片端 Backlog SOP + 影片端攻略書</span>
+  </div>
+</header>
+
+<div class="key-fact" style="border-left-color:#b8830f;background:linear-gradient(to right,#fdf9ec,#fff);">
+  <strong>📍 這是「全系統總覽地圖」</strong> —— 看照片 / 影片兩條流怎麼共用核心、在哪分歧、James / Robert / Opus 各做什麼。<br>
+  ⚠️ 影片半邊是 <strong>2026-05-16 的原始架構</strong>；影片的<strong>最新做法以 V2.1 攻略書為準</strong>（智慧抽幀、KP=i/o+keyword、HL=4★/5★、1★ 去 NG 拼接、H.264）→ <a href="./video-editing-kb.html">看影片剪輯攻略書 →</a>。照片端 + 共用核心仍為現狀。
+</div>
+
+<h2>🎨 色卡 — 媒體分類 / 角色 / 共用</h2>
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch sw-photo"></span><strong>照片端</strong></div>
+  <div class="legend-item"><span class="legend-swatch sw-video"></span><strong>影片端</strong></div>
+  <div class="legend-item"><span class="legend-swatch sw-shared"></span><strong>共用核心</strong>(兩條流都經過)</div>
+</div>
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch sw-james"></span><strong>James</strong></div>
+  <div class="legend-item"><span class="legend-swatch sw-robert"></span><strong>Robert</strong></div>
+  <div class="legend-item"><span class="legend-swatch sw-opus"></span><strong>Opus 4.8 VLM</strong></div>
+  <div class="legend-item"><span class="legend-swatch sw-storage"></span><strong>Storage / Cloud</strong></div>
+</div>
+
+<h2>🗺️ 整合 Pipeline 視覺圖</h2>
+<div class="mermaid-container">
+<pre class="mermaid">
+flowchart TD
+    classDef james fill:#fff3cd,stroke:#856404,color:#856404,stroke-width:2px
+    classDef robert fill:#cce5ff,stroke:#004085,color:#004085,stroke-width:2px
+    classDef photo fill:#fde0d8,stroke:#c74343,color:#c74343,stroke-width:2px
+    classDef video fill:#ebd9f4,stroke:#7340a0,color:#7340a0,stroke-width:2px
+    classDef shared fill:#d4edda,stroke:#2d7a4e,color:#2d7a4e,stroke-width:3px
+    classDef storage fill:#d4edda,stroke:#155724,color:#155724
+
+    IP[📷 照片 input<br/>ARW / HEIC]:::photo
+    IV[🎬 影片 input<br/>MP4 / MOV]:::video
+
+    S1[S1 匯入 NAS<br/>James + Finder]:::james
+    IP --> S1
+    IV --> S1
+
+    S2[S2 場景命名<br/>GPS + VLM + Nominatim<br/>Robert + Opus]:::shared
+    S1 --> S2
+
+    S3[S3 影片智慧抽幀<br/>scene-detect 為主・減量<br/>Robert + ffmpeg]:::video
+    S2 -- 影片 --> S3
+
+    S4[S4 Stage A 標籤<br/>label + objective_description<br/>Opus 4.8]:::shared
+    S2 -- 照片 --> S4
+    S3 --> S4
+
+    S5[S5 Stage B 評分 + Pick<br/>照片=品質 / 影片=場景用途<br/>Opus 4.8]:::shared
+    S4 --> S5
+
+    S6[S6 LR catalog 寫入<br/>v4 schema・SQL + XMP 雙寫<br/>Robert]:::shared
+    S5 --> S6
+
+    S7[S7 AutoTone trigger<br/>Robert + SQLite]:::shared
+    S6 --> S7
+
+    S8[S8 James LR review<br/>看懂素材 / 色標 / Pick<br/>影片給 rating 類型<br/>James + LR]:::james
+    S7 --> S8
+
+    %% PHOTO 9P
+    P_a[9P-a Red+P 走 Evoto 精修<br/>James + Evoto]:::photo
+    S8 -- 照片 Red+P --> P_a
+    P_b[9P-b LR Develop 套色 preset<br/>James + LR]:::photo
+    P_a --> P_b
+    S8 -- 照片 非Red --> P_b
+    P_c[9P-c 出片 _export/&lt;場景&gt;/<br/>James]:::photo
+    P_b --> P_c
+
+    %% VIDEO 9V
+    V_a[9V-a FCPX 撿片<br/>KP i/o+keyword・HL+4★5★・NG<br/>James + FCPX]:::james
+    S8 -- 影片 --> V_a
+    V_b[9V-b Export XML<br/>James + FCPX]:::james
+    V_a --> V_b
+    V_c[9V-c Robert 批次出圖<br/>KP抽4K+XMP・HL短片段・1★去NG拼接<br/>Robert + ffmpeg]:::video
+    V_b --> V_c
+    V_d[9V-d James 剪輯<br/>James + FCPX]:::james
+    V_c --> V_d
+    V_e[9V-e 出片 _export/&lt;場景&gt;/memoirs/<br/>H.264 1080p + faststart]:::storage
+    V_d --> V_e
+
+    C[☁️ 上雲 共用<br/>_export → GPhotos / Drive / iCloud<br/>Robert]:::storage
+    P_c --> C
+    V_e --> C
+    V_c -. 動態照片短片 .-> C
+</pre>
+</div>
+
+<h2>🔗 共用節點 vs 分歧節點對照</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>名稱</th>
+      <th>照片端</th>
+      <th>影片端</th>
+      <th>共用?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>拍攝</td>
+      <td>Sony A7R V / iPhone → ARW / HEIC</td>
+      <td>Sony / iPhone → MP4 / MOV</td>
+      <td>—(同設備不同 codec)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>匯入 NAS</td>
+      <td>_RAW / _PIC</td>
+      <td>_MOV/&lt;scene&gt;/</td>
+      <td>✅ 共用 NAS 結構,只是子資料夾不同</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>場景命名 GPS+VLM</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — Robert + Opus + Nominatim</strong></td>
+      <td>✅ 完全共用</td>
+    </tr>
+    <tr>
+      <td>S3</td>
+      <td>影片智慧抽幀</td>
+      <td>—（不抽）</td>
+      <td>scene-detect 為主・減量（評場景用途，非找 keeper）</td>
+      <td>影片獨有</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Stage A Label-only</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — Opus 4.8 API</strong>(照片+STILL 一起跑)</td>
+      <td>✅ 完全共用</td>
+    </tr>
+    <tr>
+      <td>4.5</td>
+      <td>James audit</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — 10 張抽查</strong></td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Stage B Rating + Pick</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — Opus 4.8 API</strong></td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>LR Catalog SQL 寫入</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — v4 schema</strong>(關鍵字 + 註解 + 評等 + 旗標 + 色標)</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>AutoTone trigger</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — INSERT history step calculate</strong>(對所有影像)</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>James LR review</td>
+      <td>色標 / Pick / 評分微調</td>
+      <td>+ 看懂素材 / 給 MOV rating 類型 + colorLabel</td>
+      <td>✅ 共用 LR 介面</td>
+    </tr>
+    <tr>
+      <td>9P-a</td>
+      <td>Red+P → Evoto 精修</td>
+      <td>✅ Evoto round-trip</td>
+      <td>—</td>
+      <td>照片獨有</td>
+    </tr>
+    <tr>
+      <td>9P-b</td>
+      <td>LR Develop 套色 preset</td>
+      <td>✅ HarborDiary / 色調庫</td>
+      <td>—</td>
+      <td>照片獨有</td>
+    </tr>
+    <tr>
+      <td>9P-c</td>
+      <td>出片</td>
+      <td>✅ JPG → _export/&lt;場景&gt;/</td>
+      <td>—</td>
+      <td>照片獨有</td>
+    </tr>
+    <tr>
+      <td>9V-a</td>
+      <td>FCPX 撿片</td>
+      <td>—</td>
+      <td>✅ KP(i/o+keyword) / HL(4★5★) / NG</td>
+      <td>影片獨有（James）</td>
+    </tr>
+    <tr>
+      <td>9V-b</td>
+      <td>Export XML</td>
+      <td>—</td>
+      <td>✅ 一次交件驅動全部</td>
+      <td>影片獨有（James）</td>
+    </tr>
+    <tr>
+      <td>9V-c</td>
+      <td>Robert 批次出圖</td>
+      <td>—</td>
+      <td>✅ KP抽4K+XMP / HL短片段 / 1★去NG拼接</td>
+      <td>影片獨有（Robert）</td>
+    </tr>
+    <tr>
+      <td>9V-d</td>
+      <td>James 剪輯</td>
+      <td>—</td>
+      <td>✅ FCPX</td>
+      <td>影片獨有（James）</td>
+    </tr>
+    <tr>
+      <td>9V-e</td>
+      <td>出片</td>
+      <td>—</td>
+      <td>✅ H.264 1080p → _export/memoirs/</td>
+      <td>影片獨有</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>上雲</td>
+      <td colspan="2" style="text-align:center; background:#f5fbf7;"><strong>共用 — _export 統一上 GPhotos / Drive / iCloud</strong></td>
+      <td>✅</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>🔁 共用核心邏輯(綠色節點)</h2>
+
+<div class="key-fact">
+<strong>共用核心 S1–S8</strong>：場景命名 / VLM 標籤 / VLM 評分 / catalog 寫入 / AutoTone / LR review — 照片 + 影片都走同一套，最後一起上雲。
+</div>
+
+<p><strong>為什麼共用很關鍵</strong>：</p>
+<ul>
+  <li>一份 catalog 管 photo + STILL —— LR 不必區分，評分軸一樣</li>
+  <li>一份 VLM 評 photo + STILL —— 不必為影片另寫 prompt</li>
+  <li>一份 v4 schema 寫入 —— 關鍵字 + 對話日誌格式統一</li>
+  <li>STILL 帶 source_video + timestamp，跟原片對應</li>
+  <li>共用 GPS + VLM 場景命名 —— 影片跟照片同場景自動配對</li>
+</ul>
+
+<h2>📊 兩條流的並排比較</h2>
+
+<div class="grid-2">
+  <div class="card photo">
+    <h3 style="margin-top:0; color: var(--photo);">📷 照片端(成熟)</h3>
+    <ul>
+      <li><strong>流程</strong>：評分 → 分類 → 場景 → catalog → 出片（9P-a~c）</li>
+      <li><strong>評分</strong>：人像 4 軸法（紅黃綠紫）</li>
+      <li><strong>後製</strong>：Evoto round-trip（Red+P 精修）</li>
+      <li><strong>色調</strong>：HarborDiary + 色調庫</li>
+      <li><strong>輸出</strong>：JPG → _export/&lt;場景&gt;/ → 上雲</li>
+      <li><strong>實作狀態</strong>：✅ 評分 / catalog / 出片都 production</li>
+    </ul>
+  </div>
+  <div class="card video">
+    <h3 style="margin-top:0; color: var(--video);">🎬 影片端（V2.1）</h3>
+    <ul>
+      <li><strong>攻略</strong>：影片剪輯攻略書 V2.1（撿片為核心）</li>
+      <li><strong>抽幀</strong>：智慧抽幀 scene-detect 為主・減量（評場景用途）</li>
+      <li><strong>評分</strong>：共用照片 VLM（STILL = 影片抽出的幀）</li>
+      <li><strong>撿片</strong>：James FCPX 標 KP(i/o+keyword) / HL(4★5★) / NG</li>
+      <li><strong>出圖</strong>：Robert 批次 KP 抽 4K + HL 短片段 + 1★ 去 NG 拼接</li>
+      <li><strong>輸出</strong>：H.264 1080p → _export/&lt;場景&gt;/ → 上雲</li>
+      <li><strong>實作狀態</strong>：📐 schema 定稿，<code>fcpxml_extract.py</code> 待寫（9V-c）</li>
+    </ul>
+  </div>
+</div>
+
+<h2>🎯 LR catalog 是兩條流的「交會點」</h2>
+
+<div class="card shared">
+<p><strong>整套架構最關鍵的設計判斷</strong>:把影片抽出來的 STILL 放進**同一個 LR catalog 跟照片一起評分**(共用節點 Step 6/7)。</p>
+
+<p><strong>為什麼這麼設計</strong>:</p>
+<ol>
+  <li>不必為影片另建 catalog / 另寫評分系統 / 另設 UI</li>
+  <li>James 在 LR review 時,photo 跟 STILL 同視覺體驗(同 4 軸 / 同色標 / 同 Pick)</li>
+  <li>v4 metadata schema 統一(關鍵字 + 註解 + 評等 + 旗標 + 色標)</li>
+  <li>Smart Collection 跨 photo + STILL 都能用</li>
+  <li>未來如要對 STILL 做精修(crop / 印刷)→ 跟 photo 同樣的 develop preset 工作流</li>
+</ol>
+
+<p><strong>差異點</strong>:</p>
+<ul>
+  <li>影片 clip 本身也進 catalog(LR 支援影片 import),但 LR 對影片只能 clip-level 評分(色標 / Pick / caption),沒 frame-level marker</li>
+  <li>所以 frame-level 操作（挑 keeper 那一禎、框精彩段）由 James 在 FCPX 做（9V-a），Robert 從 XML 抽 4K / 切片</li>
+  <li>STILL 帶 source_video + timestamp 兩個資訊，跟原片建立對應</li>
+</ul>
+</div>
+
+<h2>🚀 實作狀態</h2>
+
+<table>
+  <thead><tr><th>區塊</th><th>狀態</th></tr></thead>
+  <tbody>
+    <tr><td>📷 照片端 S1–S8 + 9P-a~c</td><td>✅ Production（評分 / catalog SQL / Evoto / 套色 都在跑）</td></tr>
+    <tr><td>🤝 共用核心 S1–S8（場景命名 / VLM / catalog / AutoTone）</td><td>✅ Production</td></tr>
+    <tr><td>🎬 影片 S3 智慧抽幀 + S4/S5 評分</td><td>✅ 可跑（共用照片 VLM）</td></tr>
+    <tr><td>🎬 影片 9V-c 批次出圖腳本 <code>fcpxml_extract.py</code></td><td>📐 schema 定稿，待寫（James 給 demo .fcpxml 即動工）</td></tr>
+    <tr><td>☁️ 上雲自動化</td><td>— 待選雲（GPhotos / Drive / iCloud）</td></tr>
+  </tbody>
+</table>
+
+<h2>📚 配套文件（PhotoNB）</h2>
+
+<ul>
+  <li><strong>影片細節</strong>：<a href="./video-editing-kb.html">影片剪輯攻略書 V2.1</a>（含每步 9V 代號 + FCPX 操作 + 批次出圖規格）</li>
+  <li><strong>更新紀錄</strong>：<a href="./_video-editing-kb-changelog.html">版本演變</a>（影片 schema、FCPX cheatsheet 等歷史版收在這）</li>
+  <li><strong>照片端</strong>：評分 4 軸法 / VLM 防幻覺紅線 / Evoto round-trip / LR catalog 寫入 — 詳見 vault 對應 skills（Robert 內部維護）</li>
+</ul>
+
+<footer style="margin-top:60px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px;text-align:center;">
+全 Pipeline 總覽地圖 · 架構 2026-05-16 · 影片端對齊 V2.1（2026-06-03）· Robert
+</footer>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { curve: 'basis', padding: 20 }
+  });
+</script>
+
+</body>
+</html>
