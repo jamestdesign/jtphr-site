@@ -180,10 +180,10 @@
 <nav class="toc">
   <h3>目錄</h3>
   <ol>
-    <li><a href="#whatsnew">① V2.1 改了什麼</a></li>
+    <li><a href="#whatsnew">① 這本攻略書怎麼用</a></li>
     <li><a href="#overview">② 一頁全流程圖</a></li>
     <li><a href="#terms">③ 名詞表（NG/KP/HL/KF）</a></li>
-    <li><a href="#extract">④ 智慧抽幀 V2.1（減量）</a></li>
+    <li><a href="#extract">④ 智慧抽幀</a></li>
     <li><a href="#rating">⑤ 評分系統（用途 + 主體）</a></li>
     <li><a href="#markers">⑥ 三標記 + KF 自動回填</a></li>
     <li><a href="#caption">⑦ Caption / Keyword 格式</a></li>
@@ -194,52 +194,26 @@
     <li><a href="#cleanup">⑫ Pick=-1 清理</a></li>
     <li><a href="#efficiency">⑬ 效率改善建議（給 James）</a></li>
     <li><a href="#checklist">⑭ 紅線 + checklist</a></li>
-    <li><a href="#open">⑮ 待你確認的事項</a></li>
   </ol>
 </nav>
 
-<!-- ===================== 1 What's new ===================== -->
-<h2 id="whatsnew">① V2.1 改了什麼</h2>
+<!-- ===================== 1 導覽 ===================== -->
+<h2 id="whatsnew">① 這本攻略書怎麼用</h2>
 
-<table>
-<thead><tr><th style="width:160px;">項目</th><th>V2（之前）</th><th>V2.1（這次 2026-06-03）</th></tr></thead>
-<tbody>
-<tr>
-  <td><strong>抽幀密度</strong></td>
-  <td>每 3 秒保底 1 張 + scene-detect 加碼（永漢 72→33）</td>
-  <td><span class="new">NEW</span> 大幅減量：<strong>以 scene-detect 為主</strong>，靜態無變化區段不抽，保底拉長到 ~10 秒 1 張只為「看得懂這段」</td>
-</tr>
-<tr>
-  <td><strong>抽幀目的</strong></td>
-  <td>找 keeper 幀 + 評品質 + 場景分類</td>
-  <td><span class="new">NEW</span> 重點轉向「<strong>這個場景是幹嘛用的</strong>」（場景用途分類），keeper 改由你 FCPX 親手挑</td>
-</tr>
-<tr>
-  <td><strong>keeper 靜照來源</strong></td>
-  <td>Robert 抽 + 你 LR 補 Pick</td>
-  <td><span class="new">NEW</span> 你在 FCPX <code>i/o 單禎 + keyword KP_R/Y/G/P</code> → Robert 抽 4K + 分類寫進 XMP</td>
-</tr>
-<tr>
-  <td><strong>HL 精彩段</strong></td>
-  <td>你 LR caption 標 <code>HL:9.0-10.5</code></td>
-  <td><span class="new">NEW</span> = 4★/5★ + Favorite(<kbd>F</kbd>) → Robert 切短片段 → 網路相簿動態照片</td>
-</tr>
-<tr>
-  <td><strong>出片末端</strong></td>
-  <td>Robert 自動分流上雲</td>
-  <td>你剪輯出片 + Robert 批次出圖支援（不變，更明確分工）</td>
-</tr>
-</tbody>
-</table>
+<p>這是影片端從「素材」到「出片」的完整工序攻略 —— 看這一本就能做事，不用翻別處。各章獨立，照目錄跳著查即可。</p>
 
 <div class="tip">
-<strong>💡 一句話：</strong>V2.1 把「找好畫面」這件需要藝術判斷的事<strong>還給你</strong>（你在 FCPX 撿），Robert 退到「<strong>幫你看懂素材（智慧抽幀 + 場景用途評分）</strong>」+「<strong>幫你把你挑的東西批次出圖 / 切片 / 命名 / 歸檔</strong>」。人做判斷，機器做勞動。
+<strong>📌 版本 V2.1 ｜ 更新紀錄：</strong>本書只寫「現在怎麼做」。想看版本怎麼演變（改了哪裡、為什麼改）→ <a href="./_video-editing-kb-changelog.html">點這裡看更新紀錄 →</a>
+</div>
+
+<div class="tip">
+<strong>💡 核心分工：</strong>「找好畫面」這件需要藝術判斷的事<strong>歸你</strong>（你在 FCPX 撿），Robert 負責「<strong>幫你看懂素材（智慧抽幀 + 場景用途評分）</strong>」+「<strong>把你挑的東西批次出圖 / 切片 / 命名 / 歸檔</strong>」。人做判斷，機器做勞動。
 </div>
 
 <!-- ===================== 2 Overview ===================== -->
 <h2 id="overview">② 一頁全流程圖</h2>
 
-<div class="flow">┌─ 照片端（V2 已穩定）────────────────────────────┐
+<div class="flow">┌─ 照片端 ──────────────────────────────────────────┐
 │  Robert 評分→分類→場景→catalog 寫入               │
 │       ↓                                           │
 │  James 檢查 + 出片到 _to_export                    │
@@ -247,16 +221,16 @@
 │  Robert 發佈 / 搬到 _export/&lt;scene&gt;/（或你自己搬）  │
 └───────────────────────────────────────────────────┘
 
-┌─ 影片端（V2.1 新工序）──────────────────────────┐
-│ ① Robert：智慧抽幀（減量）+ 場景用途評分           │
+┌─ 影片端 ──────────────────────────────────────────┐
+│ ① Robert：智慧抽幀 + 場景用途評分                  │
 │       ↓  讓你在 LR/FCPX 看得懂每段影片是什麼        │
 │ ② James：FCPX 撿片                                 │
-│       ├─ 喜歡的畫面 → KP（marker / 截圖）           │
-│       └─ 精彩段     → HL keyword 範圍              │
+│       ├─ 好畫面 → KP（i/o 單禎 + keyword KP_R/Y/G/P）│
+│       └─ 精彩瞬間 → HL（i/o 範圍 + keyword，4★/5★） │
 │       ↓  File → Export XML                         │
 │ ③ Robert：批次出圖                                 │
 │       ├─ KP → 4K 單禎抽圖 → _export/&lt;scene&gt;/        │
-│       └─ HL → 切片 mp4 + 抽圖 → _export/&lt;scene&gt;/    │
+│       └─ HL → 切短片段（動態照片）→ _export/&lt;scene&gt;/ │
 │       ↓                                           │
 │ ④ James：剪輯影片 → 出片 → _export/&lt;scene&gt;/memoirs/ │
 └───────────────────────────────────────────────────┘</div>
@@ -274,22 +248,22 @@
 <tr><td><strong>MOV</strong></td><td>影片本體</td><td>原始 .MOV/.mov/.mp4，<code>_MOV/&lt;scene&gt;/IMG_XXXX.MOV</code> — <strong>永遠不切</strong></td></tr>
 <tr><td><strong>STILL</strong></td><td>抽幀靜畫</td><td>ffmpeg 從 MOV 抽出的 JPG，給你看懂 + 評場景用途用</td></tr>
 <tr><td><span class="pill yellow">NG</span></td><td>No Good</td><td>失誤段（對焦 / 穿幫）。短素材 = <strong>只標不切</strong>；1★ 長篇發表 = <strong>切掉拼接</strong>（按 Delete/Reject）</td></tr>
-<tr><td><span class="pill green">KP</span></td><td>Keep</td><td>你想保留的<strong>單禎好畫面</strong>（V2.1：你在 FCPX 親手挑）→ Robert 抽 4K 圖出片</td></tr>
-<tr><td><span class="pill red">HL</span></td><td>High Light</td><td>精彩<strong>片段範圍</strong> → Robert 切獨立 mp4 + 抽圖。<strong>HL ⊆ KP 概念</strong></td></tr>
+<tr><td><span class="pill green">KP</span></td><td>Keep</td><td>你在 FCPX 親手挑的<strong>單禎好畫面</strong> → Robert 抽 4K 圖出片</td></tr>
+<tr><td><span class="pill red">HL</span></td><td>High Light</td><td>精彩瞬間<strong>片段</strong>（= 4★/5★）→ Robert 切短片段給網路相簿動態照片</td></tr>
 <tr><td><span class="pill purple">KF</span></td><td>Key Frame</td><td>從 STILL 評分結果<strong>自動回填</strong>到 MOV keyword 的時間點（你不用標）</td></tr>
 </tbody>
 </table>
 
 <div class="tip">
-<strong>💡 KP 在 V2.1 的微調：</strong>原本 KP 是「Robert 在保留段中間抽 1 幀」。V2.1 因為你<strong>自己在 FCPX 撿片挑畫面</strong>，KP 變成「<strong>你指定要的那一禎</strong>」，比機器抽的準。（這點我列在 §15 待你確認，怕和舊定義混淆。）
+<strong>💡 KP：</strong>你在 FCPX 親手挑的那一禎好畫面（<kbd>I</kbd>/<kbd>O</kbd> 同一禎 + keyword <code>KP_R/Y/G/P</code>）。Robert 從原片抽 4K，畫質無損。
 </div>
 
 <!-- ===================== 4 Extract ===================== -->
-<h2 id="extract">④ 智慧抽幀 V2.1（減量）</h2>
+<h2 id="extract">④ 智慧抽幀</h2>
 
 <div class="card callout-green">
-  <span class="label green">V2.1 核心改動</span>
-  <p>你回饋：<em>「still 抽太多但可用性太少」</em>。所以抽幀目的<strong>不再是找 keeper</strong>（keeper 你 FCPX 自己挑），而是：</p>
+  <span class="label green">抽幀的目的</span>
+  <p>抽幀<strong>不是為了找 keeper</strong>（keeper 你 FCPX 自己挑），而是：</p>
   <ul>
     <li>讓 Robert 跟你<strong>看得懂這段影片在拍什麼</strong>（場景用途評分）</li>
     <li>抓住<strong>敏感動作 / 轉場</strong>那幾個關鍵瞬間</li>
@@ -297,7 +271,7 @@
   </ul>
 </div>
 
-<h3>抽幀邏輯：scene-detect 為主、時間保底拉長</h3>
+<h3>抽幀邏輯：scene-detect 為主</h3>
 
 <pre><code>ffmpeg -nostdin -loglevel info \
   -i _MOV/&lt;scene&gt;/IMG_XXXX.MOV \
@@ -306,11 +280,11 @@
   /tmp/_extract_IMG_XXXX_%04d.jpg</code></pre>
 
 <table>
-<thead><tr><th style="width:200px;">參數</th><th>V2 舊值</th><th>V2.1 新值</th><th>意義</th></tr></thead>
+<thead><tr><th style="width:220px;">參數</th><th style="width:90px;">值</th><th>意義</th></tr></thead>
 <tbody>
-<tr><td>時間保底 <code>gte(t-prev,N)</code></td><td>3 秒</td><td><strong>10 秒</strong></td><td>靜態長鏡頭最少每 10 秒留 1 張「能看懂」，不再每 3 秒灌</td></tr>
-<tr><td>scene 門檻 <code>gt(scene,X)</code></td><td>0.1</td><td><strong>0.4</strong></td><td>只在<strong>明顯</strong>動作 / 轉場（球桿揮動、鏡頭切換、人物進出）才加抽，小晃動不抽</td></tr>
-<tr><td>首幀 <code>isnan(prev)</code></td><td>留</td><td>留</td><td>永遠抽 t=0 起始幀（代表這段開頭）</td></tr>
+<tr><td>時間保底 <code>gte(t-prev,N)</code></td><td><strong>10 秒</strong></td><td>靜態長鏡頭最少每 10 秒留 1 張「能看懂」</td></tr>
+<tr><td>scene 門檻 <code>gt(scene,X)</code></td><td><strong>0.4</strong></td><td>只在<strong>明顯</strong>動作 / 轉場（球桿揮動、鏡頭切換、人物進出）才加抽，小晃動不抽</td></tr>
+<tr><td>首幀 <code>isnan(prev)</code></td><td>留</td><td>永遠抽 t=0 起始幀（代表這段開頭）</td></tr>
 </tbody>
 </table>
 
@@ -319,8 +293,8 @@
 </div>
 
 <div class="card callout-yellow">
-  <span class="label yellow">⚠️ 預期效果</span>
-  <p>永漢實證 V2 是 72→33（砍 54%）。V2.1 參數預估再砍一半，<strong>大約 72→15 上下</strong>（砍 ~80%）。代價：純靜態時段可能只剩開頭 1 張 — 但那正是你要的（那種時段本來就沒 keeper）。</p>
+  <span class="label yellow">⚠️ 抽幀量預期</span>
+  <p>一支約 70 張原始幀的影片，這組參數大約抽 <strong>15 張上下</strong>。純靜態時段可能只剩開頭 1 張 —— 那正是你要的（那種時段本來就沒 keeper）。每個 trip 第一支先試跑看抽幾張再微調。</p>
 </div>
 
 <h3>評分重點：從「品質」改成「場景用途」</h3>
@@ -346,7 +320,7 @@
 <thead><tr><th style="width:60px;">★</th><th>類型</th><th>出片規則</th></tr></thead>
 <tbody>
 <tr><td><strong>0★</strong></td><td><strong>生活紀錄</strong>（預設不評就是）</td><td>即使 P=1 也不直接出片 — KF + KP 仍可進劇本</td></tr>
-<tr style="background:#fdf9ec;"><td><strong>1★</strong></td><td><strong>長篇發表（去 NG）</strong><span class="new">改</span>（導覽 / 介紹 / 課程）</td><td>i/o 框整段 + Delete 標壞鏡頭 → Robert <strong>去 NG 拼接成一支完整檔</strong>（見下方）</td></tr>
+<tr style="background:#fdf9ec;"><td><strong>1★</strong></td><td><strong>長篇發表（去 NG）</strong>（導覽 / 介紹 / 課程）</td><td>i/o 框整段 + Delete 標壞鏡頭 → Robert <strong>去 NG 拼接成一支完整檔</strong>（見下方）</td></tr>
 <tr><td><strong>2★</strong></td><td><strong>活動攝影</strong>（演唱會 / 說明會）</td><td>直接剪在一起放雲端保存（不精修）</td></tr>
 <tr><td><strong>3★</strong></td><td>保留（待定義二級類型）</td><td>進剪輯流程</td></tr>
 <tr><td><strong>4★</strong></td><td><strong>精彩瞬間</strong></td><td>P=1 → 直接壓縮出片 + 二次剪輯</td></tr>
@@ -356,7 +330,7 @@
 <p><strong>分水嶺：</strong>直接出片 vs 剪輯出片 在 <strong>4★</strong>。</p>
 
 <div class="card callout-yellow">
-  <span class="label yellow">🆕 1★ 長篇發表「去 NG 拼接」（2026-06-03 James 拍板）</span>
+  <span class="label yellow">1★ 長篇發表「去 NG 拼接」</span>
   <p><strong>情境：</strong>導覽 / 介紹這類長片，整段大致要留，但中間夾雜很多壞鏡頭（吃螺絲 / 穿幫 / 對焦跑掉）。</p>
   <p><strong>你做：</strong>① <kbd>I</kbd>/<kbd>O</kbd> 框「要的整段」② 段內壞鏡頭選起來按 <kbd>Delete</kbd>（= Reject 紅標）。</p>
   <p><strong>Robert 做：</strong>抓出你框的整段 → 照 Reject 位置把壞段挖掉 → 把剩下的好段（第 1 段 + 第 2 段 + 第 3 段…）<strong>接成一支完整影片、一個檔</strong>（hard cut，預設不加轉場）。</p>
@@ -366,7 +340,7 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
   -af "aselect='between(t,&lt;k1s&gt;,&lt;k1e&gt;)+...',asetpts=N/SR/TB" \
   -c:v libx264 -crf 20 -preset slow -c:a aac -b:a 192k -movflags +faststart \
   _export/&lt;scene&gt;/&lt;clip&gt;_clean.mp4</code></pre>
-  <div class="tip"><strong>💡 跟舊規則的差別：</strong>原本「NG 只標不切」是針對<strong>短素材</strong>。<strong>只有 1★ 長篇發表</strong>會真的把 NG 切掉再拼接；其他類型（0★/2★…）NG 維持「只標不切」。</div>
+  <div class="tip"><strong>💡 NG 處理分兩種：</strong><strong>只有 1★ 長篇發表</strong>會把 NG 切掉再拼接；其他類型（0★/2★…）NG 一律「<strong>只標不切</strong>」，你自己剪輯時再決定。</div>
 </div>
 
 <h3>MOV colorLabel = VLM 主體分類（跟 rating 獨立）</h3>
@@ -417,8 +391,8 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 </table>
 
 <div class="card callout-red">
-  <span class="label red">⚠️ HL ⊆ KP 規則 — 不要重複標</span>
-  <p>標 <code>HL</code> 的段，Robert 同時視為：① 獨立切片出片 + ② 劇本 KP 候選。<strong>HL 自帶 KP 屬性</strong>，不用再對同段補標 KP。同一片段只切一次。</p>
+  <span class="label red">⚠️ HL 與 KP 不必重複標</span>
+  <p>HL 是「精彩<strong>片段</strong>」（出短片），KP 是「好<strong>單禎</strong>」（出靜照）—— 兩件不同的事。HL 段裡若剛好也有想當靜照的那一禎，再單獨點 KP 即可，不用整段重標。</p>
 </div>
 
 <div class="tip">
@@ -508,7 +482,7 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
   -vf "scale=-2:1080,format=yuv420p" -c:v libx264 -crf 20 -preset slow \
   -c:a aac -b:a 192k -movflags +faststart \
   _export/&lt;scene&gt;/&lt;clip&gt;_hl&lt;NN&gt;.mp4</code></pre>
-    <p>段邊界 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（暫定，待你最終確認；見 §15）。</p>
+    <p>段邊界 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（你框多長出多長）。</p>
   </div>
 </div>
 
@@ -620,31 +594,6 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
     <li>ExFAT 走 /tmp 副本；UPDATE <strong>必加 WHERE</strong></li>
     <li>keyword / rating / label 一律 <strong>SQL + exiftool 雙寫</strong>（catalog 崩可從 XMP 重 import）</li>
   </ul>
-</div>
-
-<!-- ===================== 15 Open ===================== -->
-<h2 id="open">⑮ 確認狀態（2026-06-03 James 回覆）</h2>
-
-<div class="card callout-green">
-  <span class="label green">✅ 已確認</span>
-  <ol>
-    <li><strong>KP 定義</strong> = 你親手挑的單禎好畫面。✅</li>
-    <li><strong>KP 操作</strong> = <kbd>I</kbd>/<kbd>O</kbd> 同一禎 + keyword <code>KP_R/Y/G/P</code>（位置 + 主體分類一鍵）。畫質無損；Robert 抽 4K + 把 R/Y/G/P 寫進 XMP（LR 色標 + 關鍵字）。✅ 維持此法，不改 marker。</li>
-    <li><strong>HL</strong> = 精彩瞬間 = rating 4★/5★ + Favorite（<kbd>F</kbd>，FCPX 顯綠辨識）。Robert 針對 4★/5★ 做影片分段輸出 → 短片段放網路相簿當動態照片。✅</li>
-  </ol>
-</div>
-
-<div class="card callout-green">
-  <span class="label green">✅ 再確認（2026-06-03 第二輪）</span>
-  <ol>
-    <li><strong>HL 認定以 keyword + i/o 範圍為準</strong>，Favorite(<kbd>F</kbd>) 只是綠色視覺輔助。段邊界 = 你 i/o 框的範圍。✅</li>
-    <li><strong>1★ 改為「長篇發表（去 NG）」</strong>：i/o 框整段 + <kbd>Delete</kbd>(Reject) 標壞鏡頭 → Robert 去 NG 拼接成一支完整檔（hard cut）。其他類型 NG 維持只標不切。✅（見 §5）</li>
-  </ol>
-</div>
-
-<div class="card callout-blue">
-  <span class="label blue">📌 全部確認完畢，無待決項</span>
-  <p>schema 已定稿。下一步 = Robert 寫 <code>fcpxml_extract.py</code>（讀 XML：KP 抽 4K + 寫 XMP / HL 切短片段 / 1★ 去 NG 拼接 / NG 記錄），James 給一支 demo .fcpxml 即可動工驗證。</p>
 </div>
 
 <footer>
