@@ -273,7 +273,7 @@
 <tbody>
 <tr><td><strong>MOV</strong></td><td>影片本體</td><td>原始 .MOV/.mov/.mp4，<code>_MOV/&lt;scene&gt;/IMG_XXXX.MOV</code> — <strong>永遠不切</strong></td></tr>
 <tr><td><strong>STILL</strong></td><td>抽幀靜畫</td><td>ffmpeg 從 MOV 抽出的 JPG，給你看懂 + 評場景用途用</td></tr>
-<tr><td><span class="pill yellow">NG</span></td><td>No Good</td><td>失誤段（對焦 / 穿幫）— <strong>只標不切</strong>，劇本 / 剪輯跳過</td></tr>
+<tr><td><span class="pill yellow">NG</span></td><td>No Good</td><td>失誤段（對焦 / 穿幫）。短素材 = <strong>只標不切</strong>；1★ 長篇發表 = <strong>切掉拼接</strong>（按 Delete/Reject）</td></tr>
 <tr><td><span class="pill green">KP</span></td><td>Keep</td><td>你想保留的<strong>單禎好畫面</strong>（V2.1：你在 FCPX 親手挑）→ Robert 抽 4K 圖出片</td></tr>
 <tr><td><span class="pill red">HL</span></td><td>High Light</td><td>精彩<strong>片段範圍</strong> → Robert 切獨立 mp4 + 抽圖。<strong>HL ⊆ KP 概念</strong></td></tr>
 <tr><td><span class="pill purple">KF</span></td><td>Key Frame</td><td>從 STILL 評分結果<strong>自動回填</strong>到 MOV keyword 的時間點（你不用標）</td></tr>
@@ -346,7 +346,7 @@
 <thead><tr><th style="width:60px;">★</th><th>類型</th><th>出片規則</th></tr></thead>
 <tbody>
 <tr><td><strong>0★</strong></td><td><strong>生活紀錄</strong>（預設不評就是）</td><td>即使 P=1 也不直接出片 — KF + KP 仍可進劇本</td></tr>
-<tr><td><strong>1★</strong></td><td><strong>專題報導</strong>（課程整片 / 單一專題）</td><td>整片保留 + NG 註記切除版剪輯出片</td></tr>
+<tr style="background:#fdf9ec;"><td><strong>1★</strong></td><td><strong>長篇發表（去 NG）</strong><span class="new">改</span>（導覽 / 介紹 / 課程）</td><td>i/o 框整段 + Delete 標壞鏡頭 → Robert <strong>去 NG 拼接成一支完整檔</strong>（見下方）</td></tr>
 <tr><td><strong>2★</strong></td><td><strong>活動攝影</strong>（演唱會 / 說明會）</td><td>直接剪在一起放雲端保存（不精修）</td></tr>
 <tr><td><strong>3★</strong></td><td>保留（待定義二級類型）</td><td>進剪輯流程</td></tr>
 <tr><td><strong>4★</strong></td><td><strong>精彩瞬間</strong></td><td>P=1 → 直接壓縮出片 + 二次剪輯</td></tr>
@@ -354,6 +354,20 @@
 </tbody>
 </table>
 <p><strong>分水嶺：</strong>直接出片 vs 剪輯出片 在 <strong>4★</strong>。</p>
+
+<div class="card callout-yellow">
+  <span class="label yellow">🆕 1★ 長篇發表「去 NG 拼接」（2026-06-03 James 拍板）</span>
+  <p><strong>情境：</strong>導覽 / 介紹這類長片，整段大致要留，但中間夾雜很多壞鏡頭（吃螺絲 / 穿幫 / 對焦跑掉）。</p>
+  <p><strong>你做：</strong>① <kbd>I</kbd>/<kbd>O</kbd> 框「要的整段」② 段內壞鏡頭選起來按 <kbd>Delete</kbd>（= Reject 紅標）。</p>
+  <p><strong>Robert 做：</strong>抓出你框的整段 → 照 Reject 位置把壞段挖掉 → 把剩下的好段（第 1 段 + 第 2 段 + 第 3 段…）<strong>接成一支完整影片、一個檔</strong>（hard cut，預設不加轉場）。</p>
+  <pre><code># 取 keep 段 = i/o 範圍 − Reject 段，逐段裁切後 concat 成一支
+ffmpeg -i &lt;clip&gt;.MOV -vf \
+  "select='between(t,&lt;k1s&gt;,&lt;k1e&gt;)+between(t,&lt;k2s&gt;,&lt;k2e&gt;)+...',setpts=N/FRAME_RATE/TB" \
+  -af "aselect='between(t,&lt;k1s&gt;,&lt;k1e&gt;)+...',asetpts=N/SR/TB" \
+  -c:v libx264 -crf 20 -preset slow -c:a aac -b:a 192k -movflags +faststart \
+  _export/&lt;scene&gt;/&lt;clip&gt;_clean.mp4</code></pre>
+  <div class="tip"><strong>💡 跟舊規則的差別：</strong>原本「NG 只標不切」是針對<strong>短素材</strong>。<strong>只有 1★ 長篇發表</strong>會真的把 NG 切掉再拼接；其他類型（0★/2★…）NG 維持「只標不切」。</div>
+</div>
 
 <h3>MOV colorLabel = VLM 主體分類（跟 rating 獨立）</h3>
 
@@ -378,7 +392,7 @@
 <tr>
   <td><span class="pill red">HL</span></td>
   <td>精彩瞬間（= rating 4★/5★）— 動態照片用短片段</td>
-  <td>James（FCPX：<kbd>I</kbd>/<kbd>O</kbd> 範圍 + Favorite <kbd>F</kbd> 顯綠 + 4★/5★）</td>
+  <td>James（FCPX：<kbd>I</kbd>/<kbd>O</kbd> 範圍 + keyword <strong>為準</strong>；Favorite <kbd>F</kbd> 只是綠色視覺輔助；clip 給 4★/5★）</td>
   <td>Robert 切短片段 <code>&lt;clip&gt;_hlNN.mp4</code>（1080p H.264 faststart）→ 網路相簿動態照片</td>
 </tr>
 <tr>
@@ -390,8 +404,8 @@
 <tr>
   <td><span class="pill yellow">NG</span></td>
   <td>失誤段（對焦 / 穿幫 / 拍壞）</td>
-  <td>James（FCPX keyword）</td>
-  <td><strong>只標不切</strong>，劇本 / 剪輯跳過</td>
+  <td>James（FCPX：keyword，或 1★ 用 <kbd>Delete</kbd>=Reject）</td>
+  <td>短素材 <strong>只標不切</strong>；1★ 長篇發表 <strong>切掉再拼接</strong>（見 §5）</td>
 </tr>
 <tr style="background:#f9f4fc;">
   <td><span class="pill purple">KF</span></td>
@@ -447,8 +461,9 @@
 <tr><td><kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd></td><td>倒 / 停 / 進</td><td>多按加速</td></tr>
 <tr><td><kbd>I</kbd> / <kbd>O</kbd></td><td>標入 / 出點</td><td>HL 框範圍；KP 則 <kbd>I</kbd>/<kbd>O</kbd> 同一禎</td></tr>
 <tr><td><kbd>Ctrl</kbd>+<kbd>2~5</kbd></td><td>套 KP_R/Y/G/P</td><td>單禎 keeper + 主體分類一鍵（位置+分類）</td></tr>
-<tr><td><kbd>F</kbd></td><td>Favorite = HL</td><td>精彩段顯綠辨識，配 rating 4★/5★</td></tr>
-<tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>套 NG</td><td>失誤段（只標不切）</td></tr>
+<tr><td><kbd>F</kbd></td><td>Favorite（HL 視覺輔助）</td><td>精彩段顯綠好辨識；HL 認定<strong>以 keyword+i/o 為準</strong></td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>套 NG</td><td>短素材失誤段（只標不切）</td></tr>
+<tr><td><kbd>Delete</kbd></td><td>Reject</td><td>1★ 長篇發表段內壞鏡頭 → Robert 去 NG 拼接</td></tr>
 </tbody>
 </table>
 
@@ -594,7 +609,7 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
     <li>❌ 出片用 HEVC（LR 預覽灰畫面）</li>
     <li>❌ <code>_MOV/</code> 搬完改名（破壞 FCP 重連）</li>
     <li>❌ LR catalog 跟 FCP Library 放同一子資料夾</li>
-    <li>❌ NG 段切原檔（V2.1：只標不切）</li>
+    <li>❌ 短素材 NG 段切原檔（只標不切）—— 但 1★ 長篇發表是例外，要去 NG 拼接（見 §5）</li>
   </ul>
 </div>
 
@@ -619,16 +634,24 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
   </ol>
 </div>
 
-<div class="card callout-yellow">
-  <span class="label yellow">🔸 唯一待你最終點頭</span>
-  <p><strong>HL 段邊界</strong>：每段輸出 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（你框多長出多長），暫定如此。若你要「整支 favorite clip 原樣出」或別的切法，跟我說。</p>
+<div class="card callout-green">
+  <span class="label green">✅ 再確認（2026-06-03 第二輪）</span>
+  <ol>
+    <li><strong>HL 認定以 keyword + i/o 範圍為準</strong>，Favorite(<kbd>F</kbd>) 只是綠色視覺輔助。段邊界 = 你 i/o 框的範圍。✅</li>
+    <li><strong>1★ 改為「長篇發表（去 NG）」</strong>：i/o 框整段 + <kbd>Delete</kbd>(Reject) 標壞鏡頭 → Robert 去 NG 拼接成一支完整檔（hard cut）。其他類型 NG 維持只標不切。✅（見 §5）</li>
+  </ol>
+</div>
+
+<div class="card callout-blue">
+  <span class="label blue">📌 全部確認完畢，無待決項</span>
+  <p>schema 已定稿。下一步 = Robert 寫 <code>fcpxml_extract.py</code>（讀 XML：KP 抽 4K + 寫 XMP / HL 切短片段 / 1★ 去 NG 拼接 / NG 記錄），James 給一支 demo .fcpxml 即可動工驗證。</p>
 </div>
 
 <footer>
   <p>整理者：Robert ／ 對接：James ／ 版本：V2.1（2026-06-03）</p>
   <p>檔案：<code>~/Desktop/Claude-Workspace/photo-grade/2026-06-03_video_editing_kb_v2.1.html</code></p>
   <p>承襲：<code>2026-05-27_yonghan_video_schema_record.html</code>（schema）、<code>2026-06-02_fcpx_operation_cheatsheet.html</code>（操作）、<code>robert/skills/影片素材_VLM抽幀_腳本剪輯_SOP.md</code>（7 步 pipeline）</p>
-  <p>下一步：① 你回 §15 三個確認 → ② Robert 寫 <code>fcpxml_extract.py</code>（讀 XML → KP 抽圖 + HL 切片）→ ③ 你給一支 demo .fcpxml 動工驗證。</p>
+  <p>下一步：schema 已定稿 → Robert 寫 <code>fcpxml_extract.py</code>（KP 抽 4K+寫 XMP / HL 切短片段 / 1★ 去 NG 拼接 / NG 記錄）→ James 給 demo .fcpxml 動工驗證。</p>
 </footer>
 
 </div>
