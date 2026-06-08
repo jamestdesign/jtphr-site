@@ -246,7 +246,7 @@
 <tr><td><strong>9P-a/b/c</strong></td><td>照片</td><td>Evoto 精修 → 套色 preset → 出片</td></tr>
 <tr><td><span class="pill red">9V-a</span></td><td>James</td><td>FCPX 撿片（標 KP / HL / NG）— 見 §8</td></tr>
 <tr><td><span class="pill red">9V-b</span></td><td>James</td><td>Export XML 交給 Robert</td></tr>
-<tr><td><span class="pill blue">9V-c</span></td><td>Robert</td><td>批次出圖（KP 抽 4K / HL 短片段 / 1★ 去 NG 拼接）— 見 §9</td></tr>
+<tr><td><span class="pill blue">9V-c</span></td><td>Robert</td><td>批次出圖（KP 抽原生單禎 / HL 短片段 / Star1 去 NG 拼接）→ <code>_preview_mov_*</code> — 見 §9</td></tr>
 <tr><td><span class="pill red">9V-d</span></td><td>James</td><td>FCPX 剪輯</td></tr>
 <tr><td><strong>9V-e</strong></td><td>—</td><td>出片 → <code>_export/&lt;scene&gt;/memoirs/</code></td></tr>
 </tbody>
@@ -541,8 +541,18 @@ ffmpeg -ss &lt;start&gt; -t &lt;dur&gt; -i &lt;clip&gt; \
 </div>
 
 <div class="step">
-  <div class="head"><span class="num">C</span>NG → 只記錄不切<span class="who">Robert</span></div>
-  <div class="body"><p>NG 段寫進 metadata 供劇本 / 剪輯跳過，<strong>原檔不動</strong>。</p></div>
+  <div class="head"><span class="num">C</span>Star1（長篇發表・去 NG）→ 移除 Reject 拼成一支<span class="who">Robert</span></div>
+  <div class="body">
+    <p>你 <kbd>I</kbd>/<kbd>O</kbd> 框整段 + 段內壞鏡頭按 <kbd>Delete</kbd>(Reject) → 工具讀 Reject 範圍，挖掉壞段、把剩下好段 concat 成一支完整長片。</p>
+    <pre><code># 成品也落 _preview_mov_HL，但檔名標 Star1（一眼看出是去 NG 長片）
+_preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star1_&lt;NN&gt;.mp4</code></pre>
+    <p>屬「<strong>另外出片</strong>」——獨立長片成品，不是 Star4/5 那種當動態照片觀賞的短片段。<span style="font-size:13px;color:#5c6773;">⚠️ 此 concat 功能尚在待補，規格已定。</span></p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="head"><span class="num">D</span>NG → 只記錄不切<span class="who">Robert</span></div>
+  <div class="body"><p>短素材的 NG 段寫進 metadata 供劇本 / 剪輯跳過，<strong>原檔不動</strong>（只有 Star1 長篇會真的去 NG 拼接）。</p></div>
 </div>
 
 <div class="tip">
