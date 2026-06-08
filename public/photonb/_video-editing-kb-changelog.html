@@ -30,6 +30,18 @@
   <h1>影片剪輯知識庫 · 更新紀錄</h1>
   <p class="sub">這頁記錄攻略書版本怎麼演變。平常看主書即可，想知道「改了哪裡、為什麼改」再看這裡。</p>
 
+  <h2><span class="ver">V2.1.1</span><span class="date">2026-06-08</span></h2>
+  <p>9V-c 批次出圖從「待寫腳本」升格成<strong>已定型工具</strong>，並把輸出版面鎖死（James：「不要每次都不一樣」）：</p>
+  <ul>
+    <li><strong>工具定名 <code>fcpxmld-export</code></strong>：一條指令吃 <code>.fcpxmld</code> 全自動出圖。實證 day2（KP61+HL42）、day1/day4（HL31+KP11），零錯誤。</li>
+    <li><strong>🔒 輸出版面鎖死</strong>：<code>_preview_mov_KP/&lt;場景&gt;/</code>（單禎）+ <code>_preview_mov_HL/&lt;場景&gt;/</code>（片段），分場景、檔名一眼看出是 mov 導出預覽檔。先前 §10 誤寫成落 <code>_export/</code>，已更正。</li>
+    <li><strong>.fcpbundle 路徑修正</strong>：素材被 FCP 託管時，工具改抓 day 場景夾原檔，避免輸出套進 bundle 深層路徑。</li>
+    <li><strong>HLG→SDR</strong>：iPhone <code>IMG_*.MOV</code>（Rec.2020 HLG）自動 tonemap 轉 Rec.709，否則畫面會灰；手機 <code>VID*.mp4</code>（709）原樣。</li>
+    <li><strong>KP 抽圖更正</strong>：原寫「4K」實際是<strong>原生解析度</strong>（<code>-q:v 1</code>）。LR 標註含色標 Label + 關鍵字 + 來源時碼。</li>
+    <li><strong>待補</strong>：Star1「長篇發表（去 NG）」concat 拼接；出圖<strong>套 LUT 調色</strong>（James 2026-06-08「找時間來嘗試」）。</li>
+  </ul>
+  <p class="date">工作說明：<code>robert/skills/fcpxmld-export_撿片出圖工具.md</code>。未來方向：人工撿片 → AI 代理人自動撿片（調研中）。</p>
+
   <h2><span class="ver">V2.1</span><span class="date">2026-06-03</span></h2>
   <p>把散在三份文件（FCPX 操作速查、NG/KP/HL/KF schema、7 步 pipeline）彙整成<strong>一本完整攻略書</strong>，並依當天討論定下這些工序：</p>
   <ul>

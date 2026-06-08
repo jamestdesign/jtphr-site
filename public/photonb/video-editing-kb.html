@@ -493,32 +493,50 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 </div>
 
 <!-- ===================== 9 Batch ===================== -->
-<h2 id="batch">⑨ Robert 批次出圖（讀 XML 自動跑）<span style="font-size:15px;color:#5c6773;">· 9V-c</span></h2>
+<h2 id="batch">⑨ Robert 批次出圖（讀 XML 自動跑）<span style="font-size:15px;color:#5c6773;">· 9V-c · 工具 fcpxmld-export</span></h2>
+
+<div class="card callout-green">
+  <span class="label green">🛠️ 工具：fcpxmld-export（已定型・實證 day1/2/4 零錯誤）</span>
+  <p>你在 FCPX 撿完片，Export 一個 <code>.fcpxmld</code> 交給我，一條指令全自動出圖：</p>
+  <pre><code>fcpxmld-export &lt;trip&gt;/_MOV/xxx.fcpxmld</code></pre>
+  <p>工具讀 <code>.fcpxmld</code> 內的 keyword / star，自動切 HL 片段 + 抽 KP 單禎，分場景輸出並寫好 LR 可讀標註。<strong>命名 / 分場景 / 轉檔 / 標註全自動，你不用手動做任何一步。</strong></p>
+</div>
+
+<div class="card callout-red">
+  <span class="label red">🔒 輸出版面（鎖死・不要每次不一樣）</span>
+  <pre><code>&lt;trip&gt;/_preview_mov_KP/&lt;場景&gt;/   ← KP 單禎 JPG
+&lt;trip&gt;/_preview_mov_HL/&lt;場景&gt;/   ← HL 片段 mp4</code></pre>
+  <p><code>&lt;場景&gt;</code> = day 場景夾名（如 <code>day1 趕赴札幌帝王蟹之旅/1801 札幌薄野蟹本家品蟹</code>）。命名一眼看出是「mov 導出的預覽檔」。</p>
+  <p style="font-size:13px;color:#5c6773;">⚠️ 素材若被 FCP 託管進 <code>.fcpbundle</code>，工具一律改抓 day 場景夾的原檔，輸出才會落對場景（不會套進 bundle 深層路徑）。</p>
+</div>
 
 <div class="step">
-  <div class="head"><span class="num">A</span>KP → 4K 單禎抽圖 + 分類寫進 XMP<span class="who">Robert</span></div>
+  <div class="head"><span class="num">A</span>KP → 原生解析度單禎抽圖 + 分類寫進 XMP<span class="who">Robert</span></div>
   <div class="body">
-    <p>讀 XML 裡 <code>KP_R/Y/G/P</code> keyword 的時間點（<kbd>I</kbd>/<kbd>O</kbd> 單禎）→ ffmpeg 從原片抽該禎 4K JPG，再把分類寫進 XMP：</p>
-    <pre><code>ffmpeg -ss &lt;t&gt; -i &lt;clip&gt;.MOV -frames:v 1 -q:v 2 \
-  _export/&lt;scene&gt;/&lt;clip&gt;_KP&lt;NN&gt;_t&lt;秒.秒&gt;.jpg
+    <p>讀 XML 裡 <code>KP_R/Y/G/P</code> keyword 的時間點（<kbd>I</kbd>/<kbd>O</kbd> 單禎）→ ffmpeg 從原片抽該禎<strong>原生解析度</strong> JPG（<code>-q:v 1</code>），再把分類寫進 XMP：</p>
+    <pre><code># 抽單禎（HLG 來源先 tonemap 轉 SDR，否則畫面會灰）
+ffmpeg -ss &lt;t&gt; -i &lt;clip&gt; [-vf &lt;HLG→SDR&gt;] -frames:v 1 -q:v 1 \
+  _preview_mov_KP/&lt;場景&gt;/&lt;clip&gt;_KP&lt;色&gt;_t&lt;秒.秒&gt;.jpg
 
-# R/Y/G/P 寫進 XMP，LR import 直接讀到色標 + 關鍵字
+# R/Y/G/P 寫進 XMP，LR import 直接讀到色標 + 關鍵字 + 來源時碼
 exiftool -XMP:Label=&lt;Red/Yellow/Green/Purple&gt; \
-  -XMP-dc:Subject+=&lt;KP_R/Y/G/P&gt; &lt;out.jpg&gt;</code></pre>
-    <p>→ 你 import LR 直接看到<strong>色標</strong>（紅臉 / 黃背影 / 綠風景 / 紫物件）+ 關鍵字，不用再標一次。</p>
+  -Keywords=KP_&lt;色&gt; -Keywords=&lt;場景&gt; \
+  -Source="&lt;來源檔&gt; @ t=&lt;秒&gt;s" &lt;out.jpg&gt;</code></pre>
+    <p>→ 你 import LR 直接看到<strong>色標</strong>（紅臉 / 黃背影 / 綠風景 / 紫物件）+ 關鍵字 + 來源時碼，不用再標一次。</p>
   </div>
 </div>
 
 <div class="step">
-  <div class="head"><span class="num">B</span>HL（4★/5★ + Favorite）→ 動態照片短片段<span class="who">Robert</span></div>
+  <div class="head"><span class="num">B</span>HL（Star4★/5★）→ 動態照片短片段<span class="who">Robert</span></div>
   <div class="body">
-    <p>讀 XML 裡 Favorite + rating 4★/5★ 的範圍 → ffmpeg 切短片段（H.264 1080p faststart）→ 放網路相簿當動態照片觀賞：</p>
+    <p>讀 XML 裡 rating <strong>4★/5★</strong> 的範圍（認定以 keyword + i/o 為準，Favorite 綠標只是視覺輔助）→ ffmpeg 切短片段（H.264 1080p faststart）→ 放網路相簿當動態照片觀賞：</p>
     <pre><code># 切片段（精準到幀重編碼，不用 -c copy 避免關鍵幀對不齊）
-ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
-  -vf "scale=-2:1080,format=yuv420p" -c:v libx264 -crf 20 -preset slow \
+# HLG 來源（iPhone IMG_*.MOV）先 tonemap 轉 SDR，手機 VID*.mp4 原樣
+ffmpeg -ss &lt;start&gt; -t &lt;dur&gt; -i &lt;clip&gt; \
+  -vf "[HLG→SDR,]scale=-2:1080,format=yuv420p" -c:v libx264 -crf 20 -preset medium \
   -c:a aac -b:a 192k -movflags +faststart \
-  _export/&lt;scene&gt;/&lt;clip&gt;_hl&lt;NN&gt;.mp4</code></pre>
-    <p>段邊界 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（你框多長出多長）。</p>
+  _preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star&lt;4/5&gt;_&lt;NN&gt;.mp4</code></pre>
+    <p>段邊界 = 你 <kbd>I</kbd>/<kbd>O</kbd> 框的範圍（你框多長出多長）。<strong>Star3 = 只記不切。</strong></p>
   </div>
 </div>
 
@@ -538,13 +556,13 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
 ├── &lt;場景&gt;/                          ← 照片場景（ARW + Evotofu/）
 ├── _MOV/&lt;scene&gt;/&lt;clip&gt;.MOV           ← 影片母檔（永遠不切）
 ├── _STILL/&lt;scene&gt;/...               ← 智慧抽幀（看懂 + 評用途）
+├── _preview_mov_KP/&lt;場景&gt;/           ← KP 單禎 JPG（9V-c 工具出，分場景）
+├── _preview_mov_HL/&lt;場景&gt;/           ← HL 片段 mp4（9V-c 工具出，分場景）
 ├── &lt;trip&gt;_FCP/Library.fcpbundle     ← FCP library（Leave in place，只記引用）
 ├── &lt;trip&gt;_LR/                       ← LR catalog（主管理）
 ├── _to_evoto/  _to_export/          ← 暫存（Evoto TIFF / LR 出 JPG）
 └── _export/&lt;scene&gt;/                 ← 出片區（平層）
     ├── &lt;photo&gt;.jpg / &lt;photo&gt;-EVT.jpg  ← 照片出片
-    ├── &lt;clip&gt;_KP&lt;NN&gt;_t&lt;秒&gt;.jpg        ← KP 單禎（V2.1）
-    ├── &lt;clip&gt;_hl&lt;NN&gt;.mp4              ← HL 切片
     └── memoirs/&lt;edited&gt;.mp4           ← 你剪輯完成版</code></pre>
 
 <div class="tip">
@@ -633,10 +651,10 @@ ffmpeg -ss &lt;start&gt; -to &lt;end&gt; -i &lt;clip&gt;.MOV \
 </div>
 
 <footer>
-  <p>整理者：Robert ／ 對接：James ／ 版本：V2.1（2026-06-03）</p>
+  <p>整理者：Robert ／ 對接：James ／ 版本：V2.1.1（2026-06-08）· <a href="./_video-editing-kb-changelog.html">更新紀錄</a></p>
   <p>檔案：<code>~/Desktop/Claude-Workspace/photo-grade/2026-06-03_video_editing_kb_v2.1.html</code></p>
   <p>承襲：<code>2026-05-27_yonghan_video_schema_record.html</code>（schema）、<code>2026-06-02_fcpx_operation_cheatsheet.html</code>（操作）、<code>robert/skills/影片素材_VLM抽幀_腳本剪輯_SOP.md</code>（7 步 pipeline）</p>
-  <p>下一步：schema 已定稿 → Robert 寫 <code>fcpxml_extract.py</code>（KP 抽 4K+寫 XMP / HL 切短片段 / 1★ 去 NG 拼接 / NG 記錄）→ James 給 demo .fcpxml 動工驗證。</p>
+  <p>✅ 9V-c 工具 <code>fcpxmld-export</code> 已定型 + 實證（2026-06-06 day2：KP61+HL42；2026-06-08 day1/day4：HL31+KP11，零錯誤）。輸出鎖死 <code>_preview_mov_KP/</code> + <code>_preview_mov_HL/</code> 分場景。<strong>待補</strong>：Star1 去 NG concat 拼接、出圖套 LUT 調色（規劃中）。工作說明見 <code>robert/skills/fcpxmld-export_撿片出圖工具.md</code>。</p>
 </footer>
 
 </div>
