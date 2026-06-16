@@ -15,6 +15,15 @@ sourceNote: "stocks__daily__2026-06-16_多源財經投顧匯總"
 ## 🔴 即時財金（盤中即時更新）
 > 今日盤中首發即時訊息，依時間排序、看過即可關閉；完整盤後彙整見下方各章節。
 
+**12:00**
+
+• 日本央行升息1碼至1% 創1995年以來31年新高（工商時報）
+• 台灣50指數18日盤後換血 <span style="color:#d42500;font-weight:600">南電</span>、<span style="color:#d42500;font-weight:600">臻鼎-KY</span>、<span style="color:#d42500;font-weight:600">創意</span>、<span style="color:#d42500;font-weight:600">貿聯-KY</span>納入提前漲停（工商時報）
+• 高盛維持<span style="color:#d42500;font-weight:600">緯創</span>買進評等 目標價246元 隱含逾5成上漲空間（工商時報）
+• <span style="color:#d42500;font-weight:600">欣興</span>早盤觸及千元大關 與<span style="color:#d42500;font-weight:600">環球晶</span>、國巨同登千金股（工商時報）
+• 晶華股東會通過配息10.7496元 2025年EPS達11.42元（工商時報）
+• 必應創造股東會通過配息5元 下半年參與五月天等7場演唱會（工商時報）
+
 **10:00**
 
 • 美伊敲定終戰協議重啟荷姆茲海峽 道瓊、費半同創歷史收盤新高（工商時報）
