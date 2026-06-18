@@ -15,6 +15,15 @@ pipeline: fincai-multi-digest
 ## 🔴 即時財金（盤中即時更新）
 > 今日盤中首發即時訊息，依時間排序、看過即可關閉；完整盤後彙整見下方各章節。
 
+**20:00**
+
+• 杏昌停牌重訊 以8.9億收購安星製藥76%股權（鉅亨網）
+• 國泰投信誤買<span style="color:#d42500;font-weight:600">世芯-KY</span> 涉內控缺失恐遭金管會裁罰（鉅亨網）
+• <span style="color:#d42500;font-weight:600">倍利科</span>CoPoS、矽光子最快Q4完成驗證 明年放量（鉅亨網）
+• 央行利率連9凍維持2% 楊金龍偏鷹有2理事主張升息（工商時報）
+• 研調：全球智慧手機第20週銷售年減8% 連9週下滑（鉅亨網）
+• <span style="color:#d42500;font-weight:600">全新</span>等4檔下周一列處置股 南亞、<span style="color:#d42500;font-weight:600">國巨</span>*等49檔列注意股（工商時報）
+
 **18:00**
 
 • <span style="color:#d42500;font-weight:600">京元電</span>獲麥格理升評優於大盤、目標價348元、盤中攻漲停（工商時報）
