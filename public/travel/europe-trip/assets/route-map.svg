@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-label="Europe trip route map">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9eef4"/><stop offset="1" stop-color="#a7d3de"/></linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2e7c9"/><stop offset="1" stop-color="#d8c59b"/></linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#795548" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1200" height="560" rx="36" fill="url(#sea)"/>
+  <path d="M75,165 C160,70 280,80 345,140 C410,105 515,75 600,120 C685,160 780,115 865,160 C960,215 1065,185 1120,270 C1080,330 1030,390 930,390 C840,430 780,505 660,465 C560,520 440,465 360,420 C250,430 140,370 100,285 C70,240 45,200 75,165 Z" fill="url(#land)" opacity=".92"/>
+  <path d="M255 185 L405 250 L305 350 L470 320 L695 360 L835 430" fill="none" stroke="#7b4e34" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 0"/>
+  <path d="M405 250 L360 310 M405 250 L430 195 M405 250 L475 230" fill="none" stroke="#7b4e34" stroke-width="4" stroke-linecap="round" stroke-dasharray="9 12"/>
+  <g font-family="'Noto Sans TC','PingFang TC',Arial,sans-serif" filter="url(#softShadow)">
+    <g transform="translate(220 150)"><circle r="24" fill="#2c6e9f"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">1</text><rect x="30" y="-28" width="190" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">阿姆斯特丹</text><text x="48" y="20" font-size="15" fill="#6b5a4b">6/22–6/23</text></g>
+    <g transform="translate(390 250)"><circle r="24" fill="#cb7b37"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">2</text><rect x="30" y="-28" width="175" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">布魯塞爾</text><text x="48" y="20" font-size="15" fill="#6b5a4b">6/24–6/28</text></g>
+    <g transform="translate(300 350)"><circle r="24" fill="#d86e7a"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">3</text><rect x="30" y="-28" width="165" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">巴黎一日</text><text x="48" y="20" font-size="15" fill="#6b5a4b">6/25</text></g>
+    <g transform="translate(430 195)"><circle r="24" fill="#d89b35"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">4</text><rect x="30" y="-28" width="150" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">布魯日</text><text x="48" y="20" font-size="15" fill="#6b5a4b">6/26</text></g>
+    <g transform="translate(475 230)"><circle r="24" fill="#5a8d55"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">5</text><rect x="30" y="-28" width="145" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">根特</text><text x="48" y="20" font-size="15" fill="#6b5a4b">6/27</text></g>
+    <g transform="translate(700 360)"><circle r="24" fill="#4571b5"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">6</text><rect x="30" y="-28" width="165" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">慕尼黑</text><text x="48" y="20" font-size="15" fill="#6b5a4b">6/29–7/2</text></g>
+    <g transform="translate(840 430)"><circle r="24" fill="#7a6b52"/><text y="8" text-anchor="middle" font-size="22" fill="#fff" font-weight="700">7</text><rect x="30" y="-28" width="185" height="56" rx="16" fill="#fff7e8"/><text x="48" y="-4" font-size="19" fill="#3d2b1f" font-weight="700">法蘭克福</text><text x="48" y="20" font-size="15" fill="#6b5a4b">7/3–7/4</text></g>
+  </g>
+  <g fill="#7b4e34" opacity=".75"><path d="M250 184 l-16 -18 l36 13 l-35 18 z"/><path d="M404 249 l-22 -8 l34 -10 l-18 32 z"/><path d="M305 350 l-2 -23 l25 25 l-37 4 z"/><path d="M695 360 l-20 -12 l36 -4 l-22 28 z"/><path d="M835 430 l-16 -16 l35 9 l-33 20 z"/></g>
+  <text x="54" y="510" font-family="'Noto Sans TC','PingFang TC',Arial,sans-serif" font-size="20" fill="#5d4037" font-weight="700">最終路線：台北 → 阿姆斯特丹 → 布魯塞爾 → 巴黎／布魯日／根特 → 慕尼黑 → 法蘭克福 → 台北</text>
+</svg>
