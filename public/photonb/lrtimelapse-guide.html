@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LRTimelapse 7 攻略 · 縮時後製 + 我們的協作分工</title>
-  <meta name="description" content="LRTimelapse 7 怎麼用：去閃爍、日夜曝光漸變(holy grail)、關鍵幀調色，完整流程、踩雷、價格，以及 James↔Robert 縮時產線怎麼分工。" />
+  <title>LRTimelapse 7 Pro 協同教程 · 縮時 RAW 直出 8K 素材</title>
+  <meta name="description" content="LRTimelapse 7 Pro 純 RAW 工作流（免 Lightroom）：調曝光、去閃、聖杯漸變、直出 8K ProRes 422，加上 James↔Robert 協同分工與明早實作清單。" />
   <meta name="date" content="2026-06-21" />
   <style>
     :root { --surface:#0f0f23; --brand:#1a1a2e; --accent:#e94560; --text:#eaeaea; --muted:#a0a0a0;
@@ -26,6 +26,7 @@
     .step { background:var(--brand); border:1px solid #2a2a44; border-radius:14px; padding:1.1rem 1.3rem; margin:1rem 0; }
     .step .n { display:inline-block; background:var(--accent); color:#fff; font-weight:700; border-radius:8px;
                padding:.05em .6em; margin-right:.5em; font-size:.9rem; }
+    .step .who { float:right; font-size:.75rem; color:var(--muted); background:#2a2a44; border-radius:20px; padding:.1em .7em; }
     .callout { border-radius:12px; padding:.85rem 1.1rem; margin:1rem 0; font-size:.95rem; }
     .tip  { background:var(--tipbg);  border-left:4px solid var(--tip); }
     .ok   { background:var(--okbg);   border-left:4px solid var(--ok); }
@@ -37,144 +38,145 @@
     .pill { display:inline-block; background:#2a2a44; border-radius:20px; padding:.1em .8em; font-size:.8rem; margin:.15em .2em .15em 0; }
     .flow { background:var(--brand); border:1px solid #2a2a44; border-radius:14px; padding:1.1rem 1.3rem; line-height:2; }
     .flow b { color:var(--accent); }
+    .check { background:var(--okbg); border:1px solid #2a4a3a; border-radius:14px; padding:1.1rem 1.3rem; }
     a { color:var(--accent); }
   </style>
 </head>
 <body>
   <div class="wrap">
     <a class="back" href="./">← 攝影筆記本</a>
-    <h1>LRTimelapse 7 攻略<br>縮時後製 + 我們的協作分工</h1>
-    <p class="date">2026-06-21 · Robert 整理</p>
-    <p class="lede">縮時攝影後製的業界標準工具。專治三大痛點：閃爍、日夜曝光漸變、上千張統一調色。這篇講「怎麼用」＋「我們怎麼分工」。</p>
+    <h1>LRTimelapse 7 Pro 協同教程<br>縮時 RAW 直出 8K 素材</h1>
+    <p class="date">2026-06-21 · Robert 整理（James 已購 Pro 7 授權）</p>
+    <p class="lede">重點更新：LRTimelapse 7 Pro <b>不需要 Lightroom</b> —— 用內建編輯器直接吃 RAW，調曝光、去閃、聖杯漸變，最後<b>直接輸出 ProRes 422 8K</b>。這篇是「我們一起做」的實作流程。</p>
 
-    <h2>🎯 它在解什麼問題</h2>
-    <p>RAW 縮時拍完，最難搞的三件事，LRTimelapse 一次包辦：</p>
+    <h2>🎯 它一次解三個縮時痛點</h2>
     <ul>
-      <li><b>閃爍（Flicker）</b>：自動曝光或光圈微跳，幀與幀忽明忽暗 → <b>Multi-Pass Visual Deflicker</b> 無損去閃。</li>
-      <li><b>日夜曝光漸變（Holy Grail）</b>：跨日落/日出，亮度差好幾級 → <b>關鍵幀內插</b>，平滑過渡不跳階。</li>
-      <li><b>上千張統一調色</b>：不可能一張張調 → 只調幾張<b>關鍵幀</b>，自動內插到整段。</li>
+      <li><b>閃爍（Flicker）</b>：幀間忽明忽暗 → Multi-Pass Visual Deflicker 無損去閃。</li>
+      <li><b>日夜曝光漸變（聖杯 Holy Grail）</b>：跨日落/日出大跨度 → 關鍵幀內插平滑過渡。</li>
+      <li><b>上千張統一調色/曝光</b>：只調幾張關鍵幀，自動內插到整段。</li>
     </ul>
-    <div class="callout ok">✅ <b>核心心法</b>：曝光與雜訊一定要在 <b>RAW／單幀階段</b>處理（寬容度最大），別等變成影片才救。LRTimelapse 就是讓你用「修 RAW 照片」的品質去處理整段縮時。</div>
+    <div class="callout ok">✅ <b>Pro 7 的關鍵升級</b>：免 Lightroom（內建編輯器處理 RAW）＋ 直出 <b>ProRes 422/444</b>＋ 無損 RAW→Rec.2020 全程色彩管理。所以「畫質夠就直出，不夠再補」這條路成立。</div>
 
-    <h2>🧭 它在我們產線的位置</h2>
-    <p>縮時整理是<b>獨立的第三條產線</b>（跟照片整理、影片整理並列）。分三步：</p>
+    <h2>🧭 我們的產線（縮時＝獨立第三條）</h2>
     <div class="flow">
-      <b>Step 1</b>（Robert）場景自動分類 + 4K 原味參考片<br>
-      → <b>Step 2</b>（James）<b>LRTimelapse + Lightroom 調色/曝光漸變 → 匯出 JPG</b> ← 本攻略主角<br>
-      → <b>Step 3</b>（Robert）JPG → 8K ProRes 422 素材
+      <b>Step 1</b>（Robert）場景自動分類 + 英文路徑乾淨序列 + 4K 原味參考片 + 標聖杯候選<br>
+      → <b>Step 2</b>（James）<b>LRTimelapse 7 Pro 一條龍</b>：調曝光 → 去閃 → 聖杯漸變 → 直出 8K ProRes 422<br>
+      → <b>Step 3</b>（Robert・<span style="color:var(--tip)">補位</span>）只有當 8K ProRes 直出受限時，我用 ffmpeg 補出 8K ProRes 422；否則只做驗收/歸檔
     </div>
 
-    <h2>🛠️ 完整流程（六步）</h2>
+    <h2>🛠️ 實作流程（純 LRTimelapse 7 Pro，免 Lightroom）</h2>
 
-    <div class="step"><span class="n">0</span><b>前置</b>
+    <div class="step"><span class="who">Robert</span><span class="n">0</span><b>前置</b>
       <ul>
-        <li>裝 <b>Adobe DNG Converter</b>（免費，LRTimelapse 必要依賴）+ Lightroom Classic。</li>
-        <li>把該場景的 RAW 放進一個資料夾。</li>
+        <li>我把該場景 RAW 分好 + 放<b>全英文路徑</b>資料夾交給你。</li>
+        <li>你端：裝好 LRTimelapse 7 Pro（已購 ✓）。RAW 解碼 v7 用內建 DngLab；部分機型仍建議裝免費的 Adobe DNG Converter。</li>
       </ul>
-      <div class="callout warn">🚨 <b>路徑不能有中文！</b> 資料夾/檔名有中文字元 → Exiftool 讀不到 → 沒預覽、會出錯。我 Step 1 會幫你出一份<b>全英文路徑</b>的乾淨序列專供這裡用。</div>
+      <div class="callout warn">🚨 <b>路徑不能有中文</b>：Exiftool 讀不到 → 沒預覽。我交給你的序列已是英文路徑。</div>
     </div>
 
-    <div class="step"><span class="n">1</span><b>LRTimelapse 初始化 + 自動關鍵幀</b>
+    <div class="step"><span class="who">James</span><span class="n">1</span><b>初始化 + 自動關鍵幀</b>
+      <p>RAW 資料夾拖進 LRTimelapse → 產生視覺預覽 → 按 <code>Initialize</code> 自動沿時間軸鋪關鍵幀。</p>
+    </div>
+
+    <div class="step"><span class="who">James</span><span class="n">2</span><b>調整曝光 / 色調（內建編輯器，取代 Lightroom）</b>
       <ul>
-        <li>把資料夾拖進 LRTimelapse，它讀序列、產生視覺預覽。</li>
-        <li>按 <code>Initialize</code> 自動沿時間軸鋪上關鍵幀（轉場/變光處）。</li>
+        <li>用 LRTimelapse <b>內建編輯器</b>直接調關鍵幀的曝光、白平衡、色調。</li>
+        <li>+/- 按鈕精調：單擊動 1 格、Shift+擊動 10 格，連點不重算預覽、很快。</li>
       </ul>
-      <div class="callout tip">💡 <b>小貼士</b>：固定光線的場景（如正午）關鍵幀少、調一張就好；日夜轉換的場景關鍵幀多。我會在 Step 1 先幫你<b>標出哪些場景是 holy-grail 候選</b>，你就知道哪幾段要花工。</div>
+      <div class="callout tip">💡 <b>小貼士</b>：這是「不可外包的藝術判斷」由你做。內建編輯器夠用就免開 LR；要更深度修圖（鏡頭校正、細部遮罩）再回頭用 Lightroom 補 —— 就是你說的「不夠再補」。</div>
     </div>
 
-    <div class="step"><span class="n">2</span><b>進 Lightroom 調關鍵幀</b>
+    <div class="step"><span class="who">James</span><span class="n">3</span><b>去閃爍 Visual Deflicker</b>
+      <p>跑 Visual Deflicker，自動抹平幀間明暗。v7 proxy 緩衝讓預覽/去閃<b>快達 50%</b>，多跑一兩輪夜空更乾淨。</p>
+    </div>
+
+    <div class="step"><span class="who">James</span><span class="n">4</span><b>聖杯 + 曝光平滑（Holy Grail Wizard）</b>
+      <p>跨日夜序列用<b>聖杯精靈</b>做曝光大跨度平滑。v7 新增 <b>Optimize</b>，自動算 Rotate / Stretch 最佳值，省手動試。</p>
+      <div class="callout tip">💡 <b>小貼士</b>：定光場景（正午）不必動聖杯；只有日出/日落/天黑那種才需要。我會在 Step 1 先幫你<b>標出哪幾段是聖杯候選</b>。</div>
+    </div>
+
+    <div class="step"><span class="who">James</span><span class="n">5</span><b>匯出素材影片（直出 8K ProRes 422）</b>
       <ul>
-        <li>LRTimelapse 會把關鍵幀那幾張送進 Lightroom。</li>
-        <li>你只調<b>這幾張</b>：色調、白平衡、曝光（日夜段就把暗的拉亮、亮的壓下）。</li>
+        <li>Render 設定：格式選 <b>ProRes 422</b>、解析度設你的目標（8K / 或素材上限）、幀率（縮時常用 24/30/60）。</li>
+        <li>LRTimelapse 走無損 RAW→Rec.2020 色彩管理 → 直接輸出可用素材。</li>
       </ul>
-      <div class="callout tip">💡 <b>小貼士</b>：這步是<b>不可外包的藝術判斷</b>，由你來。LRTimelapse 能對 400+ 個 Lightroom 工具做動畫內插，所以你在關鍵幀上動的幾乎所有調整都會平滑過渡。</div>
+      <div class="callout warn">⚠️ <b>明早要測的點</b>：有文件提到 LRTimelapse 的 <b>ProRes 直出可能卡在 5–6K</b>，8K 走 H.264/H.265 才行。若真是這樣 → 你輸出「最高品質序列/中間檔」，<b>我用 ffmpeg 補出 8K ProRes 422</b>（我的 Step 3）。明早實測就知道。</div>
     </div>
 
-    <div class="step"><span class="n">3</span><b>回 LRTimelapse → Reload</b>
-      <p>按 <code>Reload</code>，把你在 LR 調好的關鍵幀設定吸回來，內插到整段每一幀。</p>
-    </div>
+    <h2>🤝 協同分工</h2>
+    <table>
+      <tr><th>誰</th><th>做什麼</th></tr>
+      <tr><td><b>Robert<br>（前置）</b></td><td>場景自動分類（EXIF 間隔）→ 英文路徑乾淨序列 → 標<b>聖杯候選場景</b> → 4K 原味參考片讓你快速選片</td></tr>
+      <tr><td><b>James<br>（主力）</b></td><td>LRTimelapse 7 Pro 一條龍：內建編輯器調曝光/色調 → 去閃 → 聖杯漸變 → 直出 8K ProRes 422</td></tr>
+      <tr><td><b>Robert<br>（補位/QA）</b></td><td>① 8K ProRes 直出若受限 → ffmpeg 補出 8K ProRes 422<br>② 出片驗收 + 歸檔到 X10</td></tr>
+    </table>
+    <div class="callout ok">✅ 原則不變：<b>藝術判斷你做、機械活我包</b>。Pro 7 把你那段變成一條龍，我退到前置 + 補位。</div>
 
-    <div class="step"><span class="n">4</span><b>Visual Deflicker（去閃爍）</b>
-      <p>跑 <b>Visual Deflicker</b>，自動把幀間忽明忽暗抹平。v7 有 proxy 緩衝，預覽/去閃比舊版<b>快達 50%</b>。</p>
-      <div class="callout tip">💡 <b>小貼士</b>：去閃是「無損 multi-pass」，多跑一兩輪通常更乾淨，尤其夜空。</div>
-    </div>
-
-    <div class="step"><span class="n">5</span><b>Holy Grail Wizard（日夜漸變）</b>
-      <p>跨日夜的序列用<b>聖杯精靈</b>處理曝光大跨度。v7 新增 <b>Optimize</b>，自動幫你算 Rotate / Stretch 滑桿的最佳值，省去手動試。</p>
-    </div>
-
-    <div class="step"><span class="n">6</span><b>匯出 JPG（交給 Robert）</b>
+    <h2>🌅 明早實作清單</h2>
+    <div class="check">
+      <b>你先準備：</b>
       <ul>
-        <li>處理完，用 LRTExport / Lightroom 把整段匯成<b>高品質 JPG 序列</b>。</li>
-        <li>丟給我 → 我 Step 3 出 8K ProRes 422 素材。</li>
+        <li>挑一個 <b>有日夜變化</b>的 RAW 縮時資料夾（最能練聖杯），把路徑丟我。</li>
+        <li>確認 LRTimelapse 7 Pro 已啟用授權。</li>
       </ul>
-      <div class="callout ok">✅ <b>我們的分界</b>：你負責「修好每一幀」，最終 8K 影片組裝由我用 ffmpeg 出 ProRes —— 所以你<b>不必</b>靠 LRTimelapse 自己的影片輸出。</div>
+      <b>我會先做（你睡前丟路徑，我先跑好）：</b>
+      <ul>
+        <li>場景分類 + 英文路徑序列 + 4K 參考片 + 標好聖杯候選段。</li>
+      </ul>
+      <b>明早一起：</b>
+      <ol>
+        <li>你照 Step 1→5 在 LRTimelapse 跑一遍（我線上一步步陪你、解 Telegram）。</li>
+        <li>到 Step 5 一起測「8K ProRes 直出」行不行 → 決定要不要我 ffmpeg 補位。</li>
+        <li>出一支完整 8K 素材 → 驗收 → 把流程定型成可重複 SOP。</li>
+      </ol>
     </div>
 
-    <h2>✨ v7 新功能（值得知道）</h2>
+    <h2>✨ v7 / Pro 重點功能</h2>
     <ul>
-      <li><span class="pill">JPG 序列支援</span> v7 起 JPG 也能跟 RAW 一樣做預覽+去閃（不過曝光大跨度仍是 RAW 寬容度最好）。</li>
-      <li><span class="pill">預覽快 50%</span> proxy 緩衝加速去閃與視覺預覽。</li>
-      <li><span class="pill">Holy Grail Optimize</span> 自動算最佳漸變參數。</li>
-      <li><span class="pill">HDR 支援</span> LRTExport 與渲染支援 HDR。</li>
-      <li><span class="pill">視覺裁切</span> Shift+拖動直接框裁。</li>
+      <li><span class="pill">免 Lightroom</span> 內建編輯器直接編 RAW。</li>
+      <li><span class="pill">ProRes 422/444 直出</span> + DNxHR、H.264、H.265。</li>
+      <li><span class="pill">8K+ 輸出</span>（ProRes 直出上限明早測）。</li>
+      <li><span class="pill">色彩管理</span> 無損 RAW→Rec.2020。</li>
+      <li><span class="pill">JPG 序列支援</span> v7 起 JPG 也能預覽+去閃。</li>
+      <li><span class="pill">預覽快 50%</span> · <span class="pill">Holy Grail Optimize</span> · <span class="pill">視覺裁切</span></li>
     </ul>
 
-    <h2>💰 價格與授權</h2>
+    <h2>💰 版本與授權</h2>
+    <p>James 已購 <b>Pro 7</b>（不限幀 + 8K + ProRes 422/444 + 商用授權），以下供參考：</p>
     <table>
-      <tr><th>版本</th><th>價格（買斷，非訂閱）</th><th>重點</th></tr>
-      <tr><td>免費評估版</td><td>$0</td><td>限 <b>400 幀</b> + 輸出只到 <b>1080p</b>。試流程可以，正式不夠。</td></tr>
-      <tr><td>Private 私人版</td><td>約 €99</td><td>不限幀數、2 台電腦、<b>僅非商業</b>用途。個人夠用。</td></tr>
-      <tr><td>Pro 專業版</td><td>€249</td><td>不限幀、<b>商用授權</b>、8K 輸出、浮水印/logo。要商業發表才需要。</td></tr>
+      <tr><th>版本</th><th>價格（買斷）</th><th>重點</th></tr>
+      <tr><td>免費評估版</td><td>$0</td><td>限 400 幀 + 1080p。</td></tr>
+      <tr><td>Private</td><td>約 €99</td><td>不限幀、非商業。</td></tr>
+      <tr><td><b>Pro ✓</b></td><td>€249</td><td>不限幀、商用、8K、ProRes 422/444、浮水印/logo。</td></tr>
     </table>
-    <div class="callout tip">💡 <b>怎麼選</b>：我們的 8K ProRes 是我用 ffmpeg 出，所以你買它主要是為了<b>破 400 幀限制</b>。個人用 Private 就夠；要對外商業發表才上 Pro。買 LRT6（2024 後）可免費用 LRT7。<b>請從官網購買，別用來路不明的破解站</b>（有安全與授權風險）。</div>
-    <p>官方購買：<a href="https://lrtimelapse.com/buy/">lrtimelapse.com/buy</a></p>
+    <div class="callout warn">🚨 jpsmile 那種是<b>破解站</b>（有安全/授權風險）。你已買正版，之後更新都從官網 <a href="https://lrtimelapse.com/">lrtimelapse.com</a> 走。</div>
 
     <h2>🕳️ 踩雷清單</h2>
     <ul>
-      <li><b>中文路徑</b> → 沒預覽。用全英文/數字路徑（我 Step 1 幫你備好）。</li>
-      <li><b>沒裝 DNG Converter</b> → 跑不動。先裝。</li>
-      <li><b>需要 Lightroom Classic</b>（或 Adobe Camera RAW）配合，不是純獨立軟體。</li>
-      <li><b>免費版 400 幀上限</b> → 你的場景常上千張，會卡。</li>
+      <li><b>中文路徑</b> → 沒預覽。用英文路徑（我備好）。</li>
+      <li><b>RAW 解碼</b>：v7 用 DngLab；少數機型仍要 Adobe DNG Converter。</li>
+      <li><b>ProRes 8K 直出上限</b>：可能卡 5–6K，明早測，必要時我 ffmpeg 補位。</li>
     </ul>
-
-    <h2>🤝 我們的協作分工（建議方向）</h2>
-    <p>原則跟整個系統一致：<b>藝術判斷你做，機械活我包</b>。LRTimelapse 的關鍵幀調色是你的藝術判斷；前置與出片是我的事。</p>
-    <table>
-      <tr><th>誰</th><th>做什麼</th></tr>
-      <tr><td><b>Robert<br>（前置）</b></td><td>① 場景自動分類（EXIF 間隔）<br>② 出「<b>英文路徑</b>乾淨序列」給 LRTimelapse 吃<br>③ <b>標出 holy-grail 候選場景</b>（從 4K 參考片+亮度變化判斷哪段日夜轉換要重工）<br>④ 4K 原味參考片讓你快速選片</td></tr>
-      <tr><td><b>James<br>（藝術判斷）</b></td><td>在自己機器跑 <b>LRTimelapse + Lightroom</b>：調關鍵幀色調/曝光、跑去閃、Holy Grail 漸變 → 匯出 JPG</td></tr>
-      <tr><td><b>Robert<br>（出片）</b></td><td>接你的 JPG → Step 3 出 <b>8K ProRes 422</b> 素材 → 驗收 + 歸檔</td></tr>
-    </table>
-    <div class="callout ok">✅ <b>交接界面很乾淨</b>：我給你「英文路徑序列 + 哪幾段要做漸變」；你還我「調好的 JPG」；我出 ProRes。你只專注最值錢的調色判斷，其餘不碰。</div>
-    <div class="callout tip">💡 <b>進階加值</b>：我還能幫你做「<b>場景分流</b>」——定光場景（一鍵 sync 即可）vs 日夜場景（要 LRTimelapse 重工）分開列，讓你優先把時間花在真正需要的幾段。</div>
 
     <h2>🎓 官方教學・學習路徑</h2>
-    <p>官網把教學分三階，照順序看最有效率（Beginner → Advanced → Expert）：</p>
     <table>
       <tr><th>階段</th><th>學什麼</th></tr>
-      <tr><td><b>1. 基礎 Basic</b></td><td>匯入/整理序列、Visual Workflow、在 LRTimelapse 直接編輯與渲染、<b>Visual Deflicker</b>、透過 Lightroom 編輯與影片輸出、日夜轉場入門。<br>→ 我們攻略的<b>六步流程，這一階就涵蓋</b>。</td></tr>
-      <tr><td><b>2. 進階 Advanced</b></td><td>拍/做 <b>Holy Grail</b>（無縫日夜、夜日轉換）、一次處理多段序列加速、進階去閃技巧、正確色彩管理。</td></tr>
-      <tr><td><b>3. 專家 Expert Tips</b></td><td>重新編輯既有序列、漸層(gradient)的正確動畫化等進階技巧。</td></tr>
+      <tr><td><b>1. 基礎 Basic</b></td><td>匯入/整理、Visual Workflow、內建編輯與渲染、Visual Deflicker、日夜轉場入門 → 涵蓋我們的流程。</td></tr>
+      <tr><td><b>2. 進階 Advanced</b></td><td>聖杯（無縫日夜）、多序列加速、進階去閃、色彩管理。</td></tr>
+      <tr><td><b>3. 專家 Expert</b></td><td>重新編輯、漸層動畫等。</td></tr>
     </table>
-    <p>官方教學總入口：<a href="https://lrtimelapse.com/tutorials/">lrtimelapse.com/tutorials</a>。另有官方電子書《Timelapse Photography (Ed.2)》480 頁，從器材到輸出完整。</p>
-    <div class="callout tip">💡 <b>給你的最短路徑</b>：先看<b>基礎(Basic)</b>就能上手我們的六步流程；等要做日落→夜景那種大跨度，再回頭看<b>進階的 Holy Grail</b>那段即可，不用一次全吞。</div>
+    <p>總入口：<a href="https://lrtimelapse.com/tutorials/">lrtimelapse.com/tutorials</a> · 匯出與渲染：<a href="https://lrtimelapse.com/workflow/export-and-render/">export-and-render</a>。另有官方 480 頁電子書。</p>
+    <div class="callout tip">💡 <b>最短路徑</b>：先看基礎(Basic)就能跑我們的流程；要做日夜大跨度再看進階聖杯那段。</div>
 
-    <h2>📚 學習資源</h2>
-    <h3>🎬 中文影片教學（推薦先看）</h3>
+    <h2>📚 中文影片教學</h2>
     <ul>
-      <li><b>繁中・LRTimelapse 6 一步一步跟我做</b>《風光攝影師 第八集》：<a href="https://www.youtube.com/watch?v=n09NmQ_DHv4">youtube.com/watch?v=n09NmQ_DHv4</a><br>→ 跟本攻略<b>六步流程最對得上</b>、版本也新（v6），建議第一個看。</li>
-      <li><b>中文・LRT5 + Lightroom 基礎工作流</b>（系列播放清單）：<a href="https://www.youtube.com/watch?v=2eSMcY-AkX4&list=PLomt9AtoWLdMg7MP1aFNdtJyK6HLfPQaU">整個 playlist</a></li>
-    </ul>
-    <h3>官方 + 繁中圖文</h3>
-    <ul>
-      <li>官方基礎教學：<a href="https://lrtimelapse.com/tutorial/basic/">lrtimelapse.com/tutorial/basic</a></li>
-      <li>官方完整流程：<a href="https://lrtimelapse.com/workflow/visual-workflow/">lrtimelapse.com/workflow/visual-workflow</a></li>
+      <li><b>繁中・LRTimelapse 6 一步一步</b>《風光攝影師 第八集》：<a href="https://www.youtube.com/watch?v=n09NmQ_DHv4">youtube.com/watch?v=n09NmQ_DHv4</a>（跟流程最對得上，推薦先看）</li>
+      <li><b>中文・LRT5+Lightroom 基礎</b>（playlist）：<a href="https://www.youtube.com/watch?v=2eSMcY-AkX4&list=PLomt9AtoWLdMg7MP1aFNdtJyK6HLfPQaU">整個 playlist</a></li>
       <li>繁中圖文：Grace Photo「LRTimelapse 縮時攝影基礎班」、Fotobeginner 縮時前後製</li>
     </ul>
 
     <hr>
-    <p class="date">有問題或要我幫你備英文路徑序列、標 holy-grail 候選場景，直接 Telegram 找我。— Robert</p>
+    <p class="date">睡前把 RAW 資料夾路徑丟我，我先把 Step 1 跑好，明早直接上手。— Robert</p>
   </div>
 </body>
 </html>
