@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>2026 產經資訊自動更新 — 全系統演進與架構</title>
+<style>
+  :root{
+    --bg:#0b0f17; --panel:#121826; --panel2:#1a2235; --line:#26304a;
+    --ink:#e8edf6; --muted:#94a3b8; --dim:#64748b;
+    --a:#38bdf8;  /* 入料 */
+    --b:#a78bfa;  /* 資料庫 */
+    --c:#fbbf24;  /* 評鑑 */
+    --d:#34d399;  /* 發佈 */
+    --red:#f87171;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
+    line-height:1.7;font-size:16px;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+  header h1{font-size:1.7rem;margin:0 0 6px;letter-spacing:.5px}
+  .sub{color:var(--muted);font-size:.95rem}
+  .meta{color:var(--dim);font-size:.82rem;margin-top:6px}
+  .northstar{
+    background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(167,139,250,.10));
+    border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:22px 0;
+  }
+  .northstar b{color:var(--a)}
+  h2{font-size:1.25rem;margin:42px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h2 .n{color:var(--dim);font-weight:400;margin-right:8px}
+  p{color:#cdd6e6}
+  code{background:#0d1422;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.85em;color:#cfe7ff}
+
+  /* ── flow diagram ── */
+  .flow{display:flex;flex-direction:column;gap:0;margin:10px 0 6px}
+  .layer{border-radius:14px;padding:14px 16px;border:1px solid var(--line);background:var(--panel)}
+  .layer + .arrowrow{display:flex;justify-content:center;align-items:center;height:34px;color:var(--dim)}
+  .arrowrow .lbl{font-size:.78rem;color:var(--muted);background:var(--panel2);
+    border:1px solid var(--line);border-radius:20px;padding:2px 12px}
+  .arrowrow:after{content:"▼";position:absolute;font-size:.9rem}
+  .arrowrow{position:relative}
+  .ltag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:1px;
+    padding:2px 10px;border-radius:20px;margin-bottom:10px}
+  .La{background:rgba(56,189,248,.15);color:var(--a);border:1px solid rgba(56,189,248,.4)}
+  .Lb{background:rgba(167,139,250,.15);color:var(--b);border:1px solid rgba(167,139,250,.4)}
+  .Lc{background:rgba(251,191,36,.15);color:var(--c);border:1px solid rgba(251,191,36,.4)}
+  .Ld{background:rgba(52,211,153,.15);color:var(--d);border:1px solid rgba(52,211,153,.4)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .card h4{margin:0 0 4px;font-size:.92rem}
+  .card .role{font-size:.78rem;color:var(--muted)}
+  .card .tool{font-size:.74rem;color:var(--dim);margin-top:6px;font-family:ui-monospace,Menlo,monospace}
+  .one{grid-template-columns:1fr}
+  .two{grid-template-columns:repeat(2,1fr)}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88rem;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--ink);white-space:nowrap}
+  td{color:#cdd6e6}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+  .mono{font-family:ui-monospace,Menlo,monospace;font-size:.84em;color:#cfe7ff}
+
+  .pill{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:20px;border:1px solid var(--line)}
+  .timeline{list-style:none;padding:0;margin:10px 0}
+  .timeline li{position:relative;padding:8px 0 8px 92px;border-left:2px solid var(--line);margin-left:70px}
+  .timeline li .date{position:absolute;left:-70px;top:8px;width:120px;font-family:ui-monospace,Menlo,monospace;
+    font-size:.78rem;color:var(--a);text-align:right;padding-right:14px}
+  .timeline li:before{content:"";position:absolute;left:-7px;top:14px;width:11px;height:11px;border-radius:50%;
+    background:var(--a);border:2px solid var(--bg)}
+  .timeline li.k:before{background:var(--c)}
+  .timeline li.k .date{color:var(--c)}
+
+  .stat{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}
+  .stat div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;flex:1;min-width:120px;text-align:center}
+  .stat b{display:block;font-size:1.5rem;color:var(--a)}
+  .stat span{font-size:.78rem;color:var(--muted)}
+  footer{margin-top:50px;color:var(--dim);font-size:.8rem;text-align:center;border-top:1px solid var(--line);padding-top:18px}
+  a{color:var(--a)}
+
+  @media(max-width:680px){
+    .cards{grid-template-columns:1fr}
+    .two{grid-template-columns:1fr}
+    .timeline li{padding-left:14px;margin-left:8px}
+    .timeline li .date{position:static;display:block;width:auto;text-align:left;padding:0 0 2px}
+    .timeline li:before{left:-7px}
+    header h1{font-size:1.4rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>2026 產經資訊自動更新</h1>
+  <div class="sub">全系統演進與架構 · Single Source of Truth</div>
+  <div class="meta">更新：2026-06-21 · 版本 v1 · 維護：claude_robin × james</div>
+</header>
+
+<div class="stat">
+  <div><b>4</b><span>現役 launchd 排程</span></div>
+  <div><b>9</b><span>自製工具</span></div>
+  <div><b>2</b><span>核心 Skill</span></div>
+  <div><b>2</b><span>消化管線 A/B</span></div>
+</div>
+
+<div class="northstar">
+  <b>系統北極星</b><br>
+  用「個股被新聞／影片提及的次數」當市場熱度訊號 —— 越多來源提及＝越夯的板塊（<b>量</b>），
+  配合投顧研究內文（<b>質</b>），雙軌回饋「重新擬定 2026 趨勢股觀察板塊」。
+  追蹤記錄 Sheet 的「近 4 週提及次數／來源種類數／新股候選」就是這套地基。
+</div>
+
+<h2><span class="n">流程圖</span>一張圖看懂</h2>
+<p>每天自動把投顧 YouTube／財經來源抓下來 → Claude 消化成結構化匯總 → 同步進「2026 趨勢股」資料庫做量化評鑑 → 排版發到 Telegram 與本站。全程零人工，由 macOS <code>launchd</code> 定時驅動。</p>
+
+<div class="flow">
+
+  <div class="layer">
+    <span class="ltag La">① 入料・消化層</span>
+    <div class="cards">
+      <div class="card">
+        <h4>A 管線 · 錢線百分百</h4>
+        <div class="role">單頻道消化（原型）</div>
+        <div class="tool">qianxian-digest.py</div>
+      </div>
+      <div class="card">
+        <h4>B 管線 · 多源匯總 ★</h4>
+        <div class="role">多來源・現役主力・每小時心跳</div>
+        <div class="tool">fincai-multi-digest.py</div>
+      </div>
+      <div class="card">
+        <h4>桌面投放</h4>
+        <div class="role">手動丟 txt → 消化</div>
+        <div class="tool">daily-stock-digest.sh</div>
+      </div>
+    </div>
+    <p style="margin:12px 0 0;font-size:.85rem;color:var(--muted)">
+      yt-dlp 抓字幕 / RSS → 字幕快取（滾動 4 天）→ Claude「五大欄位」合成（產經趨勢／個股題材／產業鏈／外資動向／法人籌碼）
+    </p>
+  </div>
+
+  <div class="arrowrow"><span class="lbl">去重・整合・watchlist 翻紅</span></div>
+
+  <div class="layer">
+    <span class="ltag Lb">② 資料庫・評鑑層</span>
+    <div class="cards two">
+      <div class="card">
+        <h4>主清單 table1</h4>
+        <div class="role">A~AE 欄：股價 / 法人 / 強弱信號</div>
+        <div class="tool">stock-table-update.py · Apps Script</div>
+      </div>
+      <div class="card">
+        <h4>追蹤記錄 Sheet2</h4>
+        <div class="role">提及次數 / 來源種類數 / 新股候選</div>
+        <div class="tool">addEntries（Web App doPost）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrowrow"><span class="lbl">回算提及次數＋彈新股候選</span></div>
+
+  <div class="layer">
+    <span class="ltag Lc">③ 評鑑框架層（人＋AI 拍板）</span>
+    <div class="cards">
+      <div class="card"><h4>主板塊分類</h4><div class="role">11+2 類「編號_中文」</div></div>
+      <div class="card"><h4>雙軸評鑑</h4><div class="role">A 題材⭐ × B 體質燈號</div></div>
+      <div class="card"><h4>剔除封存區</h4><div class="role">潛力＋是否在趨勢上</div></div>
+    </div>
+  </div>
+
+  <div class="arrowrow"><span class="lbl">排版・發佈</span></div>
+
+  <div class="layer">
+    <span class="ltag Ld">④ 發佈層</span>
+    <div class="cards">
+      <div class="card"><h4>KB（Obsidian/iCloud）</h4><div class="role">結構化筆記沉澱</div></div>
+      <div class="card"><h4>JTPHR 網站</h4><div class="role">sync-kb → Vercel</div><div class="tool">kb_daily_commit.sh</div></div>
+      <div class="card"><h4>Telegram 股票群</h4><div class="role">🌅 晨間匯總 / 🔴 即時更新</div></div>
+    </div>
+  </div>
+
+</div>
+
+<h2><span class="n">②</span>開發的工具（9 個）</h2>
+<table>
+<thead><tr><th>#</th><th>工具</th><th>角色</th><th>語言</th><th>誕生</th></tr></thead>
+<tbody>
+<tr><td>1</td><td class="mono">stock_tracker v7/v8.gs</td><td>Sheet 端寫入 + 強弱信號重算</td><td>GAS</td><td>04-08 / 04-10</td></tr>
+<tr><td>2</td><td class="mono">Web App 端點</td><td>getMainEntries / addEntries / addMainEntries / updateMainSector / updateStockData</td><td>GAS</td><td>隨 v8</td></tr>
+<tr><td>3</td><td class="mono">qianxian-digest.py</td><td>A 管線：錢線百分百單頻道消化（原型）</td><td>Python</td><td>05-07</td></tr>
+<tr><td>4</td><td class="mono">daily-stock-digest.sh</td><td>桌面投放 txt 消化 → TG</td><td>Bash</td><td>05-04</td></tr>
+<tr><td>5</td><td class="mono">fincai-multi-digest.py</td><td>B 管線：多來源匯總（現役主力）</td><td>Python</td><td>v1 06-10 → 06-21</td></tr>
+<tr><td>6</td><td class="mono">stock-table-update.py</td><td>本機版主清單更新（避 GAS 6 分鐘超時）</td><td>Python</td><td>06-21</td></tr>
+<tr><td>7</td><td class="mono">kb_daily_commit.sh</td><td>KB → JTPHR 滾動發佈（兩階段）</td><td>Bash</td><td>05-06</td></tr>
+<tr><td>8</td><td class="mono">sync-kb.sh / sync-shares.sh</td><td>KB markdown → Astro 內容同步</td><td>Bash</td><td>jtphr-site</td></tr>
+<tr><td>9</td><td class="mono">kb_upgrade_v1 / kb_fix_dates.py</td><td>KB frontmatter/日期遷移工具</td><td>Python</td><td>05-06</td></tr>
+</tbody>
+</table>
+
+<h2><span class="n">③</span>設定的 Skill（2 個核心）</h2>
+<table>
+<thead><tr><th>Skill</th><th>角色</th><th>與管線關係</th></tr></thead>
+<tbody>
+<tr><td class="mono">fincai-summary</td><td>財金摘要引擎：任意素材 → 五大欄位 + TG 精華 + 個股 CSV</td><td>= fincai-multi-digest.py 的 summarize() 抽成可手動呼叫</td></tr>
+<tr><td class="mono">morning-digest</td><td>晨間完整匯總管線「操作手冊」</td><td>= fincai-multi-digest.py 的邏輯說明＋手動補發 SOP</td></tr>
+<tr><td class="mono">insight</td><td>Session Insight 產出（周邊）</td><td>對話/群組內容總結存 KB</td></tr>
+</tbody>
+</table>
+
+<h2><span class="n">④</span>資料如何收藏</h2>
+<table>
+<tbody>
+<tr><td><b>YouTube 投顧</b></td><td><span class="mono">yt-dlp</span> 抓自動字幕 → 字幕快取（保留 14 天）</td></tr>
+<tr><td><b>RSS／財金網站</b></td><td>fetch_rss_items 抓條目（部分 HTML 抓取器待接）</td></tr>
+<tr><td><b>來源清單</b></td><td>不寫死，讀「每日財金影片來源清單」（線上 Sheet「抓取來源管理」為準）→ 改表即可加減來源/調頻率</td></tr>
+<tr><td><b>桌面投放</b></td><td>丟 txt 進 <span class="mono">~/Desktop/每日股票訊息/</span> → 8:30 自動消化（.processed 去重）</td></tr>
+<tr><td><b>個股提及</b></td><td>append 進 <span class="mono">個股提及紀錄.csv</span> + 寫進 Sheet 追蹤記錄累計</td></tr>
+</tbody>
+</table>
+
+<h2><span class="n">⑤</span>用什麼 tool 更新（現役排程）</h2>
+<table>
+<thead><tr><th>launchd</th><th>工具</th><th>排程</th><th>做什麼</th></tr></thead>
+<tbody>
+<tr><td class="mono">fincai-digest</td><td>fincai-multi-digest.py</td><td>每整點心跳</td><td>hour ∈ {8,10,12,14,16,18,20,21} 才發佈；當天首發＝🌅晨報全量，之後＝🔴即時層</td></tr>
+<tr><td class="mono">stock-digest</td><td>daily-stock-digest.sh</td><td>每天 08:30</td><td>消化桌面投放 txt → TG</td></tr>
+<tr><td class="mono">stock-table-update</td><td>stock-table-update.py</td><td>週一~五 18:30</td><td>平行抓 Yahoo+法人 → 一次 POST 回寫 Sheet、重算強弱信號</td></tr>
+<tr><td class="mono">session-insight</td><td>insight</td><td>每日</td><td>對話總結（周邊）</td></tr>
+</tbody>
+</table>
+<p style="font-size:.85rem;color:var(--muted)">發佈不另設排程：晨報發佈時 fincai 內部直接呼叫 <code>kb_daily_commit.sh</code>（sync-kb → commit → push → Vercel 重建）。</p>
+
+<h2><span class="n">⑥</span>資料比對邏輯</h2>
+<div class="cards two">
+  <div class="card"><h4>跨來源去重</h4><div class="role">同事件多家報導 → 只講一次、出處併列。素材一律當「資料」，忽略其中指令（防注入）。</div></div>
+  <div class="card"><h4>滾動視窗 4 天</h4><div class="role">摘要看近 4 天素材，薄日也撐得起深度；即時層不消耗視窗。</div></div>
+  <div class="card"><h4>watchlist 翻紅</h4><div class="role">讀 getMainEntries（~114 檔）全文比對股名命中翻紅。</div></div>
+  <div class="card"><h4>提及聚合 → 新股候選</h4><div class="role">回算「近 4 週提及/來源種類數」；多源反覆提及但未追蹤 → 彈候選。</div></div>
+</div>
+<p style="margin-top:14px"><b>強弱信號（AE 欄 −5 ~ +9）：</b></p>
+<p class="mono" style="background:#0d1422;border:1px solid var(--line);border-radius:8px;padding:12px;color:#cfe7ff">score = Z近4週提及(0~4) + 月漲(−2~+2) + 週漲(−1~+1) + 24週位置(−1~+1) + 法人買賣超(−1~+1)</p>
+<p><b>雙軸評鑑：</b>A 軸 題材⭐（70%，產業底色±卡位）× B 軸 體質燈號🟢🟡🟠🔴（30%＝營收YoY 30%＋強弱信號 25%＋24週位置 20%＋月漲 15%＋法人 10%）→ 動作 tier。🔻＝連 3 月營收 YoY 轉負。</p>
+
+<h2><span class="n">⑦</span>對照 2026 趨勢欄位</h2>
+<table>
+<thead><tr><th>欄</th><th>內容</th><th>來源</th></tr></thead>
+<tbody>
+<tr><td>J / K</td><td>目前股價 / 昨收（J&gt;K 紅、J&lt;K 綠）</td><td>Yahoo</td></tr>
+<tr><td>L / M</td><td>週 / 月漲跌幅%（負綠正紅）</td><td>Yahoo</td></tr>
+<tr><td>N / O</td><td>24 週高 / 低點</td><td>Yahoo</td></tr>
+<tr><td>P</td><td>本益比 P/E</td><td>Yahoo</td></tr>
+<tr><td>AD</td><td>近 5 日三大法人買賣超（張）</td><td>TWSE T86 + TPEX CSV</td></tr>
+<tr><td>AE</td><td>強弱信號（−5~+9 色階）</td><td>上述公式重算</td></tr>
+</tbody>
+</table>
+<p style="font-size:.9rem;color:var(--muted)"><b>追蹤記錄 Sheet2：</b>近 4 週提及次數 · 來源種類數 · 最近提及日 · 新股候選旗標。<br>
+<b>板塊：</b>每檔對應主板塊分類 11+2 類（新股必須歸類或建議新類）。<b>去留：</b>錨點＝產業潛力＋是否在趨勢上（非股價）。</p>
+
+<h2><span class="n">⑧</span>版本演進時間軸</h2>
+<ul class="timeline">
+  <li class="k"><span class="date">2026-04-08</span>Apps Script <b>v7</b> 穩定版：條件格式 + I/L/M %字串顏色 + AE 色階</li>
+  <li class="k"><span class="date">2026-04-10</span>Apps Script <b>v8</b> 大改版：AD 改法人買賣超、AE 改多維度評分、TPEX 改 CSV</li>
+  <li><span class="date">2026-05-04</span>daily-stock-digest.sh：桌面投放消化上線</li>
+  <li><span class="date">2026-05-06</span>kb_daily_commit.sh + KB 遷移工具；KB→JTPHR 自動發佈打通</li>
+  <li><span class="date">2026-05-07</span>A 管線 qianxian-digest.py：錢線百分百全自動消化（原型）</li>
+  <li class="k"><span class="date">2026-06-04</span>雙軸評鑑 v1→v3：A 題材⭐ × B 體質燈號決策框架定版</li>
+  <li class="k"><span class="date">2026-06-10</span>B 管線 v2 fincai-multi-digest.py：多源、來源外置、滾動視窗、五大欄位、Sheet 回寫</li>
+  <li><span class="date">2026-06-12</span>B 管線加盤中即時層（晨報/即時兩層產品）；改每小時心跳</li>
+  <li class="k"><span class="date">2026-06-13</span>launchd FDA 根因根治：給 python3 完整磁碟取用權 → 自動發佈恢復</li>
+  <li class="k"><span class="date">2026-06-21</span>stock-table-update.py：本機版主清單更新（取代 GAS 完整更新）</li>
+</ul>
+
+<h2><span class="n">⑨</span>關鍵踩坑與根治</h2>
+<table>
+<thead><tr><th>坑</th><th>根治</th></tr></thead>
+<tbody>
+<tr><td>macOS FDA/TCC：launchd 子程序無權限 → 自動發佈靜默失敗</td><td>給 /usr/bin/python3 完整磁碟取用權，子程序繼承</td></tr>
+<tr><td>認證誤標：反覆起停讓 telegram plugin 被當壞跳過</td><td>啟動前清 mcp-needs-auth-cache.json</td></tr>
+<tr><td>Apps Script 6 分鐘上限：126 檔逐格寫入超時</td><td>改本機 Python 平行抓取 + 批次 POST；GAS 只留輕量 doPost</td></tr>
+<tr><td>TWSE 單位誤判：法人數值是「股」不是「千股」</td><td>全部 ÷1000 換算成張</td></tr>
+<tr><td>TPEX JSON 端點失效</td><td>改 CSV 下載端點 + Big5 解碼</td></tr>
+<tr><td>Web App % 字元：URL 編碼造成解碼失敗</td><td>寫入前剔除文字內 %</td></tr>
+</tbody>
+</table>
+
+<footer>
+  2026 產經資訊自動更新 · 全系統演進文件 · 內部參照（unlisted, noindex）<br>
+  本頁不構成投資建議；個股題材均為素材整理，僅供參考。
+</footer>
+
+</div>
+</body>
+</html>
