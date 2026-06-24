@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>縮時參考片 · 整理完直接看拍攝狀況（1080p）</title>
+  <meta name="description" content="Robert 把縮時素材整理完後，自動拼一支 1080p 最相容的參考片放進該趟的 _refs 資料夾，James 用任何裝置點開就能看當天拍攝狀況。檔名沿用英文場景夾名。" />
+  <meta name="date" content="2026-06-24" />
+  <style>
+    :root { --surface:#0f0f23; --brand:#1a1a2e; --accent:#e94560; --text:#eaeaea; --muted:#a0a0a0;
+            --tip:#f5c542; --tipbg:#2a2616; --ok:#46c98b; --okbg:#16271f; --warn:#ff7a59; --warnbg:#2a1a16; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--surface); color:var(--text);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif; line-height:1.75; -webkit-font-smoothing:antialiased; }
+    .wrap { max-width:760px; margin:0 auto; padding:3.5rem 1.25rem 6rem; }
+    a.back { color:var(--accent); text-decoration:none; font-size:.85rem; }
+    h1 { font-size:1.95rem; margin:1.4rem 0 .3rem; line-height:1.3; }
+    .date { color:var(--muted); font-size:.85rem; }
+    .lede { color:var(--muted); font-size:1rem; margin:.6rem 0 0; }
+    h2 { color:var(--accent); margin-top:2.6rem; font-size:1.35rem; border-bottom:1px solid #2a2a44; padding-bottom:.4rem; }
+    h3 { margin-top:1.8rem; font-size:1.08rem; }
+    code { background:#2a2a44; padding:.15em .4em; border-radius:5px; font-size:.88em; }
+    hr { border:none; border-top:1px solid #2a2a44; margin:2.5rem 0; }
+    ul,ol { padding-left:1.3rem; }
+    li { margin:.35rem 0; }
+    .step { background:var(--brand); border:1px solid #2a2a44; border-radius:14px; padding:1.1rem 1.3rem; margin:1rem 0; }
+    .step .n { display:inline-block; background:var(--accent); color:#fff; font-weight:700; border-radius:8px;
+               padding:.05em .6em; margin-right:.5em; font-size:.9rem; }
+    .step .who { float:right; font-size:.75rem; color:var(--muted); background:#2a2a44; border-radius:20px; padding:.1em .7em; }
+    .callout { border-radius:12px; padding:.85rem 1.1rem; margin:1rem 0; font-size:.95rem; }
+    .tip  { background:var(--tipbg);  border-left:4px solid var(--tip); }
+    .ok   { background:var(--okbg);   border-left:4px solid var(--ok); }
+    .warn { background:var(--warnbg); border-left:4px solid var(--warn); }
+    .callout b { color:#fff; }
+    table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.92rem; }
+    th,td { border:1px solid #2a2a44; padding:.55rem .7rem; text-align:left; vertical-align:top; }
+    th { background:var(--brand); color:var(--accent); }
+    .pill { display:inline-block; background:#2a2a44; border-radius:20px; padding:.1em .8em; font-size:.8rem; margin:.15em .2em .15em 0; }
+    .flow { background:var(--brand); border:1px solid #2a2a44; border-radius:14px; padding:1.1rem 1.3rem; line-height:2; }
+    .flow b { color:var(--accent); }
+    a { color:var(--accent); }
+    .fname { font-family:ui-monospace,Menlo,monospace; background:#2a2a44; padding:.1em .45em; border-radius:5px; font-size:.85em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="./">← 攝影筆記本</a>
+    <h1>縮時參考片<br>整理完直接看拍攝狀況（1080p）</h1>
+    <p class="date">2026-06-24 · Robert 整理（James 拍板）</p>
+    <p class="lede">每趟縮時的原始 RAW 我整理分好場景後，會<b>自動拼一支 1080p 最相容的參考片</b>放進該趟的 <span class="fname">_refs</span> 資料夾。你用手機、平板、任何瀏覽器點開就能<b>直接看當天拍到什麼、流暢度如何</b>——不用等正式 8K、不用開 Lightroom。</p>
+
+    <div class="callout ok">✅ <b>一句話</b>：<span class="fname">_refs/</span> 裡那支 mp4 = 「這場縮時拍得怎樣」的快速預覽。看了滿意，再進 LRTimelapse 調色 → 出正式 8K。</div>
+
+    <h2>🎯 這支參考片是什麼、不是什麼</h2>
+    <ul>
+      <li>✅ <b>是</b>：看拍攝狀況的快速預覽 + 原味視覺留底（沒調色、沒去閃、沒裁切，就是相機直出的樣子）。</li>
+      <li>✅ <b>最相容</b>：H.264 / 1080p，手機到電視都能播，不挑軟體。</li>
+      <li>❌ <b>不是</b>資料備份——真正的底是 RAW 檔本身（壓過的影片救不回 RAW）。</li>
+      <li>❌ <b>不是</b>成片——成片是之後 LRTimelapse 調色去閃 → 8K ProRes（見 <a href="./lrtimelapse-guide.html">LRTimelapse 7 Pro 教程</a>）。</li>
+    </ul>
+
+    <h2>📁 放哪裡、叫什麼名字</h2>
+    <div class="flow">
+      該趟資料夾 <b>…_TL/</b> 底下開一個 <b>_refs/</b> 子資料夾<br>
+      → 每個場景一支參考片<br>
+      → 檔名<b>沿用整理好的英文場景夾名</b> + <span class="fname">_ref1080.mp4</span>
+    </div>
+    <p>例：場景夾 <span class="fname">01 0624 0139-0353 S</span> → 參考片 <span class="fname">_refs/01 0624 0139-0353_s_ref1080.mp4</span>（尾巴的 <code>S</code> 小寫成 <code>_s</code>、<code>F</code> → <code>_f</code>，跟正式 8K 檔名同一套規則）。</p>
+    <div class="callout tip">💡 <b>為什麼要英文檔名</b>：縮時工具（LRTimelapse / exiftool）讀不到中文路徑，所以整理階段就把每個場景另存成全英文/數字夾名，參考片直接沿用，全程不碰中文。</div>
+
+    <h2>📐 規格（鎖死，每趟都一樣）</h2>
+    <table>
+      <tr><th>項目</th><th>值</th></tr>
+      <tr><td>用途</td><td>看拍攝狀況 + 原味留底</td></tr>
+      <tr><td>編碼</td><td>H.264（libx264，最相容）</td></tr>
+      <tr><td>解析度</td><td>1080p（1440×1080，相機內嵌預覽原生比例）</td></tr>
+      <tr><td>幀率</td><td>30fps</td></tr>
+      <tr><td>畫質</td><td>CRF 20（夜景噪點不壓糊）</td></tr>
+      <tr><td>位置</td><td><span class="fname">&lt;該趟&gt;_TL/_refs/</span></td></tr>
+      <tr><td>命名</td><td>英文場景夾名 + <span class="fname">_ref1080.mp4</span></td></tr>
+    </table>
+    <div class="callout tip">💡 想看更細節時，我也能出 <b>4K 版</b>（<span class="fname">_4kref.mp4</span>）當加選；但<b>預設交付 1080p</b>，因為它到處都能播、檔案小、傳手機快。</div>
+
+    <h2>🧭 它在整條縮時流程的哪一段</h2>
+    <div class="flow">
+      <b>Step 1</b>（Robert）分場景 + 英文乾淨序列 + <b>1080p 參考片 → _refs/</b> + 標聖杯候選<br>
+      → <b>Step 2</b>（James）看 _refs 確認 → LRTimelapse 調曝光/去閃/聖杯漸變<br>
+      → <b>Step 3</b>（Robert）出正式 8K ProRes 422 素材交 FCP
+    </div>
+
+    <h2>📌 實例</h2>
+    <ul>
+      <li><span class="fname">115-04-03 eric house 月空_TL/_refs/</span> —— 首版範本（2 場景）。</li>
+      <li><span class="fname">115-06-24 荷蘭717阿姆斯特丹_TL/_refs/</span> —— 夜景 + 清晨兩支（2026-06-24）。</li>
+    </ul>
+
+    <hr>
+    <p class="date">這頁是「現狀攻略書」：縮時參考片每趟都照這個來。流程細節與 ffmpeg 指令收在 vault 的 <code>縮時攝影_ProRes素材輸出_SOP</code>（v2）。</p>
+  </div>
+</body>
+</html>
