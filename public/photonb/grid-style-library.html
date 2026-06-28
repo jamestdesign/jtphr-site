@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>to_grid 專案 第一版 · 拼貼風格資料庫</title>
+<meta name="description" content="to_grid 拼貼自動出片:指令 grid(拼貼輸出) = 樣式+格式+色調+標題+內文。三大風格(馬賽克/壁貼/剪貼簿)+影片馬賽克,全自動。">
+<meta name="date" content="2026-06-28">
+<style>
+  :root{--bg:#f6f3ee;--card:#fff;--ink:#2c2824;--muted:#8a8178;--line:#e6e0d6;--accent:#b08456;--code:#3a352f;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang TC","Helvetica Neue",sans-serif;line-height:1.6;}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 80px;}
+  h1{font-size:27px;margin:.1em 0 .05em;letter-spacing:.5px}
+  .tag{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:1px 9px;font-size:13px;vertical-align:middle;margin-left:6px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:22px;font-size:14.5px}
+  .card b{color:var(--accent)}
+  code{background:#efe9e0;border-radius:5px;padding:1px 6px;font-size:13px;color:var(--code);font-family:ui-monospace,Menlo,monospace}
+  pre{background:#2e2a25;color:#f3ede2;border-radius:10px;padding:12px 14px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+  table{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:13.5px}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12.5px}
+  td b{color:var(--ink)}
+  .rt{color:var(--accent);font-weight:600}
+  h2{font-size:20px;margin:34px 0 4px;padding-top:10px;border-top:2px solid var(--line)}
+  .styledesc{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .item img,.item video{width:100%;display:block;background:#eee}
+  .meta{padding:9px 12px;font-size:12.5px}
+  .meta .t{font-weight:600}
+  .meta .d{color:var(--muted);margin-top:2px}
+  .note{background:#fff8ec;border:1px solid #f0e2c6;border-radius:12px;padding:14px 18px;margin-top:30px;font-size:13.5px;color:#6b5d3f}
+  footer{margin-top:40px;color:var(--muted);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🖼️ to_grid 拼貼風格資料庫 <span class="tag">第一版</span></h1>
+  <div class="sub">to_grid 專案 · 2026-06-28 · 全部由現有歸檔照片「程式全自動」產出（0 Canva）</div>
+
+  <!-- 指令說明 -->
+  <div class="card">
+    <div style="font-size:16px;font-weight:700;margin-bottom:8px">🎛️ 出片指令</div>
+    指令名稱：<code>grid</code>　或打　<b>拼貼輸出</b><br>
+    用法 = <b>樣式 + 格式 + 色調 + 標題 + 內文</b>。把照片丟進 <code>to_grid/</code>，給參數就出圖到 <code>to_grid/_out/</code>。
+    <pre>grid &lt;照片夾&gt; --style 壁貼 --format 直式 --tone 暖 --title "Le Train Bleu" --text "Paris · 2026"</pre>
+    <table>
+      <tr><th width="90">參數</th><th>可選值</th></tr>
+      <tr><td><b>樣式 style</b></td><td>馬賽克　/　壁貼　/　剪貼簿　/　剪貼簿黑</td></tr>
+      <tr><td><b>格式 format</b></td><td>方形　/　直式　/　長版　/　橫式　/　<b>all</b>（一次出四種）</td></tr>
+      <tr><td><b>色調 tone</b></td><td>原色　/　黑白　/　暖　/　冷　/　莫蘭迪</td></tr>
+      <tr><td><b>標題 title</b></td><td>大標（壁貼用草寫、剪貼簿用大寫）</td></tr>
+      <tr><td><b>內文 text</b></td><td>副標 / 小字（如日期、地點）</td></tr>
+    </table>
+  </div>
+
+  <!-- 格式對應比例 -->
+  <div class="card">
+    <div style="font-size:16px;font-weight:700;margin-bottom:8px">📐 格式 format 對應比例</div>
+    <table>
+      <tr><th>格式</th><th>解析度</th><th>比例</th><th>用途</th></tr>
+      <tr><td><b>方形</b></td><td class="rt">1080 × 1080</td><td>1:1</td><td>IG 貼文</td></tr>
+      <tr><td><b>直式</b></td><td class="rt">1080 × 1920</td><td>9:16</td><td>IG 限動 / Reels / TikTok</td></tr>
+      <tr><td><b>長版</b></td><td class="rt">1080 × 1620</td><td>2:3</td><td>Pinterest / IG 直式貼文</td></tr>
+      <tr><td><b>橫式</b></td><td class="rt">1920 × 1080</td><td>16:9</td><td>YouTube / FB 封面 / 橫向</td></tr>
+      <tr><td><b>all</b></td><td class="rt">以上四種一次出</td><td>—</td><td>一次備好各平台</td></tr>
+    </table>
+    <div style="color:var(--muted);font-size:12.5px;margin-top:6px">💡 一張拼貼甜蜜點 5–7 張、上限約 9 張（方形/橫式 4–7，直式/長版 6–9），超過自動拆多張。</div>
+  </div>
+
+  <h2>🅰️ 馬賽克格狀 <span style="font-weight:400;font-size:14px;color:#8a8178">— 乾淨雜誌感,適合食物/家飾/物件</span></h2>
+  <div class="styledesc">不規則矩形格 + 留白 + 圓角,大小交錯。前 4 張同組照片<b>換色調</b>;後 3 張<b>換格式(比例)</b>。</div>
+  <div class="grid" id="gridA"></div>
+
+  <h2>🅱️ 壁貼 <span style="font-weight:400;font-size:14px;color:#8a8178">— 優雅留白 + 草寫標題,適合旅遊/封面</span></h2>
+  <div class="styledesc">乾淨照片(細白框)+ 中央草寫標題 + 淺色留白。<i>※ 花/蝶壓邊貼紙待素材庫,這版先呈現版型+標題。</i></div>
+  <div class="grid" id="gridB"></div>
+
+  <h2>🆑 剪貼簿 / 手帳 <span style="font-weight:400;font-size:14px;color:#8a8178">— 拍立得白框 + 旋轉疊放 + 手寫 + 塗鴉</span></h2>
+  <div class="styledesc">隨性回憶感。<code>剪貼簿</code>=淺底(手寫地名、愛心)；<code>剪貼簿黑</code>=黑底直排(上下標題,Story 風)。</div>
+  <div class="grid" id="gridC"></div>
+
+  <h2>🎞️ 影片馬賽克 <span style="font-weight:400;font-size:14px;color:#8a8178">— 多支影片同時播放的動態拼貼</span></h2>
+  <div class="styledesc">ffmpeg 把多支 clip 合成一支會動的 mp4。下面是 4 支巴黎風景片 2×2 動態馬賽克(方形 8 秒,靜音)。可加背景音樂、出各比例。</div>
+  <div class="grid">
+    <div class="item" style="max-width:340px">
+      <video src="to_canva_assets/D_videomosaic_square.mp4" autoplay loop muted playsinline></video>
+      <div class="meta"><div class="t">方形 1080² (1:1) · 動態 2×2</div><div class="d">4 支巴黎風景片同時播放</div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>說明</b><br>
+    • 範例用無人臉照片/影片(食物/建築/風景)示意版型,實際出片用你 <code>to_grid/</code> 的素材。<br>
+    • 待補:🅱️ 壁貼花/蝶貼紙、影片馬賽克其他比例/背景音樂、同色系自動分組、更多版型變體。<br>
+    • 想調:底色、留白/圓角、標題文字、字型、版型 → 跟我說即可。<br>
+    • <b>to_grid 專案第一版</b>;定稿後規格發佈知識庫給 Robin 收編。
+  </div>
+
+  <footer>Robert · photo-grade pipeline · to_grid 專案 第一版</footer>
+</div>
+<script>
+const S=[
+  [
+    "A_sq_原色.jpg",
+    "🅰️馬賽克格狀",
+    "square",
+    "原色",
+    ""
+  ],
+  [
+    "A_sq_暖.jpg",
+    "🅰️馬賽克格狀",
+    "square",
+    "暖",
+    ""
+  ],
+  [
+    "A_sq_莫蘭迪.jpg",
+    "🅰️馬賽克格狀",
+    "square",
+    "莫蘭迪",
+    ""
+  ],
+  [
+    "A_sq_黑白.jpg",
+    "🅰️馬賽克格狀",
+    "square",
+    "黑白",
+    ""
+  ],
+  [
+    "A_vertical_cool.jpg",
+    "🅰️馬賽克格狀",
+    "vertical",
+    "原色",
+    ""
+  ],
+  [
+    "A_long_cool.jpg",
+    "🅰️馬賽克格狀",
+    "long",
+    "原色",
+    ""
+  ],
+  [
+    "A_horizontal_cool.jpg",
+    "🅰️馬賽克格狀",
+    "horizontal",
+    "原色",
+    ""
+  ],
+  [
+    "B_wallsticker_vertical.jpg",
+    "🅱️壁貼",
+    "vertical",
+    "暖",
+    "Travel Inspiration"
+  ],
+  [
+    "C_scrapbook_square.jpg",
+    "🆑剪貼簿(堆疊)",
+    "square",
+    "原色",
+    "手寫 Gent/Belgium"
+  ],
+  [
+    "C_scrapbook_black_vertical.jpg",
+    "🆑剪貼簿(黑底直排)",
+    "vertical",
+    "原色",
+    "黑底+標題+愛心"
+  ]
+];
+const labelRatio={square:"方形 1080² (1:1)",vertical:"直式 9:16",long:"長版 2:3",horizontal:"橫式 16:9"};
+function card(s){const[file,style,ratio,tone,title]=s;
+  return `<div class="item"><img loading="lazy" src="to_canva_assets/${file}" alt="${style}">
+   <div class="meta"><div class="t">${labelRatio[ratio]||ratio} · 色調:${tone}</div>
+   <div class="d">${title?('「'+title+'」'):style}</div></div></div>`;}
+const byStyle=k=>S.filter(s=>s[1].includes(k)).map(card).join("");
+document.getElementById("gridA").innerHTML=byStyle("馬賽克");
+document.getElementById("gridB").innerHTML=byStyle("壁貼");
+document.getElementById("gridC").innerHTML=byStyle("剪貼簿");
+</script>
+</body>
+</html>
