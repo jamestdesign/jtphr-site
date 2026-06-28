@@ -70,6 +70,32 @@
     <div style="color:var(--muted);font-size:12.5px;margin-top:6px">💡 一張拼貼甜蜜點 5–7 張、上限約 9 張（方形/橫式 4–7，直式/長版 6–9），超過自動拆多張。</div>
   </div>
 
+  <!-- 指令產生器 -->
+  <div class="card" id="gen">
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px">🧩 指令產生器 <span style="font-weight:400;font-size:12.5px;color:var(--muted)">勾選後自動生成,複製給 Robert</span></div>
+    <style>
+      #gen .row{margin:12px 0 4px}
+      #gen .lbl{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
+      #gen label.opt{display:inline-flex;align-items:center;gap:5px;background:#f1ebe1;border:1px solid var(--line);border-radius:18px;padding:5px 12px;margin:0 7px 7px 0;font-size:13.5px;cursor:pointer;user-select:none}
+      #gen label.opt:has(input:checked){background:var(--accent);color:#fff;border-color:var(--accent)}
+      #gen input[type=text]{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:14px;background:#fff}
+      #gen .two{display:flex;gap:10px;flex-wrap:wrap}.two>div{flex:1;min-width:180px}
+      #gen textarea{width:100%;height:118px;margin-top:6px;padding:11px 13px;border:0;border-radius:10px;background:#2e2a25;color:#f3ede2;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.55;resize:vertical}
+      #gen .btn{background:var(--accent);color:#fff;border:0;border-radius:9px;padding:9px 18px;font-size:13.5px;cursor:pointer;margin-top:8px}
+      #gen .cnt{color:var(--muted);font-size:12px;margin-top:6px}
+    </style>
+    <div class="row"><div class="lbl">樣式 style（可複選）</div><div id="gStyle"></div></div>
+    <div class="row"><div class="lbl">格式 format（可複選 · 勾 all 即四種一次）</div><div id="gFormat"></div></div>
+    <div class="row"><div class="lbl">色調 tone（可複選）</div><div id="gTone"></div></div>
+    <div class="row two">
+      <div><div class="lbl">標題 title</div><input type="text" id="gTitle" placeholder="如 Le Train Bleu"></div>
+      <div><div class="lbl">內文 text</div><input type="text" id="gText" placeholder="如 Paris · 2026"></div>
+    </div>
+    <div class="row"><div class="lbl">輸入夾</div><input type="text" id="gDir" value="to_grid"></div>
+    <textarea id="gOut" readonly placeholder="勾選上面選項，這裡自動生成指令…"></textarea>
+    <div><button class="btn" onclick="copyGen()">📋 複製指令</button> <span class="cnt" id="gCnt"></span></div>
+  </div>
+
   <h2>🅰️ 馬賽克格狀 <span style="font-weight:400;font-size:14px;color:#8a8178">— 乾淨雜誌感,適合食物/家飾/物件</span></h2>
   <div class="styledesc">不規則矩形格 + 留白 + 圓角,大小交錯。前 4 張同組照片<b>換色調</b>;後 3 張<b>換格式(比例)</b>。</div>
   <div class="grid" id="gridA"></div>
@@ -183,6 +209,38 @@ const byStyle=k=>S.filter(s=>s[1].includes(k)).map(card).join("");
 document.getElementById("gridA").innerHTML=byStyle("馬賽克");
 document.getElementById("gridB").innerHTML=byStyle("壁貼");
 document.getElementById("gridC").innerHTML=byStyle("剪貼簿");
+
+/* ---- 指令產生器 ---- */
+const OPT={style:["馬賽克","壁貼","剪貼簿","剪貼簿黑"],format:["方形","直式","長版","橫式","all"],tone:["原色","黑白","暖","冷","莫蘭迪"]};
+function chips(id,name){
+  document.getElementById(id).innerHTML=OPT[name].map(v=>
+    `<label class="opt"><input type="checkbox" value="${v}" onchange="gen()">${v}</label>`).join("");
+}
+chips("gStyle","style");chips("gFormat","format");chips("gTone","tone");
+function checked(id){return [...document.querySelectorAll('#'+id+' input:checked')].map(c=>c.value);}
+function gen(){
+  let st=checked("gStyle"),fm=checked("gFormat"),tn=checked("gTone");
+  if(fm.includes("all")) fm=["all"];                       // all 蓋過個別
+  const dir=document.getElementById("gDir").value.trim()||"to_grid";
+  const ti=document.getElementById("gTitle").value.trim();
+  const tx=document.getElementById("gText").value.trim();
+  const lines=[];
+  (st.length?st:["（選樣式）"]).forEach(s=>
+    (fm.length?fm:["（選格式）"]).forEach(f=>
+      (tn.length?tn:["（選色調）"]).forEach(t=>{
+        let c=`grid ${dir} --style ${s} --format ${f} --tone ${t}`;
+        if(ti) c+=` --title "${ti}"`;
+        if(tx) c+=` --text "${tx}"`;
+        lines.push(c);
+      })));
+  const valid=st.length&&fm.length&&tn.length;
+  document.getElementById("gOut").value=valid?lines.join("\n"):"請至少各勾一個 樣式 / 格式 / 色調";
+  document.getElementById("gCnt").textContent=valid?(lines.length+" 條指令 · 共 "+(st.length*(fm.includes("all")?4:fm.length)*tn.length)+" 張輸出"):"";
+}
+["gTitle","gText","gDir"].forEach(id=>document.getElementById(id).addEventListener("input",gen));
+function copyGen(){const t=document.getElementById("gOut");t.select();
+  navigator.clipboard?.writeText(t.value).then(()=>{const b=event.target;b.textContent="✓ 已複製";setTimeout(()=>b.textContent="📋 複製指令",1500);});}
+gen();
 </script>
 </body>
 </html>
