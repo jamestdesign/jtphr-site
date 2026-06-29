@@ -24,7 +24,7 @@ category: "其他"
 <p class="font-bold text-red-400 mb-2">🔴 一句話定義</p>
 <div class="text-sm text-gray-300">
 
-James 在 Final Cut Pro 邊看 clip 邊用 `M` 加 marker(顏色 = 用途、note = 檔名後綴),Robert 透過 SpliceKit MCP 讀取所有 marker,用 ffmpeg 抽 4K 原寬 still,輸出到 `_MOV/<scene>/stills/`。**James 的 M 永遠優先,Robert 不抽沒 mark 的時點**。
+James 在 Final Cut Pro 邊看 clip 邊用 `M` 加 marker(顏色 = 用途、note = 檔名後綴),Robert 透過 SpliceKit MCP 讀取所有 marker,用 ffmpeg 抽 4K 原寬 still,輸出到 `MOV_<day>/<scene>/stills/`。**James 的 M 永遠優先,Robert 不抽沒 mark 的時點**。
 
 </div>
 </div>
@@ -45,7 +45,7 @@ James 在 Final Cut Pro 邊看 clip 邊用 `M` 加 marker(顏色 = 用途、note
 - Event:`All Clips`
 - HDR 設定:SDR(跟照片端一致)
 - Codec:原始 HEVC + iPhone H.264(**不轉檔**)
-- 素材位置:`/Volumes/X10 Pro2/input/<trip>/_MOV/<scene>/`(leave in place,FCP 引用而非拷貝)
+- 素材位置:`/Volumes/X10 Pro2/input/<trip>/MOV_<day>/<scene>/`(leave in place,FCP 引用而非拷貝)
 - SpliceKit MCP 已透過 dylib 注入 FCP(連 127.0.0.1:9876 JSON-RPC)
 
 </div>
@@ -161,7 +161,7 @@ Robert 抽幀腳本會**跳過所有 reject clips**,整段不處理。
 ```bash
 ffmpeg -ss <秒> -i <clip>.MP4 \
        -frames:v 1 -q:v 1 \
-       _MOV/<scene>/stills/<clip>_t<秒>_<note>.jpg
+       MOV_<day>/<scene>/stills/<clip>_t<秒>_<note>.jpg
 ```
 
 - 解析度:4K(HEVC 源 3840×2160 / iPhone 1920×1080)
@@ -298,8 +298,8 @@ A: 可以,但建議用 monitor headphones + 把 FCP 音量拉低或靜音其他 
 - 工作目錄:`~/Desktop/Claude-Workspace/photo-grade/`
 - LR catalog:`/Volumes/X10 Pro2/115-00-00 Robert 剪輯日常/`
 - Trip 根:`/Volumes/X10 Pro2/input/<trip>/`
-- `_MOV/<scene>/`:素材原檔(FCP 引用源)
-- `_MOV/<scene>/stills/`:抽幀輸出
+- `MOV_<day>/<scene>/`:素材原檔(FCP 引用源)
+- `MOV_<day>/<scene>/stills/`:抽幀輸出
 - SpliceKit dylib + JSON-RPC:`127.0.0.1:9876`
 - 抽幀腳本:`~/Desktop/Claude-Workspace/photo-grade/2026-05-XX_marker_to_stills.py`
 
@@ -318,7 +318,7 @@ A: 可以,但建議用 monitor headphones + 把 FCP 音量拉低或靜音其他 
 
 **Robert 流程**:
 1. SpliceKit MCP 讀 marker → 跳過 reject → 收集 ~120 markers
-2. ffmpeg 抽 4K still → `_MOV/<scene>/stills/`
+2. ffmpeg 抽 4K still → `MOV_<day>/<scene>/stills/`
 3. 報告 by color / by scene
 4. 問 James 要不要 sync 進 LR catalog
 

@@ -66,7 +66,7 @@ Backlog SOP 5 階段是**照片端** workflow。本 SOP 是**影片端**對應,�
 
 ```
 [原始素材 NAS]
-  _MOV/<scene>/<clip>.MP4         ← 母檔(永久保存)
+  MOV_<day>/<scene>/<clip>.MP4         ← 母檔(永久保存)
         └ _STILL/<clip>_t<秒>.jpg ← VLM 抽幀(4K 原寬,LR 評分用)
 
 [去 NG 處理(只對有 NG 段的 clip)]
@@ -75,7 +75,7 @@ Backlog SOP 5 階段是**照片端** workflow。本 SOP 是**影片端**對應,�
 
 [剪輯素材(FCP import)]
   FCP 雙資料夾 import:
-    _MOV/<scene>/    (沒 NG 的 clip)→ keyword `original`
+    MOV_<day>/<scene>/    (沒 NG 的 clip)→ keyword `original`
     _FCPX/<scene>/   (有 NG 切過的)→ keyword `trimmed`
 
 [出片(壓縮上雲)]
@@ -88,10 +88,20 @@ Backlog SOP 5 階段是**照片端** workflow。本 SOP 是**影片端**對應,�
 
 | 層 | 內容 | 上雲? |
 |---|---|---|
-| `_MOV/` 原檔 | 全集母檔 | ❌ NAS only |
+| `MOV_<day>/` 原檔 | 全集母檔 | ❌ NAS only |
 | `_FCPX/<clean>` | 紅黃 P=1 + 有 NG 切過的 | ❌ NAS only(原寬) |
 | `_export/highlights/<cloud>` | 紅 P=1 → 1080p H.265 壓縮版 | ✅ |
 | `_export/memoirs/<edited>` | 黃 P=1 剪輯完成版 | ✅ |
+
+<div class="not-prose my-6 bg-blue-500/10 border-l-4 border-blue-500 rounded-r-lg p-4">
+<p class="font-bold text-blue-400 mb-2">📝 資料夾前綴規則(2026-06-29 James 拍板)</p>
+<div class="text-sm text-gray-300">
+
+trip 根目錄「前綴三分天下」:**前導底線 `_` 保留給最高工作層**(LR catalog、`_FCPX`、`_export` 等工作／輸出層)。**影片母檔夾改用 `MOV_<完整 day 名>` 前綴**(不再用前導底線 `_MOV`),放 trip 頂層,底下鏡像照片的 `主/次` + 場景名。無前綴的 day 夾 = 照片。詳見 feedback_source_staging_folders / 歸檔 skill。
+
+</div>
+</div>
+
 
 ---
 
@@ -99,8 +109,8 @@ Backlog SOP 5 階段是**照片端** workflow。本 SOP 是**影片端**對應,�
 
 ### Step 1 — 抽幀(VLM 預備)
 
-**輸入**:`_MOV/<scene>/<clip>.MP4`(整批)
-**輸出**:`_MOV/<scene>/_STILL/<clip>_t<秒>.jpg` 每秒 1 張
+**輸入**:`MOV_<day>/<scene>/<clip>.MP4`(整批)
+**輸出**:`MOV_<day>/<scene>/_STILL/<clip>_t<秒>.jpg` 每秒 1 張
 
 **工具**:ffmpeg
 
@@ -194,21 +204,21 @@ ffmpeg -i <clip>.MP4 -vf fps=1 -q:v 1 \
     → _FCPX/<scene>/<clip>_clean.mp4 (原寬,NAS)
     → _export/<scene>/highlights/<clip>_cloud.mp4 (1080p H.265 8Mbps,上雲)
   else (整段 OK):
-    → _export/<scene>/highlights/<clip>_cloud.mp4 (從 _MOV 壓縮,上雲)
-    _MOV/<clip> 留 NAS(沒 _clean 版,原檔即母檔)
+    → _export/<scene>/highlights/<clip>_cloud.mp4 (從 MOV_<day> 壓縮,上雲)
+    MOV_<day>/<clip> 留 NAS(沒 _clean 版,原檔即母檔)
 
 🔴 color=紅 AND pick=0:
-  → 不上雲,_MOV 維持
+  → 不上雲,MOV_<day> 維持
 
 🟡 color=黃 AND pick=1:
   if has_NG:
     → _FCPX/<scene>/<clip>_clean.mp4 (進 FCP 剪輯)
   else:
-    → FCP import 時直接讀 _MOV/<clip>
+    → FCP import 時直接讀 MOV_<day>/<clip>
   剪輯完成 → _export/<scene>/memoirs/<edited>.mp4 (1080p H.265 上雲)
 
 🟡 color=黃 AND pick=0:
-  → 不剪輯不上雲,_MOV 維持
+  → 不剪輯不上雲,MOV_<day> 維持
 ```
 
 **ffmpeg 規格**:
@@ -295,7 +305,7 @@ ffmpeg -i <input> -c:v libx265 -crf 24 -b:v 8M -preset slow \
 | `精彩瞬間` | 對應 LR colorLabel = 紅色 |
 | `長篇紀錄` | 對應 LR colorLabel = 黃色 |
 | `trimmed` | 從 `_FCPX/<scene>/` import 的(已 trim 過) |
-| `original` | 從 `_MOV/<scene>/` import 的(沒 NG 過) |
+| `original` | 從 `MOV_<day>/<scene>/` import 的(沒 NG 過) |
 
 Smart Collection 範例:
 - `Keyword 含 "trimmed"` → 已去 NG 可直接用
@@ -429,7 +439,7 @@ IMG_5680_t0012.jpg,IMG_5680.MP4,12.0,Red,4,1,... ← STILL(P)
 
 ## ⏸ 未來功能(待 James 拍板再設計)
 
-- **`_MOV/` cleanup batch**:定期清理沒 P 的 _MOV 原檔(三階段安全:列清單 → 移垃圾桶 → 清空垃圾桶)— **暫不實作,2026-05-16 James 拍板「未來可能但還沒決定」**
+- **`MOV_<day>/` cleanup batch**:定期清理沒 P 的 MOV_<day> 原檔(三階段安全:列清單 → 移垃圾桶 → 清空垃圾桶)— **暫不實作,2026-05-16 James 拍板「未來可能但還沒決定」**
 - **三層儲存長期保存策略** — 用了再說
 - **Purple 軸食物影片**(食物 / 創作物影片有沒有專屬軸)— 跟 人像評分_4軸法 Purple 軸訓練接
 
