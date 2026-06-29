@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>攝影師儀表板 · PhotoNB</title>
+  <meta name="description" content="James 的攝影工作台：所有攝影筆記、SOP、工具與出片的總入口。" />
+  <meta name="date" content="2026-06-29" />
+  <style>
+    :root {
+      --surface: #0b0b1a;
+      --surface-2: #12122a;
+      --brand: #1a1a2e;
+      --line: #2a2a44;
+      --accent: #e94560;
+      --text: #ededf4;
+      --muted: #9a9ab0;
+      --tools: #36c5a8;
+      --video: #9b7be0;
+      --map: #4aa3ff;
+      --about: #f0a93b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--surface); color: var(--text);
+      font-family: 'Noto Sans TC', 'Helvetica Neue', system-ui, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 3rem 1.25rem 6rem; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 22px;
+      padding: 2.6rem 2rem 2.4rem;
+      background:
+        radial-gradient(120% 140% at 0% 0%, rgba(233,69,96,.20), transparent 55%),
+        radial-gradient(120% 160% at 100% 0%, rgba(74,163,255,.16), transparent 50%),
+        linear-gradient(180deg, var(--surface-2), var(--brand));
+      margin-bottom: 2.2rem;
+    }
+    .eyebrow { color: var(--accent); font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; margin: 0 0 .6rem; font-weight: 600; }
+    .hero h1 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: .01em; }
+    .hero .tag { color: var(--muted); margin: .7rem 0 0; font-size: 1rem; max-width: 46ch; }
+
+    /* ---------- Status strip ---------- */
+    .status {
+      display: flex; gap: .9rem; align-items: flex-start;
+      margin-top: 1.6rem; padding: .95rem 1.1rem;
+      background: rgba(255,255,255,.04); border: 1px solid var(--line);
+      border-left: 3px solid var(--accent); border-radius: 12px;
+    }
+    .status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tools); margin-top: .45rem; flex: none; box-shadow: 0 0 0 4px rgba(54,197,168,.18); }
+    .status b { color: var(--text); }
+    .status .s-date { color: var(--accent); font-size: .78rem; letter-spacing: .04em; font-weight: 600; }
+    .status p { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; }
+
+    /* ---------- Search ---------- */
+    .search { position: sticky; top: 0; z-index: 5; padding: 1rem 0 1.4rem; background: linear-gradient(var(--surface) 75%, transparent); }
+    .search input {
+      width: 100%; padding: .85rem 1.1rem; font-size: 1rem;
+      color: var(--text); background: var(--surface-2);
+      border: 1px solid var(--line); border-radius: 12px; outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .search input::placeholder { color: var(--muted); }
+    .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(233,69,96,.18); }
+
+    /* ---------- Sections ---------- */
+    .section { margin: 2.2rem 0 0; }
+    .section h2 {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: 1.05rem; margin: 0 0 1rem; letter-spacing: .02em;
+    }
+    .section h2 .ico { font-size: 1.15rem; }
+    .section h2 .bar { flex: 1; height: 1px; background: var(--line); margin-left: .4rem; }
+    .count { color: var(--muted); font-size: .8rem; font-weight: 400; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+
+    .card {
+      display: flex; flex-direction: column; text-decoration: none; color: inherit;
+      background: var(--brand); border: 1px solid var(--line); border-radius: 16px;
+      padding: 1.2rem 1.3rem 1.25rem; position: relative;
+      transition: border-color .16s, transform .16s, box-shadow .16s;
+      border-top: 3px solid var(--cat, var(--accent));
+    }
+    .card:hover { transform: translateY(-3px); border-color: var(--cat, var(--accent)); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    .card .kicker { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cat, var(--accent)); font-weight: 600; }
+    .card h3 { margin: .5rem 0 .4rem; font-size: 1.08rem; line-height: 1.35; }
+    .card p { margin: 0; color: var(--muted); font-size: .9rem; flex: 1; }
+    .card .meta { margin-top: .9rem; display: flex; align-items: center; gap: .5rem; color: var(--muted); font-size: .76rem; }
+    .card .meta .arrow { margin-left: auto; color: var(--cat, var(--accent)); transition: transform .16s; }
+    .card:hover .meta .arrow { transform: translateX(3px); }
+
+    .tools { --cat: var(--tools); }
+    .video { --cat: var(--video); }
+    .map   { --cat: var(--map); }
+    .about { --cat: var(--about); }
+
+    .noresult { display: none; color: var(--muted); padding: 2rem 0; text-align: center; }
+
+    footer { margin-top: 3.4rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 2rem 1rem 4rem; }
+      .hero { padding: 2rem 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">Photographer's Dashboard</p>
+      <h1>攝影師儀表板</h1>
+      <p class="tag">所有攝影筆記、SOP、工具與出片的總入口。隨時用手機或瀏覽器查詢目前的工作流與素材。</p>
+
+      <div class="status">
+        <span class="dot"></span>
+        <div>
+          <span class="s-date">最新 · 2026-06-29</span>
+          <p><b>資料夾前綴規則上線</b>：前導 <code>_</code>＝工作層、<code>MOV_</code>＝影片、無前綴＝照片。比利時・荷蘭 trip 歸檔結構已完成。</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="search">
+      <input id="q" type="search" placeholder="🔎 搜尋筆記 / 工具 / SOP（例：拼貼、縮時、FCPX、歸檔）" autocomplete="off" />
+    </div>
+
+    <!-- 工具 · 出片自動化 -->
+    <section class="section" data-sec>
+      <h2><span class="ico">🛠️</span> 工具 · 出片自動化 <span class="bar"></span></h2>
+      <div class="grid">
+        <a class="card tools" href="./grid-style-library.html" data-kw="grid 拼貼 馬賽克 壁貼 剪貼簿 collage 出片 風格">
+          <span class="kicker">to_grid · 拼貼</span>
+          <h3>拼貼風格資料庫</h3>
+          <p>一句「拼貼輸出」＝樣式＋格式＋色調＋標題＋內文。三大風格＋影片馬賽克，全自動出片。</p>
+          <span class="meta">2026-06-28 <span class="arrow">→</span></span>
+        </a>
+        <a class="card tools" href="./timelapse-ref-clips.html" data-kw="縮時 timelapse 參考片 1080p 預覽 拍攝狀況">
+          <span class="kicker">縮時 · 參考片</span>
+          <h3>縮時參考片（1080p）</h3>
+          <p>素材整理完自動拼一支最相容的 1080p 參考片，任何裝置點開就看當天拍攝狀況。</p>
+          <span class="meta">2026-06-24 <span class="arrow">→</span></span>
+        </a>
+        <a class="card tools" href="./lrtimelapse-guide.html" data-kw="LRTimelapse 縮時 RAW 8K ProRes 聖杯 去閃 holy grail">
+          <span class="kicker">縮時 · RAW 工作流</span>
+          <h3>LRTimelapse 7 Pro 教程</h3>
+          <p>純 RAW 工作流（免 LR）：調曝光、去閃、聖杯漸變，直出 8K ProRes 422。</p>
+          <span class="meta">2026-06-21 <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 影片剪輯 -->
+    <section class="section" data-sec>
+      <h2><span class="ico">🎬</span> 影片剪輯 <span class="bar"></span></h2>
+      <div class="grid">
+        <a class="card video" href="./video-editing-kb.html" data-kw="影片 剪輯 知識庫 KB FCPX 撿片 抽幀 KP HL 出圖">
+          <span class="kicker">知識庫 · V2.1</span>
+          <h3>影片剪輯知識庫 完整版</h3>
+          <p>從素材到出片的完整工序：智慧抽幀減量、FCPX 撿片、KP/HL 批次出圖、效率 6 條。</p>
+          <span class="meta">2026-06-03 <span class="arrow">→</span></span>
+        </a>
+        <a class="card video" href="./_fcpx-cheatsheet.html" data-kw="FCPX final cut 撿片 快捷鍵 cheatsheet marker M 操作 速查">
+          <span class="kicker">速查 · Cheat Sheet</span>
+          <h3>FCPX 撿片操作速查</h3>
+          <p>邊看 clip 邊標記的快捷鍵與操作流程，撿片時隨手對照。</p>
+          <span class="meta">速查表 <span class="arrow">→</span></span>
+        </a>
+        <a class="card video" href="./_video-schema.html" data-kw="schema NG KP HL KF 影片 標記 結構 評分">
+          <span class="kicker">速查 · Schema</span>
+          <h3>NG / KP / HL / KF Schema</h3>
+          <p>影片標記與評分的欄位定義，VLM 評分與撿片共用的資料結構。</p>
+          <span class="meta">速查表 <span class="arrow">→</span></span>
+        </a>
+        <a class="card video" href="./_video-editing-kb-changelog.html" data-kw="影片 知識庫 更新 紀錄 changelog 版本">
+          <span class="kicker">版本 · Changelog</span>
+          <h3>影片知識庫 · 更新紀錄</h3>
+          <p>影片剪輯 KB 的歷次調整與版本演進。</p>
+          <span class="meta">更新紀錄 <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 全景總覽 -->
+    <section class="section" data-sec>
+      <h2><span class="ico">🗺️</span> 全景 · 總覽 <span class="bar"></span></h2>
+      <div class="grid">
+        <a class="card map" href="./pipeline-overview.html" data-kw="pipeline 總覽 全景 照片 影片 分工 流程 地圖 input 雲端">
+          <span class="kicker">Pipeline · 全景</span>
+          <h3>全 Pipeline 總覽</h3>
+          <p>照片＋影片兩條流的共用核心與分歧分流，從 input 到雲端的全景地圖。</p>
+          <span class="meta">2026-05-16 <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 關於 -->
+    <section class="section" data-sec>
+      <h2><span class="ico">📓</span> 筆記本 <span class="bar"></span></h2>
+      <div class="grid">
+        <a class="card about" href="./index.html" data-kw="全部 筆記 列表 最新 index 所有">
+          <span class="kicker">索引 · 全部</span>
+          <h3>全部筆記（最新排序）</h3>
+          <p>所有已發佈筆記的時間軸列表，依日期新到舊。</p>
+          <span class="meta">列表 <span class="arrow">→</span></span>
+        </a>
+        <a class="card about" href="./welcome.html" data-kw="關於 啟用 welcome 介紹 說明">
+          <span class="kicker">關於</span>
+          <h3>攝影筆記本啟用</h3>
+          <p>這個筆記本如何運作、為什麼能在任何瀏覽器讀。</p>
+          <span class="meta">2026-06-02 <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <p class="noresult" id="noresult">找不到符合的項目，換個關鍵字試試 🤔</p>
+
+    <footer>
+      <a href="/">← 回 JTpHR 首頁</a>
+      <span>攝影師儀表板 · 由 Robert 維護</span>
+    </footer>
+  </div>
+
+  <script>
+    const q = document.getElementById('q');
+    const cards = [...document.querySelectorAll('.card')];
+    const sections = [...document.querySelectorAll('[data-sec]')];
+    const noresult = document.getElementById('noresult');
+    q.addEventListener('input', () => {
+      const t = q.value.trim().toLowerCase();
+      let any = false;
+      cards.forEach(c => {
+        const hay = (c.textContent + ' ' + (c.dataset.kw || '')).toLowerCase();
+        const show = !t || hay.includes(t);
+        c.style.display = show ? '' : 'none';
+        if (show) any = true;
+      });
+      sections.forEach(s => {
+        const visible = [...s.querySelectorAll('.card')].some(c => c.style.display !== 'none');
+        s.style.display = visible ? '' : 'none';
+      });
+      noresult.style.display = any ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
