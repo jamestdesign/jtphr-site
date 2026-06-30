@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>新天鵝堡 Neuschwanstein · 觀光導覽</title>
+  <meta name="description" content="巴伐利亞童話城堡新天鵝堡的觀光導覽海報：城堡檔案、必看亮點、今日行程路線與拍攝建議。" />
+  <meta name="date" content="2026-06-30" />
+  <style>
+    :root{
+      --navy:#0b1022; --navy2:#121a35; --gold:#d8b65a; --gold2:#f3df9b;
+      --ink:#f5f1e6; --muted:#aeb6cc; --line:rgba(216,182,90,.34);
+      --panel:rgba(255,255,255,.045);
+    }
+    *{box-sizing:border-box;}
+    html,body{overflow-x:hidden;}
+    body{
+      margin:0; background:
+        radial-gradient(120% 80% at 50% -10%, #1a2447 0%, var(--navy) 55%, #070b18 100%);
+      color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;
+      line-height:1.65; -webkit-font-smoothing:antialiased;
+    }
+    .back{display:block; max-width:960px; margin:0 auto; padding:1rem 1.25rem 0;
+      color:var(--gold); text-decoration:none; font-size:.82rem; letter-spacing:.04em;}
+    .poster{max-width:960px; margin:0 auto; padding:1.5rem 1.1rem 4rem;}
+
+    /* ── header ── */
+    .eyebrow{display:flex; align-items:center; justify-content:center; gap:.6rem;
+      color:var(--gold); letter-spacing:.42em; font-size:.78rem; font-weight:700;
+      text-transform:uppercase; margin:.5rem 0 .2rem;}
+    .flag{font-size:1rem; letter-spacing:0;}
+    h1.title{
+      text-align:center; margin:.1rem 0 0; line-height:.95;
+      font-size:clamp(1.8rem,8.7vw,5rem); font-weight:800; letter-spacing:-.005em;
+      background:linear-gradient(180deg,#fbeebc 0%,var(--gold2) 38%,#c79a3a 62%,#9c7322 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 1px 0 rgba(255,255,255,.18), 0 6px 18px rgba(0,0,0,.45);
+      font-family:'Georgia','Noto Serif TC',serif;
+    }
+    .tagline{text-align:center; color:var(--gold); letter-spacing:.22em; font-size:clamp(.7rem,2.6vw,.95rem);
+      text-transform:uppercase; margin:.5rem 0 0; position:relative;}
+    .tagline span{padding:0 .9rem;}
+    .tagline:before,.tagline:after{content:""; position:absolute; top:50%; width:14%; height:1px; background:var(--line);}
+    .tagline:before{left:9%;} .tagline:after{right:9%;}
+    .intro{max-width:640px; margin:1rem auto 0; text-align:center; color:#dfe3ee; font-size:.95rem;}
+
+    /* ── locators row ── */
+    .locrow{display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin:1.4rem 0 .4rem;}
+    .loc{display:flex; flex-direction:column; align-items:center; gap:.35rem; flex:0 0 auto;}
+    .loc small{color:var(--gold); letter-spacing:.18em; font-size:.62rem; text-transform:uppercase;}
+
+    /* ── hero ── */
+    .hero{position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--line);
+      box-shadow:0 20px 60px rgba(0,0,0,.5); background:#0a1330;}
+    .hero svg{display:block; width:100%; height:auto;}
+    .pin{position:absolute; transform:translate(-50%,-100%);
+      font-size:.62rem; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
+    .pin b{display:flex; align-items:center; gap:.3rem; background:rgba(11,16,34,.82);
+      border:1px solid var(--line); color:var(--gold2); padding:.18rem .5rem; border-radius:999px;
+      backdrop-filter:blur(3px);}
+    .pin i{width:.5rem; height:.5rem; border-radius:50%; background:var(--gold); box-shadow:0 0 0 3px rgba(216,182,90,.25); display:inline-block;}
+
+    /* ── panels grid ── */
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin-top:1rem;}
+    .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1.05rem 1.1rem;}
+    .card h3{margin:0 0 .7rem; color:var(--gold); font-size:.82rem; letter-spacing:.16em; text-transform:uppercase;
+      border-bottom:1px solid var(--line); padding-bottom:.5rem;}
+    .attr li{list-style:none; padding:.28rem 0 .28rem 1.2rem; position:relative; font-size:.9rem;}
+    .attr li:before{content:"✦"; position:absolute; left:0; color:var(--gold); font-size:.75rem; top:.34rem;}
+    .attr li small{display:block; color:var(--muted); font-size:.74rem; padding-left:0;}
+    .attr{margin:0; padding:0;}
+    .facts{display:flex; flex-direction:column; gap:.5rem; margin:0; padding:0;}
+    .facts div{display:flex; justify-content:space-between; gap:.6rem; font-size:.86rem; border-bottom:1px dashed rgba(255,255,255,.08); padding-bottom:.42rem;}
+    .facts dt{color:var(--muted); display:flex; gap:.45rem; align-items:center;}
+    .facts dd{margin:0; color:var(--ink); font-weight:600; text-align:right;}
+
+    /* ── route timeline ── */
+    .route{margin-top:1rem; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1.1rem 1.2rem;}
+    .route h3{margin:0 0 .9rem; color:var(--gold); font-size:.82rem; letter-spacing:.16em; text-transform:uppercase;}
+    .tl{position:relative; margin:0; padding:0 0 0 1.4rem; border-left:2px solid var(--line);}
+    .tl li{list-style:none; position:relative; padding:0 0 1rem;}
+    .tl li:last-child{padding-bottom:0;}
+    .tl li:before{content:""; position:absolute; left:-1.78rem; top:.25rem; width:.7rem; height:.7rem; border-radius:50%;
+      background:var(--gold); box-shadow:0 0 0 3px rgba(216,182,90,.2);}
+    .tl .t{color:var(--gold2); font-weight:700; font-size:.82rem; letter-spacing:.03em;}
+    .tl .n{font-weight:700; font-size:.96rem; margin:.05rem 0;}
+    .tl .d{color:var(--muted); font-size:.82rem;}
+    .tl .pass:before{background:transparent; border:2px solid var(--line); box-shadow:none;}
+
+    /* ── highlight strip ── */
+    .strip{display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; margin-top:1rem;}
+    .tile{border:1px solid var(--line); border-radius:12px; padding:.85rem .8rem; text-align:center;
+      background:linear-gradient(180deg, rgba(216,182,90,.08), rgba(255,255,255,.02));}
+    .tile .ic{font-size:1.4rem;}
+    .tile b{display:block; margin:.35rem 0 .1rem; font-size:.84rem;}
+    .tile small{color:var(--muted); font-size:.72rem;}
+
+    /* ── feature callouts ── */
+    .feat{display:grid; grid-template-columns:repeat(5,1fr); gap:.7rem; margin-top:1rem;}
+    .fc{text-align:center; padding:.4rem .2rem;}
+    .fc .ic{font-size:1.5rem;}
+    .fc b{display:block; color:var(--gold2); font-size:.74rem; margin:.35rem 0 .15rem; letter-spacing:.02em;}
+    .fc small{color:var(--muted); font-size:.68rem; line-height:1.35; display:block;}
+
+    /* ── photographer tip ── */
+    .tip{margin-top:1rem; border:1px solid var(--line); border-radius:14px; padding:1.05rem 1.15rem;
+      background:linear-gradient(180deg, rgba(216,182,90,.1), rgba(216,182,90,.02));}
+    .tip h3{margin:0 0 .55rem; color:var(--gold); font-size:.86rem; letter-spacing:.08em;}
+    .tip ul{margin:0; padding-left:1.1rem;} .tip li{font-size:.88rem; margin:.25rem 0;}
+    .tip li b{color:var(--gold2);}
+
+    footer{margin-top:1.6rem; text-align:center; color:var(--muted); font-size:.72rem; line-height:1.7;}
+    footer .cred{color:var(--gold);}
+
+    @media(max-width:560px){
+      .grid{grid-template-columns:1fr;}
+      .feat{grid-template-columns:repeat(2,1fr);}
+      .strip{grid-template-columns:repeat(2,1fr);}
+      .locrow{gap:.5rem;}
+    }
+  </style>
+</head>
+<body>
+  <a class="back" href="./">← 攝影筆記本</a>
+  <div class="poster">
+
+    <!-- HEADER -->
+    <p class="eyebrow"><span class="flag">🇩🇪</span> Germany · Bavaria <span class="flag">🇩🇪</span></p>
+    <h1 class="title">NEUSCHWANSTEIN</h1>
+    <p class="tagline"><span>The Fairytale Castle of Bavaria</span></p>
+    <p class="intro">巴伐利亞阿爾卑斯山腳的童話城堡，由「夢幻國王」路德維希二世於 1869 年起建，靈感來自華格納歌劇與中世紀騎士傳說，更是迪士尼睡美人城堡的原型。山崖、湖泊、雪峰與白塔藍頂，一年吸引近 140 萬旅人朝聖。</p>
+
+    <!-- LOCATORS -->
+    <div class="locrow">
+      <div class="loc">
+        <!-- Germany silhouette w/ Bavaria highlighted -->
+        <svg width="86" height="100" viewBox="0 0 86 100" aria-label="Germany map">
+          <path d="M30 6 L40 4 L44 12 L54 10 L52 18 L62 20 L58 28 L68 34 L62 42 L70 52 L60 60 L66 72 L54 76 L56 88 L46 92 L44 84 L34 90 L30 80 L20 82 L24 70 L14 64 L22 54 L12 46 L20 36 L14 26 L26 24 L22 14 Z"
+            fill="rgba(255,255,255,.08)" stroke="var(--line)" stroke-width="1.2"/>
+          <!-- Bavaria (south-east) -->
+          <path d="M44 84 L34 90 L30 80 L20 82 L24 70 L36 66 L48 70 L56 78 L56 88 L46 92 Z"
+            fill="var(--gold)" opacity=".85"/>
+          <circle cx="46" cy="80" r="2.6" fill="#fff"/>
+        </svg>
+        <small>Bavaria</small>
+      </div>
+      <div class="loc" style="flex:1; max-width:none;"></div>
+      <div class="loc">
+        <!-- Europe globe locator -->
+        <svg width="92" height="92" viewBox="0 0 92 92" aria-label="Europe locator">
+          <circle cx="46" cy="46" r="44" fill="rgba(255,255,255,.05)" stroke="var(--line)" stroke-width="1.2"/>
+          <circle cx="46" cy="46" r="30" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+          <path d="M30 30 q8 -4 16 0 q10 2 12 10 q-2 8 -10 10 q-12 4 -18 -2 q-6 -8 0 -16 Z" fill="rgba(216,182,90,.35)" stroke="var(--line)"/>
+          <circle cx="47" cy="44" r="3.4" fill="var(--gold)"/>
+          <circle cx="47" cy="44" r="6.5" fill="none" stroke="var(--gold)" opacity=".5"/>
+        </svg>
+        <small>Europe</small>
+      </div>
+    </div>
+
+    <!-- HERO ILLUSTRATION -->
+    <div class="hero">
+      <svg viewBox="0 0 960 540" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Neuschwanstein alpine scene illustration">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f6c98a"/><stop offset=".4" stop-color="#e9b878"/>
+            <stop offset=".75" stop-color="#9fb3d6"/><stop offset="1" stop-color="#cfd9ec"/>
+          </linearGradient>
+          <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#fff6df"/><stop offset="1" stop-color="#fff6df" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="mtnFar" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9aa9c6"/><stop offset="1" stop-color="#7e8fb2"/>
+          </linearGradient>
+          <linearGradient id="mtnMid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#6c7ea3"/><stop offset="1" stop-color="#4d5d80"/>
+          </linearGradient>
+          <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3a5340"/><stop offset="1" stop-color="#1f3026"/>
+          </linearGradient>
+          <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8fb6d6"/><stop offset="1" stop-color="#5d86ad"/>
+          </linearGradient>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbf6ec"/><stop offset="1" stop-color="#dcd2bf"/>
+          </linearGradient>
+          <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7da3c4"/><stop offset="1" stop-color="#4f6f93"/>
+          </linearGradient>
+        </defs>
+
+        <rect width="960" height="540" fill="url(#sky)"/>
+        <circle cx="720" cy="150" r="160" fill="url(#sun)"/>
+        <circle cx="720" cy="150" r="46" fill="#fff7e4"/>
+
+        <!-- far snow peaks -->
+        <path d="M0 250 L120 150 L200 215 L300 120 L380 210 L470 140 L560 225 L660 150 L760 220 L860 165 L960 235 L960 360 L0 360 Z" fill="url(#mtnFar)"/>
+        <path d="M300 120 L330 150 L300 168 L272 150 Z M470 140 L496 165 L470 182 L446 165 Z M660 150 L686 176 L660 192 L636 176 Z" fill="#eef3fb" opacity=".9"/>
+        <!-- mid mountains -->
+        <path d="M0 320 L120 235 L240 320 L360 245 L500 330 L640 250 L780 330 L900 260 L960 320 L960 540 L0 540 Z" fill="url(#mtnMid)"/>
+
+        <!-- forested crag -->
+        <path d="M250 540 L300 340 Q360 280 430 300 L470 360 L520 420 L500 540 Z" fill="url(#hill)"/>
+        <!-- pines on crag -->
+        <g fill="#26392c">
+          <path d="M300 430 l10 22 l-20 0 Z"/><path d="M330 410 l11 24 l-22 0 Z"/>
+          <path d="M360 440 l9 20 l-18 0 Z"/><path d="M470 430 l10 22 l-20 0 Z"/>
+          <path d="M490 470 l9 20 l-18 0 Z"/>
+        </g>
+
+        <!-- CASTLE on the crag -->
+        <g transform="translate(338,222)">
+          <!-- main block -->
+          <rect x="20" y="60" width="92" height="78" fill="url(#wall)" stroke="#c3b89f" stroke-width="1"/>
+          <!-- left wing -->
+          <rect x="0" y="88" width="34" height="50" fill="url(#wall)" stroke="#c3b89f"/>
+          <!-- gatehouse front -->
+          <rect x="44" y="96" width="44" height="44" fill="#f3ede0" stroke="#c3b89f"/>
+          <!-- tall keep -->
+          <rect x="84" y="10" width="30" height="130" fill="url(#wall)" stroke="#c3b89f"/>
+          <!-- secondary tower -->
+          <rect x="6" y="48" width="20" height="90" fill="url(#wall)" stroke="#c3b89f"/>
+          <!-- roofs -->
+          <polygon points="84,10 99,-26 114,10" fill="url(#roof)"/>
+          <polygon points="6,48 16,22 26,48" fill="url(#roof)"/>
+          <polygon points="44,96 66,72 88,96" fill="url(#roof)"/>
+          <polygon points="20,60 66,30 112,60" fill="url(#roof)"/>
+          <!-- spires -->
+          <line x1="99" y1="-26" x2="99" y2="-40" stroke="#caa24a" stroke-width="2"/>
+          <circle cx="99" cy="-42" r="2.4" fill="#f3df9b"/>
+          <!-- windows (warm lit) -->
+          <g fill="#e9c773">
+            <rect x="92" y="40" width="5" height="12" rx="1"/><rect x="101" y="40" width="5" height="12" rx="1"/>
+            <rect x="92" y="64" width="5" height="12" rx="1"/><rect x="101" y="64" width="5" height="12" rx="1"/>
+            <rect x="34" y="80" width="5" height="11" rx="1"/><rect x="46" y="80" width="5" height="11" rx="1"/>
+            <rect x="58" y="80" width="5" height="11" rx="1"/><rect x="70" y="80" width="5" height="11" rx="1"/>
+            <rect x="12" y="70" width="4" height="10" rx="1"/><rect x="12" y="92" width="4" height="10" rx="1"/>
+          </g>
+        </g>
+
+        <!-- Alpsee lake + foreground treeline -->
+        <path d="M0 470 Q220 450 380 470 L380 540 L0 540 Z" fill="url(#lake)" opacity=".9"/>
+        <path d="M0 478 Q200 462 360 478" fill="none" stroke="#ffffff" stroke-width="1" opacity=".25"/>
+        <g fill="#1c2c22">
+          <path d="M560 540 l14 -40 l14 40 Z"/><path d="M600 540 l16 -52 l16 52 Z"/>
+          <path d="M650 540 l13 -38 l13 38 Z"/><path d="M700 540 l17 -50 l17 50 Z"/>
+          <path d="M760 540 l14 -42 l14 42 Z"/><path d="M820 540 l16 -52 l16 52 Z"/>
+          <path d="M880 540 l14 -40 l14 40 Z"/>
+        </g>
+      </svg>
+
+      <!-- pins (percent positioned) -->
+      <span class="pin" style="left:46%; top:43%;"><b><i></i>新天鵝堡 Schloss</b></span>
+      <span class="pin" style="left:20%; top:62%;"><b><i></i>Alpsee 湖</b></span>
+      <span class="pin" style="left:70%; top:58%;"><b><i></i>Marienbrücke 觀景橋</b></span>
+      <span class="pin" style="left:30%; top:33%;"><b><i></i>阿爾卑斯雪峰</b></span>
+    </div>
+
+    <!-- PANELS -->
+    <div class="grid">
+      <div class="card">
+        <h3>必看亮點 · Top Highlights</h3>
+        <ul class="attr">
+          <li>瑪麗安橋（Marienbrücke）<small>1845 年建，拍城堡正面經典機位</small></li>
+          <li>霍恩施萬高城堡 Hohenschwangau<small>路德維希二世童年的黃色城堡</small></li>
+          <li>阿爾卑斯湖 Alpsee<small>山谷倒影，散步約 30 分</small></li>
+          <li>王座廳 Throne Hall<small>拜占庭風格，金光馬賽克穹頂</small></li>
+          <li>歌手大廳 Singers' Hall<small>華格納主題壁畫的全堡核心</small></li>
+          <li>上層中庭 & 山景陽台<small>270° 巴伐利亞群山全景</small></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>城堡檔案 · Castle Facts</h3>
+        <dl class="facts">
+          <div><dt>🏗 建造</dt><dd>1869–1886</dd></div>
+          <div><dt>👑 委建</dt><dd>國王路德維希二世</dd></div>
+          <div><dt>🏛 風格</dt><dd>羅曼復興式</dd></div>
+          <div><dt>📍 位置</dt><dd>施旺高 · 巴伐利亞</dd></div>
+          <div><dt>⛰ 海拔</dt><dd>約 965 公尺</dd></div>
+          <div><dt>🚪 房間</dt><dd>約 200（14 間完工）</dd></div>
+          <div><dt>👥 年訪客</dt><dd>約 140 萬人</dd></div>
+          <div><dt>🕐 時區</dt><dd>CET (UTC+1)</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- TODAY'S ROUTE -->
+    <div class="route">
+      <h3>今日行程路線 · Today's Tour（2026-06-30）</h3>
+      <ul class="tl">
+        <li><span class="t">08:45 · 出發</span><div class="n">慕尼黑 Stachus（集合）</div><div class="d">Sonnenstraße 1 上 Mentor Reisen 巴士，09:00 啟程</div></li>
+        <li><span class="t">11:00 · 第一站</span><div class="n">林德霍夫宮 Schloss Linderhof</div><div class="d">路德維希二世唯一生前完工的宮殿，法式洛可可＋凡爾賽風花園，導覽約 30 分</div></li>
+        <li class="pass"><span class="t">途經</span><div class="n">上阿默高 Oberammergau</div><div class="d">Lüftlmalerei 壁畫小鎮、木雕與十年一度耶穌受難劇</div></li>
+        <li><span class="t">下午 · 機位</span><div class="n">瑪麗安橋 Marienbrücke</div><div class="d">新天鵝堡最佳正面視角，務必拍一張（免費 · 約 15 分）</div></li>
+        <li><span class="t">16:00 · 主秀</span><div class="n">新天鵝堡 Schloss Neuschwanstein</div><div class="d">霍恩施萬高取免排隊票；步行上山約 30–40 分（或接駁巴士／馬車）。導覽 25 分附語音；可順遊 Alpsee 與 Hohenschwangau</div></li>
+        <li><span class="t">17:30 · 返程</span><div class="n">回慕尼黑 Stachus</div><div class="d">車程約 2 小時，回市區下車</div></li>
+      </ul>
+    </div>
+
+    <!-- HIGHLIGHT STRIP -->
+    <div class="strip">
+      <div class="tile"><div class="ic">🌉</div><b>Marienbrücke</b><small>正面經典機位</small></div>
+      <div class="tile"><div class="ic">🏰</div><b>白塔藍頂</b><small>童話城堡外觀</small></div>
+      <div class="tile"><div class="ic">👑</div><b>王座廳</b><small>金色馬賽克穹頂</small></div>
+      <div class="tile"><div class="ic">🎼</div><b>歌手大廳</b><small>華格納壁畫</small></div>
+      <div class="tile"><div class="ic">🏞</div><b>Alpsee</b><small>山谷湖泊倒影</small></div>
+      <div class="tile"><div class="ic">🏯</div><b>Hohenschwangau</b><small>黃色童年城堡</small></div>
+    </div>
+
+    <!-- FEATURE CALLOUTS -->
+    <div class="feat">
+      <div class="fc"><div class="ic">🏰</div><b>童話建築</b><small>中世紀騎士幻想的城堡</small></div>
+      <div class="fc"><div class="ic">👑</div><b>夢幻國王</b><small>路德維希二世的執念</small></div>
+      <div class="fc"><div class="ic">✨</div><b>迪士尼原型</b><small>睡美人城堡靈感來源</small></div>
+      <div class="fc"><div class="ic">⛰</div><b>阿爾卑斯</b><small>雪峰與山谷全景</small></div>
+      <div class="fc"><div class="ic">🎼</div><b>華格納</b><small>歌劇主題的內裝</small></div>
+    </div>
+
+    <!-- PHOTOGRAPHER TIP -->
+    <div class="tip">
+      <h3>📷 給 James 的拍攝建議</h3>
+      <ul>
+        <li><b>正面全景</b>：瑪麗安橋是唯一能拍到城堡正臉＋山谷的點，人多早點卡位；橋會晃，腳架免了，提高快門。</li>
+        <li><b>鏡頭</b>：廣角收城堡＋雪峰；中長焦（70–200）壓縮拍塔尖與窗的細節；別忘從城堡陽台回拍 Alpsee。</li>
+        <li><b>光線</b>：午後到傍晚正面順光偏暖；OPPO 拍實況、SONY/長焦收特寫，雙機分工。</li>
+        <li><b>內部</b>：王座廳／歌手大廳通常禁止攝影，眼睛記下來就好，省下時間拍外觀與山景。</li>
+        <li><b>備援</b>：上山步道與橋上回望都有機位，邊走邊拍；回程巴士車窗也能補阿爾卑斯空景。</li>
+      </ul>
+    </div>
+
+    <footer>
+      <div>資料來源：Neuschwanstein 官方導覽 · Bayerische Schlösserverwaltung · 行程：Mentor Reisen</div>
+      <div class="cred">Made by Robert × PhotoNB · 2026-06-30 德國五天四夜 day2</div>
+      <div>本圖為旅遊導覽用途整理，城堡內部請依現場規定攝影。</div>
+    </footer>
+  </div>
+</body>
+</html>
