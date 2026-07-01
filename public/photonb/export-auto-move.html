@@ -61,13 +61,22 @@ export-auto-move "&lt;trip 根目錄&gt;"
 export-auto-move "&lt;trip 根目錄&gt;" --go
 
 # 可選：自訂來源/輸出夾（預設 &lt;trip&gt;/to_export 與 &lt;trip&gt;/_export）
-export-auto-move "&lt;trip&gt;" --to_export /path/in --export /path/out --go</pre>
+export-auto-move "&lt;trip&gt;" --to_export /path/in --export /path/out --go
+# 可選：--ext jpg → 只搬指定副檔名（例：跳過 to_evoto 的 .tif 送洗中間檔）
+export-auto-move "&lt;trip&gt;" --to_export "&lt;trip&gt;/to_evoto" --ext jpg</pre>
   <p class="tag">別名 <code>to_export</code> 亦可</p><p class="tag">腳本 <code>tools/export_auto_move.py</code></p>
+
+  <h2>自動兼容結構</h2>
+  <ul>
+    <li><b>多日 trip</b>：<code>&lt;trip&gt;/&lt;dayN&gt;/主(次)/&lt;場景&gt;/</code> → <code>_export/&lt;dayN&gt;/&lt;場景&gt;/</code>（分天）。</li>
+    <li><b>單日 trip</b>：母檔在 <code>&lt;trip&gt;/主(次)/&lt;場景&gt;/</code>（無 dayN 層）→ 自動偵測，<code>_export/&lt;場景&gt;/</code> 攤平不分天。</li>
+    <li><b>Evoto round-trip</b>：<code>-EVT</code> / <code>-EVTO</code> 成品尾綴自動 strip，對得上母檔；<code>to_evoto</code> 的 <code>.tif</code> 送洗中間檔用 <code>--ext jpg</code> 跳過。</li>
+  </ul>
 
   <h2>前提 & 規則</h2>
   <ul>
     <li><b>LR Export 檔名選「原始檔名」</b> → 成品 stem 才對得上母檔（例 <code>RKLU8425.jpg</code> ↔ 母檔 <code>RKLU8425.DNG</code>）。</li>
-    <li>LR 若自動加尾綴會<b>先 strip 再比對</b>：<code>-2</code> / <code>-Edit</code> / <code>-Enhanced</code> / <code>-NR</code> / <code>-HDR</code> / <code>-Pano</code>…；但母檔本身真實的 <code>_01</code> 尾會<b>保留</b>不誤刪。</li>
+    <li>尾綴會<b>先 strip 再比對</b>：<code>-2</code> / <code>-Edit</code> / <code>-Enhanced</code> / <code>-NR</code> / <code>-HDR</code> / <code>-Pano</code> / <code>-EVT</code> / <code>-EVTO</code>…；但母檔本身真實的 <code>_01</code> 尾會<b>保留</b>不誤刪。</li>
     <li><b>對不上</b>（找不到母檔）的檔會<b>列清單、留在 to_export/</b>，不亂搬 → 你檢查檔名。</li>
     <li>同名衝突（一個 stem 對到多場景）會在報告裡標 ⚠️（實務上 trip 內檔名唯一，通常 0 衝突）。</li>
   </ul>
