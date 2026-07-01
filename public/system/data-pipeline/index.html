@@ -98,11 +98,11 @@
 <header>
   <h1>2026 產經資訊自動更新</h1>
   <div class="sub">全系統演進與架構 · Single Source of Truth</div>
-  <div class="meta">更新：2026-06-21 · 版本 v1 · 維護：claude_robin × james</div>
+  <div class="meta">更新：2026-07-01 · 版本 v1.1 · 維護：claude_robin × james</div>
 </header>
 
 <div class="stat">
-  <div><b>4</b><span>現役 launchd 排程</span></div>
+  <div><b>6</b><span>現役 launchd 排程</span></div>
   <div><b>9</b><span>自製工具</span></div>
   <div><b>2</b><span>核心 Skill</span></div>
   <div><b>2</b><span>消化管線 A/B</span></div>
@@ -230,6 +230,8 @@
 <tr><td class="mono">fincai-digest</td><td>fincai-multi-digest.py</td><td>每整點心跳</td><td>hour ∈ {8,10,12,14,16,18,20,21} 才發佈；當天首發＝🌅晨報全量，之後＝🔴即時層</td></tr>
 <tr><td class="mono">stock-digest</td><td>daily-stock-digest.sh</td><td>每天 08:30</td><td>消化桌面投放 txt → TG</td></tr>
 <tr><td class="mono">stock-table-update</td><td>stock-table-update.py</td><td>週一~五 18:30</td><td>平行抓 Yahoo+法人 → 一次 POST 回寫 Sheet、重算強弱信號</td></tr>
+<tr><td class="mono">liquidity-daily</td><td>liquidity-daily.sh → liquidity-dashboard.py</td><td>每天 08:00</td><td>資金面每日觀測（含油價/通膨鏈）自動重生 → 寫回 KB → sync-kb → build → push；晨報 08:30 隨後引用</td></tr>
+<tr><td class="mono">chip-flow-daily</td><td>chip-flow-daily.sh → chip-flow.py</td><td>週一~五 18:45</td><td>台股籌碼面量能爆發 50 強自動重生（吃 TWSE 盤後 T86/MI_INDEX/MI_MARGN，收盤後才齊→接 18:30 之後）→ 發佈</td></tr>
 <tr><td class="mono">session-insight</td><td>insight</td><td>每日</td><td>對話總結（周邊）</td></tr>
 </tbody>
 </table>
@@ -273,6 +275,8 @@
   <li><span class="date">2026-06-12</span>B 管線加盤中即時層（晨報/即時兩層產品）；改每小時心跳</li>
   <li class="k"><span class="date">2026-06-13</span>launchd FDA 根因根治：給 python3 完整磁碟取用權 → 自動發佈恢復</li>
   <li class="k"><span class="date">2026-06-21</span>stock-table-update.py：本機版主清單更新（取代 GAS 完整更新）</li>
+  <li><span class="date">2026-06-30</span>油價/通膨鏈訊號（liquidity-dashboard v5）：Brent/WTI + 10 年通膨預期 breakeven，接晨報資金面定調</li>
+  <li class="k"><span class="date">2026-07-01</span>資金面 + 籌碼面自動排程上線：liquidity-daily.sh(08:00) 與 chip-flow-daily.sh(週一~五 18:45) 各建 wrapper+launchd 自動重生＋發佈（先前只手動、卡在 6/29）</li>
 </ul>
 
 <h2><span class="n">⑨</span>關鍵踩坑與根治</h2>
