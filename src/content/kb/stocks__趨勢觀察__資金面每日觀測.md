@@ -5,7 +5,7 @@ category: "股票-趨勢觀察"
 source: "liquidity-dashboard.py（FRED + 台灣證交所 open data + CoinGecko）"
 creator: claude_robin
 managed_by: claude_robin
-auto_generated: false
+auto_generated: true
 last_revised: 2026-07-01
 tags: [資金面, 流動性, 每日觀測, risk-on-off]
 ---
@@ -116,9 +116,9 @@ tags: [資金面, 流動性, 每日觀測, risk-on-off]
 - **現在**：近月 -20.6%。
 - **意義**：最敏感風險資產大失血＝risk-off 鐵證。
 
-### 🪙 加密總市值 — $2.128T（BTC佔55.4%）
+### 🪙 加密總市值 — $2.125T（BTC佔55.4%）
 
-- **現在**：24h -0.56%、BTC 主導度 55.4%。
+- **現在**：24h -0.69%、BTC 主導度 55.4%。
 - **意義**：資金縮回 BTC、退出小幣＝加密圈也在避險化。
 
 > 黃金 ETF 流、EPFR 全球資金流為付費或月更，無法每日自動，只能引用。
