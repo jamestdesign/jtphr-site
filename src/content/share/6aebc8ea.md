@@ -143,6 +143,8 @@ sourceNote: "stocks__tool__2026產經資訊自動更新_全系統演進"
 | `com.james.fincai-digest` | `fincai-multi-digest.py` | **每整點心跳** | `hour ∈ {8,10,12,14,16,18,20,21}` 才匯總發佈；當天首發＝🌅晨報全量，之後＝🔴即時層 |
 | `com.james.stock-digest` | `daily-stock-digest.sh` | 每天 **08:30** | 消化桌面投放 txt → TG |
 | `com.james.stock-table-update` | `stock-table-update.py` | **週一~五 18:30** | 平行抓 Yahoo+法人 → 一次 POST 回寫 Sheet 主清單、重算強弱信號 |
+| `com.james.liquidity-daily` | `liquidity-daily.sh`（wrap `liquidity-dashboard.py`） | 每天 **08:00** | 資金面每日觀測（含油價/通膨鏈）自動重生 → 寫回 KB → sync-kb → build → push；晨報 08:30 隨後引用 |
+| `com.james.chip-flow-daily` | `chip-flow-daily.sh`（wrap `chip-flow.py`） | **週一~五 18:45** | 台股籌碼面量能爆發 50 強自動重生（吃 TWSE 盤後 T86/MI_INDEX/MI_MARGN，收盤後才齊→接在 18:30 之後）→ 發佈 |
 | `com.james.session-insight` | insight | 每日 | 對話總結（周邊） |
 
 > 發佈不另設排程：`fincai-multi-digest.py` 在晨報發佈時**內部直接呼叫** `kb_daily_commit.sh`（sync-kb → commit → push kb-vault + jtphr-site → Vercel 重建）。
@@ -221,6 +223,8 @@ score = Z近4週提及(0~4) + 月漲(-2~+2) + 週漲(-1~+1) + 24週位置(-1~+1)
 | 2026-06-12 | B 管線加**盤中即時層**（晨報/即時兩層產品）；改每小時心跳 |
 | 2026-06-13 | **launchd FDA 根因根治**：給 `/usr/bin/python3` 完整磁碟取用權 → 自動發佈恢復 |
 | 2026-06-21 | `stock-table-update.py`：本機版主清單更新上線（取代 Apps Script 完整更新，避 6 分鐘超時） |
+| 2026-06-30 | **油價/通膨鏈訊號**（liquidity-dashboard v5）：Brent/WTI + 10 年通膨預期 breakeven，接晨報資金面定調 |
+| 2026-07-01 | **資金面 + 籌碼面自動排程上線**：`liquidity-daily.sh`(08:00) 與 `chip-flow-daily.sh`(週一~五 18:45) 各建 wrapper+launchd 自動重生＋發佈。根因＝兩頁先前只手動跑、卡在 6/29。wrapper 坑：bash `$VAR` 後緊接全形字（`：`『）』）會被 `set -u` 判 unbound，一律用 `${VAR}` |
 
 ---
 
