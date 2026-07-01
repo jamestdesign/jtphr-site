@@ -70,8 +70,11 @@
     .breakdown li{padding:.3rem 0 .3rem 1.3rem; position:relative; font-size:.9rem;}
     .breakdown li:before{content:"✦"; position:absolute; left:0; color:var(--gold); font-size:.72rem; top:.42rem;}
     .breakdown li b{color:var(--gold2);}
-    .promptbox{position:relative; background:#060a16; border:1px solid var(--line); border-radius:12px; padding:.9rem 1rem; margin:.5rem 0 1rem;}
-    .promptbox pre{margin:0; white-space:pre-wrap; word-break:break-word; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem; color:#dfe6f2; line-height:1.5;}
+    .ptitle{color:var(--gold2); font-weight:700; font-size:.92rem; margin:.5rem 0 .3rem; user-select:all; cursor:text;}
+    .ptitle:before{content:"▸ "; color:var(--gold);}
+    .promptbox{position:relative; background:#060a16; border:1px solid var(--line); border-radius:12px; padding:.9rem 1rem; margin:.35rem 0 1rem;}
+    .promptbox pre{margin:0; white-space:pre-wrap; word-break:break-word; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem; color:#dfe6f2; line-height:1.5; user-select:text; -webkit-user-select:text; cursor:text;}
+    .selhint{color:var(--muted); font-size:.72rem; margin:-.1rem 0 .6rem;}
     .copybtn{position:absolute; top:.55rem; right:.55rem; background:var(--gold); color:var(--navy); border:none; border-radius:8px;
       font-size:.74rem; font-weight:700; padding:.3rem .6rem; cursor:pointer;}
     .copybtn.done{background:#5bd48a;}
@@ -173,8 +176,10 @@ Crisp legible typography, clean sans-serif body text, balanced composition, rich
     });
   }
   function open(e){
-    const promptBlock=(label,txt)=>`<h4 class="sec">${label}</h4>
-      <div class="promptbox"><button class="copybtn">複製</button><pre>${txt.replace(/</g,"&lt;")}</pre></div>`;
+    const promptBlock=(label,txt,titleLine)=>`<h4 class="sec">${label}</h4>
+      <div class="ptitle">${titleLine}</div>
+      <div class="promptbox"><button class="copybtn">複製</button><pre>${txt.replace(/</g,"&lt;")}</pre></div>
+      <p class="selhint">💡 點一下 prompt 文字框會自動全選，再 Cmd/Ctrl+C；或直接用滑鼠圈選。標題那行點一下也會整段選起來。</p>`;
     sheet.innerHTML=`<button class="close">&times;</button>
       <div class="idrow"><span class="id">${e.id}</span><span class="sub">${e.titleEn||""}</span></div>
       <h2>${e.title}</h2>
@@ -185,13 +190,18 @@ Crisp legible typography, clean sans-serif body text, balanced composition, rich
       <h4 class="sec">拆解說明</h4>
       <ul class="breakdown">${e.breakdown.map(b=>`<li><b>${b.h}</b>：${b.d}</li>`).join("")}</ul>
       ${e.note?`<p class="sub">⚠️ ${e.note}</p>`:""}
-      ${promptBlock("Prompt（換 {大括號} 即可）",e.prompt)}
-      ${e.promptAlt?promptBlock(e.promptAltLabel||"變體",e.promptAlt):""}
+      ${promptBlock("Prompt（換 {大括號} 即可）",e.prompt,`${e.id} · ${e.title} — Prompt`)}
+      ${e.promptAlt?promptBlock(e.promptAltLabel||"變體",e.promptAlt,`${e.id} · ${e.title} — ${e.promptAltLabel||"變體"}`):""}
       <h4 class="sec">如何引用</h4>
       <div class="cite">跟 Robert 說「用 <code>${e.id}</code> 幫我做〈某城市／某主題〉」，我就照這套結構把 {大括號} 填好、導出可貼的新 prompt（或直接用兩層法幫你出成品上 PhotoNB）。</div>`;
     sheet.querySelectorAll('.copybtn').forEach((btn,i)=>{
       btn.onclick=()=>{ const txt=btn.parentElement.querySelector('pre').innerText;
         navigator.clipboard.writeText(txt).then(()=>{btn.textContent="已複製 ✓"; btn.classList.add('done'); setTimeout(()=>{btn.textContent="複製"; btn.classList.remove('done');},1600);});};
+    });
+    // click prompt box → auto select-all its text (for manual Cmd/Ctrl+C)
+    sheet.querySelectorAll('.promptbox pre').forEach(pre=>{
+      pre.onclick=()=>{ const r=document.createRange(); r.selectNodeContents(pre);
+        const s=window.getSelection(); s.removeAllRanges(); s.addRange(r); };
     });
     sheet.querySelector('.close').onclick=closeM;
     modal.classList.add('open');
