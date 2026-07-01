@@ -68,8 +68,9 @@ export-auto-move "&lt;trip&gt;" --to_export "&lt;trip&gt;/to_evoto" --ext jpg</p
 
   <h2>自動兼容結構</h2>
   <ul>
-    <li><b>多日 trip</b>：<code>&lt;trip&gt;/&lt;dayN&gt;/主(次)/&lt;場景&gt;/</code> → <code>_export/&lt;dayN&gt;/&lt;場景&gt;/</code>（分天）。</li>
-    <li><b>單日 trip</b>：母檔在 <code>&lt;trip&gt;/主(次)/&lt;場景&gt;/</code>（無 dayN 層）→ 自動偵測，<code>_export/&lt;場景&gt;/</code> 攤平不分天。</li>
+    <li><b>場景平鋪＋<code>_次</code>（2026-07-01 新）</b>：day 底下場景平鋪，次相機 = 主場景名＋<code>_次</code>（如 <code>08_…_次/</code>）→ 依母檔所在場景鏡射，<code>_次</code> 也照樣落 <code>_export/…/&lt;場景&gt;_次/</code>。</li>
+    <li><b>舊 主/次 子夾（向後相容）</b>：<code>&lt;trip&gt;/&lt;dayN&gt;/主(次)/&lt;場景&gt;/</code> 仍照吃。</li>
+    <li><b>多日 vs 單日</b>：多日 → <code>_export/&lt;dayN&gt;/&lt;場景&gt;/</code>（分天）；單日（場景直接在 trip 下）→ <code>_export/&lt;場景&gt;/</code> 攤平。四種組合自動偵測。</li>
     <li><b>Evoto round-trip</b>：<code>-EVT</code> / <code>-EVTO</code> 成品尾綴自動 strip，對得上母檔；<code>to_evoto</code> 的 <code>.tif</code> 送洗中間檔用 <code>--ext jpg</code> 跳過。</li>
   </ul>
 
