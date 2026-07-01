@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>產出自動分場景 · export-auto-move · PhotoNB</title>
+  <meta name="description" content="出片工具：把 LR 匯出的成品 JPG 依母檔所在場景，自動分天分場景鏡射到 _export。catalog-free（A 方案）。" />
+  <meta name="date" content="2026-07-01" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:760px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.55em;letter-spacing:.02em;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.02rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;
+      font-family:ui-monospace,Menlo,monospace;font-size:.83rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    ul{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.86rem;margin:.4rem 0 .2rem;}
+    .flow b{background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:.3rem .6rem;color:var(--gold2);}
+    .flow i{color:var(--gold);font-style:normal;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.74rem;color:var(--muted);margin:.15rem .2rem 0 0;}
+    .ok{color:var(--green);} .bad{color:var(--red);}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">出片工具 · Delivery SOP</p>
+  <h1>產出自動分場景 <span class="en">export-auto-move</span></h1>
+  <p class="lead">LR 匯出的成品 JPG，依母檔所在的 day／場景，<b>自動分天分場景</b>鏡射到 <code>_export</code>。完全不碰 catalog（A 方案，中繼資料已烤進 JPG）。</p>
+
+  <h2>做什麼</h2>
+  <div class="flow">
+    <b>LR 匯出成品 JPG</b><i>→</i><b>&lt;trip&gt;/to_export/</b><i>→</i><b>export-auto-move</b><i>→</i><b>_export/&lt;dayN&gt;/&lt;場景&gt;/</b>
+  </div>
+  <ul>
+    <li>用<b>檔名（去副檔名）當鑰匙</b>，掃 trip 各 day 的 <code>主/次/&lt;場景&gt;/</code> 母檔，建「stem → (day, 場景)」對照表。</li>
+    <li>把 <code>to_export/</code> 的每張成品 JPG，鏡射搬到母檔對應的 <code>_export/&lt;day 資料夾&gt;/&lt;場景&gt;/</code>。</li>
+    <li>結構：<b>① 分天</b>（每個 dayN 一夾）　<b>② 主/次合併</b>（OPPO 與第二台放同一場景夾）。</li>
+  </ul>
+
+  <h2>怎麼用</h2>
+  <pre># 1) 先 dry-run（只報告，不搬）— 看每個 day/場景幾張，對不對
+export-auto-move "&lt;trip 根目錄&gt;"
+
+# 2) 確認無誤 → 實際搬
+export-auto-move "&lt;trip 根目錄&gt;" --go
+
+# 可選：自訂來源/輸出夾（預設 &lt;trip&gt;/to_export 與 &lt;trip&gt;/_export）
+export-auto-move "&lt;trip&gt;" --to_export /path/in --export /path/out --go</pre>
+  <p class="tag">別名 <code>to_export</code> 亦可</p><p class="tag">腳本 <code>tools/export_auto_move.py</code></p>
+
+  <h2>前提 & 規則</h2>
+  <ul>
+    <li><b>LR Export 檔名選「原始檔名」</b> → 成品 stem 才對得上母檔（例 <code>RKLU8425.jpg</code> ↔ 母檔 <code>RKLU8425.DNG</code>）。</li>
+    <li>LR 若自動加尾綴會<b>先 strip 再比對</b>：<code>-2</code> / <code>-Edit</code> / <code>-Enhanced</code> / <code>-NR</code> / <code>-HDR</code> / <code>-Pano</code>…；但母檔本身真實的 <code>_01</code> 尾會<b>保留</b>不誤刪。</li>
+    <li><b>對不上</b>（找不到母檔）的檔會<b>列清單、留在 to_export/</b>，不亂搬 → 你檢查檔名。</li>
+    <li>同名衝突（一個 stem 對到多場景）會在報告裡標 ⚠️（實務上 trip 內檔名唯一，通常 0 衝突）。</li>
+  </ul>
+
+  <h2>對照範例（德國 5天4夜實測）</h2>
+  <table>
+    <tr><th>to_export 檔名</th><th>處理</th><th>落點</th></tr>
+    <tr><td><code>RKLU8425.jpg</code></td><td>直接對上 DNG</td><td>day2 / 08 瑪麗安橋</td></tr>
+    <tr><td><code>IMG…114215-2.jpg</code></td><td>去 <code>-2</code></td><td>day2 / 04 宮殿洞窟</td></tr>
+    <tr><td><code>IMG_0496-Edit.jpg</code></td><td>去 <code>-Edit</code></td><td>day1 / 04 車上點心</td></tr>
+    <tr><td><code>IMG_7958-Enhanced-NR.jpg</code></td><td>去 <code>-Enhanced-NR</code></td><td>day1 / 08 慕尼黑</td></tr>
+    <tr><td><code>…145343_01.jpg</code></td><td>保留 <code>_01</code></td><td>day2 / 08</td></tr>
+    <tr><td><code>NOMATCH1234.jpg</code></td><td class="bad">對不上</td><td class="bad">留 to_export/ 待查</td></tr>
+  </table>
+  <p class="lead" style="font-size:.85rem">母檔 1032 張、stem 全唯一、<span class="ok">0 場景衝突</span>。</p>
+
+  <div class="note">💡 <b>鐵則</b>：一定先 <code>dry-run</code> 看「鏡射預覽（每 day/場景張數）」對不對，再加 <code>--go</code>。搬檔是移動（同碟秒級），對不上的絕不亂丟。</div>
+
+  <footer>PhotoNB · 出片 SOP — export-auto-move（catalog-free / A 方案）· 由 Robert 維護</footer>
+</div>
+</body>
+</html>
