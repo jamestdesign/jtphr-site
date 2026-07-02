@@ -1,0 +1,141 @@
+---
+title: "2026-07-02 多源財經投顧匯總"
+date: 2026-07-02
+category: "股票-盤後日報"
+source: "非凡新聞 / weekly.invest / ansforce / 投顧 sweetlucky777 (YouTube)"
+sources_used: "鉅亨網, 工商時報, cmoney_美股新聞, cmoney_台股新聞, 非凡新聞（USTV 非凡電視）"
+video_count: 1381
+creator: claude_robin
+managed_by: claude_robin
+auto_generated: true
+pipeline: fincai-multi-digest
+---
+
+<!-- REALTIME:START -->
+## 🔴 即時財金（盤中即時更新）
+> 今日盤中首發即時訊息，依時間排序、看過即可關閉；完整盤後彙整見下方各章節。
+
+> （今日盤中即時訊息將在此累加更新）
+<!-- REALTIME:END -->
+
+> 💰 **資金面定調**：🐻 偏空（中性偏空）（綜合分 -2）
+> 🛢️⬇️ 油價退潮（Brent $71.59，月-22.9%、已跌破戰前；通膨預期-17bp）→ 利成長股／降息空間
+> 📊 每指標近月長條圖 → [資金面每日觀測](https://jtphr-site.vercel.app/kb/stocks__趨勢觀察__資金面每日觀測)
+
+> 🇹🇼 **台股籌碼面**：量能爆發 50 強（量比異動＋三大法人拆解＋融資增減） → [每日籌碼榜](https://jtphr-site.vercel.app/kb/stocks__趨勢觀察__台股籌碼面_量能爆發)
+
+# 重點摘要（30 秒讀完）
+
+台股 7 月開門紅，權值股領軍終止外資連 6 賣、買超 323.76 億重返 47K（收 47,018 點、量 1.36 兆）；但美股 7 月首日費半重挫近 5%、美光跌逾 10%、Meta 飆近 9%。當日三大主軸：①野村示警 AI 半導體「史詩級」短缺、2027 漲價勢在必行首推<span style="color:#d42500;font-weight:600">台積電</span>，矽晶圓、被動元件、ABF 載板齊漲；②記憶體兩極化——兆易創新示警報價恐回落＋韓廠擴產＋三星SK美光遭反壟斷訴訟，<span style="color:#d42500;font-weight:600">南亞科</span>、<span style="color:#d42500;font-weight:600">華邦電</span>、<span style="color:#d42500;font-weight:600">旺宏</span>遭外資倒貨；③油價跌至四個月新低（美伊談判、OPEC+增產），Fed 華許拒談 7 月升息。焦點事件：國泰投信利關人風暴、無人機採購條例、蘋果因記憶體漲價。
+
+## 一、產經趨勢
+
+**1. AI 半導體超級循環，野村喊「史詩級」短缺**
+野村最新報告反駁 AI 週期見頂論，指雲端資本支出續擴張、2026 下半年將現嚴重供應鏈錯配，2027 年漲價勢在必行，首推<span style="color:#d42500;font-weight:600">台積電</span>；美光目標價調升至 1,600、一年飆 855%，高盛更將三星 2027 年 HBM 價格年增預期由 14% 上修至 44%。<span style="color:#d42500;font-weight:600">台積電</span>亞利桑那廠傳擴建一倍、川普稱美晶片市占拚 50%，法說會 7/16 登場，法人看第二季毛利率挑戰 7 成。**觀察重點**：漲價落地速度與 CoWoS／HBM 產能瓶頸。
+
+**2. 記憶體兩極化——漲價題材鬆動、資金轉進矽晶圓載板**
+中國 NOR Flash 龍頭兆易創新示警利基型記憶體報價已處歷史高位、恐明顯回落，加上韓國宣布 1,800 兆韓元 AI 國家計畫（三星、SK 海力士砸逾 800 兆擴產、DRAM 產能五年翻倍）、三星SK美光在美遭 DRAM 反壟斷集體訴訟，<span style="color:#d42500;font-weight:600">南亞科</span>、<span style="color:#d42500;font-weight:600">華邦電</span>、<span style="color:#d42500;font-weight:600">旺宏</span>、力積電盤中重挫逾 8%，外資單日倒貨逾 10 萬張。資金轉向具 AI 需求支撐的矽晶圓（野村上修現貨價漲逾 10%、<span style="color:#d42500;font-weight:600">環球晶</span>等噴漲停）、ABF 載板、被動元件與電力設備。**觀察重點**：韓廠擴產屬長期信號、實際年增淨產能僅個位數，短期供給仍吃緊。
+
+**3. 漲價潮擴散：被動元件、矽晶圓、CCL、玻纖布、功率元件**
+<span style="color:#d42500;font-weight:600">國巨</span>全系列電容 7/1 起調漲、股價登 1,200 元創分割後新高，日本 Rubycon、京瓷（砸千億日圓擴 MLCC）與陸廠江海同步漲價，二線廠信昌電、凱美等亮燈。矽晶圓<span style="color:#d42500;font-weight:600">環球晶</span>、中美晶、合晶噴漲停；CCL <span style="color:#d42500;font-weight:600">台燿</span>獲野村喊買 2,115 元；富喬玻纖布發漲價通知；功率半導體<span style="color:#d42500;font-weight:600">強茂</span>以車電＋AI Server 雙核搶市。廣發證券估高階光晶片 2027 年仍供不應求。**觀察重點**：漲價可否轉嫁及終端拉貨延續性。
+
+**4. 油價四個月新低、Fed 華許拒談升息**
+美伊談判進展、荷姆茲海峽航運恢復、OPEC+ 預期增產，國際油價跌至近四個月低點，大摩料 2027 年供給過剩。Fed 主席華許在 ECB 論壇拒絕透露 7 月是否升息、稱通膨風險已緩解；ADP 小非農僅增 9.8 萬人偏弱，6 月非農週四（7/2 晚）揭曉。美最高法院 5:4 駁回川普撤換理事庫克，力保 Fed 獨立性。**觀察重點**：非農數據與科技通膨（記憶體漲價）是否推升升息預期。
+
+**5. 政策與事件：國泰投信風暴、無人機採購、虛擬資產專法、蘋果漲價**
+國泰投信誤踩利關人交易損 9.48 億元，前董座郭明鑑兼任世芯獨董漏報，李長庚鞠躬道歉、蔡宏圖聘外部顧問總體檢，兼職改「原則禁止」。國防自主無人載具採購條例朝野競提（規模上看 2,300～2,400 億），台船、<span style="color:#d42500;font-weight:600">雷虎</span>、<span style="color:#d42500;font-weight:600">中光電</span>漲停。《虛擬資產服務法》6/30 三讀通過。記憶體暴漲逼蘋果調漲 MacBook／iPad，iPhone 18 Pro 記憶體成本傳翻三倍，蘋果遊說採購長鑫存儲。
+
+## 二、個股題材
+
+| 標的 | 代號 | 題材重點 | 來源 |
+|------|------|---------|------|
+| <span style="color:#d42500;font-weight:600">台積電</span> | 2330 | 野村首推、法說7/16、亞利桑那擴廠、CoPoS玻璃中介層、收2505創高 | 鉅亨、工商、cmoney、非凡 |
+| <span style="color:#d42500;font-weight:600">聯發科</span> | 2454 | ASIC發威、麥格理目標價喊萬元、蔡明介史普尼克時刻 | 工商、cmoney、非凡 |
+| <span style="color:#d42500;font-weight:600">台達電</span> | 2308 | 電源、AI基建、破線後反彈近9% | 工商、cmoney、非凡 |
+| <span style="color:#d42500;font-weight:600">國巨</span>* | 2327 | 被動元件龍頭全系列電容漲價、登1200創高、違約交割/遭刪ETF | 鉅亨、工商、cmoney |
+| <span style="color:#d42500;font-weight:600">大立光</span> | 3008 | 高盛CPO目標價6231元居冠、7/9法說 | 工商、鉅亨 |
+| <span style="color:#d42500;font-weight:600">環球晶</span> | 6488 | 矽晶圓漲價噴漲停、野村1200元、投顧1500元 | 工商、cmoney |
+| 中美晶 | 5483 | 矽晶圓漲停 | 工商 |
+| 合晶 | 6182 | 矽晶圓漲停創18年高 | 工商、鉅亨 |
+| <span style="color:#d42500;font-weight:600">南電</span> | 8046 | ABF載板漲停創天價1185、5月EPS1.21 | 工商、cmoney |
+| <span style="color:#d42500;font-weight:600">欣興</span> | 3037 | AI ASIC載板龍頭、外資喊買 | 工商、cmoney、非凡 |
+| 景碩 | 3189 | 載板、投信布局 | 非凡、cmoney |
+| <span style="color:#d42500;font-weight:600">台燿</span> | 6274 | CCL漲價、野村目標價2115元 | 工商 |
+| <span style="color:#d42500;font-weight:600">南亞</span> | 1303 | AI材料轉型、投信力捧漲停創高 | 鉅亨、工商 |
+| <span style="color:#d42500;font-weight:600">南亞科</span> | 2408 | 記憶體、大摩550元/樂觀1160、外資倒貨 | 工商、cmoney |
+| <span style="color:#d42500;font-weight:600">華邦電</span> | 2344 | 記憶體、大摩288元、遭倒貨重挫逾8% | 工商、cmoney |
+| <span style="color:#d42500;font-weight:600">旺宏</span> | 2337 | 記憶體、兆易創新示警重挫 | 工商、鉅亨 |
+| 力積電 | 6770 | 記憶體/成熟製程、按倒讚跌逾半根 | 工商 |
+| <span style="color:#d42500;font-weight:600">聯電</span> | 2303 | 成熟製程漲價旺到2027、外資買、列處置股 | 工商、cmoney |
+| <span style="color:#d42500;font-weight:600">世界先進</span> | 5347 | 8吋供不應求、開高走低 | 工商、鉅亨 |
+| <span style="color:#d42500;font-weight:600">強茂</span> | 2481 | 車電＋AI Server功率元件、漲停、期貨保證金調高 | 工商、cmoney |
+| 達明 | 4585 | AI協作機器人進駐廣達德國車電廠 | 鉅亨、工商 |
+| <span style="color:#d42500;font-weight:600">緯穎</span> | 6669 | AWS/AMD ASIC發酵、漲停攻5000元 | 鉅亨、cmoney |
+| <span style="color:#d42500;font-weight:600">創意</span> | 3443 | ASIC、Google CPU、特斯拉AI5/AI6訂單 | 非凡 |
+| <span style="color:#d42500;font-weight:600">友達</span> | 2409 | 高階人事AI轉型、外資買、成交量王 | 工商、cmoney |
+| <span style="color:#d42500;font-weight:600">群創</span> | 3481 | CoPoS玻璃基板、<span style="color:#d42500;font-weight:600">台積電</span>合作、外資賣15萬張 | 鉅亨、工商、非凡 |
+| 華航 | 2610 | 外資買14.66萬張、AI伺服器貨運急單 | 工商、cmoney |
+| 長榮航 | 2618 | AI貨運急單、華盛頓開航、年底拚飛印度 | 工商、鉅亨 |
+| 富喬 | 1815 | 玻纖布漲價通知 | 工商 |
+| 藥華藥 | 6446 | FDA核准長效干擾素筆針、漲停創高1270 | 工商 |
+| 禾榮科 | 7799 | BNCT硼中子、陽明交大合作、漲停 | 工商 |
+| <span style="color:#d42500;font-weight:600">臻鼎-KY</span> | 4958 | AI伺服器/光模組/載板、5月獲利年增300% | 工商 |
+| 川湖 | 2059 | 伺服器導軌、股利51元創高、AI急單、美廠9月量產 | 鉅亨、工商 |
+| 崇友 | 4506 | 電梯、拿下金仁寶北士科總部大單、在手訂單近百億 | 工商 |
+| <span style="color:#d42500;font-weight:600">信驊</span> | 5274 | 日系外資上修目標價19100元、股東會後貼息 | 鉅亨、工商、非凡 |
+| <span style="color:#d42500;font-weight:600">國泰金</span> | 2882 | 投信利關人風暴損9.48億、除息貼息跌破100 | 鉅亨、工商、cmoney |
+| <span style="color:#d42500;font-weight:600">雷虎</span> | 8033 | 無人機/無人艇採購條例、漲停 | 工商 |
+| <span style="color:#d42500;font-weight:600">中光電</span> | 5371 | 無人機、漲停 | 工商 |
+| <span style="color:#d42500;font-weight:600">漢翔</span> | 2634 | 軍工/無人機、大漲逾5% | 工商 |
+| 台船 | 2208 | 1320艘無人艇採購復活、漲停 | 工商 |
+| 力麗 | 1444 | 細丹尼/高值化紗線轉型、漲停 | 工商 |
+| 力鵬 | 1447 | 特殊機能紗轉型、漲停 | 工商 |
+| <span style="color:#d42500;font-weight:600">華新科</span> | 2492 | 被動元件漲價、AI伺服器/車用需求、漲7.61% | cmoney |
+| 信昌電 | 6173 | 被動元件二線廠漲停 | 工商 |
+| 漢唐 | 2404 | <span style="color:#d42500;font-weight:600">台積電</span>廠務工程、創歷史新高 | 非凡 |
+| 亞翔 | 6139 | 廠務工程、美光訂單 | 非凡 |
+| 崇越 | 5434 | 半導體耗材代理信越、創新高 | 非凡 |
+| 青雲 | 5386 | 涉輝達AI伺服器走私案遭搜索、跌停 | 鉅亨、工商 |
+| 是方 | 6561 | 涉走私案遭搜索、IDC營運商 | 工商 |
+| 泰山 | 1218 | 沙拉油驗出致癌物下架、總座異動 | 工商、鉅亨 |
+| 皇翔 | 2545 | 上半年靠台股大賺10.3億、超越去年全年 | 工商 |
+
+## 三、個股對應產業鏈（細緻版）
+
+- **2330 <span style="color:#d42500;font-weight:600">台積電</span>**｜定位：晶圓代工先進製程／先進封裝龍頭｜上游：矽晶圓（6488/5483）、設備（艾司摩爾、應材、科磊）、廠務工程（2404/6139）、耗材（5434/1560）｜下游：輝達、超微、<span style="color:#d42500;font-weight:600">聯發科</span>、蘋果、CSP｜題材連動：CoPoS 玻璃中介層、2 奈米、AI HPC。
+- **2454 <span style="color:#d42500;font-weight:600">聯發科</span>**｜定位：IC 設計 ASIC／SoC｜上游：<span style="color:#d42500;font-weight:600">台積電</span>先進製程、8046/3037 載板、日月光封測｜下游：Google TPU、CSP、智慧手機｜題材連動：ASIC 爆發、先進封裝 3.5D、AI 眼鏡/自駕。
+- **2308 <span style="color:#d42500;font-weight:600">台達電</span>**｜定位：電源管理／散熱／AI 基建｜上游：功率元件（2481）、被動元件｜下游：AI 伺服器、資料中心｜題材連動：HVDC 高壓直流、Blackwell 季度交付。
+- **2327 <span style="color:#d42500;font-weight:600">國巨</span>***｜定位：被動元件（MLCC/電容）龍頭｜上游：陶瓷粉體、鋁箔｜下游：AI 伺服器、車用、消費電子｜題材連動：全系列漲價、二線廠（6173/2375）連動。
+- **3008 <span style="color:#d42500;font-weight:600">大立光</span>**｜定位：手機光學鏡頭龍頭跨足 CPO｜上游：玻璃/塑膠鏡片｜下游：蘋果、CPO 光通訊｜題材連動：CPO 光纖陣列試產線 9 月建置、視覺 AI。
+- **6488 <span style="color:#d42500;font-weight:600">環球晶</span>／5483 中美晶／6182 合晶**｜定位：矽晶圓製造｜上游：多晶矽、長晶爐｜下游：晶圓代工、記憶體、功率半導體｜題材連動：AI 需求引爆漲價新循環、現貨價漲逾 10%。
+- **8046 <span style="color:#d42500;font-weight:600">南電</span>／3037 <span style="color:#d42500;font-weight:600">欣興</span>／3189 景碩**｜定位：ABF/BT IC 載板｜上游：味之素 ABF、銅箔、玻纖布（1815）、CCL（6274）｜下游：AI GPU/ASIC、CPU 封裝｜題材連動：AI 代理/HPC 需求爆發、供不應求至 2028。
+- **2408 <span style="color:#d42500;font-weight:600">南亞科</span>／2344 <span style="color:#d42500;font-weight:600">華邦電</span>／2337 <span style="color:#d42500;font-weight:600">旺宏</span>／6770 力積電**｜定位：利基型 DRAM/NOR Flash 記憶體｜上游：矽晶圓、設備｜下游：消費電子、工控、車用｜題材連動：報價鬆動疑慮、韓廠擴產、反壟斷訴訟（負向）。
+- **2303 <span style="color:#d42500;font-weight:600">聯電</span>／5347 <span style="color:#d42500;font-weight:600">世界先進</span>**｜定位：成熟製程晶圓代工｜上游：矽晶圓、光阻｜下游：PMIC、面板驅動 IC、邊緣 AI｜題材連動：成熟製程漲價旺到 2027、<span style="color:#d42500;font-weight:600">聯電</span>列處置股。
+- **2481 <span style="color:#d42500;font-weight:600">強茂</span>**｜定位：功率半導體（MOSFET/SiC/二極體）｜上游：晶圓｜下游：車用電子、AI Server 電源、人形機器人靈巧手 IC｜題材連動：漲價、車電/AI 雙核。
+- **4585 達明／2382 廣達**｜定位：AI 協作型機器人／伺服器代工｜上游：感測器、馬達、視覺 IC｜下游：廣達德國車電廠、AOI 產線｜題材連動：智慧製造、人形機器人。
+- **6669 <span style="color:#d42500;font-weight:600">緯穎</span>／3443 <span style="color:#d42500;font-weight:600">創意</span>**｜定位：AI 伺服器代工／ASIC 設計服務｜上游：<span style="color:#d42500;font-weight:600">台積電</span> CoWoS、載板｜下游：AWS、AMD、Google、特斯拉 xAI｜題材連動：ASIC 放量、下半年發酵。
+- **2409 <span style="color:#d42500;font-weight:600">友達</span>／3481 <span style="color:#d42500;font-weight:600">群創</span>**｜定位：面板廠跨足面板級封裝｜上游：玻璃基板、驅動 IC｜下游：<span style="color:#d42500;font-weight:600">台積電</span> CoPoS、FOPLP｜題材連動：AI 轉型、玻璃基板先進封裝。
+- **2610 華航／2618 長榮航**｜定位：航空客貨運｜上游：燃油（油價下跌受惠）｜下游：AI 伺服器空運急單、轉機客｜題材連動：AI 貨運包機占四~五成、低油價紅利。
+- **4958 <span style="color:#d42500;font-weight:600">臻鼎-KY</span>／2059 川湖**｜定位：PCB／伺服器導軌｜上游：銅箔基板、金屬件｜下游：AI 伺服器、光通訊模組｜題材連動：AI 三引擎放量、美國廠量產。
+- **6446 藥華藥／7799 禾榮科**｜定位：新藥／BNCT 硼中子癌症治療｜下游：全球血液腫瘤、實體癌市場｜題材連動：FDA 筆針核准、產學臨床平台（低基期非電輪動）。
+
+## 四、外資動向
+
+- 台股 7 月首個交易日外資**買超 323.76 億元、終止連 6 賣**，大舉敲進主動式 ETF 00981A、00403A 逾 10 萬張。
+- 惟外資避險，**台指期淨空單增 1,105 口至 84,168 口再創新高**，盤面「抓大放小」，宜避免過度追價。
+- 上半年（至 6/26）**外資累計賣超台股逼近 1 兆元（9,463 億）**；6/30 一面調高記憶體目標價、一面倒貨<span style="color:#d42500;font-weight:600">南亞科</span>、<span style="color:#d42500;font-weight:600">華邦電</span>、<span style="color:#d42500;font-weight:600">旺宏</span>、力積電逾 10 萬張。
+- **目標價調整**：麥格理<span style="color:#d42500;font-weight:600">聯發科</span>由 5,850 → 10,000 元（點名第五檔萬金股）；瑞銀<span style="color:#d42500;font-weight:600">聯發科</span> 6,500 元；高盛<span style="color:#d42500;font-weight:600">大立光</span> 3,423 → 6,231 元（市場最高）；野村<span style="color:#d42500;font-weight:600">環球晶</span> 1,200 元、<span style="color:#d42500;font-weight:600">台燿</span> 2,115 元；大摩喊<span style="color:#d42500;font-weight:600">台積電</span>全年營收年增 40%、目標價最高 3,500 元；富國銀行超微 AMD 615 美元；大摩調升<span style="color:#d42500;font-weight:600">南亞科</span> 550/<span style="color:#d42500;font-weight:600">華邦電</span> 288/<span style="color:#d42500;font-weight:600">旺宏</span> 220/力積電 111 元。
+- 高盛將三星 2027 年 HBM 價格年增預期由 14% 大幅上修至 44%；美光 MU 目標價調升至 1,600 元。
+- ADR/國際：Meta 傳進軍雲端賣算力、盤前飆 8%；美光重挫逾 10%；費半 7 月首日重挫近 5%。
+
+## 五、法人籌碼
+
+- **投信 Q2 買超 3,695.04 億元、改寫史上最大單季買超**，<span style="color:#d42500;font-weight:600">台積電</span>、廣達最受青睞（均加碼逾千億）；7 月首日/近期持續買超，資金湧入主被動式 ETF。
+- **ETF 配息**：元大高股息 0056 配 1.35 元（創季配新高、年化逾 10%）；元大台灣 50（0050）配 0.6 元；復華 00929 配 0.38 元（年化近 15%）；主動復華未來 50（00991A）首次半年配 0.77 元；群益半導體收益 00927 配 1.88 元（連 3 季創高、年化約 18%）。台股原型 ETF 總市值突破 10 兆元。
+- **融資餘額約 8,100 億元處歷史高檔待調節**，6/26 單日大減 200~263 億元去槓桿，被視為籌碼清洗好訊號；金管會防「四貸同堂」，兩個月股票質借去槓桿約 621 億元。
+- **處置股／警示**：<span style="color:#d42500;font-weight:600">聯電</span>（2303）7/2~7/15 列處置股；<span style="color:#d42500;font-weight:600">強茂</span>（2481）、<span style="color:#d42500;font-weight:600">台半</span>期貨保證金調高為 1.5 倍；<span style="color:#d42500;font-weight:600">國巨</span>*（2327）爆七家券商違約交割合計 3,880 萬元；福懋油（1225）董事缺額遭罰 10 萬元。
+- 勞動基金前五月獲利 2.125 兆元、收益率 27.7%，退撫基金前五月 3,132 億元、收益率 24.29%，雙創歷史新高。
+- 蔡明介提「史普尼克時刻」、輝達黃仁勳喊「AI 算力＝營收獲利」，法人維持 AI 長多、台股上看 5 萬點觀點不變。
+
+---
+⚠️ 個股題材／產業鏈／投顧推薦皆來自影片與新聞內容整理，僅供資訊參考，不構成投資建議。
