@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>初剪規格選擇器 · initcut spec picker · PhotoNB</title>
+<meta name="description" content="像 grid 照片一樣，勾選初剪的輸出規格＋拼貼版型＋時間線組裝，一鍵複製規格字串貼給 Robert。" />
+<meta name="date" content="2026-07-03" />
+<style>
+  :root{--surface:#0f0f23;--brand:#1a1a2e;--accent:#e94560;--gold:#f0c860;
+    --text:#eaeaea;--muted:#a0a0a0;--border:#2a2a44;--chip:#242440;--chipon:#e94560;--ok:#2d7a4e;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:var(--surface);color:var(--text);
+    font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;padding:1.2rem 1.05rem 6rem;}
+  a.back{color:var(--accent);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.28em;font-size:.68rem;text-transform:uppercase;margin:1.2rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.5rem,5vw,2rem);}
+  h1 .en{color:var(--gold);font-family:ui-monospace,Menlo,monospace;font-size:.5em;letter-spacing:.02em;}
+  .lead{color:var(--muted);margin:.2rem 0 1.2rem;font-size:.92rem;}
+  .group{background:var(--brand);border:1px solid var(--border);border-radius:14px;padding:.9rem 1rem 1.1rem;margin:.9rem 0;}
+  .group h2{margin:.1rem 0 .2rem;font-size:1rem;color:var(--gold);letter-spacing:.03em;}
+  .group .hint{color:var(--muted);font-size:.78rem;margin:0 0 .7rem;}
+  .row{margin:.7rem 0 .2rem;}
+  .row .lbl{font-size:.82rem;color:#cdd3e6;margin-bottom:.35rem;display:block;}
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .chip{background:var(--chip);border:1px solid var(--border);border-radius:999px;
+    padding:.34rem .8rem;font-size:.85rem;color:#dfe4f2;cursor:pointer;user-select:none;transition:.12s;}
+  .chip:active{transform:scale(.96);}
+  .chip.on{background:var(--chipon);border-color:var(--chipon);color:#fff;font-weight:600;}
+  .chip.gold.on{background:var(--gold);border-color:var(--gold);color:#25201a;}
+  .out{position:sticky;bottom:0;margin-top:1.4rem;background:#0b0b1c;border:1px solid var(--gold);
+    border-radius:14px;padding:.9rem 1rem;box-shadow:0 -8px 30px #0009;}
+  .out .olbl{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+  .spec{font-family:ui-monospace,Menlo,monospace;font-size:.86rem;color:#fff;background:#161633;
+    border:1px solid var(--border);border-radius:10px;padding:.7rem .8rem;margin:.5rem 0 .6rem;
+    word-break:break-word;line-height:1.55;user-select:all;}
+  .copy{width:100%;background:var(--accent);color:#fff;border:none;border-radius:10px;
+    padding:.7rem;font-size:.95rem;font-weight:600;cursor:pointer;}
+  .copy:active{transform:scale(.99);} .copy.done{background:var(--ok);}
+  .note{background:#1f1a3a;border-left:4px solid #7340a0;border-radius:6px;padding:.7rem .9rem;margin:1rem 0;font-size:.84rem;}
+  .note b{color:#c8a0ff;}
+  footer{margin-top:2rem;color:var(--muted);font-size:.72rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">影片初剪 · initcut</p>
+  <h1>初剪規格選擇器 <span class="en">spec picker</span></h1>
+  <p class="lead">跟 grid 照片一樣：勾一勾輸出規格＋拼貼版型＋時間線組裝，底下自動生成「規格字串」，<b>複製貼給 Robert</b> 就照這個組初剪 XML。</p>
+
+  <div class="note">🎬 <b>先決條件</b>：你已在 FCPX 撿片標好 <b>⭐2 拼貼 / ⭐3 身體 / ⭐4 精彩</b> keyword 並導出 <code>.fcpxmld</code>。這裡選的是「組裝時怎麼排版輸出」。（⭐1 PIP 之後補、⭐5 敘事走直出不進初剪。）</p></div>
+
+  <!-- A 輸出規格 -->
+  <div class="group" data-g="輸出">
+    <h2>① 輸出規格</h2>
+    <p class="hint">成品時間線的畫布規格。</p>
+    <div class="row"><span class="lbl">解析度</span><div class="chips" data-k="解析度" data-def="1080p">
+      <span class="chip">1080p</span><span class="chip">4K</span></div></div>
+    <div class="row"><span class="lbl">比例</span><div class="chips" data-k="比例" data-def="16:9橫">
+      <span class="chip">16:9橫</span><span class="chip">9:16直</span><span class="chip">1:1方</span></div></div>
+    <div class="row"><span class="lbl">幀率</span><div class="chips" data-k="幀率" data-def="30p">
+      <span class="chip">24p</span><span class="chip">30p</span><span class="chip">60p</span></div></div>
+    <div class="row"><span class="lbl">色彩</span><div class="chips" data-k="色彩" data-def="SDR709">
+      <span class="chip">SDR709</span><span class="chip">HLG</span></div></div>
+  </div>
+
+  <!-- B 拼貼 -->
+  <div class="group" data-g="拼貼">
+    <h2>② 拼貼 ⭐2 版型</h2>
+    <p class="hint">Star2 標記的片段，怎麼拼。「自動」＝依素材方向＋數量選（直式並排／橫式 2×2／堆疊）。</p>
+    <div class="row"><span class="lbl">版型</span><div class="chips gold" data-k="拼貼版型" data-def="自動">
+      <span class="chip">自動</span><span class="chip">2×2四宮格</span><span class="chip">橫向並排</span><span class="chip">直向堆疊</span></div></div>
+    <div class="row"><span class="lbl">每組幾支</span><div class="chips gold" data-k="每組" data-def="3支">
+      <span class="chip">2支</span><span class="chip">3支</span><span class="chip">4支</span></div></div>
+    <div class="row"><span class="lbl">長度對齊</span><div class="chips gold" data-k="長度" data-def="最長放主線">
+      <span class="chip">最長放主線</span><span class="chip">最短切齊</span></div></div>
+  </div>
+
+  <!-- C 時間線 -->
+  <div class="group" data-g="時間線">
+    <h2>③ 時間線組裝</h2>
+    <p class="hint">⭐3 身體排成敘事主體，⭐4 精彩去重併入。</p>
+    <div class="row"><span class="lbl">⭐3 排序</span><div class="chips" data-k="排序" data-def="時間序">
+      <span class="chip">時間序</span><span class="chip">場景序</span></div></div>
+    <div class="row"><span class="lbl">⭐4 去重（被⭐3包含就剔除）</span><div class="chips" data-k="Star4去重" data-def="開">
+      <span class="chip">開</span><span class="chip">關</span></div></div>
+    <div class="row"><span class="lbl">轉場</span><div class="chips" data-k="轉場" data-def="硬切">
+      <span class="chip">硬切</span><span class="chip">Cross Dissolve</span></div></div>
+  </div>
+
+  <div class="out">
+    <div class="olbl">規格字串（複製貼給 Robert）</div>
+    <div class="spec" id="spec">—</div>
+    <button class="copy" id="copy">📋 複製規格</button>
+  </div>
+
+  <footer>PhotoNB · 影片初剪規格選擇器 — 由 Robert 維護 · 對接工具：initcut assembler</footer>
+</div>
+
+<script>
+  const groups=[...document.querySelectorAll('.chips')];
+  function initGroup(g){
+    const def=g.dataset.def;
+    [...g.children].forEach(c=>{
+      if(c.textContent===def) c.classList.add('on');
+      c.addEventListener('click',()=>{
+        [...g.children].forEach(x=>x.classList.remove('on'));
+        c.classList.add('on'); build();
+      });
+    });
+  }
+  groups.forEach(initGroup);
+  function val(k){const g=document.querySelector(`[data-k="${k}"]`);const on=g.querySelector('.on');return on?on.textContent:g.dataset.def;}
+  function build(){
+    const s=`【初剪規格 v1】`
+      +`${val('解析度')}·${val('比例')}·${val('幀率')}·${val('色彩')}`
+      +` ┃ 拼貼:${val('拼貼版型')}·${val('每組')}·${val('長度')}`
+      +` ┃ 時間線:⭐3${val('排序')}·⭐4去重${val('Star4去重')}·${val('轉場')}`;
+    document.getElementById('spec').textContent=s;
+    return s;
+  }
+  document.getElementById('copy').addEventListener('click',async()=>{
+    const s=build(); const btn=document.getElementById('copy');
+    try{await navigator.clipboard.writeText(s);}catch(e){
+      const r=document.createRange();r.selectNode(document.getElementById('spec'));
+      getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');
+    }
+    btn.textContent='✅ 已複製，貼給 Robert';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent='📋 複製規格';btn.classList.remove('done');},2200);
+  });
+  build();
+</script>
+</body>
+</html>
