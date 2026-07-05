@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>建築風格辨識指南</title>
+  <meta name="description" content="旅遊拍建築的風格辨識攻略：12 風格史 + 11 大師語彙，含辨識重點與標註規則" />
+  <meta name="date" content="2026-07-05" />
+  <style>
+    :root { --surface:#0f0f23; --brand:#1a1a2e; --accent:#e94560; --gold:#e8c47a; --text:#eaeaea; --muted:#a0a0a0; --card:#181832; --line:#2a2a44; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--surface); color:var(--text);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif; line-height:1.7; }
+    .wrap { max-width:860px; margin:0 auto; padding:2.5rem 1.15rem 6rem; }
+    a.back { color:var(--accent); text-decoration:none; font-size:.85rem; }
+    h1 { font-size:1.95rem; margin:1.2rem 0 .3rem; }
+    .date { color:var(--muted); font-size:.85rem; margin:0 0 1.4rem; }
+    .lead { color:#cfcfe6; background:var(--card); border-left:3px solid var(--gold);
+      padding:.9rem 1.1rem; border-radius:8px; font-size:.95rem; }
+    .lead code { background:#2a2a44; padding:.1em .4em; border-radius:5px; font-size:.9em; color:var(--gold); }
+    h2 { color:var(--accent); margin:2.6rem 0 1rem; font-size:1.35rem; border-bottom:1px solid var(--line); padding-bottom:.4rem; }
+    .search { width:100%; padding:.7rem .9rem; margin:.4rem 0 1.2rem; border-radius:10px;
+      border:1px solid var(--line); background:#12122a; color:var(--text); font-size:1rem; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:12px;
+      padding:1rem 1.15rem; margin:.7rem 0; }
+    .card h3 { margin:.1rem 0 .5rem; font-size:1.12rem; color:var(--gold); }
+    .card h3 .en { color:var(--muted); font-size:.82rem; font-weight:400; margin-left:.4rem; }
+    .era { display:inline-block; font-size:.72rem; color:#0f0f23; background:var(--gold);
+      border-radius:20px; padding:.05rem .55rem; margin-left:.3rem; vertical-align:middle; }
+    .row { font-size:.9rem; margin:.28rem 0; }
+    .row b { color:#bfbfe0; font-weight:600; }
+    .cue { color:var(--gold); }
+    .tag { display:inline-block; font-size:.78rem; background:#22223f; color:#cfcfe6;
+      border:1px solid var(--line); border-radius:6px; padding:.05rem .5rem; margin:.15rem .2rem 0 0; }
+    .note { color:var(--muted); font-size:.82rem; }
+    .toc { display:flex; flex-wrap:wrap; gap:.4rem; margin:.6rem 0 0; }
+    .toc a { font-size:.8rem; color:#cfcfe6; text-decoration:none; background:#1c1c38;
+      border:1px solid var(--line); border-radius:6px; padding:.2rem .55rem; }
+    hr { border:none; border-top:1px solid var(--line); margin:2.4rem 0; }
+    .foot { color:var(--muted); font-size:.8rem; }
+    mark { background:var(--accent); color:#fff; border-radius:3px; padding:0 .15em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="./">← 攝影筆記本</a>
+    <h1>建築風格辨識指南 🏛️</h1>
+    <p class="date">2026-07-05 · Robert 整理 · 供旅遊照歸檔標註 &amp; 現場辨識</p>
+
+    <p class="lead">
+      旅遊拍到建築時，標一個<b>風格關鍵字</b>進 catalog，之後在 LR 就能用「哥德式」「現代主義」「柯比意」搜圖。<br>
+      命名格式：<code>風格｜建築名</code>（認得出名字就補），例：<code>現代主義｜The Squaire</code>、<code>柯比意現代主義｜朗香教堂</code>。<br>
+      規則：只在<b>建築/空間是主體</b>的照片標；不確定風格<b>就不硬套</b>（可留泛稱「現代建築」）。人像、食物不套。
+    </p>
+
+    <input class="search" id="q" placeholder="🔍 輸入風格 / 建築師 / 特徵（例：尖拱、圓頂、清水混凝土、扶壁）即時篩選…" oninput="filt()" />
+
+    <h2 id="hist">Part 1 · 建築風格史（12）</h2>
+    <div class="toc" id="toc1"></div>
+
+    <div class="card" data-k="古希臘 greek 神廟 柱式 多立克 愛奧尼 科林斯 山牆 帕德嫩 對稱 大理石">
+      <h3>古希臘 <span class="en">Ancient Greek</span><span class="era">約 BCE 700–100</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">三角形山牆（pediment）＋一排列柱</span>、柱頭三式（多立克樸素／愛奧尼渦捲／科林斯莨苕葉）、水平樑柱、白大理石、嚴謹對稱。</div>
+      <div class="row"><b>代表：</b>帕德嫩神廟、宙斯神殿。</div>
+      <div class="row note">易混：新古典（近代仿希臘，更乾淨新穎）。</div>
+    </div>
+
+    <div class="card" data-k="古羅馬 roman 拱券 拱頂 圓頂 萬神殿 混凝土 鬥獸場 渡槽 凱旋門">
+      <h3>古羅馬 <span class="en">Ancient Roman</span><span class="era">約 BCE 100–CE 400</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">半圓拱券、拱頂、大圓頂</span>、混凝土量體、宏大工程感（鬥獸場的層層拱、渡槽、凱旋門）。</div>
+      <div class="row"><b>代表：</b>羅馬競技場、萬神殿、嘉德水道橋。</div>
+      <div class="row note">關鍵差別：希臘用「樑柱」，羅馬用「拱」。</div>
+    </div>
+
+    <div class="card" data-k="拜占庭 byzantine 圓頂 帆拱 馬賽克 金色 聖索菲亞 希臘十字">
+      <h3>拜占庭 <span class="en">Byzantine</span><span class="era">4–15 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">中央大圓頂＋帆拱、內部金色馬賽克鑲嵌畫</span>、希臘十字平面、樸素磚砌外觀但金碧內裝。</div>
+      <div class="row"><b>代表：</b>聖索菲亞大教堂、聖馬可大教堂。</div>
+    </div>
+
+    <div class="card" data-k="羅馬式 romanesque 厚牆 半圓拱 筒形拱頂 敦實 圓塔 小窗">
+      <h3>羅馬式 <span class="en">Romanesque</span><span class="era">10–12 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">厚重牆體、半圓拱、小窗、敦實低矮</span>、筒形／交叉拱頂、圓塔，整體樸素防禦感。</div>
+      <div class="row"><b>代表：</b>比薩主教座堂、施派爾主教座堂。</div>
+      <div class="row note">易混哥德：羅馬式＝<b>半圓</b>拱、厚重；哥德＝<b>尖</b>拱、高瘦。</div>
+    </div>
+
+    <div class="card" data-k="哥德式 gothic 尖拱 飛扶壁 肋拱 彩繪玻璃 玫瑰窗 尖塔 科隆 聖母院 高聳">
+      <h3>哥德式 <span class="en">Gothic</span><span class="era">12–16 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">尖拱、飛扶壁、肋狀拱頂、高聳向上</span>、大片彩繪玻璃與玫瑰窗、密集尖塔與雕飾。</div>
+      <div class="row"><b>代表：</b>科隆大教堂、巴黎聖母院、米蘭主教座堂。</div>
+      <div class="row note">歐洲老城的「大教堂」多半是這類；認尖拱＋飛扶壁最準。</div>
+    </div>
+
+    <div class="card" data-k="文藝復興 renaissance 對稱 比例 圓頂 佛羅倫斯 古典柱式 水平">
+      <h3>文藝復興 <span class="en">Renaissance</span><span class="era">15–16 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">古典柱式回歸、嚴謹對稱與和諧比例</span>、半圓拱、水平線分層、和緩大圓頂（相對哥德的「冷靜」）。</div>
+      <div class="row"><b>代表：</b>佛羅倫斯主教座堂圓頂、聖彼得大教堂。</div>
+    </div>
+
+    <div class="card" data-k="巴洛克 baroque 動感 曲線 繁複 戲劇 光影 橢圓 金碧 凡爾賽">
+      <h3>巴洛克 <span class="en">Baroque</span><span class="era">17–18 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">動感曲面、繁複裝飾、戲劇性光影</span>、橢圓平面、金碧輝煌、扭轉柱與大量雕塑，「華麗到滿出來」。</div>
+      <div class="row"><b>代表：</b>凡爾賽宮、羅馬四噴泉聖卡羅教堂。</div>
+    </div>
+
+    <div class="card" data-k="洛可可 rococo 粉彩 貝殼 渦捲 rocaille 不對稱 室內 纖細">
+      <h3>洛可可 <span class="en">Rococo</span><span class="era">18 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">比巴洛克更輕巧纖細、粉嫩色、貝殼渦捲（rocaille）</span>、不對稱裝飾，以室內／宮廷沙龍為主。</div>
+      <div class="row"><b>代表：</b>阿瑪林堡、維斯教堂。</div>
+      <div class="row note">巴洛克＝雄渾戲劇；洛可可＝甜美輕盈。</div>
+    </div>
+
+    <div class="card" data-k="新古典 neoclassical 列柱 門廊 山牆 莊重 大英博物館 國會">
+      <h3>新古典 <span class="en">Neoclassical</span><span class="era">18–19 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">回歸希臘羅馬純粹、巨大列柱門廊＋三角山牆</span>、對稱莊重、乾淨少裝飾（博物館、議會、銀行常見）。</div>
+      <div class="row"><b>代表：</b>大英博物館、美國國會大廈、柏林布蘭登堡門。</div>
+    </div>
+
+    <div class="card" data-k="新藝術 art nouveau 有機 曲線 植物 藤蔓 鐵藝 高第 tassel 地鐵">
+      <h3>新藝術 <span class="en">Art Nouveau</span><span class="era">約 1890–1910</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">有機流動曲線、植物藤蔓母題、鍛鐵與彩色玻璃</span>、鞭索狀線條，反工業的手工華麗。</div>
+      <div class="row"><b>代表：</b>布魯塞爾 Hôtel Tassel、巴黎地鐵入口、高第早期作品。</div>
+    </div>
+
+    <div class="card" data-k="現代主義 modernism 少即是多 幾何 玻璃 鋼筋混凝土 水平帶窗 架空 柯比意 密斯 無裝飾 高樓 機場">
+      <h3>現代主義 <span class="en">Modernism</span><span class="era">20 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">簡潔幾何、大面玻璃、無多餘裝飾</span>、鋼筋混凝土、水平帶窗、底層架空、機能導向。</div>
+      <div class="row"><b>代表：</b>薩伏伊別墅、西格拉姆大廈；機場／玻璃帷幕高樓多屬此類或其延伸（High-tech）。</div>
+      <div class="row note">這趟德國回程（慕尼黑機場、法蘭克福 The Squaire、天際線）多半標這個。</div>
+    </div>
+
+    <div class="card" data-k="蒙兀兒 mughal 洋蔥圓頂 對稱 花園 白大理石 尖拱 四塔 泰姬瑪哈陵">
+      <h3>蒙兀兒 <span class="en">Mughal</span><span class="era">16–18 世紀</span></h3>
+      <div class="row"><b>辨識重點：</b><span class="cue">洋蔥形圓頂、對稱四分花園與水池、白大理石、尖拱與四角尖塔</span>、鑲嵌花紋。</div>
+      <div class="row"><b>代表：</b>泰姬瑪哈陵、胡馬雍陵。</div>
+    </div>
+
+    <h2 id="master">Part 2 · 大師建築語彙（11）</h2>
+    <div class="toc" id="toc2"></div>
+
+    <div class="card" data-k="高第 gaudi 加泰隆尼亞 有機 碎瓷 trencadis 仿生 聖家堂 米拉">
+      <h3>高第 <span class="en">Antoni Gaudí</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">有機仿生曲線、碎瓷拼貼（trencadís）、無直線</span>、加泰隆尼亞現代主義。</div>
+      <div class="row"><b>代表作：</b>聖家堂、米拉之家、巴特略之家、奎爾公園。</div>
+    </div>
+
+    <div class="card" data-k="貝聿銘 pei 幾何 玻璃金字塔 光影 羅浮宮 蘇州博物館 中銀">
+      <h3>貝聿銘 <span class="en">I. M. Pei</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">純粹幾何、玻璃與石材、光影穿透</span>、現代與在地文脈結合。</div>
+      <div class="row"><b>代表作：</b>羅浮宮金字塔、蘇州博物館、香港中銀大廈、美秀美術館。</div>
+    </div>
+
+    <div class="card" data-k="安藤忠雄 ando 清水混凝土 幾何 光 光之教堂 極簡">
+      <h3>安藤忠雄 <span class="en">Tadao Ando</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">清水混凝土、俐落幾何、引光入室</span>、極簡、與自然對話。</div>
+      <div class="row"><b>代表作：</b>光之教堂、水之教堂、直島地中美術館。</div>
+    </div>
+
+    <div class="card" data-k="萊特 wright 有機建築 草原 地景 懸挑 落水山莊 古根漢">
+      <h3>萊特 <span class="en">Frank Lloyd Wright</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">有機建築、草原風格、與地景融合、水平懸挑</span>。</div>
+      <div class="row"><b>代表作：</b>落水山莊、紐約古根漢美術館、羅比之家。</div>
+    </div>
+
+    <div class="card" data-k="柯比意 le corbusier 現代主義五原則 架空 屋頂花園 自由平面 朗香 薩伏伊">
+      <h3>柯比意 <span class="en">Le Corbusier</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">現代主義五原則（底層架空、屋頂花園、自由平面、水平長窗、自由立面）</span>、粗獷混凝土。</div>
+      <div class="row"><b>代表作：</b>薩伏伊別墅、朗香教堂、馬賽公寓。</div>
+    </div>
+
+    <div class="card" data-k="密斯 mies 少即是多 鋼 玻璃 通用空間 巴塞隆納館 西格拉姆">
+      <h3>密斯・凡德羅 <span class="en">Mies van der Rohe</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">「少即是多」、鋼與玻璃、通用空間、極致精準節點</span>。</div>
+      <div class="row"><b>代表作：</b>巴塞隆納德國館、西格拉姆大廈、范斯沃斯宅。</div>
+    </div>
+
+    <div class="card" data-k="路易斯康 louis kahn 紀念性 光 磚石 幾何 沙克 孟加拉國會">
+      <h3>路易斯・康 <span class="en">Louis Kahn</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">紀念性量體、光作為材料、磚石與幾何開口</span>、沉靜厚重。</div>
+      <div class="row"><b>代表作：</b>沙克生物研究所、孟加拉國會大廈、金貝爾美術館。</div>
+    </div>
+
+    <div class="card" data-k="蓋瑞 gehry 解構主義 扭曲 金屬 鈦板 曲面 畢爾包 古根漢 迪士尼">
+      <h3>蓋瑞 <span class="en">Frank Gehry</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">解構主義、扭曲流動的金屬曲面、鈦板反光</span>。</div>
+      <div class="row"><b>代表作：</b>畢爾包古根漢、洛杉磯迪士尼音樂廳、路易威登基金會。</div>
+    </div>
+
+    <div class="card" data-k="扎哈 zaha hadid 參數化 流動 曲線 未來 廣州大劇院 maxxi">
+      <h3>扎哈・哈蒂 <span class="en">Zaha Hadid</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">參數化流動曲線、無稜角未來感、動態量體</span>。</div>
+      <div class="row"><b>代表作：</b>廣州大劇院、羅馬 MAXXI、北京大興機場。</div>
+    </div>
+
+    <div class="card" data-k="福斯特 foster high-tech 玻璃 鋼 環保 中庭 小黃瓜 蘋果">
+      <h3>福斯特 <span class="en">Norman Foster</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">High-tech、外露鋼骨與玻璃、環境永續、通透中庭</span>。</div>
+      <div class="row"><b>代表作：</b>大英博物館大中庭、倫敦小黃瓜、蘋果總部、柏林國會穹頂。</div>
+    </div>
+
+    <div class="card" data-k="隈研吾 kengo kuma 木構 自然材料 消隱 格柵 根津美術館">
+      <h3>隈研吾 <span class="en">Kengo Kuma</span></h3>
+      <div class="row"><b>招牌語彙：</b><span class="cue">木格柵與自然材料、「消隱的建築」、輕盈層疊</span>。</div>
+      <div class="row"><b>代表作：</b>根津美術館、東京新國立競技場、微熱山丘南青山店。</div>
+    </div>
+
+    <hr>
+    <h2 id="rule">標註規則（歸檔用）</h2>
+    <ul>
+      <li>只對<b>建築/空間為主體</b>的照片（評分 label＝Green 那類）標風格；人像、食物不套。</li>
+      <li>命名格式 <code>風格｜建築名</code>；認不出建築名就只標風格；認不出風格就標泛稱「現代建築／歷史建築」或留空。</li>
+      <li><mark>不確定就不硬套</mark>——防幻覺紅線一樣適用，寧可少標不要編。</li>
+      <li>寫入位置：catalog 關鍵字 + XMP <code>dc:Subject</code>，LR 可直接用風格搜圖。</li>
+    </ul>
+
+    <p class="foot">來源：James 2026-07-05 給的兩套詞庫（風格史 12 ＋ 大師語彙 11）＋ Robert 補辨識重點。此頁只講現行標註規則；後續增補走 changelog。</p>
+  </div>
+
+  <script>
+    // build TOC
+    const cards=[...document.querySelectorAll('.card[data-k]')];
+    function toc(id, arr){ const el=document.getElementById(id); if(!el)return;
+      el.innerHTML=arr.map(c=>{const h=c.querySelector('h3'); const name=h.childNodes[0].textContent.trim();
+        return `<a href="#" onclick="jump('${name}');return false">${name}</a>`;}).join(''); }
+    const hist=cards.slice(0,12), mast=cards.slice(12);
+    toc('toc1',hist); toc('toc2',mast);
+    function jump(name){ const c=cards.find(x=>x.querySelector('h3').childNodes[0].textContent.trim()===name);
+      if(c){document.getElementById('q').value=''; filt(); c.scrollIntoView({behavior:'smooth',block:'center'});
+      c.style.boxShadow='0 0 0 2px var(--gold)'; setTimeout(()=>c.style.boxShadow='',1400);} }
+    function filt(){ const q=document.getElementById('q').value.trim().toLowerCase();
+      cards.forEach(c=>{ const hay=(c.getAttribute('data-k')+' '+c.textContent).toLowerCase();
+        c.style.display = (!q||hay.includes(q))?'':'none'; }); }
+  </script>
+</body>
+</html>
