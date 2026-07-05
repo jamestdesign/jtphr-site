@@ -19,6 +19,7 @@
       --video: #9b7be0;
       --map: #4aa3ff;
       --about: #f0a93b;
+      --ref: #e8c47a;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -98,6 +99,7 @@
     .video { --cat: var(--video); }
     .map   { --cat: var(--map); }
     .about { --cat: var(--about); }
+    .ref   { --cat: var(--ref); }
 
     .noresult { display: none; color: var(--muted); padding: 2rem 0; text-align: center; }
 
@@ -122,8 +124,8 @@
       <div class="status">
         <span class="dot"></span>
         <div>
-          <span class="s-date">最新 · 2026-06-29</span>
-          <p><b>資料夾前綴規則上線</b>：前導 <code>_</code>＝工作層、<code>MOV_</code>＝影片、無前綴＝照片。比利時・荷蘭 trip 歸檔結構已完成。</p>
+          <span class="s-date">最新 · 2026-07-05</span>
+          <p><b>建築風格攻略 + 旅遊影片匯入fcpx 上線</b>：建築風格辨識指南（12 風格史＋11 大師，含水彩範例圖）與生圖 prompt 清單發佈；影片 KB 新增 §8⁰ <code>旅遊影片匯入fcpx</code>（V2.1.2）。德國五天四夜 trip 全歸檔完成。</p>
         </div>
       </div>
     </header>
@@ -154,6 +156,12 @@
           <p>純 RAW 工作流（免 LR）：調曝光、去閃、聖杯漸變，直出 8K ProRes 422。</p>
           <span class="meta">2026-06-21 <span class="arrow">→</span></span>
         </a>
+        <a class="card tools" href="./export-auto-move.html" data-kw="export-auto-move 出片 鏡射 分場景 _export LR 匯出 catalog-free A方案 搬移">
+          <span class="kicker">出片 · 鏡射搬移</span>
+          <h3>export-auto-move（出片鏡射）</h3>
+          <p>LR 匯出的成品 JPG 依母檔場景，自動分天分場景鏡射到 <code>_export</code>。catalog-free（A 方案）。</p>
+          <span class="meta">2026-07-01 <span class="arrow">→</span></span>
+        </a>
       </div>
     </section>
 
@@ -161,11 +169,17 @@
     <section class="section" data-sec>
       <h2><span class="ico">🎬</span> 影片剪輯 <span class="bar"></span></h2>
       <div class="grid">
-        <a class="card video" href="./video-editing-kb.html" data-kw="影片 剪輯 知識庫 KB FCPX 撿片 抽幀 KP HL 出圖">
-          <span class="kicker">知識庫 · V2.1</span>
+        <a class="card video" href="./video-editing-kb.html" data-kw="影片 剪輯 知識庫 KB FCPX 撿片 抽幀 KP HL 出圖 旅遊影片匯入fcpx trip_fcpx_build">
+          <span class="kicker">知識庫 · V2.1.2</span>
           <h3>影片剪輯知識庫 完整版</h3>
-          <p>從素材到出片的完整工序：智慧抽幀減量、FCPX 撿片、KP/HL 批次出圖、效率 6 條。</p>
-          <span class="meta">2026-06-03 <span class="arrow">→</span></span>
+          <p>從素材到出片的完整工序：智慧抽幀、旅遊影片匯入fcpx（§8⁰ 建 Library）、FCPX 撿片、KP/HL 批次出圖。</p>
+          <span class="meta">2026-07-05 更新 <span class="arrow">→</span></span>
+        </a>
+        <a class="card video" href="./initcut-spec-picker.html" data-kw="初剪 規格 選擇器 initcut spec picker 拼貼 版型 時間線 組裝 規格字串">
+          <span class="kicker">工具 · 初剪規格</span>
+          <h3>初剪規格選擇器</h3>
+          <p>像 grid 照片一樣勾選初剪輸出規格＋拼貼版型＋時間線組裝，一鍵複製規格字串貼給 Robert。</p>
+          <span class="meta">2026-07-03 <span class="arrow">→</span></span>
         </a>
         <a class="card video" href="./_fcpx-cheatsheet.html" data-kw="FCPX final cut 撿片 快捷鍵 cheatsheet marker M 操作 速查">
           <span class="kicker">速查 · Cheat Sheet</span>
@@ -184,6 +198,37 @@
           <h3>影片知識庫 · 更新紀錄</h3>
           <p>影片剪輯 KB 的歷次調整與版本演進。</p>
           <span class="meta">更新紀錄 <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 參考 · 攻略 & AI -->
+    <section class="section" data-sec>
+      <h2><span class="ico">📚</span> 參考 · 攻略 &amp; AI Prompt <span class="bar"></span></h2>
+      <div class="grid">
+        <a class="card ref" href="./architecture-style-guide.html" data-kw="建築 風格 辨識 指南 哥德 巴洛克 現代主義 高第 柯比意 12風格 大師 攻略 標註">
+          <span class="kicker">建築 · 辨識攻略</span>
+          <h3>建築風格辨識指南 🏛️</h3>
+          <p>旅遊拍建築的風格辨識攻略：12 風格史＋11 大師語彙，含水彩範例圖、辨識重點與標註規則。</p>
+          <span class="meta">2026-07-05 <span class="arrow">→</span></span>
+        </a>
+        <a class="card ref" href="./architecture-style-prompts.html" data-kw="建築 風格 生圖 prompt 清單 水彩 圖鑑 跨頁 midjourney 代表建築 細節">
+          <span class="kicker">建築 · 生圖 Prompt</span>
+          <h3>建築風格 生圖 Prompt 清單</h3>
+          <p>23 主題各配代表建築＋細節特寫的生圖 prompt（統一水彩圖鑑風），含跨頁版一張出一整頁。</p>
+          <span class="meta">2026-07-05 <span class="arrow">→</span></span>
+        </a>
+        <a class="card ref" href="./prompt-library.html" data-kw="prompt 範例庫 生圖 AI 編號 PR 拆解 可複製 收藏 批次">
+          <span class="kicker">AI · Prompt 範例庫</span>
+          <h3>Prompt 範例庫</h3>
+          <p>特殊生圖 prompt 收藏庫：每個編號含範例圖、拆解說明與可複製 prompt，用編號引用即可批次導出。</p>
+          <span class="meta">2026-07-01 <span class="arrow">→</span></span>
+        </a>
+        <a class="card ref" href="./neuschwanstein-guide.html" data-kw="新天鵝堡 Neuschwanstein 導覽 海報 巴伐利亞 城堡 旅遊 亮點 拍攝建議 行程">
+          <span class="kicker">旅遊 · 導覽海報</span>
+          <h3>新天鵝堡 觀光導覽</h3>
+          <p>巴伐利亞童話城堡導覽海報：城堡檔案、必看亮點、今日路線與拍攝建議（版型範本）。</p>
+          <span class="meta">2026-06-30 <span class="arrow">→</span></span>
         </a>
       </div>
     </section>
