@@ -23,6 +23,7 @@
       border:1px solid var(--line); background:#12122a; color:var(--text); font-size:1rem; }
     .card { background:var(--card); border:1px solid var(--line); border-radius:12px;
       padding:1rem 1.15rem; margin:.7rem 0; }
+    .card img.ex { width:100%; border-radius:8px; margin:.15rem 0 .65rem; display:block; border:1px solid var(--line); }
     .card h3 { margin:.1rem 0 .5rem; font-size:1.12rem; color:var(--gold); }
     .card h3 .en { color:var(--muted); font-size:.82rem; font-weight:400; margin-left:.4rem; }
     .era { display:inline-block; font-size:.72rem; color:#0f0f23; background:var(--gold);
@@ -220,6 +221,14 @@
   <script>
     // build TOC
     const cards=[...document.querySelectorAll('.card[data-k]')];
+    // 嵌入水彩範例圖（文件順序 = ar01…ar23）
+    cards.forEach((c,i)=>{
+      const img=document.createElement('img');
+      img.className='ex'; img.loading='lazy';
+      img.src='arch-assets/ar'+String(i+1).padStart(2,'0')+'.jpg';
+      img.alt=c.querySelector('h3').textContent.trim()+' 代表建築';
+      c.querySelector('h3').insertAdjacentElement('afterend', img);
+    });
     function toc(id, arr){ const el=document.getElementById(id); if(!el)return;
       el.innerHTML=arr.map(c=>{const h=c.querySelector('h3'); const name=h.childNodes[0].textContent.trim();
         return `<a href="#" onclick="jump('${name}');return false">${name}</a>`;}).join(''); }
