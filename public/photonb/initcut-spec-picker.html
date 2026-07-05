@@ -111,7 +111,8 @@
       <div class="row"><span class="lbl">模式</span><div class="chips" data-k="移動中_模式" data-def="移動"><span class="chip">移動</span><span class="chip">定點</span></div></div>
       <div class="row"><span class="lbl">交通</span><div class="chips" data-k="移動中_交通" data-def="✈飛機"><span class="chip">✈飛機</span><span class="chip">🚄火車</span><span class="chip">🚇地鐵</span><span class="chip">🚌巴士</span></div></div>
       <div class="row"><span class="lbl">圖層</span><div class="chips" data-k="移動中_圖層" data-def="兩層"><span class="chip">兩層</span><span class="chip">只資訊</span><span class="chip">只地圖</span></div></div>
-      <div class="row"><span class="lbl">版位</span><div class="chips" data-k="移動中_版位" data-def="左上"><span class="chip">左上</span><span class="chip">右上</span><span class="chip">置中</span><span class="chip">左下</span><span class="chip">右下</span></div></div>
+      <div class="row"><span class="lbl">資訊層版位</span><div class="chips" data-k="移動中_資訊版位" data-def="左上"><span class="chip">左上</span><span class="chip">右上</span><span class="chip">左下</span><span class="chip">右下</span></div></div>
+      <div class="row"><span class="lbl">地圖層版位</span><div class="chips" data-k="移動中_地圖版位" data-def="右上"><span class="chip">右上</span><span class="chip">左上</span><span class="chip">右下</span><span class="chip">左下</span></div></div>
     </div>
     <div class="sub" data-sub="景點" hidden>
       <div class="subttl">📍 景點地名條（宮崎風）</div>
@@ -168,7 +169,7 @@
     const cs=cats();
     if(cs.length){
       const parts=cs.map(cat=>{
-        if(cat==='移動中') return `移動中[機票感·${val('移動中_模式')}·${val('移動中_交通')}·${val('移動中_圖層')}·${val('移動中_版位')}]`;
+        if(cat==='移動中') return `移動中[機票感·${val('移動中_模式')}·${val('移動中_交通')}·${val('移動中_圖層')}·資訊@${val('移動中_資訊版位')}·地圖@${val('移動中_地圖版位')}]`;
         if(cat==='景點') return `景點[地名條·${val('景點_版位')}·${val('景點_比例')}]`;
         if(cat==='建築') return `建築[建築卡·${val('建築_版位')}]`;
         if(cat==='飲食') return `飲食[${val('飲食_標籤')}]`;
