@@ -41,13 +41,19 @@
     生完丟回給我，我裁切＋嵌進攻略書重發。想要寫實照片版就把後綴的水彩那句換成 <code>photorealistic architectural photography, natural light</code>。
   </p>
 
-  <div class="plabel">🎨 統一風格後綴（每則都接這段）</div>
+  <div class="plabel">🎨 統一風格後綴（單張版才要接；下面「跨頁版」已內含畫風不用接）</div>
   <div class="prompt suffix" id="suffix">hand-painted watercolor and fine ink architectural illustration, muted natural palette, soft even daylight, plain off-white background, centered eye-level composition, no people, no text, no labels, encyclopedia plate aesthetic, highly detailed, 4:3<button class="copy" onclick="cp(this)">複製</button></div>
 
-  <h2>Part 1 · 建築風格史（12）</h2>
+  <h2>⭐ 跨頁版（推薦）· 一張 prompt 出一整頁</h2>
+  <p class="note" style="margin-top:-.3rem">仿你傳的那組卡片：一張圖＝6 棟建築的水彩圖鑑跨頁，每格一個風格、角落只放數字 1–6（中文名我之後嵌 HTML 時再補，避免 AI 打錯字）。共 4 頁生完就整套。</p>
+  <div id="plates"></div>
+
+  <h2>單張版（想個別重生某一格時用）</h2>
+  <p class="note" style="margin-top:-.3rem">某格生壞了、想單獨重出時，用這區的單張 prompt（複製會自動接上面的風格後綴）。含「細節辨識特寫」。</p>
+  <h3 style="color:var(--gold);font-size:1rem;margin:1.2rem 0 .3rem">Part 1 · 建築風格史（12）</h3>
   <div id="hist"></div>
 
-  <h2>Part 2 · 大師建築語彙（11）</h2>
+  <h3 style="color:var(--gold);font-size:1rem;margin:1.4rem 0 .3rem">Part 2 · 大師建築語彙（11）</h3>
   <div id="mast"></div>
 
   <p class="note">共 23 主題 × 2 張 = 46 張。編號 AR-01…AR-23。代表照都用該風格最經典的建築；細節特寫鎖定「辨識重點」那個特徵。</p>
@@ -127,6 +133,23 @@ const MAST=[
   "the Japan National Stadium by Kengo Kuma, layered horizontal timber louvers, warm natural wood, lightweight",
   "close-up of Kengo Kuma stacked wooden slat lattice screen, natural timber texture"],
 ];
+const PLATE_STYLE="Render as a single sheet: a neat grid of six separate framed panels with thin borders, each panel a different building, ALL in the same hand-painted watercolor and fine ink architectural illustration style, muted natural palette, soft even daylight, off-white background, only a small number in the corner of each panel, no other text, no people, highly detailed, encyclopedia plate, portrait 3:4.";
+const PLATES=[
+ ["圖鑑跨頁 1／4","風格史·古典到中世紀（AR-01~06）",
+  "A watercolor architecture encyclopedia plate, 2x3 grid of six panels: panel 1 the Parthenon (ancient Greek marble temple with Doric colonnade and pediment); panel 2 the Roman Colosseum (tiered semicircular arches); panel 3 Hagia Sophia (big central Byzantine dome); panel 4 a Romanesque cathedral (thick walls, round arches, sturdy towers); panel 5 Cologne Cathedral (Gothic pointed spires and flying buttresses); panel 6 Florence Cathedral (Renaissance red-tiled dome). "+PLATE_STYLE],
+ ["圖鑑跨頁 2／4","風格史·近世到現代（AR-07~12）",
+  "A watercolor architecture encyclopedia plate, 2x3 grid of six panels: panel 1 the Palace of Versailles (ornate Baroque facade); panel 2 the Amalienburg pavilion (pastel Rococo); panel 3 the British Museum (Neoclassical colonnade and pediment); panel 4 Hotel Tassel Brussels (Art Nouveau curves and wrought iron); panel 5 Villa Savoye (white Modernist box on pilotis); panel 6 the Taj Mahal (Mughal white marble onion dome and minarets). "+PLATE_STYLE],
+ ["圖鑑跨頁 3／4","大師 A（AR-13~18）",
+  "A watercolor architecture encyclopedia plate, 2x3 grid of six panels: panel 1 Sagrada Familia (Gaudi organic towers); panel 2 the Louvre glass pyramid (I.M. Pei); panel 3 Church of the Light (Tadao Ando exposed concrete with cross of light); panel 4 Fallingwater (Frank Lloyd Wright cantilevers over waterfall); panel 5 Ronchamp chapel (Le Corbusier sculptural white roof); panel 6 the Barcelona Pavilion (Mies van der Rohe steel, glass and marble). "+PLATE_STYLE],
+ ["圖鑑跨頁 4／4","大師 B（AR-19~23，5格）",
+  "A watercolor architecture encyclopedia plate, five panels in a 3-over-2 layout: panel 1 the Salk Institute (Louis Kahn monumental concrete courtyard); panel 2 Guggenheim Bilbao (Frank Gehry twisting titanium curves); panel 3 Guangzhou Opera House (Zaha Hadid flowing parametric forms); panel 4 the Gherkin 30 St Mary Axe (Norman Foster high-tech glass diagrid tower); panel 5 the Japan National Stadium (Kengo Kuma layered timber louvers). Render as a single sheet, five framed panels same size with thin borders, ALL in the same hand-painted watercolor and fine ink architectural illustration style, muted palette, soft daylight, off-white background, small corner number only, no other text, no people, highly detailed, portrait 3:4."],
+];
+function plate(row){
+  const [tag,zh,p]=row;
+  return `<div class="card"><h3><span class="num">${tag}</span>${zh}</h3>
+    <div class="prompt selfcontained">${p}<button class="copy" onclick="cp(this)">複製</button></div></div>`;
+}
+document.getElementById('plates').innerHTML=PLATES.map(plate).join('');
 function card(row){
   const [num,zh,en,ex,det]=row;
   return `<div class="card"><h3><span class="num">${num}</span>${zh}<span class="en">${en}</span></h3>
@@ -142,7 +165,8 @@ function cp(btn){
   box.querySelector('.copy')?.remove();
   const suffix=document.getElementById('suffix').textContent.replace('複製','').trim();
   let t=box.textContent.trim();
-  if(btn.parentNode.id!=='suffix') t=t+", "+suffix;
+  const selfContained = btn.parentNode.id==='suffix' || btn.parentNode.classList.contains('selfcontained');
+  if(!selfContained) t=t+", "+suffix;
   navigator.clipboard.writeText(t).then(()=>{const o=btn.textContent;btn.textContent='✓已複製';setTimeout(()=>btn.textContent=o,1200);});
 }
 </script>
