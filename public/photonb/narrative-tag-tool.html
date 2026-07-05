@@ -35,6 +35,12 @@
     pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;font-size:.76rem;color:#d7d7ee;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:.3rem 0;}
     .cp{background:var(--tools);color:#08221c;border:none;border-radius:9px;padding:.6rem 1.1rem;font-size:.95rem;font-weight:700;cursor:pointer;}
     .note{color:var(--muted);font-size:.8rem;}
+    .sumrow{margin:.1rem 0 .6rem;}
+    .summary{display:inline-block;background:var(--code);border:1px solid var(--tools);border-radius:20px;padding:.4rem .85rem;font-size:.85rem;color:var(--gold);}
+    .specbox{margin:.55rem 0;}
+    .specbox>summary{cursor:pointer;color:var(--muted);font-size:.82rem;list-style:none;}
+    .specbox>summary::-webkit-details-marker{display:none;}
+    .specbox pre{max-height:190px;overflow:auto;}
     code{background:#2a2a44;padding:.1em .4em;border-radius:5px;color:var(--gold);font-size:.88em;}
   </style>
 </head>
@@ -103,9 +109,13 @@
   </div>
 
   <div class="out">
+    <div class="sumrow"><span id="summary" class="summary"></span></div>
     <button class="cp" onclick="copySpec()">📋 複製規格貼給 Robert</button>
-    <pre id="spec"></pre>
-    <p class="note">貼到 Telegram 給 Robert，Robert 跑 <code>narrative_tag.py</code> 出圖層。GPS 航跡/地名 Robert 從歸檔資料自動補。</p>
+    <details class="specbox">
+      <summary>▸ 完整規格 JSON（點開看／除錯用）</summary>
+      <pre id="spec"></pre>
+    </details>
+    <p class="note">複製後貼給 Robert，Robert 跑 <code>narrative_tag.py</code> 出圖層。GPS 航跡/地名 Robert 從歸檔資料自動補。</p>
   </div>
 </div>
 <script>
@@ -133,6 +143,14 @@ function build(){
     c.pos=POS[p]||POS.c; c.name=(val('en')||'scene').toLowerCase().replace(/\s+/g,'_');
   }
   document.getElementById('spec').textContent=JSON.stringify(c,null,1);
+  // compact summary chip
+  const posn={tl:'左上',tr:'右上',c:'置中',bl:'左下',br:'右下',bc:'下中'}[p]||p;
+  const ic={plane:'✈',train:'🚄',metro:'🚇',bus:'🚌'}[seg.transport]||'';
+  let sum;
+  if(TPL==='ticket'){const ly={both:'兩層',info:'資訊層',map:'地圖層'}[seg.layers];
+    sum=`🎫 機票感 · ${seg.mode==='move'?'移動':'定點'} · ${ic} · ${ly} · ${posn} · ${Math.round(c.scale*100)}% · ${c.seconds}s`;}
+  else sum=`📍 景點地名 · ${val('cjk')||val('en')||'（GPS 自動）'} · ${posn} · ${Math.round(c.scale*100)}% · ${c.seconds}s`;
+  document.getElementById('summary').textContent=sum;
   return c;
 }
 function copySpec(){const t="敘事標籤規格：\n"+JSON.stringify(build());navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.cp');const o=b.textContent;b.textContent='✓ 已複製';setTimeout(()=>b.textContent=o,1300);});}
