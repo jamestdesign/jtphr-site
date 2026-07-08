@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FCPX 操作指南 · PhotoNB</title>
+  <meta name="description" content="Final Cut Pro 怎麼操作的總入口：2026-06 新 AI 功能(Generate Captions/Edit Detection/Auto Mask/Match Color/Advanced Trimming)實操步驟＋接哪條旅拍流程，並整合既有撿片速查、影片攻略書、schema 深頁。" />
+  <meta name="date" content="2026-07-08" />
+  <style>
+    :root {
+      --surface:#0f0f23; --brand:#1a1a2e; --accent:#e94560; --feat:#9b7be0;
+      --text:#eaeaea; --muted:#a0a0a0;
+      --tip-bg:#1f1a3a; --tip-border:#7340a0;
+      --warn-bg:#2a1e1e; --warn-border:#e94560;
+      --ok-bg:#1a2a23; --ok-border:#2d7a4e;
+      --code-bg:#2a2a44; --kbd-bg:#3a3a55;
+      --border:#2a2a44;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; background:var(--surface); color:var(--text);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif; line-height:1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width:760px; margin:0 auto; padding:3.5rem 1.25rem 6rem; }
+    a.back { color:var(--accent); text-decoration:none; font-size:.85rem; }
+    h1 { font-size:1.9rem; margin:1.5rem 0 .25rem; }
+    .date { color:var(--muted); font-size:.85rem; }
+    .lead { color:var(--muted); margin-top:.5rem; font-size:.95rem; }
+    h2 {
+      color:var(--accent); margin-top:2.6rem; font-size:1.3rem;
+      border-bottom:1px solid var(--border); padding-bottom:.4rem;
+    }
+    h2.feat { color:var(--feat); border-bottom-color:rgba(155,123,224,.4); }
+    h3 { color:var(--text); margin-top:1.8rem; font-size:1.08rem; }
+    h3 .plat { font-size:.7rem; font-weight:600; letter-spacing:.03em; padding:.12em .5em; border-radius:10px; vertical-align:2px; margin-left:.4rem; }
+    .plat.both { background:rgba(45,122,78,.25); color:#7fc99f; }
+    .plat.mac { background:rgba(30,107,143,.25); color:#7fc4e6; }
+    p { margin:.8rem 0; }
+    ul, ol { padding-left:1.5rem; }
+    li { margin:.35rem 0; }
+    code { background:var(--code-bg); padding:.15em .4em; border-radius:5px; font-size:.88em; font-family:'SF Mono','Consolas',monospace; }
+    kbd {
+      display:inline-block; background:var(--kbd-bg); color:var(--text);
+      padding:.1em .55em; border-radius:5px; font-family:'SF Mono','Consolas',monospace; font-size:.78em;
+      font-weight:600; box-shadow:0 2px 0 #000; margin:0 1px; vertical-align:1px;
+    }
+    hr { border:none; border-top:1px solid var(--border); margin:2.5rem 0; }
+    table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem; }
+    th, td { padding:.6rem .7rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+    th { color:var(--accent); font-weight:600; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
+    tr:hover td { background:rgba(233,69,96,0.05); }
+    .tip { background:var(--tip-bg); border-left:4px solid var(--tip-border); border-radius:4px; padding:.85rem 1.1rem; margin:1.1rem 0; font-size:.92rem; }
+    .tip strong { color:#c8a0ff; }
+    .warn { background:var(--warn-bg); border-left:4px solid var(--warn-border); border-radius:4px; padding:.85rem 1.1rem; margin:1.1rem 0; font-size:.92rem; }
+    .warn strong { color:var(--accent); }
+    .ok { background:var(--ok-bg); border-left:4px solid var(--ok-border); border-radius:4px; padding:.85rem 1.1rem; margin:1.1rem 0; font-size:.92rem; }
+    .ok strong { color:#7fc99f; }
+    .flow-tag { color:#7fc99f; font-weight:600; }
+    .toc { background:var(--brand); border:1px solid var(--border); border-radius:10px; padding:1rem 1.3rem; margin:1.5rem 0 2.5rem; font-size:.88rem; }
+    .toc h3 { margin:0 0 .5rem; color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; }
+    .toc ol { margin:0; }
+    .toc li { margin:.2rem 0; }
+    .toc a { color:var(--accent); text-decoration:none; }
+    .toc a:hover { text-decoration:underline; }
+    .linkcard { display:block; background:var(--brand); border:1px solid var(--border); border-left:4px solid var(--feat); border-radius:8px; padding:.9rem 1.1rem; margin:.8rem 0; text-decoration:none; color:var(--text); transition:border-color .15s, transform .15s; }
+    .linkcard:hover { border-color:var(--feat); transform:translateY(-2px); }
+    .linkcard b { color:#c8a0ff; }
+    .linkcard span { color:var(--muted); font-size:.86rem; display:block; margin-top:.25rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="./">← 攝影筆記本</a>
+    <h1>FCPX 操作指南</h1>
+    <p class="date">2026-07-08 · Robert 整理</p>
+    <p class="lead">Final Cut Pro「怎麼操作」的總入口。重點放 <strong>2026-06 新 AI 功能</strong>怎麼實際操作＋接你哪條旅拍流程；撿片、完整工序、schema 這些既有深頁在文末用連結整合，不重抄。</p>
+
+    <div class="tip">
+      <strong>🧭 先分清三件事：</strong><br>
+      ① <strong>撿片</strong>（標 Star / KP / NG）→ 看 <a href="./_fcpx-cheatsheet.html" style="color:#7fc4e6;">撿片操作速查</a>／<a href="./video-editing-kb.html" style="color:#7fc4e6;">影片攻略書 V2.1</a><br>
+      ② <strong>完整剪輯工序</strong>（抽幀→撿片→出圖→剪）→ 看 <a href="./video-editing-kb.html" style="color:#7fc4e6;">影片攻略書 V2.1</a><br>
+      ③ <strong>新 AI 功能</strong>（字幕/校色/遮罩/拆時間軸…）→ <strong>就是本頁重點，往下看</strong> 👇
+    </div>
+
+    <nav class="toc">
+      <h3>目錄</h3>
+      <ol>
+        <li><a href="#update">① 先更新到最新版（怎麼拿到這些功能）</a></li>
+        <li><a href="#overview">② 6 個新 AI 功能總覽（一眼看哪個對你有用）</a></li>
+        <li><a href="#captions">③ Generate Captions — 自動上字幕</a></li>
+        <li><a href="#editdetect">④ Edit Detection — 成品拆回時間軸</a></li>
+        <li><a href="#mask">⑤ Auto Mask / Magnetic Mask — 智慧遮罩</a></li>
+        <li><a href="#matchcolor">⑥ Match Color — 跨鏡頭校色</a></li>
+        <li><a href="#trim">⑦ Advanced Trimming — 逐格微調</a></li>
+        <li><a href="#pixelmator">⑧ 送 Pixelmator Pro — 出縮圖</a></li>
+        <li><a href="#automation">⑨ 這些我能幫你批次自動跑</a></li>
+        <li><a href="#deep">⑩ 既有 FCPX 深頁（整合連結）</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="update">① 先更新到最新版</h2>
+    <p>這些 AI 功能是 Apple「Creator Studio」2026-06 更新的一部分，<strong>內建進 Final Cut Pro</strong>，不是另外的 app、不用學新工具。</p>
+    <ol>
+      <li>開 <strong>App Store</strong> → 更新頁 → 把 <strong>Final Cut Pro</strong> 更新到最新版</li>
+      <li>更新完，功能直接長在 FCP 選單／Inspector 裡</li>
+    </ol>
+    <div class="ok">
+      <strong>✅ 費用與隱私</strong>
+      <ul>
+        <li>既有 FCP 使用者 <strong>免費更新</strong>（新購買斷 $299.99，或訂閱 $12.99/月・$129/年）</li>
+        <li>全部 AI 都是 <strong>裝置端運算</strong>（Mac/iPad 本機跑，素材不上傳雲端，隱私 OK）</li>
+      </ul>
+    </div>
+
+    <h2 class="feat" id="overview">② 6 個新 AI 功能總覽</h2>
+    <table>
+      <thead>
+        <tr><th>功能</th><th>平台</th><th>一句話</th><th>接你哪條流程</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Generate Captions</strong></td><td>Mac + iPad</td><td>語音自動轉字幕排進時間軸</td><td>🔥 對話字幕專案的官方解</td></tr>
+        <tr><td><strong>Edit Detection</strong></td><td>Mac + iPad</td><td>成品自動拆回原始 clip</td><td>只有輸出檔要改片時</td></tr>
+        <tr><td><strong>Auto Mask</strong></td><td>Mac</td><td>AI 辨識人/天空/植物做遮罩</td><td>分區調色免描邊</td></tr>
+        <tr><td><strong>Match Color</strong></td><td>Mac</td><td>跨鏡頭自動校色</td><td>多機同場景拉齊色調</td></tr>
+        <tr><td><strong>Advanced Trimming</strong></td><td>Mac</td><td>入出點逐格微調</td><td>卡音樂節奏精修</td></tr>
+        <tr><td><strong>送 Pixelmator Pro</strong></td><td>Mac</td><td>影格送去修再回時間軸</td><td>出 YouTube/IG 縮圖</td></tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      <strong>💡 先玩這 3 個最有感：</strong>① Generate Captions（拿一支對話片試）② Match Color（兩支不同相機的同場景片）③ Auto Mask（想單調天空的片）。
+    </div>
+
+    <h2 class="feat" id="captions">③ Generate Captions <span class="plat both" style="font-size:.62rem;">Mac + iPad</span></h2>
+    <p><strong>用途：</strong>自動把片中語音轉成字幕，直接排進時間軸，字型／顏色／位置／動畫樣式都能調。（延續 FCP 11 的 Transcribe to Captions，這次 AI 更準、更自動。）</p>
+    <p><strong>怎麼操作：</strong></p>
+    <ol>
+      <li>時間軸選有語音的 clip（或整段時間軸）</li>
+      <li>觸發 <strong>Generate Captions</strong>（從 <strong>字幕/Captions</strong> 選單；報導的快捷鍵為 <kbd>Shift</kbd>+<kbd>Cmd</kbd>+<kbd>C</kbd>）</li>
+      <li>AI 轉錄 → 產生 caption 層 → 在 Caption 檢視器/Inspector 校正文字、改樣式（字型/色/位置/動畫）</li>
+    </ol>
+    <div class="ok">
+      <strong>🔥 接你流程：</strong>這正是攝影區代辦「<strong>影片對話字幕/角色辨識專案</strong>」的官方解。家庭對話片直接自動上字幕，你只校正少數人名／錯字。<span class="flow-tag">語者分段（誰在講）</span>仍可搭 Whisper 前處理或手動指派，字幕層本身讓 FCP 自動生。
+    </div>
+    <div class="tip"><strong>💡 先驗準度：</strong>拿一支有國/台語混講的片試，看繁中轉錄準不準，再決定要不要全趟批次上。</div>
+
+    <h2 class="feat" id="editdetect">④ Edit Detection <span class="plat both" style="font-size:.62rem;">Mac + iPad</span></h2>
+    <p><strong>用途：</strong>把一支「已經壓平的成品影片」自動拆回原本的一段一段 clip 到時間軸——不用你手動找切點。</p>
+    <p><strong>怎麼操作：</strong></p>
+    <ol>
+      <li>把成品檔（例：一支已輸出的 mp4）拉進時間軸</li>
+      <li>觸發 <strong>Edit Detection</strong></li>
+      <li>AI 分析畫面切點 → 自動在每個原切點斷開成獨立 clip</li>
+    </ol>
+    <p><strong>接你流程：</strong>手上只剩輸出檔、沒有原專案時，要改片／重剪／擷取精華段做社群短片，靠這個免手動一格一格找切點。</p>
+
+    <h2 class="feat" id="mask">⑤ Auto Mask ＋ Magnetic Mask <span class="plat mac" style="font-size:.62rem;">Mac only</span></h2>
+    <p><strong>用途：</strong>把畫面裡的特定元素單獨圈出來（做遮罩），配合調色或特效只作用在那個區域。兩個是一組：</p>
+    <h3>Auto Mask（自動）</h3>
+    <ol>
+      <li>對 clip 套 Auto Mask</li>
+      <li>把游標 <strong>hover 在畫面上 → 即時預覽</strong> AI 偵測到的主體</li>
+      <li>從 <strong>Inspector 的清單</strong>勾選要遮的元素：皮膚 / 頭髮 / 天空 / 植物 / 衣服</li>
+      <li>接上色彩校正或效果 → 只作用在那個遮罩區</li>
+    </ol>
+    <h3>Magnetic Mask（手動精修）</h3>
+    <p>Auto Mask 的手控版：拖到 clip 上 → 用<strong>滴管點你要的主體</strong> → 它追蹤 → 完全由你決定辨識/追蹤/遮什麼。當 Auto Mask 自動抓不準時用。</p>
+    <div class="ok"><strong>接你流程：</strong>天空單獨壓藍加對比、人物膚色單獨修、植物單獨加飽和——免像以前手動一格一格描邊。</div>
+
+    <h2 class="feat" id="matchcolor">⑥ Match Color（重做版）<span class="plat mac" style="font-size:.62rem;">Mac only</span></h2>
+    <p><strong>用途：</strong>跨鏡頭自動校色——把一個鏡頭的色調套到另一個上，這次重做過，更廣的素材與光線條件都能配得更自然。</p>
+    <p><strong>怎麼操作：</strong></p>
+    <ol>
+      <li>選要被校色的 clip</li>
+      <li>用 <strong>Match Color</strong> → 指定一個<strong>參考影格（reference frame）</strong>（你想要的目標色調那一格）</li>
+      <li>FCP 分析兩者 → 自動套色 → 再手動微調</li>
+    </ol>
+    <div class="ok"><strong>接你流程：</strong>你多機拍（OPPO / iPhone / Sony）同一場景色調對不齊 → 挑一支當基準，其他一鍵拉齊；黃金時刻連拍統一色溫。</div>
+
+    <h2 class="feat" id="trim">⑦ Advanced Trimming <span class="plat mac" style="font-size:.62rem;">Mac only</span></h2>
+    <p><strong>用途：</strong>入點／出點<strong>一格一格</strong>微調，做到單格精準。</p>
+    <p><strong>怎麼操作：</strong>trim 一段時，用逐格控制細修入/出影格，不再只能大略拖。</p>
+    <p><strong>接你流程：</strong>剪輯精修階段對音樂節奏卡切點、修掉頭尾多一格的瑕疵。</p>
+
+    <h2 class="feat" id="pixelmator">⑧ 送 Pixelmator Pro <span class="plat mac" style="font-size:.62rem;">Mac only</span></h2>
+    <p><strong>用途：</strong>把時間軸上某一影格送進 <strong>Pixelmator Pro</strong> 修（做縮圖、社群封面圖），改完自動整合回時間軸。</p>
+    <p><strong>怎麼操作：</strong>選/右鍵某影格 → 送 Pixelmator Pro → 編輯 → 存檔自動回到 FCP 時間軸。</p>
+    <p><strong>接你流程：</strong>出 YouTube 縮圖 / IG 封面，不用另外截圖再開別的軟體。</p>
+
+    <h2 id="automation">⑨ 這些我能幫你批次自動跑</h2>
+    <p>上面是你在 FCP 內手動點的做法。其中可自動化的，我能透過 <strong>SpliceKit（程式化操控 FCP）</strong>幫你整趟批次跑，不用一支一支手動：</p>
+    <ul>
+      <li>整趟對話片 <strong>一次全上字幕</strong>（Generate Captions 批次）</li>
+      <li>同場景多機片 <strong>批次校色</strong>（挑基準後套整組）</li>
+      <li>撿片後 <strong>批次抽 KP 幀出圖</strong>（既有流程）</li>
+    </ul>
+    <div class="tip"><strong>💡 用法：</strong>素材備好跟我說「整趟上字幕」或「這場多機校色」，我用 SpliceKit 跑完再回你結果，你只做最後校正。</div>
+
+    <h2 id="deep">⑩ 既有 FCPX 深頁（整合連結）</h2>
+    <p>撿片流程、完整工序、schema 這些我之前寫過的深頁，直接連過去看，本頁不重抄：</p>
+
+    <a class="linkcard" href="./video-editing-kb.html">
+      <b>🎬 影片剪輯攻略書 V2.1（完整工序）</b>
+      <span>從素材到出片的完整流程：智慧抽幀、旅遊影片匯入 fcpx 建 Library、FCPX 撿片、KP/HL 批次出圖。FCPX 操作也整合在這本。</span>
+    </a>
+    <a class="linkcard" href="./_fcpx-cheatsheet.html">
+      <b>⌨️ 撿片操作速查（快捷鍵）</b>
+      <span>撿片時邊看邊標的快捷鍵：Star1~5（整支類型）、KP_R/Y/G/P（抽幀指令）、Delete（NG）、Marker、Export XML、搬 NAS reconnect、Library 瘦身。</span>
+    </a>
+    <a class="linkcard" href="./_video-schema.html">
+      <b>🗂️ NG / KP / HL / KF Schema</b>
+      <span>影片標記與評分的欄位定義，VLM 評分與撿片共用的資料結構。</span>
+    </a>
+
+    <hr />
+    <p style="color:var(--muted); font-size:.8rem;">
+      撰寫：Robert ／ 對接：James ／ 新 AI 功能來源：Apple Creator Studio 更新（2026-06，已對 Apple newsroom + CineD + MacRumors 查證）。<br>
+      本頁定位：FCPX「怎麼操作」總入口，聚焦新 AI 功能實操；撿片/工序/schema 深頁見上方整合連結。
+    </p>
+  </div>
+</body>
+</html>
