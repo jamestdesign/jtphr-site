@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>室內設計 AI Prompt 庫 · PhotoNB</title>
+  <meta name="description" content="12 個室內設計 AI Prompt 的可複製範例庫：每張卡有用途、變數表、可一鍵複製的英文 prompt，加上 Robert 的強化建議。附 3 套路／3 弱點拆解導讀。" />
+  <meta name="date" content="2026-07-08" />
+  <style>
+    :root{
+      --navy:#0b1022; --navy2:#121a35; --gold:#d8b65a; --gold2:#f3df9b;
+      --ink:#f5f1e6; --muted:#aeb6cc; --line:rgba(216,182,90,.32); --panel:rgba(255,255,255,.045);
+      --green:#6f7f5a; --clay:#b56a4a; --sage:#8a9a78;
+    }
+    *{box-sizing:border-box;}
+    html,body{overflow-x:hidden;}
+    body{margin:0; background:radial-gradient(120% 80% at 50% -10%,#1a2447 0%,var(--navy) 55%,#070b18 100%);
+      color:var(--ink); font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:1040px; margin:0 auto; padding:1rem 1.1rem 5rem;}
+    .back{color:var(--gold); text-decoration:none; font-size:.82rem; letter-spacing:.04em;}
+    header{margin:1.6rem 0 1rem; text-align:center;}
+    .eyebrow{color:var(--gold); letter-spacing:.4em; font-size:.72rem; text-transform:uppercase; margin:0;}
+    h1{margin:.3rem 0 .2rem; font-size:clamp(1.8rem,6vw,2.8rem);
+      background:linear-gradient(180deg,#fbeebc,var(--gold2) 45%,#c79a3a); -webkit-background-clip:text; background-clip:text; color:transparent; font-family:'Georgia',serif;}
+    .lead{color:var(--muted); max-width:660px; margin:.4rem auto 0; font-size:.92rem;}
+    .src{color:var(--muted); font-size:.76rem; margin:.6rem auto 0;}
+    .src code{background:#0006; border:1px solid var(--line); border-radius:6px; padding:.06em .4em; color:var(--gold2);}
+
+    /* analysis / how-to */
+    .analysis{max-width:760px; margin:1.4rem auto 0; display:grid; gap:.8rem; grid-template-columns:1fr 1fr;}
+    .abox{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));
+      border:1px solid var(--line); border-radius:14px; padding:.9rem 1.05rem; font-size:.85rem;}
+    .abox h4{margin:0 0 .5rem; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold2);}
+    .abox ol{margin:0; padding-left:1.1rem;}
+    .abox li{margin:.28rem 0;}
+    .abox li b{color:var(--gold2);}
+    .abox.warn h4{color:#e9b7a0;}
+    .abox.warn{border-color:rgba(181,106,74,.4); background:linear-gradient(180deg,rgba(181,106,74,.12),rgba(181,106,74,.02));}
+    .howto{max-width:760px; margin:.8rem auto 0; background:var(--panel);
+      border:1px solid var(--line); border-radius:14px; padding:.85rem 1.05rem; font-size:.85rem;}
+    .howto b{color:var(--gold2);}
+    .howto code{background:#0006; border:1px solid var(--line); border-radius:6px; padding:.06em .4em; color:var(--gold2);}
+
+    /* filter chips */
+    .filters{display:flex; flex-wrap:wrap; gap:.45rem; justify-content:center; margin:1.6rem 0 1.2rem;}
+    .chip{background:var(--panel); border:1px solid var(--line); color:var(--muted); border-radius:999px;
+      padding:.32rem .8rem; font-size:.78rem; cursor:pointer; transition:.15s;}
+    .chip.active,.chip:hover{color:var(--navy); background:var(--gold); border-color:var(--gold);}
+
+    /* grid */
+    .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:.9rem;}
+    .card{background:var(--navy2); border:1px solid var(--line); border-radius:14px; padding:1rem 1.05rem 1.1rem; cursor:pointer;
+      transition:transform .15s,border-color .15s; display:flex; flex-direction:column; border-top:3px solid var(--cat,var(--gold));}
+    .card:hover{transform:translateY(-3px); border-color:var(--cat,var(--gold));}
+    .card .top{display:flex; align-items:center; gap:.55rem; margin-bottom:.45rem;}
+    .card .num{font-family:'Georgia',serif; font-size:1.5rem; font-weight:700; color:var(--cat,var(--gold2)); line-height:1;}
+    .card .kicker{font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--cat,var(--gold)); font-weight:700;}
+    .card h3{margin:.1rem 0 .35rem; font-size:1rem; line-height:1.35;}
+    .card p{margin:0; color:var(--muted); font-size:.83rem; flex:1;}
+    .card .chips{display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.7rem;}
+    .card .chips span{font-size:.66rem; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:.06rem .45rem;}
+
+    /* modal */
+    .modal{position:fixed; inset:0; background:rgba(4,7,16,.86); backdrop-filter:blur(4px); z-index:50;
+      display:none; align-items:flex-start; justify-content:center; padding:2.2rem 1rem; overflow-y:auto;}
+    .modal.open{display:flex;}
+    .sheet{background:var(--navy2); border:1px solid var(--line); border-radius:18px; max-width:800px; width:100%; padding:1.4rem 1.3rem 2rem; position:relative;}
+    .close{position:absolute; top:.7rem; right:.9rem; background:none; border:none; color:var(--muted); font-size:1.6rem; cursor:pointer; line-height:1;}
+    .sheet .idrow{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap;}
+    .sheet .id{color:var(--gold2); font-weight:800; font-family:'Georgia',serif; font-size:1.2rem;}
+    .sheet .sub{color:var(--muted); font-size:.85rem;}
+    .sheet h2{margin:.3rem 0 .5rem; font-size:1.35rem;}
+    .use{color:var(--ink); font-size:.9rem; margin:0 0 1rem;}
+    h4.sec{color:var(--gold); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; border-bottom:1px solid var(--line); padding-bottom:.4rem; margin:1.4rem 0 .7rem;}
+    table.vars{width:100%; border-collapse:collapse; font-size:.85rem;}
+    table.vars td{padding:.35rem .5rem; border-bottom:1px solid rgba(255,255,255,.06); vertical-align:top;}
+    table.vars td.k{color:var(--gold2); font-weight:600; white-space:nowrap; width:42%;}
+    table.vars td.v{color:var(--muted);}
+    .promptbox{position:relative; background:#060a16; border:1px solid var(--line); border-radius:12px; padding:.9rem 1rem; margin:.35rem 0 .5rem;}
+    .promptbox pre{margin:0; white-space:pre-wrap; word-break:break-word; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem; color:#dfe6f2; line-height:1.5; user-select:text; -webkit-user-select:text; cursor:text;}
+    .selhint{color:var(--muted); font-size:.72rem; margin:.1rem 0 .6rem;}
+    .copybtn{position:absolute; top:.55rem; right:.55rem; background:var(--gold); color:var(--navy); border:none; border-radius:8px;
+      font-size:.74rem; font-weight:700; padding:.3rem .6rem; cursor:pointer;}
+    .copybtn.done{background:#5bd48a;}
+    .boost{background:linear-gradient(180deg,rgba(111,127,90,.16),rgba(111,127,90,.03)); border:1px solid rgba(138,154,120,.4);
+      border-radius:12px; padding:.75rem .95rem; font-size:.86rem; margin-top:.4rem;}
+    .boost b{color:#c7d6ac;}
+    footer{margin-top:2.4rem; text-align:center; color:var(--muted); font-size:.75rem;}
+    @media(max-width:640px){ .analysis{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="./">← 攝影筆記本</a>
+    <header>
+      <p class="eyebrow">PhotoNB · Prompt Library</p>
+      <h1>室內設計 AI Prompt 庫</h1>
+      <p class="lead">12 個室內設計 AI Prompt 的可複製收藏庫。每張卡有「用途 · 變數表 · 可一鍵複製的英文 prompt · 💪 強化建議」。點卡看細節，換掉 {大括號} 就能用。</p>
+      <p class="src">來源：Instagram <code>@richmeetings.ai</code>「12 AI Prompts for Interior Designers」carousel（2026-06-29）。原文照收＋Robert 拆解強化。</p>
+
+      <div class="analysis">
+        <div class="abox">
+          <h4>✅ 3 個共通套路（值得偷）</h4>
+          <ol>
+            <li><b>角色定位開頭</b>：「Act as a professional…」先給身份，輸出品質差很多。</li>
+            <li><b>[方括號]變數模板化</b>：把 prompt 變成可重複套用的表單 — 跟我們的「描述標籤 config / PR-00X 範例庫」同一個思路。</li>
+            <li><b>強制列清單</b>：明列「要包含哪 6–8 項」，逼 AI 不要偷懶只講兩句。</li>
+          </ol>
+        </div>
+        <div class="abox warn">
+          <h4>⚠️ 3 個弱點（別照抄）</h4>
+          <ol>
+            <li><b>沒規定輸出格式</b>：實跑很發散 → 每張卡的 💪 建議都補了格式規範。</li>
+            <li><b>變數沒給範例值</b>：新手不知填什麼 → 變數表都附了範例。</li>
+            <li><b>號稱吃圖不可靠</b>：純文字模型看不到照片，第 2、10 題要用能讀圖的模型並真的附圖。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="howto">
+        <b>怎麼用</b>　① 點卡片看變數表＋可複製 prompt。② 把 <code>{大括號}</code> 換成你的內容再貼進 ChatGPT。③ 想要更準 → 照卡片底部的 💪 強化建議加一句輸出格式。④ 想要「攝影版」自己的 prompt 庫，跟 Robert 說一聲。
+      </div>
+    </header>
+
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <footer>PhotoNB · 室內設計 AI Prompt 庫 — 由 Robert 拆解維護，James 拍板收藏。</footer>
+  </div>
+
+  <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+
+  <script>
+  // ==== 新增 prompt 只要往這個陣列加一個物件 ====
+  const ENTRIES = [
+    {
+      n:"01", cat:"發想", title:"設計概念產生器", titleEn:"Interior Design Concept Generator",
+      tags:["發想","全流程起手式"],
+      use:"給房型＋風格，一次吐出配色／家具／燈光／材質／佈局＋省錢替代方案。整個案子的第一步。",
+      vars:[["{Room Type} 房型","客廳 / 主臥 / 書房 / 玄關"],["{Style} 風格","現代簡約 / 侘寂 wabi-sabi / 中古世紀現代 / 工業風"]],
+      prompt:`Act as a professional interior designer. Create a design concept for a {Room Type} in {Style}. Include color palette, furniture, lighting, materials, textures, décor, layout, and budget-friendly alternatives.`,
+      boost:"結尾加：「Output as a table (項目｜建議｜預算替代方案｜約略成本), then a 3-line summary of the overall mood.」逼它結構化、每項都給省錢替代。"
+    },
+    {
+      n:"02", cat:"空間", title:"房間改造建議", titleEn:"Room Makeover Ideas",
+      tags:["空間","吃圖"],
+      use:"上傳一張房間照，請它給完整改造（before → after）：家具擺放、牆色、燈光、地板、收納。",
+      vars:[["（附圖）","真的把房間照片貼進對話，不能只用文字描述"]],
+      prompt:`Analyze the uploaded room photo and suggest a complete makeover. Recommend furniture placement, wall colors, lighting, flooring, décor, storage solutions, and ways to improve functionality and aesthetics.`,
+      boost:"⚠️ 純文字模型看不到圖 — 要用能讀圖的多模態模型（GPT-4o/Claude 附圖）。加：「Structure as: 現況問題 3 點 → 改造方案 → 優先順序（先做哪 3 件）。」"
+    },
+    {
+      n:"03", cat:"空間", title:"空間規劃專家", titleEn:"Space Planning Expert",
+      tags:["空間","動線"],
+      use:"給房間尺寸，算出最有效率的家具佈局，兼顧動線、收納、採光與視覺平衡。",
+      vars:[["{Room Type} 房型","客餐廳 / 主臥 / 小套房"],["{Dimensions} 尺寸","4.5m × 3.2m（或 15ft × 11ft）"]],
+      prompt:`Create the most efficient furniture layout for a {Room Type} measuring {Dimensions}. Optimize circulation, storage, seating, natural light, and functionality while maintaining visual balance.`,
+      boost:"加：「Describe the layout zone by zone with approximate placement, and list 3 circulation rules. Assume the main door and window positions if not given, and state your assumption.」讓它先講清楚假設。"
+    },
+    {
+      n:"04", cat:"材質配色", title:"材質與飾面選配", titleEn:"Material & Finish Selector",
+      tags:["材質配色","估價"],
+      use:"給風格，列出地板／牆面／檯面／櫃體／布料／金屬的最佳選材，附耐用度、保養與估價。",
+      vars:[["{Style} 風格","現代奢華 / 北歐 / 日式侘寂 / 工業風"]],
+      prompt:`Suggest the best materials and finishes for a {Style} interior. Include flooring, wall finishes, countertops, cabinetry, fabrics, metals, wood types, durability, maintenance, and estimated cost.`,
+      boost:"加：「Output as a comparison table: 部位｜推薦材質｜耐用度(1-5)｜保養難度｜每坪約略成本. End with 2 cheaper swaps.」表格化最好用。"
+    },
+    {
+      n:"05", cat:"材質配色", title:"配色方案產生器", titleEn:"Color Palette Creator",
+      tags:["材質配色","HEX"],
+      use:"一次產出 5 組專業配色，含牆色、家具色、點綴色與 HEX 色碼。可直接套進出片色票。",
+      vars:[["{Room Type} 房型","主臥 / 客廳 / 咖啡廳"],["{Style} 風格","侘寂大地色 / 莫蘭迪 / 深色調 moody"]],
+      prompt:`Generate 5 professional color palettes for a {Room Type} in {Style}. Include wall colors, furniture colors, accent shades, décor suggestions, and HEX color codes.`,
+      boost:"加：「For each palette give a name, 5 HEX codes (wall/main furniture/secondary/accent/metal), and one sentence on the mood.」→ 產出可直接貼進設計工具的色票。跟你出片色票／mood board 互通。"
+    },
+    {
+      n:"06", cat:"發想", title:"情緒板產生器", titleEn:"Mood Board Generator",
+      tags:["發想","情緒板"],
+      use:"產一份完整 mood board 清單：家具、布料、材質、燈光、藝術品、植栽，並解釋為何這樣搭。",
+      vars:[["{Style} 風格","侘寂 / 現代簡約 / 復古法式"]],
+      prompt:`Create a detailed mood board for a {Style} interior. Recommend furniture, fabrics, textures, lighting, artwork, plants, accessories, and explain how everything works together.`,
+      boost:"文字模型只能給清單＋說明（不會出圖）。想要真的圖 → 把它的清單當 mid-journey/生圖 prompt 素材。加：「Group into 6 sections and give a one-line 'style story' at the end.」"
+    },
+    {
+      n:"07", cat:"呈現", title:"客戶簡報撰稿", titleEn:"Client Presentation Writer",
+      tags:["呈現","文案"],
+      use:"把設計寫成有說服力的客戶提案文：概念、靈感、選材、佈局決策、mood board 說明＋設計敘事。",
+      vars:[["（貼上你的設計重點）","前面幾題的產出可以直接餵給它當素材"]],
+      prompt:`Write a premium client presentation for an interior design project. Include project concept, inspiration, material selections, layout decisions, mood board explanation, and a persuasive design narrative.`,
+      boost:"加：「Structure as slides: each slide = 標題 + 3 bullet points + 一句 speaker note. Tone: confident but warm.」→ 直接可貼進簡報。"
+    },
+    {
+      n:"08", cat:"呈現", title:"預算規劃師", titleEn:"Budget Interior Planner",
+      tags:["呈現","估價"],
+      use:"給總預算，排支出優先順序、推薦平價替代、估成本，在不超支下最大化風格。",
+      vars:[["{Room Type} 房型","客廳 / 全屋"],["{Currency}{Budget} 預算","NT$150,000（原文是 ₹ 盧比，換成你的幣別）"]],
+      prompt:`Design a beautiful {Room Type} with a total budget of {Currency}{Budget}. Prioritize spending, recommend affordable alternatives, estimate costs, and maximize style without exceeding the budget.`,
+      boost:"加：「Output a budget table: 項目｜金額｜佔比%｜為什麼值得. Total must not exceed the budget. Add 3 money-saving tips.」原文範例圖就是這種預算表。"
+    },
+    {
+      n:"09", cat:"燈光", title:"燈光設計助手", titleEn:"Lighting Design Assistant",
+      tags:["燈光"],
+      use:"給房型，產專業燈光計畫：環境／重點／裝飾光、燈具位置、色溫、流明、智慧照明。",
+      vars:[["{Room Type} 房型","客廳 / 主臥 / 餐廳 / 攝影棚"]],
+      prompt:`Create a professional lighting plan for a {Room Type}. Recommend ambient, task, accent, and decorative lighting, fixture placement, color temperature, lumen levels, and smart lighting options.`,
+      boost:"加：「Give a 3-layer plan (ambient/task/accent) with specific 色溫(K) and 流明 per zone, and a simple text diagram of fixture placement.」色溫觀念跟你拍攝／調色的白平衡直接相通。"
+    },
+    {
+      n:"10", cat:"精修", title:"3D 算圖優化", titleEn:"3D Render Improvement Prompt",
+      tags:["精修","吃圖"],
+      use:"上傳一張室內算圖，請它挑出燈光、材質、擬真度、構圖、反射、鏡位的可改進處。",
+      vars:[["（附算圖）","真的把 render 圖貼進去，要用讀圖模型"]],
+      prompt:`Analyze the uploaded interior render and suggest improvements in lighting, materials, realism, composition, textures, reflections, furniture styling, and camera angles for a photorealistic result.`,
+      boost:"⚠️ 要多模態模型附圖。這題的思路＝「AI 當你的第二雙眼睛挑毛病」，跟你的 VLM 評分／挑片一模一樣。加：「List issues by severity (must-fix / nice-to-have) with a concrete fix for each.」"
+    },
+    {
+      n:"11", cat:"行銷", title:"內容行銷產生器", titleEn:"Interior Design Content Creator",
+      tags:["行銷","IG"],
+      use:"一次產 30 個 IG 貼文點子：Reel、carousel 主題、captions、hook、CTA、趨勢題、hashtag。",
+      vars:[["（換成你的領域）","把 interior design 換成 travel photography / 縮時攝影"]],
+      prompt:`Create 30 Instagram content ideas for my interior design business. Include Reel ideas, carousel topics, captions, hooks, CTAs, trending content, and SEO-friendly hashtags.`,
+      boost:"把「interior design」換成你的主題就變攝影版。加：「Group the 30 into 5 themes, each idea with a hook line + 3 hashtags.」→ 直接可排一個月內容。"
+    },
+    {
+      n:"12", cat:"呈現", title:"客戶諮詢問卷", titleEn:"Client Consultation Assistant",
+      tags:["呈現","表單"],
+      use:"產一份完整的新客諮詢問卷：生活型態、預算、設計偏好、家庭需求、收納、色彩、時程、期待。",
+      vars:[["（可換成拍攝諮詢）","把 interior design clients 換成 wedding / portrait clients"]],
+      prompt:`Generate a complete questionnaire for new interior design clients. Cover lifestyle, budget, design preferences, family needs, storage requirements, color choices, timeline, and project expectations.`,
+      boost:"換成「new portrait/wedding photography clients」就是你的拍攝前問卷。加：「Group questions into sections, mix multiple-choice and open-ended, keep it under 20 questions.」"
+    }
+  ];
+
+  // ==== 渲染邏輯 ====
+  const grid=document.getElementById('grid'), filters=document.getElementById('filters');
+  const modal=document.getElementById('modal'), sheet=document.getElementById('sheet');
+  const allCats=[...new Set(ENTRIES.map(e=>e.cat))];
+  let active="全部";
+  function chips(){
+    filters.innerHTML="";
+    ["全部",...allCats].forEach(s=>{
+      const c=document.createElement('div'); c.className="chip"+(s===active?" active":""); c.textContent=s;
+      c.onclick=()=>{active=s; chips(); render();}; filters.appendChild(c);
+    });
+  }
+  function render(){
+    grid.innerHTML="";
+    ENTRIES.filter(e=>active==="全部"||e.cat===active).forEach(e=>{
+      const col=CATCOLOR(e.cat);
+      const card=document.createElement('div'); card.className="card"; card.style.setProperty('--cat',col);
+      card.innerHTML=`<div class="top"><span class="num">${e.n}</span><span class="kicker">${e.cat}</span></div>
+        <h3>${e.title}</h3>
+        <p>${e.use}</p>
+        <div class="chips">${e.tags.map(t=>`<span>${t}</span>`).join("")}</div>`;
+      card.onclick=()=>open(e); grid.appendChild(card);
+    });
+  }
+  function CATCOLOR(c){ return {"發想":"#8a9a78","空間":"#4aa3ff","材質配色":"#d8b65a","燈光":"#f0a93b","呈現":"#b56a4a","精修":"#9b7be0","行銷":"#e94560"}[c]||"#d8b65a"; }
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+  function open(e){
+    const col=CATCOLOR(e.cat);
+    sheet.style.setProperty('--cat',col);
+    sheet.innerHTML=`<button class="close">&times;</button>
+      <div class="idrow"><span class="id" style="color:${col}">${e.n}</span><span class="sub">${e.cat} · ${e.titleEn}</span></div>
+      <h2>${e.title}</h2>
+      <p class="use">${e.use}</p>
+      <h4 class="sec">變數（換成你的內容）</h4>
+      <table class="vars">${e.vars.map(v=>`<tr><td class="k">${v[0]}</td><td class="v">${v[1]}</td></tr>`).join("")}</table>
+      <h4 class="sec">可複製 Prompt</h4>
+      <div class="promptbox"><button class="copybtn">複製</button><pre>${esc(e.prompt)}</pre></div>
+      <p class="selhint">💡 點一下 prompt 框會自動全選，再 Cmd/Ctrl+C；或直接圈選。</p>
+      <div class="boost"><b>💪 強化建議：</b>${e.boost}</div>`;
+    sheet.querySelectorAll('.copybtn').forEach(btn=>{
+      btn.onclick=()=>{ const txt=btn.parentElement.querySelector('pre').innerText;
+        navigator.clipboard.writeText(txt).then(()=>{btn.textContent="已複製 ✓"; btn.classList.add('done'); setTimeout(()=>{btn.textContent="複製"; btn.classList.remove('done');},1600);});};
+    });
+    sheet.querySelectorAll('.promptbox pre').forEach(pre=>{
+      pre.onclick=()=>{ const r=document.createRange(); r.selectNodeContents(pre);
+        const s=window.getSelection(); s.removeAllRanges(); s.addRange(r); };
+    });
+    sheet.querySelector('.close').onclick=closeM;
+    modal.classList.add('open');
+  }
+  function closeM(){ modal.classList.remove('open'); }
+  modal.onclick=(ev)=>{ if(ev.target===modal) closeM(); };
+  document.addEventListener('keydown',ev=>{ if(ev.key==="Escape") closeM(); });
+  chips(); render();
+  </script>
+</body>
+</html>
