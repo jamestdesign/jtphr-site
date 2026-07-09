@@ -44,25 +44,33 @@
   .sub{background:#12122a;border:1px solid var(--border);border-radius:10px;padding:.5rem .7rem .65rem;margin:.55rem 0 .2rem;}
   .subttl{font-size:.82rem;color:var(--gold);margin:.05rem 0 .15rem;}
   .subttl a{color:var(--muted);font-size:.75rem;text-decoration:none;float:right;}
-  /* mode 2 controls */
-  textarea.kw{width:100%;background:#12122a;border:1px solid var(--border);border-radius:10px;color:#eaeaea;
-    font-family:ui-monospace,Menlo,monospace;font-size:.82rem;line-height:1.6;padding:.55rem .7rem;resize:vertical;min-height:4.4rem;}
-  textarea.kw:focus{outline:none;border-color:var(--gold);}
+  /* mode 2 · 群組卡片 */
   input.txt{width:100%;background:#12122a;border:1px solid var(--border);border-radius:8px;color:#eaeaea;
     font-size:.85rem;padding:.45rem .6rem;font-family:inherit;}
-  input.txt:focus{outline:none;border-color:var(--gold);}
+  input.txt:focus,textarea.txt:focus,select.sel:focus{outline:none;border-color:var(--gold);}
   textarea.txt{width:100%;background:#12122a;border:1px solid var(--border);border-radius:8px;color:#eaeaea;
     font-size:.85rem;padding:.45rem .6rem;font-family:inherit;resize:vertical;min-height:2.6rem;line-height:1.5;}
   select.sel{background:#12122a;border:1px solid var(--border);border-radius:8px;color:#eaeaea;font-size:.82rem;padding:.36rem .5rem;}
-  select.sel:focus{outline:none;border-color:var(--gold);}
-  .descBlock{background:#161633;border:1px solid var(--border);border-radius:10px;padding:.6rem .7rem .7rem;margin:.55rem 0;}
-  .descBlock .bhead{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem;}
-  .descBlock .bidx{color:var(--gold);font-weight:700;font-size:.82rem;}
+  .grpCard{background:#14142e;border:1px solid var(--border);border-left:3px solid var(--gold);
+    border-radius:12px;padding:.7rem .8rem .8rem;margin:.6rem 0;}
+  .grpHead{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem;}
+  .grpHead .gidx{color:var(--gold);font-weight:700;font-size:.86rem;}
+  .grpHead .del{margin-left:auto;background:none;border:1px solid var(--border);color:#e88;border-radius:8px;
+    font-size:.74rem;padding:.2rem .55rem;cursor:pointer;}
+  .kwField{font-family:ui-monospace,Menlo,monospace;font-size:.82rem;}
+  .descList{margin:.55rem 0 .4rem .2rem;padding-left:.7rem;border-left:2px dashed #3a3a5c;}
+  .descBlock{background:#181838;border:1px solid var(--border);border-radius:10px;padding:.55rem .65rem .65rem;margin:.5rem 0;}
+  .descBlock .bhead{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.45rem;}
+  .descBlock .bidx{color:#c8a0ff;font-weight:700;font-size:.8rem;}
+  .descBlock .poslbl{font-size:.74rem;color:#9aa;}
+  .descBlock .nInput{width:3.6rem;}
   .descBlock .del{margin-left:auto;background:none;border:1px solid var(--border);color:#e88;border-radius:8px;
-    font-size:.74rem;padding:.2rem .5rem;cursor:pointer;}
-  .descBlock .fld{margin:.35rem 0;}
-  .descBlock .fld .fl{font-size:.72rem;color:#9aa;display:block;margin-bottom:.18rem;}
-  .descBlock .nInput{width:3.4rem;}
+    font-size:.72rem;padding:.15rem .45rem;cursor:pointer;}
+  .descBlock .fld{margin:.32rem 0;}
+  .descBlock .fld .fl{font-size:.72rem;color:#9aa;display:block;margin-bottom:.16rem;}
+  .addDescBtn{background:#181838;border:1px dashed #7340a0;color:#c8a0ff;border-radius:9px;
+    padding:.4rem .7rem;font-size:.8rem;font-weight:600;cursor:pointer;}
+  .addDescBtn:active{transform:scale(.99);}
   .addbtn{width:100%;background:#12122a;border:1px dashed var(--gold);color:var(--gold);border-radius:10px;
     padding:.55rem;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:.35rem;}
   .addbtn:active{transform:scale(.99);}
@@ -161,15 +169,11 @@
       </div>
     </div>
 
-    <!-- 模式 2：特定關鍵字 · 特定描述檔 -->
+    <!-- 模式 2：特定關鍵字 · 群組卡片 -->
     <div data-mode="特定關鍵字" hidden>
-      <p class="hint">貼 FCPX 自訂關鍵字：<b>一行＝一組</b>，同組用 <b>+</b> 串多個＝一起拉進初剪。再為它們加描述區塊。</p>
-      <div class="row"><span class="lbl">關鍵字組（一行一組）</span>
-        <textarea class="kw" id="kwInput" spellcheck="false" placeholder="06_AlterHof舊宮·街拍·精品
-06_AlterHof舊宮·街拍·精品 + 07_Residenz·國家劇院·精品街"></textarea></div>
-      <div class="subttl" style="margin-top:.7rem;">📝 描述區塊 <span style="float:right;color:var(--muted);font-size:.72rem;font-weight:400;">標題／內文／標籤 ＋ 掛哪組·出現位置</span></div>
-      <div id="descBlocks"></div>
-      <button class="addbtn" id="addDesc">＋ 新增描述區塊</button>
+      <p class="hint">每個「關鍵字組」＝要一起拉進初剪的片段；描述直接加在它<b>底下</b>。多個關鍵字用 <b>+</b> 串（一起初剪）。看樣：<a href="./narrative-tag-tool.html" style="color:var(--gold)">描述標籤版型庫 →</a></p>
+      <div id="kwGroups"></div>
+      <button class="addbtn" id="addGroup">＋ 新增關鍵字組</button>
     </div>
   </div>
 
@@ -194,18 +198,14 @@
       });
     });
   }
-  // 標籤類別(多選) 與 標籤模式(切換) 走各自邏輯，其餘走 initGroup
   [...document.querySelectorAll('.chips')]
     .filter(g=>g.dataset.k!=='標籤類別')
     .forEach(initGroup);
 
   function afterPick(g){
-    // 模式切換：顯示對應 mode 區塊
     if(g.dataset.k==='標籤模式'){
       const mode=val('標籤模式');
-      document.querySelectorAll('[data-mode]').forEach(m=>{
-        m.hidden = (m.dataset.mode!==mode);
-      });
+      document.querySelectorAll('[data-mode]').forEach(m=>{ m.hidden=(m.dataset.mode!==mode); });
     }
   }
 
@@ -222,7 +222,6 @@
     }else{
       c.classList.toggle('on');
       syncSub(c.dataset.cat,c.classList.contains('on'));
-      // 「全部」的狀態跟著實際是否全開
       const allChip=catChips.find(x=>x.dataset.cat==='全部');
       allChip.classList.toggle('on',realCats.every(rc=>rc.classList.contains('on')));
     }
@@ -232,76 +231,62 @@
 
   function val(k){const g=document.querySelector(`[data-k="${k}"]`);const on=g.querySelector('.on');return on?on.textContent:g.dataset.def;}
 
-  // ---- 模式2：關鍵字組 + 動態描述區塊 ----
-  const kwInput=document.getElementById('kwInput');
-  const descBlocks=document.getElementById('descBlocks');
+  // ---- 模式2：關鍵字組卡片（描述巢狀在組內）----
+  const kwGroupsEl=document.getElementById('kwGroups');
   const POSITIONS=['場景開頭','整段','指定第N支'];
-  function kwGroups(){return kwInput.value.split('\n').map(s=>s.trim()).filter(Boolean);}
-  function groupOptions(){
-    const gs=kwGroups();
-    const opts=['全部'].concat(gs.map((g,i)=>`G${i+1}`));
-    return opts;
-  }
-  function refreshGroupSelects(){
-    const opts=groupOptions();
-    descBlocks.querySelectorAll('select.grpSel').forEach(sel=>{
-      const cur=sel.value;
-      sel.innerHTML=opts.map(o=>`<option>${o}</option>`).join('');
-      if(opts.includes(cur)) sel.value=cur;
-    });
-  }
-  let blockSeq=0;
-  function addBlock(){
-    blockSeq++;
-    const el=document.createElement('div');
-    el.className='descBlock';
+
+  function addDesc(list){
+    const el=document.createElement('div'); el.className='descBlock';
     el.innerHTML=`
       <div class="bhead">
-        <span class="bidx">描述 #<span class="num"></span></span>
-        <label style="font-size:.74rem;color:#9aa;">掛
-          <select class="sel grpSel">${groupOptions().map(o=>`<option>${o}</option>`).join('')}</select>
-        </label>
-        <label style="font-size:.74rem;color:#9aa;">位置
+        <span class="bidx">描述 <span class="num"></span></span>
+        <label class="poslbl">位置
           <select class="sel posSel">${POSITIONS.map(o=>`<option>${o}</option>`).join('')}</select>
         </label>
         <input class="txt nInput" type="number" min="1" value="1" style="display:none;" title="第幾支">
-        <button class="del" title="刪除">✕</button>
+        <button class="del delDesc" title="刪除描述">✕</button>
       </div>
       <div class="fld"><span class="fl">標題</span><input class="txt title" type="text" placeholder="例：AlterHof 舊宮街拍"></div>
-      <div class="fld"><span class="fl">內文</span><textarea class="txt body" placeholder="例：慕尼黑最古老的宮殿一角，精品櫥窗與石板街。"></textarea></div>
+      <div class="fld"><span class="fl">內文</span><textarea class="txt body" placeholder="例：慕尼黑最古老宮殿一角，精品櫥窗與石板街。"></textarea></div>
       <div class="fld"><span class="fl">標籤</span><input class="txt tag" type="text" placeholder="例：#精品街"></div>`;
-    descBlocks.appendChild(el);
-    const posSel=el.querySelector('.posSel');
-    const nInput=el.querySelector('.nInput');
-    const toggleN=()=>{nInput.style.display = posSel.value==='指定第N支' ? '' : 'none'; build();};
-    posSel.addEventListener('change',toggleN);
-    el.querySelectorAll('input,textarea,select').forEach(inp=>inp.addEventListener('input',build));
-    el.querySelector('.del').addEventListener('click',()=>{el.remove();renumber();build();});
-    renumber(); build();
+    list.appendChild(el);
+    const posSel=el.querySelector('.posSel'), nInput=el.querySelector('.nInput');
+    posSel.addEventListener('change',()=>{nInput.style.display=posSel.value==='指定第N支'?'':'none';build();});
+    el.querySelectorAll('input,textarea,select').forEach(i=>i.addEventListener('input',build));
+    el.querySelector('.delDesc').addEventListener('click',()=>{const p=el.parentNode;el.remove();renumberDesc(p);build();});
+    renumberDesc(list); build();
   }
-  function renumber(){
-    [...descBlocks.children].forEach((el,i)=>el.querySelector('.num').textContent=i+1);
-    const empty=descBlocks.querySelector('.empty');
-    if(descBlocks.querySelectorAll('.descBlock').length===0 && !empty){
-      const e=document.createElement('div');e.className='empty';e.textContent='還沒有描述區塊，按下面「＋ 新增描述區塊」。';
-      descBlocks.appendChild(e);
-    }else if(descBlocks.querySelectorAll('.descBlock').length>0 && empty){empty.remove();}
+  function renumberDesc(list){[...list.querySelectorAll('.descBlock')].forEach((el,i)=>el.querySelector('.num').textContent='#'+(i+1));}
+
+  function addGroup(){
+    const card=document.createElement('div'); card.className='grpCard';
+    card.innerHTML=`
+      <div class="grpHead">
+        <span class="gidx">🔑 關鍵字組 <span class="gnum"></span></span>
+        <button class="del delGrp" title="刪除整組">✕ 刪組</button>
+      </div>
+      <input class="txt kwField" type="text" placeholder="貼 FCPX 關鍵字；多個用 + 串一起初剪">
+      <div class="descList"></div>
+      <button class="addDescBtn">＋ 加描述</button>`;
+    kwGroupsEl.appendChild(card);
+    const list=card.querySelector('.descList');
+    card.querySelector('.kwField').addEventListener('input',build);
+    card.querySelector('.addDescBtn').addEventListener('click',()=>addDesc(list));
+    card.querySelector('.delGrp').addEventListener('click',()=>{card.remove();renumberGroups();build();});
+    renumberGroups(); build();
+    return card;
   }
-  document.getElementById('addDesc').addEventListener('click',addBlock);
-  kwInput.addEventListener('input',()=>{refreshGroupSelects();build();});
-  function readBlocks(){
-    return [...descBlocks.querySelectorAll('.descBlock')].map(el=>{
-      const pos=el.querySelector('.posSel').value;
-      const n=el.querySelector('.nInput').value||'1';
-      return {
-        grp:el.querySelector('.grpSel').value,
-        pos: pos==='指定第N支' ? `第${n}支` : pos,
-        title:el.querySelector('.title').value.trim(),
-        body:el.querySelector('.body').value.trim(),
-        tag:el.querySelector('.tag').value.trim()
-      };
-    });
+  function renumberGroups(){
+    const cards=[...kwGroupsEl.querySelectorAll('.grpCard')];
+    cards.forEach((c,i)=>c.querySelector('.gnum').textContent=i+1);
+    let empty=kwGroupsEl.querySelector('.empty');
+    if(cards.length===0 && !empty){
+      empty=document.createElement('div');empty.className='empty';
+      empty.textContent='還沒有關鍵字組，按下面「＋ 新增關鍵字組」。';
+      kwGroupsEl.appendChild(empty);
+    }else if(cards.length>0 && empty){empty.remove();}
   }
+  document.getElementById('addGroup').addEventListener('click',addGroup);
 
   // ---- 生成規格字串 ----
   function build(){
@@ -325,28 +310,32 @@
         s+=` ┃ 描述標籤[預設檔]:（未勾類別）`;
       }
     }else{
-      // 模式2
-      const gs=kwGroups();
-      const blocks=readBlocks();
+      const cards=[...kwGroupsEl.querySelectorAll('.grpCard')];
       s+=`\n┃ 描述標籤[特定關鍵字]`;
-      if(gs.length){
-        s+=`\n  關鍵字組:\n`+gs.map((g,i)=>`   G${i+1} = ${g}`).join('\n');
-      }else{
-        s+=`\n  關鍵字組:（未輸入）`;
-      }
-      if(blocks.length){
-        s+=`\n  描述:\n`+blocks.map((b,i)=>
-          `   [${i+1}] 掛${b.grp}·${b.pos} ｜ 標題「${b.title||'—'}」內文「${b.body||'—'}」標籤「${b.tag||'—'}」`
-        ).join('\n');
-      }
+      if(!cards.length){ s+=`\n  （未新增關鍵字組）`; }
+      cards.forEach((card,gi)=>{
+        const kw=card.querySelector('.kwField').value.trim()||'（未填關鍵字）';
+        s+=`\n  ▸ 組${gi+1}: ${kw}`;
+        const ds=[...card.querySelectorAll('.descBlock')];
+        if(!ds.length){ s+=`\n      （只拉素材進初剪，無描述）`; }
+        ds.forEach((el,di)=>{
+          const pos=el.querySelector('.posSel').value;
+          const n=el.querySelector('.nInput').value||'1';
+          const posStr= pos==='指定第N支' ? `第${n}支` : pos;
+          const t=el.querySelector('.title').value.trim()||'—';
+          const b=el.querySelector('.body').value.trim()||'—';
+          const g=el.querySelector('.tag').value.trim()||'—';
+          s+=`\n      [${di+1}] ${posStr} ｜ 標題「${t}」內文「${b}」標籤「${g}」`;
+        });
+      });
     }
     document.getElementById('spec').textContent=s;
     return s;
   }
 
-  // 初始化模式顯示 + 空狀態
+  // 初始化：模式顯示 + 先給一組空的關鍵字組
   afterPick(document.querySelector('[data-k="標籤模式"]'));
-  renumber();
+  addGroup();
   build();
 
   document.getElementById('copy').addEventListener('click',async()=>{
