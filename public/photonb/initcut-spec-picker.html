@@ -177,13 +177,36 @@
     </div>
   </div>
 
+  <!-- E LOGO -->
+  <div class="group" data-g="LOGO">
+    <h2>⑤ LOGO</h2>
+    <p class="hint">品牌標疊在畫面上。兩顆標同一套銀線語言、透明底，壓在任何畫面都不會擋住重要資訊。</p>
+    <div class="row"><span class="lbl">要哪顆</span><div class="chips gold" data-k="LOGO標" data-def="圓形鏡頭標">
+      <span class="chip">不放</span><span class="chip">圓形鏡頭標</span><span class="chip">橫式 JT|PHR</span><span class="chip">兩個都要</span></div></div>
+    <p class="hint" style="margin-top:-2px">「兩個都要」＝橫式當片頭 lockup（置中 3 秒）＋ 圓形當全片角落浮水印。</p>
+
+    <div data-logo="on">
+      <div class="row"><span class="lbl">版位</span><div class="chips" data-k="LOGO版位" data-def="右下">
+        <span class="chip">右下</span><span class="chip">左下</span><span class="chip">右上</span><span class="chip">左上</span><span class="chip">置中</span></div></div>
+      <div class="row"><span class="lbl">大小</span><div class="chips" data-k="LOGO大小" data-def="標準">
+        <span class="chip">小</span><span class="chip">標準</span><span class="chip">大</span></div></div>
+      <div class="row"><span class="lbl">透明度</span><div class="chips" data-k="LOGO透明度" data-def="92%">
+        <span class="chip">70%</span><span class="chip">85%</span><span class="chip">92%</span></div></div>
+      <div class="row"><span class="lbl">掃光（金屬反光掃過，5 秒一次）</span><div class="chips" data-k="LOGO掃光" data-def="開">
+        <span class="chip">開</span><span class="chip">關</span></div></div>
+      <div class="row"><span class="lbl">出現時機</span><div class="chips" data-k="LOGO時機" data-def="全片">
+        <span class="chip">全片</span><span class="chip">片頭3秒</span><span class="chip">片尾3秒</span></div></div>
+      <p class="hint">💡 <b>小貼士</b>：長片常駐浮水印建議「掃光關」——每 5 秒閃一次會一直搶注意力。掃光留給片頭／片尾那一下。亮天空底下標會變淡，是正常的，Robert 那邊有一層暗描邊在撐邊界，不夠就說一聲往上加。</p>
+    </div>
+  </div>
+
   <div class="out">
     <div class="olbl">規格字串（複製貼給 Robert）</div>
     <div class="spec" id="spec">—</div>
     <button class="copy" id="copy">📋 複製規格</button>
   </div>
 
-  <footer>PhotoNB · 影片初剪規格選擇器 v2 — 由 Robert 維護 · 對接工具：initcut assembler</footer>
+  <footer>PhotoNB · 影片初剪規格選擇器 v2.1 — 由 Robert 維護 · 對接工具：initcut assembler · narrative_tag · logo_tag</footer>
 </div>
 
 <script>
@@ -207,6 +230,11 @@
       const mode=val('標籤模式');
       document.querySelectorAll('[data-mode]').forEach(m=>{ m.hidden=(m.dataset.mode!==mode); });
     }
+    if(g.dataset.k==='LOGO標') syncLogo();
+  }
+  function syncLogo(){
+    const off = val('LOGO標')==='不放';
+    document.querySelector('[data-logo="on"]').hidden = off;
   }
 
   // ---- 模式1：描述類別多選 + 勾了才展開 ----
@@ -329,12 +357,23 @@
         });
       });
     }
+    const mark=val('LOGO標');
+    if(mark==='不放'){
+      s+=`\n┃ LOGO:不放`;
+    }else if(mark==='兩個都要'){
+      s+=`\n┃ LOGO:橫式 JT|PHR[置中·標準·${val('LOGO透明度')}·掃光開·片頭3秒]`
+        +` ＋ 圓形鏡頭標[${val('LOGO版位')}·${val('LOGO大小')}·${val('LOGO透明度')}·掃光${val('LOGO掃光')}·全片]`;
+    }else{
+      s+=`\n┃ LOGO:${mark}[${val('LOGO版位')}·${val('LOGO大小')}·${val('LOGO透明度')}·掃光${val('LOGO掃光')}·${val('LOGO時機')}]`;
+    }
+
     document.getElementById('spec').textContent=s;
     return s;
   }
 
   // 初始化：模式顯示 + 先給一組空的關鍵字組
   afterPick(document.querySelector('[data-k="標籤模式"]'));
+  syncLogo();
   addGroup();
   build();
 
