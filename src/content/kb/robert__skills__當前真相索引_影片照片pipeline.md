@@ -53,6 +53,7 @@ James 報位置一律用這套代號（例「我在 9V-a」）。
 | 影片端完整工序 | **影片剪輯攻略書 V2.1** → PhotoNB `/photonb/video-editing-kb.html`；vault `_attachments/2026-06-03_video_editing_kb_v2.1.html` | 2026-05-16_影片NG_KP_HP_schema、2026-05-17_9-V-a_HL_NG_KP_重新拍板（v1/v2 schema raw）；PhotoNB `_video-schema.html`、`_fcpx-cheatsheet.html`（已併入，退成歷史） |
 | 全系統分工總覽 | **全 Pipeline 總覽地圖** → PhotoNB `/photonb/pipeline-overview.html`；vault `_attachments/全pipeline_整合視覺圖_v2.1_2026-06-03.html` | `_attachments/全pipeline_n8n整合視覺圖_2026-05-16.html`（5/16 原版，影片半邊已過時） |
 | 影片工序決策紀錄 | 2026-06-03_影片KB_V2.1_FCPX撿片工序_智慧抽幀減量 | — |
+| 🧩 拼貼 grid transform 校正（含 position 單位坑） | **FCPXML_拼貼grid_transform校正**（2026-07-12；做拼貼前必看，別再只留記憶） | — |
 | 🌅 縮時整理（**獨立第三工具**，已調色 JPG→ProRes 8K 素材） | **縮時攝影_ProRes素材輸出_SOP**（2026-06-20 拍板獨立；與照片/影片**並列、互不隸屬**） | — |
 | 更新歷史 | PhotoNB `/photonb/_video-editing-kb-changelog.html` | — |
 
