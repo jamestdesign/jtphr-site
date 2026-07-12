@@ -151,6 +151,31 @@ Layout, top to bottom:
 Crisp legible typography, clean sans-serif body text, balanced composition, rich but tasteful. Vertical 4:5 poster.`,
       promptAltLabel: "雙語版（加這句）",
       promptAlt: `（在上面 prompt 結尾加：）Render every label and body text bilingually: Traditional Chinese on top and English below, both crisp and legible (e.g. title shows 「{TITLE_ZH}」above "{TITLE}", panels list 中文 then English).`
+    },
+    {
+      id: "PR-002",
+      title: "移動中路線地圖卡（影片疊圖）",
+      titleEn: "Travel Route Map Card (video overlay)",
+      styles: ["旅遊地圖","影片疊圖","暖膠捲","16:9橫"],
+      colorway: ["#151310","#3a3a2e","#c8a24a","#d9c9a3","#f0ead8"],
+      model: "AI 生圖（Midjourney / ChatGPT 生圖等）",
+      ratio: "16:9（或依輸出比例）",
+      source: "Robert 設計，配 MTV 暖膠捲風；移動中段落用。生圖後 Robert 合成進影片/FCPXML（可加動態小巴車）",
+      images: [
+        {src:"prompt-assets/PR-002-map.jpg", cap:"版面示意（程式版；AI 版會更美，James 生成後替換）"}
+      ],
+      thumb: "prompt-assets/PR-002-map-thumb.jpg",
+      breakdown: [
+        {h:"用途", d:"影片「移動中」段落右上角地圖卡，示意當天路線；美感優先、地理示意即可（AI 地圖非精準 GPS）"},
+        {h:"風格", d:"復古手繪地圖、暖膠捲色（sepia/褪橄欖/古金）、老紙紋、電影感，配 MTV 調色"},
+        {h:"路線", d:"虛線行程路線＋小圖釘＋地名（起點→各景點→終點）"},
+        {h:"地景", d:"插畫式山、松林、湖泊；大量柔和留白讓路線/文字清楚"},
+        {h:"合成", d:"生完傳 Robert → 裁成地圖卡、可選加會跑的小巴車、套進 FCPXML 上層軌"}
+      ],
+      note: "AI 地圖是「好看但地理不準」；若要精準 GPS 路線，改用程式版真實地圖磚（Robert 出）。標題字卡也可同法：AI 生背景 → Robert 合成文字。",
+      prompt: `Vintage illustrated travel map of {REGION}, {COUNTRY}. Hand-drawn cartography, muted warm film tones (sepia, faded olive, antique gold), subtle aged-paper texture. Show a dotted journey route from {FROM} through {STOP1}, {STOP2}, to {DESTINATION}, with small elegant location pins and labels. Delicate illustrated mountains, pine forests, alpine lakes. Clean, minimal, lots of soft negative space so a route and pins read clearly. Top-down map view. Warm cinematic color grade. {RATIO}.`,
+      promptAltLabel: "範例（德國 day2）",
+      promptAlt: `Vintage illustrated travel map of the Bavarian Alps, Germany. Hand-drawn cartography, muted warm film tones (sepia, faded olive, antique gold), subtle aged-paper texture. Dotted journey route from München south through Schloss Linderhof, Oberammergau, to Neuschwanstein Castle, with small elegant location pins and labels. Delicate illustrated mountains, pine forests, alpine lakes. Clean, minimal, lots of soft negative space. Top-down map view. Warm cinematic color grade. 16:9.`
     }
   ];
 
