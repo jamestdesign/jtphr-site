@@ -255,7 +255,7 @@
     }
     let tr='';
     if(eff==='橫向並排'){ const w=(W-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p+i*(w+g),p,w,H-2*p]); if(!desc)desc=n+' 支左右並排。';
-      tr='FCP transform（16:9＋直式素材，走 X 軸）：<br>position X = <b>−640 / 0 / +640</b> · scale <b>1.053 1.053</b>（直式原檔 fit 後約 608 寬→填滿 640）· <b>不 crop</b>'; }
+      tr='FCP transform（16:9＋直式素材，走 X 軸）：<br>position X = <b>−640 / 0 / +640</b> · scale <b>1.0 1.0</b>（留框：不放大填滿，留一點空隙比較好看）· <b>不 crop</b>'; }
     else if(eff==='直向堆疊'){ const h=(H-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p,p+i*(h+g),W-2*p,h]); if(!desc)desc=n+' 支上下堆疊。';
       tr='FCP transform（9:16＋橫式素材，走 Y 軸）：<br>position Y = <b>+640 / 0 / −640</b> · 橫式片填滿寬 · <b>不 crop</b>'; }
     else if(eff==='2×2四宮格'){ const w=(W-2*p-g)/2,h=(H-2*p-g)/2; const pos=[[p,p],[p+w+g,p],[p,p+h+g],[p+w+g,p+h+g]]; for(let i=0;i<Math.min(n,4);i++)cells.push([...pos[i],w,h]); if(!desc)desc='2×2 四宮格放 '+Math.min(n,4)+' 支。';
