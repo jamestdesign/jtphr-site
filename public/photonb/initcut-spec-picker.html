@@ -132,6 +132,10 @@
     <div class="row"><div class="chips gold" data-k="標籤模式" data-def="預設檔">
       <span class="chip">預設檔</span><span class="chip">特定關鍵字</span></div></div>
 
+    <div class="row"><span class="lbl">標題呈現</span><div class="chips gold" data-k="標題動畫" data-def="淡入">
+      <span class="chip">淡入</span><span class="chip">✍️手寫 writing</span></div></div>
+    <p class="hint" data-writinghint hidden>✍️ <b>手寫 writing</b>：標題像用筆一劃一劃「寫」出來 → 寫完在標題<b>下方劃一條白線</b> → <b>有內文才接著</b>淡入顯示。<b>只有標題</b>用寫的（英文＝簽名連筆、中文＝照筆順書寫），內文照常呈現。預設／特定兩種模式都適用。</p>
+
     <!-- 模式 1：預設關鍵字描述檔 -->
     <div data-mode="預設檔">
       <p class="hint">勾類別＝這類<b>自動生</b>內容（Robert 依場景自動填，你不用打字），可複選。看樣：<a href="./narrative-tag-tool.html" style="color:var(--gold)">描述標籤版型庫 →</a></p>
@@ -231,6 +235,10 @@
       document.querySelectorAll('[data-mode]').forEach(m=>{ m.hidden=(m.dataset.mode!==mode); });
     }
     if(g.dataset.k==='LOGO標') syncLogo();
+    if(g.dataset.k==='標題動畫') syncWriting();
+  }
+  function syncWriting(){
+    document.querySelector('[data-writinghint]').hidden = (val('標題動畫')!=='✍️手寫 writing');
   }
   function syncLogo(){
     const off = val('LOGO標')==='不放';
@@ -356,6 +364,9 @@
           s+=`\n      [${di+1}] ${posStr} ｜ 標題「${t}」內文「${b}」標籤「${g}」`;
         });
       });
+    }
+    if(val('標題動畫')==='✍️手寫 writing'){
+      s+=`\n  ✍️標題動畫: 手寫writing（標題逐劃寫出→下方劃白線→有內文才接著顯示；僅標題，內文照常）`;
     }
     const mark=val('LOGO標');
     if(mark==='不放'){
