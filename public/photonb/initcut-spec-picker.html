@@ -253,11 +253,16 @@
       else if(vert){ eff='直向堆疊'; desc='9:16 直向輸出 → 直式片上下堆疊。'; }
       else { eff='橫向並排'; desc='16:9 橫向輸出 → 直式片並排填滿。'; }
     }
-    if(eff==='橫向並排'){ const w=(W-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p+i*(w+g),p,w,H-2*p]); if(!desc)desc=n+' 支左右並排。'; }
-    else if(eff==='直向堆疊'){ const h=(H-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p,p+i*(h+g),W-2*p,h]); if(!desc)desc=n+' 支上下堆疊。'; }
-    else if(eff==='2×2四宮格'){ const w=(W-2*p-g)/2,h=(H-2*p-g)/2; const pos=[[p,p],[p+w+g,p],[p,p+h+g],[p+w+g,p+h+g]]; for(let i=0;i<Math.min(n,4);i++)cells.push([...pos[i],w,h]); if(!desc)desc='2×2 四宮格放 '+Math.min(n,4)+' 支。'; }
+    let tr='';
+    if(eff==='橫向並排'){ const w=(W-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p+i*(w+g),p,w,H-2*p]); if(!desc)desc=n+' 支左右並排。';
+      tr='FCP transform（16:9＋直式素材，走 X 軸）：<br>position X = <b>−640 / 0 / +640</b> · scale <b>1.053 1.053</b>（直式原檔 fit 後約 608 寬→填滿 640）· <b>不 crop</b>'; }
+    else if(eff==='直向堆疊'){ const h=(H-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p,p+i*(h+g),W-2*p,h]); if(!desc)desc=n+' 支上下堆疊。';
+      tr='FCP transform（9:16＋橫式素材，走 Y 軸）：<br>position Y = <b>+640 / 0 / −640</b> · 橫式片填滿寬 · <b>不 crop</b>'; }
+    else if(eff==='2×2四宮格'){ const w=(W-2*p-g)/2,h=(H-2*p-g)/2; const pos=[[p,p],[p+w+g,p],[p,p+h+g],[p+w+g,p+h+g]]; for(let i=0;i<Math.min(n,4);i++)cells.push([...pos[i],w,h]); if(!desc)desc='2×2 四宮格放 '+Math.min(n,4)+' 支。';
+      tr='FCP transform（1:1，四宮格）：<br>position = <b>(±480, ±270)</b> 四角 · scale 依素材裁切至 1:1'; }
     svg.innerHTML=cells.map(([x,y,w,h])=>`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="2.5" fill="#c8a24a" opacity="0.88"/>`).join('');
-    note.innerHTML='<b>'+kind+'</b> · '+n+'&nbsp;支 · 輸出 '+ratio+'<br>'+desc;
+    const foot=(eff==='橫向並排')?'<br><span style="opacity:.7">※ 橫式素材硬塞 16:9 直向三格、想保留一點邊框 → crop left <b>645</b> / right <b>645</b>（保留匡）</span>':'';
+    note.innerHTML='<b>'+kind+'</b> · '+n+'&nbsp;支 · 輸出 '+ratio+'<br>'+desc+'<br><span style="font-family:ui-monospace,Menlo,monospace;font-size:.86em;opacity:.92">'+tr+'</span>'+foot;
   }
 
   function afterPick(g){
