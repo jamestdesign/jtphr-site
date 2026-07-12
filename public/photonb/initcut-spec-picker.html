@@ -76,6 +76,10 @@
   .addbtn:active{transform:scale(.99);}
   .empty{color:var(--muted);font-size:.78rem;font-style:italic;margin:.3rem 0;}
   footer{margin-top:2rem;color:var(--muted);font-size:.72rem;text-align:center;}
+  .layoutprev{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  #layoutSvg{width:176px;height:99px;background:#0b0b1e;border:1px solid var(--border);border-radius:6px;flex:none;}
+  .layoutnote{font-size:.74rem;color:var(--muted);line-height:1.5;}
+  .layoutnote b{color:var(--gold);font-weight:600;}
 </style>
 </head>
 <body>
@@ -111,6 +115,9 @@
       <span class="chip">2支</span><span class="chip">3支</span><span class="chip">4支</span></div></div>
     <div class="row"><span class="lbl">長度對齊</span><div class="chips gold" data-k="長度" data-def="最長放主線">
       <span class="chip">最長放主線</span><span class="chip">最短切齊</span></div></div>
+    <div class="row"><span class="lbl">版面預覽</span>
+      <div class="layoutprev"><svg id="layoutSvg" viewBox="0 0 160 90" aria-label="版面示意"></svg><span class="layoutnote" id="layoutNote"></span></div>
+    </div>
   </div>
 
   <!-- C 時間線 -->
@@ -229,11 +236,27 @@
     .filter(g=>g.dataset.k!=='標籤類別')
     .forEach(initGroup);
 
+  // ---- ② 拼貼版面幾何預覽 ----
+  function drawLayout(){
+    const kind=val('拼貼版型'); const n=parseInt(val('每組'))||3;
+    const svg=document.getElementById('layoutSvg'); const note=document.getElementById('layoutNote');
+    if(!svg) return;
+    const W=160,H=90,g=5,p=6; let cells=[];
+    let eff=kind, desc='';
+    if(kind==='自動'){ eff='橫向並排'; desc='依素材方向自動選：直式→並排、橫式→2×2、混合→堆疊。下圖示意直式並排（你的移動片多為直式）。'; }
+    if(eff==='橫向並排'){ const w=(W-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p+i*(w+g),p,w,H-2*p]); if(!desc)desc='直式片並排，'+n+' 支填滿 16:9。'; }
+    else if(eff==='直向堆疊'){ const h=(H-2*p-(n-1)*g)/n; for(let i=0;i<n;i++)cells.push([p,p+i*(h+g),W-2*p,h]); desc='橫式片上下堆疊，'+n+' 支。'; }
+    else if(eff==='2×2四宮格'){ const w=(W-2*p-g)/2,h=(H-2*p-g)/2; const pos=[[p,p],[p+w+g,p],[p,p+h+g],[p+w+g,p+h+g]]; for(let i=0;i<Math.min(n,4);i++)cells.push([...pos[i],w,h]); desc='2×2 四宮格，放 '+Math.min(n,4)+' 支。'; }
+    svg.innerHTML=cells.map(([x,y,w,h])=>`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="2.5" fill="#c8a24a" opacity="0.88"/>`).join('');
+    note.innerHTML='<b>'+kind+'</b> · '+n+'&nbsp;支<br>'+desc;
+  }
+
   function afterPick(g){
     if(g.dataset.k==='標籤模式'){
       const mode=val('標籤模式');
       document.querySelectorAll('[data-mode]').forEach(m=>{ m.hidden=(m.dataset.mode!==mode); });
     }
+    if(g.dataset.k==='拼貼版型'||g.dataset.k==='每組') drawLayout();
     if(g.dataset.k==='LOGO標') syncLogo();
     if(g.dataset.k==='標題動畫') syncWriting();
   }
@@ -385,6 +408,7 @@
   // 初始化：模式顯示 + 先給一組空的關鍵字組
   afterPick(document.querySelector('[data-k="標籤模式"]'));
   syncLogo();
+  drawLayout();
   addGroup();
   build();
 
