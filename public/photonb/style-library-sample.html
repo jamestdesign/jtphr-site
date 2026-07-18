@@ -35,10 +35,9 @@
     @media(max-width:520px){.grid{grid-template-columns:1fr;}}
     .card{background:var(--surf);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
     .ba{position:relative;width:100%;aspect-ratio:4/3;user-select:none;touch-action:none;cursor:ew-resize;overflow:hidden;background:#000;}
-    .ba .after-wrap{position:absolute;inset:0;overflow:hidden;width:50%;}
-    .ba img{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none;display:block;pointer-events:none;}
-    .ba .before{width:100%;height:100%;object-fit:cover;}
-    .ba .after-wrap img{height:100%;object-fit:cover;}
+    .ba .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+    .ba .rev-wrap{position:absolute;top:0;left:0;bottom:0;overflow:hidden;width:50%;}
+    .ba .rev-wrap img{position:absolute;top:0;left:0;height:100%;object-fit:cover;display:block;pointer-events:none;}
     .ba .handle{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);left:50%;pointer-events:none;box-shadow:0 0 8px rgba(0,0,0,.6);}
     .ba .handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:var(--gold);color:#1a1a10;font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:700;}
     .lbl{position:absolute;top:8px;padding:.15rem .5rem;font-size:.7rem;border-radius:6px;background:rgba(0,0,0,.55);color:#fff;z-index:2;}
@@ -136,8 +135,8 @@ function renderCards(){
   vis.forEach(l=>{
     const c=document.createElement('div');c.className='card';
     c.innerHTML=`<div class="ba">
-      <img class="before" loading="lazy" src="${AP}${curPhoto}_base.jpg" alt="原圖">
-      <div class="after-wrap"><img loading="lazy" src="${AP}${curPhoto}_${l.l}.jpg" alt="${l.name}"></div>
+      <img class="bg" loading="lazy" src="${AP}${curPhoto}_${l.l}.jpg" alt="套用後 ${l.name}">
+      <div class="rev-wrap"><img loading="lazy" src="${AP}${curPhoto}_base.jpg" alt="原圖"></div>
       <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span></div>
       <div class="meta"><div class="fam">FlexPresets · ${l.fam}</div><h3>${l.name}</h3>
       <div class="tags"><span class="tag">${l.family}</span><span class="tag">${l.tone}</span>${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
@@ -147,7 +146,7 @@ function renderCards(){
 }
 function bindBA(){
   document.querySelectorAll('.ba').forEach(ba=>{
-    const wrap=ba.querySelector('.after-wrap'),handle=ba.querySelector('.handle');
+    const wrap=ba.querySelector('.rev-wrap'),handle=ba.querySelector('.handle');
     const aimg=wrap.querySelector('img');
     function fit(){const w=ba.clientWidth;aimg.style.width=w+'px';}
     fit();window.addEventListener('resize',fit);
