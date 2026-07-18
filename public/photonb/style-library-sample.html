@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>風格檔庫 · 小樣本 · PhotoNB</title>
+  <meta name="description" content="風格檔庫線上目錄（小樣本）：用新天鵝堡大景當統一樣本，拖曳看每個 LUT 風格套用前後對比。可行性驗證版。" />
+  <meta name="date" content="2026-07-18" />
+  <style>
+    :root{--bg:#0b0b12;--surf:#14141f;--line:#2a2a3a;--gold:#d8b65a;--ink:#f0eee6;--muted:#9a9ab0;--accent:#e0b64a;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;margin:0;}
+    body{background:var(--bg);color:var(--ink);font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:1000px;margin:0 auto;padding:1.2rem 1.1rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.32em;font-size:.7rem;text-transform:uppercase;margin:1.3rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5vw,2.4rem);}
+    .lead{color:var(--muted);margin:.3rem 0 1rem;max-width:60ch;}
+    .badge{display:inline-block;background:rgba(216,182,90,.14);border:1px solid var(--line);color:var(--gold);border-radius:999px;padding:.2rem .7rem;font-size:.74rem;margin:.2rem .3rem .2rem 0;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.85rem 1.05rem;font-size:.88rem;margin:1.1rem 0;color:var(--ink);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:1.4rem;margin-top:1.4rem;}
+    @media(max-width:520px){.grid{grid-template-columns:1fr;}}
+    .card{background:var(--surf);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+    .ba{position:relative;width:100%;aspect-ratio:3/2;user-select:none;touch-action:none;cursor:ew-resize;overflow:hidden;background:#000;}
+    .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+    .ba .after-wrap{position:absolute;inset:0;overflow:hidden;width:50%;}
+    .ba .after-wrap img{width:100%;}
+    .ba .after-wrap{--w:50%;}
+    .ba .handle{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);left:50%;transform:translateX(-1px);pointer-events:none;box-shadow:0 0 8px rgba(0,0,0,.6);}
+    .ba .handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--gold);color:#1a1a10;font-size:15px;display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.5);}
+    .lbl{position:absolute;top:8px;padding:.15rem .5rem;font-size:.7rem;border-radius:6px;background:rgba(0,0,0,.55);color:#fff;letter-spacing:.05em;}
+    .lbl.b{left:8px;} .lbl.a{right:8px;color:var(--gold);}
+    .meta{padding:.85rem 1rem 1rem;}
+    .meta h3{margin:.1rem 0 .3rem;font-size:1.05rem;}
+    .fam{color:var(--muted);font-size:.78rem;}
+    .tags{margin-top:.5rem;}
+    .tag{display:inline-block;font-size:.7rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:.1rem .45rem;margin:.15rem .25rem 0 0;}
+    footer{margin-top:2.6rem;color:var(--muted);font-size:.75rem;text-align:center;}
+    .refstrip{display:flex;gap:.8rem;align-items:center;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:.6rem .8rem;font-size:.82rem;color:var(--muted);}
+    .refstrip img{width:74px;height:50px;object-fit:cover;border-radius:6px;flex:none;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">風格檔庫 · 小樣本 · 可行性驗證</p>
+  <h1>風格檔庫 <span style="color:var(--gold);font-size:.6em;">線上目錄（樣本）</span></h1>
+  <p class="lead">用<strong>新天鵝堡大景</strong>當統一樣本，展示每個影片 LUT 風格<strong>套用前後</strong>的樣子。<strong>拖曳中間金線</strong>（或滑鼠移動）即可比較：左邊原圖、右邊套用後。</p>
+
+  <div class="refstrip">
+    <img src="./style-sample-assets/before.jpg" alt="參考大景">
+    <div>📍 統一樣本＝德國 day2「新天鵝堡·瑪麗安橋大景」（原圖無調色）。全部 look 都套在這張上，一眼看出差異。</div>
+  </div>
+
+  <div class="note">✅ <strong>這是可行性驗證的小樣本（6 個 look）。</strong>技術已跑通：ffmpeg 自動把 <code>.cube</code> LUT 套上樣本出前後對比。全庫有 <strong>~489 個影片 LUT ＋ 576 個照片預設</strong>，確認版面 OK 後即可全量批次生成，並加篩選（暖/冷/膠片/人像/電影…）。</div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>PhotoNB · 風格檔庫小樣本 · ffmpeg lut3d 自動渲染 · 由 Robert 維護 · 2026-07-18</footer>
+</div>
+
+<script>
+const LOOKS = [
+  {img:"look1.jpg", name:"富士 Velvia — 鮮豔", fam:"FlexPresets 影片 · 富士膠片", tags:["鮮豔","飽和","風景王"]},
+  {img:"look2.jpg", name:"富士 CLASSIC CHROME — 經典正片", fam:"FlexPresets 影片 · 富士膠片", tags:["膠片","低飽和","質感"]},
+  {img:"look3.jpg", name:"富士 ACROS — 黑白", fam:"FlexPresets 影片 · 富士膠片", tags:["黑白","膠片","質感"]},
+  {img:"look4.jpg", name:"富士 ETERNA — 電影", fam:"FlexPresets 影片 · 富士膠片", tags:["電影","柔和","低反差"]},
+  {img:"look5.jpg", name:"玩命關頭 — 橙藍電影", fam:"FlexPresets 影片 · 重磅電影", tags:["電影","橙藍","冷調"]},
+  {img:"look6.jpg", name:"日系清新", fam:"FlexPresets 影片 · 日系清新", tags:["清新","明亮","通透"]},
+];
+const grid = document.getElementById('grid');
+LOOKS.forEach(l=>{
+  const card = document.createElement('div'); card.className='card';
+  card.innerHTML = `
+    <div class="ba">
+      <img class="before" src="./style-sample-assets/before.jpg" alt="原圖">
+      <div class="after-wrap"><img src="./style-sample-assets/${l.img}" alt="${l.name}"></div>
+      <div class="handle"></div>
+      <span class="lbl b">原圖</span><span class="lbl a">套用後</span>
+    </div>
+    <div class="meta">
+      <div class="fam">${l.fam}</div>
+      <h3>${l.name}</h3>
+      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>`;
+  grid.appendChild(card);
+});
+// before/after 拖曳
+document.querySelectorAll('.ba').forEach(ba=>{
+  const wrap = ba.querySelector('.after-wrap'), handle = ba.querySelector('.handle');
+  function set(x){
+    const r = ba.getBoundingClientRect();
+    let p = (x - r.left)/r.width; p = Math.max(0, Math.min(1, p));
+    wrap.style.width = (p*100)+'%'; handle.style.left = (p*100)+'%';
+  }
+  let drag=false;
+  const start=e=>{drag=true; set((e.touches?e.touches[0]:e).clientX);};
+  const move=e=>{if(drag) set((e.touches?e.touches[0]:e).clientX);};
+  const end=()=>{drag=false;};
+  ba.addEventListener('mousedown',start); ba.addEventListener('mousemove',e=>{if(drag)move(e);});
+  ba.addEventListener('pointermove',e=>{ if(e.pressure>0||e.buttons>0) set(e.clientX); });
+  ba.addEventListener('touchstart',start,{passive:true}); ba.addEventListener('touchmove',move,{passive:true});
+  window.addEventListener('mouseup',end); window.addEventListener('touchend',end);
+  // 滑鼠 hover 也可比較
+  ba.addEventListener('mousemove',e=>set(e.clientX));
+});
+</script>
+</body>
+</html>
