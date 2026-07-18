@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>撿片批次出圖 · fcpxmld-export · PhotoNB</title>
+  <meta name="description" content="影片工具：FCPX 撿完片交一個 .fcpxmld，一條指令自動切 HL 片段＋抽 KP 單禎，分場景輸出並寫好 LR 可讀色標。命名/轉檔/標註全自動。" />
+  <meta name="date" content="2026-07-18" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:760px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.5em;letter-spacing:.02em;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.02rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;
+      font-family:ui-monospace,Menlo,monospace;font-size:.83rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    .card.red{border-color:rgba(233,117,138,.5);background:rgba(233,117,138,.06);}
+    ul{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.86rem;margin:.4rem 0 .2rem;}
+    .flow b{background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:.3rem .6rem;color:var(--gold2);}
+    .flow i{color:var(--gold);font-style:normal;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.74rem;color:var(--muted);margin:.15rem .2rem 0 0;}
+    .ok{color:var(--green);} .bad{color:var(--red);}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+    .num{display:inline-block;width:1.5rem;height:1.5rem;line-height:1.5rem;text-align:center;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:.8rem;margin-right:.4rem;}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+    .crumb{font-size:.78rem;color:var(--muted);margin:.3rem 0 0;}
+    .crumb a{text-decoration:none;}
+    .dot{color:#5bd48a;} .dotr{color:#e9758a;} .doty{color:#d8b65a;} .dotp{color:#b9a3f0;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">影片工具 · 批次出圖 · Phase B</p>
+  <h1>撿片批次出圖 <span class="en">fcpxmld-export</span></h1>
+  <p class="lead">你在 FCPX 撿完片，Export 一個 <code>.fcpxmld</code> 交給我，<b>一條指令全自動出圖</b>：讀裡面的 keyword / star，自動切 HL 片段＋抽 KP 單禎，分場景輸出並寫好 LR 可讀色標。命名／分場景／轉檔／標註全自動，你不用手動做任何一步。</p>
+  <p class="crumb">📄 本頁＝這支工具的<b>單一現行說明</b>。上游建 Library 見 <a href="./trip-fcpx-build.html">旅遊影片匯入fcpx</a>；FCPX 撿片操作＋完整工序見 <a href="./video-editing-kb.html">影片剪輯知識庫</a>。</p>
+
+  <h2>做什麼</h2>
+  <div class="flow">
+    <b>James FCPX 撿片（KP/HL）</b><i>→</i><b>Export .fcpxmld</b><i>→</i><b>fcpxmld-export</b><i>→</i><b>_preview_mov_HL/ ＋ _preview_mov_KP/</b>
+  </div>
+  <ul>
+    <li>讀 <code>.fcpxmld</code> 內的 <code>KP_R/Y/G/P</code> keyword ＋ Star 評分 ＋ 場景關鍵字。</li>
+    <li><b>KP</b> → 從原片抽<b>原生解析度</b>單禎 JPG，色標＋關鍵字＋來源時碼寫進 XMP，LR import 直接讀到。</li>
+    <li><b>HL（4★/5★）</b> → 切 1080p H.264 短片段，當「動態照片」觀賞。</li>
+    <li>命名／分場景全由腳本依 XML 生成，你不用手動命名、不用手動搬檔。</li>
+  </ul>
+
+  <h2>怎麼用</h2>
+  <pre># 撿完一天，把那天的 .fcpxmld 丟給我，一條指令：
+fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"</pre>
+  <p><span class="tag">腳本 <code>tools/fcpxmld-export.py</code></span><span class="tag">2026-07-07 起跨 trip 通用</span></p>
+  <div class="note">💡 <b>路徑自動推導（不再逐趟改碼）：</b>從 argv 的 <code>.fcpxmld</code> 路徑自動抓 <code>TRIP_ROOT</code> 與素材夾 —— 依序試 ①同名 day 素材夾 ②剝掉 <code>_主/_次</code> 的同名夾 ③同 <code>dayN</code> 的 <code>MOV_*</code> ④<code>_MOV</code> ⑤退回 trip 本身。撿完一天丟該 day 的 <code>.fcpxmld</code> 即出圖。</div>
+
+  <h2>🔒 輸出版面（鎖死・不要每次不一樣）</h2>
+  <pre>&lt;trip&gt;/_preview_mov_KP/&lt;場景&gt;/   ← KP 單禎 JPG
+&lt;trip&gt;/_preview_mov_HL/&lt;場景&gt;/   ← HL 片段 mp4</pre>
+  <p><code>&lt;場景&gt;</code> = day 場景夾名。命名一眼看出是「mov 導出的預覽檔」。</p>
+  <p style="font-size:.82rem;color:var(--muted)">⚠️ 素材若被 FCP 託管進 <code>.fcpbundle</code>，工具一律改抓 day 場景夾的原檔，輸出才會落對場景（不會套進 bundle 深層路徑）。</p>
+
+  <h2>四種處理</h2>
+  <div class="card">
+    <p><span class="num">A</span><b>KP → 原生解析度單禎 ＋ 分類寫 XMP</b></p>
+    <p>讀 <code>KP_R/Y/G/P</code> 的單禎時間點 → ffmpeg 抽原生解析度 JPG（<code>-q:v 1</code>）→ 色標寫進 XMP：<br>
+    <span class="dotr">● R=Red 臉</span>　<span class="doty">● Y=Yellow 背影</span>　<span class="dot">● G=Green 風景</span>　<span class="dotp">● P=Purple 物件</span><br>
+    你 import LR 直接看到色標＋關鍵字＋來源時碼，不用再標一次。</p>
+  </div>
+  <div class="card">
+    <p><span class="num">B</span><b>HL（4★/5★）→ 動態照片短片段</b></p>
+    <p>讀 rating 4★/5★ 的範圍（認定以 keyword + I/O 為準，Favorite 綠標只是視覺輔助）→ 切 H.264 1080p faststart 短片段。段邊界＝你 I/O 框的範圍。<b>Star3 = 只記不切。</b></p>
+  </div>
+  <div class="card">
+    <p><span class="num">C</span><b>Star1（長篇發表・去 NG）→ 移除 Reject 拼成一支</b></p>
+    <p>你 I/O 框整段＋段內壞鏡頭按 Delete(Reject) → 工具挖掉壞段、把好段 concat 成一支完整長片，檔名標 <code>Star1</code>。屬「另外出片」的獨立長片。<span style="font-size:.82rem;color:var(--muted)">⚠️ concat 功能待補，規格已定。</span></p>
+  </div>
+  <div class="card">
+    <p><span class="num">D</span><b>NG → 只記錄不切</b></p>
+    <p>短素材的 NG 段寫進 metadata 供劇本／剪輯跳過，<b>原檔不動</b>（只有 Star1 長篇會真的去 NG 拼接）。</p>
+  </div>
+
+  <h2>色彩處理（自動判來源）</h2>
+  <table>
+    <tr><th>來源 colorSpace</th><th>處理</th></tr>
+    <tr><td>Rec.2020 HLG（9-18-9，iPhone <code>IMG_*.MOV</code>）</td><td>先 <code>zscale + tonemap</code> HLG→Rec.709 SDR，否則畫面會灰</td></tr>
+    <tr><td>Rec.709（1-1-1，手機 <code>VID*.mp4</code>）</td><td>原樣不動</td></tr>
+  </table>
+  <p>由每支素材的 <code>&lt;format&gt;</code> 自動判定，不用手動指定。</p>
+
+  <h2>編碼規格</h2>
+  <pre>ffmpeg -i &lt;src.MOV&gt; -vf "scale=-2:1080,format=yuv420p" \
+  -c:v libx264 -pix_fmt yuv420p -crf 20 -preset slow \
+  -c:a aac -b:a 192k -movflags +faststart &lt;dst.mp4&gt;</pre>
+  <div class="card red">
+    <p><b>🔥 必踩坑：別用 HEVC。</b>LR Classic 預覽 HEVC（H.265）會顯示<b>灰畫面</b>（known bug），10-bit 直編也不解。出片一律走 <b>H.264 + yuv420p 8-bit</b>，檔案大 ~30% 但相容稅必付。</p>
+  </div>
+
+  <h2>✅ 已實證</h2>
+  <ul>
+    <li>北海道 day2、德國 day1（9 HL ＋ 6 KP 全成功）等多趟零錯誤。</li>
+    <li>2026-07-07 起路徑從 <code>.fcpxmld</code> 自動推導，跨 trip 通用不用改碼。</li>
+  </ul>
+
+  <footer>PhotoNB · 影片工具 — 撿片批次出圖（fcpxmld-export）· 單一現行說明 · 由 Robert 維護 · 更新 2026-07-18</footer>
+</div>
+</body>
+</html>

@@ -437,15 +437,9 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 <h2 id="ingest">⑧⁰ 旅遊影片匯入fcpx（Robert 先建 Library）<span style="font-size:15px;color:#5c6773;">· 工具 trip_fcpx_build</span></h2>
 <div class="card callout-green">
   <span class="label green">🛠️ 工具：旅遊影片匯入fcpx（trip_fcpx_build）· 已實證 比利時day2-4 / 德國day1-6（421 clips）</span>
-  <p>把整趟 <code>MOV_&lt;day&gt;</code> 一次匯進 FCP，自動分好 event 與場景關鍵字，James 開 Library 直接撿片，不用一夾一夾手動拖。</p>
-  <ul>
-    <li><strong>event = 每天</strong>（主／次各自獨立 event，不混）</li>
-    <li><strong>每個場景 = 一個 keyword collection</strong>（clip 自動掛該場景名當關鍵字 → 撿片時用關鍵字分類找片）</li>
-    <li>影片 <strong>leave-in-place</strong>（media-rep 指原檔，<code>MOV_</code> 當唯一原檔家，不複製、不佔空間）</li>
-    <li>新平鋪 <code>_次</code> 與舊主/次子夾兩種結構都吃</li>
-  </ul>
-  <pre><code>trip_fcpx_build.py "&lt;trip&gt;"/MOV_*/ --library "&lt;….fcpbundle&gt;" -o 匯入FCP.fcpxml
-# → 產 fcpxml；再 FCP「File ▸ Import ▸ XML」或雙擊匯入（也可走 SpliceKit import_fcpxml）</code></pre>
+  <p>把整趟 <code>MOV_&lt;day&gt;</code> 一次匯進 FCP，自動分好 event（每天）＋場景關鍵字＋移動中/建築/飲食分類，James 開 Library 直接撿片，不用一夾一夾手動拖。影片 leave-in-place 不複製。</p>
+  <p>👉 <strong>完整功能／用法／分類規則已獨立成一頁（單一現行說明、日後在該頁統一更新）：</strong><br>
+  <a href="./trip-fcpx-build.html"><strong>旅遊影片匯入fcpx（trip-fcpx-build）工具頁 →</strong></a>（也可從<a href="./dashboard.html">儀表板 · 工具</a>進）</p>
 </div>
 <div class="tip"><strong>💡 跟 §8 的關係：</strong>這步取代 §8「一次性設定」裡「手動匯入 <code>_MOV</code>」那一動 —— 用工具產 fcpxml 一次匯完（已自動 Leave-in-place + 場景關鍵字）。匯完就照 §8 綁 KP/HL 快捷鍵開撿。配套出圖端 = <strong>fcpxmld-export</strong>（§9）。</div>
 
@@ -516,6 +510,8 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
   <p>你在 FCPX 撿完片，Export 一個 <code>.fcpxmld</code> 交給我，一條指令全自動出圖：</p>
   <pre><code>fcpxmld-export &lt;trip&gt;/_MOV/xxx.fcpxmld</code></pre>
   <p>工具讀 <code>.fcpxmld</code> 內的 keyword / star，自動切 HL 片段 + 抽 KP 單禎，分場景輸出並寫好 LR 可讀標註。<strong>命名 / 分場景 / 轉檔 / 標註全自動，你不用手動做任何一步。</strong></p>
+  <p>👉 <strong>完整功能／四種處理／色彩與編碼規則已獨立成一頁（單一現行說明，日後在該頁統一更新）：</strong><br>
+  <a href="./fcpxmld-export.html"><strong>撿片批次出圖（fcpxmld-export）工具頁 →</strong></a>（也可從<a href="./dashboard.html">儀表板 · 工具</a>進）</p>
 </div>
 
 <div class="card callout-red">
