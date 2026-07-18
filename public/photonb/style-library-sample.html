@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>風格檔庫 · 篩選架構 + 小樣本 · PhotoNB</title>
-  <meta name="description" content="風格檔庫線上目錄：篩選架構設計（10 家族+媒體+色溫）+ 新天鵝堡大景前後對比小樣本。可行性驗證版。" />
+  <title>風格檔庫 · 多照片樣本 + 篩選 · PhotoNB</title>
+  <meta name="description" content="風格檔庫線上目錄：切換樣本照片（室內/戶外/人像/高反差）看每個 LUT 套用前後 + 篩選架構。延遲載入不吃資源。" />
   <meta name="date" content="2026-07-18" />
   <style>
-    :root{--bg:#0b0b12;--surf:#14141f;--line:#2a2a3a;--gold:#d8b65a;--ink:#f0eee6;--muted:#9a9ab0;--accent:#e0b64a;}
+    :root{--bg:#0b0b12;--surf:#14141f;--line:#2a2a3a;--gold:#d8b65a;--ink:#f0eee6;--muted:#9a9ab0;}
     *{box-sizing:border-box;} html,body{overflow-x:hidden;margin:0;}
     body{background:var(--bg);color:var(--ink);font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
     a{color:var(--gold);}
@@ -18,34 +18,38 @@
     h2{color:var(--gold);font-size:1.05rem;border-bottom:1px solid var(--line);padding-bottom:.4rem;margin:2.2rem 0 .8rem;}
     .lead{color:var(--muted);margin:.3rem 0 1rem;max-width:62ch;}
     .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.85rem 1.05rem;font-size:.88rem;margin:1.1rem 0;}
-    /* filter bar */
-    .filters{position:sticky;top:0;z-index:9;background:linear-gradient(var(--bg) 82%,transparent);padding:.7rem 0 .8rem;}
+    /* photo switcher */
+    .picker{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:.7rem .8rem;margin:.6rem 0 1rem;}
+    .picker .t{font-size:.78rem;color:var(--muted);margin-bottom:.5rem;}
+    .thumbs{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.3rem;}
+    .thumb{flex:none;width:104px;cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid transparent;position:relative;}
+    .thumb.on{border-color:var(--gold);}
+    .thumb img{width:104px;height:70px;object-fit:cover;display:block;}
+    .thumb .el{font-size:.62rem;color:var(--ink);background:rgba(0,0,0,.5);padding:.1rem .3rem;position:absolute;bottom:0;left:0;right:0;text-align:center;}
+    /* filters */
     .frow{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.25rem 0;}
-    .frow .k{color:var(--muted);font-size:.72rem;min-width:3.2em;letter-spacing:.05em;}
+    .frow .k{color:var(--muted);font-size:.72rem;min-width:3.2em;}
     .chip{border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:999px;padding:.25rem .7rem;font-size:.78rem;cursor:pointer;transition:.15s;user-select:none;}
-    .chip:hover{border-color:var(--gold);}
-    .chip.on{background:var(--gold);color:#161006;border-color:var(--gold);font-weight:600;}
+    .chip:hover{border-color:var(--gold);} .chip.on{background:var(--gold);color:#161006;border-color:var(--gold);font-weight:600;}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:1.4rem;margin-top:1rem;}
     @media(max-width:520px){.grid{grid-template-columns:1fr;}}
     .card{background:var(--surf);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
-    .ba{position:relative;width:100%;aspect-ratio:3/2;user-select:none;touch-action:none;cursor:ew-resize;overflow:hidden;background:#000;}
-    .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+    .ba{position:relative;width:100%;aspect-ratio:4/3;user-select:none;touch-action:none;cursor:ew-resize;overflow:hidden;background:#000;}
     .ba .after-wrap{position:absolute;inset:0;overflow:hidden;width:50%;}
-    .ba .after-wrap img{width:auto;}
+    .ba img{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none;display:block;pointer-events:none;}
+    .ba .before{width:100%;height:100%;object-fit:cover;}
+    .ba .after-wrap img{height:100%;object-fit:cover;}
     .ba .handle{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);left:50%;pointer-events:none;box-shadow:0 0 8px rgba(0,0,0,.6);}
-    .ba .handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--gold);color:#1a1a10;font-size:15px;display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.5);}
-    .lbl{position:absolute;top:8px;padding:.15rem .5rem;font-size:.7rem;border-radius:6px;background:rgba(0,0,0,.55);color:#fff;}
+    .ba .handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:var(--gold);color:#1a1a10;font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+    .lbl{position:absolute;top:8px;padding:.15rem .5rem;font-size:.7rem;border-radius:6px;background:rgba(0,0,0,.55);color:#fff;z-index:2;}
     .lbl.b{left:8px;} .lbl.a{right:8px;color:var(--gold);}
     .meta{padding:.8rem 1rem 1rem;}
-    .meta h3{margin:.1rem 0 .3rem;font-size:1.03rem;}
+    .meta h3{margin:.1rem 0 .3rem;font-size:1.02rem;}
     .fam{color:var(--muted);font-size:.78rem;}
     .tags{margin-top:.5rem;} .tag{display:inline-block;font-size:.7rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:.1rem .45rem;margin:.15rem .25rem 0 0;}
-    .refstrip{display:flex;gap:.8rem;align-items:center;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:.6rem .8rem;font-size:.82rem;color:var(--muted);}
-    .refstrip img{width:74px;height:50px;object-fit:cover;border-radius:6px;flex:none;}
     .taxo{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.7rem;}
     .fbox{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem;}
     .fbox b{color:var(--gold);} .fbox .ex{color:var(--muted);font-size:.8rem;margin-top:.2rem;}
-    .fbox .cnt{float:right;color:var(--muted);font-size:.74rem;}
     footer{margin-top:2.6rem;color:var(--muted);font-size:.75rem;text-align:center;}
     .empty{display:none;color:var(--muted);text-align:center;padding:2rem;}
   </style>
@@ -53,83 +57,89 @@
 <body>
 <div class="wrap">
   <a class="back" href="./">← 攝影筆記本</a>
-  <p class="eyebrow">風格檔庫 · 篩選架構 + 小樣本</p>
+  <p class="eyebrow">風格檔庫 · 多照片樣本 + 篩選架構</p>
   <h1>風格檔庫 <span style="color:var(--gold);font-size:.6em;">線上目錄</span></h1>
-  <p class="lead">全庫約 <strong>35 個命名風格 ×（照片＋影片兩版）＋ YS 人像膠片包</strong>，量大。所以<strong>先定篩選架構</strong>，之後全量才好找。下面篩選列是<strong>真的可以點</strong>的（先套在 6 個樣本上示範）。</p>
+  <p class="lead">用你挑的 <strong>9 張德國母檔</strong>（室內/戶外/人像/高反差多種元素）當樣本。<strong>上方切換照片</strong>，下面每個 look 就同步套到那張上——一眼看出同個特效在不同場景的感覺。拖曳卡片金線比較前後。</p>
 
-  <div class="refstrip">
-    <img src="./style-sample-assets/before.jpg" alt="參考大景">
-    <div>📍 統一樣本＝德國 day2「新天鵝堡大景」（原圖無調色）。拖曳卡片中間金線比較前後。</div>
+  <div class="picker">
+    <div class="t">🖼️ 選樣本照片（切換即同步套用到所有 look）</div>
+    <div class="thumbs" id="thumbs"></div>
   </div>
 
-  <!-- ===== 篩選列 ===== -->
-  <div class="filters">
-    <div class="frow"><span class="k">家族</span><span id="famChips"></span></div>
-    <div class="frow"><span class="k">色溫</span><span id="toneChips"></span></div>
-  </div>
+  <div class="frow"><span class="k">家族</span><span id="famChips"></span></div>
+  <div class="frow"><span class="k">色溫</span><span id="toneChips"></span></div>
 
   <div class="grid" id="grid"></div>
-  <div class="empty" id="empty">這個組合目前樣本沒有（全量後就有了）🙂</div>
+  <div class="empty" id="empty">這個組合樣本沒有（全量後就有）🙂</div>
 
-  <!-- ===== 完整篩選架構提案 ===== -->
-  <h2>📐 完整篩選架構（提案 · 待你確認）</h2>
-  <p class="lead">我把全部風格名照真實資料歸成 <strong>10 個家族</strong>，另加「媒體（照片/影片）」與「色溫」兩個副篩選。你看分類合不合理、要不要加減：</p>
+  <div class="note">📦 <strong>「會不會跑太大」——不會。</strong>這頁用<strong>延遲載入</strong>：一次只載「你選的那張照片」的預覽，切換才載下一批。全量時每個 look 只預先算 1 張代表照放牆上，想看「套在我全部照片」再點開才載那個 look 的 9 張 → 頁面永遠輕。另外全庫會先<strong>去重</strong>（489 LUT 很多是同族變體，實際獨立 look 約 150–200 個）。</div>
+
+  <h2>📐 完整篩選架構（提案 · 待確認）</h2>
+  <p class="lead">全部風格名照真實資料歸成 <strong>10 家族</strong>＋媒體（照片/影片）＋色溫。看分類要不要加減：</p>
   <div class="taxo" id="taxo"></div>
 
-  <div class="note">✅ 確認架構後，全量批次就照這套自動歸類 + 打標籤，每個 look 出前後對比，一頁可篩。另外會**去重**（同 look 的重複格式 + 你已裝過的）。</div>
-
-  <footer>PhotoNB · 風格檔庫（篩選架構+小樣本）· ffmpeg lut3d 自動渲染 · 由 Robert 維護 · 2026-07-18</footer>
+  <footer>PhotoNB · 風格檔庫（多照片樣本+篩選）· ffmpeg lut3d 自動渲染 · 由 Robert 維護 · 2026-07-18</footer>
 </div>
 
 <script>
-// 6 個樣本 look（已標家族/色溫）
+const PHOTOS = [
+  {id:"p1", el:"室內人像", d:"咖啡廳·逆光"},
+  {id:"p2", el:"戶外景",   d:"林德霍夫宮花園"},
+  {id:"p3", el:"戶外人像", d:"新天鵝堡前"},
+  {id:"p4", el:"室內人像", d:"宮殿廊柱"},
+  {id:"p5", el:"室內景",   d:"哥德樓梯·高反差"},
+  {id:"p6", el:"室內景",   d:"樓梯燈籠·高反差"},
+  {id:"p7", el:"室內景",   d:"彩窗逆光·高反差"},
+  {id:"p8", el:"室內景",   d:"大樓梯廳"},
+  {id:"p9", el:"室內人像", d:"樓梯逆光·高反差"},
+];
 const LOOKS = [
-  {img:"look1.jpg", name:"富士 Velvia — 鮮豔", fam:"FlexPresets · 富士膠片", family:"膠片", tone:"暖", tags:["鮮豔","飽和","風景王"]},
-  {img:"look2.jpg", name:"富士 CLASSIC CHROME — 經典正片", fam:"FlexPresets · 富士膠片", family:"膠片", tone:"中性", tags:["膠片","低飽和","質感"]},
-  {img:"look3.jpg", name:"富士 ACROS — 黑白", fam:"FlexPresets · 富士膠片", family:"黑白", tone:"黑白", tags:["黑白","膠片"]},
-  {img:"look4.jpg", name:"富士 ETERNA — 電影", fam:"FlexPresets · 富士膠片", family:"電影", tone:"中性", tags:["電影","柔和","低反差"]},
-  {img:"look5.jpg", name:"玩命關頭 — 橙藍電影", fam:"FlexPresets · 重磅電影", family:"電影", tone:"冷", tags:["電影","橙藍","冷調"]},
-  {img:"look6.jpg", name:"日系清新", fam:"FlexPresets · 日系清新", family:"日系清新", tone:"中性", tags:["清新","明亮","通透"]},
+  {l:"l1", name:"富士 Velvia — 鮮豔", fam:"富士膠片", family:"膠片", tone:"暖", tags:["鮮豔","飽和"]},
+  {l:"l2", name:"富士 CLASSIC CHROME — 經典正片", fam:"富士膠片", family:"膠片", tone:"中性", tags:["膠片","低飽和"]},
+  {l:"l3", name:"富士 ACROS — 黑白", fam:"富士膠片", family:"黑白", tone:"黑白", tags:["黑白","膠片"]},
+  {l:"l4", name:"富士 ETERNA — 電影", fam:"富士膠片", family:"電影", tone:"中性", tags:["電影","柔和"]},
+  {l:"l5", name:"玩命關頭 — 橙藍電影", fam:"重磅電影", family:"電影", tone:"冷", tags:["電影","橙藍"]},
+  {l:"l6", name:"日系清新", fam:"日系清新", family:"日系清新", tone:"中性", tags:["清新","明亮"]},
 ];
-// 10 家族提案（含全庫例子）
 const TAXO = [
-  {f:"🎞️ 膠片", ex:"富士膠片(ACROS/Velvia/CLASSIC CHROME…)、復古膠卷、YS 各膠片包", n:"最大宗"},
-  {f:"🎬 電影", ex:"重磅電影(007/玩命關頭/捍衛任務…)、暮光映画、理境光跡", n:""},
-  {f:"🌸 日系清新", ex:"日系清新、簡約琢白、粉霞綺夢", n:""},
-  {f:"👤 人像", ex:"人像聚焦、質感棚拍、YS 人像/肖像系", n:""},
-  {f:"🍽️ 美食", ex:"美食專家、咖啡絲語、伯爵奶茶、韓系咖啡廳", n:""},
-  {f:"🔥 暖陽日落", ex:"夏日青橙、黃金日落、橙霞遠征、金莎禮盒、情調曼谷", n:""},
-  {f:"❄️ 冷調", ex:"迷幻魅藍、海洋魄力、橙藍、摩登霓虹", n:""},
-  {f:"⚫ 黑白", ex:"時尚黑白、富士 ACROS/MONOCHROME", n:""},
-  {f:"🍂 復古情緒", ex:"滄桑歲月、憂鬱秋季、灰暗色彩、莫蘭迪灰綠", n:""},
-  {f:"🏙️ 都市旅拍", ex:"城市街景、環遊世界、寧靜大地、迷霧森林、工業黑金", n:""},
+  {f:"🎞️ 膠片", ex:"富士膠片(ACROS/Velvia/CLASSIC CHROME)、復古膠卷、YS 各膠片包"},
+  {f:"🎬 電影", ex:"重磅電影(007/玩命關頭/捍衛任務)、暮光映画、理境光跡"},
+  {f:"🌸 日系清新", ex:"日系清新、簡約琢白、粉霞綺夢"},
+  {f:"👤 人像", ex:"人像聚焦、質感棚拍、YS 人像/肖像"},
+  {f:"🍽️ 美食", ex:"美食專家、咖啡絲語、伯爵奶茶"},
+  {f:"🔥 暖陽日落", ex:"夏日青橙、黃金日落、橙霞遠征、金莎禮盒"},
+  {f:"❄️ 冷調", ex:"迷幻魅藍、海洋魄力、橙藍、摩登霓虹"},
+  {f:"⚫ 黑白", ex:"時尚黑白、富士 ACROS/MONOCHROME"},
+  {f:"🍂 復古情緒", ex:"滄桑歲月、憂鬱秋季、灰暗色彩、莫蘭迪"},
+  {f:"🏙️ 都市旅拍", ex:"城市街景、環遊世界、寧靜大地、工業黑金"},
 ];
-const FAMILIES = TAXO.map(t=>t.f.replace(/^[^一-龥]+/, '').trim());
-const TONES = ["暖","中性","冷","黑白"];
+const FAMILIES=["膠片","電影","日系清新","人像","美食","暖陽日落","冷調","黑白","復古情緒","都市旅拍"];
+const TONES=["暖","中性","冷","黑白"];
+const AP="./style-multi-assets/";
 
-// render taxonomy
-document.getElementById('taxo').innerHTML = TAXO.map(t=>
-  `<div class="fbox"><span class="cnt">${t.n}</span><b>${t.f}</b><div class="ex">${t.ex}</div></div>`).join('');
+document.getElementById('taxo').innerHTML = TAXO.map(t=>`<div class="fbox"><b>${t.f}</b><div class="ex">${t.ex}</div></div>`).join('');
 
-// filter state
-let selFam=null, selTone=null;
+let curPhoto="p1", selFam=null, selTone=null;
+// thumbs
+document.getElementById('thumbs').innerHTML = PHOTOS.map(p=>
+  `<div class="thumb${p.id===curPhoto?' on':''}" data-p="${p.id}"><img loading="lazy" src="${AP}${p.id}_base.jpg" alt="${p.d}"><span class="el">${p.el}</span></div>`).join('');
 function chip(txt,on){return `<span class="chip${on?' on':''}" data-v="${txt}">${txt}</span>`;}
 function renderChips(){
-  document.getElementById('famChips').innerHTML = chip("全部",!selFam)+FAMILIES.map(f=>chip(f,selFam===f)).join('');
-  document.getElementById('toneChips').innerHTML = chip("全部",!selTone)+TONES.map(t=>chip(t,selTone===t)).join('');
+  document.getElementById('famChips').innerHTML=chip("全部",!selFam)+FAMILIES.map(f=>chip(f,selFam===f)).join('');
+  document.getElementById('toneChips').innerHTML=chip("全部",!selTone)+TONES.map(t=>chip(t,selTone===t)).join('');
 }
-// render cards
 const grid=document.getElementById('grid');
 function renderCards(){
   grid.innerHTML='';
-  const vis = LOOKS.filter(l=>(!selFam||l.family===selFam)&&(!selTone||l.tone===selTone));
-  document.getElementById('empty').style.display = vis.length?'none':'block';
+  const vis=LOOKS.filter(l=>(!selFam||l.family===selFam)&&(!selTone||l.tone===selTone));
+  document.getElementById('empty').style.display=vis.length?'none':'block';
   vis.forEach(l=>{
-    const c=document.createElement('div'); c.className='card';
-    c.innerHTML=`<div class="ba"><img class="before" src="./style-sample-assets/before.jpg" alt="原圖">
-      <div class="after-wrap"><img src="./style-sample-assets/${l.img}" alt="${l.name}"></div>
+    const c=document.createElement('div');c.className='card';
+    c.innerHTML=`<div class="ba">
+      <img class="before" loading="lazy" src="${AP}${curPhoto}_base.jpg" alt="原圖">
+      <div class="after-wrap"><img loading="lazy" src="${AP}${curPhoto}_${l.l}.jpg" alt="${l.name}"></div>
       <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span></div>
-      <div class="meta"><div class="fam">${l.fam}</div><h3>${l.name}</h3>
+      <div class="meta"><div class="fam">FlexPresets · ${l.fam}</div><h3>${l.name}</h3>
       <div class="tags"><span class="tag">${l.family}</span><span class="tag">${l.tone}</span>${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
     grid.appendChild(c);
   });
@@ -137,19 +147,22 @@ function renderCards(){
 }
 function bindBA(){
   document.querySelectorAll('.ba').forEach(ba=>{
-    const wrap=ba.querySelector('.after-wrap'),handle=ba.querySelector('.handle'),aimg=wrap.querySelector('img');
-    function fit(){aimg.style.width=ba.getBoundingClientRect().width+'px';aimg.style.height=ba.getBoundingClientRect().height+'px';}
-    fit(); window.addEventListener('resize',fit);
+    const wrap=ba.querySelector('.after-wrap'),handle=ba.querySelector('.handle');
+    const aimg=wrap.querySelector('img');
+    function fit(){const w=ba.clientWidth;aimg.style.width=w+'px';}
+    fit();window.addEventListener('resize',fit);
     function set(x){const r=ba.getBoundingClientRect();let p=(x-r.left)/r.width;p=Math.max(0,Math.min(1,p));wrap.style.width=(p*100)+'%';handle.style.left=(p*100)+'%';}
     ba.addEventListener('mousemove',e=>set(e.clientX));
-    ba.addEventListener('touchmove',e=>{set(e.touches[0].clientX);},{passive:true});
-    ba.addEventListener('touchstart',e=>{set(e.touches[0].clientX);},{passive:true});
+    ba.addEventListener('touchstart',e=>set(e.touches[0].clientX),{passive:true});
+    ba.addEventListener('touchmove',e=>set(e.touches[0].clientX),{passive:true});
   });
 }
 document.addEventListener('click',e=>{
+  const th=e.target.closest('.thumb');
+  if(th){ curPhoto=th.dataset.p; document.querySelectorAll('.thumb').forEach(t=>t.classList.toggle('on',t.dataset.p===curPhoto)); renderCards(); return; }
   const c=e.target.closest('.chip'); if(!c)return;
-  const v=c.dataset.v, inFam=c.closest('#famChips');
-  if(inFam){ selFam = (v==="全部")?null:v; } else { selTone=(v==="全部")?null:v; }
+  const v=c.dataset.v;
+  if(c.closest('#famChips')) selFam=(v==="全部")?null:v; else selTone=(v==="全部")?null:v;
   renderChips(); renderCards();
 });
 renderChips(); renderCards();
