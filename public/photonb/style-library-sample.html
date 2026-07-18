@@ -49,6 +49,10 @@
     .taxo{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.7rem;}
     .fbox{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem;}
     .fbox b{color:var(--gold);} .fbox .ex{color:var(--muted);font-size:.8rem;margin-top:.2rem;}
+    .fbox .cnt{float:right;color:var(--gold);font-size:.74rem;font-weight:600;}
+    .ba .hist{position:absolute;right:8px;bottom:8px;width:116px;height:56px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.15);border-radius:6px;z-index:3;pointer-events:none;}
+    .sig{margin-top:.45rem;font-size:.74rem;color:var(--muted);}
+    .sig b{color:var(--gold);font-weight:600;}
     footer{margin-top:2.6rem;color:var(--muted);font-size:.75rem;text-align:center;}
     .empty{display:none;color:var(--muted);text-align:center;padding:2rem;}
   </style>
@@ -100,31 +104,35 @@ const LOOKS = [
   {l:"l5", name:"玩命關頭 — 橙藍電影", fam:"重磅電影", family:"電影", tone:"冷", tags:["電影","橙藍"]},
   {l:"l6", name:"日系清新", fam:"日系清新", family:"日系清新", tone:"中性", tags:["清新","明亮"]},
 ];
+// n = 預估全量「命名風格組」數（FlexPresets 35 組 + YS/78日系清新，去重前概估）
 const TAXO = [
-  {f:"🎞️ 膠片", ex:"富士膠片(ACROS/Velvia/CLASSIC CHROME)、復古膠卷、YS 各膠片包"},
-  {f:"🎬 電影", ex:"重磅電影(007/玩命關頭/捍衛任務)、暮光映画、理境光跡"},
-  {f:"🌸 日系清新", ex:"日系清新、簡約琢白、粉霞綺夢"},
-  {f:"👤 人像", ex:"人像聚焦、質感棚拍、YS 人像/肖像"},
-  {f:"🍽️ 美食", ex:"美食專家、咖啡絲語、伯爵奶茶"},
-  {f:"🔥 暖陽日落", ex:"夏日青橙、黃金日落、橙霞遠征、金莎禮盒"},
-  {f:"❄️ 冷調", ex:"迷幻魅藍、海洋魄力、橙藍、摩登霓虹"},
-  {f:"⚫ 黑白", ex:"時尚黑白、富士 ACROS/MONOCHROME"},
-  {f:"🍂 復古情緒", ex:"滄桑歲月、憂鬱秋季、灰暗色彩、莫蘭迪"},
-  {f:"🏙️ 都市旅拍", ex:"城市街景、環遊世界、寧靜大地、工業黑金"},
+  {f:"🎞️ 膠片", n:9, ex:"富士膠片(ACROS/Velvia/CLASSIC CHROME…)、復古膠卷、YS 各膠片包"},
+  {f:"🎬 電影", n:4, ex:"重磅電影(007/玩命關頭/捍衛任務)、暮光映画、理境光跡"},
+  {f:"🌸 日系清新", n:4, ex:"日系清新、簡約琢白、粉霞綺夢"},
+  {f:"👤 人像", n:8, ex:"人像聚焦、質感棚拍、夢中婚禮、YS 人像/肖像多包"},
+  {f:"🍽️ 美食", n:3, ex:"美食專家、咖啡絲語、伯爵奶茶"},
+  {f:"🔥 暖陽日落", n:5, ex:"夏日青橙、黃金日落、橙霞遠征、金莎禮盒、情調曼谷"},
+  {f:"❄️ 冷調", n:3, ex:"迷幻魅藍、海洋魄力、橙藍"},
+  {f:"⚫ 黑白", n:2, ex:"時尚黑白、富士 ACROS/MONOCHROME"},
+  {f:"🍂 復古情緒", n:5, ex:"滄桑歲月、憂鬱秋季、灰暗色彩、皇家黑鑽、莫蘭迪"},
+  {f:"🏙️ 都市旅拍", n:6, ex:"城市街景、環遊世界、寧靜大地、迷霧森林、摩登霓虹、工業黑金"},
 ];
 const FAMILIES=["膠片","電影","日系清新","人像","美食","暖陽日落","冷調","黑白","復古情緒","都市旅拍"];
 const TONES=["暖","中性","冷","黑白"];
 const AP="./style-multi-assets/";
+const FAMCOUNT={}; TAXO.forEach((t,i)=>FAMCOUNT[FAMILIES[i]]=t.n);
+const TOTALN=TAXO.reduce((a,t)=>a+t.n,0);
+let HIST={};
 
-document.getElementById('taxo').innerHTML = TAXO.map(t=>`<div class="fbox"><b>${t.f}</b><div class="ex">${t.ex}</div></div>`).join('');
+document.getElementById('taxo').innerHTML = TAXO.map(t=>`<div class="fbox"><span class="cnt">~${t.n} 組</span><b>${t.f}</b><div class="ex">${t.ex}</div></div>`).join('');
 
 let curPhoto="p1", selFam=null, selTone=null;
 // thumbs
 document.getElementById('thumbs').innerHTML = PHOTOS.map(p=>
   `<div class="thumb${p.id===curPhoto?' on':''}" data-p="${p.id}"><img loading="lazy" src="${AP}${p.id}_base.jpg" alt="${p.d}"><span class="el">${p.el}</span></div>`).join('');
-function chip(txt,on){return `<span class="chip${on?' on':''}" data-v="${txt}">${txt}</span>`;}
+function chip(txt,on,cnt){return `<span class="chip${on?' on':''}" data-v="${txt}">${txt}${cnt!=null?` <span style="opacity:.7">${cnt}</span>`:''}</span>`;}
 function renderChips(){
-  document.getElementById('famChips').innerHTML=chip("全部",!selFam)+FAMILIES.map(f=>chip(f,selFam===f)).join('');
+  document.getElementById('famChips').innerHTML=chip("全部",!selFam,TOTALN)+FAMILIES.map(f=>chip(f,selFam===f,FAMCOUNT[f])).join('');
   document.getElementById('toneChips').innerHTML=chip("全部",!selTone)+TONES.map(t=>chip(t,selTone===t)).join('');
 }
 const grid=document.getElementById('grid');
@@ -137,12 +145,39 @@ function renderCards(){
     c.innerHTML=`<div class="ba">
       <img class="bg" loading="lazy" src="${AP}${curPhoto}_${l.l}.jpg" alt="套用後 ${l.name}">
       <div class="rev-wrap"><img loading="lazy" src="${AP}${curPhoto}_base.jpg" alt="原圖"></div>
-      <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span></div>
+      <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span>
+      <canvas class="hist" width="116" height="56" data-a="${curPhoto}_${l.l}" data-b="${curPhoto}_base"></canvas></div>
       <div class="meta"><div class="fam">FlexPresets · ${l.fam}</div><h3>${l.name}</h3>
+      <div class="sig" data-a="${curPhoto}_${l.l}" data-b="${curPhoto}_base"></div>
       <div class="tags"><span class="tag">${l.family}</span><span class="tag">${l.tone}</span>${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
     grid.appendChild(c);
   });
-  bindBA();
+  bindBA(); drawAll();
+}
+function drawHist(cv,aKey,bKey){
+  const a=HIST[aKey]; if(!a)return; const b=HIST[bKey];
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height,N=a.r.length,bw=W/N; ctx.clearRect(0,0,W,H);
+  if(b){ctx.strokeStyle='rgba(200,200,200,.55)';ctx.lineWidth=1;ctx.beginPath();
+    for(let i=0;i<N;i++){const v=(b.r[i]+b.g[i]+b.b[i])/3,y=H-v*H*.95;i?ctx.lineTo(i*bw,y):ctx.moveTo(0,y);}ctx.stroke();}
+  ctx.globalCompositeOperation='screen';
+  [['r','rgba(235,70,70,.6)'],['g','rgba(70,205,110,.6)'],['b','rgba(85,135,245,.6)']].forEach(([c,col])=>{
+    ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,H);
+    for(let i=0;i<N;i++){const y=H-a[c][i]*H*.95;ctx.lineTo(i*bw,y);}ctx.lineTo(W,H);ctx.closePath();ctx.fill();});
+  ctx.globalCompositeOperation='source-over';
+}
+function sigText(aKey,bKey){
+  const a=HIST[aKey],b=HIST[bKey]; if(!a||!b)return'';
+  const N=a.r.length; const mean=(h,c)=>{let s=0,w=0;for(let i=0;i<N;i++){s+=h[c][i]*i;w+=h[c][i];}return w?s/w:0;};
+  const lum=h=>(mean(h,'r')+mean(h,'g')+mean(h,'b'))/3;
+  const dL=lum(a)-lum(b); const warm=(mean(a,'r')-mean(a,'b'))-(mean(b,'r')-mean(b,'b'));
+  const parts=[];
+  parts.push(dL>1.2?'提亮':dL<-1.2?'壓暗':'明暗持平');
+  parts.push(warm>1.0?'偏暖':warm<-1.0?'偏冷':'色溫中性');
+  return `<b>特徵：</b>${parts.join('・')}`;
+}
+function drawAll(){
+  grid.querySelectorAll('canvas.hist').forEach(cv=>drawHist(cv,cv.dataset.a,cv.dataset.b));
+  grid.querySelectorAll('.sig').forEach(s=>s.innerHTML=sigText(s.dataset.a,s.dataset.b));
 }
 function bindBA(){
   document.querySelectorAll('.ba').forEach(ba=>{
@@ -165,6 +200,7 @@ document.addEventListener('click',e=>{
   renderChips(); renderCards();
 });
 renderChips(); renderCards();
+fetch(AP+'hist.json').then(r=>r.json()).then(d=>{HIST=d; drawAll();}).catch(()=>{});
 </script>
 </body>
 </html>
