@@ -145,8 +145,7 @@ function renderCards(){
     c.innerHTML=`<div class="ba">
       <img class="bg" loading="lazy" src="${AP}${curPhoto}_${l.l}.jpg" alt="套用後 ${l.name}">
       <div class="rev-wrap"><img loading="lazy" src="${AP}${curPhoto}_base.jpg" alt="原圖"></div>
-      <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span>
-      <canvas class="hist" width="116" height="56" data-a="${curPhoto}_${l.l}" data-b="${curPhoto}_base"></canvas></div>
+      <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span></div>
       <div class="meta"><div class="fam">FlexPresets · ${l.fam}</div><h3>${l.name}</h3>
       <div class="sig" data-a="${curPhoto}_${l.l}" data-b="${curPhoto}_base"></div>
       <div class="tags"><span class="tag">${l.family}</span><span class="tag">${l.tone}</span>${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
@@ -176,7 +175,6 @@ function sigText(aKey,bKey){
   return `<b>特徵：</b>${parts.join('・')}`;
 }
 function drawAll(){
-  grid.querySelectorAll('canvas.hist').forEach(cv=>drawHist(cv,cv.dataset.a,cv.dataset.b));
   grid.querySelectorAll('.sig').forEach(s=>s.innerHTML=sigText(s.dataset.a,s.dataset.b));
 }
 function bindBA(){
