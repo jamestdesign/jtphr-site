@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>素材歸場景 · scene_build · PhotoNB</title>
+  <meta name="description" content="Pipeline 第一步：倒卡素材（照片+影片）一口氣時區校正→分天分場景→VLM 評分/色標/關鍵字→寫 XMP→歸檔，並鋪好 LR 目錄與 FCP 資料庫工作檔，開卡即接手。" />
+  <meta name="date" content="2026-07-18" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--blue:#7fb2ff;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:760px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.5em;letter-spacing:.02em;}
+    .step1{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;font-size:.72rem;border-radius:999px;padding:.15rem .7rem;letter-spacing:.05em;margin-bottom:.4rem;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.02rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;
+      font-family:ui-monospace,Menlo,monospace;font-size:.83rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    .card.new{border-color:rgba(127,178,255,.5);background:rgba(127,178,255,.06);}
+    ul{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.86rem;margin:.4rem 0 .2rem;}
+    .flow b{background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:.3rem .6rem;color:var(--gold2);}
+    .flow i{color:var(--gold);font-style:normal;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.74rem;color:var(--muted);margin:.15rem .2rem 0 0;}
+    .ok{color:var(--green);} .bad{color:var(--red);} .soon{color:var(--blue);}
+    .stepn{display:flex;gap:.7rem;margin:.6rem 0;}
+    .stepn .n{flex:none;width:1.7rem;height:1.7rem;line-height:1.7rem;text-align:center;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:.82rem;}
+    .stepn .t{flex:1;} .stepn .t b{color:var(--gold2);}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+    .crumb{font-size:.78rem;color:var(--muted);margin:.3rem 0 0;}
+    .crumb a{text-decoration:none;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">素材處理 · Ingest · Pipeline 第一步</p>
+  <span class="step1">① 第一步 · 大門</span>
+  <h1>素材歸場景 <span class="en">scene_build</span></h1>
+  <p class="lead">倒卡進來的素材（照片＋影片），<b>一口氣</b>：時區校正 → 分天分場景 → VLM 評分／色標／關鍵字 → 寫 XMP → 搬進歸檔結構，並<b>鋪好 LR 目錄與 FCP 資料庫工作檔</b>，你開卡就直接接手。整條 pipeline 的入口。</p>
+  <p class="crumb">📄 本頁＝這支工具的<b>單一現行說明</b>（＝ <code>/照片影片歸檔</code> skill）。下游：<a href="./trip-fcpx-build.html">旅遊影片匯入fcpx</a> → <a href="./fcpxmld-export.html">撿片批次出圖</a> → <a href="./export-auto-move.html">export-auto-move</a>。</p>
+
+  <h2>做什麼</h2>
+  <div class="flow">
+    <b>倒卡暫存區<br>input/&lt;相機&gt;/</b><i>→</i><b>scene_build</b><i>→</i><b>分天分場景＋評分＋XMP 的歸檔結構</b><i>＋</i><b>鋪好 LR/FCP 工作檔</b><i>→</i><b>你開卡接手</b>
+  </div>
+  <ul>
+    <li>吃 OPPO／iPhone／Sony 多來源，<b>併進同一套場景</b>（不分相機獨立夾）。</li>
+    <li>照片：評分／色標／關鍵字／描述全寫進 <b>XMP</b>（跟著檔案走，不碰 LR catalog ＝ A 方案）。</li>
+    <li>影片：智慧抽幀＋triage，落 trip 頂層 <code>MOV_&lt;day&gt;/&lt;場景&gt;/</code> 等你 FCPX 撿片。</li>
+  </ul>
+
+  <h2>怎麼叫它</h2>
+  <pre>scene_build            # 正式工具名
+/照片影片歸檔           # skill 觸發
+「歸檔 OPPO iphone」    # 直接口語跟 Robert 說</pre>
+  <p><span class="tag">工作目錄 <code>photo-grade/&lt;日期&gt;_&lt;trip&gt;/</code></span><span class="tag">暫存區 <code>/Volumes/Crucial 8T/input/</code></span></p>
+
+  <h2>全套步驟（一次跑完）</h2>
+  <div class="stepn"><span class="n">1</span><div class="t"><b>時區校正</b> — 逐張按拍攝地。OPPO 自動跟時區；iPhone/Sony 常停 +08:00，到歐洲 −6h（出發前台北/機上照維持台灣時區不動）。用 GPS 經度判位置。</div></div>
+  <div class="stepn"><span class="n">2</span><div class="t"><b>分天 + 分場景</b> — EXIF 分天 <code>dayN</code>；每天內時間聚類（gap&gt;30min＝新場景）＋GPS 反查地名。場景名 <code>NN_HHMM_描述</code>，每天序號從 01 起。rename 前先給你看場景 contact sheet。</div></div>
+  <div class="stepn"><span class="n">3</span><div class="t"><b>VLM 評分 + 分類</b>（Opus，防幻覺紅線）— 先客觀描述→再定 label（紅人臉／黃背影／綠景／紫物食藝）→評分。建築主體再跑一輪<b>建築風格標註</b>（<code>風格｜建築名</code>）。sub-agent 並行。</div></div>
+  <div class="stepn"><span class="n">4</span><div class="t"><b>美肌偵測</b>（OPPO）— 掃 JPG 的 OnePlus 段，臉真的被磨 → 打關鍵字 <code>OPPO美肌</code>（Evoto 減量）。</div></div>
+  <div class="stepn"><span class="n">5</span><div class="t"><b>影片 Phase A</b> — 智慧抽幀（逐檔偵測 HLG 才 tonemap）＋VLM triage，出 <code>VIDEO_classification.csv</code>。keeper 最終你在 FCPX 自挑。</div></div>
+  <div class="stepn"><span class="n">6</span><div class="t"><b>XMP 雙寫（A 方案）</b> — Rating／Label／dc:Subject（場景詞＋內容＋建築風格＋美肌＋<code>_pick</code>）／dc:Description 一次寫。不 SQL inject catalog、不寫 legacy IPTC（避亂碼）。</div></div>
+  <div class="stepn"><span class="n">7</span><div class="t"><b>歸檔結構</b> — 前綴三分：<code>_</code>＝工作層、<code>MOV_</code>＝影片（trip 頂層）、無前綴＝照片。場景平鋪，第二台＝主場景名＋<code>_次</code>。搬完對帳。</div></div>
+  <div class="stepn"><span class="n">8</span><div class="t"><b>回報你（Telegram）</b> — 各 day/場景張數、label/rating 分布、picks、美肌數、5★影片亮點、結構樹、時區摘要。</div></div>
+
+  <h2>🆕 新增能力：自動鋪好工作檔（開卡即接手）</h2>
+  <div class="card new">
+    <p>歸檔完，scene_build 會<b>順手把 LR 目錄與 FCP 資料庫鋪好、命名好</b>，你連「新增目錄／新增資料庫＋命名」都不用做 —— 只是複製一個空白範本檔，<b>完全不碰 SQL、不動你資料庫</b>（最安全）：</p>
+    <ul>
+      <li>📷 <b>LR</b>：丟空白 <code>.lrcat</code> 進 <code>_&lt;trip&gt;_LR/</code> → 你雙擊打開 → 讀入新素材，XMP 的評分/色標/關鍵字自動帶進來。</li>
+      <li>🎬 <b>FCP</b>：丟空白 <code>.fcpbundle</code> 進 <code>_&lt;trip&gt;_fcpx/</code> ＋ <a href="./trip-fcpx-build.html">trip-fcpx-build</a> 生的匯入 fcpxml → 你開卡匯入 XML → 直接開始撿片。</li>
+    </ul>
+    <p class="soon">⏳ <b>待啟用：</b>需 James 各給一個「空白 <code>_TEMPLATE</code>」（在你自己的 LR／FCP 各建一個空目錄／空資料庫給 Robert 當範本，因檔案格式綁 App 版本不能亂生）。範本到手即接上此步；App 版本升級時換一次範本即可。</p>
+  </div>
+
+  <h2>🔒 安全底線</h2>
+  <ul>
+    <li><b>A 方案</b>：只寫 XMP，<b>不 SQL inject</b> 你的 LR catalog（catalog 崩也能靠 XMP 重來）。</li>
+    <li>暫存區 <code>input/&lt;相機&gt;/</code> 是你的倒卡區，<b>不刪</b>；歸檔是搬副本／移動，搬完對帳。</li>
+    <li>時區校正整批動前先抽樣驗 GPS，避免把台北/機上照改錯。</li>
+  </ul>
+
+  <footer>PhotoNB · 素材處理 — 素材歸場景（scene_build）· Pipeline 第一步 · 單一現行說明 · 由 Robert 維護 · 更新 2026-07-18</footer>
+</div>
+</body>
+</html>

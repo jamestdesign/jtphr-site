@@ -420,6 +420,10 @@ flowchart TD
 <strong>共用核心 S1–S8</strong>：場景命名 / VLM 標籤 / VLM 評分 / catalog 寫入 / AutoTone / LR review — 照片 + 影片都走同一套，最後一起上雲。
 </div>
 
+<div class="key-fact" style="border-left-color:#36c5a8;">
+🛠️ <strong>這段前端流程 ＝ 工具 <a href="./scene-build.html">素材歸場景（scene_build）</a></strong>（pipeline 第一步）：倒卡素材一口氣時區校正→分天分場景→VLM 評分/色標/關鍵字→寫 XMP→歸檔，並鋪好 LR 目錄與 FCP 資料庫工作檔。功能說明統一在該工具頁維護。
+</div>
+
 <p><strong>為什麼共用很關鍵</strong>：</p>
 <ul>
   <li>一份 catalog 管 photo + STILL —— LR 不必區分，評分軸一樣</li>
