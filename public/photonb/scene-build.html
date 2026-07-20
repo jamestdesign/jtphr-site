@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>素材歸場景 · scene_build · PhotoNB</title>
   <meta name="description" content="Pipeline 第一步：倒卡素材（照片+影片）一口氣時區校正→分天分場景→VLM 評分/色標/關鍵字→寫 XMP→歸檔，並鋪好 LR 目錄與 FCP 資料庫工作檔，開卡即接手。" />
-  <meta name="date" content="2026-07-18" />
+  <meta name="date" content="2026-07-20" />
   <style>
     :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--blue:#7fb2ff;}
     *{box-sizing:border-box;} html,body{overflow-x:hidden;}
@@ -75,14 +75,34 @@
   <div class="stepn"><span class="n">7</span><div class="t"><b>歸檔結構</b> — 前綴三分：<code>_</code>＝工作層、<code>MOV_</code>＝影片（trip 頂層）、無前綴＝照片。場景平鋪，第二台＝主場景名＋<code>_次</code>。搬完對帳。</div></div>
   <div class="stepn"><span class="n">8</span><div class="t"><b>回報你（Telegram）</b> — 各 day/場景張數、label/rating 分布、picks、美肌數、5★影片亮點、結構樹、時區摘要。</div></div>
 
-  <h2>🆕 新增能力：自動鋪好工作檔（開卡即接手）</h2>
+  <h2>🆕 自動鋪好工作檔（開卡即接手）<span class="ok" style="font-size:.7em">✓ 已啟用</span></h2>
   <div class="card new">
     <p>歸檔完，scene_build 會<b>順手把 LR 目錄與 FCP 資料庫鋪好、命名好</b>，你連「新增目錄／新增資料庫＋命名」都不用做 —— 只是複製一個空白範本檔，<b>完全不碰 SQL、不動你資料庫</b>（最安全）：</p>
     <ul>
-      <li>📷 <b>LR</b>：丟空白 <code>.lrcat</code> 進 <code>_&lt;trip&gt;_LR/</code> → 你雙擊打開 → 讀入新素材，XMP 的評分/色標/關鍵字自動帶進來。</li>
-      <li>🎬 <b>FCP</b>：丟空白 <code>.fcpbundle</code> 進 <code>_&lt;trip&gt;_fcpx/</code> ＋ <a href="./trip-fcpx-build.html">trip-fcpx-build</a> 生的匯入 fcpxml → 你開卡匯入 XML → 直接開始撿片。</li>
+      <li>📷 <b>LR</b>：空白 <code>.lrcat</code>（+<code>.lrcat-data</code>）→ <code>_&lt;名&gt;_LR/&lt;名&gt;.lrcat</code> → 你雙擊打開 → 讀入素材夾，XMP 的評分/色標/關鍵字自動帶進來。</li>
+      <li>🎬 <b>FCP</b>：空白 <code>.fcpbundle</code> → <code>_&lt;名&gt;_FCPX/&lt;名&gt;.fcpbundle</code> ＋ <a href="./trip-fcpx-build.html">trip-fcpx-build</a> 生的匯入 fcpxml → 你開卡匯入 XML → 直接撿片。</li>
     </ul>
-    <p class="soon">⏳ <b>待啟用：</b>需 James 各給一個「空白 <code>_TEMPLATE</code>」（在你自己的 LR／FCP 各建一個空目錄／空資料庫給 Robert 當範本，因檔案格式綁 App 版本不能亂生）。範本到手即接上此步；App 版本升級時換一次範本即可。</p>
+    <p>範本收在 <code>tools/templates/</code>（你自己在 LR/FCP 各建的空白，因格式綁 App 版本不能亂生；App 升版換一次即可）。純檔案複製、同碟秒級。</p>
+    <div class="note" style="margin:.6rem 0 0"><b>兩個範本坑（工具已內建處理）</b>
+      <ul style="margin:.3rem 0 0">
+        <li>收範本前 <b>LR 必須完全關閉</b>（Cmd+Q）—— 開著會鎖 catalog＋留未存檔暫存，複製到髒檔。</li>
+        <li>FCP <code>.fcpbundle</code> 內的 <code>.fcpcache</code> 是自我循環捷徑（symlink→自己），複製要跳過它、不跟隨，否則無限遞迴。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>🍣 實跑範例：吉兆 Omakase（整條 pipeline 走通）</h2>
+  <div class="card">
+    <p>一場台北東區板前無菜單晚餐，<b>30 張照片 + 11 段影片</b>，從倒卡到出片全程無縫：</p>
+    <div class="flow" style="gap:.4rem">
+      <b>scene_build<br>歸檔＋鋪工作檔</b><i>→</i><b>trip-fcpx-build<br>建 FCP 匯入庫</b><i>→</i><b>你 FCP 撿片<br>Star4/Star3</b><i>→</i><b>fcpxmld-export<br>出 HL 片段</b>
+    </div>
+    <ul>
+      <li>📷 照片 30：色標 28 紫料理／1 紅主廚／1 綠店內，12 <code>_pick</code>，XMP 30/30，搬進 <code>2026-07-16 …·吉兆Omakase/01_1851_板前無菜單晚餐/</code>。</li>
+      <li>🎬 影片 11：Phase A 分類 → 建 FCP 匯入 XML（場景＋<code>飲食</code> keyword、leave-in-place）→ 你在 FCP 撿出 8 段 Star4 → 出成 8× 1080p H.264（來源 HLG Dolby Vision 已 tonemap 轉 SDR）落 <code>_preview_mov_HL/</code>。</li>
+      <li>🗂️ 工作檔 <code>_115-07-16 OMAKASA_吉兆_LR/…lrcat</code>＋<code>_…_FCPX/…fcpbundle</code> 自動鋪好，開卡即接手。</li>
+    </ul>
+    <p class="crumb">＝ 證明「自動鋪工作檔」跟既有的 <a href="./trip-fcpx-build.html">建庫</a>／<a href="./fcpxmld-export.html">出片</a> 工具無縫串接。</p>
   </div>
 
   <h2>🔒 安全底線</h2>
@@ -92,7 +112,7 @@
     <li>時區校正整批動前先抽樣驗 GPS，避免把台北/機上照改錯。</li>
   </ul>
 
-  <footer>PhotoNB · 素材處理 — 素材歸場景（scene_build）· Pipeline 第一步 · 單一現行說明 · 由 Robert 維護 · 更新 2026-07-18</footer>
+  <footer>PhotoNB · 素材處理 — 素材歸場景（scene_build）· Pipeline 第一步 · 單一現行說明 · 由 Robert 維護 · 更新 2026-07-20</footer>
 </div>
 </body>
 </html>
