@@ -1,0 +1,125 @@
+---
+title: Obsidian + Claude Code = 第二大腦（Claudian + 5 Skills）
+date: '2026-04-10'
+tags: []
+creator: claude_robin
+co_creators:
+- james
+managed_by: claude_robin
+managed_at: '2026-05-06'
+transformed: false
+private: false
+published: false
+version: 1
+last_revised: null
+revision_history: []
+category: "AI工具"
+---
+
+# Obsidian + Claude Code = 第二大腦（Claudian + 5 Skills）
+
+**日期：** 2026-04-10
+**來源：** YouTube — 作者：Dannie
+**連結：** https://youtu.be/ohPBYGN8a9Y?si=FVDpEdQy7ZlnCbt8
+**標籤：** #AI工具 #Obsidian #ClaudeCode #知識庫 #Claudian
+
+---
+
+## 核心觀點
+
+免費＋本地化 AI 知識庫方案：
+**Obsidian（本地 Markdown）＋ Claude Code ＋ Claudian 插件**
+
+完全免費、資料全在自己電腦上，達成「越用越懂你的第二大腦」。
+
+跟「Karpathy 編譯理論」是同一個方向（持久化編譯而非臨時檢索），但這支影片提供了具體的實作工具。
+
+---
+
+## 升級點 1：Claudian 插件
+
+把 Claude Code 整合進 Obsidian → 變成內建的聊天視窗。
+
+不用切換終端機，直接在 Obsidian 內就能：
+- 跟 Claude 對話
+- 生成新筆記
+- 搜尋現有筆記
+- 跨筆記連結與分析
+
+**安裝方式：**
+1. 從 GitHub 下載最新版的 3 個檔案
+2. 放到 vault 內的 `.obsidian/plugins/claudian/` 資料夾
+3. 開啟 Obsidian → 設定 → 第三方插件 → 關閉安全模式
+4. 重新整理插件清單 → 啟用 Claudian
+5. 左側欄會出現小機器人 icon
+
+**注意：** 還沒上架 Obsidian 官方插件市場，目前只能手動安裝。
+
+---
+
+## 升級點 2：5 個官方 Obsidian Skills
+
+Anthropic 為 Obsidian 量身打造的 skills，放在 vault 根目錄的 `.claude/skills/`：
+
+### 1. obsidian-markdown
+- 生成符合 Obsidian 格式的筆記
+- 自動加 frontmatter、雙向連結、tag
+- 強化現行 /save 流程的最佳工具
+
+### 2. canvas（無限畫布）
+- 一鍵把筆記內容生成思維導圖
+- 也支援流程圖模式
+- 適合策略筆記、系統圖、知識圖譜
+
+### 3. obsidian-cli
+- 搜尋／讀／寫／管理 vault 內所有筆記
+- 例：「找到並引用 Obsidian CEO 說過關於不要有資料夾概念的內容」
+- 適合做 /review-kb（知識庫體檢）
+
+### 4. obsidian-base
+- 生成 Obsidian Bases 資料庫視圖
+- 例：「建立讀書筆記資料庫，欄位包括書名、作者、狀態、評分、讀完日期」
+- 之後筆記只要加上 `讀書筆記` tag → 自動匯入資料庫
+
+### 5. defuddle
+- 網頁去噪 → 乾淨 Markdown
+- 自動抓取網頁正文內容
+- 取代「複製貼上整個網頁」的雜亂流程
+
+---
+
+## 與現有架構對應表
+
+| 現在做法 | 影片方案 |
+|---------|---------|
+| /save 指令 + 手動分類 | obsidian-markdown skill 自動 frontmatter |
+| Claude 在終端機 | Claudian 插件直接在 Obsidian 內 |
+| 手動連結筆記 | obsidian-cli 自動找關聯 |
+| 純文字筆記 | canvas skill 一鍵思維導圖 |
+| 待建立 /review-kb | obsidian-cli + obsidian-base 可組合實現 |
+
+---
+
+## 建議導入順序
+
+1. **先裝 Claudian 插件** → 減少 context switching，立即見效
+2. **裝 obsidian-markdown skill** → 升級現行 /save 流程
+3. **裝 defuddle skill** → 之後丟網頁連結時自動清乾淨
+4. **裝 canvas skill** → 把現有的策略筆記、系統圖嘗試圖像化
+5. **裝 obsidian-cli + base** → 配合 /review-kb 做知識庫體檢
+
+---
+
+## 與 Karpathy 知識庫編譯理論的關係
+
+| Karpathy 三層 | Claudian + Skills 對應 |
+|-------------|-----------------------|
+| 數據層 | defuddle 抓取網頁／影片字幕 |
+| Wiki 層 | obsidian-markdown 生成筆記 |
+| 規則層 | skills 本身就是規則定義 |
+| 攝入 | defuddle |
+| 查詢與推理 | Claudian 對話介面 |
+| 歸檔 | obsidian-markdown |
+| 體檢 | obsidian-cli + obsidian-base |
+
+**結論：** 這支影片基本上是 Karpathy 理論的具體實作工具鏈，跟我們現行架構方向 100% 一致，只差導入動作。
