@@ -1,0 +1,188 @@
+---
+title: photo-grade v1 驗證紀錄
+date: 2026-05-13
+creator: robert
+co_creators:
+  - claude_robin
+tags:
+  - 攝影
+  - 驗證
+  - VLM
+  - photo-grade
+  - reference
+aliases:
+  - photo-grade v1 validation
+  - 驗證量化紀錄
+來源: photo-grade KB v1 (2026-05-08~2026-05-12) §9
+連結: _attachments/photo_grade_kb_2026-05-11.html
+version: 1
+
+# 管理標記（claude_robin transform 後補）
+managed_by: claude_robin
+managed_at: 2026-05-13
+transformed: true
+transform_note: |
+  Robert 寫於 robert/raw/photo_grade_驗證紀錄_v1.md，claude_robin 轉化：
+  - 類型 = reference / 驗證實證數據，跟 narrative 開發誌同 session、放同資料夾
+  - 補管理層 frontmatter + co_creators
+  - 刪除 note_to_robin 段
+  - 原 raw 檔已刪除
+
+# 發佈標記
+private: false
+published: true
+category: "攝影-開發歷程"
+---
+
+# photo-grade v1 驗證紀錄
+
+<div class="not-prose my-6 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg p-4">
+<p class="font-bold text-red-400 mb-2">🔴 一句話定義</p>
+<div class="text-sm text-gray-300">
+
+2026-05-08 ~ 2026-05-11 期間累積的所有量化驗證數據:SKILL 訓練改善幅度 / VLM vs User QC diff / Sonnet vs Opus 大批量幻覺率對比 / 本地 vs 雲端模型精度比較。這份是未來「為什麼選 X 而不選 Y」決策時的引用依據。
+
+</div>
+</div>
+
+
+## 適用引用情境
+
+- 未來討論「要不要換更便宜的模型」時 → 翻 §5 模型精度比較
+- 未來討論「VLM agent 為什麼必須 Opus」時 → 翻 §3 1057 場景幻覺實證
+- 未來討論「SKILL v2 比 v1 改了什麼」時 → 翻 §1 訓練改善幅度 + §2 QC diff
+- 未來討論「Production pipeline 預期 yield rate」時 → 翻 §3 / §4 backlog 統計
+
+---
+
+## 1. 門司港 671 張 SKILL 訓練成果(2026-05-08)
+
+| 階段 | 1★ | 2★ | 3★ | 4★ | Picks |
+|---|---|---|---|---|---|
+| VLM 跑完(修正前) | 14 | 97 | 87 | 32 | 92 |
+| User audit 33 張(修正後) | 4 | 86 | 100 | 31 | ~100 |
+
+**誤判改善幅度**:~10%(30 / 230 照片)
+
+**Green 軸 v2 calibration 主要校正四類**:
+1. 過度降星
+2. 誤判雷同
+3. 未識別抽象 / 紀念類
+4. 過度 P
+
+---
+
+## 2. VLM vs User QC Diff(2026-05-08 全 599 張)
+
+| 類型 | 數量 | 方向 |
+|---|---|---|
+| VLM 總評分 | 599 張 | — |
+| User QC 修改 | **165 張(27.5%)** | — |
+| 評分異動 | 96 張 | — |
+| Pick 異動 | 150 張 | — |
+| Label 異動 | 5 張(紅→黃 4 + 綠→黃 1) | — |
+
+### 評分具體分布
+
+| 變動 | 張數 | 方向 |
+|---|---|---|
+| 4 → 3 | 42 | 👇 慷慨原則 over-applied |
+| 2 → 3 | 28 | 👆「沒大瑕疵 = 3★」套不夠 |
+| 1 → 3 | 10 | 👆 |
+| 4 → None | 7 | 移除 |
+| 3 → 1 | 5 | 👇 |
+
+**洞察**:VLM 兩極化偏向 → user 在中段拉平。改善方向就是 v2 把「沒大瑕疵 = 3★」default 規則寫死。
+
+---
+
+## 3. Backlog 1280 張 v1(Sonnet, 2026-05-10)— 已**棄用**
+
+| Trip | 照片 | 5★ | 4★ | 3★ | 2★ | 1★ | Picks |
+|---|---|---|---|---|---|---|---|
+| 2026-04-29 原水考察 | 91 | 0 | 23 | 47 | 14 | 7 | 49 |
+| 2026-04-30 熊本城 | 454 | 5 | 179 | 264 | 4 | 2 | 258 |
+| 2026-05-01 高千穗峽 | 576 | 2 | 166 | 401 | 7 | 0 | 395 |
+| 2026-05-02 熊本往福岡 | 159 | 0 | 42 | 108 | 9 | 0 | 92 |
+| **總計** | **1280** | **7** | **410** | **820** | **34** | **9** | **794(62%)** |
+
+**成本**:Sonnet ~2 小時 / ~595K tokens ≈ Opus 的 1/5
+
+**為什麼棄用**:
+- 1057 場景證實大批量 Sonnet 幻覺率 70-80%
+- 拍板 production 走 Opus
+
+---
+
+## 4. Backlog 1280 張 v2(Opus, 2026-05-11)— **當前 production**
+
+| 類別 | 數量 |
+|---|---|
+| Stage A 標籤完成 | 1280 / 1280 |
+| Stage B 評分完成 | 1280 / 1280 |
+| **5★ Pick** | **82** |
+| 4★ keepers | 417 |
+| 3★ medium | 541 |
+| 2★ weak | 230 |
+| Reject(黑標) | 10 |
+| 1112 場景拆分 | 14 子場景 + 1 reject |
+| **XMP 配對率** | **1257 / 1280 = 98.2%** |
+
+---
+
+## 5. 模型精度比較(本地 vs 雲端)
+
+| 模型 | 大小 | 硬體 | 精度 vs Opus | 速度 / 張 |
+|---|---|---|---|---|
+| Qwen2.5-VL-7B | 7B | 16GB Mac | ~40% | 30s |
+| Qwen2.5-VL-32B | 32B | 32GB+ M Pro | ~65% | 2min |
+| Qwen2.5-VL-72B | 72B | 64GB+ M Max | ~75% | 5min |
+| InternVL3-78B | 78B | 64GB+ | ~70% | 6min |
+| GPT-4o(雲) | — | — | ~95% | 5s |
+| **Opus 4.7(現用)** | — | — | **100%** | 10s |
+
+<div class="not-prose my-6 bg-gray-500/10 border-l-4 border-gray-500 rounded-r-lg p-4">
+<p class="font-bold text-gray-400 mb-2">📌 為什麼不切本地化?</p>
+<div class="text-sm text-gray-300">
+
+1280 張用 Qwen-72B 跑 = 5min × 1280 = **107 小時**,不切實際
+本地化暫時不切換,**維持 Opus 4.7 全程**
+
+</div>
+</div>
+
+
+---
+
+## 6. 結論與引用注意事項
+
+### 高 confidence 結論(2026-05-12 拍板)
+
+1. **Production 跑 backlog 必須 Opus 4.7** — Sonnet 1057 場景實證幻覺率 70-80%
+2. **縮圖最低 1024px** — 512px 是幻覺源頭之一
+3. **Stage A / Stage B 不能合併** — 拆兩階段精度顯著上升
+4. **`objective_description` 必填且先於 label** — 順序顛倒 = 幻覺溫床
+
+### 待補驗證(下一階段)
+
+1. **Purple 軸**(食物 / 藝術品)— 尚無專屬訓練集
+2. **Develop preset baseline** — VLM 評分時是否能同步輸出
+3. **1057 場景重跑**(Task #41) — 用 Opus 跑 Stage A/B 全套
+4. **本地化 fallback**(後備)— 若雲端不可用時最低品質基準
+
+---
+
+## 相關技能 / 規範
+
+- 人像評分_4軸法 — 本驗證紀錄使用的評分主軸 SKILL
+- VLM評分_防幻覺紅線 — 由 §3 1057 場景幻覺實證淬煉而來
+- Backlog_5階段SOP — §4 production 用的 pipeline
+- LR_Catalog_v4_Metadata_Schema — 寫入規範
+- photo_grade_開發誌_v1 — narrative 配套
+- photo_grade_開發筆記本 — 對話過程紀錄
+
+---
+
+## 修訂歷史
+
+- **2026-05-13**:初版(寫到 `robert/raw/` 等 Robin 轉化 + 發佈)。從 photo-grade KB v1 §9 萃取。
