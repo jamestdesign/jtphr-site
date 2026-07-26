@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POST・自動剪輯 待完成清單 · PhotoNB</title>
+<meta name="description" content="POST 工具、審片介面、收斂指標、規範固化、接到影片、蒙太奇 Ⓑ 路線 —— 六個階段的待完成清單，勾選會自動存下來。" />
+<meta name="date" content="2026-07-26" />
+<style>
+  :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+        --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--blue:#7fb6f0;--red:#e9758a;--grey:#8b93a8;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;}
+  a{color:var(--gold);}
+  .wrap{max-width:820px;margin:0 auto;padding:1.2rem 1.15rem 6rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.2rem);}
+  .lead{color:var(--muted);margin:.2rem 0 1rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.88em;}
+  .prog{position:sticky;top:0;z-index:20;background:rgba(8,12,26,.94);backdrop-filter:blur(8px);
+        border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem;margin:.9rem 0 1.3rem;}
+  .bar{height:9px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:.45rem 0 .35rem;}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--green));width:0;transition:width .3s;}
+  .pnum{font-size:.82rem;color:var(--muted);display:flex;justify-content:space-between;gap:1rem;}
+  .btn{background:transparent;color:var(--gold);border:1px solid var(--line);border-radius:999px;
+       padding:.3rem .8rem;font-size:.78rem;cursor:pointer;font-family:inherit;}
+  .phase{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.05rem 1.1rem;margin:1rem 0;}
+  .phase h2{margin:.1rem 0 .1rem;font-size:1.02rem;color:var(--gold);letter-spacing:.04em;}
+  .phase .why{color:var(--muted);font-size:.84rem;margin:.15rem 0 .8rem;}
+  .item{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;border-top:1px solid rgba(255,255,255,.06);}
+  .item:first-of-type{border-top:0;}
+  .item input{margin-top:.42rem;width:18px;height:18px;accent-color:#5bd48a;flex:0 0 auto;cursor:pointer;}
+  .item .t{flex:1;}
+  .item .t b{font-weight:600;}
+  .item.done .t{opacity:.5;text-decoration:line-through;text-decoration-color:rgba(255,255,255,.35);}
+  .sub{display:block;color:var(--muted);font-size:.82rem;margin-top:.1rem;}
+  .tag{display:inline-block;border-radius:999px;padding:.05rem .5rem;font-size:.7rem;margin-left:.35rem;vertical-align:.12em;border:1px solid;}
+  .t-r{color:var(--gold2);border-color:rgba(216,182,90,.5);}
+  .t-j{color:var(--blue);border-color:rgba(127,182,240,.45);}
+  .t-w{color:var(--red);border-color:rgba(233,117,138,.45);}
+  .t-n{color:var(--grey);border-color:rgba(139,147,168,.4);}
+  .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);
+        border-radius:12px;padding:.8rem 1rem;font-size:.88rem;margin:.9rem 0;}
+  footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">路線圖 · Roadmap</p>
+  <h1>POST・自動剪輯 待完成清單</h1>
+  <p class="lead">2026-07-26 談定的幾個架構，拆成六個階段、逐步執行。<b>勾選會自動存在這台裝置</b>，隨時回來看進度。</p>
+
+  <div class="prog">
+    <div class="pnum"><span id="pt">進度</span><button class="btn" onclick="reset()">↺ 全部取消勾選</button></div>
+    <div class="bar"><i id="pb"></i></div>
+    <div class="pnum"><span class="tag t-r">Robert 做</span><span class="tag t-j">James 決定/提供</span><span class="tag t-w">卡住等料</span><span class="tag t-n">之後再說</span></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 0 階段 · 今天已經完成的</h2>
+    <p class="why">先把地基收乾淨：資料夾規矩統一、工具頁上架、POST 第一版出爐。</p>
+    <div id="p0"></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 1 階段 · 審片介面（建議先做這個）</h2>
+    <p class="why">現在你要改東西得打一長串字描述「哪裡、怎麼改」。改成<b>圈一圈＋留一句</b>，我直接讀。這也是之後影片版的底。</p>
+    <div id="p1"></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 2 階段 · 讓我越改越少</h2>
+    <p class="why">每次出片記錄你改了什麼，逼我把同一個錯誤收斂掉，而不是每次都被退。</p>
+    <div id="p2"></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 3 階段 · 規範寫死進工具</h2>
+    <p class="why">字級、斷句、字數、字型 —— 定一次寫進程式，不要每次靠感覺。</p>
+    <div id="p3"></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 4 階段 · POST 初稿修正</h2>
+    <p class="why">等你看完第一版跟 HTML 模板，把版型調到你滿意為止。</p>
+    <div id="p4"></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 5 階段 · 同一套圖層接到影片</h2>
+    <p class="why">你說的「這技術套用到自動剪輯影片」：同一份圖層設定，換一個渲染器就變會動的字卡。</p>
+    <div id="p5"></div>
+  </div>
+
+  <div class="phase">
+    <h2>第 6 階段 · 蒙太奇 Ⓑ 路線（剪映）</h2>
+    <p class="why">照片端已經通了（to_montage → _montage）；影片端還缺「依關鍵字撈 clip 打包」。</p>
+    <div id="p6"></div>
+  </div>
+
+  <div class="note">
+    📌 <b>怎麼用這張清單</b>：我做完一項就把它劃掉並跟你回報；你想調順序隨時說。標 <span class="tag t-j">James</span> 的是等你決定或給東西，標 <span class="tag t-w">卡住</span> 的是沒有那個東西就動不了。
+  </div>
+
+  <footer>PhotoNB · POST・自動剪輯 待完成清單（2026-07-26 建立）· 由 Robert 維護</footer>
+</div>
+
+<script>
+const P = {
+ p0:[
+  ["落地區規矩統一：<b><code>to_</code> 開頭＝東西丟進去、<code>_</code> 開頭＝成品跑出來</b>","export／montage／grid／post 四條線都改齊了","r",1],
+  ["<b>montage-auto-move</b> 工具頁上線","照片 ★4/★5 進影片世界的橋，德國首跑 7 檔全對上","r",1],
+  ["<b>POST 工具</b> 第一版出圖（7 頁 1080×1350）","Augustiner 啤酒館實作，已傳給你看","r",1],
+  ["<b>POST HTML 圖層模板</b> 上線","可改字、換圖、加刪區塊、顯示圖層框線","r",1],
+  ["POST 落點定案 <code>to_post/&lt;主題&gt;</code> → <code>_post/NN_&lt;主題&gt;</code>","自動編號，同主題會落回原本那夾","r",1],
+  ["兩支參考影片看完並整理精華","ChatGPT 八大步驟／審片介面／收斂指標","r",1]
+ ],
+ p1:[
+  ["在 POST 模板加<b>圈畫工具</b>","畫筆直接圈出哪裡怪，不用打字描述位置","r",0],
+  ["加<b>留言框</b>：圈完打一句就好","例：「這張右邊裁到了，往左移一點」","r",0],
+  ["意見<b>存成檔案</b>，我直接讀","一鍵匯出，或存在頁面裡我來抓","r",0],
+  ["我依意見改圖重出，回報「改了哪幾處」","形成一個回合","r",0],
+  ["<b>影片版審片介面</b>：播放器＋空白鍵暫停＋畫筆＋時間碼","接你說的自動剪輯影片","r",0]
+ ],
+ p2:[
+  ["每次出片後記錄「你改了幾處、改什麼」","存進待辦清單，看得到趨勢","r",0],
+  ["<b>收斂指標</b>：這支比上支少改幾處？","目標是版次一路往下","r",0],
+  ["<b>學習閉環</b>：上次學到的，這次有沒有做到","做到就寫進 SKILL／記憶，變成預設","r",0],
+  ["每 5 支回顧一次，把重複的錯誤變成規則","避免同一個地方被退第三次","r",0]
+ ],
+ p3:[
+  ["<b>字幕規範</b>：一行幾個字、怎麼斷句、標題放哪","參考片的做法是一行 ≤8 字、依語意斷","j",0],
+  ["<b>POST 文案字數</b>固化進工具","封面 8–14 字／引言 80–120／主打 50–90…","r",0],
+  ["<b>字型組定案</b>（襯線＋黑體，免費可商用）","現在用系統字，換掉會更有個性","j",0],
+  ["顏色規範寫死：米白＋純黑，彩度全交給照片","已在程式裡，補進文件","r",0]
+ ],
+ p4:[
+  ["第 3、5 頁下方留白再縮","照片可以再拉高一點","r",0],
+  ["第 4 頁拍立得地圖：大標露太少","調位置讓它從縫隙露出來","r",0],
+  ["膠囊框、浮水印的大小／位置微調","","j",0],
+  ["追蹤頁互動圖示畫得更像","HTML 版目前是暫代符號","r",0],
+  ["你看完初稿給整體意見","哪幾頁留、哪幾頁換掉","j",0]
+ ],
+ p5:[
+  ["同一份圖層設定 →<b> 動態版</b>（透明 ProRes）","改用 narrative_tag 當渲染器","r",0],
+  ["標題層／地名膠囊／地址層 做成影片字卡","進 FCP 直接疊，不用去背","r",0],
+  ["FCP 實際疊一次測試","確認位置、時間、安全區","r",0],
+  ["決定影片字卡要不要走同一份 HTML 模板","一次填字，圖跟影片都有","j",0]
+ ],
+ p6:[
+  ["定義<b>剪輯類關鍵字</b>（開場／空鏡／轉場／收尾）","你撿片時打，我靠它自動撈","j",0],
+  ["依關鍵字從 <code>.fcpxmld</code> 撈 clip","選片事實只在 fcpxmld，母帶不複製","r",0],
+  ["修剪＋照播放順序命名，打包 <code>to_montage/&lt;片名&gt;_01/</code>","整夾拖進剪映就開剪","r",0],
+  ["剪映實跑一支氛圍蒙太奇","咖啡廳／開箱／專櫃那類","j",0],
+  ["色調正規化：O-Log→709 LUT","<b>卡住</b>：等你給原廠 .cube，或給 O-Log＋一般模式對拍","w",0]
+ ]
+};
+const KEY="roadmap-post-v1";
+const state = JSON.parse(localStorage.getItem(KEY) || "{}");
+function render(){
+  let tot=0, done=0;
+  for(const k in P){
+    const host=document.getElementById(k);
+    host.innerHTML = P[k].map((it,i)=>{
+      const id=k+"-"+i;
+      const on = state[id] !== undefined ? state[id] : !!it[3];
+      tot++; if(on) done++;
+      const tag = {r:'<span class="tag t-r">Robert</span>',j:'<span class="tag t-j">James</span>',
+                   w:'<span class="tag t-w">卡住等料</span>',n:'<span class="tag t-n">之後</span>'}[it[2]]||"";
+      return `<label class="item ${on?'done':''}">
+        <input type="checkbox" data-id="${id}" ${on?"checked":""}>
+        <span class="t"><b>${it[0]}</b>${tag}${it[1]?`<span class="sub">${it[1]}</span>`:""}</span></label>`;
+    }).join("");
+  }
+  document.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener("change",()=>{ state[cb.dataset.id]=cb.checked;
+      localStorage.setItem(KEY,JSON.stringify(state)); render(); });
+  });
+  document.getElementById("pb").style.width = (done/tot*100).toFixed(1)+"%";
+  document.getElementById("pt").textContent = `進度 ${done} / ${tot} 項（${Math.round(done/tot*100)}%）`;
+}
+function reset(){ for(const k in state) delete state[k]; localStorage.removeItem(KEY); render(); }
+render();
+</script>
+</body>
+</html>
