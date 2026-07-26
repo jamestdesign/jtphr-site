@@ -44,7 +44,12 @@
   <div class="card">
     <div style="font-size:16px;font-weight:700;margin-bottom:8px">🎛️ 出片指令</div>
     指令名稱：<code>grid</code>　或打　<b>拼貼輸出</b><br>
-    用法 = <b>樣式 + 格式 + 色調 + 標題 + 內文</b>。把照片丟進 <code>to_grid/</code>，給參數就出圖到 <code>to_grid/_out/</code>。
+    用法 = <b>樣式 + 格式 + 色調 + 標題 + 內文</b>。把照片丟進 <code>to_grid/</code>，給參數就出圖到 <code>_grid/</code>。
+    <div style="background:rgba(216,182,90,.1);border:1px solid rgba(216,182,90,.3);border-radius:10px;padding:.6rem .8rem;margin:.6rem 0;font-size:14px">
+      📁 <b>歸檔邏輯跟出片一致</b>（2026-07-26 起）：<code>&lt;trip&gt;/to_grid/</code> ＝ 落地區（素材丟這）→ <code>&lt;trip&gt;/_grid/</code> ＝ 成品（出圖落這）。
+      <b>「to_」開頭＝落地區、「_」開頭＝成品</b>，跟 <code>to_export</code> → <code>_export</code>、<code>to_montage</code> → <code>_montage</code> 同一套規矩，不用另外記。
+      <span style="opacity:.75">（舊版是出到 <code>to_grid/_out/</code>，已改。）</span>
+    </div>
     <pre>grid &lt;照片夾&gt; --style 壁貼 --format 直式 --tone 暖 --title "Le Train Bleu" --text "Paris · 2026"</pre>
     <table>
       <tr><th width="90">參數</th><th>可選值</th></tr>
