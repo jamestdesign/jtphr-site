@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>進片照片自動分場景 · montage-auto-move · PhotoNB</title>
+  <meta name="description" content="影片工具：把 LR 挑好（★4/★5＋特定場景）匯出的 5760px 照片，依母檔場景自動鏡射到創作夾的 _montage，供 FCP／剪映做 montage 使用。" />
+  <meta name="date" content="2026-07-26" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:760px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.55em;letter-spacing:.02em;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.02rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;
+      font-family:ui-monospace,Menlo,monospace;font-size:.83rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    ul{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.86rem;margin:.4rem 0 .2rem;}
+    .flow b{background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:.3rem .6rem;color:var(--gold2);}
+    .flow i{color:var(--gold);font-style:normal;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.74rem;color:var(--muted);margin:.15rem .2rem 0 0;}
+    .ok{color:var(--green);} .bad{color:var(--red);}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">影片工具 · Montage 備料</p>
+  <h1>進片照片自動分場景 <span class="en">montage-auto-move</span></h1>
+  <p class="lead">把 LR 裡挑好（<b>★4／★5 ＋ 這支片要用的場景</b>）匯出的大尺寸照片，依母檔所在場景<b>自動分天分場景</b>鏡射到創作夾的 <code>_montage</code>，給 FCP／剪映做 montage 用。</p>
+
+  <h2>為什麼需要這一步</h2>
+  <div class="card">
+    <ul>
+      <li><b>照片的管理器是 LR，而 LR 不管影片</b> → 照片要跨進影片世界，需要一個中繼站，就是 <code>to_montage</code>／<code>_montage</code>。</li>
+      <li><b>影片不需要</b> —— FCP 本身就是影片的管理器（撿片後的 ★1–5、關鍵字、KP 影格全記在 <code>.fcpxmld</code>），母帶只有 <code>MOV_</code> 一份，<b>不複製第二份</b>。</li>
+      <li><b>不能拿 <code>_export</code> 直接餵剪輯</b> —— 那是雲端回顧的全部 keeper，量太大，剪片時打開只會選擇困難。進 <code>_montage</code> 的每一張都是「已確定要放進影片」的，剪的時候不用再挑第二次。</li>
+    </ul>
+  </div>
+
+  <h2>做什麼</h2>
+  <div class="flow">
+    <b>LR 篩 ★4/★5＋場景</b><i>→</i><b>&lt;trip&gt;/to_montage/</b><i>→</i><b>montage-auto-move</b><i>→</i><b>_&lt;trip&gt;_創作/_montage/&lt;dayN&gt;/&lt;場景&gt;/</b>
+  </div>
+  <ul>
+    <li>跟 <a href="./export-auto-move.html">export-auto-move</a> 同一套引擎：用<b>檔名當鑰匙</b>比對母檔，建「stem → (day, 場景)」對照表後鏡射搬檔。</li>
+    <li>差別只在<b>來源與目的地</b>：來源 <code>to_montage</code>，目的地是<b>創作夾裡的</b> <code>_montage</code>（因為 montage 素材屬於影片世界，要跟著整夾拷 NAS）。</li>
+    <li>對不上的檔<b>留在 <code>to_montage/</code></b> 不亂搬，報告會列清單。</li>
+  </ul>
+
+  <h2>資料夾規矩（兩句話記住）</h2>
+  <pre>&lt;trip&gt;/
+  to_export/    to_montage/          ← 「to_」開頭＝落地區，全部在 trip 頂層
+  to_evoto/     to_evoto_oppo/           （跑完應該是空的；空＝已處理完）
+  _export/&lt;day&gt;/&lt;場景&gt;/               ← 照片成品（上雲端的是這個）
+  _&lt;trip&gt;_創作/
+      &lt;trip&gt;.fcpbundle
+      MOV_&lt;day&gt;/                       ← 影片母帶
+      _montage/&lt;day&gt;/&lt;場景&gt;/           ← montage 成品（跟著整夾拷 NAS）</pre>
+  <ul>
+    <li><b><code>to_</code> 開頭＝落地區，一律在 trip 頂層</b> —— LR 匯出只認這一層，不用記哪個工具的落點在哪。</li>
+    <li><b><code>_</code> 開頭＝分好 day／場景的成品，各回各家</b> —— 照片的留頂層（要上雲端）、montage 的進創作夾（要跟著備份）。</li>
+  </ul>
+
+  <h2>怎麼用</h2>
+  <pre># 1) 先 dry-run（只報告，不搬）— 看每個 day/場景幾張，對不對
+export-auto-move "&lt;trip 根目錄&gt;" \
+  --to_export "&lt;trip&gt;/to_montage" \
+  --export    "&lt;trip&gt;/_&lt;trip&gt;_創作/_montage"
+
+# 2) 確認無誤 → 實際搬（加 --go）
+export-auto-move "&lt;trip 根目錄&gt;" \
+  --to_export "&lt;trip&gt;/to_montage" \
+  --export    "&lt;trip&gt;/_&lt;trip&gt;_創作/_montage" --go</pre>
+  <p class="tag">腳本 <code>tools/export_auto_move.py</code>（參數驅動，共用同一支）</p><p class="tag">第一個參數仍是 trip 根目錄（要靠它掃母檔）</p>
+
+  <h2>LR 匯出預設（已裝好）</h2>
+  <p class="lead" style="margin-bottom:.6rem">LR 的匯出預設區已經有 <code>to_montage (JPG q95 sRGB 5760px)</code>，用法跟 <code>to_export</code> 一樣：選好照片 → 匯出 → 目的地選那趟 trip 資料夾，它自己建 <code>to_montage</code> 子夾。</p>
+  <table>
+    <tr><th>設定</th><th>值</th><th>為什麼</th></tr>
+    <tr><td>長邊</td><td><b>5760px</b>（＝1.5×4K）</td><td>Ken Burns 推移放大才不會糊</td></tr>
+    <tr><td>品質</td><td>JPG q95 / sRGB / 8-bit</td><td>要被再次編碼，來源留厚一點</td></tr>
+    <tr><td>中繼資料</td><td>全部（含關鍵字、GPS）</td><td>場景關鍵字帶得進影片專案</td></tr>
+    <tr><td>檔名</td><td>沿用原檔名</td><td>鏡射工具靠檔名對母檔</td></tr>
+    <tr><td>加回 catalog</td><td class="bad">否</td><td>創作世界<b>不寫回 LR</b>（跟 to_export 不同）</td></tr>
+    <tr><td>不放大</td><td>是</td><td>原檔比 5760 小就維持原樣，硬放大只會糊</td></tr>
+  </table>
+
+  <div class="note">💡 <b>小貼士</b>：手機直出 JPG 本來就只有長邊 4000，匯出不會被放大 → <b>那類照片剪的時候推移幅度小一點</b>；RAW／DNG 進來的才吃得到 5760 的餘裕。想確認某張有沒有到 5760，選取後看 LR 右下角的尺寸，或問 Robert 幫你量。</div>
+
+  <h2>實測（德國 5天4夜 · 2026-07-26 首跑）</h2>
+  <table>
+    <tr><th>批次</th><th>檔數</th><th>結果</th></tr>
+    <tr><td>montage（to_montage → _montage）</td><td>7</td><td class="ok">全對上 · 落 day1 5 個場景夾 · 落地區殘留 0</td></tr>
+    <tr><td>同日照片出片（to_export → _export）</td><td>32</td><td class="ok">全對上 · 落 day1 9 個場景夾 · 落地區殘留 0</td></tr>
+  </table>
+  <p class="lead" style="font-size:.85rem">匯出預設驗證：<code>IMG20260629123941</code> 出來 4320×<b>5760</b> <span class="ok">✅</span>；其餘停在 4000／4896 ＝ 原檔本身上限（不放大）。</p>
+
+  <div class="note">🔒 <b>鐵則</b>：一定先 dry-run 看「鏡射預覽（每 day/場景張數）」對不對，再加 <code>--go</code>。搬檔是移動（同碟秒級），對不上的絕不亂丟，會留在落地區給你檢查。</div>
+
+  <h2>接下來要做什麼</h2>
+  <ul>
+    <li>照片進 <code>_montage</code> 後：在 <b>FCP</b> 匯入該場景那夾，或往 <b>剪映</b> 做氛圍蒙太奇。</li>
+    <li>影片素材<b>不走這條</b> —— 留在 <code>.fcpxmld</code>（撿片結果）＋ <code>MOV_</code> 母帶。要在 FCP 剪就請 Robert 出 fcpxml；要去剪映剪，Robert 再依關鍵字把 clip 修剪打包。</li>
+    <li>相關頁：<a href="./export-auto-move.html">export-auto-move</a>、<a href="./scene-build.html">scene_build（照片影片歸檔）</a>、<a href="./fcpxmld-export.html">fcpxmld-export</a>、<a href="./initcut-spec-picker.html">初剪規格選擇器</a>。</li>
+  </ul>
+
+  <footer>PhotoNB · Montage 備料 — montage-auto-move（與 export-auto-move 共用引擎）· 由 Robert 維護</footer>
+</div>
+</body>
+</html>
