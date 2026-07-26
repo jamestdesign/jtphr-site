@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POST 工具 · 圖層模板（可改字·可換圖）· PhotoNB</title>
+<meta name="description" content="POST 社群輪播 7 頁圖層模板：HTML 直接改字、換圖、加區塊，改完複製設定給 Robert 出圖。" />
+<meta name="date" content="2026-07-26" />
+<style>
+  :root{--navy:#0b1022;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);
+        --cream:#f2f0ec;--paper:#e9e6e1;--dark:#2b2724;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;}
+  a{color:var(--gold);}
+  .wrap{max-width:1120px;margin:0 auto;padding:1.2rem 1.15rem 6rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.2rem);}
+  h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.52em;}
+  .lead{color:var(--muted);margin:.2rem 0 1rem;}
+  h2{color:var(--gold);font-size:1rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+  .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+  .bar{position:sticky;top:0;z-index:40;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
+       background:rgba(8,12,26,.92);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:.6rem .7rem;margin:.8rem 0 1.2rem;}
+  .btn{background:var(--gold);color:#221a05;border:0;border-radius:999px;padding:.42rem .95rem;font-weight:700;font-size:.84rem;cursor:pointer;font-family:inherit;}
+  .btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--line);}
+  .hint{color:var(--muted);font-size:.78rem;}
+  /* ---------- 幻燈片 ---------- */
+  .deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem;}
+  .slot{}
+  .slothead{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin:0 0 .4rem;}
+  .slotname{color:var(--gold2);font-size:.82rem;letter-spacing:.05em;}
+  .stage{position:relative;width:100%;aspect-ratio:1080/1350;background:var(--cream);border-radius:10px;overflow:hidden;
+         box-shadow:0 10px 34px rgba(0,0,0,.45);}
+  .canvas{position:absolute;inset:0;width:1080px;height:1350px;transform-origin:0 0;color:var(--dark);
+          font-family:'Noto Sans TC','PingFang TC',sans-serif;}
+  .L{position:absolute;}                      /* 圖層 */
+  .L img{width:100%;height:100%;object-fit:cover;display:block;}
+  .showlayers .L{outline:1.5px dashed rgba(216,90,90,.85);outline-offset:-2px;}
+  .showlayers .L::after{content:attr(data-l);position:absolute;left:0;top:0;background:rgba(216,90,90,.9);color:#fff;
+          font-size:17px;padding:2px 8px;border-radius:0 0 8px 0;letter-spacing:.05em;}
+  .ed{outline:none;}
+  .ed:hover{background:rgba(216,182,90,.22);box-shadow:0 0 0 6px rgba(216,182,90,.22);border-radius:4px;}
+  .ed:focus{background:rgba(216,182,90,.3);box-shadow:0 0 0 6px rgba(216,182,90,.3);}
+  .pic{cursor:pointer;}
+  .pic:hover{filter:brightness(.82);}
+  .tools{position:absolute;right:8px;top:8px;display:flex;gap:6px;z-index:9;}
+  .tool{background:rgba(20,20,20,.78);color:#fff;border:0;border-radius:8px;font-size:20px;padding:6px 10px;cursor:pointer;font-family:inherit;}
+  /* 版面元件（1080×1350 座標） */
+  .serif{font-family:'Didot','Playfair Display',Georgia,serif;}
+  .body{font-size:29px;line-height:1.8;text-align:justify;}
+  .cap{letter-spacing:.28em;text-transform:uppercase;}
+  .hollow{-webkit-text-stroke:2px #b4afa8;color:#e9e6e1;font-size:76px;line-height:1.12;}
+  .capsule{display:inline-block;border:2px solid #fff;border-radius:999px;padding:12px 26px;color:#fff;font-size:30px;letter-spacing:.14em;}
+  .wm{width:68px;height:68px;border:2px solid rgba(255,255,255,.72);border-radius:50%;display:grid;place-items:center;
+      font-family:Didot,Georgia,serif;font-size:30px;color:rgba(255,255,255,.72);}
+  .wm.dark{border-color:rgba(30,28,26,.55);color:rgba(30,28,26,.55);}
+  .addr{background:#fff;color:#111;font-size:25px;line-height:1.6;padding:20px 24px;}
+  .pol{background:#fcfaf6;padding:22px 22px 70px;box-shadow:0 12px 26px rgba(0,0,0,.18);}
+  .pol img{aspect-ratio:1/1.18;}
+  .polcap{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:20px;}
+  /* 選圖面板 */
+  .modal{position:fixed;inset:0;background:rgba(4,6,14,.86);z-index:80;display:none;padding:2rem 1rem;overflow:auto;}
+  .modal.on{display:block;}
+  .mgrid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.7rem;}
+  .mgrid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;cursor:pointer;border:2px solid transparent;}
+  .mgrid img:hover{border-color:var(--gold);}
+  textarea{width:100%;min-height:220px;background:#060a16;color:#dfe6f2;border:1px solid var(--line);border-radius:12px;
+           padding:.8rem;font-family:ui-monospace,Menlo,monospace;font-size:.78rem;}
+  footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">社群出片 · POST 工具</p>
+  <h1>POST 圖層模板 <span class="en">post-template</span></h1>
+  <p class="lead">7 頁輪播的<b>圖層模板</b>。字直接點就能改、圖點一下就能換、每塊都能加或刪。改完按「複製設定」把設定丟給 Robert，就出正式圖。</p>
+
+  <div class="note">
+    📁 <b>落點</b>：素材放 <code>&lt;trip&gt;/to_post/</code> → 出圖到 <code>&lt;trip&gt;/_post/01_主題/</code>（一個主題一夾，01、02… 依序）。
+    跟 <code>to_export→_export</code>、<code>to_montage→_montage</code>、<code>to_grid→_grid</code> 同一套規矩。
+  </div>
+
+  <div class="bar">
+    <button class="btn" onclick="copyCfg()">📋 複製設定（給 Robert 出圖）</button>
+    <button class="btn ghost" onclick="toggleLayers()">🔲 顯示圖層框線</button>
+    <button class="btn ghost" onclick="location.reload()">↺ 還原初稿</button>
+    <span class="hint">字＝直接點就能打　圖＝點一下換　右上 ＋／🗑 ＝ 加一塊／刪一塊</span>
+  </div>
+
+  <div class="deck" id="deck"></div>
+
+  <h2>這頁在做什麼</h2>
+  <ul>
+    <li><b>圖層概念</b>：每一頁都是「照片層＋文字層＋標籤層＋浮水印層」疊起來的。按上面「顯示圖層框線」可以看到每層的框跟名字。</li>
+    <li><b>為什麼用 HTML 做</b>：改字改圖立刻看到結果，不用等我重跑；而且同一份圖層設定<b>之後可以直接餵給影片</b>（同樣的標題層／標籤層／地圖層，改成動的就是影片字卡）。</li>
+    <li><b>怎麼接回出圖</b>：這裡改完 →「複製設定」→ 丟給 Robert → 跑 <code>post.py</code> 出 7 張 1080×1350 正式圖（HTML 只是排版預覽，正式圖仍由程式產，畫質才夠）。</li>
+  </ul>
+
+  <h2>改完的設定（也可以直接複製這塊）</h2>
+  <textarea id="cfgout" readonly></textarea>
+
+  <footer>PhotoNB · POST 工具 — 圖層模板初稿（2026-07-26）· 由 Robert 維護</footer>
+</div>
+
+<div class="modal" id="picker" onclick="if(event.target.id==='picker')closePicker()">
+  <p style="max-width:900px;margin:0 auto .8rem;color:#aeb6cc">點一張換上去（素材＝該場景 <code>to_post/</code> 裡的照片）</p>
+  <div class="mgrid" id="mgrid"></div>
+</div>
+
+<script>
+const A = "./post-assets/";
+const PHOTOS = ["IMG20260701131238","IMG20260701124656","IMG20260701130926","IMG20260701132012",
+                "IMG20260701132037","IMG20260701131132","IMG20260701124631","IMG20260701130740","IMG20260701124712"];
+
+const DATA = {
+  brand:{mark:"JT"},
+  slides:[
+    {type:"cover", name:"① 封面", photo:"IMG20260701131238",
+     title:["慕尼黑最老的啤酒館","下雨天更該躲進來的地方"], tag:"Augustiner Stammhaus"},
+    {type:"intro", name:"② 引言", title:["Augustiner","Stammhaus","München"],
+     blocks:["從 1328 年釀到現在，Augustiner 是慕尼黑最老的啤酒廠，而 Neuhauser 街上這間 Stammhaus 是它的老本家。雨天的中午走進來，木牆、拱頂與長桌把外面的濕冷全擋在門外，這裡不是給觀光客拍照的地方，是慕尼黑人吃午餐的地方。"],
+     photos:["IMG20260701124656","IMG20260701130926"]},
+    {type:"hero", name:"③ 主打", photo:"IMG20260701132012",
+     blocks:["招牌是烤豬腳配馬鈴薯丸子，外皮烤到脆、肉汁收在裡面，配一杯自家釀的 Helles 剛剛好。份量是巴伐利亞的份量，兩個人點一份不會餓到。"]},
+    {type:"map", name:"④ 拍立得地圖", title:["Beer hall","map"],
+     items:[{photo:"IMG20260701132037",caption:"Schweinshaxe 烤豬腳"},
+            {photo:"IMG20260701130926",caption:"Helles 自家釀"},
+            {photo:"IMG20260701131132",caption:"窗邊長桌"},
+            {photo:"IMG20260701124631",caption:"聖母教堂雙塔"}]},
+    {type:"space", name:"⑤ 空間", photos:["IMG20260701130740","IMG20260701124656"],
+     blocks:["挑高拱頂配上那盞掛滿人偶的巨型吊燈，是這裡最好認的畫面。深色木作壓住空間、拱窗把雨天的光放進來，整間店的節奏比想像中安靜。"]},
+    {type:"info", name:"⑥ 資訊", photo:"IMG20260701131132",
+     blocks:["中午十二點半前到位子最好挑，過了一點會開始排隊。不收訂位，直接進去找位子坐即可。"],
+     address:"Neuhauser Str. 27, 80331 München（Karlsplatz 與聖母教堂之間）"},
+    {type:"outro", name:"⑦ 追蹤", headline:"Follow Us",
+     lines:["立即按下追蹤","不再錯過任何精彩內容！"], url:"jtphr-site.vercel.app"}
+  ]
+};
+
+/* ---------- 小工具 ---------- */
+const esc = s => String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const img = (n,cls="") => `<img class="pic ${cls}" src="${A}${n}.jpg" alt="">`;
+const ed  = (path, txt, cls="", style="") =>
+  `<span class="ed ${cls}" style="${style}" contenteditable="true" data-p="${path}">${esc(txt)}</span>`;
+
+function L(style, label, inner){ return `<div class="L" data-l="${label}" style="${style}">${inner}</div>`; }
+
+/* ---------- 七頁版型（座標＝1080×1350） ---------- */
+function render(s, i){
+  const M=84, W=1080, H=1350, mark=DATA.brand.mark;
+  const wm = (top,dark)=>L(`left:506px;top:${top}px;`,"浮水印層",`<div class="wm ${dark?'dark':''}">${mark}</div>`);
+  const blocks = (si, top, size=29) => {
+    const arr = DATA.slides[si].blocks||[];
+    return arr.map((b,bi)=>
+      `<p style="margin:0 0 26px;font-size:${size}px;line-height:1.8;text-align:justify">${ed(`slides.${si}.blocks.${bi}`,b)}</p>`).join("");
+  };
+  if(s.type==="cover") return `
+    ${L(`inset:0;`,"照片層",img(s.photo))}
+    ${L(`left:0;top:700px;width:1080px;height:650px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.45));`,"壓暗層","")}
+    ${wm(370,false)}
+    ${L(`left:60px;top:880px;width:960px;text-align:center;color:#fff;`,"標題層",
+      s.title.map((t,ti)=>`<div style="font-size:58px;line-height:1.35;font-weight:600;text-shadow:0 4px 22px rgba(0,0,0,.6)">${ed(`slides.${i}.title.${ti}`,t)}</div>`).join(""))}
+    ${L(`left:60px;top:1090px;width:960px;text-align:center;`,"標籤層",`<span class="capsule">${ed(`slides.${i}.tag`,s.tag)}</span>`)}`;
+
+  if(s.type==="intro") return `
+    ${L(`left:0;top:0;width:1080px;height:1350px;background:var(--paper);`,"底紋層","")}
+    ${L(`left:589px;top:0;width:491px;height:675px;`,"照片層 A",img(s.photos[0]))}
+    ${L(`left:589px;top:675px;width:491px;height:675px;`,"照片層 B",img(s.photos[1]))}
+    ${L(`left:${M}px;top:124px;width:440px;`,"標題層",
+       s.title.map((t,ti)=>`<div class="serif hollow">${ed(`slides.${i}.title.${ti}`,t)}</div>`).join(""))}
+    ${L(`left:${M}px;top:400px;width:420px;`,"內文層",blocks(i,0,27))}
+    ${L(`left:${M}px;top:1180px;width:300px;`,"小標層",
+       `<div class="cap" style="font-size:20px">NEXT</div><div style="width:74px;height:2px;background:var(--dark);margin-top:10px"></div>`)}`;
+
+  if(s.type==="hero") return `
+    ${L(`left:0;top:0;width:1080px;height:1350px;background:var(--paper);`,"底紋層","")}
+    ${L(`left:0;top:0;width:1080px;height:900px;`,"照片層",img(s.photo))}
+    ${wm(390,false)}
+    ${L(`left:${M}px;top:960px;width:${1080-M*2}px;`,"內文層",blocks(i,0))}`;
+
+  if(s.type==="map"){
+    const spots=[[302,324,340,6],[778,364,330,-5],[292,945,330,-4],[788,972,340,5]];
+    return `
+    ${L(`left:0;top:0;width:1080px;height:1350px;background:var(--paper);`,"底紋層","")}
+    ${L(`left:0;top:557px;width:1080px;text-align:center;`,"大標層(壓在照片下)",
+       s.title.map((t,ti)=>`<div class="serif hollow" style="font-size:92px;transform:translateX(${ti?40:-40}px)">${ed(`slides.${i}.title.${ti}`,t)}</div>`).join(""))}
+    ${L(`inset:0;`,"虛線層",`<svg width="1080" height="1350" style="position:absolute;inset:0">
+        <path d="M 380 470 Q 560 380 700 470" stroke="#9e9992" stroke-width="3" stroke-dasharray="10 12" fill="none"/>
+        <path d="M 700 560 Q 800 760 700 880" stroke="#9e9992" stroke-width="3" stroke-dasharray="10 12" fill="none"/>
+        <path d="M 400 1000 Q 560 930 660 1000" stroke="#9e9992" stroke-width="3" stroke-dasharray="10 12" fill="none"/></svg>`)}
+    ${s.items.map((it,ii)=>{
+      const [cx,cy,w,rot]=spots[ii];
+      return L(`left:${cx-w/2-22}px;top:${cy-w*0.72}px;width:${w+44}px;transform:rotate(${rot}deg);`,"拍立得層 "+(ii+1),
+        `<div class="pol" style="position:relative">${img(it.photo)}<div class="polcap">${ed(`slides.${i}.items.${ii}.caption`,it.caption)}</div></div>`);
+    }).join("")}
+    ${L(`left:940px;top:60px;`,"浮水印層",`<div class="wm dark">${mark}</div>`)}`;
+  }
+
+  if(s.type==="space") return `
+    ${L(`left:0;top:0;width:1080px;height:1350px;background:var(--paper);`,"底紋層","")}
+    ${L(`left:0;top:0;width:1080px;height:900px;`,"照片層 A",img(s.photos[0]))}
+    ${L(`left:0;top:0;width:1080px;height:900px;clip-path:polygon(46% 0,100% 0,100% 100%,60% 100%);`,"照片層 B(斜切)",img(s.photos[1]))}
+    ${wm(390,false)}
+    ${L(`left:${M}px;top:960px;width:${1080-M*2}px;`,"內文層",blocks(i,0))}`;
+
+  if(s.type==="info") return `
+    ${L(`left:0;top:0;width:1080px;height:1350px;background:var(--paper);`,"底紋層","")}
+    ${L(`left:0;top:0;width:1080px;height:800px;`,"照片層",img(s.photo))}
+    ${wm(350,false)}
+    ${L(`left:${M}px;top:860px;width:${1080-M*2}px;`,"內文層",blocks(i,0,28))}
+    ${L(`left:${M+60}px;top:1120px;width:${1080-M*2-60}px;`,"地址層",
+      `<div style="position:relative"><svg width="34" height="46" style="position:absolute;left:-58px;top:8px">
+         <circle cx="17" cy="16" r="12" fill="#111"/><polygon points="8,24 26,24 17,44" fill="#111"/><circle cx="17" cy="16" r="4.5" fill="#f2f0ec"/></svg>
+       <div class="addr">${ed(`slides.${i}.address`,s.address)}</div></div>`)}`;
+
+  if(s.type==="outro") return `
+    ${L(`left:0;top:0;width:1080px;height:1350px;background:var(--paper);`,"底紋層","")}
+    ${L(`left:${M+12}px;top:520px;width:640px;`,"標題層",
+      `<div class="serif" style="font-size:96px;font-style:italic;color:#3a3632">${ed(`slides.${i}.headline`,s.headline)}</div>
+       <div style="width:220px;height:2px;background:#787370;margin:18px 0 26px"></div>
+       ${s.lines.map((t,ti)=>`<div style="font-size:27px;margin-bottom:12px">${ed(`slides.${i}.lines.${ti}`,t)}</div>`).join("")}`)}
+    ${L(`left:${M+12}px;top:830px;`,"網址層",
+      `<span style="display:inline-block;border:2px solid #969190;border-radius:999px;padding:14px 34px;font-size:26px;letter-spacing:.06em">${ed(`slides.${i}.url`,s.url)}</span>`)}
+    ${L(`left:880px;top:440px;width:120px;text-align:center;`,"互動圖示層",
+      ["♡ Like","💬 Comment","➤ Share","🔖 Save"].map(t=>`<div style="font-size:26px;margin-bottom:52px;color:#3a3632">${t}</div>`).join(""))}
+    ${L(`left:506px;top:1090px;`,"浮水印層",`<div class="wm dark">${mark}</div>`)}`;
+  return "";
+}
+
+/* ---------- 建立畫面 ---------- */
+function build(){
+  const deck=document.getElementById("deck");
+  deck.innerHTML = DATA.slides.map((s,i)=>`
+    <div class="slot">
+      <div class="slothead">
+        <span class="slotname">${s.name}</span>
+        <span>
+          ${s.blocks?`<button class="tool" title="加一塊文字" onclick="addBlock(${i})">＋文字</button>`:""}
+          ${s.blocks&&s.blocks.length>1?`<button class="tool" title="刪最後一塊" onclick="delBlock(${i})">🗑</button>`:""}
+        </span>
+      </div>
+      <div class="stage"><div class="canvas" id="cv${i}">${render(s,i)}</div></div>
+    </div>`).join("");
+  fit(); bind(); dump();
+}
+function fit(){
+  document.querySelectorAll(".stage").forEach((st,i)=>{
+    const k = st.clientWidth/1080;
+    const cv = st.querySelector(".canvas");
+    cv.style.transform = `scale(${k})`;
+  });
+}
+function bind(){
+  document.querySelectorAll(".ed").forEach(el=>{
+    el.addEventListener("input",()=>{ setPath(el.dataset.p, el.innerText); dump(); });
+  });
+  document.querySelectorAll(".pic").forEach(el=>{
+    el.addEventListener("click",e=>{ openPicker(e.target); });
+  });
+}
+function setPath(p,v){
+  const ks=p.split("."); let o=DATA;
+  for(let i=0;i<ks.length-1;i++) o=o[ks[i]];
+  o[ks[ks.length-1]]=v;
+}
+function addBlock(i){ DATA.slides[i].blocks.push("在這裡打新的一段文字…"); build(); }
+function delBlock(i){ DATA.slides[i].blocks.pop(); build(); }
+function toggleLayers(){ document.querySelectorAll(".canvas").forEach(c=>c.classList.toggle("showlayers")); }
+
+/* ---------- 換圖 ---------- */
+let target=null;
+function openPicker(el){
+  target=el;
+  document.getElementById("mgrid").innerHTML = PHOTOS.map(n=>`<img src="${A}${n}.jpg" onclick="pick('${n}')">`).join("");
+  document.getElementById("picker").classList.add("on");
+}
+function closePicker(){ document.getElementById("picker").classList.remove("on"); }
+function pick(n){
+  if(target){
+    target.src = A+n+".jpg";
+    // 寫回 DATA：用 DOM 位置反查
+    const cv = target.closest(".canvas"); const i = +cv.id.replace("cv","");
+    const s = DATA.slides[i];
+    const imgs = [...cv.querySelectorAll(".pic")]; const k = imgs.indexOf(target);
+    if(s.type==="map") s.items[k].photo=n;
+    else if(s.photos) s.photos[k]=n;
+    else s.photo=n;
+    dump();
+  }
+  closePicker();
+}
+
+/* ---------- 匯出設定 ---------- */
+function cfg(){
+  const g=t=>DATA.slides.find(s=>s.type===t);
+  return {
+    photos_dir:"<trip>/to_post/<主題>",
+    out:"<trip>/_post/01_<主題>",
+    brand:DATA.brand,
+    cover:{photo:g("cover").photo+".jpg",title:g("cover").title,tag:g("cover").tag},
+    intro:{title:g("intro").title,body:g("intro").blocks.join("\n"),photos:g("intro").photos.map(p=>p+".jpg")},
+    hero:{photo:g("hero").photo+".jpg",body:g("hero").blocks.join("\n")},
+    map:{title:g("map").title,items:g("map").items.map(it=>({photo:it.photo+".jpg",caption:it.caption}))},
+    space:{photos:g("space").photos.map(p=>p+".jpg"),body:g("space").blocks.join("\n")},
+    info:{photo:g("info").photo+".jpg",body:g("info").blocks.join("\n"),address:g("info").address},
+    outro:{headline:g("outro").headline,lines:g("outro").lines,url:g("outro").url}
+  };
+}
+function dump(){ document.getElementById("cfgout").value = JSON.stringify(cfg(),null,2); }
+function copyCfg(){
+  const t=document.getElementById("cfgout"); t.select();
+  navigator.clipboard?.writeText(t.value).then(()=>{
+    const b=event.target; const o=b.textContent; b.textContent="✓ 已複製，貼給 Robert";
+    setTimeout(()=>b.textContent=o,1800);
+  });
+}
+addEventListener("resize",fit);
+build();
+</script>
+</body>
+</html>
