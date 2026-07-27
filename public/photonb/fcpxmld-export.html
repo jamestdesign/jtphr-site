@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>撿片批次出圖 · fcpxmld-export · PhotoNB</title>
   <meta name="description" content="影片工具：FCPX 撿完片交一個 .fcpxmld，一條指令自動切 HL 片段＋抽 KP 單禎，分場景輸出並寫好 LR 可讀色標。命名/轉檔/標註全自動。" />
-  <meta name="date" content="2026-07-18" />
+  <meta name="date" content="2026-07-27" />
   <style>
     :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;}
     *{box-sizing:border-box;} html,body{overflow-x:hidden;}
@@ -56,7 +56,7 @@
   <ul>
     <li>讀 <code>.fcpxmld</code> 內的 <code>KP_R/Y/G/P</code> keyword ＋ Star 評分 ＋ 場景關鍵字。</li>
     <li><b>KP</b> → 從原片抽<b>原生解析度</b>單禎 JPG，色標＋關鍵字＋來源時碼寫進 XMP，LR import 直接讀到。</li>
-    <li><b>HL（4★/5★）</b> → 切 1080p H.264 短片段，當「動態照片」觀賞。</li>
+    <li><b>HL（★4）</b> → 切 1080p H.264 短片段，當「動態照片」觀賞。</li>
     <li>命名／分場景全由腳本依 XML 生成，你不用手動命名、不用手動搬檔。</li>
   </ul>
 
@@ -72,7 +72,72 @@ fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"</pre>
   <p><code>&lt;場景&gt;</code> = day 場景夾名。命名一眼看出是「mov 導出的預覽檔」。</p>
   <p style="font-size:.82rem;color:var(--muted)">⚠️ 素材若被 FCP 託管進 <code>.fcpbundle</code>，工具一律改抓 day 場景夾的原檔，輸出才會落對場景（不會套進 bundle 深層路徑）。</p>
 
-  <h2>四種處理</h2>
+  <h2>⭐ 星等定義（2026-07-27 James 更新）</h2>
+  <div class="note">🔄 <b>這版取代舊定義</b>。舊版是「★4/★5 都當 HL、★1 是長篇」 —— 現在<b>長篇改成 ★5</b>、<b>HL 只有 ★4</b>，並新增 ★3 生活片段、★2 工具標記。撿片時照這張表打星就好。</div>
+  <table>
+    <tr><th width="52">星</th><th>意思</th><th>工具怎麼處理</th><th width="86">狀態</th></tr>
+    <tr>
+      <td><b>★5</b></td>
+      <td><b>長篇剪輯</b><br><span style="font-size:.82rem;color:var(--muted)">口播／課程／演唱會／開箱介紹…有主題的整段</span></td>
+      <td>I/O 框整段，段內壞鏡頭按 Delete(Reject) → 挖掉壞段、好段 concat 成一支完整長片</td>
+      <td>⚠️ 待實作<br><span style="font-size:.78rem;color:var(--muted)">規格已定</span></td>
+    </tr>
+    <tr>
+      <td><b>★4</b></td>
+      <td><b>HL 動態照片</b><br><span style="font-size:.82rem;color:var(--muted)">最精彩的幾秒，當會動的照片看</span></td>
+      <td>切 1080p H.264 短片段 → <code>_preview_mov_HL/</code>，段邊界＝你 I/O 框的範圍</td>
+      <td>✅ 已實作</td>
+    </tr>
+    <tr>
+      <td><b>★3</b></td>
+      <td><b>生活片段・進入剪輯</b><br><span style="font-size:.82rem;color:var(--muted)">日常素材，之後搭配關鍵字整批剪</span></td>
+      <td>列進清單不切檔（母帶不複製第二份），之後依關鍵字批次撈進初剪／蒙太奇</td>
+      <td>🔨 現在只記不切<br><span style="font-size:.78rem;color:var(--muted)">批次剪輯待做</span></td>
+    </tr>
+    <tr>
+      <td><b>★2</b></td>
+      <td><b>工具標記</b><br><span style="font-size:.82rem;color:var(--muted)">要做拼貼／變速等特殊處理的素材</span></td>
+      <td><b>★2 ＋ 一個效果關鍵字</b>，工具依關鍵字套對應處理（見下表）</td>
+      <td>🔨 待實作</td>
+    </tr>
+    <tr>
+      <td><b>★1</b></td>
+      <td>尚未定案</td>
+      <td>—</td>
+      <td>⏸ 空著</td>
+    </tr>
+    <tr>
+      <td><b>KP</b></td>
+      <td><b>單禎</b>（不是星等，是 keyword）</td>
+      <td>抽原生解析度 JPG ＋ 色標／關鍵字／來源時碼寫進 XMP → <code>_preview_mov_KP/</code></td>
+      <td>✅ 已實作</td>
+    </tr>
+    <tr>
+      <td><b>NG</b></td>
+      <td>壞鏡頭</td>
+      <td>只記錄不切，<b>原檔不動</b>（只有 ★5 長篇會真的挖掉壞段拼接）</td>
+      <td>✅ 已實作</td>
+    </tr>
+  </table>
+
+  <h2>⭐2 工具標記 · 效果關鍵字建議</h2>
+  <p class="lead" style="margin:.2rem 0 .7rem">打 <code>★2</code> 只是說「這段要加工」，<b>加工成什麼由旁邊的關鍵字決定</b>。建議先從最常用的四個開始用，其他等你想到再加。</p>
+  <table>
+    <tr><th width="118">關鍵字</th><th>做什麼</th><th>什麼時候用</th></tr>
+    <tr><td><code>拼貼</code></td><td>丟進影片馬賽克（2×2／3×3 同時播）</td><td>同一場景很多短片、單支都不夠強</td></tr>
+    <tr><td><code>慢動作</code> <code>0.5x</code></td><td>放慢一半（原片有 120/240fps 就用原生慢動作，沒有才補幀）</td><td>水花、揮手、招牌轉場、food porn</td></tr>
+    <tr><td><code>快轉</code> <code>2x</code></td><td>加速兩倍</td><td>走路過場、排隊、上菜過程</td></tr>
+    <tr><td><code>縮時</code> <code>8x</code> <code>16x</code></td><td>大倍率縮時</td><td>車窗風景、雲、人潮、日落</td></tr>
+    <tr><td><code>倒放</code></td><td>反向播放</td><td>倒水、灑落、開箱抽出的趣味鏡</td></tr>
+    <tr><td><code>定格</code></td><td>抽一禎定住 1–2 秒（可加 Ken Burns 推移）</td><td>強調某個瞬間、當段落收尾</td></tr>
+    <tr><td><code>循環</code></td><td>來回循環（boomerang）</td><td>短動作、招牌燈、旗子</td></tr>
+    <tr><td><code>穩定</code></td><td>畫面穩定化</td><td>邊走邊拍晃得厲害的段落</td></tr>
+    <tr><td><code>靜音</code></td><td>去掉原音（或只留環境音）</td><td>要配樂蓋過去的段落</td></tr>
+    <tr><td><code>封面</code></td><td>抽該段最好的一禎當封面圖</td><td>要發社群、需要一張代表圖</td></tr>
+  </table>
+  <div class="note">💡 <b>我的建議</b>：先只用 <code>拼貼</code>／<code>慢動作</code>／<code>快轉</code>／<code>縮時</code> 四個 —— 這四個涵蓋八成情境，而且都能全自動做完不用你回頭確認。其餘等實際撿片時發現需要再開。<b>關鍵字打在 FCPX 的 keyword 上，跟 ★2 同一段範圍</b>，我讀 <code>.fcpxmld</code> 就抓得到。</div>
+
+  <h2>兩種已實作的處理</h2>
   <div class="card">
     <p><span class="num">A</span><b>KP → 原生解析度單禎 ＋ 分類寫 XMP</b></p>
     <p>讀 <code>KP_R/Y/G/P</code> 的單禎時間點 → ffmpeg 抽原生解析度 JPG（<code>-q:v 1</code>）→ 色標寫進 XMP：<br>
@@ -80,16 +145,8 @@ fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"</pre>
     你 import LR 直接看到色標＋關鍵字＋來源時碼，不用再標一次。</p>
   </div>
   <div class="card">
-    <p><span class="num">B</span><b>HL（4★/5★）→ 動態照片短片段</b></p>
-    <p>讀 rating 4★/5★ 的範圍（認定以 keyword + I/O 為準，Favorite 綠標只是視覺輔助）→ 切 H.264 1080p faststart 短片段。段邊界＝你 I/O 框的範圍。<b>Star3 = 只記不切。</b></p>
-  </div>
-  <div class="card">
-    <p><span class="num">C</span><b>Star1（長篇發表・去 NG）→ 移除 Reject 拼成一支</b></p>
-    <p>你 I/O 框整段＋段內壞鏡頭按 Delete(Reject) → 工具挖掉壞段、把好段 concat 成一支完整長片，檔名標 <code>Star1</code>。屬「另外出片」的獨立長片。<span style="font-size:.82rem;color:var(--muted)">⚠️ concat 功能待補，規格已定。</span></p>
-  </div>
-  <div class="card">
-    <p><span class="num">D</span><b>NG → 只記錄不切</b></p>
-    <p>短素材的 NG 段寫進 metadata 供劇本／剪輯跳過，<b>原檔不動</b>（只有 Star1 長篇會真的去 NG 拼接）。</p>
+    <p><span class="num">B</span><b>★4 HL → 動態照片短片段</b></p>
+    <p>讀 ★4 的範圍（認定以 keyword + I/O 為準，Favorite 綠標只是視覺輔助）→ 切 H.264 1080p faststart 短片段。段邊界＝你 I/O 框的範圍。</p>
   </div>
 
   <h2>色彩處理（自動判來源）</h2>
@@ -114,7 +171,7 @@ fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"</pre>
     <li>2026-07-07 起路徑從 <code>.fcpxmld</code> 自動推導，跨 trip 通用不用改碼。</li>
   </ul>
 
-  <footer>PhotoNB · 影片工具 — 撿片批次出圖（fcpxmld-export）· 單一現行說明 · 由 Robert 維護 · 更新 2026-07-18</footer>
+  <footer>PhotoNB · 影片工具 — 撿片批次出圖（fcpxmld-export）· 單一現行說明 · 由 Robert 維護 · 更新 2026-07-27（星等定義改版）</footer>
 </div>
 </body>
 </html>

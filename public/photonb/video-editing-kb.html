@@ -160,6 +160,7 @@
   <span class="tag">影片剪輯 KB · V2.1 完整版 · 2026-06-03</span>
   <h1>影片剪輯知識庫 V2.1</h1>
   <p class="subtitle">從素材到出片的完整工序 — 整合 schema、FCPX 撿片、智慧抽幀、批次出圖、效率改善</p>
+  <p class="subtitle" style="color:#b8830f;font-weight:600">🔄 2026-07-27 更新：星等定義改版（★5 長篇剪輯／★4 HL／★3 生活片段／★2 工具標記／★1 未定），見 §5。</p>
   <div class="meta">
     <span><strong>發布日：</strong>2026-06-03</span>
     <span><strong>對接：</strong>James（撿片 + 剪輯）／ Robert（抽幀 + 評分 + 批次出圖）</span>
@@ -228,7 +229,7 @@
 ┌─ 📷 照片 9P ─────────────┐  ┌─ 🎬 影片 9V ──────────────────┐
 │ 9P-a Evoto 精修           │  │ 9V-a FCPX 撿片                 │
 │ 9P-b LR Develop 套色      │  │   ├ 好畫面→KP(i/o單禎+KP_R/Y/G/P)│
-│ 9P-c 出片                 │  │   └ 精彩瞬間→HL(i/o範圍+4★/5★) │
+│ 9P-c 出片                 │  │   └ 精彩瞬間→HL(i/o範圍+4★) │
 │   ↓ 你檢查→_to_export     │  │ 9V-b Export XML                │
 │  Robert 搬→_export/&lt;場景&gt;/│  │ 9V-c Robert 批次出圖           │
 └───────────────────────────┘  │   ├ KP→4K 單禎抽圖             │
@@ -247,7 +248,7 @@
 <tr><td><strong>9P-a/b/c</strong></td><td>照片</td><td>Evoto 精修 → 套色 preset → 出片</td></tr>
 <tr><td><span class="pill red">9V-a</span></td><td>James</td><td>FCPX 撿片（標 KP / HL / NG）— 見 §8</td></tr>
 <tr><td><span class="pill red">9V-b</span></td><td>James</td><td>Export XML 交給 Robert</td></tr>
-<tr><td><span class="pill blue">9V-c</span></td><td>Robert</td><td>批次出圖（KP 抽原生單禎 / HL 短片段 / Star1 去 NG 拼接）→ <code>_preview_mov_*</code> — 見 §9</td></tr>
+<tr><td><span class="pill blue">9V-c</span></td><td>Robert</td><td>批次出圖（KP 抽原生單禎 / ★4 HL 短片段 / ★5 去 NG 拼接）→ <code>_preview_mov_*</code> — 見 §9</td></tr>
 <tr><td><span class="pill red">9V-d</span></td><td>James</td><td>FCPX 剪輯</td></tr>
 <tr><td><strong>9V-e</strong></td><td>—</td><td>出片 → <code>_export/&lt;scene&gt;/memoirs/</code></td></tr>
 </tbody>
@@ -265,9 +266,9 @@
 <tbody>
 <tr><td><strong>MOV</strong></td><td>影片本體</td><td>原始 .MOV/.mov/.mp4，<code>_MOV/&lt;scene&gt;/IMG_XXXX.MOV</code> — <strong>永遠不切</strong></td></tr>
 <tr><td><strong>STILL</strong></td><td>抽幀靜畫</td><td>ffmpeg 從 MOV 抽出的 JPG，給你看懂 + 評場景用途用</td></tr>
-<tr><td><span class="pill yellow">NG</span></td><td>No Good</td><td>失誤段（對焦 / 穿幫）。短素材 = <strong>只標不切</strong>；1★ 長篇發表 = <strong>切掉拼接</strong>（按 Delete/Reject）</td></tr>
+<tr><td><span class="pill yellow">NG</span></td><td>No Good</td><td>失誤段（對焦 / 穿幫）。短素材 = <strong>只標不切</strong>；★5 長篇剪輯 = <strong>切掉拼接</strong>（按 Delete/Reject）</td></tr>
 <tr><td><span class="pill green">KP</span></td><td>Keep</td><td>你在 FCPX 親手挑的<strong>單禎好畫面</strong> → Robert 抽 4K 圖出片</td></tr>
-<tr><td><span class="pill red">HL</span></td><td>High Light</td><td>精彩瞬間<strong>片段</strong>（= 4★/5★）→ Robert 切短片段給網路相簿動態照片</td></tr>
+<tr><td><span class="pill red">HL</span></td><td>High Light</td><td>精彩瞬間<strong>片段</strong>（= ★4）→ Robert 切短片段給網路相簿動態照片</td></tr>
 <tr><td><span class="pill purple">KF</span></td><td>Key Frame</td><td>從 STILL 評分結果<strong>自動回填</strong>到 MOV keyword 的時間點（你不用標）</td></tr>
 </tbody>
 </table>
@@ -334,21 +335,26 @@
 <strong>💡 重點：</strong>STILL rating 是「品質」，<strong>MOV rating 是「類型」</strong> — 同一欄、不同意義，LR 按檔案類型自然區分。這就是「這個場景幹嘛用的」答案。
 </div>
 
+<div class="tip" style="border-color:#c9a227;background:#fdf9ec;">
+<strong>🔄 2026-07-27 James 改版 — 以下為現行定義，取代舊表（舊：1★長篇／2★活動攝影／4★5★都當 HL）。</strong>
+星等的<strong>單一現行說明</strong>在 <a href="./fcpxmld-export.html">撿片批次出圖 fcpxmld-export</a>，本頁與它同步。
+</div>
+
 <table>
 <thead><tr><th style="width:60px;">★</th><th>類型</th><th>出片規則</th></tr></thead>
 <tbody>
-<tr><td><strong>0★</strong></td><td><strong>生活紀錄</strong>（預設不評就是）</td><td>即使 P=1 也不直接出片 — KF + KP 仍可進劇本</td></tr>
-<tr style="background:#fdf9ec;"><td><strong>1★</strong></td><td><strong>長篇發表（去 NG）</strong>（導覽 / 介紹 / 課程）</td><td>i/o 框整段 + Delete 標壞鏡頭 → Robert <strong>去 NG 拼接成一支完整檔</strong>（見下方）</td></tr>
-<tr><td><strong>2★</strong></td><td><strong>活動攝影</strong>（演唱會 / 說明會）</td><td>直接剪在一起放雲端保存（不精修）</td></tr>
-<tr><td><strong>3★</strong></td><td>保留（待定義二級類型）</td><td>進剪輯流程</td></tr>
-<tr><td><strong>4★</strong></td><td><strong>精彩瞬間</strong></td><td>P=1 → 直接壓縮出片 + 二次剪輯</td></tr>
-<tr><td><strong>5★</strong></td><td><strong>史詩級保留</strong>（婚禮 / 作品集 / 首映）</td><td>P=1 → 直接壓縮出片 + 二次剪輯</td></tr>
+<tr style="background:#fdf9ec;"><td><strong>5★</strong></td><td><strong>長篇剪輯</strong>（口播 / 課程 / 演唱會 / 開箱介紹…有主題的）</td><td>i/o 框整段 + Delete 標壞鏡頭 → Robert <strong>去 NG 拼接成一支完整檔</strong>（見下方）</td></tr>
+<tr><td><strong>4★</strong></td><td><strong>HL 精彩瞬間</strong>（動態照片）</td><td>切 1080p 短片段 → <code>_preview_mov_HL/</code>，當會動的照片看</td></tr>
+<tr><td><strong>3★</strong></td><td><strong>生活片段・進入剪輯</strong></td><td>列進清單不切檔；之後<strong>搭配關鍵字整批剪輯</strong>（母帶不複製第二份）</td></tr>
+<tr><td><strong>2★</strong></td><td><strong>工具標記</strong>（拼貼 / 變速 / 縮時…）</td><td><strong>★2 ＋ 一個效果關鍵字</strong> → 工具依關鍵字套處理，效果表見 <a href="./fcpxmld-export.html">fcpxmld-export</a></td></tr>
+<tr><td><strong>1★</strong></td><td>尚未定案（空著）</td><td>—</td></tr>
+<tr><td><strong>0★</strong></td><td><strong>生活紀錄</strong>（預設不評就是）</td><td>不出片 — KF + KP 仍可進劇本</td></tr>
 </tbody>
 </table>
-<p><strong>分水嶺：</strong>直接出片 vs 剪輯出片 在 <strong>4★</strong>。</p>
+<p><strong>分水嶺：</strong>★3 以上進剪輯流程；★4 以上會實際產出檔案。</p>
 
 <div class="card callout-yellow">
-  <span class="label yellow">1★ 長篇發表「去 NG 拼接」</span>
+  <span class="label yellow">5★ 長篇剪輯「去 NG 拼接」</span>
   <p><strong>情境：</strong>導覽 / 介紹這類長片，整段大致要留，但中間夾雜很多壞鏡頭（吃螺絲 / 穿幫 / 對焦跑掉）。</p>
   <p><strong>你做：</strong>① <kbd>I</kbd>/<kbd>O</kbd> 框「要的整段」② 段內壞鏡頭選起來按 <kbd>Delete</kbd>（= Reject 紅標）。</p>
   <p><strong>Robert 做：</strong>抓出你框的整段 → 照 Reject 位置把壞段挖掉 → 把剩下的好段（第 1 段 + 第 2 段 + 第 3 段…）<strong>接成一支完整影片、一個檔</strong>（hard cut，預設不加轉場）。</p>
@@ -358,7 +364,7 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
   -af "aselect='between(t,&lt;k1s&gt;,&lt;k1e&gt;)+...',asetpts=N/SR/TB" \
   -c:v libx264 -crf 20 -preset slow -c:a aac -b:a 192k -movflags +faststart \
   _export/&lt;scene&gt;/&lt;clip&gt;_clean.mp4</code></pre>
-  <div class="tip"><strong>💡 NG 處理分兩種：</strong><strong>只有 1★ 長篇發表</strong>會把 NG 切掉再拼接；其他類型（0★/2★…）NG 一律「<strong>只標不切</strong>」，你自己剪輯時再決定。</div>
+  <div class="tip"><strong>💡 NG 處理分兩種：</strong><strong>只有 ★5 長篇剪輯</strong>會把 NG 切掉再拼接；其他類型（0★/★3…）NG 一律「<strong>只標不切</strong>」，你自己剪輯時再決定。</div>
 </div>
 
 <h3>MOV colorLabel = VLM 主體分類（跟 rating 獨立）</h3>
@@ -383,8 +389,8 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 <tbody>
 <tr>
   <td><span class="pill red">HL</span></td>
-  <td>精彩瞬間（= rating 4★/5★）— 動態照片用短片段</td>
-  <td>James（FCPX：<kbd>I</kbd>/<kbd>O</kbd> 範圍 + keyword <strong>為準</strong>；Favorite <kbd>F</kbd> 只是綠色視覺輔助；clip 給 4★/5★）</td>
+  <td>精彩瞬間（= rating ★4）— 動態照片用短片段</td>
+  <td>James（FCPX：<kbd>I</kbd>/<kbd>O</kbd> 範圍 + keyword <strong>為準</strong>；Favorite <kbd>F</kbd> 只是綠色視覺輔助；clip 給 ★4）</td>
   <td>Robert 切短片段 <code>&lt;clip&gt;_hlNN.mp4</code>（1080p H.264 faststart）→ 網路相簿動態照片</td>
 </tr>
 <tr>
@@ -396,8 +402,8 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 <tr>
   <td><span class="pill yellow">NG</span></td>
   <td>失誤段（對焦 / 穿幫 / 拍壞）</td>
-  <td>James（FCPX：keyword，或 1★ 用 <kbd>Delete</kbd>=Reject）</td>
-  <td>短素材 <strong>只標不切</strong>；1★ 長篇發表 <strong>切掉再拼接</strong>（見 §5）</td>
+  <td>James（FCPX：keyword，或 ★5 用 <kbd>Delete</kbd>=Reject）</td>
+  <td>短素材 <strong>只標不切</strong>；★5 長篇剪輯 <strong>切掉再拼接</strong>（見 §5）</td>
 </tr>
 <tr style="background:#f9f4fc;">
   <td><span class="pill purple">KF</span></td>
@@ -451,7 +457,7 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
   <ol>
     <li>匯入 <code>_MOV/</code> → <strong>取消勾 Copy to library</strong>（選 Leave files in place，影片太肥不複製）</li>
     <li>HDR 對話框 → <strong>Keep as Standard (SDR)</strong></li>
-    <li><kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor → 綁 <code>NG</code>(Ctrl+1) + <code>KP_R</code>/<code>KP_Y</code>/<code>KP_G</code>/<code>KP_P</code>(Ctrl+2~5)。<strong>HL 不用 keyword</strong>（用 Favorite <kbd>F</kbd> + 星等 4★/5★）</li>
+    <li><kbd>Cmd</kbd>+<kbd>K</kbd> 開 Keyword Editor → 綁 <code>NG</code>(Ctrl+1) + <code>KP_R</code>/<code>KP_Y</code>/<code>KP_G</code>/<code>KP_P</code>(Ctrl+2~5)。<strong>HL 不用 keyword</strong>（用 Favorite <kbd>F</kbd> + 星等 ★4）</li>
   </ol>
 </div>
 
@@ -464,7 +470,7 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 <tr><td><kbd>Ctrl</kbd>+<kbd>2~5</kbd></td><td>套 KP_R/Y/G/P</td><td>單禎 keeper + 主體分類一鍵（位置+分類）</td></tr>
 <tr><td><kbd>F</kbd></td><td>Favorite（HL 視覺輔助）</td><td>精彩段顯綠好辨識；HL 認定<strong>以 keyword+i/o 為準</strong></td></tr>
 <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd></td><td>套 NG</td><td>短素材失誤段（只標不切）</td></tr>
-<tr><td><kbd>Delete</kbd></td><td>Reject</td><td>1★ 長篇發表段內壞鏡頭 → Robert 去 NG 拼接</td></tr>
+<tr><td><kbd>Delete</kbd></td><td>Reject</td><td>★5 長篇剪輯段內壞鏡頭 → Robert 去 NG 拼接</td></tr>
 </tbody>
 </table>
 
@@ -480,7 +486,7 @@ ffmpeg -i &lt;clip&gt;.MOV -vf \
 </ol>
 
 <div class="tip">
-<strong>💡 一次 export 驅動全部：</strong>KP keyword + HL（Favorite + 4★/5★）+ NG keyword 全在同一個 XML 裡，Robert 一支腳本全處理。<strong>你只交一次 XML，不用分 KP / HL 兩次給。</strong>（這是 §13 效率建議的核心。）
+<strong>💡 一次 export 驅動全部：</strong>KP keyword + HL（Favorite + ★4）+ NG keyword 全在同一個 XML 裡，Robert 一支腳本全處理。<strong>你只交一次 XML，不用分 KP / HL 兩次給。</strong>（這是 §13 效率建議的核心。）
 </div>
 
 <h3>維運 ①：搬 NAS 後 reconnect</h3>
@@ -539,9 +545,9 @@ exiftool -XMP:Label=&lt;Red/Yellow/Green/Purple&gt; \
 </div>
 
 <div class="step">
-  <div class="head"><span class="num">B</span>HL（Star4★/5★）→ 動態照片短片段<span class="who">Robert</span></div>
+  <div class="head"><span class="num">B</span>HL（★4）→ 動態照片短片段<span class="who">Robert</span></div>
   <div class="body">
-    <p>讀 XML 裡 rating <strong>4★/5★</strong> 的範圍（認定以 keyword + i/o 為準，Favorite 綠標只是視覺輔助）→ ffmpeg 切短片段（H.264 1080p faststart）→ 放網路相簿當動態照片觀賞：</p>
+    <p>讀 XML 裡 rating <strong>★4</strong> 的範圍（認定以 keyword + i/o 為準，Favorite 綠標只是視覺輔助）→ ffmpeg 切短片段（H.264 1080p faststart）→ 放網路相簿當動態照片觀賞：</p>
     <pre><code># 切片段（精準到幀重編碼，不用 -c copy 避免關鍵幀對不齊）
 # HLG 來源（iPhone IMG_*.MOV）先 tonemap 轉 SDR，手機 VID*.mp4 原樣
 ffmpeg -ss &lt;start&gt; -t &lt;dur&gt; -i &lt;clip&gt; \
@@ -553,18 +559,18 @@ ffmpeg -ss &lt;start&gt; -t &lt;dur&gt; -i &lt;clip&gt; \
 </div>
 
 <div class="step">
-  <div class="head"><span class="num">C</span>Star1（長篇發表・去 NG）→ 移除 Reject 拼成一支<span class="who">Robert</span></div>
+  <div class="head"><span class="num">C</span>★5（長篇剪輯・去 NG）→ 移除 Reject 拼成一支<span class="who">Robert</span></div>
   <div class="body">
     <p>你 <kbd>I</kbd>/<kbd>O</kbd> 框整段 + 段內壞鏡頭按 <kbd>Delete</kbd>(Reject) → 工具讀 Reject 範圍，挖掉壞段、把剩下好段 concat 成一支完整長片。</p>
-    <pre><code># 成品也落 _preview_mov_HL，但檔名標 Star1（一眼看出是去 NG 長片）
-_preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star1_&lt;NN&gt;.mp4</code></pre>
+    <pre><code># 成品也落 _preview_mov_HL，但檔名標 Star5（一眼看出是去 NG 長片）
+_preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star5_&lt;NN&gt;.mp4</code></pre>
     <p>屬「<strong>另外出片</strong>」——獨立長片成品，不是 Star4/5 那種當動態照片觀賞的短片段。<span style="font-size:13px;color:#5c6773;">⚠️ 此 concat 功能尚在待補，規格已定。</span></p>
   </div>
 </div>
 
 <div class="step">
   <div class="head"><span class="num">D</span>NG → 只記錄不切<span class="who">Robert</span></div>
-  <div class="body"><p>短素材的 NG 段寫進 metadata 供劇本 / 剪輯跳過，<strong>原檔不動</strong>（只有 Star1 長篇會真的去 NG 拼接）。</p></div>
+  <div class="body"><p>短素材的 NG 段寫進 metadata 供劇本 / 剪輯跳過，<strong>原檔不動</strong>（只有 ★5 長篇會真的去 NG 拼接）。</p></div>
 </div>
 
 <div class="tip">
@@ -630,7 +636,7 @@ _preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star1_&lt;NN&gt;.mp4</code></pre>
 </div>
 
 <h3>建議 2 — 一次 Export XML 驅動全部</h3>
-<p>KP keyword + HL（Favorite + 4★/5★）+ NG 全在 FCPX 一輪標完 → <strong>只 export 一次 XML</strong> → Robert 一支腳本全跑（KP 抽 4K 圖 + 寫 XMP / HL 切短片段 / NG 記錄）。不要分「KP 給一次、HL 給一次」，減少你的交付動作。</p>
+<p>KP keyword + HL（Favorite + ★4）+ NG 全在 FCPX 一輪標完 → <strong>只 export 一次 XML</strong> → Robert 一支腳本全跑（KP 抽 4K 圖 + 寫 XMP / HL 切短片段 / NG 記錄）。不要分「KP 給一次、HL 給一次」，減少你的交付動作。</p>
 
 <h3>建議 3 — 工具不要來回跳</h3>
 <p>影片端「人的判斷」全集中在 <strong>FCPX 一次做完</strong>，照片端全集中在 <strong>LR</strong>。在一個工具裡把該做的判斷一次做滿，再交給腳本，比邊看邊跳工具快很多。</p>
@@ -659,7 +665,7 @@ _preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star1_&lt;NN&gt;.mp4</code></pre>
     <li>❌ 出片用 HEVC（LR 預覽灰畫面）</li>
     <li>❌ <code>_MOV/</code> 搬完改名（破壞 FCP 重連）</li>
     <li>❌ LR catalog 跟 FCP Library 放同一子資料夾</li>
-    <li>❌ 短素材 NG 段切原檔（只標不切）—— 但 1★ 長篇發表是例外，要去 NG 拼接（見 §5）</li>
+    <li>❌ 短素材 NG 段切原檔（只標不切）—— 但 ★5 長篇剪輯是例外，要去 NG 拼接（見 §5）</li>
   </ul>
 </div>
 
@@ -676,7 +682,7 @@ _preview_mov_HL/&lt;場景&gt;/&lt;clip&gt;_Star1_&lt;NN&gt;.mp4</code></pre>
   <p>整理者：Robert ／ 對接：James ／ 版本：V2.1.1（2026-06-08）· <a href="./_video-editing-kb-changelog.html">更新紀錄</a></p>
   <p>檔案：<code>~/Desktop/Claude-Workspace/photo-grade/2026-06-03_video_editing_kb_v2.1.html</code></p>
   <p>承襲：<code>2026-05-27_yonghan_video_schema_record.html</code>（schema）、<code>2026-06-02_fcpx_operation_cheatsheet.html</code>（操作）、<code>robert/skills/影片素材_VLM抽幀_腳本剪輯_SOP.md</code>（7 步 pipeline）</p>
-  <p>✅ 9V-c 工具 <code>fcpxmld-export</code> 已定型 + 實證（2026-06-06 day2：KP61+HL42；2026-06-08 day1/day4：HL31+KP11，零錯誤）。輸出鎖死 <code>_preview_mov_KP/</code> + <code>_preview_mov_HL/</code> 分場景。<strong>待補</strong>：Star1 去 NG concat 拼接、出圖套 LUT 調色（規劃中）。工作說明見 <code>robert/skills/fcpxmld-export_撿片出圖工具.md</code>。</p>
+  <p>✅ 9V-c 工具 <code>fcpxmld-export</code> 已定型 + 實證（2026-06-06 day2：KP61+HL42；2026-06-08 day1/day4：HL31+KP11，零錯誤）。輸出鎖死 <code>_preview_mov_KP/</code> + <code>_preview_mov_HL/</code> 分場景。<strong>待補</strong>：★5 去 NG concat 拼接、出圖套 LUT 調色（規劃中）。工作說明見 <code>robert/skills/fcpxmld-export_撿片出圖工具.md</code>。</p>
 </footer>
 
 </div>
