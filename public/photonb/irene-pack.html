@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Irene 技能包 · 對照筆記 · PhotoNB</title>
+<meta name="description" content="Hello Irene 2.0 六支技能各做什麼、怎麼叫、跟我們自己的工具怎麼分工 —— 一頁看完可對照。" />
+<meta name="date" content="2026-07-27" />
+<style>
+  :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+        --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--blue:#7fb6f0;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.75;}
+  a{color:var(--gold);}
+  .wrap{max-width:840px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.2rem);}
+  .lead{color:var(--muted);margin:.2rem 0 1.2rem;}
+  h2{color:var(--gold);font-size:1.05rem;letter-spacing:.05em;border-bottom:1px solid var(--line);
+     padding-bottom:.45rem;margin:2.2rem 0 .7rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+  pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;overflow-x:auto;
+      font-family:ui-monospace,Menlo,monospace;font-size:.82rem;color:#dfe6f2;line-height:1.6;}
+  ul{padding-left:1.15rem;} li{margin:.3rem 0;}
+  .sk{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.1rem;margin:.9rem 0;}
+  .sk h3{margin:.1rem 0 .3rem;font-size:1rem;color:var(--gold2);}
+  .sk .say{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;
+           padding:.12rem .6rem;font-size:.78rem;color:var(--ink);margin:.2rem .3rem .2rem 0;}
+  .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);
+        border-radius:12px;padding:.75rem 1rem;font-size:.9rem;margin:.8rem 0;}
+  .warn{background:rgba(233,117,138,.08);border-color:rgba(233,117,138,.45);}
+  .ok{color:var(--green);} .bad{color:var(--red);} .hi{color:var(--blue);}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0;}
+  td,th{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top;}
+  th{color:var(--gold);font-weight:600;}
+  footer{margin-top:2.6rem;color:var(--muted);font-size:.75rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">對照筆記 · External Toolkit</p>
+  <h1>Irene 技能包</h1>
+  <p class="lead">Hello Irene 2.0（藍諾攝影學院的課程產品）已裝在這台電腦。這頁整理<b>她有哪六樣工具、怎麼叫、跟我們自己的工具怎麼分工</b>，方便你對照決定該用哪一套。</p>
+
+  <div class="note">
+    🔀 <b>切換規則</b>：你說 <b>「hello irene」</b> → 走她那套；沒說 ＝ 走我們自己這套（並持續開發）。<br>
+    兩套<b>不互相改寫</b>。我用到她的工具時，署名會標 <code>（引用 Irene · 工具名）</code>，你一眼知道成果是誰的東西做的。
+  </div>
+
+  <h2>六支技能</h2>
+
+  <div class="sk">
+    <h3>🎬 beat-cut-editor　卡點剪輯師</h3>
+    <p>一資料夾素材 → 跟著音樂節拍剪成一支成品 MP4。附 <b>14 首原創純演奏配樂</b>（開心 7／感人勵志 7，版權自有可商用）。有講話的素材會自動剪掉停頓吃螺絲、上字幕、音樂閃避人聲。</p>
+    <span class="say">幫我剪一支 30 秒開心的卡點影片</span><span class="say">第 3 段換掉</span><span class="say">副歌切慢一點</span><span class="say">換一首歌</span>
+    <p class="hi">👉 <b>這支是我們缺的那塊</b>（原本蒙太奇規劃要丟去剪映）。交出來的是「AI 初剪版」，靠你下指令迭代收斂。</p>
+  </div>
+
+  <div class="sk">
+    <h3>🗂 footage-sifter　素材整理師</h3>
+    <p>一堆沒結構的素材 → 淘汰、分組、挑最佳 take、排出粗剪順序，產出一份看得懂的報告＋安全改名腳本＋可匯入 DaVinci/FCP 的時間軸。</p>
+    <span class="say">幫我整理這個資料夾的素材</span><span class="say">這五支是同一段話的不同 take，挑最好的</span>
+    <p class="bad">⚠️ <b>不要拿來取代我們的 scene_build</b> —— 我們的認得 trip／day／場景結構、會寫 XMP 給 LR。她這支適合「SD 卡倒出來一坨、完全沒結構」的情境。</p>
+  </div>
+
+  <div class="sk">
+    <h3>💬 caption-doctor　字幕醫生</h3>
+    <p>任何來源的 <code>.srt</code>（CapCut／YouTube 自動字幕／Whisper／Premiere…）→ 修錯字、簡轉繁、依語意重新斷句、補標點、修時間軸，輸出乾淨 UTF-8 SRT，能再匯回任何剪輯軟體。</p>
+    <span class="say">幫我修這個字幕檔</span><span class="say">這份字幕轉成繁體，錯字順便修一修</span>
+    <p class="ok">👉 我們完全沒有這塊，直接用。</p>
+  </div>
+
+  <div class="sk">
+    <h3>🌏 subtitle-translator　字幕翻譯師</h3>
+    <p>把字幕翻成其他語言，<b>時間軸完全不動</b>；會依畫面停留時間濃縮字數、保留人名，並檢查閱讀速度。跟字幕醫生搭配＝洗一次、發各語言版。</p>
+    <span class="say">把這份字幕翻成英文</span><span class="say">出一版日文字幕，時間軸不要動</span>
+    <p class="ok">👉 我們也沒有，直接用。</p>
+  </div>
+
+  <div class="sk">
+    <h3>✨ broll-animation-studio　動態 B-Roll 工作室</h3>
+    <p>一句文案 → 做成會動的標題卡，<b>10 種風格</b>：Vox 紀錄片／Minimal 極簡／Pop Art 普普／VHS 錄影帶／Pastel Code 粉彩程式／Dark Terminal 深夜終端／Editorial 雜誌／Neon 霓虹／Liquid Glass 液態玻璃／Split-flap 翻牌看板。</p>
+    <span class="say">幫我做一張開場動畫，寫「三天兩夜台南之旅」</span><span class="say">我想要新聞感的那種標題卡</span>
+    <p class="bad">⚠️ 它產出的是 <b>HTML，要你用瀏覽器開、螢幕錄影</b>才變影片。我們的 <a href="./narrative-tag-tool.html">描述標籤 narrative_tag</a> 直接出<b>透明 ProRes</b> 進 FCP 疊，不用去背也不用錄影 —— <b>我們的比較順</b>，但她那 10 種風格值得參考。</p>
+  </div>
+
+  <div class="sk">
+    <h3>📊 hello-irene　統籌 ＋ IG 策略</h3>
+    <p>整包的入口。判斷你要什麼、調度上面五位；<b>IG 相關的事她自己處理</b>：帳號健檢（丟後台截圖）、Reel 開頭發想、發布後成效檢討、競品分析。</p>
+    <span class="say">hello irene</span><span class="say">幫我看看我的 IG 為什麼沒流量</span><span class="say">我想拍一支介紹新品的 Reel</span>
+    <p class="ok">👉 IG 策略是我們完全沒碰過的區塊。</p>
+  </div>
+
+  <h2>跟我們自己的工具怎麼分工</h2>
+  <table>
+    <tr><th>要做什麼</th><th>用哪套</th><th>為什麼</th></tr>
+    <tr><td>倒卡歸檔、分天分場景、寫 XMP</td><td><b>我們</b>（scene_build）</td><td>認得 trip 結構、寫回 LR</td></tr>
+    <tr><td>撿片後批次出圖（HL／KP）</td><td><b>我們</b>（fcpxmld-export）</td><td>吃 .fcpxmld、色標寫 XMP</td></tr>
+    <tr><td>照片自動拼貼</td><td><b>我們</b>（grid）</td><td>三風格＋四比例，已成熟</td></tr>
+    <tr><td>社群輪播圖卡</td><td><b>我們</b>（POST）</td><td>7 頁劇本＋圖層模板</td></tr>
+    <tr><td>影片疊動態標籤／地圖</td><td><b>我們</b>（narrative_tag）</td><td>直出透明 ProRes，不用錄影</td></tr>
+    <tr><td><b>把素材剪成一支成品影片</b></td><td class="ok"><b>Irene</b>（beat-cut-editor）</td><td>我們沒有；配樂版權自有</td></tr>
+    <tr><td><b>字幕清洗／翻譯</b></td><td class="ok"><b>Irene</b></td><td>我們沒有</td></tr>
+    <tr><td><b>IG 帳號策略／成效檢討</b></td><td class="ok"><b>Irene</b></td><td>我們沒有</td></tr>
+  </table>
+
+  <h2>看完她原始碼的重要發現</h2>
+  <div class="note">
+    <p>她的工具程式碼裡寫得很直白：<b>「Claude 做編輯判斷（分組、挑最好的、排序、命名），這支工具只做機械的部分。」</b></p>
+    <p>也就是說 —— <b>「哪支好、為什麼」不是程式算的，是模型看圖判斷的</b>；程式只負責切分鏡、抽幀、算節拍、排版、輸出檔案。她真正的價值在<b>架構</b>（把該給模型看的東西整理好），不是有什麼特殊模型。</p>
+    <p>她附的範例報告甚至留著人工修正的痕跡：「第一版我看錯，Eleanor 糾正：這是故意拍的」——證明判斷會出錯、要人複核。</p>
+    <p class="ok">→ 對我們是好消息：沒有黑盒子，能力本來就在我這邊。我已經把她的 <b>IR 方法</b>（切分鏡 → 只讀代表幀 → 標景別）接進我們的建庫流程，細節見 <a href="./kb-2026-07-27.html">2026-07-27 知識更新 ⑤</a>。</p>
+  </div>
+
+  <h2>安裝／更新／健檢</h2>
+  <ul>
+    <li><b>已安裝</b>：七支技能在 <code>~/.claude/skills/</code>，五個 Python 套件、剪輯引擎都就緒，示範配樂 14 首完整。</li>
+    <li><b>更新</b>：新版 zip 放到「下載項目」→ 跟我說「幫我更新 Irene」。你填過的個人資料（創作者檔案、剪輯偏好）不會被覆蓋。</li>
+    <li><b>健檢</b>：「幫我檢查 Irene 裝好了沒」。</li>
+    <li>⚠️ 裝完／更新後<b>要重開 Claude Code</b> 才讀得到技能。</li>
+    <li>ℹ️ 語音模型（約 460MB）第一次剪有講話的影片時才會自動下載，那次會多等幾分鐘。</li>
+  </ul>
+
+  <div class="note warn">
+    🙋 <b>我還是 Robert。</b>用她的工具不代表換人 —— 工具是她的，做事的是我。你哪天希望連口吻都切過去，說一聲就好。
+  </div>
+
+  <footer>PhotoNB · Irene 技能包對照筆記 · 由 Robert 維護 · 2026-07-27</footer>
+</div>
+</body>
+</html>
