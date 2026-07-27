@@ -56,7 +56,7 @@
   <ul>
     <li>吃 OPPO／iPhone／Sony 多來源，<b>併進同一套場景</b>（不分相機獨立夾）。</li>
     <li>照片：評分／色標／關鍵字／描述全寫進 <b>XMP</b>（跟著檔案走，不碰 LR catalog ＝ A 方案）。</li>
-    <li>影片：智慧抽幀＋triage，母帶落 <code>_&lt;trip&gt;_創作/MOV_&lt;day&gt;/&lt;場景&gt;/</code>（跟 FCP 庫同組，一夾備份 NAS）等你 FCPX 撿片。</li>
+    <li>影片：智慧抽幀＋triage，母帶落 <code>_&lt;trip&gt;_創作/MOV_&lt;day&gt;/&lt;場景&gt;/</code>（跟 FCP 庫同組，一夾備份 NAS）等你 FCPX 撿片。<b>可加跑分鏡關鍵字</b>（步驟 5.5，預設不跑）。</li>
   </ul>
 
   <h2>怎麼叫它</h2>
@@ -71,6 +71,7 @@
   <div class="stepn"><span class="n">3</span><div class="t"><b>VLM 評分 + 分類</b>（Opus，防幻覺紅線）— 先客觀描述→再定 label（紅人臉／黃背影／綠景／紫物食藝）→評分。建築主體再跑一輪<b>建築風格標註</b>（<code>風格｜建築名</code>）。sub-agent 並行。</div></div>
   <div class="stepn"><span class="n">4</span><div class="t"><b>美肌偵測</b>（OPPO）— 掃 JPG 的 OnePlus 段，臉真的被磨 → 打關鍵字 <code>OPPO美肌</code>（Evoto 減量）。</div></div>
   <div class="stepn"><span class="n">5</span><div class="t"><b>影片 Phase A</b> — 智慧抽幀（逐檔偵測 HLG 才 tonemap）＋VLM triage，出 <code>VIDEO_classification.csv</code>。keeper 最終你在 FCPX 自挑。</div></div>
+  <div class="stepn"><span class="n">5.5</span><div class="t"><b>影片分鏡關鍵字（ir_tag）</b><span class="ok" style="font-size:.78em">　🆕 2026-07-27</span> — <b>預設不跑，歸檔完我問你一句</b>。要的話：把每支影片切分鏡、抽代表幀（長鏡頭多抽 2–3 張），我讀圖標好 <b>內容／景別（遠景·中景·特寫）／品質／建議HL</b>，建 FCP 庫時<b>關鍵字一起寫進去</b>。你在 FCPX 就從「從零撿片」變「複核」：篩 <code>建議HL</code> 打你的 ★4、篩 <code>景別:特寫</code> 做 ★2 拼貼、篩 <code>品質:不可用</code> 一次排除。<b>星等一律你自己打，我只寫關鍵字。</b>⏱ 每天多 15–25 分鐘（機器跑）。</div></div>
   <div class="stepn"><span class="n">6</span><div class="t"><b>XMP 雙寫（A 方案）</b> — Rating／Label／dc:Subject（場景詞＋內容＋建築風格＋美肌＋<code>_pick</code>）／dc:Description 一次寫。不 SQL inject catalog、不寫 legacy IPTC（避亂碼）。</div></div>
   <div class="stepn"><span class="n">7</span><div class="t"><b>歸檔結構（兩個世界）</b> — 📷 LR/雲端世界：照片 <code>&lt;date&gt; &lt;地點&gt;/NN_HHMM_描述/</code>＋<code>_&lt;trip&gt;_LR/</code>＋<code>_preview_mov_HL/·_KP/</code>＋<code>to_export/</code>。🎬 影片/創作世界：<b><code>_&lt;trip&gt;_創作/</code></b> 一夾裝 <code>.fcpbundle</code>＋<code>MOV_&lt;day&gt;/</code> 4K 母帶＋<code>to_montage/</code> 4K 照片 —— <b>編輯完整夾拷 NAS</b>。場景平鋪，第二台＝主場景名＋<code>_次</code>。</div></div>
   <div class="stepn"><span class="n">8</span><div class="t"><b>回報你（Telegram）</b> — 各 day/場景張數、label/rating 分布、picks、美肌數、5★影片亮點、結構樹、時區摘要。</div></div>
