@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>撿片關鍵字總表 · 單一定義來源 · PhotoNB</title>
+<meta name="description" content="FCPX 撿片用的所有星等／關鍵字／快捷鍵的唯一定義來源。Star1~5、KP、NG、★2 效果關鍵字、Robert 自動標的 IR 關鍵字、場景名，全部集中在這裡，其他筆記一律引用不重寫。" />
+<meta name="date" content="2026-08-03" />
+<style>
+  :root{--surface:#0f0f23;--brand:#1a1a2e;--accent:#e94560;--gold:#f0c860;
+    --text:#eaeaea;--muted:#a0a0a0;--border:#2a2a44;--chip:#242440;--ok:#2d7a4e;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:var(--surface);color:var(--text);
+    font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:1.2rem 1.05rem 5rem;}
+  a.back{color:var(--accent);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.28em;font-size:.68rem;text-transform:uppercase;margin:1.2rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.5rem,5vw,2rem);}
+  h1 .en{color:var(--gold);font-family:ui-monospace,Menlo,monospace;font-size:.48em;letter-spacing:.02em;}
+  .lead{color:var(--muted);margin:.2rem 0 1.1rem;font-size:.92rem;}
+  h2{font-size:1.05rem;color:var(--gold);margin:2rem 0 .3rem;letter-spacing:.03em;
+     border-bottom:1px solid var(--border);padding-bottom:.35rem;}
+  h3{font-size:.92rem;margin:1.2rem 0 .3rem;color:#cdd3e6;}
+  .rule{background:#1f1a3a;border-left:4px solid var(--accent);border-radius:6px;
+        padding:.8rem 1rem;margin:1rem 0;font-size:.9rem;}
+  .rule b{color:#ffb3c0;}
+  .tip{background:#1a2a1f;border-left:4px solid var(--ok);border-radius:6px;
+       padding:.7rem .95rem;margin:.9rem 0;font-size:.85rem;color:#cfe8d8;}
+  table{width:100%;border-collapse:collapse;margin:.7rem 0 1rem;font-size:.86rem;}
+  th,td{border:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  th{background:#20203c;color:var(--gold);font-weight:600;white-space:nowrap;}
+  td code,li code,p code{background:#242440;border-radius:5px;padding:.1rem .38rem;
+       font-family:ui-monospace,Menlo,monospace;font-size:.86em;color:#ffd98a;}
+  .k{white-space:nowrap;font-family:ui-monospace,Menlo,monospace;color:#9fd0ff;}
+  .star{font-weight:700;white-space:nowrap;}
+  ul{padding-left:1.15rem;margin:.4rem 0;} li{margin:.24rem 0;font-size:.88rem;}
+  .refs{background:var(--brand);border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem;margin:1rem 0;}
+  .refs a{color:#9fd0ff;text-decoration:none;} .refs a:hover{text-decoration:underline;}
+  .refs li{margin:.3rem 0;font-size:.85rem;}
+  .todo{background:#2a2416;border-left:4px solid var(--gold);border-radius:6px;padding:.7rem .95rem;
+        margin:.9rem 0;font-size:.85rem;color:#f3e2b4;}
+  footer{margin-top:2.5rem;color:var(--muted);font-size:.72rem;text-align:center;}
+  @media(max-width:520px){ table{font-size:.79rem} th,td{padding:.4rem .45rem} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">撿片 · 單一定義來源</p>
+  <h1>撿片關鍵字總表 <span class="en">picking keywords</span></h1>
+  <p class="lead">FCPX 撿片會用到的<b>所有星等、關鍵字、快捷鍵</b>都定義在這一頁。</p>
+
+  <div class="rule">
+    🔒 <b>這頁是唯一定義來源</b>（James 2026-08-03 拍板）。<br>
+    定義要改，<b>只改這裡</b>；其他筆記一律用連結引用，<b>不准把定義表複製過去</b>。<br>
+    以前散在十幾頁各寫一份，改版時一定漏掉某頁 —— 星等 2026-07-27 改版就漏了初剪選擇器，直到 8/3 才被抓到。
+  </div>
+
+  <h2>① 星等 Star 1~5 <span style="font-size:.75rem;color:var(--muted)">（2026-07-27 現行版）</span></h2>
+  <p style="font-size:.86rem;color:var(--muted);margin:.2rem 0 .5rem">
+    用 <span class="k">I</span> / <span class="k">O</span> 框範圍，或 <span class="k">X</span> 選整支，再按 <span class="k">Ctrl+1~5</span>。</p>
+  <table>
+    <tr><th>快捷鍵</th><th>星等</th><th>意思</th><th>工具怎麼處理</th></tr>
+    <tr><td class="k">Ctrl+5</td><td class="star">★5</td><td><b>長篇剪輯</b><br>口播／課程／演唱會／開箱介紹</td><td>框整段＋段內 Reject 挖掉壞段 → concat 成長片<br><span style="color:#e88">⚠️ 未實作</span></td></tr>
+    <tr><td class="k">Ctrl+4</td><td class="star">★4</td><td><b>HL 精華</b>（動態照片）</td><td>切 1080p H.264 短片段 → <code>_preview_mov_HL/</code><br><b>唯一會切出檔案的星等</b></td></tr>
+    <tr><td class="k">Ctrl+3</td><td class="star">★3</td><td><b>生活片段</b>·進剪輯主體</td><td>只記不切，靠關鍵字批次撈進初剪／蒙太奇</td></tr>
+    <tr><td class="k">Ctrl+2</td><td class="star">★2</td><td><b>工具標記</b><br>＝「B-roll 中的 B-roll」，不必給整個畫面、帶過就好</td><td>★2 ＋ <b>一個效果關鍵字</b>（同一段範圍），依關鍵字套處理 → 見②</td></tr>
+    <tr><td class="k">Ctrl+1</td><td class="star">★1</td><td>未定案</td><td>—</td></tr>
+  </table>
+
+  <div class="rule">
+    ⚖️ <b>重疊時誰優先</b>：同一支同時有 ★3 和 ★4 → <b>時間軸帶 ★3 那段</b>（長的），★4 只是裡面的精華點。★5 同理。<br>
+    <span style="color:var(--muted);font-size:.85rem">（初剪選擇器裡的「⭐4 去重：被⭐3包含就剔除」就是這條。）</span>
+  </div>
+
+  <h2>② ★2 效果關鍵字</h2>
+  <p style="font-size:.86rem;color:var(--muted);margin:.2rem 0 .5rem">★2 ＋ 下面其中一個關鍵字，標在<b>同一段範圍</b>上。</p>
+  <table>
+    <tr><th>關鍵字</th><th>做什麼</th><th>狀態</th></tr>
+    <tr><td><code>拼貼</code></td><td>塞進格子（版型／每組幾支／長度對齊 →
+        <a href="./initcut-spec-picker.html" style="color:#9fd0ff">初剪規格選擇器</a> ② 設定）</td><td>規格已定</td></tr>
+    <tr><td><code>慢動作</code> <code>0.5x</code></td><td>0.5 倍速</td><td>✅ 寫進 XML 的 timeMap，匯入即變速</td></tr>
+    <tr><td><code>快轉</code> <code>2x</code></td><td>2 倍速</td><td>✅ 同上</td></tr>
+    <tr><td><code>縮時</code> <code>8x</code> <code>16x</code></td><td>8／16 倍速</td><td>✅ 同上</td></tr>
+    <tr><td><code>倒放</code> <code>定格</code> <code>循環</code><br><code>穩定</code> <code>靜音</code> <code>封面</code></td><td>字面意思</td><td>🔨 待實作</td></tr>
+  </table>
+  <div class="tip">💡 建議先只用 <b>拼貼／慢動作／快轉／縮時</b> 這四個 —— 涵蓋八成情境，而且能全自動。</div>
+
+  <h2>③ KP 抽禎指令 · NG</h2>
+  <table>
+    <tr><th>快捷鍵</th><th>關鍵字</th><th>意思</th></tr>
+    <tr><td class="k">Ctrl+6</td><td><code>KP_R</code></td><td>抽這一禎（紅）</td></tr>
+    <tr><td class="k">Ctrl+7</td><td><code>KP_Y</code></td><td>抽這一禎（黃）</td></tr>
+    <tr><td class="k">Ctrl+8</td><td><code>KP_G</code></td><td>抽這一禎（綠）</td></tr>
+    <tr><td class="k">Ctrl+9</td><td><code>KP_P</code></td><td>抽這一禎（紫）</td></tr>
+    <tr><td class="k">Delete</td><td>Reject / NG</td><td>失誤段，跳過不用</td></tr>
+  </table>
+  <div class="tip">💡 KP 抽的是<b>原生解析度單禎 JPG</b> → <code>_preview_mov_KP/&lt;day&gt;/&lt;場景&gt;_KP/</code>，並寫 XMP 色標，之後在 LR 裡評分。顏色只是分類，不影響抽法。</div>
+
+  <h2>④ Robert 自動標的關鍵字 <span style="font-size:.75rem;color:var(--muted)">（你不用打，我產）</span></h2>
+  <table>
+    <tr><th>關鍵字</th><th>意思</th></tr>
+    <tr><td><code>內容:xxx</code></td><td>畫面實際有什麼（運河／街屋／甜點…）</td></tr>
+    <tr><td><code>景別:遠景</code> <code>景別:中景</code> <code>景別:特寫</code></td><td>剪接公式靠這個排節奏</td></tr>
+    <tr><td><code>A-roll_人物</code></td><td>人是這顆鏡頭的<b>主體</b>（人像／自拍／合照／家人）</td></tr>
+    <tr><td><code>B-roll_風景</code></td><td>空間、景觀為主。<b>路過的行人、背景人潮不算 A</b></td></tr>
+    <tr><td><code>C-roll_物品</code></td><td>物件特寫（食物／商品／櫥窗）</td></tr>
+    <tr><td><code>建議HL</code></td><td>我覺得這顆特別好，建議你打 ★4</td></tr>
+    <tr><td><code>品質:不可用</code></td><td>糊掉／黑禎／曝掉</td></tr>
+    <tr><td><code>NN_HHMM_描述</code></td><td>場景名（歸檔時自動帶入，等於 keyword collection）</td></tr>
+    <tr><td><code>移動中</code> <code>飲食</code> <code>建築</code> <code>其他</code></td><td>由場景名自動分類</td></tr>
+  </table>
+
+  <div class="tip">
+    ✅ 這組就是 James 說的「<b>VLC 撿片</b>」那套（2026-08-03 確認）＝ <code>ir_tag</code>：
+    影片切分鏡 → 抽代表幀 → 我逐張讀圖標上面這些關鍵字 → 寫進建庫 XML。
+    你打開 FCP 時，這些字已經在了，直接用關鍵字篩就能挑素材。
+  </div>
+  <div class="todo">
+    ⏳ <b>還沒收進來的</b>：James 自己設的快捷關鍵字、irene 那套的標籤 —— 你把清單給我就補進這頁。
+  </div>
+
+  <h2>⑤ FCPX 快捷鍵總表</h2>
+  <h3>走片 / 預覽</h3>
+  <table>
+    <tr><td class="k">J / K / L</td><td>後退 / 停 / 前進（連按加速）</td></tr>
+    <tr><td class="k">Space</td><td>播放 / 暫停</td></tr>
+    <tr><td class="k">← / →</td><td>逐禎前後</td></tr>
+    <tr><td class="k">Shift + ← / →</td><td>跳 10 禎</td></tr>
+  </table>
+  <h3>框範圍</h3>
+  <table>
+    <tr><td class="k">I / O</td><td>標入點 / 出點</td></tr>
+    <tr><td class="k">X</td><td>選整支 clip 當範圍</td></tr>
+    <tr><td class="k">Option + X</td><td>清除入出點</td></tr>
+  </table>
+  <h3>標記</h3>
+  <table>
+    <tr><td class="k">Ctrl + 1~5</td><td>★1~★5（見①）</td></tr>
+    <tr><td class="k">Ctrl + 6~9</td><td>KP_R / Y / G / P（見③）</td></tr>
+    <tr><td class="k">Ctrl + 0</td><td>移除選取範圍所有 keyword</td></tr>
+    <tr><td class="k">Delete</td><td>Reject（NG 失誤段）</td></tr>
+    <tr><td class="k">F / U</td><td>Favorite / 清除 Favorite·Reject</td></tr>
+    <tr><td class="k">M</td><td>加 Marker（純標位置）</td></tr>
+    <tr><td class="k">Cmd + K</td><td>開 Keyword Editor</td></tr>
+  </table>
+  <div class="tip">💡 <b>顏色分不出來的問題</b>：匯入時場景名已經是藍色 keyword 條，再標 ★ 還是藍色。★4／★5 加一個 <span class="k">F</span>（Favorite）→ 多一條綠色蓋在上面 → 一眼看出「必出片候選」。</div>
+
+  <h2>⑥ 撿完之後</h2>
+  <p style="font-size:.88rem">
+    <span class="k">檔案 &gt; 輸出 XML</span> → 拿到 <code>.fcpxmld</code> 給我 →
+    我跑 <a href="./fcpxmld-export.html" style="color:#9fd0ff">fcpxmld-export</a> 切 HL／抽 KP，
+    或用 <a href="./initcut-spec-picker.html" style="color:#9fd0ff">初剪規格選擇器</a> 組初剪 XML。</p>
+
+  <div class="refs">
+    <b style="color:var(--gold)">引用這頁的筆記</b>（它們只放連結，不放定義）
+    <ul>
+      <li><a href="./fcpxmld-export.html">fcpxmld-export</a> — 撿完出 HL / KP</li>
+      <li><a href="./initcut-spec-picker.html">初剪規格選擇器</a> — 組裝規格（★2 拼貼版型在這選）</li>
+      <li><a href="./video-editing-kb.html">影片剪輯攻略書</a> — 整條流程</li>
+      <li><a href="./trip-fcpx-build.html">旅遊影片匯入 fcpx</a> — 建庫、寫入關鍵字</li>
+      <li><a href="./scene-build.html">scene_build</a> — 歸檔（場景名 keyword 從這來）</li>
+      <li><a href="./_fcpx-cheatsheet.html">舊版 Cheat Sheet</a> — <b style="color:#e88">已被本頁取代</b>，僅供回溯</li>
+    </ul>
+  </div>
+
+  <h2>⑦ 改版紀錄</h2>
+  <ul>
+    <li><b>2026-08-03</b>　建立本頁為唯一定義來源（James：「散佈在各 NB 會有漏掉的部分」）。收進 ★1~5、★2 效果關鍵字、KP、Robert 自動標的關鍵字、快捷鍵。</li>
+    <li><b>2026-07-27</b>　星等大改版：★5 長篇／★4 HL／★3 生活片段／★2 工具標記／★1 未定案。<b>舊定義（0★生活紀錄／1★專題報導／2★活動攝影／3★保留／4★精彩／5★史詩級）全部作廢。</b></li>
+  </ul>
+
+  <footer>撿片關鍵字總表 · 定義只改這一頁 · 2026-08-03</footer>
+</div>
+</body>
+</html>
