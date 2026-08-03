@@ -1,0 +1,162 @@
+<title>霓虹標題版型庫 — 選色盤</title>
+<style>
+  :root{
+    --bg:#0a0a0f; --panel:#12121a; --line:#262633; --ink:#e8e8f0; --dim:#8b8ba3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:"Hiragino Sans","PingFang TC",-apple-system,"Helvetica Neue",sans-serif;
+       -webkit-font-smoothing:antialiased}
+  header{padding:34px 20px 22px;text-align:center;border-bottom:1px solid var(--line)}
+  h1{margin:0 0 8px;font-size:26px;letter-spacing:.06em;font-weight:800}
+  .sub{color:var(--dim);font-size:14px;line-height:1.75;max-width:640px;margin:0 auto}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 18px 80px}
+
+  /* ── 比例切換 ── */
+  .switch{display:flex;justify-content:center;gap:10px;margin:24px 0 34px}
+  .switch button{background:var(--panel);color:var(--dim);border:1px solid var(--line);
+    padding:11px 26px;border-radius:999px;font-size:15px;cursor:pointer;font-weight:700;
+    font-family:inherit;transition:.18s}
+  .switch button.on{background:#fff;color:#0a0a0f;border-color:#fff}
+
+  .grid{display:grid;gap:30px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+  body.p916 .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+
+  /* ── 預覽畫布 ── */
+  .canvas{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+          background:radial-gradient(120% 90% at 50% 15%, #1c1030 0%, #080810 70%);
+          display:flex;flex-direction:column;justify-content:center;align-items:center;
+          container-type:inline-size}
+  body.p916 .canvas{aspect-ratio:9/16}
+
+  /* 掃描線 + 顆粒（疊在最上層） */
+  .canvas::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0 1px, transparent 1px 3px);
+    mix-blend-mode:multiply;opacity:.5}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:overlay}
+
+  /* ── 四個字塊 ── */
+  .stage{position:relative;z-index:2;width:100%;height:100%;padding:7% 6%;
+         display:grid;grid-template-rows:1fr auto 1fr;justify-items:center;align-content:center;gap:2%}
+  .title{font-size:19cqw;font-weight:900;letter-spacing:.05em;line-height:.95;
+         font-family:"Avenir Next","Futura",Helvetica,sans-serif;text-align:center;
+         align-self:end}
+  body.p916 .title{font-size:26cqw}
+  .jp{display:block;font-size:.26em;letter-spacing:.55em;font-weight:600;margin-top:.5em;
+      font-family:"Hiragino Mincho ProN",serif;text-indent:.55em}
+  .cols{display:flex;gap:9cqw;align-items:flex-start;justify-content:center;width:100%}
+  body.p916 .cols{gap:7cqw}
+  .col{font-size:4.3cqw;line-height:1.5;letter-spacing:.14em;font-weight:700;text-align:center;flex:0 1 auto}
+  body.p916 .col{font-size:5.4cqw}
+  .col small{display:block;font-size:.72em;letter-spacing:.2em;opacity:.82;font-weight:500;margin-top:.35em;
+             font-family:"Hiragino Mincho ProN",serif}
+  .foot{font-size:3.3cqw;letter-spacing:.42em;font-weight:600;align-self:start;text-indent:.42em;
+        text-align:center}
+  body.p916 .foot{font-size:4.2cqw}
+
+  /* ── 卡片資訊 ── */
+  .meta{padding:15px 17px 18px}
+  .name{font-size:15px;font-weight:800;margin-bottom:3px}
+  .name b{color:#fff;font-size:12px;background:#2a2a3a;border-radius:5px;padding:2px 7px;margin-right:8px}
+  .desc{color:var(--dim);font-size:12.5px;line-height:1.6;margin-bottom:11px}
+  .sw{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{display:flex;align-items:center;gap:5px;background:#1b1b26;border:1px solid var(--line);
+        border-radius:6px;padding:4px 8px;font-size:11px;color:var(--dim);
+        font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .dot{width:11px;height:11px;border-radius:3px;flex:none}
+
+  .note{margin-top:44px;background:var(--panel);border:1px solid var(--line);
+        border-left:3px solid #FF2E88;border-radius:10px;padding:19px 22px;font-size:14px;line-height:1.85}
+  .note h3{margin:0 0 10px;font-size:15px}
+  .note code{background:#1b1b26;border-radius:4px;padding:1px 6px;font-size:12.5px}
+  @media (max-width:560px){ .grid{grid-template-columns:1fr!important} h1{font-size:22px} }
+</style>
+
+<header>
+  <h1>霓虹標題版型庫</h1>
+  <div class="sub">
+    七款配色，四個字塊（大標題／左內容／右內容／中間底部小標題）。<br>
+    每款都有 <b>16:9</b> 與 <b>9:16</b> 兩個版本，按上面的按鈕切換。<br>
+    <b>挑好跟我說編號</b>（例：「用 03 號，出 9:16」），我就套你的文字產出成品。
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="switch">
+    <button id="b169" class="on" onclick="setRatio('169')">16 : 9　橫式</button>
+    <button id="b916" onclick="setRatio('916')">9 : 16　直式</button>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <div class="note">
+    <h3>💡 這是怎麼做出來的（給你參考，不用懂也沒關係）</h3>
+    這些字<b>不是 AI 生圖</b>，是純文字圖層特效 —— 所以字永遠清楚、隨時能改，
+    也不會出現 AI 生圖最常見的文字亂碼。堆疊順序：<br>
+    <code>底色漸層</code> → <code>四個字塊</code> → <code>霓虹外光暈（4 層）</code> →
+    <code>RGB 色差</code> → <code>掃描線</code> → <code>底片顆粒</code><br><br>
+    <b>產出去哪</b>：影片 → 透明背景 ProRes 疊在素材上當片頭（走 narrative_tag）；
+    社群 → 直接出圖當封面／輪播首頁（走 POST 工具）。
+  </div>
+</div>
+
+<script>
+const P = [
+  {id:"01", name:"桃紅 × 電光藍", desc:"最經典的賽博朋克組合。夜街霓虹感最強，適合城市、夜景、熱鬧場面。",
+   main:"#FF2E88", accent:"#00E5FF", foot:"#00E5FF"},
+  {id:"02", name:"電紫 × 冰青", desc:"冷調夜城。比 01 收斂一點，不吵，適合安靜的夜拍、運河、雨夜。",
+   main:"#B14AED", accent:"#22D3EE", foot:"#22D3EE"},
+  {id:"03", name:"螢光黃 × 桃紅", desc:"街頭感最強、最跳。適合市集、招牌、人多熱鬧的畫面，社群封面很吸睛。",
+   main:"#FFE500", accent:"#FF2E88", foot:"#FF2E88"},
+  {id:"04", name:"淨白 × 淡青", desc:"乾淨路線，霓虹感收到最低。這款最適合你的旅遊片 —— 不搶畫面，質感優先。",
+   main:"#FFFFFF", accent:"#A8F0E8", foot:"#A8F0E8"},
+  {id:"05", name:"橙紅 × 琥珀", desc:"暖夜霓虹。居酒屋、燈籠、黃昏、室內暖光的畫面配這款最搭。",
+   main:"#FF5A1F", accent:"#FFB020", foot:"#FFB020"},
+  {id:"06", name:"電馭綠 × 檸檬", desc:"科技綠。偏未來／駭客感，比較實驗性，用在特定主題會很有記憶點。",
+   main:"#39FF14", accent:"#D4FF3F", foot:"#D4FF3F"},
+  {id:"07", name:"冰藍 × 銀白", desc:"未來極簡。冷、乾淨、有距離感，適合建築、現代都市、空拍。",
+   main:"#7FD4FF", accent:"#E8F4FF", foot:"#E8F4FF"},
+];
+
+// 霓虹外光暈：由內而外四層 + 白芯
+function glow(c){
+  return `0 0 .04em #fff, 0 0 .12em ${c}, 0 0 .3em ${c}, 0 0 .7em ${c}, 0 0 1.4em ${c}`;
+}
+const GRAIN = "data:image/svg+xml;utf8," + encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180">
+     <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/></filter>
+     <rect width="180" height="180" filter="url(#n)"/></svg>`);
+
+document.getElementById("grid").innerHTML = P.map(p => `
+  <div class="card">
+    <div class="canvas">
+      <img class="grain" src="${GRAIN}" alt="">
+      <div class="stage">
+        <div class="title" style="color:${p.main};text-shadow:${glow(p.main)}">
+          TOKYO<span class="jp" style="color:${p.accent};text-shadow:${glow(p.accent)}">東京</span>
+        </div>
+        <div class="cols">
+          <div class="col" style="color:${p.accent};text-shadow:${glow(p.accent)}">
+            NEON<small>霓虹夜</small></div>
+          <div class="col" style="color:${p.accent};text-shadow:${glow(p.accent)}">
+            CITY<small>新宿</small></div>
+        </div>
+        <div class="foot" style="color:${p.foot};text-shadow:${glow(p.foot)}">LO-FI CITY TAPE</div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="name"><b>${p.id}</b>${p.name}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="sw">
+        <span class="chip"><i class="dot" style="background:${p.main}"></i>主色 ${p.main}</span>
+        <span class="chip"><i class="dot" style="background:${p.accent}"></i>副色 ${p.accent}</span>
+      </div>
+    </div>
+  </div>`).join("");
+
+function setRatio(r){
+  document.body.classList.toggle("p916", r === "916");
+  document.getElementById("b169").classList.toggle("on", r === "169");
+  document.getElementById("b916").classList.toggle("on", r === "916");
+}
+</script>
