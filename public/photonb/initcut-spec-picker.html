@@ -89,7 +89,8 @@
   <h1>初剪規格選擇器 <span class="en">spec picker</span></h1>
   <p class="lead">跟 grid 照片一樣：勾一勾輸出規格＋拼貼版型＋時間線組裝＋描述標籤，底下自動生成「規格字串」，<b>複製貼給 Robert</b> 就照這個組初剪 XML。</p>
 
-  <div class="note">🎬 <b>先決條件</b>：你已在 FCPX 撿片標好 <b>⭐2 拼貼 / ⭐3 身體 / ⭐4 精彩</b> keyword 並導出 <code>.fcpxmld</code>。這裡選的是「組裝時怎麼排版輸出」。（⭐1 PIP 之後補、⭐5 敘事走直出不進初剪。）</div>
+  <div class="note">🎬 <b>先決條件</b>：你已在 FCPX 撿片標好星等 keyword 並導出 <code>.fcpxmld</code>。這裡選的是「組裝時怎麼排版輸出」。<br>
+  <b>星等定義（2026-07-27 現行版）</b>：<b>⭐2 工具標記</b>（＋效果關鍵字，<code>拼貼</code>就走下面②）／<b>⭐3 生活片段</b>（初剪主體）／<b>⭐4 HL 精華</b>（被⭐3包含時剔除）／⭐5 長篇剪輯（直出，不進初剪）／⭐1 未定案。</div>
 
   <!-- A 輸出規格 -->
   <div class="group" data-g="輸出">
@@ -107,8 +108,8 @@
 
   <!-- B 拼貼 -->
   <div class="group" data-g="拼貼">
-    <h2>② 拼貼 ⭐2 版型</h2>
-    <p class="hint">Star2 標記的片段，怎麼拼。「自動」＝依素材方向＋數量選（直式並排／橫式 2×2／堆疊）。</p>
+    <h2>② 拼貼 ⭐2 版型（工具標記＋<code>拼貼</code>關鍵字）</h2>
+    <p class="hint">⭐2 ＋ <code>拼貼</code> 關鍵字的片段（＝「B-roll 中的 B-roll」，不必給整個畫面、帶過就好），怎麼拼。「自動」＝依素材方向＋數量選（直式並排／橫式 2×2／堆疊）。</p>
     <div class="row"><span class="lbl">版型</span><div class="chips gold" data-k="拼貼版型" data-def="自動">
       <span class="chip">自動</span><span class="chip">2×2四宮格</span><span class="chip">橫向並排</span><span class="chip">直向堆疊</span></div></div>
     <div class="row"><span class="lbl">每組幾支</span><div class="chips gold" data-k="每組" data-def="3支">
@@ -123,10 +124,10 @@
   <!-- C 時間線 -->
   <div class="group" data-g="時間線">
     <h2>③ 時間線組裝</h2>
-    <p class="hint">⭐3 身體排成敘事主體，⭐4 精彩去重併入。</p>
-    <div class="row"><span class="lbl">⭐3 排序</span><div class="chips" data-k="排序" data-def="時間序">
+    <p class="hint">⭐3 生活片段排成敘事主體，⭐4 HL 去重後併入。</p>
+    <div class="row"><span class="lbl">⭐3 生活片段 排序</span><div class="chips" data-k="排序" data-def="時間序">
       <span class="chip">時間序</span><span class="chip">場景序</span></div></div>
-    <div class="row"><span class="lbl">⭐4 去重（被⭐3包含就剔除）</span><div class="chips" data-k="Star4去重" data-def="開">
+    <div class="row"><span class="lbl">⭐4 HL 去重（被⭐3包含就剔除）</span><div class="chips" data-k="Star4去重" data-def="開">
       <span class="chip">開</span><span class="chip">關</span></div></div>
     <div class="row"><span class="lbl">轉場</span><div class="chips" data-k="轉場" data-def="硬切">
       <span class="chip">硬切</span><span class="chip">Cross Dissolve</span></div></div>
