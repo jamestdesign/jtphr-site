@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>長景 longview · Abao Vision 全方位拆解 · PhotoNB</title>
+<meta name="description" content="拆解 Abao Vision（33.8萬訂閱／51支）的陪伴影片商業模式：雙頻道結構、一素材兩影片、Loop 機制、標題公式、描述模板、音樂上架導流。這是「長景 longview」工具要對標的模板。" />
+<meta name="date" content="2026-08-04" />
+<style>
+  :root{--surface:#0f0f23;--brand:#1a1a2e;--accent:#e94560;--gold:#f0c860;
+    --text:#eaeaea;--muted:#a0a0a0;--border:#2a2a44;--ok:#2d7a4e;--warn:#c8901f;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:var(--surface);color:var(--text);
+    font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.78;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:820px;margin:0 auto;padding:1.2rem 1.05rem 5rem;}
+  a.back{color:var(--accent);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.28em;font-size:.68rem;text-transform:uppercase;margin:1.2rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.5rem,5vw,2rem);}
+  h1 .en{color:var(--gold);font-family:ui-monospace,Menlo,monospace;font-size:.46em;}
+  .lead{color:var(--muted);margin:.2rem 0 1.1rem;font-size:.92rem;}
+  h2{font-size:1.06rem;color:var(--gold);margin:2.2rem 0 .3rem;border-bottom:1px solid var(--border);padding-bottom:.35rem;}
+  h3{font-size:.95rem;margin:1.3rem 0 .3rem;color:#cdd3e6;}
+  pre{background:#12122a;border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem;
+      overflow-x:auto;font-size:.79rem;line-height:1.65;font-family:ui-monospace,Menlo,monospace;color:#dfe4f2;}
+  code{background:#242440;border-radius:5px;padding:.1rem .38rem;font-family:ui-monospace,Menlo,monospace;font-size:.86em;color:#ffd98a;}
+  table{width:100%;border-collapse:collapse;margin:.7rem 0 1rem;font-size:.85rem;}
+  th,td{border:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  th{background:#20203c;color:var(--gold);font-weight:600;white-space:nowrap;}
+  .key{background:#1f1a3a;border-left:4px solid var(--accent);border-radius:6px;padding:.85rem 1rem;margin:1rem 0;font-size:.9rem;}
+  .key b{color:#ffb3c0;}
+  .tip{background:#1a2a1f;border-left:4px solid var(--ok);border-radius:6px;padding:.75rem .95rem;margin:.9rem 0;font-size:.86rem;color:#cfe8d8;}
+  .warn{background:#2a2416;border-left:4px solid var(--warn);border-radius:6px;padding:.75rem .95rem;margin:.9rem 0;font-size:.86rem;color:#f3e2b4;}
+  .stat{display:flex;flex-wrap:wrap;gap:.55rem;margin:.9rem 0;}
+  .stat div{background:var(--brand);border:1px solid var(--border);border-radius:10px;padding:.55rem .85rem;flex:1 1 130px;}
+  .stat b{display:block;color:var(--gold);font-size:1.22rem;line-height:1.25;font-family:ui-monospace,Menlo,monospace;}
+  .stat span{font-size:.74rem;color:var(--muted);}
+  .flow{background:var(--brand);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;margin:1rem 0;font-size:.86rem;}
+  ul{padding-left:1.15rem;} li{margin:.3rem 0;font-size:.88rem;}
+  footer{margin-top:2.5rem;color:var(--muted);font-size:.72rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">長景 longview · 對標拆解</p>
+  <h1>Abao Vision 全方位拆解 <span class="en">teardown</span></h1>
+  <p class="lead">James 2026-08-04：「整個工具是要做成可以一路到頻道」「以這位為模板」。這頁是拆給我們自己看的作業書。</p>
+
+  <div class="stat">
+    <div><b>338K</b><span>@abaovision 訂閱</span></div>
+    <div><b>51</b><span>支影片</span></div>
+    <div><b>1.29M</b><span>主頻道 @abaointokyo</span></div>
+    <div><b>86 分</b><span>平均長度（中位 76）</span></div>
+  </div>
+
+  <h2>① 最關鍵的三個發現</h2>
+
+  <div class="key">
+    <b>發現 1 ── 一批素材出兩支影片，賺兩次</b><br>
+    同一支澀谷雨夜，他發了<b>兩個版本</b>：<br>
+    　🎵 <b>有音樂版</b>　190 萬觀看<br>
+    　🌧 <b>純環境音版</b>（無音樂）　80 萬觀看<br>
+    畫面完全一樣，只換音軌，<b>兩支加起來 270 萬</b>。而且兩支互相在描述裡導流。
+  </div>
+
+  <div class="key">
+    <b>發現 2 ── 他不是拍兩小時，他 Loop</b><br>
+    描述裡寫得清清楚楚：<code>01:05:07 - Loop starts</code>。<br>
+    影片全長 2:09，<b>1:05 之後是同一段畫面再播一次</b>。<br>
+    → <b>拍 65 分鐘 = 出 2 小時的片</b>。這直接解決我們「素材不夠長」的問題。
+  </div>
+
+  <div class="key">
+    <b>發現 3 ── 音樂本身是第三個產品</b><br>
+    描述裡放 <b>Spotify / Apple Music 藝人頁</b>連結（藝人名 abao in tokyo）。<br>
+    → 影片賺廣告、音樂賺串流、主頻道吃流量，<b>一份創作三個出口</b>。<br>
+    這就是 James 說的「一個作品多元導流」，他已經做到了。
+  </div>
+
+  <h2>② 雙頻道結構</h2>
+  <div class="flow">
+    <b>@abaointokyo</b>（主頻道 1.29M）── 城市風景／讀書陪伴，流量池<br>
+    　　　↓ 每支影片描述都導流<br>
+    <b>@abaovision</b>（本頻道 338K）── 純長片陪伴影片，51 支<br>
+    　　　↓ 描述導流<br>
+    <b>Spotify / Apple Music</b> ── 同一批音樂當專輯上架
+  </div>
+  <div class="tip">💡 <b>對我們的意義</b>：不用一開始就開新頻道。先在現有頻道發，長出穩定觀眾再拆分。他也是先有主頻道才有這個。</div>
+
+  <h2>③ 內容公式（51 支統計）</h2>
+  <table>
+    <tr><th>維度</th><th>分佈</th></tr>
+    <tr><td>載具</td><td><b>開車 59%</b>（30 支）／走路 10%／鐵道 8%</td></tr>
+    <tr><td>城市</td><td><b>東京 59%</b>／京都 4%／大阪 4%／其他</td></tr>
+    <tr><td>時段</td><td>夜晚 45%／日出·日落·藍調 27%／<b>下雨 25%</b></td></tr>
+    <tr><td>音樂</td><td><b>Piano 59%</b>／Lofi 39%／Jazz 4%／Ambient 4%</td></tr>
+    <tr><td>規格標示</td><td><b>8K 100%</b>／60fps 100%／HDR 90%　← 每支標題都寫</td></tr>
+    <tr><td>長度</td><td>中位 <b>76 分</b>／最短 27 分／最長 179 分</td></tr>
+  </table>
+  <div class="tip">💡 <b>他只換三個變數</b>：地點 × 時段 × 音樂類型。其餘完全固定 —— 這就是能一個人量產 51 支的原因。</div>
+
+  <h2>④ 標題公式</h2>
+  <pre>[時長] [動作] in [地點] [emoji] / 8K 60fps HDR / [音樂類型]
+
+2-HOUR Rainy Night Walk in Shibuya, Tokyo / 8K 60fps / Calm Piano
+Tokyo Night Drive from Shibuya to Skytree 🌃 / 8K 60fps HDR / Relaxing Lofi Beats
+Kyoto Dawn Drive ⛩️ / 8K 60fps HDR / Japanese Ambient Lofi</pre>
+  <ul>
+    <li><b>規格寫進標題</b>（8K / 60fps / HDR）→ 這是這個類型的搜尋關鍵字，不是炫技</li>
+    <li><b>音樂類型寫進標題</b> → 觀眾是先選音樂再選畫面的</li>
+    <li><b>emoji 一個就好</b>，放在地點後面</li>
+    <li><b>A to B 的路線寫法</b>（from Shibuya to Skytree）比單一地名更吸引人</li>
+  </ul>
+
+  <h2>⑤ 描述模板（照抄結構，換內容）</h2>
+  <pre>🎧 Ambient-only version (no music):
+&lt;純環境音版連結&gt;
+
+📑 CONTENTS
+00:00:00 - INTRO
+00:00:30 - Walk begins
+01:05:07 - Loop starts        ← 連 loop 點都誠實寫出來
+
+🌧️ Date Filmed: March 2025
+📍 Location: Shibuya, Tokyo, Japan
+
+🎼 Listen on Spotify: &lt;藝人頁&gt;
+🍏 Listen on Apple Music: &lt;藝人頁&gt;
+For more study &amp; cityscape videos, check out my main channel: @abaointokyo
+
+Do not use my footage without permission.
+✉️ Business contact: &lt;email&gt;
+🏷 #rainynight #shibuyatokyo #abaovision</pre>
+  <div class="tip">💡 <b>七段結構</b>：另一版本連結 → 章節 → 拍攝資訊 → 音樂平台 → 主頻道 → 版權聲明 → 商務信箱 → hashtag。<b>每一段都是一個導流出口。</b></div>
+
+  <h2>⑥ 我們的落差（誠實評估）</h2>
+  <table>
+    <tr><th>項目</th><th>他</th><th>我們現況</th></tr>
+    <tr><td>畫質</td><td>8K 60fps HDR</td><td>4K（OPPO/iPhone）→ <b>標題不能寫 8K</b>，寫 4K</td></tr>
+    <tr><td>單段長度</td><td>一鏡到底 65 分</td><td>最長單支 68 秒 → <b>要靠長溶接串</b></td></tr>
+    <tr><td>素材量</td><td>一趟拍滿</td><td>荷蘭全趟平穩風景 <b>44 支／19.9 分</b></td></tr>
+    <tr><td>音樂</td><td>自己作曲＋上架</td><td>先用 Irene 14 首可商用；AI 自創待評估</td></tr>
+    <tr><td>頻道</td><td>雙頻道 1.29M + 338K</td><td>從現有頻道開始</td></tr>
+  </table>
+  <div class="warn">
+    ⚠️ <b>最大的落差是「單段長度」</b>。他一鏡到底，我們是 44 段拼接。<br>
+    → 補法：<b>2~3 秒長溶接</b>（水面/樹影會融合，接點很不明顯）＋ <b>照動線排序</b> ＋ <b>Loop 一次</b>。<br>
+    20 分鐘素材 → 長溶接後約 18 分 → Loop 兩次 ≈ <b>54 分鐘</b>，就進他的長度區間了。
+  </div>
+
+  <h2>⑦ 「長景 longview」要做到哪裡</h2>
+  <div class="flow">
+    ✅ <b>已有</b>　平穩風景自動篩選（B-roll＋非特寫＋≥12秒＋單一構圖）<br>
+    ✅ <b>已有</b>　長溶接串接 ＋ HLG→SDR<br>
+    🔨 <b>做中</b>　版型圖層（主標題／副標／場景清單／正在播放／音浪／JT PHR 標）<br>
+    ⬜ <b>要做</b>　Loop 機制（拍 20 分 → 出 60 分）<br>
+    ⬜ <b>要做</b>　純環境音版（同畫面、換音軌，一次出兩支）<br>
+    ⬜ <b>要做</b>　封面圖產生器<br>
+    ⬜ <b>要做</b>　標題／描述／章節自動產出（照上面的模板）<br>
+    ⏸ <b>需 James</b>　YouTube 上傳（要授權，而且每支發布前都要你確認）
+  </div>
+
+  <footer>長景 longview · 對標拆解 · 2026-08-04</footer>
+</div>
+</body>
+</html>
