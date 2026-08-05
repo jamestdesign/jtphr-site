@@ -40,8 +40,8 @@
 <div class="wrap">
   <a class="back" href="./">← 攝影筆記本</a>
   <h1>描述標籤版型庫 🎫</h1>
-  <p class="date">2026-07-05 · 版型庫（陸續新增／汰舊換新）</p>
-  <p class="lead">影片「<b>描述標籤</b>」＝疊在畫面上的透明 overlay（機票感航跡、景點地名…）。這頁純<b>看樣挑款</b>；實際要出時去 <a href="./initcut-spec-picker.html">初剪規格選擇器</a> 勾類別＋設定。描述標籤是初剪的一個分支，勾了才展開。</p>
+  <p class="date">2026-07-05 建立 · <b>2026-08-05 併入長景／霓虹標題那批</b>（同類型都收這裡）</p>
+  <p class="lead">影片「<b>描述標籤</b>」＝疊在畫面上的透明 overlay（機票感航跡、景點地名…）。這頁純<b>看樣挑款</b>。要出時：<b>①~②</b> 去 <a href="./initcut-spec-picker.html">初剪規格選擇器</a>；<b>③~⑥</b> 去 <a href="./title-picker.html">標題字體選擇器</a>（可即時預覽）。描述標籤是初剪的一個分支，勾了才展開。</p>
 
   <h2>現行版型</h2>
   <div class="grid">
@@ -69,10 +69,62 @@
         <div class="use">適用 <b>景點 / 地標</b> · 地名 Robert 從 GPS 自動帶</div>
       </div>
     </div>
+
+    <div class="card">
+      <img src="narrative-assets/tpl_opening.jpg" alt="開場標題卡">
+      <div class="body"><span class="tag">現行</span>
+        <h3>③ 開場標題卡</h3>
+        <p>影片最前面 5 秒的字幕卡：<b>地名（滿版粗黑體）＋ 日期 ＋ 規格</b>，淡入淡出後開始走。
+        對標 Abao Vision 開頭那張。字體／配色跟長景同一套，一致性直接有。</p>
+        <div class="use">適用 <b>所有長片開頭</b> · 之後可加「對話日記」訊息泡泡（待 James 決定語氣）</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="narrative-assets/tpl_longview.jpg" alt="長景版型 橫式">
+      <div class="body"><span class="tag">現行</span>
+        <h3>④ 長景版型（橫式 16:9）</h3>
+        <p>風景陪伴長片用。<b>大標題滿版</b>＋左清單／右中文副標左右對稱＋底部音波緞帶／點陣 LED 曲名／JT 標。
+        文字層只顯示 4 秒，底部效果全片保留。</p>
+        <div class="use">適用 <b>長景 longview</b> 陪伴影片 · <a href="./title-picker.html">選擇器即時預覽 →</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="narrative-assets/tpl_longview_v.jpg" alt="長景版型 直式">
+      <div class="body"><span class="tag">現行</span>
+        <h3>④-B 長景版型（直式 9:16）</h3>
+        <p>同一套版型的直式版，<b>不是把橫式壓扁</b>：左右兩欄改上下堆疊、副標置中、
+        清單移到左下角齊頭靠左、字級各自放大。</p>
+        <div class="use">適用 <b>Reels / Shorts</b> · 排版隨畫布自動切換</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="narrative-assets/tpl_neon_behind.jpg" alt="霓虹標題 文字在人後面">
+      <div class="body"><span class="tag">現行</span>
+        <h3>⑤ 霓虹標題（文字夾在人物後面）</h3>
+        <p>人像片用。四個字塊＋七款霓虹配色，<b>文字被人物擋住</b>——用 macOS Vision 逐幀去背，
+        本機跑不用付費 API。🚨 一律拿原生 4K 去背，遮罩才細。</p>
+        <div class="use">適用 <b>人像 / 有主體的畫面</b> · <a href="./neon-title.html">工具說明 →</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="narrative-assets/tpl_wave_led.jpg" alt="音波緞帶與點陣LED">
+      <div class="body"><span class="tag">現行</span>
+        <h3>⑥ 音波緞帶 ＋ 點陣 LED 曲名</h3>
+        <p><b>音波緞帶</b>：44 條細線疊正弦波做出緞帶扭轉，<b>振幅跟著音樂音量走</b>
+        （ffmpeg 的 showwaves 做不出來，自己畫的）。<br>
+        <b>點陣 LED</b>：字縮成 9 排點陣、每格畫圓點，暗燈留很淡的白看得到燈板網格，曲名一格格往左跑。</p>
+        <div class="use">適用 <b>有配樂的長片</b> · 兩者可各自開關</div>
+      </div>
+    </div>
   </div>
 
   <h2>規劃中（陸續補上）</h2>
   <div class="grid">
+    <div class="card soon"><div class="ph">對話日記泡泡 · 待 James 決定語氣</div>
+      <div class="body"><span class="tag soont">規劃中</span><h3>③-B 對話日記（開場延伸）</h3>
+        <p>左下角訊息泡泡一句句跳出來（「嗨，我是 James」「現在是阿姆斯特丹的下午兩點」）。
+        Abao Vision 最有效的一招：兩小時沒旁白的片，靠四句話就有「有人陪你」的感覺。</p>
+        <div class="use">⏸ 待決定：中文還英文？語氣親切還是安靜？</div></div></div>
     <div class="card soon"><div class="ph">建築製圖感 · 範例待生</div>
       <div class="body"><span class="tag soont">規劃中</span><h3>③ 建築卡</h3>
         <p>建築名＋風格＋年代，接歸檔的建築風格關鍵字（例「哥德式｜科隆大教堂」）。</p>
