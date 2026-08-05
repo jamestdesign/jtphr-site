@@ -30,13 +30,13 @@
   .sc{position:absolute;bottom:3.2%;height:36%;width:48%}
   .sc.l{left:0;background:linear-gradient(to top right,rgba(0,0,0,.66),rgba(0,0,0,0) 64%)}
   .sc.r{right:0;background:linear-gradient(to top left,rgba(0,0,0,.66),rgba(0,0,0,0) 64%)}
-  .ttl{position:absolute;top:7%;width:100%;text-align:center;white-space:nowrap;
+  .ttl{position:absolute;top:7%;z-index:2;width:100%;text-align:center;white-space:nowrap;
     line-height:.94;transform-origin:top center}
   .ttl span{display:inline-block}
-  .sub{position:absolute;top:44%;right:4.5cqw;text-align:right;line-height:1.5;
+  .sub{position:absolute;top:44%;right:4.5cqw;text-align:right;line-height:1.5;z-index:2;
     font-family:'Xingkai TC','Xingkai SC',cursive;font-size:3.6cqw;letter-spacing:.12em}
   .sub small{display:block;font-size:.6em;opacity:.8;margin-top:.2em}
-  .lft{position:absolute;top:44%;left:4.5cqw;font-family:'Helvetica Neue',sans-serif;
+  .lft{position:absolute;top:44%;left:4.5cqw;z-index:2;font-family:'Helvetica Neue',sans-serif;
     text-shadow:0 1px 8px rgba(0,0,0,.85);min-width:17cqw}
   .lft h4{margin:0 0 .55cqw;font-size:1.72cqw;font-weight:600;letter-spacing:.16em;
     padding-bottom:.45cqw;border-bottom:.28cqw solid rgba(255,255,255,.78)}
@@ -58,8 +58,13 @@
 
   /* ── 控制項 ── */
   /* 直式：中文副標置中 → 第二行 → 清單標題 → 清單內容，由上而下一欄 */
-  .stage.v9 .sub{top:42%;bottom:auto;right:auto;left:0;width:100%;text-align:center;font-size:6.2cqw}
-  .stage.v9 .lft{top:56%;bottom:auto;left:0;width:100%;text-align:center;min-width:0}
+  .stage.v9 .sc{display:none}
+  .stage.v9::after{content:"";position:absolute;left:0;right:0;top:30%;height:42%;
+    background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.52) 28%,rgba(0,0,0,.52) 72%,rgba(0,0,0,0));
+    pointer-events:none;z-index:1}
+  .stage.v9 .sub{top:38%;bottom:auto;right:auto;left:0;width:100%;text-align:center;font-size:6.2cqw}
+  .stage.v9 .sub small{margin-top:.6em;font-size:.58em;letter-spacing:.18em}
+  .stage.v9 .lft{top:55%;bottom:auto;left:0;width:100%;text-align:center;min-width:0}
   .stage.v9 .lft h4{display:inline-block;font-size:3.4cqw;margin-bottom:1.4cqw;
     padding-bottom:.9cqw;border-bottom:.5cqw solid rgba(255,255,255,.8)}
   .stage.v9 .lft li{font-size:3.1cqw;line-height:1.6}
