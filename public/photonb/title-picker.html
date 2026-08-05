@@ -146,6 +146,10 @@
   <div class="group">
     <h2>⑤ 效果</h2>
     <div class="chips" id="fx"></div>
+    <p style="font-size:.76rem;color:var(--muted);margin:.45rem 0 0">
+      <b>前景遮擋</b>＝跑 macOS Vision 逐幀人物去背，讓<b>人擋住文字</b>。<br>
+      本機跑、不用付費 API，但要算圖：<b>4K 約 0.3 秒／幀（每分鐘影片約 5 分鐘）</b>。<br>
+      素材沒有人物就關掉，出片會快很多 —— 這個開關同時是我判斷要不要算的依據。</p>
   </div>
 
   <div class="group">
@@ -293,8 +297,8 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   document.querySelectorAll("#fx .chip").forEach(c=>{
     c.classList.toggle("on",
       (c.dataset.k==="霓虹發光"&&S.glow)||(c.dataset.k==="拉滿寬"&&S.fill)||
-      (c.dataset.k==="文字被前景遮擋"&&S.occl));
-    if(c.dataset.k==="文字被前景遮擋"){
+      (c.dataset.k==="前景遮擋（Vision 去背）"&&S.occl));
+    if(c.dataset.k==="前景遮擋（Vision 去背）"){
       c.style.opacity = hasFg ? 1 : .45;
       c.title = hasFg ? "" : "這張背景沒有人物，切到「人像 直」才看得到效果";
     }
@@ -302,7 +306,7 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   document.querySelectorAll("#bgs .chip").forEach(c=>c.classList.toggle("on",
       BGS.find(b=>b.k===c.dataset.k).v===S.bg));
   document.getElementById("spec").textContent =
-`長景版型 ┃ 出片:${S.deliv} ┃ 版式:${S.ratio} ┃ 排版:${S.lay} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開（要算去背）":"關（不用算）"}
+`長景版型 ┃ 出片:${S.deliv} ┃ 版式:${S.ratio} ┃ 排版:${S.lay} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開 · 跑 Vision 去背（要算圖）":"關 · 不跑去背"}
 標題:${document.getElementById("iTitle").value}${document.getElementById("iTitle2").value?" ｜ "+document.getElementById("iTitle2").value:""}\n底部小標:${document.getElementById("iFoot").value||"（不顯示）"}
 副標:${document.getElementById("iSub").value} / ${document.getElementById("iSub2").value}
 清單:${document.getElementById("iLT").value} ┃ ${(document.getElementById("iLI").value||"").split("\n").filter(x=>x.trim()).join(" / ")}
@@ -311,7 +315,7 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
 chips(document.getElementById("ratios"),RATIOS,null,k=>S.ratio=k);
 chips(document.getElementById("fonts"),FONTS,null,k=>S.font=k);
 chips(document.getElementById("pals"),PALS,null,k=>S.pal=k);
-chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"},{k:"文字被前景遮擋"}],null,
+chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"},{k:"前景遮擋（Vision 去背）"}],null,
       k=>{if(k==="霓虹發光")S.glow=!S.glow;else if(k==="拉滿寬")S.fill=!S.fill;else S.occl=!S.occl;});
 chips(document.getElementById("lay"),[{k:"置中"},{k:"左右拆"}],null,k=>S.lay=k);
 chips(document.getElementById("deliv"),[{k:"燒進成品"},{k:"透明 ProRes（進 FCP）"}],null,k=>S.deliv=k);
