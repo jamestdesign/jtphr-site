@@ -119,7 +119,12 @@
   </div>
 
   <div class="group">
-    <h2>⑤ 文字</h2>
+    <h2>⑤ 要顯示哪些元件</h2>
+    <div class="chips" id="parts"></div>
+  </div>
+
+  <div class="group">
+    <h2>⑥ 文字</h2>
     <div class="row"><label>地名</label><input class="txt" id="iTitle" value="AMSTERDAM"></div>
     <div class="row"><label>中文副標</label><input class="txt" id="iSub" value="運河遊船"></div>
     <div class="row"><label>第二行</label><input class="txt" id="iSub2" value="午後 · 阿姆斯特丹"></div>
@@ -158,7 +163,9 @@ const BG16=[{k:"運河 A",v:"./img/lv_bg_canal.jpg"},{k:"運河 B",v:"./img/lv_b
 const BG9 =[{k:"運河 直",v:"./img/lv_bg_vert.jpg"},{k:"人像 直",v:"./img/lv_bg_person.jpg"}];
 let BGS=BG16;
 const RATIOS=[{k:"16:9 橫"},{k:"9:16 直"}];
-const S={font:"2", pal:"白", glow:false, fill:true, occl:false, ratio:"16:9 橫", bg:BG16[0].v};
+const S={font:"2", pal:"白", glow:false, fill:true, occl:false,
+         wave:true, led:true, logo:true, scenes:true,
+         ratio:"16:9 橫", bg:BG16[0].v};
 
 function glow(c){return `0 0 .04em #fff,0 0 .12em ${c},0 0 .3em ${c},0 0 .7em ${c},0 0 1.4em ${c}`}
 function chips(el,items,get,set){
@@ -175,7 +182,11 @@ function draw(){
   st.classList.toggle("v9", vert);
   BGS = vert ? BG9 : BG16;
   if(!BGS.some(b=>b.v===S.bg)) S.bg = BGS[0].v;
-  chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
+  chips(document.getElementById("parts"),
+      [{k:"音波"},{k:"跑馬燈"},{k:"LOGO"},{k:"左邊內容"}],null,
+      k=>{if(k==="音波")S.wave=!S.wave; else if(k==="跑馬燈")S.led=!S.led;
+          else if(k==="LOGO")S.logo=!S.logo; else S.scenes=!S.scenes;});
+chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   st.style.backgroundImage=`url(${S.bg})`;
   const t=document.getElementById("ttl"), tx=document.getElementById("ttlTx");
   t.style.fontFamily=f.f; t.style.fontWeight=f.w; t.style.color=p.m;
@@ -202,6 +213,13 @@ function draw(){
     const h0=tx.getBoundingClientRect().height;
     if(h0>0){const k=Math.max(1,Math.min(1.55,(H*0.40)/h0)); t.style.transform=`scaleY(${k})`;}
   }
+  document.querySelector(".wave").style.display = S.wave?"":"none";
+  document.querySelector(".led").style.display  = S.led ?"":"none";
+  document.querySelector(".jt").style.display   = S.logo?"":"none";
+  document.getElementById("lft").style.display  = S.scenes?"":"none";
+  document.querySelectorAll("#parts .chip").forEach(c=>c.classList.toggle("on",
+    (c.dataset.k==="音波"&&S.wave)||(c.dataset.k==="跑馬燈"&&S.led)||
+    (c.dataset.k==="LOGO"&&S.logo)||(c.dataset.k==="左邊內容"&&S.scenes)));
   document.querySelectorAll("#ratios .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.ratio));
   document.querySelectorAll("#fonts .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.font));
   document.querySelectorAll("#pals .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.pal));
@@ -229,6 +247,10 @@ chips(document.getElementById("fonts"),FONTS,null,k=>S.font=k);
 chips(document.getElementById("pals"),PALS,null,k=>S.pal=k);
 chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"},{k:"文字被前景遮擋"}],null,
       k=>{if(k==="霓虹發光")S.glow=!S.glow;else if(k==="拉滿寬")S.fill=!S.fill;else S.occl=!S.occl;});
+chips(document.getElementById("parts"),
+      [{k:"音波"},{k:"跑馬燈"},{k:"LOGO"},{k:"左邊內容"}],null,
+      k=>{if(k==="音波")S.wave=!S.wave; else if(k==="跑馬燈")S.led=!S.led;
+          else if(k==="LOGO")S.logo=!S.logo; else S.scenes=!S.scenes;});
 chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
 ["iTitle","iSub","iSub2","iL1","iL2"].forEach(id=>
   document.getElementById(id).addEventListener("input",draw));
