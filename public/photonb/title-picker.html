@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>標題字體選擇器 · title picker · PhotoNB</title>
-<meta name="description" content="即時預覽長景／霓虹標題的字體 × 配色 × 霓虹發光 × 拉滿寬，勾一勾產生規格字串貼給 Robert 就出片。" />
+<title>長景 longview · 版型選擇器 ＋ 工具說明 · PhotoNB</title>
+<meta name="description" content="長景 longview 一頁到底：版型選擇器（即時預覽、產規格字串）＋ 工具說明（平穩風景怎麼挑、音波緞帶與點陣LED原理、人物去背4K鐵則、踩過的坑）。" />
 <meta name="date" content="2026-08-05" />
 <style>
   :root{--surface:#0f0f23;--brand:#1a1a2e;--accent:#e94560;--gold:#f0c860;
@@ -98,15 +98,27 @@
   .copy{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9px;
     padding:.6rem;font-size:.92rem;font-weight:700;cursor:pointer}
   .copy.done{background:var(--ok)}
+  h2.doc{font-size:1.05rem;color:var(--gold);margin:2.1rem 0 .3rem;border-bottom:1px solid var(--border);padding-bottom:.35rem}
+  .key{background:#1f1a3a;border-left:4px solid var(--accent);border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.89rem}
+  .key b{color:#ffb3c0}
+  .tip{background:#1a2a1f;border-left:4px solid var(--ok);border-radius:6px;padding:.72rem .95rem;margin:.9rem 0;font-size:.86rem;color:#cfe8d8}
+  .warn{background:#2a2416;border-left:4px solid #c8901f;border-radius:6px;padding:.72rem .95rem;margin:.9rem 0;font-size:.86rem;color:#f3e2b4}
+  table{width:100%;border-collapse:collapse;margin:.7rem 0 1rem;font-size:.85rem}
+  th,td{border:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{background:#20203c;color:var(--gold);font-weight:600;white-space:nowrap}
+  pre{background:#12122a;border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem;
+      overflow-x:auto;font-size:.78rem;line-height:1.6;font-family:ui-monospace,Menlo,monospace;color:#dfe4f2}
+  code{background:#242440;border-radius:5px;padding:.1rem .38rem;font-family:ui-monospace,Menlo,monospace;font-size:.86em;color:#ffd98a}
+  .docs ul{padding-left:1.15rem} .docs li{margin:.3rem 0;font-size:.88rem}
   footer{margin-top:2rem;color:var(--muted);font-size:.72rem;text-align:center;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="./longview.html">← 長景 longview</a>
+  <a class="back" href="./">← 攝影筆記本</a>
   <p class="eyebrow">長景 · 霓虹標題</p>
-  <h1>標題字體選擇器 <span class="en">title picker</span></h1>
-  <p class="lead">字體 × 配色 × 霓虹發光 × 拉滿寬，<b>即時預覽</b>。挑好按下面的鈕複製規格，貼給我就出片。</p>
+  <h1>長景 <span class="en">longview</span></h1>
+  <p class="lead">把「平穩風景」串成陪伴影片，套上版型。<b>上半部挑款（即時預覽）、下半部是工具說明。</b></p>
 
   <div class="stage" id="stage">
     <div class="bar t"></div><div class="bar b"></div>
@@ -193,7 +205,94 @@ Golden Hour Canal</textarea></div>
     <button class="copy" id="cp">複製規格</button>
   </div>
 
-  <footer>title picker · 2026-08-05</footer>
+  <div class="docs">
+  <h2 class="doc" style="margin-top:2.6rem">──── 以下是工具說明 ────</h2>
+  <div class="key">
+    🏷️ <b>命名</b>（James 2026-08-04 拍板）：<b>長</b>＝長片段·長播放；<b>景</b>＝風景·窗景，跟我們既有的「場景」「景別」同一套語彙。<br>
+    資料夾比照 <code>to_export</code>／<code>to_montage</code>：落地 <code>to_longview/</code>　成品 <code>_longview/</code>
+  </div>
+
+  <h2 class="doc">兩個自己寫的動態元件</h2>
+  <div class="tip">
+    🌊 <b>音波緞帶</b> <code>wave_ribbon.py</code> —— ffmpeg 的 <code>showwaves</code>／<code>showfreqs</code> 做不出「一束細線的緞帶」（實測是一團糊）。
+    改成自己畫：44 條細線各疊三組正弦波、線間相位微差製造扭轉，<b>振幅跟著音樂音量走</b>，所以仍是跟著音樂在動。
+  </div>
+  <div class="tip">
+    💡 <b>點陣 LED 曲名</b> <code>led_marquee.py</code> —— 字先縮成 9 排低解析點陣，每格畫成圓點；
+    亮燈白色、暗燈保留很淡的白（看得到燈板網格）。歌名一格一格往左跑。
+  </div>
+
+  <h2 class="doc">怎麼用</h2>
+  <pre>① 挑素材　longview_build.py  → 平穩風景長溶接串成長片（含 HLG→SDR）
+② 套版型　title_layer.py <config.json>   ← 已跟霓虹標題整合成同一支
+            preset:"longview"（風景長片）／"neon"（人像片，文字可夾在人後面）
+            size:[1920,1080] 橫式 ／ [1080,1920] 直式（自動切換排版）
+            alpha:true → 出透明 ProRes 給 FCP
+
+config 範本：tools/templates/longview_config_範本.json
+  title / sub / sub2      標題與兩行副標
+  scenes[]                左邊清單（on:true = 現行場景）
+  tracks[]                曲目與時間段（LED 跑馬燈）
+  text_secs               文字層顯示秒數（定稿 4）
+  still: true             只出一張圖，不算影片 ← 調版面時用這個，秒出</pre>
+
+  <h2 class="doc">平穩風景怎麼挑</h2>
+  <pre>條件：B-roll（人不是主體）＋ 非特寫 ＋ ≥12 秒 ＋ 分鏡≤2（中途沒重新構圖）＋ 橫式
+
+荷蘭全趟實例：292 支 → 符合 44 支 ／ 19.9 分鐘
+  day1 01_0702 飛行途中·空拍荷蘭  11 支  7.0 分   ← 雲海→農地→跑道，本身就是完整的降落敘事
+  day1 11_1349 運河遊船           14 支  6.0 分
+  day0 03_0145 飛行途中·夜空       4 支  1.6 分
+  其餘 11 個場景                  15 支  5.3 分</pre>
+
+  <h2 class="doc">人物去背（文字夾在人物後面）</h2>
+  <p style="font-size:.88rem">用 <b>macOS 內建 Vision 框架</b>（<code>VNGeneratePersonSegmentationRequest</code>）逐幀算人物遮罩，
+  讓文字被人擋住。<b>全程本機跑，不上傳、不用付費 API</b>。
+  在 <a href="./title-picker.html" style="color:#9fd0ff">選擇器</a>裡就是「前景遮擋（Vision 去背）」那個開關。</p>
+  <div class="warn">
+    🚨 <b>畫質鐵則：一律拿原生 4K 母帶去背</b>（2026-08-04 實測）<br>
+    Vision 的遮罩<b>固定 1512×2016</b>，它會先把來源縮到這尺寸再算：<br>
+    · 餵 <b>4K</b> → 是<b>縮小</b>，細節保留最多 ✅　· 餵 <b>1080</b> → 要先<b>放大</b>才算，等於無中生有 ❌<br>
+    實測同一格髮際線的半透明過渡像素：<b>餵 4K 有 87,231，餵 1080 只有 32,118（少 2.7 倍）</b>。<br>
+    <b>就算最後只出 1080，也要用 4K 去背。</b>工具已內建。
+  </div>
+  <table>
+    <tr><th>輸出尺寸</th><th>遮罩夠不夠</th></tr>
+    <tr><td>1080×1920 直式</td><td>遮罩 1512 &gt; 1080 → <b style="color:#7fd47f">綽綽有餘，等於原生</b></td></tr>
+    <tr><td>2160×3840 4K 直式</td><td>遮罩 1512 &lt; 2160 → 放大 1.43 倍，<b style="color:#e8c07f">邊緣略軟</b>；要交 4K 可用 FCP Auto Mask 補修</td></tr>
+  </table>
+  <div class="tip">⏱️ 速度：4K 去背約 <b>0.3 秒/幀</b>（每分鐘影片約 5 分鐘）。素材沒有人物就把開關關掉，出片快很多。</div>
+
+  <h2 class="doc">踩過的坑（工具已內建修正）</h2>
+  <ul>
+    <li><b>HLG 沒轉 SDR</b> → 12 支 HLG 混 2 支 SDR，在一般螢幕上偏灰又色調不一致</li>
+    <li><b>旋轉旗標</b>會被複製到成品 → 播放器再轉一次變橫的，要 <code>-display_rotation 0</code> remux</li>
+    <li><b>手機兩條音軌</b>，第二條沒 decoder → 要 <code>-map 0:a:0?</code> 只取第一條</li>
+    <li><b>無頭 Chrome 有最小視窗高度</b> → 用 56px 高截圖會得到全透明空白，要用 240px 渲染再裁</li>
+    <li><b>跑馬燈週期</b>要用「字寬＋框寬」算，用圖片寬度算的話字大半時間在畫面外</li>
+    <li><b>4K 母帶 vs 1080 圖層</b>沒先縮 → 文字只蓋左上角四分之一</li>
+    <li><b>手機兩條音軌</b>第二條沒 decoder → 要 <code>-map 0:a:0?</code> 只取第一條</li>
+  </ul>
+
+  <h2 class="doc">還沒做的</h2>
+  <ul>
+    <li>場景清單跟播放進度自動亮（現在是設定檔寫死）</li>
+    <li>曲目時間點自動從音樂檔長度算</li>
+    <li>開場標題卡、對話日記泡泡</li>
+    <li>Loop 機制（預設不開，看音樂長度決定）</li>
+    <li>發佈包：封面圖 ＋ 標題 ＋ 描述 ＋ 章節時間碼</li>
+    <li><b>AI 音樂</b>（James 下一步要處理的）</li>
+  </ul>
+  <h2 class="doc">相關</h2>
+  <ul>
+    <li><a href="./narrative-tag-tool.html">描述標籤版型庫</a> — 8 款版型看樣挑款</li>
+    <li><a href="./longview-teardown.html">Abao Vision 全方位拆解</a> — 這套要對標的商業模式</li>
+    <li><a href="./ai-music.html">AI 音樂創作</a> — 配樂規劃（含待辦）</li>
+    <li><a href="./picking-keywords.html">撿片關鍵字總表</a> — 平穩風景篩選條件的來源</li>
+  </ul>
+  </div>
+
+  <footer>長景 longview · 選擇器＋工具說明 · 2026-08-05</footer>
 </div>
 
 <script>
