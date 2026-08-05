@@ -62,7 +62,7 @@
 
   <table>
     <tr><th>元件</th><th>規格</th><th>顯示時間</th></tr>
-    <tr><td>主標題（地名英文）</td><td>Futura 粗體，填滿寬度＋垂直拉伸 1.5×，<b>佔畫面高 45%</b></td><td rowspan="3"><b>預設 4 秒</b><br>淡入 0.7s／淡出 0.9s</td></tr>
+    <tr><td>主標題（地名英文）</td><td>粗黑體（可選 Helvetica Neue Black／Avenir Next Heavy／Arial Black），<b>自動拉滿寬 90%＋自動拉伸到高 40%</b></td><td rowspan="3"><b>預設 4 秒</b><br>淡入 0.7s／淡出 0.9s</td></tr>
     <tr><td>中文副標（右）</td><td>行楷-繁 半草書，兩行（第二行 60%）</td></tr>
     <tr><td>SCENES 清單（左）</td><td>Helvetica Neue，現行場景 ▸ 亮起</td></tr>
     <tr><td>音波緞帶</td><td>底部整條，畫面高 21%</td><td rowspan="3"><b>全片保留</b></td></tr>
@@ -71,8 +71,11 @@
   </table>
 
   <div class="warn">
-    ⚠️ <b>字數決定字高</b>：參考的 TOKYO 只有 5 個字母，能又寬又高；<b>AMSTERDAM 有 9 個</b>，同樣填滿寬度時字級就得縮小。
-    我們靠<b>垂直拉伸</b>補回來（時尚雜誌手法），所以<b>每個地名要各自調拉伸倍率</b>，不能一套打天下。
+    ✅ <b>標題一律「拉滿寬」＋「自動拉伸」</b>（2026-08-05 James 拍板後改）<br>
+    先量實際字寬 → 反推字級，讓<b>任何字數都填到畫面寬 90%</b>（左右各留 5%）；
+    再量字高 → 反推拉伸倍率，讓<b>字高一律落在 40%</b>。<br>
+    <span style="color:var(--muted)">實測：AMSTERDAM(9字) 佔寬 90% 高 44%；TOKYO(5字) 佔寬 89% 高 44%。
+    短地名不會再被拉得又長又怪 —— 這是先前固定倍率的毛病。</span>
   </div>
 
   <h2>兩個自己寫的動態元件</h2>
@@ -126,6 +129,7 @@ config 範本：tools/templates/longview_config_範本.json
 
   <h2>相關</h2>
   <ul>
+    <li><a href="./title-picker.html" style="color:#9fd0ff"><b>標題字體選擇器</b></a> — 字體／配色／霓虹／拉滿寬，即時預覽挑選</li>
     <li><a href="./longview-teardown.html" style="color:#9fd0ff">Abao Vision 全方位拆解</a> — 這套要對標的商業模式</li>
     <li><a href="./neon-title.html" style="color:#9fd0ff">霓虹標題 neon_title</a> — 人像片的文字圖層（文字在人後面）</li>
     <li><a href="./picking-keywords.html" style="color:#9fd0ff">撿片關鍵字總表</a> — 平穩風景的篩選條件來源</li>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>標題字體選擇器 · title picker · PhotoNB</title>
+<meta name="description" content="即時預覽長景／霓虹標題的字體 × 配色 × 霓虹發光 × 拉滿寬，勾一勾產生規格字串貼給 Robert 就出片。" />
+<meta name="date" content="2026-08-05" />
+<style>
+  :root{--surface:#0f0f23;--brand:#1a1a2e;--accent:#e94560;--gold:#f0c860;
+    --text:#eaeaea;--muted:#a0a0a0;--border:#2a2a44;--chip:#242440;--ok:#2d7a4e;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:var(--surface);color:var(--text);
+    font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:900px;margin:0 auto;padding:1.1rem 1rem 6rem;}
+  a.back{color:var(--accent);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.28em;font-size:.68rem;text-transform:uppercase;margin:1rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.4rem,4.6vw,1.85rem);}
+  h1 .en{color:var(--gold);font-family:ui-monospace,Menlo,monospace;font-size:.48em;}
+  .lead{color:var(--muted);margin:.2rem 0 1rem;font-size:.9rem;}
+
+  /* ── 預覽畫布 ── */
+  .stage{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;
+    background:#000 center/cover no-repeat;container-type:inline-size;border:1px solid var(--border)}
+  .bar{position:absolute;left:0;width:100%;height:5.5cqh;background:#000;z-index:5}
+  .bar.t{top:0}.bar.b{bottom:0}
+  .top{position:absolute;top:5.5cqh;left:0;width:100%;height:42cqh;
+    background:linear-gradient(to bottom,rgba(0,0,0,.46),rgba(0,0,0,0))}
+  .sc{position:absolute;bottom:5.5cqh;height:36cqh;width:48%}
+  .sc.l{left:0;background:linear-gradient(to top right,rgba(0,0,0,.66),rgba(0,0,0,0) 64%)}
+  .sc.r{right:0;background:linear-gradient(to top left,rgba(0,0,0,.66),rgba(0,0,0,0) 64%)}
+  .ttl{position:absolute;top:5.5cqh;width:100%;text-align:center;white-space:nowrap;
+    line-height:.94;transform-origin:top center}
+  .ttl span{display:inline-block}
+  .sub{position:absolute;top:44cqh;right:4.5cqw;text-align:right;line-height:1.5;
+    font-family:'Xingkai TC','Xingkai SC',cursive;font-size:3.6cqw;letter-spacing:.12em}
+  .sub small{display:block;font-size:.6em;opacity:.8;margin-top:.2em}
+  .lft{position:absolute;top:44cqh;left:4.5cqw;font-weight:700;font-size:2.05cqw;
+    line-height:1.35;letter-spacing:.04em;font-family:'Helvetica Neue',sans-serif;
+    text-shadow:0 1px 8px rgba(0,0,0,.85)}
+  .wave{position:absolute;left:0;bottom:5.8cqh;width:100%;height:8cqh;opacity:.75;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 1px,transparent 1px 3px);
+    -webkit-mask-image:radial-gradient(120% 100% at 50% 50%,#000 30%,transparent 75%);
+            mask-image:radial-gradient(120% 100% at 50% 50%,#000 30%,transparent 75%)}
+  .led{position:absolute;left:50%;transform:translateX(-50%);bottom:9.5cqh;
+    font-family:ui-monospace,Menlo,monospace;font-size:1.7cqw;letter-spacing:.3em;opacity:.9}
+  .jt{position:absolute;right:3.5cqw;bottom:7.5cqh;width:7cqw;aspect-ratio:1;border-radius:50%;
+    border:1px solid rgba(255,255,255,.6);display:grid;place-items:center;
+    font-size:1.7cqw;letter-spacing:.1em;opacity:.9}
+
+  /* ── 控制項 ── */
+  .group{background:var(--brand);border:1px solid var(--border);border-radius:12px;
+    padding:.75rem .9rem .9rem;margin:.8rem 0;}
+  .group h2{margin:.05rem 0 .5rem;font-size:.92rem;color:var(--gold);letter-spacing:.03em;}
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .chip{background:var(--chip);border:1px solid var(--border);border-radius:999px;
+    padding:.32rem .8rem;font-size:.84rem;color:#dfe4f2;cursor:pointer;user-select:none;transition:.12s;}
+  .chip.on{background:var(--gold);border-color:var(--gold);color:#25201a;font-weight:700}
+  .chip .dot{display:inline-block;width:.62rem;height:.62rem;border-radius:3px;margin-right:.35rem;
+    vertical-align:-1px}
+  input.txt{background:#12122a;border:1px solid var(--border);border-radius:8px;color:#eaeaea;
+    font-size:.86rem;padding:.4rem .6rem;font-family:inherit;width:100%;max-width:22rem}
+  .row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.35rem 0}
+  .row label{font-size:.8rem;color:#cdd3e6;min-width:4.2rem}
+  .out{position:sticky;bottom:0;margin-top:1.1rem;background:#0b0b1c;border:1px solid var(--gold);
+    border-radius:12px;padding:.8rem .9rem;box-shadow:0 -8px 30px #0009;}
+  .spec{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:#fff;background:#161633;
+    border:1px solid var(--border);border-radius:9px;padding:.6rem .7rem;margin:.4rem 0 .5rem;
+    white-space:pre-wrap;user-select:all}
+  .copy{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9px;
+    padding:.6rem;font-size:.92rem;font-weight:700;cursor:pointer}
+  .copy.done{background:var(--ok)}
+  footer{margin-top:2rem;color:var(--muted);font-size:.72rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./longview.html">← 長景 longview</a>
+  <p class="eyebrow">長景 · 霓虹標題</p>
+  <h1>標題字體選擇器 <span class="en">title picker</span></h1>
+  <p class="lead">字體 × 配色 × 霓虹發光 × 拉滿寬，<b>即時預覽</b>。挑好按下面的鈕複製規格，貼給我就出片。</p>
+
+  <div class="stage" id="stage">
+    <div class="bar t"></div><div class="bar b"></div>
+    <div class="top"></div><div class="sc l"></div><div class="sc r"></div>
+    <div class="ttl" id="ttl"><span id="ttlTx">AMSTERDAM</span></div>
+    <div class="sub" id="sub">運河遊船<small id="sub2">午後 · 阿姆斯特丹</small></div>
+    <div class="lft" id="lft">AMSTERDAM CANAL<br>AFTERNOON CRUISE</div>
+    <div class="wave"></div>
+    <div class="led">▪ WARM CUP MORNING ▪</div>
+    <div class="jt">JT</div>
+  </div>
+
+  <div class="group">
+    <h2>① 字體</h2>
+    <div class="chips" id="fonts"></div>
+  </div>
+
+  <div class="group">
+    <h2>② 配色（霓虹色票）</h2>
+    <div class="chips" id="pals"></div>
+  </div>
+
+  <div class="group">
+    <h2>③ 效果</h2>
+    <div class="chips" id="fx"></div>
+  </div>
+
+  <div class="group">
+    <h2>④ 文字</h2>
+    <div class="row"><label>地名</label><input class="txt" id="iTitle" value="AMSTERDAM"></div>
+    <div class="row"><label>中文副標</label><input class="txt" id="iSub" value="運河遊船"></div>
+    <div class="row"><label>第二行</label><input class="txt" id="iSub2" value="午後 · 阿姆斯特丹"></div>
+    <div class="row"><label>左上行</label><input class="txt" id="iL1" value="AMSTERDAM CANAL"></div>
+    <div class="row"><label>左下行</label><input class="txt" id="iL2" value="AFTERNOON CRUISE"></div>
+    <div class="row"><label>背景</label>
+      <span class="chips" id="bgs"></span></div>
+  </div>
+
+  <div class="out">
+    <div style="font-size:.68rem;letter-spacing:.2em;color:var(--gold)">規格字串</div>
+    <div class="spec" id="spec"></div>
+    <button class="copy" id="cp">複製規格</button>
+  </div>
+
+  <footer>title picker · 2026-08-05</footer>
+</div>
+
+<script>
+const FONTS=[
+ {k:"2",n:"Helvetica Neue Black",f:"'Helvetica Neue',sans-serif",w:900},
+ {k:"3",n:"Avenir Next Heavy",  f:"'Avenir Next',sans-serif",   w:800},
+ {k:"5",n:"Arial Black",        f:"'Arial Black',Arial,sans-serif",w:900},
+];
+const PALS=[
+ {k:"白", m:"#FFFFFF", a:"#FFFFFF"},
+ {k:"01", m:"#FF2E88", a:"#00E5FF"},
+ {k:"02", m:"#B14AED", a:"#22D3EE"},
+ {k:"03", m:"#FFE500", a:"#FF2E88"},
+ {k:"04", m:"#FFFFFF", a:"#A8F0E8"},
+ {k:"05", m:"#FF5A1F", a:"#FFB020"},
+ {k:"06", m:"#39FF14", a:"#D4FF3F"},
+ {k:"07", m:"#7FD4FF", a:"#E8F4FF"},
+];
+const BGS=[{k:"運河 A",v:"./img/lv_bg_canal.jpg"},{k:"運河 B",v:"./img/lv_bg_canal2.jpg"}];
+const S={font:"2", pal:"白", glow:false, fill:true, bg:BGS[0].v};
+
+function glow(c){return `0 0 .04em #fff,0 0 .12em ${c},0 0 .3em ${c},0 0 .7em ${c},0 0 1.4em ${c}`}
+function chips(el,items,get,set){
+  el.innerHTML=items.map(i=>`<span class="chip" data-k="${i.k}">${
+    i.m?`<i class="dot" style="background:${i.m}"></i>`:""}${i.n||i.k}</span>`).join("");
+  el.querySelectorAll(".chip").forEach(c=>{
+    c.onclick=()=>{set(c.dataset.k);draw()};
+  });
+}
+function draw(){
+  const f=FONTS.find(x=>x.k===S.font), p=PALS.find(x=>x.k===S.pal);
+  const st=document.getElementById("stage");
+  st.style.backgroundImage=`url(${S.bg})`;
+  const t=document.getElementById("ttl"), tx=document.getElementById("ttlTx");
+  t.style.fontFamily=f.f; t.style.fontWeight=f.w; t.style.color=p.m;
+  t.style.textShadow=S.glow?glow(p.m):"0 4px 40px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5)";
+  const sub=document.getElementById("sub");
+  sub.style.color=p.a;
+  sub.style.textShadow=S.glow?glow(p.a):"0 2px 18px rgba(0,0,0,.7)";
+  document.getElementById("lft").style.color="#fff";
+  tx.textContent=document.getElementById("iTitle").value||"AMSTERDAM";
+  sub.firstChild.textContent=document.getElementById("iSub").value;
+  document.getElementById("sub2").textContent=document.getElementById("iSub2").value;
+  document.getElementById("lft").innerHTML=
+    (document.getElementById("iL1").value||"")+"<br>"+(document.getElementById("iL2").value||"");
+  // 拉滿寬 + 自動拉伸到 40% 高
+  t.style.fontSize="10cqw"; t.style.transform="none";
+  const W=st.clientWidth, H=st.clientHeight;
+  if(S.fill){
+    let cur=parseFloat(getComputedStyle(t).fontSize);
+    for(let i=0;i<6;i++){
+      const w=tx.getBoundingClientRect().width; if(!w)break;
+      const nx=cur*(W*0.90)/w; if(Math.abs(nx-cur)<0.5)break;
+      cur=nx; t.style.fontSize=cur+"px";
+    }
+    const h0=tx.getBoundingClientRect().height;
+    if(h0>0){const k=Math.max(1,Math.min(1.55,(H*0.40)/h0)); t.style.transform=`scaleY(${k})`;}
+  }
+  document.querySelectorAll("#fonts .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.font));
+  document.querySelectorAll("#pals .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.pal));
+  document.querySelectorAll("#fx .chip").forEach(c=>c.classList.toggle("on",
+      (c.dataset.k==="霓虹發光"&&S.glow)||(c.dataset.k==="拉滿寬"&&S.fill)));
+  document.querySelectorAll("#bgs .chip").forEach(c=>c.classList.toggle("on",
+      BGS.find(b=>b.k===c.dataset.k).v===S.bg));
+  document.getElementById("spec").textContent =
+`長景版型 ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"}
+標題:${document.getElementById("iTitle").value}
+副標:${document.getElementById("iSub").value} / ${document.getElementById("iSub2").value}
+左:${document.getElementById("iL1").value} / ${document.getElementById("iL2").value}`;
+}
+chips(document.getElementById("fonts"),FONTS,null,k=>S.font=k);
+chips(document.getElementById("pals"),PALS,null,k=>S.pal=k);
+chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"}],null,
+      k=>{if(k==="霓虹發光")S.glow=!S.glow;else S.fill=!S.fill});
+chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
+["iTitle","iSub","iSub2","iL1","iL2"].forEach(id=>
+  document.getElementById(id).addEventListener("input",draw));
+document.getElementById("cp").onclick=e=>{
+  navigator.clipboard.writeText(document.getElementById("spec").textContent);
+  e.target.textContent="✓ 已複製"; e.target.classList.add("done");
+  setTimeout(()=>{e.target.textContent="複製規格";e.target.classList.remove("done")},1600);
+};
+window.addEventListener("resize",draw);
+draw();
+</script>
+</body>
+</html>
