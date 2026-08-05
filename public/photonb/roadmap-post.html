@@ -167,7 +167,22 @@ const P=[
   {id:"6.2",t:"依關鍵字從 <code>.fcpxmld</code> 撈 clip",s:"選片事實只在 fcpxmld，母帶不複製",who:"r",done:0},
   {id:"6.3",t:"修剪＋照播放順序命名，打包 <code>to_montage/&lt;片名&gt;_01/</code>",s:"整夾拖進剪映就開剪",who:"r",done:0},
   {id:"6.4",t:"剪映實跑一支氛圍蒙太奇",s:"咖啡廳／開箱／專櫃那類",who:"j",done:0},
-  {id:"6.5",t:"色調正規化：O-Log→709 LUT",s:"<b>卡住</b>：等你給原廠 .cube，或給 O-Log＋一般模式對拍",who:"w",done:0}
+  {id:"6.5",t:"色調正規化：O-Log2→709 LUT",s:"<b>2026-08-05 全線接通</b>（你給了原廠 .cube ＋第一批素材）",who:"r",done:1,
+   out:"① LUT 裝進 FCP　② 匯入檔自動掛相機 LUT（<code>customLUTOverride</code>）　③ HL/KP 出片 ffmpeg 自動烤 LUT　④ 工具 <code>tools/olog_decode.py</code>（O-Log2／HLG／709 逐支分流）"},
+  {id:"6.6",t:"<b>Apple Log 2</b> 也接進同一條分流",s:"等你用 iPhone 拍一支測試片（Apple Log FCP 原生就認，比 OPPO 好處理）",who:"j",done:0}
+ ]}
+ ,
+ {id:"p7",title:"第 7 階段 · 剪輯工具鏈整併（2026-08-05 完成）",why:"四支工具原本功能重疊、你會不知道該開哪一個。照你定的架構拆成單一職責，並用「變體編號」串起來。",items:[
+  {id:"7.1",t:"版型庫重新編號＋分組（片頭／中場／全場／整支）",s:"③ 改名<b>雜誌風格標題卡</b>；④ 音波+LED 歸「全場背景」不是片頭",who:"r",done:1,
+   out:'<a href="./narrative-tag-tool.html">narrative-tag-tool.html</a>　＋「時機只是建議不是規定」的說明'},
+  {id:"7.2",t:"<b>title-picker 拆成兩支</b>",s:"標題選擇器（編一個標題）／長篇景色模板（系列出片，參數鎖定）",who:"r",done:1,
+   out:'<a href="./title-picker.html">title-picker.html</a>　＋　<a href="./longview-aimusic-preset.html">longview-aimusic-preset.html</a>'},
+  {id:"7.3",t:"三頁用<b>變體編號</b>串起來（存 ①-A → 別頁填編號就帶入）",s:"實際開瀏覽器測過整條，不是只改文案",who:"r",done:1,
+   out:"標題選擇器「存成變體」→ 初剪／長篇景色的變體欄位自動帶出"},
+  {id:"7.4",t:"初剪的<b>描述標籤改成動態清單</b>，要幾層加幾層",s:"你說的：不要先定義三格；片頭版型拿去片尾也行",who:"r",done:1,
+   out:'<a href="./initcut-spec-picker.html">initcut-spec-picker.html</a> ④ 區（版型／時機／觸發／秒數／版位／▲▼排序）'},
+  {id:"7.5",t:"<b>AI 音樂</b>：選服務、估月費、你同意才開通",s:"長篇景色最後一塊；沒音樂就出不了完整一支",who:"j",done:0},
+  {id:"7.6",t:"長篇景色缺料：場景清單自動亮／曲目時間自動算／Loop 自動補長度／發佈包",s:"封面＋標題＋描述＋章節一次生",who:"r",done:0}
  ]}
 ];
 
@@ -175,7 +190,10 @@ const P=[
 const NOTES={
  "0.7":[{by:"r",at:"2026-07-27 10:40",text:"依你的要求加上每項留言功能。做法：我的留言直接寫進頁面（跨裝置看得到）；你的留言先存你這台，按「複製新留言」貼給我，我再寫進來變正式紀錄。"}],
  "1.1":[{by:"r",at:"2026-07-27 10:40",text:"規格我先想好了：畫筆在 post-template 的每一頁上面疊一層透明畫布，圈完自動記下是第幾頁、圈在哪個位置（相對座標），這樣我不用猜你指的是哪裡。等你一聲令下就開工。"}],
- "6.5":[{by:"r",at:"2026-07-27 10:40",text:"卡住中：需要 OPPO 原廠 O-Log→709 的 .cube。拿不到的話備案是你用同一畫面拍「O-Log 一張＋一般模式一張」（有色卡更好），我算一支近似的，準度約八九成。"}]
+ "6.5":[{by:"r",at:"2026-07-27 10:40",text:"卡住中：需要 OPPO 原廠 O-Log→709 的 .cube。拿不到的話備案是你用同一畫面拍「O-Log 一張＋一般模式一張」（有色卡更好），我算一支近似的，準度約八九成。"},
+        {by:"r",at:"2026-08-05 22:50",text:"✅ 解除卡住。你給了原廠三顆 .cube ＋ 8/3 拍的第一批 4K120 O-Log2。這趟做完四件事：① LUT 裝進 FCP 的 Camera LUTs ② 匯入檔自動掛相機 LUT（FCPXML 原生欄位 customLUTOverride，不是外掛也不是烤進畫面）③ HL/KP 出片端自己套 LUT（它們不經 FCP，相機 LUT 對它們無效）④ 新工具 olog_decode.py 逐支分流。實測 HL 4 段＋KP 8 張全部正常。"},
+        {by:"r",at:"2026-08-05 22:50",text:"兩個踩過的坑記在這：① LUTID 不是 .cube 檔的 MD5（FCP 用解析後資料的雜湊），只能在 FCP 手動套一次再匯出 XML 撈，已存成清單 ~/.config/robert/fcp_lut_ids.json ② 舊的 is_hlg() 判斷寫「色彩空間含 2020」，但 O-Log2 是 9-1-9 (Rec. 2020) 也含 2020 → 會被誤當 HLG 去 tonemap，顏色歪掉而且不易察覺。已修。"}],
+ "7.4":[{by:"r",at:"2026-08-05 19:30",text:"你打回我原本的「片頭/中場/終場三格」設計，說「能動態新增的東西就不要先設限幾格」，也點出描述標籤只是建議出場時機、片頭拿片尾的為何不行。已照這個改，並在版型庫加註說明。"}]
 };
 
 const KEY="roadmap-post-v1", NKEY="roadmap-post-notes-v1";
