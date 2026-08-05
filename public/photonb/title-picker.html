@@ -57,10 +57,13 @@
     font-size:1.7cqw;letter-spacing:.1em;opacity:.9}
 
   /* ── 控制項 ── */
-  .stage.v9 .sub{top:auto;bottom:22%;right:auto;left:0;width:100%;text-align:center;font-size:6cqw}
-  .stage.v9 .lft{top:auto;bottom:30%;left:0;width:100%;text-align:center;min-width:0}
-  .stage.v9 .lft h4{font-size:3.4cqw;border-bottom:none;padding-bottom:0;margin-bottom:1cqw}
-  .stage.v9 .lft li{font-size:3.1cqw}
+  /* 直式：中文副標置中 → 第二行 → 清單標題 → 清單內容，由上而下一欄 */
+  .stage.v9 .sub{top:42%;bottom:auto;right:auto;left:0;width:100%;text-align:center;font-size:6.2cqw}
+  .stage.v9 .lft{top:56%;bottom:auto;left:0;width:100%;text-align:center;min-width:0}
+  .stage.v9 .lft h4{display:inline-block;font-size:3.4cqw;margin-bottom:1.4cqw;
+    padding-bottom:.9cqw;border-bottom:1px solid rgba(255,255,255,.45)}
+  .stage.v9 .lft li{font-size:3.1cqw;line-height:1.6}
+  .stage.v9 .lft li.on:before{content:"▸ "}
   .stage.v9 .led{font-size:3cqw} .stage.v9 .jt{width:12cqw;font-size:3cqw}
   .group{background:var(--brand);border:1px solid var(--border);border-radius:12px;
     padding:.75rem .9rem .9rem;margin:.8rem 0;}
