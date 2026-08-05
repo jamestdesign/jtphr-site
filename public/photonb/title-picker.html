@@ -20,35 +20,41 @@
   .lead{color:var(--muted);margin:.2rem 0 1rem;font-size:.9rem;}
 
   /* ── 預覽畫布 ── */
-  .stage{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;
+  .stage{position:relative;width:100%;aspect-ratio:16/9;margin:0 auto;border-radius:10px;overflow:hidden;
     background:#000 center/cover no-repeat;container-type:inline-size;border:1px solid var(--border)}
-  .bar{position:absolute;left:0;width:100%;height:5.5cqh;background:#000;z-index:5}
+  .stage.v9{aspect-ratio:9/16;max-width:420px}
+  .bar{position:absolute;left:0;width:100%;height:3.2%;background:#000;z-index:7}
   .bar.t{top:0}.bar.b{bottom:0}
-  .top{position:absolute;top:5.5cqh;left:0;width:100%;height:42cqh;
+  .top{position:absolute;top:3.2%;left:0;width:100%;height:42%;
     background:linear-gradient(to bottom,rgba(0,0,0,.46),rgba(0,0,0,0))}
-  .sc{position:absolute;bottom:5.5cqh;height:36cqh;width:48%}
+  .sc{position:absolute;bottom:3.2%;height:36%;width:48%}
   .sc.l{left:0;background:linear-gradient(to top right,rgba(0,0,0,.66),rgba(0,0,0,0) 64%)}
   .sc.r{right:0;background:linear-gradient(to top left,rgba(0,0,0,.66),rgba(0,0,0,0) 64%)}
-  .ttl{position:absolute;top:5.5cqh;width:100%;text-align:center;white-space:nowrap;
+  .ttl{position:absolute;top:7%;width:100%;text-align:center;white-space:nowrap;
     line-height:.94;transform-origin:top center}
   .ttl span{display:inline-block}
-  .sub{position:absolute;top:44cqh;right:4.5cqw;text-align:right;line-height:1.5;
+  .sub{position:absolute;top:44%;right:4.5cqw;text-align:right;line-height:1.5;
     font-family:'Xingkai TC','Xingkai SC',cursive;font-size:3.6cqw;letter-spacing:.12em}
   .sub small{display:block;font-size:.6em;opacity:.8;margin-top:.2em}
-  .lft{position:absolute;top:44cqh;left:4.5cqw;font-weight:700;font-size:2.05cqw;
+  .lft{position:absolute;top:44%;left:4.5cqw;font-weight:700;font-size:2.05cqw;
     line-height:1.35;letter-spacing:.04em;font-family:'Helvetica Neue',sans-serif;
     text-shadow:0 1px 8px rgba(0,0,0,.85)}
-  .wave{position:absolute;left:0;bottom:5.8cqh;width:100%;height:8cqh;opacity:.75;
+  .wave{position:absolute;left:0;bottom:4%;width:100%;height:7%;opacity:.75;
     background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 1px,transparent 1px 3px);
     -webkit-mask-image:radial-gradient(120% 100% at 50% 50%,#000 30%,transparent 75%);
             mask-image:radial-gradient(120% 100% at 50% 50%,#000 30%,transparent 75%)}
-  .led{position:absolute;left:50%;transform:translateX(-50%);bottom:9.5cqh;
+  .led{position:absolute;left:50%;transform:translateX(-50%);bottom:6.5%;
     font-family:ui-monospace,Menlo,monospace;font-size:1.7cqw;letter-spacing:.3em;opacity:.9}
-  .jt{position:absolute;right:3.5cqw;bottom:7.5cqh;width:7cqw;aspect-ratio:1;border-radius:50%;
+  .fg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:4;display:none;pointer-events:none}
+  .stage.fgon .fg{display:block}
+  .jt{position:absolute;right:3.5cqw;bottom:5%;z-index:6;width:7cqw;aspect-ratio:1;border-radius:50%;
     border:1px solid rgba(255,255,255,.6);display:grid;place-items:center;
     font-size:1.7cqw;letter-spacing:.1em;opacity:.9}
 
   /* ── 控制項 ── */
+  .stage.v9 .sub{top:auto;bottom:22%;right:auto;left:0;width:100%;text-align:center;font-size:6cqw}
+  .stage.v9 .lft{top:auto;bottom:31%;left:0;width:100%;text-align:center;font-size:3.6cqw}
+  .stage.v9 .led{font-size:3cqw} .stage.v9 .jt{width:12cqw;font-size:3cqw}
   .group{background:var(--brand);border:1px solid var(--border);border-radius:12px;
     padding:.75rem .9rem .9rem;margin:.8rem 0;}
   .group h2{margin:.05rem 0 .5rem;font-size:.92rem;color:var(--gold);letter-spacing:.03em;}
@@ -88,26 +94,32 @@
     <div class="lft" id="lft">AMSTERDAM CANAL<br>AFTERNOON CRUISE</div>
     <div class="wave"></div>
     <div class="led">▪ WARM CUP MORNING ▪</div>
+    <img class="fg" id="fg" alt="" src="./img/lv_fg_person.png">
     <div class="jt">JT</div>
   </div>
 
   <div class="group">
-    <h2>① 字體</h2>
+    <h2>① 版式</h2>
+    <div class="chips" id="ratios"></div>
+  </div>
+
+  <div class="group">
+    <h2>② 字體</h2>
     <div class="chips" id="fonts"></div>
   </div>
 
   <div class="group">
-    <h2>② 配色（霓虹色票）</h2>
+    <h2>③ 配色（霓虹色票）</h2>
     <div class="chips" id="pals"></div>
   </div>
 
   <div class="group">
-    <h2>③ 效果</h2>
+    <h2>④ 效果</h2>
     <div class="chips" id="fx"></div>
   </div>
 
   <div class="group">
-    <h2>④ 文字</h2>
+    <h2>⑤ 文字</h2>
     <div class="row"><label>地名</label><input class="txt" id="iTitle" value="AMSTERDAM"></div>
     <div class="row"><label>中文副標</label><input class="txt" id="iSub" value="運河遊船"></div>
     <div class="row"><label>第二行</label><input class="txt" id="iSub2" value="午後 · 阿姆斯特丹"></div>
@@ -142,8 +154,11 @@ const PALS=[
  {k:"06", m:"#39FF14", a:"#D4FF3F"},
  {k:"07", m:"#7FD4FF", a:"#E8F4FF"},
 ];
-const BGS=[{k:"運河 A",v:"./img/lv_bg_canal.jpg"},{k:"運河 B",v:"./img/lv_bg_canal2.jpg"}];
-const S={font:"2", pal:"白", glow:false, fill:true, bg:BGS[0].v};
+const BG16=[{k:"運河 A",v:"./img/lv_bg_canal.jpg"},{k:"運河 B",v:"./img/lv_bg_canal2.jpg"}];
+const BG9 =[{k:"運河 直",v:"./img/lv_bg_vert.jpg"},{k:"人像 直",v:"./img/lv_bg_person.jpg"}];
+let BGS=BG16;
+const RATIOS=[{k:"16:9 橫"},{k:"9:16 直"}];
+const S={font:"2", pal:"白", glow:false, fill:true, occl:false, ratio:"16:9 橫", bg:BG16[0].v};
 
 function glow(c){return `0 0 .04em #fff,0 0 .12em ${c},0 0 .3em ${c},0 0 .7em ${c},0 0 1.4em ${c}`}
 function chips(el,items,get,set){
@@ -156,6 +171,11 @@ function chips(el,items,get,set){
 function draw(){
   const f=FONTS.find(x=>x.k===S.font), p=PALS.find(x=>x.k===S.pal);
   const st=document.getElementById("stage");
+  const vert = S.ratio.startsWith("9:16");
+  st.classList.toggle("v9", vert);
+  BGS = vert ? BG9 : BG16;
+  if(!BGS.some(b=>b.v===S.bg)) S.bg = BGS[0].v;
+  chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   st.style.backgroundImage=`url(${S.bg})`;
   const t=document.getElementById("ttl"), tx=document.getElementById("ttlTx");
   t.style.fontFamily=f.f; t.style.fontWeight=f.w; t.style.color=p.m;
@@ -182,22 +202,33 @@ function draw(){
     const h0=tx.getBoundingClientRect().height;
     if(h0>0){const k=Math.max(1,Math.min(1.55,(H*0.40)/h0)); t.style.transform=`scaleY(${k})`;}
   }
+  document.querySelectorAll("#ratios .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.ratio));
   document.querySelectorAll("#fonts .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.font));
   document.querySelectorAll("#pals .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.pal));
-  document.querySelectorAll("#fx .chip").forEach(c=>c.classList.toggle("on",
-      (c.dataset.k==="霓虹發光"&&S.glow)||(c.dataset.k==="拉滿寬"&&S.fill)));
+  const hasFg = S.bg.includes("person");
+  st.classList.toggle("fgon", S.occl && hasFg);
+  document.querySelectorAll("#fx .chip").forEach(c=>{
+    c.classList.toggle("on",
+      (c.dataset.k==="霓虹發光"&&S.glow)||(c.dataset.k==="拉滿寬"&&S.fill)||
+      (c.dataset.k==="文字被前景遮擋"&&S.occl));
+    if(c.dataset.k==="文字被前景遮擋"){
+      c.style.opacity = hasFg ? 1 : .45;
+      c.title = hasFg ? "" : "這張背景沒有人物，切到「人像 直」才看得到效果";
+    }
+  });
   document.querySelectorAll("#bgs .chip").forEach(c=>c.classList.toggle("on",
       BGS.find(b=>b.k===c.dataset.k).v===S.bg));
   document.getElementById("spec").textContent =
-`長景版型 ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"}
+`長景版型 ┃ 版式:${S.ratio} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開（要算去背）":"關（不用算）"}
 標題:${document.getElementById("iTitle").value}
 副標:${document.getElementById("iSub").value} / ${document.getElementById("iSub2").value}
 左:${document.getElementById("iL1").value} / ${document.getElementById("iL2").value}`;
 }
+chips(document.getElementById("ratios"),RATIOS,null,k=>S.ratio=k);
 chips(document.getElementById("fonts"),FONTS,null,k=>S.font=k);
 chips(document.getElementById("pals"),PALS,null,k=>S.pal=k);
-chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"}],null,
-      k=>{if(k==="霓虹發光")S.glow=!S.glow;else S.fill=!S.fill});
+chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"},{k:"文字被前景遮擋"}],null,
+      k=>{if(k==="霓虹發光")S.glow=!S.glow;else if(k==="拉滿寬")S.fill=!S.fill;else S.occl=!S.occl;});
 chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
 ["iTitle","iSub","iSub2","iL1","iL2"].forEach(id=>
   document.getElementById(id).addEventListener("input",draw));
