@@ -59,12 +59,15 @@
   /* ── 控制項 ── */
   /* 直式：中文副標置中 → 第二行 → 清單標題 → 清單內容，由上而下一欄 */
   .stage.v9 .sc{display:none}
-  .stage.v9::after{content:"";position:absolute;left:0;right:0;top:30%;height:42%;
-    background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.52) 28%,rgba(0,0,0,.52) 72%,rgba(0,0,0,0));
+  .stage.v9::after{content:"";position:absolute;left:0;right:0;top:30%;height:22%;
+    background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.50) 40%,rgba(0,0,0,0));
+    pointer-events:none;z-index:1}
+  .stage.v9::before{content:"";position:absolute;left:0;bottom:3.2%;width:78%;height:34%;
+    background:linear-gradient(to top right,rgba(0,0,0,.66),rgba(0,0,0,0) 68%);
     pointer-events:none;z-index:1}
   .stage.v9 .sub{top:38%;bottom:auto;right:auto;left:0;width:100%;text-align:center;font-size:6.2cqw}
   .stage.v9 .sub small{margin-top:.6em;font-size:.58em;letter-spacing:.18em}
-  .stage.v9 .lft{top:55%;bottom:auto;left:0;width:100%;text-align:center;min-width:0}
+  .stage.v9 .lft{top:auto;bottom:19%;left:5cqw;width:auto;text-align:left;min-width:0}
   .stage.v9 .lft h4{display:inline-block;font-size:3.4cqw;margin-bottom:1.4cqw;
     padding-bottom:.9cqw;border-bottom:.5cqw solid rgba(255,255,255,.8)}
   .stage.v9 .lft li{font-size:3.1cqw;line-height:1.6}
