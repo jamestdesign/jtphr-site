@@ -47,64 +47,32 @@
     資料夾比照 <code>to_export</code>／<code>to_montage</code>：落地 <code>to_longview/</code>　成品 <code>_longview/</code>
   </div>
 
-  <h2>版型（2026-08-04 定稿）</h2>
-  <div class="layout">┌──────────────────────────────────────────┐
-│              A M S T E R D A M            │  ← 主標題（畫面高 45%）
-│                                           │
-│  SCENES                        運河遊船    │  ← 左右對稱
-│  Aerial Approach          午後·阿姆斯特丹   │
-│  ▸ Canal Cruise                           │
-│  Nine Streets                             │
-│                                           │
-│  ～～～～ 音波緞帶（整條）～～～～           │
-│            ▪▪ 曲名 LED ▪▪            JT   │
-└──────────────────────────────────────────┘</div>
-
-  <table>
-    <tr><th>元件</th><th>規格</th><th>顯示時間</th></tr>
-    <tr><td>主標題（地名英文）</td><td>粗黑體（可選 Helvetica Neue Black／Avenir Next Heavy／Arial Black），<b>自動拉滿寬 90%＋自動拉伸到高 40%</b></td><td rowspan="3"><b>預設 4 秒</b><br>淡入 0.7s／淡出 0.9s</td></tr>
-    <tr><td>中文副標（右）</td><td>行楷-繁 半草書，兩行（第二行 60%）</td></tr>
-    <tr><td>SCENES 清單（左）</td><td>Helvetica Neue，現行場景 ▸ 亮起</td></tr>
-    <tr><td>音波緞帶</td><td>底部整條，畫面高 21%</td><td rowspan="3"><b>全片保留</b></td></tr>
-    <tr><td>曲名 LED</td><td>正中央底部，9 排點陣</td></tr>
-    <tr><td>JT 圓標</td><td>右下角</td></tr>
-  </table>
-
-  <div class="warn">
-    ✅ <b>標題一律「拉滿寬」＋「自動拉伸」</b>（2026-08-05 James 拍板後改）<br>
-    先量實際字寬 → 反推字級，讓<b>任何字數都填到畫面寬 90%</b>（左右各留 5%）；
-    再量字高 → 反推拉伸倍率，讓<b>字高一律落在 40%</b>。<br>
-    <span style="color:var(--muted)">實測：AMSTERDAM(9字) 佔寬 90% 高 44%；TOKYO(5字) 佔寬 89% 高 44%。
-    短地名不會再被拉得又長又怪 —— 這是先前固定倍率的毛病。</span>
+  <h2>版型長什麼樣 → 去選擇器看</h2>
+  <div class="key">
+    🎛️ <b>版型的規格不寫在這頁</b> —— 全部做進
+    <a href="./title-picker.html" style="color:#ffb3c0"><b>標題字體選擇器</b></a>，
+    可以<b>疊在真實畫面上即時預覽</b>並產出規格字串。<br>
+    <span style="color:var(--muted);font-size:.92em">
+    這頁講的是「整條流程怎麼跑、為什麼這樣做」；選擇器講的是「這一支要長什麼樣」。分工不重複。</span>
   </div>
-
-
-  <h2>直式 9:16（2026-08-05 定稿）</h2>
-  <div class="layout">┌──────────────┐
-│ A M S T E R D A M │  滿版標題
-│                   │
-│      運河遊船      │  副標置中
-│   午後·阿姆斯特丹   │
-│                   │
-│ SCENES            │  ← 左下角、齊頭靠左
-│ ───────           │
-│ Aerial Approach   │
-│ ▸ Canal Cruise    │
-│ Nine Streets      │
-│                   │
-│  ▪ 曲名 LED ▪  JT │
-└──────────────┘</div>
   <table>
-    <tr><th>直式跟橫式的差別</th><th>為什麼</th></tr>
-    <tr><td>左右兩欄 → 上下堆疊</td><td>直式畫面窄，並排會擠</td></tr>
-    <tr><td>清單移到左下角、齊頭靠左</td><td>James 2026-08-05 指定</td></tr>
-    <tr><td>清單字級放大（標題 3.4%／項目 3.1% 畫面寬）</td><td>沿用橫式字級的話只有一半大</td></tr>
-    <tr><td>副標放大兩倍</td><td>直式標題字級本來就小，同比例會太小</td></tr>
-    <tr><td>暗幕改成「中段一條＋左下一塊」</td><td>直式用不到左右暗角</td></tr>
-    <tr><td>LED 加寬到 62% 畫面寬</td><td>用橫式寬度只塞得下三個字母</td></tr>
+    <tr><th>選擇器上可以調</th><th>內容</th></tr>
+    <tr><td>版式</td><td>16:9 橫式 ／ 9:16 直式（<b>排版自動切換，不是壓扁</b>）</td></tr>
+    <tr><td>字體</td><td>Helvetica Neue Black ／ Avenir Next Heavy ／ Arial Black</td></tr>
+    <tr><td>標題排版</td><td>置中 ／ 左右拆（中間留給人物）</td></tr>
+    <tr><td>配色</td><td>純白 ＋ 霓虹七色票</td></tr>
+    <tr><td>效果</td><td>霓虹發光 ／ 拉滿寬 ／ 前景遮擋（Vision 去背）</td></tr>
+    <tr><td>出片方式</td><td>燒進成品 ／ 透明 ProRes 進 FCP</td></tr>
+    <tr><td>元件開關</td><td>音波 ／ 跑馬燈 ／ LOGO ／ 左邊清單</td></tr>
+    <tr><td>文字</td><td>地名／右半／底部小標／中文副標兩行／清單標題＋內容</td></tr>
   </table>
-  <div class="tip">🎛️ 這些全部在 <a href="./title-picker.html" style="color:#9fd0ff"><b>標題字體選擇器</b></a> 上可以即時預覽 ——
-  字體／配色／效果／<b>出片方式（燒進成品 或 透明 ProRes 進 FCP）</b>／元件開關／文字，挑好複製規格字串給 Robert。</div>
+  <div class="tip">
+    ⏱️ <b>選擇器上看不到、但工具有的兩件事</b>：<br>
+    · <b>文字層只顯示 4 秒</b>（淡入 0.7／淡出 0.9）—— 長片不能讓大標題掛整片<br>
+    · <b>底部元件（音波／跑馬燈／LOGO）全片保留</b><br>
+    · 標題<b>一律拉滿寬 90% ＋ 自動拉伸到高 40%</b>：量字寬反推字級、量字高反推倍率，
+      所以 AMSTERDAM(9字) 和 TOKYO(5字) <b>字高一樣</b>。
+  </div>
 
   <h2>兩個自己寫的動態元件</h2>
   <div class="tip">
