@@ -36,9 +36,14 @@
   .sub{position:absolute;top:44%;right:4.5cqw;text-align:right;line-height:1.5;
     font-family:'Xingkai TC','Xingkai SC',cursive;font-size:3.6cqw;letter-spacing:.12em}
   .sub small{display:block;font-size:.6em;opacity:.8;margin-top:.2em}
-  .lft{position:absolute;top:44%;left:4.5cqw;font-weight:700;font-size:2.05cqw;
-    line-height:1.35;letter-spacing:.04em;font-family:'Helvetica Neue',sans-serif;
-    text-shadow:0 1px 8px rgba(0,0,0,.85)}
+  .lft{position:absolute;top:44%;left:4.5cqw;font-family:'Helvetica Neue',sans-serif;
+    text-shadow:0 1px 8px rgba(0,0,0,.85);min-width:17cqw}
+  .lft h4{margin:0 0 .55cqw;font-size:1.72cqw;font-weight:600;letter-spacing:.16em;
+    padding-bottom:.45cqw;border-bottom:1px solid rgba(255,255,255,.45)}
+  .lft ul{margin:0;padding:0;list-style:none}
+  .lft li{font-size:1.56cqw;line-height:1.5;opacity:.8;letter-spacing:.10em}
+  .lft li.on{opacity:1;font-weight:700}
+  .lft li.on:before{content:"▸ ";opacity:.85}
   .wave{position:absolute;left:0;bottom:4%;width:100%;height:7%;opacity:.75;
     background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 1px,transparent 1px 3px);
     -webkit-mask-image:radial-gradient(120% 100% at 50% 50%,#000 30%,transparent 75%);
@@ -53,7 +58,9 @@
 
   /* ── 控制項 ── */
   .stage.v9 .sub{top:auto;bottom:22%;right:auto;left:0;width:100%;text-align:center;font-size:6cqw}
-  .stage.v9 .lft{top:auto;bottom:31%;left:0;width:100%;text-align:center;font-size:3.6cqw}
+  .stage.v9 .lft{top:auto;bottom:30%;left:0;width:100%;text-align:center;min-width:0}
+  .stage.v9 .lft h4{font-size:3.4cqw;border-bottom:none;padding-bottom:0;margin-bottom:1cqw}
+  .stage.v9 .lft li{font-size:3.1cqw}
   .stage.v9 .led{font-size:3cqw} .stage.v9 .jt{width:12cqw;font-size:3cqw}
   .group{background:var(--brand);border:1px solid var(--border);border-radius:12px;
     padding:.75rem .9rem .9rem;margin:.8rem 0;}
@@ -91,7 +98,7 @@
     <div class="top"></div><div class="sc l"></div><div class="sc r"></div>
     <div class="ttl" id="ttl"><span id="ttlTx">AMSTERDAM</span></div>
     <div class="sub" id="sub">運河遊船<small id="sub2">午後 · 阿姆斯特丹</small></div>
-    <div class="lft" id="lft">AMSTERDAM CANAL<br>AFTERNOON CRUISE</div>
+    <div class="lft" id="lft"></div>
     <div class="wave"></div>
     <div class="led">▪ WARM CUP MORNING ▪</div>
     <img class="fg" id="fg" alt="" src="./img/lv_fg_person.png">
@@ -128,8 +135,16 @@
     <div class="row"><label>地名</label><input class="txt" id="iTitle" value="AMSTERDAM"></div>
     <div class="row"><label>中文副標</label><input class="txt" id="iSub" value="運河遊船"></div>
     <div class="row"><label>第二行</label><input class="txt" id="iSub2" value="午後 · 阿姆斯特丹"></div>
-    <div class="row"><label>左上行</label><input class="txt" id="iL1" value="AMSTERDAM CANAL"></div>
-    <div class="row"><label>左下行</label><input class="txt" id="iL2" value="AFTERNOON CRUISE"></div>
+    <div class="row"><label>清單標題</label><input class="txt" id="iLT" value="SCENES"></div>
+    <div class="row" style="align-items:flex-start"><label>清單內容</label>
+      <textarea class="txt" id="iLI" rows="5" style="min-height:5.6rem;line-height:1.5"
+>Aerial Approach
+Canal Cruise
+Nine Streets
+Flower Market
+Golden Hour Canal</textarea></div>
+    <div class="row"><label>目前這段</label><input class="txt" id="iLon" value="Canal Cruise"
+      placeholder="會加 ▸ 並highlight，留空=都不亮"></div>
     <div class="row"><label>背景</label>
       <span class="chips" id="bgs"></span></div>
   </div>
@@ -198,8 +213,12 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   tx.textContent=document.getElementById("iTitle").value||"AMSTERDAM";
   sub.firstChild.textContent=document.getElementById("iSub").value;
   document.getElementById("sub2").textContent=document.getElementById("iSub2").value;
-  document.getElementById("lft").innerHTML=
-    (document.getElementById("iL1").value||"")+"<br>"+(document.getElementById("iL2").value||"");
+  const lt=document.getElementById("iLT").value||"";
+  const items=(document.getElementById("iLI").value||"").split("\n").filter(x=>x.trim());
+  const onItem=(document.getElementById("iLon").value||"").trim();
+  document.getElementById("lft").innerHTML =
+    (lt?`<h4>${lt}</h4>`:"") + "<ul>" +
+    items.map(x=>`<li class="${x.trim()===onItem?"on":""}">${x.trim()}</li>`).join("") + "</ul>";
   // 拉滿寬 + 自動拉伸到 40% 高
   t.style.fontSize="10cqw"; t.style.transform="none";
   const W=st.clientWidth, H=st.clientHeight;
@@ -240,7 +259,8 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
 `長景版型 ┃ 版式:${S.ratio} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開（要算去背）":"關（不用算）"}
 標題:${document.getElementById("iTitle").value}
 副標:${document.getElementById("iSub").value} / ${document.getElementById("iSub2").value}
-左:${document.getElementById("iL1").value} / ${document.getElementById("iL2").value}`;
+清單:${document.getElementById("iLT").value} ┃ ${(document.getElementById("iLI").value||"").split("\n").filter(x=>x.trim()).join(" / ")}
+目前這段:${document.getElementById("iLon").value}`;
 }
 chips(document.getElementById("ratios"),RATIOS,null,k=>S.ratio=k);
 chips(document.getElementById("fonts"),FONTS,null,k=>S.font=k);
@@ -252,7 +272,7 @@ chips(document.getElementById("parts"),
       k=>{if(k==="音波")S.wave=!S.wave; else if(k==="跑馬燈")S.led=!S.led;
           else if(k==="LOGO")S.logo=!S.logo; else S.scenes=!S.scenes;});
 chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
-["iTitle","iSub","iSub2","iL1","iL2"].forEach(id=>
+["iTitle","iSub","iSub2","iLT","iLI","iLon"].forEach(id=>
   document.getElementById(id).addEventListener("input",draw));
 document.getElementById("cp").onclick=e=>{
   navigator.clipboard.writeText(document.getElementById("spec").textContent);
