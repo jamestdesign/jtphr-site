@@ -134,12 +134,21 @@
   </div>
 
   <div class="group">
-    <h2>⑤ 要顯示哪些元件</h2>
+    <h2>⑤ 出片方式</h2>
+    <div class="chips" id="deliv"></div>
+    <p style="font-size:.76rem;color:var(--muted);margin:.45rem 0 0">
+      <b>燒進成品</b>＝我直接出一支做好的 MP4，最省事。<br>
+      <b>透明 ProRes</b>＝出一支帶透明度的 .mov，你拖進 FCP 當一層，位置時間自己調
+      （跟 narrative_tag 同一種用法）。</p>
+  </div>
+
+  <div class="group">
+    <h2>⑥ 要顯示哪些元件</h2>
     <div class="chips" id="parts"></div>
   </div>
 
   <div class="group">
-    <h2>⑥ 文字</h2>
+    <h2>⑦ 文字</h2>
     <div class="row"><label>地名</label><input class="txt" id="iTitle" value="AMSTERDAM"></div>
     <div class="row"><label>中文副標</label><input class="txt" id="iSub" value="運河遊船"></div>
     <div class="row"><label>第二行</label><input class="txt" id="iSub2" value="午後 · 阿姆斯特丹"></div>
@@ -186,7 +195,7 @@ const BG16=[{k:"運河 A",v:"./img/lv_bg_canal.jpg"},{k:"運河 B",v:"./img/lv_b
 const BG9 =[{k:"運河 直",v:"./img/lv_bg_vert.jpg"},{k:"人像 直",v:"./img/lv_bg_person.jpg"}];
 let BGS=BG16;
 const RATIOS=[{k:"16:9 橫"},{k:"9:16 直"}];
-const S={font:"2", pal:"白", glow:false, fill:true, occl:false,
+const S={font:"2", pal:"白", glow:false, fill:true, occl:false, deliv:"燒進成品",
          wave:true, led:true, logo:true, scenes:true,
          ratio:"16:9 橫", bg:BG16[0].v};
 
@@ -205,7 +214,8 @@ function draw(){
   st.classList.toggle("v9", vert);
   BGS = vert ? BG9 : BG16;
   if(!BGS.some(b=>b.v===S.bg)) S.bg = BGS[0].v;
-  chips(document.getElementById("parts"),
+  chips(document.getElementById("deliv"),[{k:"燒進成品"},{k:"透明 ProRes（進 FCP）"}],null,k=>S.deliv=k);
+chips(document.getElementById("parts"),
       [{k:"音波"},{k:"跑馬燈"},{k:"LOGO"},{k:"左邊內容"}],null,
       k=>{if(k==="音波")S.wave=!S.wave; else if(k==="跑馬燈")S.led=!S.led;
           else if(k==="LOGO")S.logo=!S.logo; else S.scenes=!S.scenes;});
@@ -244,6 +254,7 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   document.querySelector(".led").style.display  = S.led ?"":"none";
   document.querySelector(".jt").style.display   = S.logo?"":"none";
   document.getElementById("lft").style.display  = S.scenes?"":"none";
+  document.querySelectorAll("#deliv .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.deliv));
   document.querySelectorAll("#parts .chip").forEach(c=>c.classList.toggle("on",
     (c.dataset.k==="音波"&&S.wave)||(c.dataset.k==="跑馬燈"&&S.led)||
     (c.dataset.k==="LOGO"&&S.logo)||(c.dataset.k==="左邊內容"&&S.scenes)));
@@ -264,7 +275,7 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   document.querySelectorAll("#bgs .chip").forEach(c=>c.classList.toggle("on",
       BGS.find(b=>b.k===c.dataset.k).v===S.bg));
   document.getElementById("spec").textContent =
-`長景版型 ┃ 版式:${S.ratio} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開（要算去背）":"關（不用算）"}
+`長景版型 ┃ 出片:${S.deliv} ┃ 版式:${S.ratio} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開（要算去背）":"關（不用算）"}
 標題:${document.getElementById("iTitle").value}
 副標:${document.getElementById("iSub").value} / ${document.getElementById("iSub2").value}
 清單:${document.getElementById("iLT").value} ┃ ${(document.getElementById("iLI").value||"").split("\n").filter(x=>x.trim()).join(" / ")}
@@ -275,6 +286,7 @@ chips(document.getElementById("fonts"),FONTS,null,k=>S.font=k);
 chips(document.getElementById("pals"),PALS,null,k=>S.pal=k);
 chips(document.getElementById("fx"),[{k:"霓虹發光"},{k:"拉滿寬"},{k:"文字被前景遮擋"}],null,
       k=>{if(k==="霓虹發光")S.glow=!S.glow;else if(k==="拉滿寬")S.fill=!S.fill;else S.occl=!S.occl;});
+chips(document.getElementById("deliv"),[{k:"燒進成品"},{k:"透明 ProRes（進 FCP）"}],null,k=>S.deliv=k);
 chips(document.getElementById("parts"),
       [{k:"音波"},{k:"跑馬燈"},{k:"LOGO"},{k:"左邊內容"}],null,
       k=>{if(k==="音波")S.wave=!S.wave; else if(k==="跑馬燈")S.led=!S.led;
