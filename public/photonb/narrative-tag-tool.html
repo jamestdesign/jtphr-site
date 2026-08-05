@@ -44,76 +44,52 @@
   <p class="lead">
   📚 <b>這頁是「引用資料庫」，不是下單頁</b> —— 收所有疊在畫面上的 overlay 版型，<b>看樣挑款</b>用。<br>
   挑好之後去對應的工具下單：<br>
-  <b>①~②</b>（機票感／地名條，由 <code>narrative_tag</code> 出）→ <a href="./initcut-spec-picker.html">初剪規格選擇器</a>（剪輯工具）<br>
-  <b>③~⑥</b>（開場卡／長景／霓虹／音波LED，由 <code>title_layer</code> 出）→ <a href="./title-picker.html">長景 longview</a>（可即時預覽）
+  <b>②~③</b>（機票感／遊覽車票／地名條，由 <code>narrative_tag</code> 出）→ <a href="./initcut-spec-picker.html">初剪規格選擇器</a>（剪輯工具）<br>
+  <b>①・④~⑥</b>（雜誌風格標題卡／音波LED／長景／霓虹，由 <code>title_layer</code> 出）→ <a href="./title-picker.html">標題選擇器</a>
 </p>
 
-  <h2>現行版型</h2>
+  <h2>🎬 片頭</h2>
   <div class="grid">
-    <div class="card">
+<div class="card">
+      <img src="narrative-assets/tpl_opening.jpg" alt="開場標題卡">
+      <div class="body"><span class="tag">現行</span>
+        <h3>① 雜誌風格標題卡</h3>
+        <p>影片最前面 5 秒的字幕卡，三層：<b>地名（滿版粗黑體）</b> ＋ <b>中文草寫一句（日記感）</b> ＋ 規格小字。<br>對標 Abao Vision 開頭那張。字體／配色跟長景同一套，開場接正片不會斷裂。</p>
+        <div class="use">🎬 <b>片頭</b> · 16:9 與 9:16 兩版<br><a href="./title-picker.html?tpl=1&ratio=16:9">→ 16:9 進標題選擇器編輯</a> ｜ <a href="./title-picker.html?tpl=1&ratio=9:16">→ 9:16 進標題選擇器編輯</a><br>適用 <b>所有長片開頭</b> · 中文草寫＝行楷-繁（James 2026-08-05：「中文草寫比較有日記感」）· 之後可加「對話日記」訊息泡泡</div>
+      </div>
+    </div>
+<div class="card">
       <img src="narrative-assets/tpl_ticket.jpg" alt="機票感">
       <div class="body"><span class="tag">現行</span>
-        <h3>① 機票／車票感</h3>
+        <h3>②-A 機票／車票感</h3>
         <p>大標班次＋起迄站＋當前地點＋時間（資訊層）；白線稿世界地圖＋虛線航線＋交通圖示（地圖層）。兩層各自可出。</p>
         <div class="use">適用 <b>移動中</b> ✈🚄🚇🚌 · 模式：移動（沿線動）/ 定點（停在此素材 GPS）<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
       </div>
     </div>
-    <div class="card">
+<div class="card">
       <img src="narrative-assets/tpl_bus.jpg" alt="遊覽車票＋路線地圖動線">
       <div class="body"><span class="tag">現行</span>
-        <h3>①-B 遊覽車票 ＋ 路線地圖動線</h3>
+        <h3>②-B 遊覽車票 ＋ 路線地圖動線</h3>
         <p>復古<b>巴士票（左上）</b>標起訖站＋票根 Day／段次；復古手繪<b>地圖（右上）</b>把該段路線畫上去、標記滑到終點針，標「車流到哪」。多段行程一段一張（起→訖），兩層都 70% 透明不擋畫面。實證：德國 day2 移動中（慕尼黑→林德霍夫→新天鵝堡→返程）。</p>
         <div class="use">適用 <b>移動中 · 巴士／遊覽車</b> 🚌 · 分段標起訖 · 地圖靠外部 AI 生<br><a href="./prompt-library.html">→ 生成 prompt：PR-002 移動中路線地圖卡</a> ｜ <a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
       </div>
     </div>
-    <div class="card">
+<div class="card">
       <img src="narrative-assets/tpl_scene.jpg" alt="景點地名">
       <div class="body"><span class="tag">現行</span>
-        <h3>② 景點極簡地名條</h3>
+        <h3>③ 景點極簡地名條</h3>
         <p>英文小字寬字距 ＋「｜ 中文地名 ｜」細直線框，置中。乾淨編輯感（宮崎風）。</p>
         <div class="use">適用 <b>景點 / 地標</b> · 地名 Robert 從 GPS 自動帶<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <img src="narrative-assets/tpl_opening.jpg" alt="開場標題卡">
-      <div class="body"><span class="tag">現行</span>
-        <h3>③ 開場標題卡</h3>
-        <p>影片最前面 5 秒的字幕卡，三層：<b>地名（滿版粗黑體）</b> ＋ <b>中文草寫一句（日記感）</b> ＋ 規格小字。<br>對標 Abao Vision 開頭那張。字體／配色跟長景同一套，開場接正片不會斷裂。</p>
-        <div class="use">適用 <b>所有長片開頭</b> · 中文草寫＝行楷-繁（James 2026-08-05：「中文草寫比較有日記感」）· 之後可加「對話日記」訊息泡泡</div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="narrative-assets/tpl_longview.jpg" alt="長景版型 橫式">
-      <div class="body"><span class="tag">現行</span>
-        <h3>④ 長景版型（橫式 16:9）</h3>
-        <p>風景陪伴長片用。<b>大標題滿版</b>＋左清單／右中文副標左右對稱＋底部音波緞帶／點陣 LED 曲名／JT 標。
-        文字層只顯示 4 秒，底部效果全片保留。</p>
-        <div class="use">適用 <b>長景 longview</b> 陪伴影片 · <a href="./title-picker.html">選擇器即時預覽 →</a></div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="narrative-assets/tpl_longview_v.jpg" alt="長景版型 直式">
-      <div class="body"><span class="tag">現行</span>
-        <h3>④-B 長景版型（直式 9:16）</h3>
-        <p>同一套版型的直式版，<b>不是把橫式壓扁</b>：左右兩欄改上下堆疊、副標置中、
-        清單移到左下角齊頭靠左、字級各自放大。</p>
-        <div class="use">適用 <b>Reels / Shorts</b> · 排版隨畫布自動切換</div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="narrative-assets/tpl_neon_behind.jpg" alt="霓虹標題 文字在人後面">
-      <div class="body"><span class="tag">現行</span>
-        <h3>⑤ 霓虹標題（文字夾在人物後面）</h3>
-        <p>人像片用。四個字塊＋七款霓虹配色，<b>文字被人物擋住</b>——用 macOS Vision 逐幀去背，
-        本機跑不用付費 API。🚨 一律拿原生 4K 去背，遮罩才細。</p>
-        <div class="use">適用 <b>人像 / 有主體的畫面</b> · <a href="./title-picker.html">工具說明 →</a></div>
-      </div>
-    </div>
-    <div class="card">
+  <h2>🎞️ 全場背景（整支都在）</h2>
+  <div class="grid">
+<div class="card">
       <img src="narrative-assets/tpl_wave_led.jpg" alt="音波緞帶與點陣LED">
       <div class="body"><span class="tag">現行</span>
-        <h3>⑥ 音波緞帶 ＋ 點陣 LED 曲名</h3>
+        <h3>④ 音波緞帶 ＋ 點陣 LED 曲名</h3>
         <p><b>音波緞帶</b>：44 條細線疊正弦波做出緞帶扭轉，<b>振幅跟著音樂音量走</b>
         （ffmpeg 的 showwaves 做不出來，自己畫的）。<br>
         <b>點陣 LED</b>：字縮成 9 排點陣、每格畫圓點，暗燈留很淡的白看得到燈板網格，曲名一格格往左跑。</p>
@@ -122,23 +98,54 @@
     </div>
   </div>
 
+  <h2>🖼️ 整支版型（長篇景色模板用）</h2>
+  <div class="grid">
+<div class="card">
+      <img src="narrative-assets/tpl_longview.jpg" alt="長景版型 橫式">
+      <div class="body"><span class="tag">現行</span>
+        <h3>⑤ 長景版型（橫式 16:9）</h3>
+        <p>風景陪伴長片用。<b>大標題滿版</b>＋左清單／右中文副標左右對稱＋底部音波緞帶／點陣 LED 曲名／JT 標。
+        文字層只顯示 4 秒，底部效果全片保留。</p>
+        <div class="use">適用 <b>長景 longview</b> 陪伴影片 · <a href="./title-picker.html">選擇器即時預覽 →</a></div>
+      </div>
+    </div>
+<div class="card">
+      <img src="narrative-assets/tpl_longview_v.jpg" alt="長景版型 直式">
+      <div class="body"><span class="tag">現行</span>
+        <h3>⑤-B 長景版型（直式 9:16）</h3>
+        <p>同一套版型的直式版，<b>不是把橫式壓扁</b>：左右兩欄改上下堆疊、副標置中、
+        清單移到左下角齊頭靠左、字級各自放大。</p>
+        <div class="use">適用 <b>Reels / Shorts</b> · 排版隨畫布自動切換</div>
+      </div>
+    </div>
+<div class="card">
+      <img src="narrative-assets/tpl_neon_behind.jpg" alt="霓虹標題 文字在人後面">
+      <div class="body"><span class="tag">現行</span>
+        <h3>⑥ 霓虹標題（文字夾在人物後面）</h3>
+        <p>人像片用。四個字塊＋七款霓虹配色，<b>文字被人物擋住</b>——用 macOS Vision 逐幀去背，
+        本機跑不用付費 API。🚨 一律拿原生 4K 去背，遮罩才細。</p>
+        <div class="use">適用 <b>人像 / 有主體的畫面</b> · <a href="./title-picker.html">工具說明 →</a></div>
+      </div>
+    </div>
+  </div>
+
   <h2>規劃中（陸續補上）</h2>
   <div class="grid">
     <div class="card soon"><div class="ph">對話日記泡泡 · 待 James 決定語氣</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>③-B 對話日記（開場延伸）</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>🎞️ 中場 · 對話日記過場</h3>
         <p>左下角訊息泡泡一句句跳出來（「嗨，我是 James」「現在是阿姆斯特丹的下午兩點」）。
         Abao Vision 最有效的一招：兩小時沒旁白的片，靠四句話就有「有人陪你」的感覺。</p>
         <div class="use">⏸ 待決定：中文還英文？語氣親切還是安靜？</div></div></div>
     <div class="card soon"><div class="ph">建築製圖感 · 範例待生</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>③ 建築卡</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>⑦ 建築卡</h3>
         <p>建築名＋風格＋年代，接歸檔的建築風格關鍵字（例「哥德式｜科隆大教堂」）。</p>
         <div class="use">適用 <b>建築</b></div></div></div>
     <div class="card soon"><div class="ph">郵戳／明信片感 · 範例待生</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>④ 郵戳／明信片感</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>⑧ 郵戳／明信片感</h3>
         <p>地名＋座標＋日期，像護照蓋章。</p>
         <div class="use">適用 <b>景點</b></div></div></div>
     <div class="card soon"><div class="ph">餐券／收據感 · 範例待生</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>⑤ 餐券／收據感</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>⑨ 餐券／收據感</h3>
         <p>店名／菜名，票根收據質感。</p>
         <div class="use">適用 <b>飲食</b></div></div></div>
   </div>
