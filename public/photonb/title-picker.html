@@ -313,7 +313,7 @@ chips(document.getElementById("bgs"),BGS,null,k=>S.bg=BGS.find(b=>b.k===k).v);
   document.querySelectorAll("#bgs .chip").forEach(c=>c.classList.toggle("on",
       BGS.find(b=>b.k===c.dataset.k).v===S.bg));
   document.getElementById("spec").textContent =
-`長景版型 ┃ 出片:${S.deliv} ┃ 版式:${S.ratio} ┃ 排版:${S.lay} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開 · 跑 Vision 去背（要算圖）":"關 · 不跑去背"}
+`標題規格 ┃ 出片:${S.deliv} ┃ 版式:${S.ratio} ┃ 排版:${S.lay} ┃ 字體:${f.n} ┃ 配色:${S.pal} ┃ 霓虹發光:${S.glow?"開":"關"} ┃ 拉滿寬:${S.fill?"開":"關"} ┃ 前景遮擋:${S.occl?"開 · 跑 Vision 去背（要算圖）":"關 · 不跑去背"}
 標題:${document.getElementById("iTitle").value}${document.getElementById("iTitle2").value?" ｜ "+document.getElementById("iTitle2").value:""}\n底部小標:${document.getElementById("iFoot").value||"（不顯示）"}
 副標:${document.getElementById("iSub").value} / ${document.getElementById("iSub2").value}
 清單:${document.getElementById("iLT").value} ┃ ${(document.getElementById("iLI").value||"").split("\n").filter(x=>x.trim()).join(" / ")}
