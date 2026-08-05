@@ -139,6 +139,25 @@ config 範本：tools/templates/longview_config_範本.json
   day0 03_0145 飛行途中·夜空       4 支  1.6 分
   其餘 11 個場景                  15 支  5.3 分</pre>
 
+
+  <h2>人物去背（文字夾在人物後面）</h2>
+  <p style="font-size:.88rem">用 <b>macOS 內建 Vision 框架</b>（<code>VNGeneratePersonSegmentationRequest</code>）逐幀算人物遮罩，
+  讓文字被人擋住。<b>全程本機跑，不上傳、不用付費 API</b>。
+  在 <a href="./title-picker.html" style="color:#9fd0ff">選擇器</a>裡就是「前景遮擋（Vision 去背）」那個開關。</p>
+  <div class="warn">
+    🚨 <b>畫質鐵則：一律拿原生 4K 母帶去背</b>（2026-08-04 實測）<br>
+    Vision 的遮罩<b>固定 1512×2016</b>，它會先把來源縮到這尺寸再算：<br>
+    · 餵 <b>4K</b> → 是<b>縮小</b>，細節保留最多 ✅　· 餵 <b>1080</b> → 要先<b>放大</b>才算，等於無中生有 ❌<br>
+    實測同一格髮際線的半透明過渡像素：<b>餵 4K 有 87,231，餵 1080 只有 32,118（少 2.7 倍）</b>。<br>
+    <b>就算最後只出 1080，也要用 4K 去背。</b>工具已內建。
+  </div>
+  <table>
+    <tr><th>輸出尺寸</th><th>遮罩夠不夠</th></tr>
+    <tr><td>1080×1920 直式</td><td>遮罩 1512 &gt; 1080 → <b style="color:#7fd47f">綽綽有餘，等於原生</b></td></tr>
+    <tr><td>2160×3840 4K 直式</td><td>遮罩 1512 &lt; 2160 → 放大 1.43 倍，<b style="color:#e8c07f">邊緣略軟</b>；要交 4K 可用 FCP Auto Mask 補修</td></tr>
+  </table>
+  <div class="tip">⏱️ 速度：4K 去背約 <b>0.3 秒/幀</b>（每分鐘影片約 5 分鐘）。素材沒有人物就把開關關掉，出片快很多。</div>
+
   <h2>踩過的坑（工具已內建修正）</h2>
   <ul>
     <li><b>HLG 沒轉 SDR</b> → 12 支 HLG 混 2 支 SDR，在一般螢幕上偏灰又色調不一致</li>
@@ -146,6 +165,8 @@ config 範本：tools/templates/longview_config_範本.json
     <li><b>手機兩條音軌</b>，第二條沒 decoder → 要 <code>-map 0:a:0?</code> 只取第一條</li>
     <li><b>無頭 Chrome 有最小視窗高度</b> → 用 56px 高截圖會得到全透明空白，要用 240px 渲染再裁</li>
     <li><b>跑馬燈週期</b>要用「字寬＋框寬」算，用圖片寬度算的話字大半時間在畫面外</li>
+    <li><b>4K 母帶 vs 1080 圖層</b>沒先縮 → 文字只蓋左上角四分之一</li>
+    <li><b>手機兩條音軌</b>第二條沒 decoder → 要 <code>-map 0:a:0?</code> 只取第一條</li>
   </ul>
 
   <h2>還沒做的</h2>
@@ -162,7 +183,6 @@ config 範本：tools/templates/longview_config_範本.json
   <ul>
     <li><a href="./title-picker.html" style="color:#9fd0ff"><b>標題字體選擇器</b></a> — 字體／配色／霓虹／拉滿寬，即時預覽挑選</li>
     <li><a href="./longview-teardown.html" style="color:#9fd0ff">Abao Vision 全方位拆解</a> — 這套要對標的商業模式</li>
-    <li><a href="./neon-title.html" style="color:#9fd0ff">霓虹標題 neon_title</a> — 人像片的文字圖層（文字在人後面）</li>
     <li><a href="./picking-keywords.html" style="color:#9fd0ff">撿片關鍵字總表</a> — 平穩風景的篩選條件來源</li>
   </ul>
 
