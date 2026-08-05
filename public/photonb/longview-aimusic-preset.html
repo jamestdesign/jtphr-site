@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>固定出片模板 · 長篇景色 ＋ AI 音樂 · PhotoNB</title>
+<meta name="description" content="對標 Abao Vision 的系列自動出片模板：素材＝平穩風景、版型參數鎖定、片頭套標題選擇器的變體、配 AI 音樂，一句話出整支。" />
+<meta name="date" content="2026-08-05" />
+<style>
+  :root{--surface:#0f0f23;--brand:#1a1a2e;--accent:#e94560;--gold:#f0c860;
+    --text:#eaeaea;--muted:#a0a0a0;--border:#2a2a44;--chip:#242440;--ok:#2d7a4e;--warn:#c8901f;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:var(--surface);color:var(--text);
+    font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:900px;margin:0 auto;padding:1.1rem 1rem 6rem;}
+  a{color:#9fd0ff;} a.back{color:var(--accent);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.28em;font-size:.68rem;text-transform:uppercase;margin:1rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.4rem,4.6vw,1.85rem);}
+  h1 .en{color:var(--gold);font-family:ui-monospace,Menlo,monospace;font-size:.46em;}
+  .lead{color:var(--muted);margin:.2rem 0 1rem;font-size:.9rem;}
+  .group{background:var(--brand);border:1px solid var(--border);border-radius:12px;
+    padding:.75rem .9rem .9rem;margin:.8rem 0;}
+  .group h2{margin:.05rem 0 .5rem;font-size:.95rem;color:var(--gold);letter-spacing:.03em;}
+  .group .hint{color:var(--muted);font-size:.78rem;margin:0 0 .55rem}
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .chip{background:var(--chip);border:1px solid var(--border);border-radius:999px;
+    padding:.32rem .8rem;font-size:.84rem;color:#dfe4f2;cursor:pointer;user-select:none;transition:.12s;}
+  .chip.on{background:var(--gold);border-color:var(--gold);color:#25201a;font-weight:700}
+  input.txt,select.sel,textarea.txt{background:#12122a;border:1px solid var(--border);border-radius:8px;
+    color:#eaeaea;font-size:.86rem;padding:.4rem .6rem;font-family:inherit;width:100%;max-width:24rem}
+  .row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.35rem 0}
+  .row label{font-size:.8rem;color:#cdd3e6;min-width:5.4rem}
+  .lock{background:#1f1a3a;border-left:4px solid var(--accent);border-radius:6px;padding:.75rem 1rem;
+    margin:.9rem 0;font-size:.87rem} .lock b{color:#ffb3c0}
+  .tip{background:#1a2a1f;border-left:4px solid var(--ok);border-radius:6px;padding:.72rem .95rem;
+    margin:.9rem 0;font-size:.86rem;color:#cfe8d8}
+  .warn{background:#2a2416;border-left:4px solid var(--warn);border-radius:6px;padding:.72rem .95rem;
+    margin:.9rem 0;font-size:.86rem;color:#f3e2b4}
+  table{width:100%;border-collapse:collapse;margin:.7rem 0 1rem;font-size:.85rem}
+  th,td{border:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{background:#20203c;color:var(--gold);font-weight:600;white-space:nowrap}
+  pre{background:#12122a;border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem;
+      overflow-x:auto;font-size:.78rem;line-height:1.6;font-family:ui-monospace,Menlo,monospace;color:#dfe4f2}
+  code{background:#242440;border-radius:5px;padding:.1rem .38rem;font-family:ui-monospace,Menlo,monospace;font-size:.86em;color:#ffd98a}
+  h2.doc{font-size:1.02rem;color:var(--gold);margin:2rem 0 .3rem;border-bottom:1px solid var(--border);padding-bottom:.35rem}
+  .key{background:#1f1a3a;border-left:4px solid var(--accent);border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.89rem}
+  .key b{color:#ffb3c0}
+  .docs ul{padding-left:1.15rem} .docs li{margin:.3rem 0;font-size:.88rem}
+  .out{position:sticky;bottom:0;margin-top:1.1rem;background:#0b0b1c;border:1px solid var(--gold);
+    border-radius:12px;padding:.8rem .9rem;box-shadow:0 -8px 30px #0009;}
+  .spec{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:#fff;background:#161633;
+    border:1px solid var(--border);border-radius:9px;padding:.6rem .7rem;margin:.4rem 0 .5rem;
+    white-space:pre-wrap;user-select:all}
+  .copy{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9px;
+    padding:.6rem;font-size:.92rem;font-weight:700;cursor:pointer} .copy.done{background:var(--ok)}
+  footer{margin-top:2rem;color:var(--muted);font-size:.72rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">固定出片模板</p>
+  <h1>長篇景色 ＋ AI 音樂 <span class="en">longview preset</span></h1>
+  <p class="lead">對標 <a href="./longview-teardown.html">Abao Vision</a> 的<b>系列自動出片</b>：素材固定＝平穩風景、版型參數鎖定、
+  片頭套<a href="./title-picker.html">標題選擇器</a>存好的變體、配你的 AI 音樂 —— <b>你只設片頭，其餘我出</b>。</p>
+
+  <div class="lock">
+    🔒 <b>這頁是「參數鎖定版」</b>，跟標題選擇器的分工：<br>
+    <b>標題選擇器</b>＝自由設計單一標題（存成 ①-A／①-B 變體）<br>
+    <b>這頁</b>＝整支長片的固定配方，只挑「用哪個變體、哪批素材、哪首曲子」。
+  </div>
+
+  <div class="group">
+    <h2>① 版式</h2>
+    <div class="chips" id="ratio"></div>
+  </div>
+
+  <div class="group">
+    <h2>② 片頭標題</h2>
+    <p class="hint">用標題選擇器存好的變體編號（例 ①-A）。沒有就先去
+      <a href="./title-picker.html?tpl=1">標題選擇器</a> 編一個。</p>
+    <div class="row"><label>變體編號</label><input class="txt" id="iVar" value="①-A" placeholder="①-A"></div>
+    <div class="row"><label>片頭秒數</label><input class="txt" id="iOpen" value="5" style="max-width:6rem"></div>
+  </div>
+
+  <div class="group">
+    <h2>③ 素材</h2>
+    <p class="hint">預設吃「平穩風景」那批（B-roll＋非特寫＋≥12秒＋單一構圖＋橫式）。</p>
+    <div class="row"><label>來源 trip</label><input class="txt" id="iTrip" value="2026-06-22 荷蘭阿姆斯特丹九街-運河"></div>
+    <div class="row"><label>目標長度</label><input class="txt" id="iLen" value="60" style="max-width:6rem"> <span style="font-size:.8rem;color:var(--muted)">分鐘（不夠會建議 Loop，不會自動做）</span></div>
+    <div class="row"><label>接點</label><span class="chips" id="fade"></span></div>
+  </div>
+
+  <div class="group">
+    <h2>④ 音樂</h2>
+    <div class="row"><label>來源</label><span class="chips" id="msrc"></span></div>
+    <div class="row"><label>曲目／清單</label><input class="txt" id="iTrack" value="Warm Cup Morning / Photo Album Keys"></div>
+    <div class="row"><label>音量</label><input class="txt" id="iDb" value="-19" style="max-width:6rem"> <span style="font-size:.8rem;color:var(--muted)">dB（陪伴影片建議 −19）</span></div>
+  </div>
+
+  <div class="group">
+    <h2>⑤ 全場元件</h2>
+    <div class="chips" id="parts"></div>
+    <div class="row" style="margin-top:.5rem"><label>清單標題</label><input class="txt" id="iLT" value="SCENES"></div>
+    <div class="row" style="align-items:flex-start"><label>清單內容</label>
+      <textarea class="txt" id="iLI" rows="4" style="min-height:4.6rem">Aerial Approach
+Canal Cruise
+Nine Streets
+Flower Market</textarea></div>
+  </div>
+
+  <div class="group">
+    <h2>⑥ 出片方式</h2>
+    <div class="chips" id="deliv"></div>
+  </div>
+
+  <div class="out">
+    <div style="font-size:.68rem;letter-spacing:.2em;color:var(--gold)">出片規格</div>
+    <div class="spec" id="spec"></div>
+    <button class="copy" id="cp">複製規格</button>
+  </div>
+
+  <div class="docs">
+  <h2 class="doc" style="margin-top:2.6rem">──── 以下是工具說明 ────</h2>
+  <div class="key">
+    🏷️ <b>命名</b>（James 2026-08-04 拍板）：<b>長</b>＝長片段·長播放；<b>景</b>＝風景·窗景，跟我們既有的「場景」「景別」同一套語彙。<br>
+    資料夾比照 <code>to_export</code>／<code>to_montage</code>：落地 <code>to_longview/</code>　成品 <code>_longview/</code>
+  </div>
+
+  <h2 class="doc">兩個自己寫的動態元件</h2>
+  <div class="tip">
+    🌊 <b>音波緞帶</b> <code>wave_ribbon.py</code> —— ffmpeg 的 <code>showwaves</code>／<code>showfreqs</code> 做不出「一束細線的緞帶」（實測是一團糊）。
+    改成自己畫：44 條細線各疊三組正弦波、線間相位微差製造扭轉，<b>振幅跟著音樂音量走</b>，所以仍是跟著音樂在動。
+  </div>
+  <div class="tip">
+    💡 <b>點陣 LED 曲名</b> <code>led_marquee.py</code> —— 字先縮成 9 排低解析點陣，每格畫成圓點；
+    亮燈白色、暗燈保留很淡的白（看得到燈板網格）。歌名一格一格往左跑。
+  </div>
+
+  <h2 class="doc">怎麼用</h2>
+  <pre>① 挑素材　longview_build.py  → 平穩風景長溶接串成長片（含 HLG→SDR）
+② 套版型　title_layer.py <config.json>   ← 已跟霓虹標題整合成同一支
+            preset:"longview"（風景長片）／"neon"（人像片，文字可夾在人後面）
+            size:[1920,1080] 橫式 ／ [1080,1920] 直式（自動切換排版）
+            alpha:true → 出透明 ProRes 給 FCP
+
+config 範本：tools/templates/longview_config_範本.json
+  title / sub / sub2      標題與兩行副標
+  scenes[]                左邊清單（on:true = 現行場景）
+  tracks[]                曲目與時間段（LED 跑馬燈）
+  text_secs               文字層顯示秒數（定稿 4）
+  still: true             只出一張圖，不算影片 ← 調版面時用這個，秒出</pre>
+
+  <h2 class="doc">平穩風景怎麼挑</h2>
+  <pre>條件：B-roll（人不是主體）＋ 非特寫 ＋ ≥12 秒 ＋ 分鏡≤2（中途沒重新構圖）＋ 橫式
+
+荷蘭全趟實例：292 支 → 符合 44 支 ／ 19.9 分鐘
+  day1 01_0702 飛行途中·空拍荷蘭  11 支  7.0 分   ← 雲海→農地→跑道，本身就是完整的降落敘事
+  day1 11_1349 運河遊船           14 支  6.0 分
+  day0 03_0145 飛行途中·夜空       4 支  1.6 分
+  其餘 11 個場景                  15 支  5.3 分</pre>
+
+  <h2 class="doc">人物去背（文字夾在人物後面）</h2>
+  <p style="font-size:.88rem">用 <b>macOS 內建 Vision 框架</b>（<code>VNGeneratePersonSegmentationRequest</code>）逐幀算人物遮罩，
+  讓文字被人擋住。<b>全程本機跑，不上傳、不用付費 API</b>。
+  在 <a href="./title-picker.html" style="color:#9fd0ff">選擇器</a>裡就是「前景遮擋（Vision 去背）」那個開關。</p>
+  <div class="warn">
+    🚨 <b>畫質鐵則：一律拿原生 4K 母帶去背</b>（2026-08-04 實測）<br>
+    Vision 的遮罩<b>固定 1512×2016</b>，它會先把來源縮到這尺寸再算：<br>
+    · 餵 <b>4K</b> → 是<b>縮小</b>，細節保留最多 ✅　· 餵 <b>1080</b> → 要先<b>放大</b>才算，等於無中生有 ❌<br>
+    實測同一格髮際線的半透明過渡像素：<b>餵 4K 有 87,231，餵 1080 只有 32,118（少 2.7 倍）</b>。<br>
+    <b>就算最後只出 1080，也要用 4K 去背。</b>工具已內建。
+  </div>
+  <table>
+    <tr><th>輸出尺寸</th><th>遮罩夠不夠</th></tr>
+    <tr><td>1080×1920 直式</td><td>遮罩 1512 &gt; 1080 → <b style="color:#7fd47f">綽綽有餘，等於原生</b></td></tr>
+    <tr><td>2160×3840 4K 直式</td><td>遮罩 1512 &lt; 2160 → 放大 1.43 倍，<b style="color:#e8c07f">邊緣略軟</b>；要交 4K 可用 FCP Auto Mask 補修</td></tr>
+  </table>
+  <div class="tip">⏱️ 速度：4K 去背約 <b>0.3 秒/幀</b>（每分鐘影片約 5 分鐘）。素材沒有人物就把開關關掉，出片快很多。</div>
+
+  <h2 class="doc">踩過的坑（工具已內建修正）</h2>
+  <ul>
+    <li><b>HLG 沒轉 SDR</b> → 12 支 HLG 混 2 支 SDR，在一般螢幕上偏灰又色調不一致</li>
+    <li><b>旋轉旗標</b>會被複製到成品 → 播放器再轉一次變橫的，要 <code>-display_rotation 0</code> remux</li>
+    <li><b>手機兩條音軌</b>，第二條沒 decoder → 要 <code>-map 0:a:0?</code> 只取第一條</li>
+    <li><b>無頭 Chrome 有最小視窗高度</b> → 用 56px 高截圖會得到全透明空白，要用 240px 渲染再裁</li>
+    <li><b>跑馬燈週期</b>要用「字寬＋框寬」算，用圖片寬度算的話字大半時間在畫面外</li>
+    <li><b>4K 母帶 vs 1080 圖層</b>沒先縮 → 文字只蓋左上角四分之一</li>
+    <li><b>手機兩條音軌</b>第二條沒 decoder → 要 <code>-map 0:a:0?</code> 只取第一條</li>
+  </ul>
+
+  <h2 class="doc">還沒做的</h2>
+  <ul>
+    <li>場景清單跟播放進度自動亮（現在是設定檔寫死）</li>
+    <li>曲目時間點自動從音樂檔長度算</li>
+    <li>開場標題卡、對話日記泡泡</li>
+    <li>Loop 機制（預設不開，看音樂長度決定）</li>
+    <li>發佈包：封面圖 ＋ 標題 ＋ 描述 ＋ 章節時間碼</li>
+    <li><b>AI 音樂</b>（James 下一步要處理的）</li>
+  </ul>
+  <h2 class="doc">相關</h2>
+  <ul>
+    <li><a href="./narrative-tag-tool.html">描述標籤版型庫</a> — 8 款版型看樣挑款</li>
+    <li><a href="./longview-teardown.html">Abao Vision 全方位拆解</a> — 這套要對標的商業模式</li>
+    <li><a href="./ai-music.html">AI 音樂創作</a> — 配樂規劃（含待辦）</li>
+    <li><a href="./picking-keywords.html">撿片關鍵字總表</a> — 平穩風景篩選條件的來源</li>
+  </ul>
+  </div>
+
+
+  <footer>固定出片模板 · 長篇景色 ＋ AI 音樂 · 2026-08-05</footer>
+</div>
+
+<script>
+const S={ratio:"16:9 橫",fade:"2.5 秒長溶接",msrc:"Irene 原創曲（可商用）",
+         deliv:"燒進成品",wave:true,led:true,logo:true,scenes:true};
+function chips(el,items,set){
+  el.innerHTML=items.map(i=>`<span class="chip" data-k="${i}">${i}</span>`).join("");
+  el.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{set(c.dataset.k);draw()});
+}
+function draw(){
+  const g=id=>document.getElementById(id).value;
+  document.querySelectorAll("#ratio .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.ratio));
+  document.querySelectorAll("#fade .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.fade));
+  document.querySelectorAll("#msrc .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.msrc));
+  document.querySelectorAll("#deliv .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.deliv));
+  document.querySelectorAll("#parts .chip").forEach(c=>c.classList.toggle("on",
+    (c.dataset.k==="音波"&&S.wave)||(c.dataset.k==="跑馬燈"&&S.led)||
+    (c.dataset.k==="LOGO"&&S.logo)||(c.dataset.k==="場景清單"&&S.scenes)));
+  document.getElementById("spec").textContent =
+`長篇景色模板 ┃ 版式:${S.ratio} ┃ 出片:${S.deliv}
+片頭:變體 ${g("iVar")} · ${g("iOpen")} 秒
+素材:${g("iTrip")} · 平穩風景 · 目標 ${g("iLen")} 分 · ${S.fade}
+音樂:${S.msrc} · ${g("iTrack")} · ${g("iDb")}dB
+元件:音波${S.wave?"開":"關"} 跑馬燈${S.led?"開":"關"} LOGO${S.logo?"開":"關"} 清單${S.scenes?"開":"關"}
+清單:${g("iLT")} ┃ ${g("iLI").split("\n").filter(x=>x.trim()).join(" / ")}`;
+}
+chips(document.getElementById("ratio"),["16:9 橫","9:16 直"],k=>S.ratio=k);
+chips(document.getElementById("fade"),["2.5 秒長溶接","1.5 秒","硬切"],k=>S.fade=k);
+chips(document.getElementById("msrc"),["Irene 原創曲（可商用）","我的 AI 自創曲","純環境音（無音樂）"],k=>S.msrc=k);
+chips(document.getElementById("deliv"),["燒進成品","透明 ProRes（進 FCP）","出 fcpxml 我自己剪"],k=>S.deliv=k);
+chips(document.getElementById("parts"),["音波","跑馬燈","LOGO","場景清單"],
+  k=>{if(k==="音波")S.wave=!S.wave;else if(k==="跑馬燈")S.led=!S.led;
+      else if(k==="LOGO")S.logo=!S.logo;else S.scenes=!S.scenes;});
+["iVar","iOpen","iTrip","iLen","iTrack","iDb","iLT","iLI"].forEach(id=>
+  document.getElementById(id).addEventListener("input",draw));
+document.getElementById("cp").onclick=e=>{
+  navigator.clipboard.writeText(document.getElementById("spec").textContent);
+  e.target.textContent="✓ 已複製"; e.target.classList.add("done");
+  setTimeout(()=>{e.target.textContent="複製規格";e.target.classList.remove("done")},1600);
+};
+draw();
+</script>
+</body>
+</html>
