@@ -78,6 +78,34 @@
     短地名不會再被拉得又長又怪 —— 這是先前固定倍率的毛病。</span>
   </div>
 
+
+  <h2>直式 9:16（2026-08-05 定稿）</h2>
+  <div class="layout">┌──────────────┐
+│ A M S T E R D A M │  滿版標題
+│                   │
+│      運河遊船      │  副標置中
+│   午後·阿姆斯特丹   │
+│                   │
+│ SCENES            │  ← 左下角、齊頭靠左
+│ ───────           │
+│ Aerial Approach   │
+│ ▸ Canal Cruise    │
+│ Nine Streets      │
+│                   │
+│  ▪ 曲名 LED ▪  JT │
+└──────────────┘</div>
+  <table>
+    <tr><th>直式跟橫式的差別</th><th>為什麼</th></tr>
+    <tr><td>左右兩欄 → 上下堆疊</td><td>直式畫面窄，並排會擠</td></tr>
+    <tr><td>清單移到左下角、齊頭靠左</td><td>James 2026-08-05 指定</td></tr>
+    <tr><td>清單字級放大（標題 3.4%／項目 3.1% 畫面寬）</td><td>沿用橫式字級的話只有一半大</td></tr>
+    <tr><td>副標放大兩倍</td><td>直式標題字級本來就小，同比例會太小</td></tr>
+    <tr><td>暗幕改成「中段一條＋左下一塊」</td><td>直式用不到左右暗角</td></tr>
+    <tr><td>LED 加寬到 62% 畫面寬</td><td>用橫式寬度只塞得下三個字母</td></tr>
+  </table>
+  <div class="tip">🎛️ 這些全部在 <a href="./title-picker.html" style="color:#9fd0ff"><b>標題字體選擇器</b></a> 上可以即時預覽 ——
+  字體／配色／效果／<b>出片方式（燒進成品 或 透明 ProRes 進 FCP）</b>／元件開關／文字，挑好複製規格字串給 Robert。</div>
+
   <h2>兩個自己寫的動態元件</h2>
   <div class="tip">
     🌊 <b>音波緞帶</b> <code>wave_ribbon.py</code> —— ffmpeg 的 <code>showwaves</code>／<code>showfreqs</code> 做不出「一束細線的緞帶」（實測是一團糊）。
@@ -90,7 +118,10 @@
 
   <h2>怎麼用</h2>
   <pre>① 挑素材　longview_build.py  → 平穩風景長溶接串成長片（含 HLG→SDR）
-② 套版型　longview_overlay.py <config.json>
+② 套版型　title_layer.py <config.json>   ← 已跟霓虹標題整合成同一支
+            preset:"longview"（風景長片）／"neon"（人像片，文字可夾在人後面）
+            size:[1920,1080] 橫式 ／ [1080,1920] 直式（自動切換排版）
+            alpha:true → 出透明 ProRes 給 FCP
 
 config 範本：tools/templates/longview_config_範本.json
   title / sub / sub2      標題與兩行副標
