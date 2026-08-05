@@ -79,7 +79,9 @@
     <h2>② 片頭標題</h2>
     <p class="hint">用標題選擇器存好的變體編號（例 ①-A）。沒有就先去
       <a href="./title-picker.html?tpl=1">標題選擇器</a> 編一個。</p>
-    <div class="row"><label>變體編號</label><input class="txt" id="iVar" value="①-A" placeholder="①-A"></div>
+    <div class="row"><label>變體編號</label><input class="txt" id="iVar" value="①-A" placeholder="①-A" list="varlist">
+      <datalist id="varlist"></datalist></div>
+    <div id="varhint" style="font-size:.76rem;color:var(--muted);margin:.1rem 0 .3rem"></div>
     <div class="row"><label>片頭秒數</label><input class="txt" id="iOpen" value="5" style="max-width:6rem"></div>
   </div>
 
@@ -249,6 +251,11 @@ document.getElementById("cp").onclick=e=>{
   e.target.textContent="✓ 已複製"; e.target.classList.add("done");
   setTimeout(()=>{e.target.textContent="複製規格";e.target.classList.remove("done")},1600);
 };
+(function(){ let v=[]; try{ v=JSON.parse(localStorage.getItem("jtphr_title_variants")||"[]") }catch(e){}
+  const dl=document.getElementById("varlist"), h=document.getElementById("varhint"); if(!dl) return;
+  dl.innerHTML=v.map(x=>'<option value="'+x.id+'">'+x.title+'</option>').join("");
+  h.textContent = v.length ? "\u5df2\u5b58 "+v.length+" \u500b\uff1a"+v.map(x=>x.id+"("+x.title+")").join("\u3001")
+                           : "\u9084\u6c92\u6709\u8b8a\u9ad4 \u2014\u2014 \u5148\u53bb\u300c\u6a19\u984c\u9078\u64c7\u5668\u300d\u7de8\u4e00\u500b\u4e26\u6309\u300c\u5b58\u6210\u8b8a\u9ad4\u300d\u3002"; })();
 draw();
 </script>
 </body>

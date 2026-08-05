@@ -137,57 +137,17 @@
   <!-- D 描述標籤 -->
   <div class="group" data-g="描述標籤">
     <h2>④ 描述標籤</h2>
-    <p class="hint">疊畫面的 overlay（標題／描述／地圖等）怎麼來。兩種模式擇一：</p>
-    <div class="row"><div class="chips gold" data-k="標籤模式" data-def="預設檔">
-      <span class="chip">預設檔</span><span class="chip">特定關鍵字</span></div></div>
+    <p class="hint">疊畫面的 overlay <b>想加幾層就加幾層</b>，沒有上限。清單順序＝出場順序，可上下移動。<br>
+      🔸 <b>時機只是建議</b>：版型庫把①②歸在「片頭」只是常見用法，你要把片頭版型拿去片尾、把全場元件只放中間，都可以。</p>
 
     <div class="row"><span class="lbl">標題呈現</span><div class="chips gold" data-k="標題動畫" data-def="淡入">
       <span class="chip">淡入</span><span class="chip">✍️手寫 writing</span></div></div>
-    <p class="hint" data-writinghint hidden>✍️ <b>手寫 writing</b>：標題像用筆一劃一劃「寫」出來 → 寫完在標題<b>下方劃一條白線</b> → <b>有內文才接著</b>淡入顯示。<b>只有標題</b>用寫的（英文＝簽名連筆、中文＝照筆順書寫），內文照常呈現。預設／特定兩種模式都適用。</p>
+    <p class="hint" data-writinghint hidden>✍️ <b>手寫 writing</b>：標題像用筆一劃一劃「寫」出來 → 寫完在標題<b>下方劃一條白線</b> → <b>有內文才接著</b>淡入顯示。<b>只有標題</b>用寫的（英文＝簽名連筆、中文＝照筆順書寫），內文照常呈現。</p>
 
-    <!-- 模式 1：預設關鍵字描述檔 -->
-    <div data-mode="預設檔">
-      <p class="hint">勾類別＝這類<b>自動生</b>內容（Robert 依場景自動填，你不用打字），可複選。看樣：<a href="./narrative-tag-tool.html" style="color:var(--gold)">描述標籤版型庫 →</a></p>
-      <div class="row"><span class="lbl">套標籤的類別</span><div class="chips" data-k="標籤類別">
-        <span class="chip cat" data-cat="全部">全部</span>
-        <span class="chip cat" data-cat="移動中">移動中 · 地圖+描述</span>
-        <span class="chip cat" data-cat="建築">建築 · 介紹</span>
-        <span class="chip cat" data-cat="景點">景點 · 介紹</span>
-        <span class="chip cat" data-cat="飲食">飲食 · 卡</span></div></div>
-
-      <div class="sub" data-sub="移動中" hidden>
-        <div class="subttl">🎫 機票／車票感（移動中 → 自動生地圖＋描述）</div>
-        <div class="row"><span class="lbl">模式</span><div class="chips" data-k="移動中_模式" data-def="移動"><span class="chip">移動</span><span class="chip">定點</span></div></div>
-        <div class="row"><span class="lbl">交通</span><div class="chips" data-k="移動中_交通" data-def="✈飛機"><span class="chip">✈飛機</span><span class="chip">🚄火車</span><span class="chip">🚇地鐵</span><span class="chip">🚌巴士</span></div></div>
-        <div class="row"><span class="lbl">圖層</span><div class="chips" data-k="移動中_圖層" data-def="兩層"><span class="chip">兩層</span><span class="chip">只資訊</span><span class="chip">只地圖</span></div></div>
-        <div class="row"><span class="lbl">文字層輸出</span><div class="chips" data-k="移動中_文字層" data-def="出圖"><span class="chip">出圖(精準)</span><span class="chip">FCPX字幕(可編輯)</span></div></div>
-        <div class="row"><span class="lbl">資訊層版位</span><div class="chips" data-k="移動中_資訊版位" data-def="左上"><span class="chip">左上</span><span class="chip">右上</span><span class="chip">左下</span><span class="chip">右下</span></div></div>
-        <div class="row"><span class="lbl">地圖層版位</span><div class="chips" data-k="移動中_地圖版位" data-def="右上"><span class="chip">右上</span><span class="chip">左上</span><span class="chip">右下</span><span class="chip">左下</span></div></div>
-      </div>
-      <div class="sub" data-sub="景點" hidden>
-        <div class="subttl">📍 景點地名條（景點 → 自動生介紹說明對應場景）</div>
-        <div class="row"><span class="lbl">文字輸出</span><div class="chips" data-k="景點_文字層" data-def="FCPX字幕"><span class="chip">FCPX字幕(可編輯)</span><span class="chip">出圖(精準)</span></div></div>
-        <div class="row"><span class="lbl">版位</span><div class="chips" data-k="景點_版位" data-def="置中"><span class="chip">置中</span><span class="chip">下中</span><span class="chip">左下</span></div></div>
-        <div class="row"><span class="lbl">比例</span><div class="chips" data-k="景點_比例" data-def="標準"><span class="chip">小</span><span class="chip">標準</span><span class="chip">大</span></div></div>
-      </div>
-      <div class="sub" data-sub="建築" hidden>
-        <div class="subttl">🏛️ 建築卡（建築 → 自動抓建築名/風格生介紹）</div>
-        <div class="row"><span class="lbl">文字輸出</span><div class="chips" data-k="建築_文字層" data-def="FCPX字幕"><span class="chip">FCPX字幕(可編輯)</span><span class="chip">出圖(精準)</span></div></div>
-        <div class="row"><span class="lbl">版位</span><div class="chips" data-k="建築_版位" data-def="左下"><span class="chip">左下</span><span class="chip">右下</span><span class="chip">置中</span></div></div>
-      </div>
-      <div class="sub" data-sub="飲食" hidden>
-        <div class="subttl">🍽️ 飲食卡（飲食 → 餐券感）</div>
-        <div class="row"><span class="lbl">內容</span><div class="chips" data-k="飲食_標籤" data-def="不加"><span class="chip">不加（只分類）</span><span class="chip">店名/菜名</span></div></div>
-        <div class="row"><span class="lbl">版位</span><div class="chips" data-k="飲食_版位" data-def="右下"><span class="chip">右下</span><span class="chip">左下</span><span class="chip">置中</span></div></div>
-      </div>
-    </div>
-
-    <!-- 模式 2：特定關鍵字 · 群組卡片 -->
-    <div data-mode="特定關鍵字" hidden>
-      <p class="hint">每個「關鍵字組」＝要一起拉進初剪的片段；描述直接加在它<b>底下</b>。多個關鍵字用 <b>+</b> 串（一起初剪）。看樣：<a href="./narrative-tag-tool.html" style="color:var(--gold)">描述標籤版型庫 →</a></p>
-      <div id="kwGroups"></div>
-      <button class="addbtn" id="addGroup">＋ 新增關鍵字組</button>
-    </div>
+    <div id="ovList"></div>
+    <button class="addbtn" id="addOv">＋ 新增描述標籤</button>
+    <p class="hint" style="margin-top:.5rem">版型看樣：<a href="./narrative-tag-tool.html" style="color:var(--gold)">描述標籤版型庫 →</a>　
+      標題要自己調字體配色：<a href="./title-picker.html" style="color:var(--gold)">標題選擇器 →</a>（存成變體 ①-A，這裡填編號就帶入）</p>
   </div>
 
   <!-- E LOGO -->
@@ -234,9 +194,7 @@
       });
     });
   }
-  [...document.querySelectorAll('.chips')]
-    .filter(g=>g.dataset.k!=='標籤類別')
-    .forEach(initGroup);
+  [...document.querySelectorAll('.chips')].forEach(initGroup);
 
   // ---- ② 拼貼版面幾何預覽（連動①輸出比例）----
   function drawLayout(){
@@ -268,10 +226,6 @@
   }
 
   function afterPick(g){
-    if(g.dataset.k==='標籤模式'){
-      const mode=val('標籤模式');
-      document.querySelectorAll('[data-mode]').forEach(m=>{ m.hidden=(m.dataset.mode!==mode); });
-    }
     if(g.dataset.k==='拼貼版型'||g.dataset.k==='每組'||g.dataset.k==='比例') drawLayout();
     if(g.dataset.k==='LOGO標') syncLogo();
     if(g.dataset.k==='標題動畫') syncWriting();
@@ -284,84 +238,100 @@
     document.querySelector('[data-logo="on"]').hidden = off;
   }
 
-  // ---- 模式1：描述類別多選 + 勾了才展開 ----
-  const catWrap=document.querySelector('[data-k="標籤類別"]');
-  const catChips=[...catWrap.querySelectorAll('.cat')];
-  const realCats=catChips.filter(c=>c.dataset.cat!=='全部');
-  function syncSub(cat,on){const sub=document.querySelector(`.sub[data-sub="${cat}"]`);if(sub)sub.hidden=!on;}
-  catChips.forEach(c=>c.addEventListener('click',()=>{
-    if(c.dataset.cat==='全部'){
-      const turnOn=!c.classList.contains('on');
-      c.classList.toggle('on',turnOn);
-      realCats.forEach(rc=>{rc.classList.toggle('on',turnOn);syncSub(rc.dataset.cat,turnOn);});
-    }else{
-      c.classList.toggle('on');
-      syncSub(c.dataset.cat,c.classList.contains('on'));
-      const allChip=catChips.find(x=>x.dataset.cat==='全部');
-      allChip.classList.toggle('on',realCats.every(rc=>rc.classList.contains('on')));
-    }
-    build();
-  }));
-  function cats(){return realCats.filter(c=>c.classList.contains('on')).map(c=>c.dataset.cat);}
-
   function val(k){const g=document.querySelector(`[data-k="${k}"]`);const on=g.querySelector('.on');return on?on.textContent:g.dataset.def;}
 
-  // ---- 模式2：關鍵字組卡片（描述巢狀在組內）----
-  const kwGroupsEl=document.getElementById('kwGroups');
-  const POSITIONS=['場景開頭','整段','指定第N支'];
+  // ---- ④ 描述標籤：動態清單，想加幾層加幾層 ----
+  const ovListEl=document.getElementById('ovList');
+  const TPL=[
+    {id:'\u2460',   n:'\u2460 \u96dc\u8a8c\u98a8\u683c\u6a19\u984c\u5361', f:['variant']},
+    {id:'\u2461-A', n:'\u2461-A \u6a5f\u7968\uff0f\u8eca\u7968\u611f', f:['move']},
+    {id:'\u2461-B', n:'\u2461-B \u904a\u89bd\u8eca\u7968\uff0b\u8def\u7dda\u5716', f:['move']},
+    {id:'\u2462',   n:'\u2462 \u666f\u9ede\u5730\u540d\u689d', f:['scale']},
+    {id:'\u2463',   n:'\u2463 \u97f3\u6ce2\u7dec\u5e36\uff0b\u9ede\u9663 LED', f:['parts']},
+    {id:'\u2464',   n:'\u2464 \u9577\u666f\u7248\u578b\uff08\u6a6b\uff09', f:['variant']},
+    {id:'\u2464-B', n:'\u2464-B \u9577\u666f\u7248\u578b\uff08\u76f4\uff09', f:['variant']},
+    {id:'\u2465',   n:'\u2465 \u9713\u8679\u6a19\u984c', f:['variant']},
+    {id:'\u2466',   n:'\u2466 \u5efa\u7bc9\u5361\uff08\u898f\u5283\u4e2d\uff09', f:[]},
+    {id:'\u2467',   n:'\u2467 \u90f5\u6233\uff08\u898f\u5283\u4e2d\uff09', f:[]},
+    {id:'\u2468',   n:'\u2468 \u9910\u5238\uff08\u898f\u5283\u4e2d\uff09', f:[]},
+    {id:'\u81ea\u8a02', n:'\u270d\ufe0f \u81ea\u8a02\u6587\u5b57', f:[]},
+  ];
+  const WHEN=['\u7247\u982d','\u4e2d\u5834','\u7247\u5c3e','\u5168\u5834\uff08\u6574\u652f\uff09','\u6307\u5b9a\u5834\u666f'];
+  const TRIG=['\u5168\u90e8\u5957\u7528','\u95dc\u9375\u5b57','\u624b\u52d5\u6307\u5b9a'];
+  const POS =['\u5de6\u4e0a','\u53f3\u4e0a','\u5de6\u4e0b','\u53f3\u4e0b','\u7f6e\u4e2d','\u4e0b\u4e2d'];
+  const OUT =['\u51fa\u5716(\u7cbe\u6e96)','FCPX\u5b57\u5e55(\u53ef\u7de8\u8f2f)'];
+  function variants(){ try{ return JSON.parse(localStorage.getItem('jtphr_title_variants')||'[]') }catch(e){ return [] } }
 
-  function addDesc(list){
-    const el=document.createElement('div'); el.className='descBlock';
+  function addOv(){
+    const el=document.createElement('div'); el.className='grpCard';
     el.innerHTML=`
-      <div class="bhead">
-        <span class="bidx">描述 <span class="num"></span></span>
-        <label class="poslbl">位置
-          <select class="sel posSel">${POSITIONS.map(o=>`<option>${o}</option>`).join('')}</select>
-        </label>
-        <input class="txt nInput" type="number" min="1" value="1" style="display:none;" title="第幾支">
-        <button class="del delDesc" title="刪除描述">✕</button>
-      </div>
-      <div class="fld"><span class="fl">標題</span><input class="txt title" type="text" placeholder="例：AlterHof 舊宮街拍"></div>
-      <div class="fld"><span class="fl">內文</span><textarea class="txt body" placeholder="例：慕尼黑最古老宮殿一角，精品櫥窗與石板街。"></textarea></div>
-      <div class="fld"><span class="fl">標籤</span><input class="txt tag" type="text" placeholder="例：#精品街"></div>`;
-    list.appendChild(el);
-    const posSel=el.querySelector('.posSel'), nInput=el.querySelector('.nInput');
-    posSel.addEventListener('change',()=>{nInput.style.display=posSel.value==='指定第N支'?'':'none';build();});
-    el.querySelectorAll('input,textarea,select').forEach(i=>i.addEventListener('input',build));
-    el.querySelector('.delDesc').addEventListener('click',()=>{const p=el.parentNode;el.remove();renumberDesc(p);build();});
-    renumberDesc(list); build();
-  }
-  function renumberDesc(list){[...list.querySelectorAll('.descBlock')].forEach((el,i)=>el.querySelector('.num').textContent='#'+(i+1));}
-
-  function addGroup(){
-    const card=document.createElement('div'); card.className='grpCard';
-    card.innerHTML=`
       <div class="grpHead">
-        <span class="gidx">🔑 關鍵字組 <span class="gnum"></span></span>
-        <button class="del delGrp" title="刪除整組">✕ 刪組</button>
+        <span class="gidx">\u{1F3AC} \u63cf\u8ff0\u6a19\u7c64 <span class="gnum"></span></span>
+        <span>
+          <button class="del up"   title="\u4e0a\u79fb">\u25b2</button>
+          <button class="del down" title="\u4e0b\u79fb">\u25bc</button>
+          <button class="del delOv" title="\u522a\u9664">\u2715</button>
+        </span>
       </div>
-      <input class="txt kwField" type="text" placeholder="貼 FCPX 關鍵字；多個用 + 串一起初剪">
-      <div class="descList"></div>
-      <button class="addDescBtn">＋ 加描述</button>`;
-    kwGroupsEl.appendChild(card);
-    const list=card.querySelector('.descList');
-    card.querySelector('.kwField').addEventListener('input',build);
-    card.querySelector('.addDescBtn').addEventListener('click',()=>addDesc(list));
-    card.querySelector('.delGrp').addEventListener('click',()=>{card.remove();renumberGroups();build();});
-    renumberGroups(); build();
-    return card;
+      <div class="fld"><span class="fl">\u7248\u578b</span>
+        <select class="txt sel tpl">${TPL.map(t=>`<option value="${t.id}">${t.n}</option>`).join('')}</select></div>
+      <div class="fld"><span class="fl">\u51fa\u5834\u6642\u6a5f</span>
+        <select class="txt sel when">${WHEN.map(o=>`<option>${o}</option>`).join('')}</select>
+        <input class="txt whenN" type="text" placeholder="\u54ea\u500b\u5834\u666f\uff08\u4f8b\uff1a03_1420 \u904b\u6cb3\u8239\uff09" style="display:none"></div>
+      <div class="fld"><span class="fl">\u89f8\u767c</span>
+        <select class="txt sel trig">${TRIG.map(o=>`<option>${o}</option>`).join('')}</select>
+        <input class="txt trigKw" type="text" placeholder="\u95dc\u9375\u5b57\uff0c\u591a\u500b\u7528 + \u4e32" style="display:none"></div>
+      <div class="fld"><span class="fl">\u79d2\u6578</span><input class="txt secs" type="number" min="1" step="0.5" value="4"></div>
+      <div class="fld"><span class="fl">\u7248\u4f4d</span><select class="txt sel pos">${POS.map(o=>`<option>${o}</option>`).join('')}</select></div>
+      <div class="fld"><span class="fl">\u6587\u5b57\u8f38\u51fa</span><select class="txt sel out">${OUT.map(o=>`<option>${o}</option>`).join('')}</select></div>
+      <div class="fld f-variant" style="display:none"><span class="fl">\u6a19\u984c\u8b8a\u9ad4</span>
+        <input class="txt variant" type="text" placeholder="\u2460-A\uff08\u5728\u6a19\u984c\u9078\u64c7\u5668\u5b58\u7684\uff09" list="ovVars"></div>
+      <div class="fld f-move" style="display:none"><span class="fl">\u4ea4\u901a</span>
+        <select class="txt sel mv">${['\u2708\u98db\u6a5f','\u{1F684}\u706b\u8eca','\u{1F687}\u5730\u9435','\u{1F68C}\u5df4\u58eb','\u{1F6A2}\u8239'].map(o=>`<option>${o}</option>`).join('')}</select>
+        <select class="txt sel mvL">${['\u5169\u5c64','\u53ea\u8cc7\u8a0a','\u53ea\u5730\u5716'].map(o=>`<option>${o}</option>`).join('')}</select></div>
+      <div class="fld f-scale" style="display:none"><span class="fl">\u6bd4\u4f8b</span>
+        <select class="txt sel scale">${['\u5c0f','\u6a19\u6e96','\u5927'].map(o=>`<option ${o==='\u6a19\u6e96'?'selected':''}>${o}</option>`).join('')}</select></div>
+      <div class="fld f-parts" style="display:none"><span class="fl">\u5143\u4ef6</span>
+        <label class="poslbl"><input type="checkbox" class="pWave" checked> \u97f3\u6ce2</label>
+        <label class="poslbl"><input type="checkbox" class="pLed" checked> LED \u66f2\u540d</label>
+        <label class="poslbl"><input type="checkbox" class="pLogo" checked> LOGO</label></div>
+      <div class="fld"><span class="fl">\u6a19\u984c</span><input class="txt ttl" type="text" placeholder="\u7559\u7a7a\uff1dRobert \u4f9d\u5834\u666f\u81ea\u52d5\u586b"></div>
+      <div class="fld"><span class="fl">\u5167\u6587</span><textarea class="txt bdy" placeholder="\u7559\u7a7a\uff1d\u81ea\u52d5\u751f"></textarea></div>`;
+    ovListEl.appendChild(el);
+    const q=c=>el.querySelector(c);
+    function syncFields(){
+      const t=TPL.find(x=>x.id===q('.tpl').value)||{f:[]};
+      ['variant','move','scale','parts'].forEach(f=>{
+        const d=q('.f-'+f); if(d) d.style.display = t.f.includes(f)?'':'none';
+      });
+      q('.whenN').style.display = q('.when').value.indexOf('\u6307\u5b9a')===0?'':'none';
+      q('.trigKw').style.display = q('.trig').value==='\u95dc\u9375\u5b57'?'':'none';
+      q('.secs').disabled = q('.when').value.indexOf('\u5168\u5834')===0;
+    }
+    el.querySelectorAll('input,textarea,select').forEach(i=>{
+      i.addEventListener('input',()=>{syncFields();build();});
+      i.addEventListener('change',()=>{syncFields();build();});
+    });
+    q('.delOv').addEventListener('click',()=>{el.remove();renumberOv();build();});
+    q('.up').addEventListener('click',()=>{const pv=el.previousElementSibling;if(pv&&pv.classList.contains('grpCard'))ovListEl.insertBefore(el,pv);renumberOv();build();});
+    q('.down').addEventListener('click',()=>{const nx=el.nextElementSibling;if(nx&&nx.classList.contains('grpCard'))ovListEl.insertBefore(nx,el);renumberOv();build();});
+    syncFields(); renumberOv(); build();
+    return el;
   }
-  function renumberGroups(){
-    const cards=[...kwGroupsEl.querySelectorAll('.grpCard')];
-    cards.forEach((c,i)=>c.querySelector('.gnum').textContent=i+1);
-    let empty=kwGroupsEl.querySelector('.empty');
+  function renumberOv(){
+    const cards=[...ovListEl.querySelectorAll('.grpCard')];
+    cards.forEach((c,i)=>c.querySelector('.gnum').textContent='#'+(i+1));
+    let empty=ovListEl.querySelector('.empty');
     if(cards.length===0 && !empty){
       empty=document.createElement('div');empty.className='empty';
-      empty.textContent='還沒有關鍵字組，按下面「＋ 新增關鍵字組」。';
-      kwGroupsEl.appendChild(empty);
+      empty.textContent='\u9084\u6c92\u6709\u63cf\u8ff0\u6a19\u7c64\u3002\u6309\u4e0b\u9762\u300c\uff0b \u65b0\u589e\u63cf\u8ff0\u6a19\u7c64\u300d\uff0c\u8981\u5e7e\u5c64\u52a0\u5e7e\u5c64\u3002';
+      ovListEl.appendChild(empty);
     }else if(cards.length>0 && empty){empty.remove();}
   }
-  document.getElementById('addGroup').addEventListener('click',addGroup);
+  document.getElementById('addOv').addEventListener('click',addOv);
+  (function(){ const dl=document.createElement('datalist'); dl.id='ovVars';
+    dl.innerHTML=variants().map(v=>`<option value="${v.id}">${v.title}</option>`).join('');
+    document.body.appendChild(dl); })();
 
   // ---- 生成規格字串 ----
   function build(){
@@ -370,40 +340,33 @@
       +` ┃ 拼貼:${val('拼貼版型')}·${val('每組')}·${val('長度')}`
       +` ┃ 時間線:⭐3${val('排序')}·⭐4去重${val('Star4去重')}·${val('轉場')}`;
 
-    if(val('標籤模式')==='預設檔'){
-      const cs=cats();
-      if(cs.length){
-        const parts=cs.map(cat=>{
-          if(cat==='移動中') return `移動中[機票感·${val('移動中_模式')}·${val('移動中_交通')}·${val('移動中_圖層')}·文字${val('移動中_文字層')}·資訊@${val('移動中_資訊版位')}·地圖@${val('移動中_地圖版位')}]`;
-          if(cat==='景點') return `景點[地名條·文字${val('景點_文字層')}·${val('景點_版位')}·${val('景點_比例')}]`;
-          if(cat==='建築') return `建築[建築卡·文字${val('建築_文字層')}·${val('建築_版位')}]`;
-          if(cat==='飲食') return `飲食[${val('飲食_標籤')}·${val('飲食_版位')}]`;
-          return cat;
-        });
-        s+=` ┃ 描述標籤[預設檔]:${parts.join('，')}`;
-      }else{
-        s+=` ┃ 描述標籤[預設檔]:（未勾類別）`;
-      }
-    }else{
-      const cards=[...kwGroupsEl.querySelectorAll('.grpCard')];
-      s+=`\n┃ 描述標籤[特定關鍵字]`;
-      if(!cards.length){ s+=`\n  （未新增關鍵字組）`; }
-      cards.forEach((card,gi)=>{
-        const kw=card.querySelector('.kwField').value.trim()||'（未填關鍵字）';
-        s+=`\n  ▸ 組${gi+1}: ${kw}`;
-        const ds=[...card.querySelectorAll('.descBlock')];
-        if(!ds.length){ s+=`\n      （只拉素材進初剪，無描述）`; }
-        ds.forEach((el,di)=>{
-          const pos=el.querySelector('.posSel').value;
-          const n=el.querySelector('.nInput').value||'1';
-          const posStr= pos==='指定第N支' ? `第${n}支` : pos;
-          const t=el.querySelector('.title').value.trim()||'—';
-          const b=el.querySelector('.body').value.trim()||'—';
-          const g=el.querySelector('.tag').value.trim()||'—';
-          s+=`\n      [${di+1}] ${posStr} ｜ 標題「${t}」內文「${b}」標籤「${g}」`;
-        });
+    const ovs=[...document.querySelectorAll('#ovList .grpCard')];
+    if(ovs.length){
+      const lines=ovs.map((c,i)=>{
+        const g=x=>{const e=c.querySelector(x);return e?e.value:''};
+        const vis=x=>{const e=c.querySelector(x);return e&&e.style.display!=='none'};
+        let t=`  #${i+1} ${g('.tpl')}｜${g('.when')}${vis('.whenN')&&g('.whenN')?'('+g('.whenN')+')':''}`
+             +`｜${g('.trig')}${vis('.trigKw')&&g('.trigKw')?':'+g('.trigKw'):''}`
+             +`｜${g('.when').indexOf('全場')===0?'全片':g('.secs')+'s'}｜@${g('.pos')}｜${g('.out')}`;
+        if(vis('.f-variant')&&g('.variant')) t+=`｜變體${g('.variant')}`;
+        if(vis('.f-move'))  t+=`｜${g('.mv')}·${g('.mvL')}`;
+        if(vis('.f-scale')) t+=`｜${g('.scale')}`;
+        if(vis('.f-parts')){
+          const on=[];
+          if(c.querySelector('.pWave').checked) on.push('音波');
+          if(c.querySelector('.pLed').checked)  on.push('LED');
+          if(c.querySelector('.pLogo').checked) on.push('LOGO');
+          t+=`｜${on.length?on.join('+'):'全關'}`;
+        }
+        if(g('.ttl')) t+=`\n     標題「${g('.ttl')}」`;
+        if(g('.bdy')) t+=`\n     內文「${g('.bdy')}」`;
+        return t;
       });
+      s+=`\n┃ 描述標籤(${ovs.length} 層，依序)：\n`+lines.join('\n');
+    }else{
+      s+=` ┃ 描述標籤：無`;
     }
+    s+=`\n┃ 標題呈現:${val('標題動畫')}`;
     if(val('標題動畫')==='✍️手寫 writing'){
       s+=`\n  ✍️標題動畫: 手寫writing（標題逐劃寫出→下方劃白線→有內文才接著顯示；僅標題，內文照常）`;
     }
@@ -416,16 +379,14 @@
     }else{
       s+=`\n┃ LOGO:${mark}[${val('LOGO版位')}·${val('LOGO大小')}·${val('LOGO透明度')}·掃光${val('LOGO掃光')}·${val('LOGO時機')}]`;
     }
-
     document.getElementById('spec').textContent=s;
     return s;
   }
 
   // 初始化：模式顯示 + 先給一組空的關鍵字組
-  afterPick(document.querySelector('[data-k="標籤模式"]'));
   syncLogo();
   drawLayout();
-  addGroup();
+  addOv();
   build();
 
   document.getElementById('copy').addEventListener('click',async()=>{
