@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>自動剪輯 · 片型地圖 · PhotoNB</title>
+<meta name="description" content="自動剪輯是一條共用流程，上面可以掛很多種片型模組 —— 長篇景色、社群輪播、卡點剪輯、交通移動、口播、教學、開箱。這頁是總表：骨幹六步各用哪支工具、每個片型做到哪。" />
+<meta name="date" content="2026-08-06" />
+<style>
+  :root{--navy:#0b1022;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+        --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--blue:#7fb6f0;--grey:#8b93a8;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;}
+  a{color:var(--gold);}
+  .wrap{max-width:900px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.2rem);}
+  .lead{color:var(--muted);margin:.2rem 0 1.2rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.88em;}
+  h2{color:var(--gold);font-size:1.05rem;letter-spacing:.04em;margin:2rem 0 .2rem;}
+  .sub{color:var(--muted);font-size:.85rem;margin:.1rem 0 .9rem;}
+
+  /* 骨幹步驟 */
+  .spine{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.4rem 1rem;}
+  .step{display:flex;gap:.85rem;padding:.75rem 0;border-top:1px solid rgba(255,255,255,.07);}
+  .step:first-child{border-top:0;}
+  .no{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#221a05;
+      font-weight:700;font-size:.8rem;display:grid;place-items:center;margin-top:.15rem;}
+  .step b{display:block;}
+  .step .t{flex:1;}
+  .tool{font-size:.82rem;color:var(--muted);}
+  .tool a{white-space:nowrap;}
+
+  /* 片型卡 */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.8rem;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.85rem .95rem;
+        display:flex;flex-direction:column;gap:.35rem;}
+  .card h3{margin:.1rem 0;font-size:.98rem;}
+  .card p{margin:0;font-size:.83rem;color:var(--muted);flex:1;}
+  .st{align-self:flex-start;font-size:.68rem;letter-spacing:.14em;border-radius:999px;padding:.12rem .6rem;border:1px solid;}
+  .s-ok{color:var(--green);border-color:rgba(91,212,138,.5);}
+  .s-half{color:var(--blue);border-color:rgba(127,182,240,.5);}
+  .s-plan{color:var(--grey);border-color:rgba(139,147,168,.45);}
+  .lnk{font-size:.8rem;}
+  .callout{background:rgba(216,182,90,.08);border:1px solid var(--line);border-left:3px solid var(--gold);
+           border-radius:10px;padding:.7rem .9rem;margin:1.1rem 0;font-size:.87rem;}
+  footer{color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);margin-top:2.4rem;padding-top:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本</a>
+  <div class="eyebrow">AUTO EDIT · MAP</div>
+  <h1>自動剪輯 · 片型地圖</h1>
+  <p class="lead">
+    自動剪輯<b>是一條流程</b>，不是一支工具。<br>
+    同一條骨幹上面可以掛很多種<b>片型</b> —— 長篇景色、社群輪播、卡點剪輯、交通移動、口播、教學、開箱…<br>
+    這頁回答兩件事：<b>骨幹每一步用哪支工具</b>、<b>每個片型做到哪了</b>。
+  </p>
+
+  <div class="callout">
+    💡 <b>為什麼要這樣分</b>（James 2026-08-06 拍板）：<br>
+    以前把「長篇景色」跟「POST 社群輪播」混在同一張待辦清單，愈長愈難看。<br>
+    正確的看法是 —— <b>骨幹只有一條、只維護一次；片型是掛上去的模組，各自有各自的待辦</b>。
+    新增一種片型不必動骨幹，只要決定它在每一步吃什麼參數。
+  </div>
+
+  <h2>🦴 共用骨幹 · 六步</h2>
+  <p class="sub">不管出哪一種片，都走這六步。片型只是在每一步塞不同參數。</p>
+  <div class="spine">
+    <div class="step"><div class="no">1</div><div class="t">
+      <b>歸檔 scene_build</b>
+      <div class="tool">倒卡 → 分天分場景 → 鋪 LR/FCP 工作檔。順手做色彩分流（O-Log2／HLG／709）。<br>
+        <a href="./scene-build.html">scene_build →</a></div></div></div>
+    <div class="step"><div class="no">2</div><div class="t">
+      <b>匯入 FCP</b>
+      <div class="tool">整趟 <code>MOV_&lt;day&gt;</code> 一次進 FCP，場景變關鍵字，母帶不複製。log 素材自動掛相機 LUT。<br>
+        <a href="./trip-fcpx-build.html">旅遊影片匯入fcpx →</a></div></div></div>
+    <div class="step"><div class="no">3</div><div class="t">
+      <b>你撿片</b>
+      <div class="tool">★5 長篇／★4 HL／★3 生活片段／★2 工具標記＋效果關鍵字／KP 單禎。<br>
+        <a href="./picking-keywords.html">星等與關鍵字總表 →</a></div></div></div>
+    <div class="step"><div class="no">4</div><div class="t">
+      <b>出圖出片段</b>
+      <div class="tool">從 <code>.fcpxmld</code> 抽 HL 片段與 KP 單禎，該解碼的自動解碼。<br>
+        <a href="./fcpxmld-export.html">fcpxmld-export →</a></div></div></div>
+    <div class="step"><div class="no">5</div><div class="t">
+      <b>組時間線＋疊圖層</b>
+      <div class="tool">初剪規格選擇器決定怎麼組；描述標籤版型庫提供圖層；標題選擇器編標題存變體。<br>
+        <a href="./initcut-spec-picker.html">初剪規格選擇器 →</a>
+        <a href="./narrative-tag-tool.html">描述標籤版型庫 →</a>
+        <a href="./title-picker.html">標題選擇器 →</a></div></div></div>
+    <div class="step"><div class="no">6</div><div class="t">
+      <b>出片＋你審片</b>
+      <div class="tool">燒進成品／透明 ProRes 進 FCP／出 fcpxml 自己剪，三選一。審片介面還沒做。<br>
+        <a href="./roadmap-post.html">審片介面待辦（第 1 階段）→</a></div></div></div>
+  </div>
+
+  <h2>🎞️ 片型模組</h2>
+  <p class="sub">每一種片型 ＝ 骨幹上的一組參數。做過的有工具頁，還沒做的先列著。</p>
+  <div class="grid">
+
+    <div class="card">
+      <span class="st s-ok">已有工具</span>
+      <h3>🪟 長篇景色 ＋ AI 音樂</h3>
+      <p>平穩風景長溶接、音樂頻道版型，對標 Abao Vision 的系列自動出片。<b>還缺 AI 音樂</b>。</p>
+      <div class="lnk"><a href="./longview-aimusic-preset.html">固定出片模板 →</a>　<a href="./roadmap-longview.html">待辦清單 →</a></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-ok">已有工具</span>
+      <h3>📱 社群輪播 POST</h3>
+      <p>7 頁 1080×1350 雜誌式圖文輪播，config 驅動。第一版已交（Augustiner 啤酒館）。</p>
+      <div class="lnk"><a href="./post-template.html">HTML 模板 →</a>　<a href="./roadmap-post.html">待辦清單 →</a></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-ok">已有工具</span>
+      <h3>🎬 卡點剪輯</h3>
+      <p>吃 <code>.fcpxmld</code> 的撿片結果，照音樂節拍切。阿里山首跑 16 刀 30 秒。<b>待調：套 LUT、照片混剪</b>。</p>
+      <div class="lnk"><a href="./initcut-spec-picker.html">初剪規格選擇器 →</a></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-ok">已有工具</span>
+      <h3>✈️ 交通移動</h3>
+      <p>機票／車票感圖層＋真實航跡地圖，做過桃園→阿姆斯特丹整段。</p>
+      <div class="lnk"><a href="./narrative-tag-tool.html">版型庫 ②-A / ②-B →</a></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-ok">已有工具</span>
+      <h3>🧩 拼貼 grid</h3>
+      <p>★2 工具標記的去處：馬賽克／壁貼／剪貼簿三風格，影片拼貼全自動。</p>
+      <div class="lnk"><a href="./grid-style-library.html">風格目錄 →</a></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-ok">已有工具</span>
+      <h3>🌅 縮時 ProRes</h3>
+      <p>一資料夾 JPG 序列 → 一支 8K60p ProRes422 全幅縮時。</p>
+      <div class="lnk"><span style="color:var(--muted)">工具已可用，尚未開獨立頁</span></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-half">部分做過</span>
+      <h3>🌉 蒙太奇（剪映）</h3>
+      <p>照片端已通（<code>to_montage</code> → <code>_montage</code>）；<b>影片端還缺「依關鍵字撈 clip 打包」</b>。</p>
+      <div class="lnk"><a href="./roadmap-post.html">第 6 階段待辦 →</a></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-plan">規劃中</span>
+      <h3>🎤 口播影片</h3>
+      <p>有講話的素材：保留原聲、剪停頓吃螺絲、逐字稿自動上字幕、音樂墊底閃避人聲。</p>
+      <div class="lnk"><span style="color:var(--muted)">缺：字幕規範（一行幾字、怎麼斷句）先定案</span></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-plan">規劃中</span>
+      <h3>📚 教學影片</h3>
+      <p>章節化、重點字卡、步驟編號、螢幕錄影與實拍混排。</p>
+      <div class="lnk"><span style="color:var(--muted)">還沒開始，等你要做再談規格</span></div>
+    </div>
+
+    <div class="card">
+      <span class="st s-plan">規劃中</span>
+      <h3>📦 開箱影片</h3>
+      <p>細節特寫節奏快、規格數字上字卡、質感光影。可沿用拼貼與卡點。</p>
+      <div class="lnk"><span style="color:var(--muted)">還沒開始，等你要做再談規格</span></div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    ➕ <b>想加新片型怎麼做</b>：跟我說「我要做 ○○ 片」，我會問三件事 ——
+    <b>① 素材長什麼樣</b>（有沒有人講話、直式橫式、多長）
+    <b>② 成品給誰看</b>（平台、長度、有沒有字幕）
+    <b>③ 參考片</b>（有的話最快）。
+    然後我把它變成骨幹第 5、6 步的一組參數，不用重寫流程。
+  </div>
+
+  <footer>PhotoNB · 自動剪輯片型地圖（2026-08-06 建立）· 由 Robert 維護</footer>
+</div>
+</body>
+</html>

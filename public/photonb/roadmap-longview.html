@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>POST・自動剪輯 待完成清單 · PhotoNB</title>
-<meta name="description" content="POST 工具、審片介面、收斂指標、規範固化、接到影片、蒙太奇 Ⓑ 路線 —— 六階段待完成清單，每項可勾選、可留言記錄進度節點。" />
-<meta name="date" content="2026-07-27" />
+<title>長篇景色 ＋ AI 音樂 · 待完成清單 · PhotoNB</title>
+<meta name="description" content="長篇景色片型的待辦：版型已定稿、還缺 AI 音樂／場景清單自動亮／曲目時間／Loop／發佈包。每項可勾選、可留言。" />
+<meta name="date" content="2026-08-06" />
 <style>
   :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
         --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--blue:#7fb6f0;--red:#e9758a;--grey:#8b93a8;}
@@ -73,10 +73,13 @@
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="./">← 攝影筆記本</a>
-  <p class="eyebrow">路線圖 · Roadmap</p>
-  <h1>POST・自動剪輯 待完成清單</h1>
-  <p class="lead"><a href="./autoedit-map.html">← 這是「自動剪輯」骨幹上的一個片型（社群輪播 POST），看全圖</a><br>逐步執行。<b>每一項底下都能留言記錄進度節點</b> —— 我做到哪、你提案到哪，都留在該項下面，之後回來看就知道上次停在哪。做完的項目會補上 <span style="color:#a9dcbd">✅ 產出</span>，寫明東西變成 PhotoNB 的哪一頁、哪支工具、還是我的技能包。<b>零碎時間隨時接手，不怕斷線。</b></p>
+  <a class="back" href="./dashboard.html">← 攝影筆記本</a>
+  <p class="eyebrow">路線圖 · LONGVIEW</p>
+  <h1>長篇景色 ＋ AI 音樂 · 待完成清單</h1>
+  <p class="lead">對標 Abao Vision 的系列自動出片。<b>版型 2026-08-05 已定稿</b>，
+  剩下的是「讓它能一直出片」的自動化，以及最關鍵的一塊 —— <b>AI 音樂</b>。<br>
+  <a href="./autoedit-map.html">← 這是「自動剪輯」骨幹上的一個片型，看全圖</a>　·　
+  每一項底下都能留言記錄進度節點。</p>
 
   <div class="prog">
     <div class="pnum"><span id="pt">進度</span>
@@ -108,95 +111,59 @@
   <h2 style="color:var(--gold);font-size:1rem;border-bottom:1px solid var(--line);padding-bottom:.4rem">你的新留言（可直接複製這塊）</h2>
   <textarea id="out" readonly placeholder="在任一項底下留言後，這裡會自動整理成可以貼給 Robert 的格式…"></textarea>
 
-  <footer>PhotoNB · POST・自動剪輯 待完成清單（2026-07-26 建立 · 2026-07-27 加留言）· 由 Robert 維護</footer>
+  <footer>PhotoNB · 長篇景色 ＋ AI 音樂 待完成清單（2026-08-06 從 POST 路線圖拆出）· 由 Robert 維護</footer>
 </div>
 
 <script>
 /* ---------- 待辦資料：id 固定，之後插新項目也不會錯位 ---------- */
 const P=[
- {id:"p0",title:"第 0 階段 · 今天已經完成的",why:"先把地基收乾淨：資料夾規矩統一、工具頁上架、POST 第一版出爐。",items:[
-  {id:"0.1",t:"落地區規矩統一：<b><code>to_</code> 開頭＝東西丟進去、<code>_</code> 開頭＝成品跑出來</b>",s:"export／montage／grid／post 四條線都改齊了",who:"r",done:1,
-   out:"寫進 <b>scene_build SKILL §7</b> 結構樹＋兩條鐵則（歸檔時自動照這個放）"},
-  {id:"0.2",t:"<b>montage-auto-move</b> 工具頁上線",s:"照片 ★4/★5 進影片世界的橋",who:"r",done:1,
-   out:'PhotoNB 工具頁 <a href="./montage-auto-move.html">montage-auto-move.html</a>（＋儀表板卡片）'},
-  {id:"0.3",t:"<b>POST 工具</b> 第一版出圖（7 頁 1080×1350）",s:"Augustiner 啤酒館實作，已傳給你看",who:"r",done:1,
-   out:"腳本 <code>tools/post.py</code>＋範例組 <code>Claude-Workspace/photo-grade/2026-07-26_post_demo/</code>（含空白模板 <code>post_模板.json</code>）"},
-  {id:"0.4",t:"<b>POST HTML 圖層模板</b> 上線",s:"可改字、換圖、加刪區塊、顯示圖層框線",who:"r",done:1,
-   out:'PhotoNB <a href="./post-template.html">post-template.html</a>（＋儀表板卡片）'},
-  {id:"0.5",t:"POST 落點定案 <code>to_post/&lt;主題&gt;</code> → <code>_post/NN_&lt;主題&gt;</code>",s:"自動編號，同主題會落回原本那夾",who:"r",done:1,
-   out:"<code>post.py</code> 的 <code>auto_out()</code>；規矩同步寫進 SKILL §7"},
-  {id:"0.6",t:"兩支參考影片看完並整理精華",s:"ChatGPT 八大步驟／審片介面／收斂指標",who:"r",done:1,
-   out:"逐字稿＋關鍵幀留在 <code>Claude-Workspace/2026-07-26_video_refs/</code>；精華已存成我的記憶（之後隨時可調用）"},
-  {id:"0.7",t:"<b>每項可留言記錄進度節點</b>",s:"就是你現在看到的這個功能",who:"r",done:1,
-   out:"本頁（<code>roadmap-post.html</code>）；每項完成後我都會在下面補一行「✅ 產出」，說明東西放哪"}
+ {id:"L0",title:"第 0 階段 · 已經完成的",why:"版型從無到定稿花了兩天，逐項調到你說「可以定稿了」。",items:[
+  {id:"L0.1",t:"<b>平穩風景篩選</b>：B-roll ＋ 非特寫 ＋ ≥12 秒 ＋ 分鏡≤2 ＋ 橫式",s:"荷蘭 292 支挑出 44 支／19.9 分",who:"r",done:1,
+   out:"<code>tools/longview_build.py</code>（含 HLG→SDR）"},
+  {id:"L0.2",t:"<b>版型定稿</b>：標題自動拉滿寬＋自動拉伸／左右對稱／底部效果全片",s:"橫式直式都定了，文字層 4 秒",who:"r",done:1,
+   out:'<code>tools/title_layer.py</code>（preset longview/neon 同一支）＋ <a href="./title-picker.html">標題選擇器</a>'},
+  {id:"L0.3",t:"<b>兩個自己畫的動態元件</b>：音波緞帶、點陣 LED 曲名",s:"ffmpeg 內建做出來是一團糊，只好自己畫",who:"r",done:1,
+   out:"<code>tools/wave_ribbon.py</code>、<code>tools/led_marquee.py</code>"},
+  {id:"L0.4",t:"<b>人物去背夾層</b>：文字夾在背景與人物中間",s:"macOS Vision，本機免費",who:"r",done:1,
+   out:"<code>tools/bin/PersonMask</code>；鐵則：一律拿原生 4K 去背（遮罩固定 1512×2016）"},
+  {id:"L0.5",t:"<b>固定出片模板頁</b>上線（參數鎖定，系列出片用）",s:"你只挑：標題變體／素材／曲子／元件開關",who:"r",done:1,
+   out:'<a href="./longview-aimusic-preset.html">longview-aimusic-preset.html</a>'},
+  {id:"L0.6",t:"<b>對標 Abao Vision 全方位拆解</b>",s:"一素材兩影片／Loop 拉長／音樂當第三個產品",who:"r",done:1,
+   out:'<a href="./longview-teardown.html">longview-teardown.html</a>'}
  ]},
- {id:"p1",title:"第 1 階段 · 審片介面（建議先做這個）",why:"現在你要改東西得打一長串字描述「哪裡、怎麼改」。改成圈一圈＋留一句，我直接讀。這也是之後影片版的底。",items:[
-  {id:"1.1",t:"在 POST 模板加<b>圈畫工具</b>",s:"畫筆直接圈出哪裡怪，不用打字描述位置",who:"r",done:0},
-  {id:"1.2",t:"加<b>留言框</b>：圈完打一句就好",s:"例：「這張右邊裁到了，往左移一點」",who:"r",done:0},
-  {id:"1.3",t:"意見<b>存成檔案</b>，我直接讀",s:"一鍵匯出，或存在頁面裡我來抓",who:"r",done:0},
-  {id:"1.4",t:"我依意見改圖重出，回報「改了哪幾處」",s:"形成一個回合",who:"r",done:0},
-  {id:"1.5",t:"<b>影片版審片介面</b>：播放器＋空白鍵暫停＋畫筆＋時間碼",s:"接你說的自動剪輯影片",who:"r",done:0}
+ {id:"L1",title:"第 1 階段 · AI 音樂（最關鍵的一塊）",why:"沒有音樂就出不了完整一支。這也是 Abao 的第三個收入來源（影片賺廣告、音樂賺串流）。",items:[
+  {id:"L1.1",t:"<b>選服務</b>：你挑一家，我估月費",s:"要「舒服的旋律」：純演奏、BPM 60~80、不要有明顯段落起伏",who:"j",done:0},
+  {id:"L1.2",t:"<b>估價 → 你同意才開通</b>",s:"這是鐵則，不會先刷下去",who:"r",done:0},
+  {id:"L1.3",t:"生第一批曲子，挑出可用的",s:"長度要夠（目標 60 分以上，不夠就 Loop）",who:"r",done:0},
+  {id:"L1.4",t:"決定音樂要不要獨立上架（Spotify／Apple Music）",s:"Abao 是這樣做導流的",who:"j",done:0}
  ]},
- {id:"p2",title:"第 2 階段 · 讓我越改越少",why:"每次出片記錄你改了什麼，逼我把同一個錯誤收斂掉，而不是每次都被退。",items:[
-  {id:"2.1",t:"每次出片後記錄「你改了幾處、改什麼」",s:"存進待辦清單，看得到趨勢",who:"r",done:0},
-  {id:"2.2",t:"<b>收斂指標</b>：這支比上支少改幾處？",s:"目標是版次一路往下",who:"r",done:0},
-  {id:"2.3",t:"<b>學習閉環</b>：上次學到的，這次有沒有做到",s:"做到就寫進 SKILL／記憶，變成預設",who:"r",done:0},
-  {id:"2.4",t:"每 5 支回顧一次，把重複的錯誤變成規則",s:"避免同一個地方被退第三次",who:"r",done:0}
+ {id:"L2",title:"第 2 階段 · 讓它能一直出片",why:"版型定了，但每出一支還是要我手工填一堆。這些做完就變「挑素材＋挑曲子」兩步。",items:[
+  {id:"L2.1",t:"<b>場景清單跟著播放進度自動亮</b>",s:"現在清單是死的，播到哪不會變",who:"r",done:0},
+  {id:"L2.2",t:"<b>曲目時間自動算</b>",s:"依曲長自動排時間碼，不用手填",who:"r",done:0},
+  {id:"L2.3",t:"<b>Loop 自動補長度</b>",s:"素材不夠長時自動接回開頭（Abao 拍 65 分出 2 小時）",who:"r",done:0},
+  {id:"L2.4",t:"<b>發佈包</b>：封面＋標題＋描述＋章節一次生",s:"標題寫規格（4K/60fps）、描述放章節時間碼",who:"r",done:0},
+  {id:"L2.5",t:"⚠️ 標題不能寫 8K",s:"我們是 4K，Abao 才是 8K，別抄錯",who:"r",done:1}
  ]},
- {id:"p3",title:"第 3 階段 · 規範寫死進工具",why:"字級、斷句、字數、字型 —— 定一次寫進程式，不要每次靠感覺。",items:[
-  {id:"3.1",t:"<b>字幕規範</b>：一行幾個字、怎麼斷句、標題放哪",s:"參考片的做法是一行 ≤8 字、依語意斷",who:"j",done:0},
-  {id:"3.2",t:"<b>POST 文案字數</b>固化進工具",s:"封面 8–14 字／引言 80–120／主打 50–90…",who:"r",done:0},
-  {id:"3.3",t:"<b>字型組定案</b>（襯線＋黑體，免費可商用）",s:"現在用系統字，換掉會更有個性",who:"j",done:0},
-  {id:"3.4",t:"顏色規範寫死：米白＋純黑，彩度全交給照片",s:"已在程式裡，補進文件",who:"r",done:0}
+ {id:"L3",title:"第 3 階段 · 一素材兩影片",why:"Abao 同一支素材發「有音樂版」＋「純環境音版」，互相導流，兩支加起來 270 萬觀看。",items:[
+  {id:"L3.1",t:"同一批素材出兩版（配樂版／純環境音版）",s:"環境音版要保原音，不能靜音",who:"r",done:0},
+  {id:"L3.2",t:"兩支互相在描述裡導流",s:"發佈包順便生",who:"r",done:0}
  ]},
- {id:"p4",title:"第 4 階段 · POST 初稿修正",why:"等你看完第一版跟 HTML 模板，把版型調到你滿意為止。",items:[
-  {id:"4.1",t:"第 3、5 頁下方留白再縮",s:"照片可以再拉高一點",who:"r",done:0},
-  {id:"4.2",t:"第 4 頁拍立得地圖：大標露太少",s:"調位置讓它從縫隙露出來",who:"r",done:0},
-  {id:"4.3",t:"膠囊框、浮水印的大小／位置微調",s:"",who:"j",done:0},
-  {id:"4.4",t:"追蹤頁互動圖示畫得更像",s:"HTML 版目前是暫代符號",who:"r",done:0},
-  {id:"4.5",t:"你看完初稿給整體意見",s:"哪幾頁留、哪幾頁換掉",who:"j",done:0}
- ]},
- {id:"p5",title:"第 5 階段 · 同一套圖層接到影片",why:"你說的「這技術套用到自動剪輯影片」：同一份圖層設定，換一個渲染器就變會動的字卡。",items:[
-  {id:"5.1",t:"同一份圖層設定 → <b>動態版</b>（透明 ProRes）",s:"改用 narrative_tag 當渲染器",who:"r",done:0},
-  {id:"5.2",t:"標題層／地名膠囊／地址層 做成影片字卡",s:"進 FCP 直接疊，不用去背",who:"r",done:0},
-  {id:"5.3",t:"FCP 實際疊一次測試",s:"確認位置、時間、安全區",who:"r",done:0},
-  {id:"5.4",t:"決定影片字卡要不要走同一份 HTML 模板",s:"一次填字，圖跟影片都有",who:"j",done:0}
- ]},
- {id:"p6",title:"第 6 階段 · 蒙太奇 Ⓑ 路線（剪映）",why:"照片端已經通了（to_montage → _montage）；影片端還缺「依關鍵字撈 clip 打包」。",items:[
-  {id:"6.1",t:"定義<b>剪輯類關鍵字</b>（開場／空鏡／轉場／收尾）",s:"你撿片時打，我靠它自動撈",who:"j",done:0},
-  {id:"6.2",t:"依關鍵字從 <code>.fcpxmld</code> 撈 clip",s:"選片事實只在 fcpxmld，母帶不複製",who:"r",done:0},
-  {id:"6.3",t:"修剪＋照播放順序命名，打包 <code>to_montage/&lt;片名&gt;_01/</code>",s:"整夾拖進剪映就開剪",who:"r",done:0},
-  {id:"6.4",t:"剪映實跑一支氛圍蒙太奇",s:"咖啡廳／開箱／專櫃那類",who:"j",done:0},
-  {id:"6.5",t:"色調正規化：O-Log2→709 LUT",s:"<b>2026-08-05 全線接通</b>（你給了原廠 .cube ＋第一批素材）",who:"r",done:1,
-   out:"① LUT 裝進 FCP　② 匯入檔自動掛相機 LUT（<code>customLUTOverride</code>）　③ HL/KP 出片 ffmpeg 自動烤 LUT　④ 工具 <code>tools/olog_decode.py</code>（O-Log2／HLG／709 逐支分流）"},
-  {id:"6.6",t:"<b>Apple Log 2</b> 也接進同一條分流",s:"等你用 iPhone 拍一支測試片（Apple Log FCP 原生就認，比 OPPO 好處理）",who:"j",done:0}
- ]}
- ,
- {id:"p7",title:"第 7 階段 · 剪輯工具鏈整併（2026-08-05 完成）",why:"四支工具原本功能重疊、你會不知道該開哪一個。照你定的架構拆成單一職責，並用「變體編號」串起來。",items:[
-  {id:"7.1",t:"版型庫重新編號＋分組（片頭／中場／全場／整支）",s:"③ 改名<b>雜誌風格標題卡</b>；④ 音波+LED 歸「全場背景」不是片頭",who:"r",done:1,
-   out:'<a href="./narrative-tag-tool.html">narrative-tag-tool.html</a>　＋「時機只是建議不是規定」的說明'},
-  {id:"7.2",t:"<b>title-picker 拆成兩支</b>",s:"標題選擇器（編一個標題）／長篇景色模板（系列出片，參數鎖定）",who:"r",done:1,
-   out:'<a href="./title-picker.html">title-picker.html</a>　＋　<a href="./longview-aimusic-preset.html">longview-aimusic-preset.html</a>'},
-  {id:"7.3",t:"三頁用<b>變體編號</b>串起來（存 ①-A → 別頁填編號就帶入）",s:"實際開瀏覽器測過整條，不是只改文案",who:"r",done:1,
-   out:"標題選擇器「存成變體」→ 初剪／長篇景色的變體欄位自動帶出"},
-  {id:"7.4",t:"初剪的<b>描述標籤改成動態清單</b>，要幾層加幾層",s:"你說的：不要先定義三格；片頭版型拿去片尾也行",who:"r",done:1,
-   out:'<a href="./initcut-spec-picker.html">initcut-spec-picker.html</a> ④ 區（版型／時機／觸發／秒數／版位／▲▼排序）'},
-  {id:"7.5",t:"<b>長篇景色 ＋ AI 音樂已拆成獨立路線圖</b>",s:"它是另一個片型，不該混在這張（James 2026-08-06 拍板）",who:"r",done:1,
-   out:'<a href="./roadmap-longview.html">長篇景色 ＋ AI 音樂 待完成清單 →</a>　骨幹全圖：<a href="./autoedit-map.html">自動剪輯片型地圖 →</a>'}
+ {id:"L4",title:"第 4 階段 · 上頻道",why:"工具做完了要真的發出去才有意義。",items:[
+  {id:"L4.1",t:"決定頻道定位與名稱",s:"你的風景素材很多，先想清楚主軸",who:"j",done:0},
+  {id:"L4.2",t:"第一支正式片上線",s:"用荷蘭運河遊船那批當首發",who:"j",done:0},
+  {id:"L4.3",t:"發佈後回頭看數據，調整版型",s:"哪裡被跳過、留存掉在哪",who:"r",done:0}
  ]}
 ];
 
 /* ---------- 已同步的留言（Robert 維護，發佈進頁面 = 所有裝置都看得到） ---------- */
+
 const NOTES={
- "0.7":[{by:"r",at:"2026-07-27 10:40",text:"依你的要求加上每項留言功能。做法：我的留言直接寫進頁面（跨裝置看得到）；你的留言先存你這台，按「複製新留言」貼給我，我再寫進來變正式紀錄。"}],
- "1.1":[{by:"r",at:"2026-07-27 10:40",text:"規格我先想好了：畫筆在 post-template 的每一頁上面疊一層透明畫布，圈完自動記下是第幾頁、圈在哪個位置（相對座標），這樣我不用猜你指的是哪裡。等你一聲令下就開工。"}],
- "6.5":[{by:"r",at:"2026-07-27 10:40",text:"卡住中：需要 OPPO 原廠 O-Log→709 的 .cube。拿不到的話備案是你用同一畫面拍「O-Log 一張＋一般模式一張」（有色卡更好），我算一支近似的，準度約八九成。"},
-        {by:"r",at:"2026-08-05 22:50",text:"✅ 解除卡住。你給了原廠三顆 .cube ＋ 8/3 拍的第一批 4K120 O-Log2。這趟做完四件事：① LUT 裝進 FCP 的 Camera LUTs ② 匯入檔自動掛相機 LUT（FCPXML 原生欄位 customLUTOverride，不是外掛也不是烤進畫面）③ HL/KP 出片端自己套 LUT（它們不經 FCP，相機 LUT 對它們無效）④ 新工具 olog_decode.py 逐支分流。實測 HL 4 段＋KP 8 張全部正常。"},
-        {by:"r",at:"2026-08-05 22:50",text:"兩個踩過的坑記在這：① LUTID 不是 .cube 檔的 MD5（FCP 用解析後資料的雜湊），只能在 FCP 手動套一次再匯出 XML 撈，已存成清單 ~/.config/robert/fcp_lut_ids.json ② 舊的 is_hlg() 判斷寫「色彩空間含 2020」，但 O-Log2 是 9-1-9 (Rec. 2020) 也含 2020 → 會被誤當 HLG 去 tonemap，顏色歪掉而且不易察覺。已修。"}],
- "7.4":[{by:"r",at:"2026-08-05 19:30",text:"你打回我原本的「片頭/中場/終場三格」設計，說「能動態新增的東西就不要先設限幾格」，也點出描述標籤只是建議出場時機、片頭拿片尾的為何不行。已照這個改，並在版型庫加註說明。"}]
+ "L1.1":[{by:"r",at:"2026-08-06 11:20",text:"已經給過你四支中文教學連結。關鍵參數其實只有三個：純演奏（排除人聲）、BPM 60~80、不要有明顯段落起伏。你挑好服務跟我說，我先估月費，你同意我才開通 —— 這是我們的鐵則。"}],
+ "L2.3":[{by:"r",at:"2026-08-06 11:20",text:"Loop 就是「素材不夠長時自動接回開頭」。Abao 的做法是描述裡寫「01:05:07 - Loop starts」，等於拍 65 分鐘出 2 小時的片。我們素材夠的話不一定要用。"}],
+ "L0.2":[{by:"r",at:"2026-08-06 11:20",text:"定稿過程我有一句話講錯過：我說「字數決定字高、長地名只能矮」——那是錯的，是我當時用固定字級/固定拉伸造成的，不是物理限制。現在一律量實際字寬反推字級填滿 90%，AMSTERDAM(9字) 跟 TOKYO(5字) 字高都是 44%。"}]
 };
 
-const KEY="roadmap-post-v1", NKEY="roadmap-post-notes-v1";
+const KEY="roadmap-longview-v1", NKEY="roadmap-longview-notes-v1";
 const state = JSON.parse(localStorage.getItem(KEY)||"{}");
 const mine  = JSON.parse(localStorage.getItem(NKEY)||"{}");   // {itemId:[{text,at}]}
 const open  = {};
