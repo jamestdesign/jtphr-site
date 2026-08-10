@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Robert 的工具箱 · 裝了什麼 · PhotoNB</title>
+<meta name="description" content="這台工作電腦上，Robert 手邊有哪些工具：技能包、自己寫的腳本、指令列工具、外部軟體。你問「我們有沒有裝○○」時查這頁。" />
+<meta name="date" content="2026-08-10" />
+<style>
+  :root{--navy:#0b1022;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+        --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--blue:#7fb6f0;--grey:#8b93a8;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;}
+  a{color:var(--gold);}
+  .wrap{max-width:900px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.2rem);}
+  .lead{color:var(--muted);margin:.2rem 0 1.2rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.88em;}
+  h2{color:var(--gold);font-size:1.05rem;letter-spacing:.04em;margin:2.2rem 0 .2rem;
+     border-bottom:1px solid var(--line);padding-bottom:.35rem;}
+  h3{font-size:.92rem;margin:1.2rem 0 .35rem;color:var(--gold2);}
+  .note{color:var(--muted);font-size:.85rem;margin:.15rem 0 .8rem;}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.4rem 0 .2rem;}
+  th{text-align:left;color:var(--gold);font-weight:600;font-size:.76rem;letter-spacing:.1em;
+     border-bottom:1px solid var(--line);padding:.35rem .5rem;}
+  td{border-bottom:1px solid rgba(255,255,255,.07);padding:.42rem .5rem;vertical-align:top;}
+  td:first-child{white-space:nowrap;color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.92em;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .ok{color:var(--green);} .dim{color:var(--grey);}
+  .callout{background:rgba(216,182,90,.08);border:1px solid var(--line);border-left:3px solid var(--gold);
+           border-radius:10px;padding:.7rem .9rem;margin:1.1rem 0;font-size:.87rem;}
+  footer{color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);margin-top:2.4rem;padding-top:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本</a>
+  <div class="eyebrow">TOOLBOX</div>
+  <h1>Robert 的工具箱</h1>
+  <p class="lead">
+    這台工作電腦上我手邊有什麼。你看到別人推薦某個工具、想問「我們是不是有裝」時，先查這頁。<br>
+    <span style="color:var(--green)">✅</span> ＝ 我實際跑過確認能動　·
+    <span class="dim">○</span> ＝ 裝好了但還沒實跑驗證
+  </p>
+
+  <div class="callout">
+    🔸 <b>怎麼用這頁</b>：你不用記工具名字。想做什麼就直接跟我說（「幫我剪一支一分鐘」「這支影片在講什麼」），
+    我自己挑工具。這頁是<b>給你查證用的</b> —— 免得我說「有裝」你也不知道真的假的。
+  </div>
+
+  <h2>🧠 技能包（Claude Code Skills）</h2>
+  <p class="note">裝在 <code>~/.claude/skills/</code>。技能包 ＝ 一整套做事流程＋腳本，不是單一指令。</p>
+
+  <h3>我們自己建的</h3>
+  <div class="tw"><table>
+    <tr><th>名稱</th><th>做什麼</th><th>狀態</th></tr>
+    <tr><td>照片影片歸檔<br>(scene_build)</td><td>倒卡素材跑全套歸檔：分天分場景、評分、寫 XMP、鋪 LR/FCP 工作檔。<b>pipeline 的第一道門</b></td><td class="ok">✅ 常用</td></tr>
+    <tr><td>claude-real-video</td><td><b>讓我看得懂影片</b>。丟 YouTube／IG 連結或本機影片檔給我，抽關鍵幀＋逐字稿，我就能分析內容。偵測畫面變化才抽幀，全程本機跑不上雲</td><td class="ok">✅ 2026-08-10 實測</td></tr>
+    <tr><td>session-insight</td><td>把一次對話整理成紀錄存檔，避免斷線後忘記做到哪</td><td class="dim">○</td></tr>
+  </table></div>
+
+  <h3>Irene 那套（外部剪輯團隊技能包）</h3>
+  <p class="note">六支專家技能，入口是 <code>hello-irene</code>。<b>你沒說要用她，我預設走我們自己的 pipeline</b>；
+    用了她的工具，我在署名會標出來。</p>
+  <div class="tw"><table>
+    <tr><th>名稱</th><th>做什麼</th><th>狀態</th></tr>
+    <tr><td>hello-irene</td><td>統籌，判斷需求後調度下面五位</td><td class="dim">○</td></tr>
+    <tr><td>beat-cut-editor</td><td><b>卡點剪輯師</b>：一資料夾素材 → 配樂剪成短片。內建 14 首原創純演奏音樂（版權自有可商用）</td><td class="ok">✅ LV show 實跑</td></tr>
+    <tr><td>footage-sifter</td><td>素材大掃除：淘汰、分組、每組挑最佳一顆</td><td class="dim">○</td></tr>
+    <tr><td>caption-doctor</td><td>洗字幕檔：任何來源的 .srt 都能清乾淨</td><td class="dim">○</td></tr>
+    <tr><td>subtitle-translator</td><td>字幕翻譯，時間軸完全不跑掉</td><td class="dim">○</td></tr>
+    <tr><td>broll-animation-studio</td><td>開場動畫字卡，十種風格（Vox 紀錄片、極簡…）</td><td class="dim">○</td></tr>
+    <tr><td>irene-setup</td><td>她那套的安裝／健檢管家</td><td class="dim">○</td></tr>
+  </table></div>
+
+  <h3>第三方（別人開源的）</h3>
+  <div class="tw"><table>
+    <tr><th>名稱</th><th>做什麼</th><th>狀態</th></tr>
+    <tr><td>pixel2motion</td><td>PNG／LOGO 圖檔 → 乾淨 SVG → 會動的品牌動畫（HTML）</td><td class="dim">○ 裝了沒實用過</td></tr>
+    <tr><td>text-to-lottie</td><td>用文字描述生成 Lottie 動畫（給 App／網頁用的向量動畫格式）</td><td class="dim">○ 裝了沒實用過</td></tr>
+  </table></div>
+
+  <h2>🛠️ 我自己寫的工具</h2>
+  <p class="note">在 <code>~/Desktop/Claude-Workspace/photo-grade/tools/</code>，共 29 支。這些是為你的流程量身寫的，網路上找不到。</p>
+
+  <h3>歸檔 · 匯入</h3>
+  <div class="tw"><table>
+    <tr><td>scene_build_scaffold</td><td>歸檔完自動鋪好該 trip 的 LR catalog 與 FCP library（照範本複製，不碰資料庫）</td></tr>
+    <tr><td>trip_fcpx_build</td><td>整趟 <code>MOV_&lt;day&gt;</code> 產匯入檔進 FCP：場景變關鍵字、母帶不複製、<b>log 素材自動掛相機 LUT</b></td></tr>
+    <tr><td>olog_decode</td><td>OPPO O-Log2 自動辨識＋套官方 LUT 解碼。混搭素材逐支分流（O-Log2／HLG／一般 709）</td></tr>
+    <tr><td>apply_scores_xmp</td><td>把評分寫進 XMP，不動 LR catalog（安全路線）</td></tr>
+    <tr><td>restructure_zhuci</td><td>第二台 iPhone 補充素材的回溯重組</td></tr>
+  </table></div>
+
+  <h3>撿片 · 出圖出片段</h3>
+  <div class="tw"><table>
+    <tr><td>fcpxmld-export</td><td>從你撿好片的 <code>.fcpxmld</code> 抽 HL 片段與 KP 單禎，<b>該解碼的自動解碼</b></td></tr>
+    <tr><td>ir_tag</td><td>影片分鏡抽幀 → 我讀圖標關鍵字（內容／景別／A-B-C roll）→ 產出可匯入的關鍵字</td></tr>
+    <tr><td>camera_motion</td><td>判斷是「拍攝者在移動」還是「相機沒動」</td></tr>
+    <tr><td>export_auto_move</td><td>出片鏡射：自動分場景搬進 <code>_export</code></td></tr>
+    <tr><td>ir_merge_parts</td><td>大批量分身標記結果的合併</td></tr>
+  </table></div>
+
+  <h3>組時間線 · 剪輯</h3>
+  <div class="tw"><table>
+    <tr><td>fcpxml_to_edl</td><td>卡點剪輯：吃 FCPX 撿片結果 ＋ 創作素材，產出剪輯表</td></tr>
+    <tr><td>fcpxml-assemble</td><td>把多個 <code>.fcpxmld</code> 的 ★3/★4 範圍併成一條時間軸</td></tr>
+    <tr><td>flight_sequence_xml</td><td>「起飛→落地」分段航跡時間軸（桃園→阿姆斯特丹那支）</td></tr>
+    <tr><td>longview_build</td><td>平穩風景長溶接串成陪伴影片（含 HLG→SDR）</td></tr>
+    <tr><td>longview_fcpxml</td><td>平穩風景清單 → FCP 時間軸給你自己微調</td></tr>
+  </table></div>
+
+  <h3>圖層 · 版型</h3>
+  <div class="tw"><table>
+    <tr><td>title_layer</td><td><b>文字圖層總成</b>：長景版型＋霓虹標題同一支。橫直自動切排版、標題自動拉滿寬、可出透明 ProRes 給 FCP、<b>文字能夾在人物後面</b></td></tr>
+    <tr><td>narrative_tag</td><td>描述標籤版型庫的算圖端（機票感、地名條那些）</td></tr>
+    <tr><td>wave_ribbon</td><td>音波緞帶（ffmpeg 內建做出來是一團糊，自己畫的）</td></tr>
+    <tr><td>led_marquee</td><td>點陣 LED 曲名跑馬燈</td></tr>
+    <tr><td>logo_tag</td><td>品牌標 overlay</td></tr>
+    <tr><td>neon_title</td><td>舊版霓虹標題（已併進 title_layer，留著回溯）</td></tr>
+    <tr><td>longview_overlay</td><td>舊版長景圖層（同上，已被 title_layer 取代）</td></tr>
+  </table></div>
+
+  <h3>出片 · 社群</h3>
+  <div class="tw"><table>
+    <tr><td>post</td><td>社群輪播出片：7 頁雜誌式版型 1080×1350</td></tr>
+    <tr><td>grid</td><td>拼貼輸出：馬賽克／壁貼／剪貼簿三風格，影片拼貼全自動</td></tr>
+    <tr><td>collage / collage2</td><td>情緒板拼貼（grid 的前身）</td></tr>
+    <tr><td>catalog_gen</td><td>風格檔庫目錄產生器</td></tr>
+  </table></div>
+
+  <h2>⌨️ 指令列工具</h2>
+  <div class="tw"><table>
+    <tr><th>指令</th><th>做什麼</th><th>狀態</th></tr>
+    <tr><td>crv</td><td>claude-real-video 的本體 —— 影片抽幀＋逐字稿</td><td class="ok">✅</td></tr>
+    <tr><td>transcribe</td><td>語音轉逐字稿（Whisper ＋ 自動簡轉繁）</td><td class="ok">✅</td></tr>
+    <tr><td>exiftool</td><td>讀寫照片影片的中繼資料（關鍵字、評分、色標、GPS、時區）</td><td class="ok">✅</td></tr>
+    <tr><td>ffmpeg / ffprobe</td><td>所有影片切、轉、疊圖層、上 LUT 的底層引擎</td><td class="ok">✅</td></tr>
+    <tr><td>yt-dlp</td><td>抓網路影片（給 crv 分析用）</td><td class="ok">✅</td></tr>
+    <tr><td>PersonMask</td><td>自己編的小程式：macOS Vision 人物去背（本機免費，文字夾人物後面靠它）</td><td class="ok">✅</td></tr>
+  </table></div>
+
+  <h2>🔌 直接控制得了的軟體</h2>
+  <div class="tw"><table>
+    <tr><th>連接</th><th>能做什麼</th><th>狀態</th></tr>
+    <tr><td>SpliceKit</td><td><b>直接操控 Final Cut Pro</b>：開專案、讀時間軸、下刀、套效果、截圖驗證。需要開特製版 FCP</td><td class="dim">○ 要開 FCP 才連得上</td></tr>
+    <tr><td>claudetube</td><td>影片互動問答（「第幾分鐘在講什麼」）</td><td class="dim">○ 待重開生效</td></tr>
+    <tr><td>Telegram</td><td>就是你現在跟我講話的這條線</td><td class="ok">✅</td></tr>
+    <tr><td>Chrome</td><td>開網頁、截圖、驗證我做的 PhotoNB 頁面真的能用</td><td class="ok">✅</td></tr>
+  </table></div>
+
+  <h2>🎨 電腦上的外部軟體</h2>
+  <p class="note">這些是你在用的，我大多只能讀資料或準備檔案給它們，不能代你操作。</p>
+  <div class="tw"><table>
+    <tr><td>Lightroom Classic</td><td>照片主場。我能讀寫 catalog 與 XMP</td></tr>
+    <tr><td>Final Cut Pro</td><td>影片主場。我產匯入檔、讀你撿片的結果</td></tr>
+    <tr><td>Evoto</td><td>人像修圖。round-trip 有固定規矩（編輯版進 <code>Evotofu/</code> 子夾）</td></tr>
+    <tr><td>Excire Foto</td><td>AI 照片標記，資料庫我能查</td></tr>
+    <tr><td>Photoshop 2026 / Luminar Neo</td><td>外部編輯器，走同一套 round-trip 規矩</td></tr>
+    <tr><td>CapCut（剪映）</td><td>蒙太奇 Ⓑ 路線的落點</td></tr>
+  </table></div>
+
+  <h2>📦 準備好的素材與範本</h2>
+  <div class="tw"><table>
+    <tr><td>O-Log2 LUT</td><td>官方三顆（Rec709／HLG／PQ）已裝進 FCP 的相機 LUT，匯入檔會自動掛</td></tr>
+    <tr><td>LR / FCP 範本</td><td><code>_templateLR.lrcat</code>、<code>_templateFCPX.fcpbundle</code> —— 要開新 trip 直接複製</td></tr>
+    <tr><td>音樂庫</td><td>Irene 的 14 首原創純演奏（開心 7／感人勵志 7），版權自有可商用</td></tr>
+    <tr><td>風格檔庫</td><td>576 個照片預設 ＋ 489 個影片 LUT</td></tr>
+  </table></div>
+
+  <div class="callout">
+    ➕ <b>看到想裝的工具怎麼辦</b>：截圖丟給我就好。我會先查<b>是不是已經有了</b>（很多功能我們早就有，只是名字不同），
+    真的沒有再評估要不要裝 —— 會看它<b>要不要錢</b>、<b>會不會把你的素材上傳雲端</b>、
+    以及<b>跟現有流程接不接得起來</b>。要花錢的一律先估價給你，你同意才動。
+  </div>
+
+  <footer>PhotoNB · Robert 的工具箱（2026-08-10 建立）· 每次裝新東西我會回來更新</footer>
+</div>
+</body>
+</html>
