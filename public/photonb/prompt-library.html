@@ -176,6 +176,159 @@ Crisp legible typography, clean sans-serif body text, balanced composition, rich
       prompt: `Vintage illustrated travel map of {REGION}, {COUNTRY}. Hand-drawn cartography, muted warm film tones (sepia, faded olive, antique gold), subtle aged-paper texture. Show a dotted journey route from {FROM} through {STOP1}, {STOP2}, to {DESTINATION}, with small elegant location pins and labels. Delicate illustrated mountains, pine forests, alpine lakes. Clean, minimal, lots of soft negative space so a route and pins read clearly. Top-down map view. Warm cinematic color grade. {RATIO}.`,
       promptAltLabel: "範例（德國 day2）",
       promptAlt: `Vintage illustrated travel map of the Bavarian Alps, Germany. Hand-drawn cartography, muted warm film tones (sepia, faded olive, antique gold), subtle aged-paper texture. Dotted journey route from München south through Schloss Linderhof, Oberammergau, to Neuschwanstein Castle, with small elegant location pins and labels. Delicate illustrated mountains, pine forests, alpine lakes. Clean, minimal, lots of soft negative space. Top-down map view. Warm cinematic color grade. 16:9.`
+    }    ,{
+      id: "PR-003",
+      title: "「我的小宇宙」一日拼貼海報",
+      titleEn: "My Little Universe Collage",
+      styles: ["角色海報","拼貼","暖棕暈黃","1:1方形","李善"],
+      colorway: ["#3a2a20","#c99a6b","#f3e3d0","#ffd9a0","#fff6ea"],
+      model: "AI 生圖（Nano Banana / ChatGPT 生圖皆可）",
+      ratio: "1:1 方形（IG 貼文）",
+      source: "James 既有角色「李善」，2026-08-11 提供",
+      images: [{src:"prompt-assets/PR-003-universe.jpg", cap:"李善的小宇宙"}],
+      thumb: "prompt-assets/PR-003-universe-thumb.jpg",
+      breakdown: [
+        {h:"版式", d:"1:1 方形，中央一顆大頭像（半身、托腮），四周環繞 8~10 個小分身場景"},
+        {h:"分身場景", d:"每個小分身做一件事：追劇／閱讀／抱貓／工作／聽歌／吃蛋糕／寫日記／泡澡／發呆。每個都配一句手寫感白色語音泡泡"},
+        {h:"氛圍", d:"夜晚房間、大量暖黃小燈串 bokeh、毛毯／針織／泰迪熊，整張暈黃"},
+        {h:"標題", d:"頂端手寫感中文大標＋一行副標語"},
+        {h:"底部兩張紙卡", d:"左＝勾選清單「今日小確幸」；右＝手寫信「給未來的自己」，右下署名"},
+        {h:"點綴", d:"愛心線稿、星星、月亮、拍立得小照片散落"}
+      ],
+      note: "分身越多越容易崩臉。實務做法：先生中央主體定角色，再用同一張當參考圖逐個生分身，最後合成；或直接讓模型一次生但接受小分身臉會略有差異（縮得小其實看不出來）。",
+      prompt: `Create a 1:1 square "my little universe" collage poster of {CHARACTER}.
+
+Center: a large half-body portrait of the character resting her chin on her hands, looking at the camera, soft warm smile, cozy knit sweater.
+
+Around the center, arrange 8-10 smaller vignettes of the SAME character doing everyday self-care things, each in its own soft-edged scene:
+watching a drama on her phone / reading a book in a rattan chair / hugging a fluffy cat while sleeping / working on a laptop / listening to music with headphones / eating a small cake / writing in a diary / taking a bubble bath / lying in bed daydreaming.
+
+Each vignette has a small white hand-written speech bubble with a short line of {LANGUAGE} text.
+
+Mood: night-time cozy bedroom, tons of warm golden fairy-light bokeh, knit blankets, teddy bears, candles, polaroid photos pinned around. Everything bathed in a warm amber glow.
+
+Top: large hand-written title "{TITLE}" with a thin subtitle line under it.
+Bottom-left: a paper note card with a checklist of small daily joys.
+Bottom-right: a paper letter "to my future self", signed.
+Scatter: line-art hearts, stars, crescent moons, tiny polaroids.
+
+Style: soft cinematic AI illustration, dreamy, high detail, warm brown-amber palette.`
+    },
+    {
+      id: "PR-004",
+      title: "勵志語錄海報 · Q版多分身",
+      titleEn: "Quote Poster with Chibi Vignettes",
+      styles: ["語錄海報","Q版角色","手寫大標","4:5直式","李善"],
+      colorway: ["#7a4a24","#c99a6b","#fdf6ec","#4a6fa5","#dbe8f7"],
+      model: "AI 生圖",
+      ratio: "4:5 / 2:3 直式",
+      source: "James 既有角色「李善」，2026-08-11 提供（暖棕版＋藍色版）",
+      images: [
+        {src:"prompt-assets/PR-004-warm.jpg", cap:"暖棕版（Good morning 手寫體）"},
+        {src:"prompt-assets/PR-004-blue.jpg", cap:"藍色版（同版型換色）"}
+      ],
+      thumb: "prompt-assets/PR-004-warm-thumb.jpg",
+      breakdown: [
+        {h:"左上", d:"英文手寫花體大標 Good morning ＋ 一句中文金句（關鍵詞換紅／藍強調色）"},
+        {h:"名言出處", d:"中文金句下面接英文原句，再接「—— 作者（身分）」"},
+        {h:"主角", d:"中央偏右一個大 Q 版角色（托腮／寫字），周圍 3~5 個小 Q 版分身各做一件相關動作"},
+        {h:"清單卡", d:"2~3 張紙條／便利貼，寫勾選清單與提醒，手寫字"},
+        {h:"道具", d:"鬧鐘、咖啡杯（杯身有標語）、相機、花、蠟燭、筆記本"},
+        {h:"底部", d:"一行總結金句，關鍵詞上色；或四個 icon＋關鍵詞"}
+      ],
+      note: "同一版型只換配色就能出一整個系列（暖棕／天藍／薄荷…）。文字多時小字容易出錯，生完逐行檢查，錯的那塊叫模型「fix the text in that card to exactly: …」。",
+      prompt: `Create a vertical (4:5) motivational quote poster featuring {CHARACTER}.
+
+Top-left: large English hand-written script headline "Good morning", then a bold {LANGUAGE} quote in 3 lines with the key phrase in {ACCENT_COLOR}. Under it the English original of the quote, then the attribution "— {AUTHOR} ({AUTHOR_TITLE})".
+
+Main subject: one large chibi 3D-cute version of the character on the right, resting her chin on her hand while writing in an open notebook. Around her, 3-5 smaller chibi versions of the SAME character each doing a related action (reading with glasses, running with a bag, giving a thumbs up, working on a laptop, presenting at a whiteboard), each with a small thought bubble.
+
+Props: alarm clock, coffee mug with a slogan on it, vintage camera, daisies in a vase, candles, an open notebook with a hand-written checklist.
+Paper cards: 2-3 note cards / sticky notes with hand-written checklists and reminders.
+Bottom: one summary line with the key word highlighted in {ACCENT_COLOR}.
+
+Palette: {PALETTE}. Soft warm lighting, bokeh, cozy, high detail, dreamy AI illustration style.`
+    },
+    {
+      id: "PR-005",
+      title: "勵志語錄海報 · 襯線單人版",
+      titleEn: "Serif Quote Poster, Single Portrait",
+      styles: ["語錄海報","襯線標題","深藍金","4:5直式","李善"],
+      colorway: ["#0f1e3d","#c9a86a","#f5f1e6","#8fb3e0","#eaf2fb"],
+      model: "AI 生圖",
+      ratio: "4:5 直式",
+      source: "James 既有角色「李善」，2026-08-11 提供（深藍金版＋淺藍版）",
+      images: [
+        {src:"prompt-assets/PR-005-navy.jpg", cap:"深藍金版（最有質感）"},
+        {src:"prompt-assets/PR-005-lightblue.jpg", cap:"淺藍版（附底部五欄 icon）"}
+      ],
+      thumb: "prompt-assets/PR-005-navy-thumb.jpg",
+      breakdown: [
+        {h:"版面", d:"左文右人。左欄純文字，右邊一個角色，不放小分身 —— 比 PR-004 安靜、正式"},
+        {h:"標題", d:"GOOD MORNING 全大寫襯線體，字距拉開，金色或深藍"},
+        {h:"金句", d:"中文 4 行，關鍵詞換色；下面英文原句；再下面作者出處"},
+        {h:"角色", d:"半身，托腮或寫字，桌上有筆記本、馬克杯（杯身印關鍵詞）、書堆、花"},
+        {h:"底部（淺藍版）", d:"五個圓形 icon ＋ 關鍵詞 ＋ 一行說明，做成流程感"},
+        {h:"邊框", d:"細金線內框，四角小裝飾"}
+      ],
+      note: "這版適合當「系列封面」——字少、留白多、看起來最貴。深藍金那版可直接沿用我們 PhotoNB 的配色。",
+      prompt: `Create a vertical (4:5) elegant motivational quote poster.
+
+Layout: text on the left half, character on the right half. Thin gold inner border frame with small corner ornaments.
+
+Left column, top to bottom:
+- "GOOD MORNING" in large all-caps serif, wide letter-spacing, {ACCENT_COLOR}
+- a thin divider ornament
+- a 4-line {LANGUAGE} quote, with the key phrase in {ACCENT_COLOR}
+- the English original of the quote in serif
+- attribution "— {AUTHOR}"
+- a hand-written signature at the bottom
+
+Right: a semi-realistic cute 3D-style portrait of {CHARACTER}, half body, resting her chin on her hand, sitting at a desk with an open notebook, a mug with {KEYWORDS} printed on it, stacked books and flowers.
+
+Background: {BACKGROUND} with soft bokeh and subtle sparkles.
+Bottom strip (optional): 5 circular icons in a row, each with a keyword and one explanatory line.
+
+Palette: {PALETTE}. Cinematic soft lighting, luxurious, high detail.`
+    }    ,{
+      id: "PR-006",
+      title: "水彩繪本風 · 四格知識手冊",
+      titleEn: "Watercolour Storybook Info-Handbook",
+      styles: ["繪本風","水彩","米黃紙感","四格卡","南湳"],
+      colorway: ["#6b5537","#a8935f","#f3ecdc","#cfd9bd","#fffaf0"],
+      model: "AI 生圖",
+      ratio: "4:5 / 2:3 直式",
+      source: "James 為家貓「南湳」製作，2026-08-11 提供",
+      images: [
+        {src:"prompt-assets/PR-006-arrival.jpg", cap:"安心到家手冊"},
+        {src:"prompt-assets/PR-006-care.jpg", cap:"日常照護（同版型換主題）"}
+      ],
+      thumb: "prompt-assets/PR-006-arrival-thumb.jpg",
+      breakdown: [
+        {h:"整體", d:"米黃紙感底、細棕線框、水彩繪本筆觸。跟 PR-003~005 的「3D 可愛」是完全不同的語言，溫柔安靜"},
+        {h:"標題區", d:"手寫感毛筆中文大標（兩行）＋緞帶條副標；右上角一隻大貓半身探出來"},
+        {h:"主體", d:"2×2 四格卡片，每格一個編號＋小標題＋插畫＋2~4 條要點（每條前面小肉球）"},
+        {h:"插畫內容", d:"同一隻貓＋同一個女生在不同情境；女生只露側面/半身，不搶主角"},
+        {h:"底部", d:"緞帶橫幅一句總結金句；角落綴葉子、緞帶結、肉球"},
+        {h:"配色", d:"米黃、淺棕、鼠尾草綠，飽和度全壓低"}
+      ],
+      note: "這個版型換主題就能一直生（到家／照護／健康／出門／過節…），是做系列最省力的一款。要點文字建議自己寫好塞進 prompt，別讓模型自由發揮養寵知識。",
+      prompt: `Create a vertical (4:5) warm watercolour storybook-style info handbook page.
+
+Background: aged cream paper texture with a thin brown line border, botanical leaf sprigs in the corners.
+
+Header: a large hand-brushed {LANGUAGE} title in two lines, with a ribbon banner underneath carrying a one-line subtitle. Top-right corner: a large half-body watercolour illustration of {PET} peeking in.
+
+Body: a 2x2 grid of four rounded cards. Each card has:
+- a circled number and a short section title on a small taped label
+- a soft watercolour illustration of {PET} (and optionally {CHARACTER}, shown from the side, never stealing focus) in that situation
+- 2-4 bullet lines, each starting with a tiny paw-print marker
+
+Card topics: {TOPIC_1} / {TOPIC_2} / {TOPIC_3} / {TOPIC_4}
+
+Bottom: a ribbon banner with a single warm closing sentence, plus a small vignette illustration in the corner.
+
+Palette: cream, soft brown, sage green — all low saturation. Style: gentle watercolour children's-book illustration, soft edges, cozy, no harsh outlines.`
     }
   ];
 
