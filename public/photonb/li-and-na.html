@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Li&amp;Na 專案 · 李寶與南湳 · PhotoNB</title>
+<meta name="description" content="李寶（角色）＋南湳（家貓）的生活分享頻道。漫畫線條、一句一格、語音驅動。畫風規格、角色設定表、製作流程與待辦。" />
+<meta name="date" content="2026-08-11" />
+<style>
+  :root{--navy:#0b1022;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+        --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--blue:#7fb6f0;--grey:#8b93a8;--pink:#f0a5b8;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;}
+  a{color:var(--gold);}
+  .wrap{max-width:880px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.4rem);}
+  .lead{color:var(--muted);margin:.2rem 0 1.2rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.88em;}
+  h2{color:var(--gold);font-size:1.06rem;letter-spacing:.04em;margin:2.2rem 0 .3rem;
+     border-bottom:1px solid var(--line);padding-bottom:.35rem;}
+  h3{font-size:.94rem;margin:1.3rem 0 .3rem;color:var(--gold2);}
+  .note{color:var(--muted);font-size:.85rem;margin:.15rem 0 .7rem;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.85rem 1rem;margin:.7rem 0;}
+  .spec{display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;font-size:.88rem;}
+  .spec dt{color:var(--gold2);white-space:nowrap;}
+  .spec dd{margin:0;color:var(--ink);}
+  pre{background:#0009;border:1px solid var(--line);border-radius:10px;padding:.8rem .9rem;overflow-x:auto;
+      font-size:.8rem;line-height:1.6;color:#dfe6f5;white-space:pre-wrap;word-break:break-word;}
+  .swatch{display:inline-block;width:22px;height:22px;border-radius:5px;border:1px solid rgba(255,255,255,.25);
+          vertical-align:middle;margin-right:.3rem;}
+  .callout{background:rgba(216,182,90,.08);border:1px solid var(--line);border-left:3px solid var(--gold);
+           border-radius:10px;padding:.7rem .9rem;margin:1.1rem 0;font-size:.87rem;}
+  .warn{background:rgba(233,117,138,.09);border-left-color:#e9758a;}
+  ol,ul{padding-left:1.2rem;} li{margin:.25rem 0;}
+  .step{display:flex;gap:.8rem;padding:.6rem 0;border-top:1px solid rgba(255,255,255,.07);}
+  .step:first-child{border-top:0;}
+  .no{flex:0 0 auto;width:25px;height:25px;border-radius:50%;background:var(--gold);color:#221a05;
+      font-weight:700;font-size:.78rem;display:grid;place-items:center;margin-top:.15rem;}
+  .todo{font-size:.9rem;} .todo li{margin:.3rem 0;}
+  footer{color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);margin-top:2.4rem;padding-top:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本</a>
+  <div class="eyebrow">PROJECT · LI &amp; NA</div>
+  <h1>Li&amp;Na　李寶 × 南湳</h1>
+  <p class="lead">
+    <b>李寶</b>（你既有的角色）＋ <b>南湳</b>（家裡的貓）的生活分享頻道。<br>
+    形式參考你丟的那支 IG Reel：<b>漫畫線條、一句一格、語音驅動</b>。<br>
+    <span style="color:var(--green)">James 2026-08-11 立案</span>
+  </p>
+
+  <div class="callout">
+    🔸 <b>畫風已拍板：走漫畫線條</b>（不是 3D 可愛，也不是水彩繪本）。<br>
+    你手上原本有三種語言 —— 3D 可愛角色海報（<a href="./prompt-library.html">PR-003~005</a>）、
+    南湳水彩繪本手冊（<a href="./prompt-library.html">PR-006</a>）、以及這次要走的漫畫線條。
+    <b>三種不能混在同一支影片裡</b>，但可以分工：漫畫＝頻道主體，海報／繪本＝貼文與置頂。
+  </div>
+
+  <h2>🎨 畫風規格（拆自參考 Reel，可直接餵給生圖）</h2>
+  <div class="card">
+    <dl class="spec">
+      <dt>線條</dt><dd>黑色<b>封閉輪廓</b>，粗細幾乎不變（固定寬度數位筆刷）。內部細節極少，鼻子常省略</dd>
+      <dt>上色</dt><dd><b>純平塗</b>，無漸層無材質。陰影<b>只有一階</b>淺灰紫，貼在下巴下方與衣褶</dd>
+      <dt>底色</dt><dd>不是純白，是<b>米白</b></dd>
+      <dt>皮膚</dt><dd>幾乎不上色（留白）＋兩點腮紅</dd>
+      <dt>眼睛</dt><dd><b>巨大圓眼</b>，黑點瞳孔＋大量眼白，眼距寬。情緒靠眼睛大小＋眉毛，不靠嘴型</dd>
+      <dt>爆點</dt><dd>五官歪掉的「崩壞臉」，一支用一到兩次就好</dd>
+      <dt>色票</dt><dd>
+        <span class="swatch" style="background:#f3a3ae"></span>
+        <span class="swatch" style="background:#e8c88a"></span>
+        <span class="swatch" style="background:#faf6ef"></span>
+        <span class="swatch" style="background:#cfc9d6"></span>
+        <span class="swatch" style="background:#a8562f"></span>
+        <span class="swatch" style="background:#f0a03c"></span>
+        全片只用五、六個顏色 —— <b>色少才耐看</b>，跟我們做輪播圖同一個原則
+      </dd>
+    </dl>
+  </div>
+
+  <h3>分鏡與版面</h3>
+  <div class="card">
+    <dl class="spec">
+      <dt>畫布</dt><dd>直式 9:16 全幅（1080×1920）</dd>
+      <dt>鏡頭</dt><dd>像在拍電影：全景（房間）→ 中景 → <b>大特寫（一張臉塞滿整個直式畫面）</b></dd>
+      <dt>特寫時</dt><dd><b>背景直接不畫</b>，留白或單色</dd>
+      <dt>插敘</dt><dd>白框小格疊在大背景上 ＝ 回憶／舉例</dd>
+      <dt>旁白字</dt><dd>畫面<b>上方置中</b>，灰黑體加白邊，一句一格</dd>
+      <dt>對白</dt><dd>放在角色旁邊，同一套字</dd>
+      <dt>節奏</dt><dd>不是固定節拍，是<b>「講完一句換一張」</b>。參考片 169 秒 30 格 ≈ 平均 5.6 秒</dd>
+    </dl>
+  </div>
+
+  <h2>🧩 最大的技術問題：角色一致性</h2>
+  <div class="callout warn">
+    ⚠️ <b>AI 每生一張，人物長相就會跑掉一點。</b>一支影片 30 格，跑到第 10 格就變成另一個人了。<br>
+    這是這個專案<b>唯一真正的難關</b>，其他（字幕、組片、出片）我們的工具都已經有了。
+  </div>
+
+  <h3>兩條路</h3>
+  <div class="card">
+    <div class="step"><div class="no">Ⓐ</div><div>
+      <b>元件化（推薦）</b><br>
+      <span class="note">角色只定稿一次 → 把「頭型／髮型／眼睛／眉毛／嘴／手／身體姿勢」拆成獨立圖層 →
+      之後每一格用程式組合。<b>100% 一致</b>，而且能批次生幾百格。<br>
+      代價：前期要把李寶與南湳的<b>角色設定表</b>做完整。做完之後每支影片都很快。</span>
+    </div></div>
+    <div class="step"><div class="no">Ⓑ</div><div>
+      <b>AI 生圖＋參考圖鎖角色</b><br>
+      <span class="note">快，但一致性要碰運氣，格數越多越容易崩。適合先做樣片試水溫，不適合長期經營頻道。</span>
+    </div></div>
+  </div>
+
+  <h3>先做角色設定表（不管走哪條路都要）</h3>
+  <p class="note">拿下面這段去生圖，生完挑一張定稿，之後所有畫面都以它為準。</p>
+  <pre>Create a character reference sheet in flat 2D webtoon style, on an off-white background.
+
+Character: {李寶 / 南湳的外型描述}
+
+Style rules (strict):
+- bold black closed outlines of uniform thickness, no line-weight variation
+- completely flat fills, NO gradients, NO texture
+- exactly ONE shadow tone (a pale grey-lavender), used only under the chin and in cloth folds
+- skin left almost uncolored, with two small blush dots
+- huge round eyes with black dot pupils and lots of white, wide-set
+- tiny mouth, nose usually omitted
+- limited palette: pink hair / warm blonde / off-white / pale grey-lavender / one accent
+
+Sheet layout:
+Row 1 — front view, 3/4 view, side view, back view (full body)
+Row 2 — head close-ups: neutral, happy, surprised, confused, embarrassed (sweat drop), deadpan
+Row 3 — one "broken face" comedic reaction, plus 3 common hand gestures
+Row 4 — the character at three camera distances: full shot, medium shot, extreme close-up filling the frame
+
+No background, no text labels, no shading beyond the single flat shadow tone.</pre>
+
+  <h2>🔧 製作流程（我們現有的工具怎麼接）</h2>
+  <div class="card">
+    <div class="step"><div class="no">1</div><div><b>寫腳本</b>　<span class="note">一個生活觀察 → 一個反差／代溝的梗 → 自嘲收尾。你口述我整理</span></div></div>
+    <div class="step"><div class="no">2</div><div><b>錄旁白</b>　<span class="note">你自己講，手機錄就好 —— 這支頻道的靈魂是你的口氣</span></div></div>
+    <div class="step"><div class="no">3</div><div><b>逐字稿＋切句</b>　<span class="note"><code>transcribe</code> 出逐字稿與時間碼，一句 ＝ 一格　✅ 已有</span></div></div>
+    <div class="step"><div class="no">4</div><div><b>生每一格的圖</b>　<span class="note">元件組合或 AI 生圖　⬜ 這塊要建</span></div></div>
+    <div class="step"><div class="no">5</div><div><b>疊旁白字</b>　<span class="note"><code>title_layer</code> / <code>narrative_tag</code> 出字層　✅ 已有</span></div></div>
+    <div class="step"><div class="no">6</div><div><b>依語音組成影片</b>　<span class="note">每格停到該句講完為止　✅ 已有（改一下 EDL 產生器）</span></div></div>
+    <div class="step"><div class="no">7</div><div><b>出片</b>　<span class="note">9:16 直式，Reels／Shorts　✅ 已有</span></div></div>
+  </div>
+  <p class="note">👉 七步裡面<b>只有第 4 步是新的</b>，其餘都能沿用。</p>
+
+  <h2>🐱 南湳有真實素材可以用</h2>
+  <div class="card">
+    <p style="margin:.2rem 0">2026-08-03 那批 <b>4K120 O-Log2</b> 影片就是南湳（沙發、花花抱枕、地板玩耍）。
+    真貓片段可以跟漫畫混剪 —— 漫畫講故事、真貓當「證據」，這種混搭在寵物頻道很吃香。</p>
+    <p class="note" style="margin:.5rem 0 0">
+      📁 <code>2026-08-03 貓咪 O-Log2 測拍/</code>（已歸檔、已解碼、FCP library 已建）</p>
+  </div>
+  <div class="callout warn">
+    ⚠️ <b>那個資料夾先不要改名。</b>FCP library 記的是絕對路徑，改名會讓所有素材連結斷掉。
+    要正名成「南湳」的話跟我說，我用正確方式搬（重建連結），不要直接在 Finder 改。
+  </div>
+
+  <h2>✅ 待辦</h2>
+  <ul class="todo">
+    <li>⬜ <b>頻道定位定稿</b>：平台（IG Reels／YouTube Shorts／兩邊）、更新頻率、中文還是雙語 —— <b>你決定</b></li>
+    <li>⬜ <b>李寶角色設定表</b>：用上面的 prompt 生，你挑一張定稿</li>
+    <li>⬜ <b>南湳角色設定表</b>：同上，貓的版本（要跟真貓像，但走漫畫線條）</li>
+    <li>⬜ <b>第一支樣片</b>：15 秒，驗證整條線跑得通</li>
+    <li>⬜ <b>決定 Ⓐ 元件化 還是 Ⓑ AI 生圖</b>：建議先用 Ⓑ 做樣片，確定風格對了再投資 Ⓐ</li>
+    <li>⬜ <b>頻道識別</b>：頭像、封面、片頭片尾卡（可沿用我們的標題工具）</li>
+  </ul>
+
+  <footer>PhotoNB · Li&amp;Na 專案（2026-08-11 立案）· 由 Robert 維護</footer>
+</div>
+</body>
+</html>
