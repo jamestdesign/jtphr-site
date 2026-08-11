@@ -151,6 +151,16 @@ No background, no text labels, no shading beyond the single flat shadow tone.</p
   <h3>李寶 ③ 真實照片版　—— 用 LV101 那批，不經 AI</h3>
   <div class="card"><img src="prompt-assets/lina-card-li_real.png" alt="李寶 真實照片版 角色設定表" style="width:100%;border-radius:10px;display:block"></div>
 
+  <h3>李寶 ③-B 真人臉部基準　—— 做角色一致性的那張</h3>
+  <p class="note">用 macOS Vision 找出臉與五官位置後裁切（<code>tools/bin/FaceParts</code>），本機跑、零成本。
+    <b>這張才是「一致性基準」</b>：生圖時當參考圖、寫特徵描述、事後比對哪裡跑掉。</p>
+  <div class="card"><img src="prompt-assets/lina-card-li_face.png" alt="李寶 真人臉部基準" style="width:100%;border-radius:10px;display:block"></div>
+  <div class="callout warn">
+    ⚠️ <b>一個常見誤解要講清楚</b>：生圖 AI <b>不會</b>「拿眼睛＋鼻子＋嘴巴拼成一張臉」——它沒有圖層概念。<br>
+    真正能拼零件的是我們自己的<b>向量系統</b>（<code>lina_char.py</code>，見下方零件表）。<br>
+    AI 那邊要一致靠兩件事：<b>①同一張參考圖　②固定的特徵描述</b>。這張臉部基準卡就是這兩件事的來源。
+  </div>
+
   <h3>南湳 ① 水彩繪本　—— 沿用你原本手冊的風格</h3>
   <div class="card"><img src="prompt-assets/lina-card-na_book.png" alt="南湳 繪本版 角色設定表" style="width:100%;border-radius:10px;display:block"></div>
 
