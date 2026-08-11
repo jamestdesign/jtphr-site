@@ -138,21 +138,35 @@ Row 4 — the character at three camera distances: full shot, medium shot, extre
 
 No background, no text labels, no shading beyond the single flat shadow tone.</pre>
 
-  <h2>🖼️ 角色卡（v1 · 2026-08-11）</h2>
-  <p class="note">不是 AI 生的 —— 是用向量圖層<b>畫出來的</b>，所以每一格永遠是同一組形狀。
-    工具：<code>tools/lina_char.py</code>。要改造型（眼睛大小、髮色、線寬）改一個參數，所有畫面一起變。</p>
-  <div class="card">
-    <img src="prompt-assets/lina-li-sheet.png" alt="李寶 角色設定表" style="width:100%;border-radius:10px;display:block">
-  </div>
-  <div class="card">
-    <img src="prompt-assets/lina-na-sheet.png" alt="南湳 角色設定表" style="width:100%;border-radius:10px;display:block">
-  </div>
-  <div class="callout">
-    🔸 <b>這是第一版，等你挑毛病。</b>常見的會想改：臉圓不圓、眼睛大小、髮色深淺、線條粗細、
-    腮紅要不要、緞帶顏色、貓的毛蓬鬆度。<b>你講「眼睛再大一點」我改一個數字，兩張卡一起更新。</b>
+  <h2>🖼️ 角色卡（2026-08-11）</h2>
+  <p class="note"><b>李寶三組、南湳兩組。</b>下面四張是 AI 生圖版（造型定裝用），最後一組是我用向量畫的（量產用）。
+    版面文字全部由我排，<b>沒讓 AI 畫字</b>。</p>
+
+  <h3>李寶 ① 線條插畫　—— 頻道主體</h3>
+  <div class="card"><img src="prompt-assets/lina-card-li_line.png" alt="李寶 線條插畫版 角色設定表" style="width:100%;border-radius:10px;display:block"></div>
+
+  <h3>李寶 ② 可愛Q版　—— 貼紙／周邊／頭像</h3>
+  <div class="card"><img src="prompt-assets/lina-card-li_chibi.png" alt="李寶 Q版 角色設定表" style="width:100%;border-radius:10px;display:block"></div>
+
+  <h3>南湳 ① 水彩繪本　—— 沿用你原本手冊的風格</h3>
+  <div class="card"><img src="prompt-assets/lina-card-na_book.png" alt="南湳 繪本版 角色設定表" style="width:100%;border-radius:10px;display:block"></div>
+
+  <h3>南湳 ② 扁平向量Q版　—— 依你給的貼圖範例，毛色換成南湳的</h3>
+  <div class="card"><img src="prompt-assets/lina-card-na_chibi.png" alt="南湳 Q版 角色設定表" style="width:100%;border-radius:10px;display:block"></div>
+
+  <h3>向量版（量產用，非 AI）</h3>
+  <p class="note">工具 <code>tools/lina_char.py</code>。每一格都是同一組形狀，<b>30 格永遠一致、不用再付錢</b>。
+    定裝定案後我會照上面 AI 版的造型把參數調過去。</p>
+  <div class="card"><img src="prompt-assets/lina-li-sheet.png" alt="李寶 向量版" style="width:100%;border-radius:10px;display:block"></div>
+  <div class="card"><img src="prompt-assets/lina-na-sheet.png" alt="南湳 向量版" style="width:100%;border-radius:10px;display:block"></div>
+
+  <div class="callout warn">
+    ⚠️ <b>已知待修</b>：南湳有幾張被 AI 穿上衣服、站起來變兩腳走路（給的姿勢指令本來是寫給人的）。
+    要改成純四腳貓約 NT$16，等 James 決定。<br>
+    另外少數幾張 AI 自己加了「LI BAO / Na Nan」英文字，排版時未裁，不影響使用。
   </div>
 
-  <h2>🔧 製作流程（我們現有的工具怎麼接）</h2>
+  <h2>🔧 製作流程  <h2>🔧 製作流程（我們現有的工具怎麼接）</h2>
   <div class="card">
     <div class="step"><div class="no">1</div><div><b>寫腳本</b>　<span class="note">一個生活觀察 → 一個反差／代溝的梗 → 自嘲收尾。你口述我整理</span></div></div>
     <div class="step"><div class="no">2</div><div><b>錄旁白</b>　<span class="note">你自己講，手機錄就好 —— 這支頻道的靈魂是你的口氣</span></div></div>
