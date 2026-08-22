@@ -330,6 +330,44 @@ Bottom: a ribbon banner with a single warm closing sentence, plus a small vignet
 
 Palette: cream, soft brown, sage green — all low saturation. Style: gentle watercolour children's-book illustration, soft edges, cozy, no harsh outlines.`
     }
+    ,{
+      id: "PR-007",
+      title: "市中心立體手繪地圖（影片疊圖）",
+      titleEn: "City Pictorial 3D Map (video overlay)",
+      styles: ["旅遊地圖","立體等角","羊皮紙","影片疊圖","9:16直式"],
+      colorway: ["#5a4726","#8a7346","#d5c193","#efe3c6","#3f6f7a"],
+      model: "AI 生圖（Midjourney / ChatGPT 生圖 / Nano Banana）",
+      ratio: "9:16 直式（橫式片改 16:9）",
+      source: "James 2026-08-22 指定，參考 Odessa / Kaliningrad 立體古地圖。取代原本平面線稿版",
+      images: [
+        {src:"prompt-assets/PR-007-city.jpg", cap:"版面示意（AI 生成後由 James 替換）"}
+      ],
+      thumb: "prompt-assets/PR-007-city-thumb.jpg",
+      breakdown: [
+        {h:"用途", d:"②-D 市內移動（捷運／公車／步行）段落的地圖層。範圍是**一個城市之內**，不是區域地圖"},
+        {h:"最重要的一條", d:"James：「充分表現這個市我要去的地方附近建築物的特色」——地標要畫成**認得出來的那一棟**，不是通用小房子。prompt 裡一定要點名建築特徵與當地建築語彙"},
+        {h:"風格", d:"羊皮紙老地圖＋羅盤玫瑰＋花飾外框＋標題卷軸；建築做 3D 等角迷你模型（不是平面線稿）"},
+        {h:"路線", d:"發光／虛線路線串起各站，路上放一台交通工具（電車／公車／小船）"},
+        {h:"標註", d:"地標名雙語（英文＋中文），字放在建築旁邊不壓到主體"},
+        {h:"光線", d:"暖色電影感、水面柔藍綠，大量留白讓路線讀得出來"}
+      ],
+      note: "跟 PR-002 的差別：PR-002 是**區域**地圖（跨城市、山林湖泊），這張是**市內**街區（建築物才是主角）。一樣是「好看但地理不準」，要精準 GPS 用程式版。生完傳 Robert 合成進 FCPXML 上層軌。",
+      prompt: `Vintage pictorial tourist map of downtown {CITY}, {COUNTRY}, drawn on aged parchment. Ornate decorative border, compass rose, and a title cartouche reading "{CITY}".
+
+Render the landmarks as detailed 3D isometric miniature buildings — each one clearly recognisable by its real architecture, not generic houses. Feature: {LANDMARKS}. Reflect the local vernacular architecture of {CITY}: {ARCH_STYLE}.
+
+A glowing dotted route winds through the city connecting the stops in order, with a small {VEHICLE} travelling along it. Label each landmark in English with {LANGUAGE} underneath, placed beside the building so it never covers it.
+
+Water rendered in soft blue-green, warm cinematic golden-hour lighting, muted sepia and ochre palette, aged paper texture, subtle vignette. Plenty of soft negative space so the route and labels read clearly. High detail, storybook cartography. {RATIO}.`,
+      promptAltLabel: "範例（蘇州市內）",
+      promptAlt: `Vintage pictorial tourist map of downtown Suzhou, China, drawn on aged parchment. Ornate decorative border, compass rose, and a title cartouche reading "SUZHOU 蘇州".
+
+Render the landmarks as detailed 3D isometric miniature buildings — each one clearly recognisable by its real architecture, not generic houses. Feature: Pingjiang Road canal street, Shantang Street, the leaning Tiger Hill Pagoda, the Humble Administrator's Garden, Guanqian Street, and the twin pagodas. Reflect the local vernacular architecture of Suzhou: whitewashed walls with dark grey tiled roofs, upturned eaves, horse-head gables, moon gates, latticed windows, arched stone bridges over narrow canals, weeping willows, wooden boats.
+
+A glowing dotted route winds through the city connecting the stops in order, with a small wooden canal boat travelling along it. Label each landmark in English with Traditional Chinese underneath, placed beside the building so it never covers it.
+
+Water rendered in soft blue-green, warm cinematic golden-hour lighting, muted sepia and ochre palette, aged paper texture, subtle vignette. Plenty of soft negative space so the route and labels read clearly. High detail, storybook cartography. 9:16 vertical.`
+    }
   ];
 
   // ==== 以下為渲染邏輯，通常不用改 ====
