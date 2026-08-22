@@ -453,7 +453,7 @@ Water in muted teal-green with fine engraved wave hatching, land in sand and och
   function render(){
     grid.innerHTML="";
     ENTRIES.filter(e=>active==="全部"||e.styles.includes(active)).forEach(e=>{
-      const card=document.createElement('div'); card.className="card";
+      const card=document.createElement('div'); card.className="card"; card.dataset.id=e.id;
       card.innerHTML=`<div class="thumbwrap"><span class="idtag">${e.id}</span><img loading="lazy" src="${e.thumb||e.images[0].src}" alt="${e.title}"></div>
         <div class="meta"><h3>${e.title}</h3>
         <div class="chips">${e.styles.map(s=>`<span>${s}</span>`).join("")}</div>
@@ -498,5 +498,16 @@ Water in muted teal-green with fine engraved wave hatching, land in sand and och
   document.addEventListener('keydown',ev=>{ if(ev.key==="Escape") closeM(); });
   chips(); render();
   </script>
+<script>
+// 從版型庫點「這張地圖的提示詞 → PR-00X」進來時，直接展開那一張
+function hashOpen(){
+  var id=(location.hash||"").replace("#","");
+  if(!id) return;
+  var el=document.querySelector('[data-id="'+id+'"]')||document.getElementById(id);
+  if(el){ el.click ? el.click() : null; el.scrollIntoView({block:"center"}); }
+}
+window.addEventListener("load",function(){ setTimeout(hashOpen,300); });
+window.addEventListener("hashchange",hashOpen);
+</script>
 </body>
 </html>
