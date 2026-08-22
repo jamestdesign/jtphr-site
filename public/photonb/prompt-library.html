@@ -368,6 +368,73 @@ A glowing dotted route winds through the city connecting the stops in order, wit
 
 Water rendered in soft blue-green, warm cinematic golden-hour lighting, muted sepia and ochre palette, aged paper texture, subtle vignette. Plenty of soft negative space so the route and labels read clearly. High detail, storybook cartography. 9:16 vertical.`
     }
+    ,{
+      id: "PR-008",
+      title: "城際路線連結圖 · 科技感（影片疊圖）",
+      titleEn: "Intercity Connectivity Map (tech)",
+      styles: ["旅遊地圖","科技感","深藍金","影片疊圖","9:16直式"],
+      colorway: ["#0e1c33","#1b3a63","#4fe3d3","#e8b44f","#ffffff"],
+      model: "AI 生圖（ChatGPT 生圖 / Gemini / Midjourney）",
+      ratio: "9:16 直式（橫式片改 16:9）",
+      source: "James 2026-08-22 指定，參考越南建案連結圖。配 ②-C 高鐵科技感票",
+      images: [{src:"prompt-assets/PR-008-tech.jpg", cap:"版面示意（AI 生成後由 James 替換）"}],
+      thumb: "prompt-assets/PR-008-tech-thumb.jpg",
+      breakdown: [
+        {h:"用途", d:"②-C 高鐵／城際列車段落的地圖層。範圍＝跨都市（幾十到幾百公里）"},
+        {h:"風格", d:"深藍底平面向量、乾淨企業感；不是老地圖也不是插畫"},
+        {h:"路線", d:"主線用發光青色粗線；周邊道路／支線用較淡的藍線，部分虛線"},
+        {h:"節點", d:"起訖站用琥珀金圓點＋白色大寫地名；中途站小一號"},
+        {h:"地標", d:"沿線少量金色線性 icon（機場／車站／地標）＋極小字標註"},
+        {h:"留白", d:"大量深藍留白，路線與地名一定要讀得出來"}
+      ],
+      note: "跟 PR-002／PR-007 的差別：這張**不做老紙、不做插畫**，走現代平面向量。生完傳 Robert，會把發光行進點合成上去讓標記跟著影片跑。",
+      prompt: `Modern flat-vector connectivity map showing the rail corridor from {FROM} to {DESTINATION} in {REGION}, {COUNTRY}. Deep navy background (#0e1c33), clean corporate infographic style, no textures, no old-paper look.
+
+Draw the main high-speed rail line as a smooth glowing cyan route connecting the cities in order: {STOPS}. Surrounding highways and secondary lines in muted lighter blue, some of them dashed. Mark {FROM} and {DESTINATION} with amber-gold dots and their names in bold white uppercase; smaller amber dots for intermediate stops with smaller labels.
+
+Scatter a few minimal gold line icons along the corridor for airports, stations and landmarks, each with a tiny caption. Keep large areas of empty navy so the route and the city names read clearly at a glance.
+
+Flat vector, crisp thin strokes, high contrast, no photorealism, no 3D. {RATIO}.`,
+      promptAltLabel: "範例（上海→蘇州）",
+      promptAlt: `Modern flat-vector connectivity map showing the rail corridor from Shanghai Hongqiao to Suzhou North in the Yangtze River Delta, China. Deep navy background (#0e1c33), clean corporate infographic style, no textures, no old-paper look.
+
+Draw the main high-speed rail line as a smooth glowing cyan route connecting the cities in order: Shanghai Hongqiao, Kunshan South, Suzhou North. Surrounding highways and secondary lines in muted lighter blue, some of them dashed. Mark Shanghai Hongqiao and Suzhou North with amber-gold dots and their names in bold white uppercase; smaller amber dots for intermediate stops with smaller labels.
+
+Scatter a few minimal gold line icons along the corridor for airports, stations and landmarks, each with a tiny caption. Keep large areas of empty navy so the route and the city names read clearly at a glance.
+
+Flat vector, crisp thin strokes, high contrast, no photorealism, no 3D. 9:16 vertical.`
+    },
+    {
+      id: "PR-009",
+      title: "水路航線圖 · 古海圖（影片疊圖）",
+      titleEn: "Waterway Chart (vintage nautical)",
+      styles: ["旅遊地圖","古海圖","羊皮紙","影片疊圖","9:16直式"],
+      colorway: ["#3a2f1c","#8a7346","#d9c9a3","#2f5d6b","#9c3a2c"],
+      model: "AI 生圖（ChatGPT 生圖 / Gemini / Midjourney）",
+      ratio: "9:16 直式",
+      source: "James 2026-08-22 開的 ②-E 船票版型，地圖配古海圖（待 James 確認風格）",
+      images: [{src:"prompt-assets/PR-009-sea.jpg", cap:"版面示意（AI 生成後由 James 替換）"}],
+      thumb: "prompt-assets/PR-009-sea-thumb.jpg",
+      breakdown: [
+        {h:"用途", d:"②-E 船票（渡輪／遊船／運河遊）段落的地圖層"},
+        {h:"風格", d:"古海圖：羊皮紙、羅盤玫瑰、方位射線（rhumb lines）、測深數字、卷軸標題"},
+        {h:"路線", d:"航線用紅色虛線，沿途小船圖示；碼頭用錨點標記"},
+        {h:"岸邊", d:"岸上畫簡單立體小建築點出上下船的地標，水面留白最多"},
+        {h:"配色", d:"沙褐＋墨綠藍水面＋朱紅航線，跟 ②-E 黑白船票對比但不打架"}
+      ],
+      note: "⚠️ 這張風格 James 還沒拍板（②-E 的地圖是唯一還空著的）。如果他想要跟船票一樣的黑白極簡，把 prompt 裡的羊皮紙與配色整段換成 'black and white line engraving on white paper'。",
+      prompt: `Vintage nautical chart of {WATERWAY} in {REGION}, {COUNTRY}, drawn on aged parchment. Compass rose, radiating rhumb lines, depth soundings, and a scrolled title cartouche reading "{TITLE}".
+
+Plot the voyage as a red dashed route from {FROM} to {DESTINATION}, with a small sailing vessel drawn along it and anchor symbols at each landing. Along the banks, draw a few small 3D isometric buildings for the landmarks: {LANDMARKS} — recognisable by their real architecture.
+
+Water in muted teal-green with fine engraved wave hatching, land in sand and ochre, plenty of open water so the route reads clearly. Warm cinematic light, aged paper texture, subtle vignette. High detail, storybook cartography. {RATIO}.`,
+      promptAltLabel: "範例（蘇州水巷）",
+      promptAlt: `Vintage nautical chart of the Suzhou canal network in Jiangsu, China, drawn on aged parchment. Compass rose, radiating rhumb lines, depth soundings, and a scrolled title cartouche reading "SUZHOU WATERWAYS 蘇州水巷".
+
+Plot the voyage as a red dashed route from Pingjiang Road to Shantang Street, with a small wooden canal boat drawn along it and anchor symbols at each landing. Along the banks, draw a few small 3D isometric buildings for the landmarks: whitewashed canal houses with dark grey tiled roofs, arched stone bridges, garden pavilions, the twin pagodas — recognisable by their real architecture.
+
+Water in muted teal-green with fine engraved wave hatching, land in sand and ochre, plenty of open water so the route reads clearly. Warm cinematic light, aged paper texture, subtle vignette. High detail, storybook cartography. 9:16 vertical.`
+    }
   ];
 
   // ==== 以下為渲染邏輯，通常不用改 ====
