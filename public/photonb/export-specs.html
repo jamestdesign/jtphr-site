@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>出片規格總表 · PhotoNB</title>
+<meta name="description" content="YouTube／IG Reels／HL 片段／KP 單禎／縮時參考片／8K ProRes —— 每個用途一組規格，含踩過的坑。忘了就查這頁。" />
+<meta name="date" content="2026-08-22" />
+<style>
+  :root{--navy:#0b1022;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+        --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;}
+  *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+       font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;}
+  a{color:var(--gold);}
+  .wrap{max-width:900px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+  .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+  .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+  h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.2rem);}
+  .lead{color:var(--muted);margin:.2rem 0 1.2rem;}
+  code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.88em;}
+  h2{color:var(--gold);font-size:1.05rem;letter-spacing:.04em;margin:2.1rem 0 .3rem;
+     border-bottom:1px solid var(--line);padding-bottom:.35rem;}
+  .note{color:var(--muted);font-size:.85rem;margin:.15rem 0 .7rem;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.05rem;margin:.8rem 0;}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:.28rem 1rem;margin:.2rem 0;font-size:.9rem;}
+  dt{color:var(--gold2);white-space:nowrap;}
+  dd{margin:0;}
+  pre{background:#0009;border:1px solid var(--line);border-radius:10px;padding:.75rem .85rem;overflow-x:auto;
+      font-size:.79rem;line-height:1.65;color:#dfe6f5;}
+  .callout{background:rgba(216,182,90,.08);border:1px solid var(--line);border-left:3px solid var(--gold);
+           border-radius:10px;padding:.7rem .9rem;margin:1rem 0;font-size:.87rem;}
+  .warn{background:rgba(233,117,138,.09);border-left-color:var(--red);}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.4rem 0;}
+  th{text-align:left;color:var(--gold);font-size:.75rem;letter-spacing:.1em;border-bottom:1px solid var(--line);padding:.35rem .5rem;}
+  td{border-bottom:1px solid rgba(255,255,255,.07);padding:.4rem .5rem;vertical-align:top;}
+  td:first-child{color:var(--gold2);white-space:nowrap;}
+  footer{color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);margin-top:2.4rem;padding-top:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本</a>
+  <div class="eyebrow">EXPORT SPECS</div>
+  <h1>出片規格總表</h1>
+  <p class="lead">
+    每個用途一組規格，忘了就查這頁。<br>
+    這些數字不是抄來的 —— 是我們工具裡實際在用、而且踩過坑之後固定下來的。
+  </p>
+
+  <div class="callout">
+    🧭 <b>一句話版</b>：<br>
+    <b>YouTube</b> 傳 4K　·　<b>IG</b> 1080×1920 H.264　·　<b>看片用</b> 1080p CRF20　·　<b>保存</b> 只留母帶
+  </div>
+
+  <h2>📺 YouTube（橫式主陣地）</h2>
+  <div class="card">
+    <dl>
+      <dt>解析度</dt><dd><b>3840×2160</b>　有 4K 素材就傳 4K</dd>
+      <dt>編碼</dt><dd>H.264 或 HEVC 都可以</dd>
+      <dt>幀率</dt><dd>照母帶 —— 60p 拍的就傳 60p，<b>不要降</b></dd>
+      <dt>色彩</dt><dd>Rec.709 SDR</dd>
+      <dt>位元率</dt><dd>4K60 → 80~120 Mbps　／　1080p60 → 15~20 Mbps</dd>
+      <dt>聲音</dt><dd>AAC 320kbps / 48kHz</dd>
+    </dl>
+  </div>
+  <div class="callout">
+    🔑 <b>最好用的一招：一定要傳 4K，即使你只想給人看 1080p。</b><br>
+    YouTube 給 4K 上傳的位元率明顯比 1080p 高，<b>它降轉出來的 1080p，比你自己壓好再傳的 1080p 乾淨</b>。
+  </div>
+
+  <h2>📱 IG Reels（直式）</h2>
+  <div class="card">
+    <dl>
+      <dt>解析度</dt><dd><b>1080×1920</b></dd>
+      <dt>編碼</dt><dd><b>H.264</b>　（IG 對 HEVC 相容性仍差，別冒險）</dd>
+      <dt>幀率</dt><dd>30p 或 60p</dd>
+      <dt>位元率</dt><dd>10~15 Mbps　<span class="note">傳更高沒用，IG 一樣重壓</span></dd>
+      <dt>長度</dt><dd>3 分鐘以內</dd>
+      <dt>聲音</dt><dd>AAC 128~192kbps</dd>
+    </dl>
+  </div>
+  <div class="callout warn">
+    ⚠️ <b>IG 會重壓，別花力氣做超高規。</b>真正影響成品的是<b>畫面本身乾不乾淨</b> ——
+    雜訊少、對比夠、不要一堆細碎高頻細節，壓完才不會糊成一片。
+  </div>
+
+  <h2>🎞️ 我出給你的那些（自動化產物）</h2>
+  <p class="note">這些是 pipeline 自動產的，規格已經寫死在工具裡，你不用記。</p>
+  <div class="tw"><table>
+    <tr><th>產物</th><th>規格</th><th>用途</th><th>工具</th></tr>
+    <tr><td>HL 片段</td><td>1080p · H.264 · CRF20 · faststart · AAC 192k</td>
+        <td>看片、快速判斷、直接發 IG</td><td><a href="./fcpxmld-export.html">fcpxmld-export</a></td></tr>
+    <tr><td>KP 單禎</td><td><b>原生解析度</b> JPG · 最高品質</td>
+        <td>當照片用，進 LR 調色</td><td>同上</td></tr>
+    <tr><td>縮時參考片</td><td>1440×1080 · H.264 · 30fps · CRF20</td>
+        <td>看縮時拍得怎樣</td><td><a href="./timelapse-ref-clips.html">縮時參考片</a></td></tr>
+    <tr><td>縮時正式片</td><td>7680×5120 · ProRes 422 · 60p</td>
+        <td>進 FCP 當素材</td><td>LRTimelapse → ffmpeg</td></tr>
+    <tr><td>解碼預覽</td><td>1080p · HEVC · O-Log2 已套 LUT</td>
+        <td>不進 FCP 也看得到正常顏色</td><td><code>olog_decode</code></td></tr>
+  </table></div>
+
+  <h2>🚨 踩過的坑（不要再踩）</h2>
+  <div class="card">
+    <dl>
+      <dt>HEVC</dt><dd><b>出片給 LR 不要用 H.265</b>。LR Classic 對 HEVC 預覽有 bug，看不到縮圖。
+        我們固定 <b>H.264 8-bit yuv420p</b>。<span class="note">（踩了兩次才固化）</span></dd>
+      <dt>faststart</dt><dd><code>-movflags +faststart</code> 一定要加。不加的話網頁播放要整支載完才開始播。</dd>
+      <dt>Log 素材</dt><dd>O-Log2 出片前要套 LUT，否則是灰的。HL/KP <b>不經過 FCP</b>，
+        所以相機 LUT 對它們無效，一定要在 ffmpeg 端套 → <a href="./li-and-na.html">見 O-Log2 流程</a></dd>
+      <dt>旋轉旗標</dt><dd>手機影片的 rotation 會被複製到成品，播放器再轉一次就躺了。
+        <code>-metadata rotate=0</code> <b>無效</b>，要用 <code>ffmpeg -display_rotation 0 -i tmp -c copy out</code> remux。</dd>
+      <dt>兩條音軌</dt><dd>手機影片常有兩條，第二條沒 decoder。要用 <code>-map 0:a:0?</code> 只取第一條，
+        寫 <code>-map 0:a?</code> 會整個失敗。</dd>
+      <dt>音量</dt><dd>手機錄的旁白常只有 −30dB。交片前一律 <code>loudnorm=I=-16:TP=-1.5:LRA=11</code>。</dd>
+    </dl>
+  </div>
+
+  <h2>🎵 版權（發佈前一定要看）</h2>
+  <div class="callout warn">
+    <b>現場音裡有整首歌 → 上傳會被 Content ID 抓</b>，輕則消音、重則下架。<br>
+    演唱會、有背景音樂的餐廳、街頭表演，通通算。<br><br>
+    <b>可以用的</b>：Irene 那 14 首原創純演奏（版權自有、可商用）、YouTube 音樂庫、
+    Artlist / Epidemic 訂閱、或之後 AI 生成的曲子。
+  </div>
+
+  <h2>💾 保存 vs 出片（別搞混）</h2>
+  <div class="card">
+    <dl>
+      <dt>保存</dt><dd><b>只留母帶</b>（<code>MOV_&lt;day&gt;</code>）＋ <code>.fcpxmld</code> 撿片結果。
+        <b>不導 ProRes master</b> —— 太大又沒必要，母帶本身就是底。</dd>
+      <dt>出片</dt><dd>要發才壓，照上面的規格。<b>壓過的影片救不回母帶</b>，所以母帶永遠不覆蓋。</dd>
+    </dl>
+  </div>
+
+  <h2>📋 懶人版</h2>
+  <pre>YouTube   4K60 · H.264 · 100Mbps · AAC 320k       ← 一定傳 4K
+IG Reels  1080×1920 · H.264 · 12Mbps · 30p
+給我看     1080p · CRF20                            ← 我預設就是這個
+縮時       1440×1080 參考片 → 滿意再出 8K ProRes
+保存       母帶不動</pre>
+
+  <footer>PhotoNB · 出片規格總表（2026-08-22 建立）· 規格有變我會回來更新</footer>
+</div>
+</body>
+</html>
