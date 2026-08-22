@@ -60,22 +60,91 @@
         <div class="use">🎬 <b>片頭</b> · 16:9 與 9:16 兩版<br><a href="./title-picker.html?tpl=1&ratio=16:9">→ 16:9 進標題選擇器編輯</a> ｜ <a href="./title-picker.html?tpl=1&ratio=9:16">→ 9:16 進標題選擇器編輯</a><br>適用 <b>所有長片開頭</b> · 中文草寫＝行楷-繁（James 2026-08-05：「中文草寫比較有日記感」）· 之後可加「對話日記」訊息泡泡</div>
       </div>
     </div>
+  </div>
+
+<div style="margin:.8rem 0 1.2rem;padding:.9rem 1rem;border:1px solid rgba(200,162,74,.35);border-radius:8px;background:rgba(200,162,74,.06)">
+  <div style="font-weight:700;margin-bottom:.5rem">🧭 移動中版型＝照「移動距離」選（James 2026-08-22 拍板）</div>
+  <div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:.86rem;min-width:640px">
+    <tr style="text-align:left;color:var(--muted)"><th style="padding:.3rem .8rem .3rem 0">級距</th><th style="padding:.3rem .8rem">版型</th><th style="padding:.3rem .8rem">票</th><th style="padding:.3rem .8rem">地圖</th></tr>
+    <tr><td style="padding:.3rem .8rem .3rem 0">✈️ 洲際</td><td style="padding:.3rem .8rem">②-A</td><td style="padding:.3rem .8rem">Passage 白色極簡</td><td style="padding:.3rem .8rem">程式 · 真實世界地圖</td></tr>
+    <tr><td style="padding:.3rem .8rem .3rem 0">🚌 跨區</td><td style="padding:.3rem .8rem">②-B / B′</td><td style="padding:.3rem .8rem">復古米黃票根</td><td style="padding:.3rem .8rem">AI 手繪區域圖／程式手繪示意</td></tr>
+    <tr><td style="padding:.3rem .8rem .3rem 0">🚄 跨都市</td><td style="padding:.3rem .8rem">②-C</td><td style="padding:.3rem .8rem">科技感 HUD</td><td style="padding:.3rem .8rem">程式 · 深藍連結圖</td></tr>
+    <tr><td style="padding:.3rem .8rem .3rem 0">🚏 市內</td><td style="padding:.3rem .8rem">②-D</td><td style="padding:.3rem .8rem">牛皮巴士票／剪票根</td><td style="padding:.3rem .8rem">AI · 市中心立體手繪</td></tr>
+    <tr><td style="padding:.3rem .8rem .3rem 0">⛴️ 水路</td><td style="padding:.3rem .8rem">②-E</td><td style="padding:.3rem .8rem">黑白船票</td><td style="padding:.3rem .8rem">待定</td></tr>
+  </table></div>
+  <div style="margin-top:.6rem;font-size:.82rem;color:var(--muted)">💡 小貼士：<b>短程不要用真實地圖</b>。上海虹橋→蘇州北只有 84 公里，照比例畫出來就是一片空白加一個點 —— 短程改用示意圖（②-B′）或連結圖（②-C）。</div>
+</div>
+<h2>🚦 移動中（照距離分級）</h2>
+  <div class="grid">
 <div class="card">
       <img src="narrative-assets/tpl_ticket.jpg" alt="機票感">
       <div class="body"><span class="tag">現行</span>
-        <h3>②-A 機票／車票感</h3>
-        <p>大標班次＋起迄站＋當前地點＋時間（資訊層）；白線稿世界地圖＋虛線航線＋交通圖示（地圖層）。兩層各自可出。</p>
-        <div class="use">適用 <b>移動中</b> ✈🚄🚇🚌 · 模式：移動（沿線動）/ 定點（停在此素材 GPS）<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+        <h3>②-A 機票感 ✈️ <small style="color:var(--muted);font-weight:400">洲際／長程</small></h3>
+        <p>大標班次＋起迄站＋當前地點＋時間（資訊層）；白線稿世界地圖＋虛線航線＋飛機圖示（地圖層）。兩層各自可出。</p>
+        <div class="use">🗺️ 地圖＝<b>程式版真實世界地圖</b>（Natural Earth 國界，航跡照 GPS 走，不用 AI）<br>
+        適用 <b>長程飛行</b>：整塊大陸入畫才好看，短程請往下看 ②-C／②-D<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
       </div>
     </div>
 <div class="card">
       <img src="narrative-assets/tpl_bus.jpg" alt="遊覽車票＋路線地圖動線">
       <div class="body"><span class="tag">現行</span>
-        <h3>②-B 遊覽車票 ＋ 路線地圖動線</h3>
-        <p>復古<b>巴士票（左上）</b>標起訖站＋票根 Day／段次；復古手繪<b>地圖（右上）</b>把該段路線畫上去、標記滑到終點針，標「車流到哪」。多段行程一段一張（起→訖），兩層都 70% 透明不擋畫面。實證：德國 day2 移動中（慕尼黑→林德霍夫→新天鵝堡→返程）。</p>
-        <div class="use">適用 <b>移動中 · 巴士／遊覽車</b> 🚌 · 分段標起訖 · 地圖靠外部 AI 生<br><a href="./prompt-library.html">→ 生成 prompt：PR-002 移動中路線地圖卡</a> ｜ <a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+        <h3>②-B 遊覽車票 🚌 <small style="color:var(--muted);font-weight:400">跨區／一天多段</small></h3>
+        <p>復古米黃票：左票根 Day／段次、線稿交通圖示＋小字抬頭、襯線大寫起訖＋朱紅箭頭、中文副行、票號 footer。撕票口是真的挖穿的半圓缺口。<br>
+        地圖：復古手繪<b>區域</b>地圖，路線畫上去、標記滑到終點針。多段行程一段一張。實證：德國 day2（慕尼黑→林德霍夫→新天鵝堡）。</p>
+        <div class="use">🎫 票＝程式出（<code>retro_ticket</code> style <code>retro</code>）· 🗺️ 地圖＝<b>AI 生</b>（區域級，山林湖泊）<br>
+        <a href="./prompt-library.html">→ PR-002 移動中路線地圖卡</a> ｜ <a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
       </div>
     </div>
+<div class="card">
+      <img src="narrative-assets/tpl_tier_B2.jpg" alt="遊覽車票程式版">
+      <div class="body"><span class="tag">現行</span>
+        <h3>②-B′ 遊覽車票 · 全程式版 🚌</h3>
+        <p>同 ②-B 的票，但<b>地圖也用程式畫</b>：泛黃紙上一條手抖的朱紅虛線、起點空心圈、終點紅針、標記隨影片滑過去。<br>
+        <b>什麼時候用這個</b>：短程（幾十公里）AI 區域地圖畫不出東西時，或不想等 AI 生圖、要當天出片。</p>
+        <div class="use">🎫🗺️ 兩層都程式出，完全自助 · <code>style:"retro"</code> ＋ <code>map_style:"sketch"</code><br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+      </div>
+    </div>
+<div class="card">
+      <img src="narrative-assets/tpl_tier_C.jpg" alt="高鐵科技感">
+      <div class="body"><span class="tag">新</span>
+        <h3>②-C 高鐵票 · 科技感 🚄 <small style="color:var(--muted);font-weight:400">跨都市</small></h3>
+        <p>不走紙票，走<b>月台顯示器／HUD</b>：深色玻璃面板、青色發光細邊、四角準星刻痕、等寬字數據列（車次／時速／車廂座位／ETA），中間一條行程進度軌。<br>
+        地圖：深藍平面向量連結圖 — 淡藍網格、青色發光路線、琥珀節點、白色大寫站名，路線<b>照真實 GPS</b> 走。</p>
+        <div class="use">🎫🗺️ 兩層都程式出，不用 AI · <code>ticket_style:"tech"</code> ＋ <code>map_style:"tech"</code><br>
+        適用 <b>高鐵／城際列車</b>（James 2026-08-22：「跨不同城市間的移動 就用這種科技感一點」）<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+      </div>
+    </div>
+<div class="card">
+      <img src="narrative-assets/tpl_tier_D.jpg" alt="市區巴士懷舊票">
+      <div class="body"><span class="tag">新</span>
+        <h3>②-D 市區捷運巴士 · 懷舊剪票 🚏 <small style="color:var(--muted);font-weight:400">同一都市內</small></h3>
+        <p>老車票兩款可選：<br>
+        <b>牛皮巴士票</b>（圖）— 切角、粗黑體全大寫、票號兩側直排、GOOD FOR ONE FARE<br>
+        <b>剪票根</b> — 左邊超大路線號、右緣被剪票鉗咬掉圓孔、斜蓋「剪訖」紅章</p>
+        <div class="use">🎫 票＝程式出（<code>kraft</code> / <code>punch</code>）· 🗺️ 地圖＝<b>AI 生</b>：市中心立體手繪地圖，地標做成 3D 等角小建築、照當地建築特色畫<br>
+        <a href="./prompt-library.html">→ PR-007 市中心立體手繪地圖</a> ｜ <a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+      </div>
+    </div>
+<div class="card">
+      <img src="narrative-assets/tpl_tier_E.jpg" alt="船票">
+      <div class="body"><span class="tag">新</span>
+        <h3>②-E 船票 ⛴️ <small style="color:var(--muted);font-weight:400">渡輪／遊船</small></h3>
+        <p>黑白高對比禮券感：左直排標籤、花體大標、日期方塊、右票根船身線稿＋條碼。白底黑字疊在深色水景上特別跳。</p>
+        <div class="use">🎫 票＝程式出（<code>ticket_style:"cruise"</code>）· 🗺️ 地圖風格<b>待定</b><br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+      </div>
+    </div>
+<div class="card">
+      <img src="narrative-assets/tpl_tier_F.jpg" alt="復古蝕刻車票">
+      <div class="body"><span class="tag">新</span>
+        <h3>②-F 復古蝕刻車票 🎟️ <small style="color:var(--muted);font-weight:400">任何交通工具</small></h3>
+        <p>維多利亞古董車票：雙線外框、<b>月份＋日期格把出發日圈起來</b>（一眼看出哪天走的，比插畫更有資訊）、右上圓形紅印。<br>不綁交通工具，想要濃一點的年代感就用它。</p>
+        <div class="use">🎫 票＝程式出（<code>ticket_style:"vintage"</code>）· 地圖任選<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>📍 景點</h2>
+  <div class="grid">
 <div class="card">
       <img src="narrative-assets/tpl_scene.jpg" alt="景點地名">
       <div class="body"><span class="tag">現行</span>
