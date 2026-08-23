@@ -87,9 +87,12 @@
 
   <div class="group">
     <h2>③ 素材</h2>
-    <p class="hint">預設吃「平穩風景」那批（B-roll＋非特寫＋≥12秒＋單一構圖＋橫式）。</p>
+    <p class="hint">預設吃「平穩風景」那批（B-roll＋非特寫＋單一構圖）。<b>門檻直接影響片長</b> —— 荷蘭 day1 實測：≥12 秒只有 18.9 分，放寬到 ≥10 秒才有 20.8 分（散步類片段幾乎都卡在 8–12 秒）。</p>
     <div class="row"><label>來源 trip</label><input class="txt" id="iTrip" value="2026-06-22 荷蘭阿姆斯特丹九街-運河"></div>
     <div class="row"><label>目標長度</label><input class="txt" id="iLen" value="60" style="max-width:6rem"> <span style="font-size:.8rem;color:var(--muted)">分鐘（不夠會建議 Loop，不會自動做）</span></div>
+    <div class="row"><label>素材門檻</label><span class="chips" id="minlen"></span></div>
+    <div class="row"><label>直式素材</label><span class="chips" id="vmode"></span></div>
+    <p class="hint" style="margin-top:-.2rem">16:9 片子裡碰到直式（9:16）素材怎麼辦。<b>留黑邊</b>＝原樣兩側黑；<b>2~3 格拼貼</b>＝同場景直式併成一格（X 軸 −640/0/+640，scale 1.053，不裁構圖）—— ⚠️ 併格會讓<b>片長變短</b>（3 支變 1 段）；<b>裁中段</b>＝取畫面中間裁成 16:9，長度不變但構圖被切。</p>
     <div class="row"><label>接點</label><span class="chips" id="fade"></span></div>
   </div>
 
@@ -112,6 +115,18 @@ Flower Market</textarea></div>
   </div>
 
   <div class="group">
+    <h2>⑦ 角色 Roles（固定規則·不用選）</h2>
+    <p class="hint">每支 XML 都自動帶好，匯進 FCP 就分好類 —— James 2026-08-23 定的。</p>
+    <div style="font-size:.84rem;line-height:1.9;border-left:3px solid var(--gold);padding:.55rem .8rem;background:rgba(200,162,74,.06)">
+      <b style="color:#eae0c8">Video-H</b>　橫式素材　<b style="color:#eae0c8">Video-V</b>　直式素材<br>
+      <b style="color:#eae0c8">Titles</b>　標題／場景清單／音波／跑馬燈等所有疊層<br>
+      <b style="color:#eae0c8">Dialogue</b>　素材原音　<b style="color:#eae0c8">Music</b>　配樂<br>
+      <span style="color:var(--gold)">🔸 用途：</span>索引面板可以「一鍵關掉所有直式」「一鍵關掉所有字」「一鍵靜音原音只留配樂」，三個維度互不干擾。<br>
+      <span style="color:var(--gold)">⚠️ 已知限制：</span>寫成 <b>Video 底下的子角色</b> FCP 會建立卻不套用，所以是<b>平行的自訂角色</b>。功能一樣。
+    </div>
+  </div>
+
+  <div class="group">
     <h2>⑥ 出片方式</h2>
     <div class="chips" id="deliv"></div>
     <div style="font-size:.8rem;color:var(--muted);line-height:1.75;margin-top:.6rem;border-left:3px solid var(--gold);padding:.55rem .8rem;background:rgba(200,162,74,.06)">
@@ -122,6 +137,9 @@ Flower Market</textarea></div>
       <b style="color:#eae0c8">出 fcpxml</b>　匯進 FCP 變成<b>可以直接點開改字</b>的原生標題，改時間改位置都在 FCP 裡做。
       代價：<b>只做得出簡單的字</b> —— 霓虹光暈／自動拉滿寬／音波緞帶／點陣 LED／
       <b>文字夾在人物後面</b>這些 FCP 內建做不到，會掉光。<br>
+      <b style="color:#eae0c8">透明元件＋fcpxml（元件式）</b>　<b>今天荷蘭 day1 用的就是這個</b>：疊層各自出成獨立的透明檔（標題／場景清單／音波／跑馬燈），
+      再給一份 fcpxml 把素材＋配樂＋疊層全部排好位置。你匯進去就是完整時間軸，每個元件都能單獨關掉、換掉、改長度。
+      <b>最有彈性，但檔案最多。</b><br>
       <span style="color:var(--gold)">🔸 判斷法：</span><b>文字內容確定了 → ProRes</b>（好看）；<b>字還會改 → fcpxml</b>（好改）；
       <b>整支就這樣了 → 燒進成品</b>。長篇景色是系列出片、字很少改，<b>預設走 ProRes 或直接燒</b>。
     </div>
@@ -226,6 +244,7 @@ config 範本：tools/templates/longview_config_範本.json
 
 <script>
 const S={ratio:"16:9 橫",fade:"2.5 秒長溶接",msrc:"Irene 原創曲（可商用）",
+         minlen:"≥10 秒",vmode:"留黑邊",
          deliv:"燒進成品",wave:true,led:true,logo:true,scenes:true};
 function chips(el,items,set){
   el.innerHTML=items.map(i=>`<span class="chip" data-k="${i}">${i}</span>`).join("");
@@ -237,21 +256,25 @@ function draw(){
   document.querySelectorAll("#fade .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.fade));
   document.querySelectorAll("#msrc .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.msrc));
   document.querySelectorAll("#deliv .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.deliv));
+  document.querySelectorAll("#minlen .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.minlen));
+  document.querySelectorAll("#vmode .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.vmode));
   document.querySelectorAll("#parts .chip").forEach(c=>c.classList.toggle("on",
     (c.dataset.k==="音波"&&S.wave)||(c.dataset.k==="跑馬燈"&&S.led)||
     (c.dataset.k==="LOGO"&&S.logo)||(c.dataset.k==="場景清單"&&S.scenes)));
   document.getElementById("spec").textContent =
 `長篇景色模板 ┃ 版式:${S.ratio} ┃ 出片:${S.deliv}
 片頭:變體 ${g("iVar")} · ${g("iOpen")} 秒
-素材:${g("iTrip")} · 平穩風景 · 目標 ${g("iLen")} 分 · ${S.fade}
+素材:${g("iTrip")} · 平穩風景 · ${S.minlen} · 目標 ${g("iLen")} 分 · ${S.fade} · 直式${S.vmode}
 音樂:${S.msrc} · ${g("iTrack")} · ${g("iDb")}dB
 元件:音波${S.wave?"開":"關"} 跑馬燈${S.led?"開":"關"} LOGO${S.logo?"開":"關"} 清單${S.scenes?"開":"關"}
 清單:${g("iLT")} ┃ ${g("iLI").split("\n").filter(x=>x.trim()).join(" / ")}`;
 }
 chips(document.getElementById("ratio"),["16:9 橫","9:16 直"],k=>S.ratio=k);
+chips(document.getElementById("minlen"),["≥8 秒","≥10 秒","≥12 秒"],k=>S.minlen=k);
+chips(document.getElementById("vmode"),["留黑邊","2~3 格拼貼","裁中段"],k=>S.vmode=k);
 chips(document.getElementById("fade"),["2.5 秒長溶接","1.5 秒","硬切"],k=>S.fade=k);
 chips(document.getElementById("msrc"),["Irene 原創曲（可商用）","我的 AI 自創曲","純環境音（無音樂）"],k=>S.msrc=k);
-chips(document.getElementById("deliv"),["燒進成品","透明 ProRes（進 FCP）","出 fcpxml 我自己剪"],k=>S.deliv=k);
+chips(document.getElementById("deliv"),["燒進成品","透明 ProRes（進 FCP）","出 fcpxml 我自己剪","透明元件＋fcpxml（元件式）"],k=>S.deliv=k);
 chips(document.getElementById("parts"),["音波","跑馬燈","LOGO","場景清單"],
   k=>{if(k==="音波")S.wave=!S.wave;else if(k==="跑馬燈")S.led=!S.led;
       else if(k==="LOGO")S.logo=!S.logo;else S.scenes=!S.scenes;});
