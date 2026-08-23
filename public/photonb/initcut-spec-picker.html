@@ -28,6 +28,13 @@
     padding:.34rem .8rem;font-size:.85rem;color:#dfe4f2;cursor:pointer;user-select:none;transition:.12s;}
   .chip:active{transform:scale(.96);}
   .chip.on{background:var(--chipon);border-color:var(--chipon);color:#fff;font-weight:600;}
+.shotBox{margin:.35rem 0 .5rem;}
+  .shotBox img.shot{display:none;width:100%;max-width:320px;border-radius:10px;
+    border:1px solid var(--border);cursor:zoom-in;}
+  .shotBox .shotNa{display:none;color:var(--muted);font-size:.75rem;}
+  .shotZoom{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:center;
+    justify-content:center;z-index:99;padding:2rem;cursor:zoom-out;}
+  .shotZoom img{max-width:100%;max-height:100%;border-radius:12px;}
   .chip.gold.on{background:var(--gold);border-color:var(--gold);color:#25201a;}
   .out{position:sticky;bottom:0;margin-top:1.4rem;background:#0b0b1c;border:1px solid var(--gold);
     border-radius:14px;padding:.9rem 1rem;box-shadow:0 -8px 30px #0009;}
@@ -227,6 +234,10 @@
 
   function afterPick(g){
     if(g.dataset.k==='拼貼版型'||g.dataset.k==='每組'||g.dataset.k==='比例') drawLayout();
+    if(g.dataset.k==='比例') document.querySelectorAll('#ovList .grpCard').forEach(card=>{
+      const sel=card.querySelector('.tpl'), im=card.querySelector('.shot');
+      const src=shotFor(sel.value); if(src&&im) im.src=src;
+    });
     if(g.dataset.k==='LOGO標') syncLogo();
     if(g.dataset.k==='標題動畫') syncWriting();
   }
@@ -242,6 +253,23 @@
 
   // ---- ④ 描述標籤：動態清單，想加幾層加幾層 ----
   const ovListEl=document.getElementById('ovList');
+  // 版型 → 樣圖（James 2026-08-23 要求：選了版型直接看縮圖，不用跳去版型庫）
+  //   ②-A/②-B 有 16:9／9:16 兩版，會跟著①的輸出比例自動換；其餘只有一張。
+  const SHOT={
+    '\u2460':{one:'narrative-assets/tpl_opening.jpg'},
+    '\u2461-A':{h:'narrative-assets/tier_A_16x9.jpg', v:'narrative-assets/tier_A_9x16.jpg'},
+    '\u2461-B':{h:'narrative-assets/tier_B_16x9.jpg', v:'narrative-assets/tier_B_9x16.jpg'},
+    '\u2462':{one:'narrative-assets/tpl_scene.jpg'},
+    '\u2463':{one:'narrative-assets/tpl_wave_led.jpg'},
+    '\u2464':{one:'narrative-assets/tpl_longview.jpg'},
+    '\u2464-B':{one:'narrative-assets/tpl_longview_v.jpg'},
+    '\u2465':{one:'narrative-assets/tpl_neon_behind.jpg'},
+  };
+  function shotFor(id){
+    const m=SHOT[id]; if(!m) return null;
+    if(m.one) return m.one;
+    return (val('\u6bd4\u4f8b')||'').indexOf('9:16')===0 ? m.v : m.h;
+  }
   const TPL=[
     {id:'\u2460',   n:'\u2460 \u96dc\u8a8c\u98a8\u683c\u6a19\u984c\u5361', f:['variant']},
     {id:'\u2461-A', n:'\u2461-A \u6a5f\u7968\uff0f\u8eca\u7968\u611f', f:['move']},
@@ -275,6 +303,7 @@
       </div>
       <div class="fld"><span class="fl">\u7248\u578b</span>
         <select class="txt sel tpl">${TPL.map(t=>`<option value="${t.id}">${t.n}</option>`).join('')}</select></div>
+      <div class="shotBox"><img class="shot" alt="\u7248\u578b\u6a23\u5716"><span class="shotNa">\u9019\u500b\u7248\u578b\u9084\u6c92\u6709\u6a23\u5716</span></div>
       <div class="fld"><span class="fl">\u51fa\u5834\u6642\u6a5f</span>
         <select class="txt sel when">${WHEN.map(o=>`<option>${o}</option>`).join('')}</select>
         <input class="txt whenN" type="text" placeholder="\u54ea\u500b\u5834\u666f\uff08\u4f8b\uff1a03_1420 \u904b\u6cb3\u8239\uff09" style="display:none"></div>
@@ -307,10 +336,20 @@
       q('.whenN').style.display = q('.when').value.indexOf('\u6307\u5b9a')===0?'':'none';
       q('.trigKw').style.display = q('.trig').value==='\u95dc\u9375\u5b57'?'':'none';
       q('.secs').disabled = q('.when').value.indexOf('\u5168\u5834')===0;
+      // 版型樣圖：有就顯示，沒有就說一聲（比跳去版型庫再回來快）
+      const img=q('.shot'), na=q('.shotNa'), src=shotFor(q('.tpl').value);
+      if(src){ img.src=src; img.style.display='block'; na.style.display='none'; }
+      else   { img.removeAttribute('src'); img.style.display='none'; na.style.display='block'; }
     }
     el.querySelectorAll('input,textarea,select').forEach(i=>{
       i.addEventListener('input',()=>{syncFields();build();});
       i.addEventListener('change',()=>{syncFields();build();});
+    });
+    q('.shot').addEventListener('click',()=>{
+      if(!q('.shot').getAttribute('src')) return;
+      const z=document.createElement('div'); z.className='shotZoom';
+      z.innerHTML=`<img src="${q('.shot').getAttribute('src')}">`;
+      z.addEventListener('click',()=>z.remove()); document.body.appendChild(z);
     });
     q('.delOv').addEventListener('click',()=>{el.remove();renumberOv();build();});
     q('.up').addEventListener('click',()=>{const pv=el.previousElementSibling;if(pv&&pv.classList.contains('grpCard'))ovListEl.insertBefore(el,pv);renumberOv();build();});
