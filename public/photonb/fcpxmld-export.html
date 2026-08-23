@@ -55,7 +55,7 @@
     <b>James FCPX 撿片（KP/HL）</b><i>→</i><b>Export .fcpxmld</b><i>→</i><b>fcpxmld-export</b><i>→</i><b>_preview_mov_HL/ ＋ _preview_mov_KP/</b>
   </div>
   <ul>
-    <li>讀 <code>.fcpxmld</code> 內的 <code>KP_R/Y/G/P</code> keyword ＋ Star 評分 ＋ 場景關鍵字。</li>
+    <li>讀 <code>.fcpxmld</code> 內的 <code>KP</code> keyword ＋ Star 評分 ＋ 場景關鍵字。</li>
     <li><b>KP</b> → 從原片抽<b>原生解析度</b>單禎 JPG，色標＋關鍵字＋來源時碼寫進 XMP，LR import 直接讀到。</li>
     <li><b>HL（★4）</b> → 切 1080p H.264 短片段，當「動態照片」觀賞。</li>
     <li>命名／分場景全由腳本依 XML 生成，你不用手動命名、不用手動搬檔。</li>
@@ -63,8 +63,12 @@
 
   <h2>怎麼用</h2>
   <pre># 撿完一天，把那天的 .fcpxmld 丟給我，一條指令：
-fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"</pre>
-  <p><span class="tag">腳本 <code>tools/fcpxmld-export.py</code></span><span class="tag">2026-07-07 起跨 trip 通用</span></p>
+fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"
+
+# 若這天是新規則（只打 KP、沒帶色碼），抽完圖 Robert 會接著跑辨識：
+kp_autolabel.py "&lt;trip&gt;/_preview_mov_KP" --thumbs      # 出編號接觸表
+kp_autolabel.py "&lt;trip&gt;/_preview_mov_KP" --apply decisions.json</pre>
+  <p><span class="tag">腳本 <code>tools/fcpxmld-export.py</code></span><span class="tag">辨識 <code>tools/kp_autolabel.py</code></span><span class="tag">2026-07-07 起跨 trip 通用</span></p>
   <div class="note">💡 <b>路徑自動推導（不再逐趟改碼）：</b>從 argv 的 <code>.fcpxmld</code> 路徑自動抓 <code>TRIP_ROOT</code> 與素材夾 —— 依序試 ①同名 day 素材夾 ②剝掉 <code>_主/_次</code> 的同名夾 ③同 <code>dayN</code> 的 <code>MOV_*</code> ④<code>_MOV</code> ⑤退回 trip 本身。撿完一天丟該 day 的 <code>.fcpxmld</code> 即出圖。</div>
 
   <h2>🔒 輸出版面（鎖死・不要每次不一樣）</h2>
@@ -141,9 +145,13 @@ fcpxmld-export "&lt;trip&gt;/_&lt;trip&gt;_FCPX/&lt;MOV_day&gt;.fcpxmld"</pre>
   <h2>兩種已實作的處理</h2>
   <div class="card">
     <p><span class="num">A</span><b>KP → 原生解析度單禎 ＋ 分類寫 XMP</b></p>
-    <p>讀 <code>KP_R/Y/G/P</code> 的單禎時間點 → ffmpeg 抽原生解析度 JPG（<code>-q:v 1</code>）→ 色標寫進 XMP：<br>
-    <span class="dotr">● R=Red 臉</span>　<span class="doty">● Y=Yellow 背影</span>　<span class="dot">● G=Green 風景</span>　<span class="dotp">● P=Purple 物件</span><br>
+    <p>讀 <code>KP</code> 的單禎時間點 → ffmpeg 抽原生解析度 JPG（<code>-q:v 1</code>）→ 色標寫進 XMP：<br>
+    <span class="dotr">● R=紅色 臉/人像</span>　<span class="doty">● Y=黃色 背影</span>　<span class="dot">● G=綠色 風景</span>　<span class="dotp">● P=紫色 物件</span><br>
     你 import LR 直接看到色標＋關鍵字＋來源時碼，不用再標一次。</p>
+    <p style="margin-top:.6rem">🆕 <b>2026-08-23 規則改了：你在 FCP 只要打 <code>KP</code>，不用再加 R/Y/G/P</b>（那幾個快捷鍵留給你自己用）。<br>
+    色標改成 <b>Robert 在 export 之後看圖辨識補上</b>——抽完圖會自動做一張編號接觸表，Robert 逐張判 R/Y/G/P、寫客觀描述，再寫回 JPG 並改檔名（<code>_KP_t…</code> → <code>_KPG_t…</code>）。<br>
+    舊的 <code>KP_R/Y/G/P</code> 照吃，之前跑過的 trip 不會壞。</p>
+    <p>💡 小貼士：辨識完 <b>檔名、關鍵字、色標、Description 四個地方會一起改</b>。想自己覆蓋某一張，改 <code>_autolabel/decisions.json</code> 的 <code>color</code> 再跑一次 <code>--apply</code> 就好。</p>
   </div>
   <div class="card">
     <p><span class="num">B</span><b>★4 HL → 動態照片短片段</b></p>
