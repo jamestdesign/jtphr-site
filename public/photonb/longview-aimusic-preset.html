@@ -91,6 +91,8 @@
     <div class="row"><label>來源 trip</label><input class="txt" id="iTrip" value="2026-06-22 荷蘭阿姆斯特丹九街-運河"></div>
     <div class="row"><label>目標長度</label><input class="txt" id="iLen" value="60" style="max-width:6rem"> <span style="font-size:.8rem;color:var(--muted)">分鐘（不夠會建議 Loop，不會自動做）</span></div>
     <div class="row"><label>素材門檻</label><span class="chips" id="minlen"></span></div>
+    <div class="row"><label>排除場景</label><input class="txt" id="iSkip" value="" placeholder="留空＝全部都收（例：空拍、演唱會）"></div>
+    <p class="hint" style="margin-top:-.2rem">這趟<b>不想收</b>的場景關鍵字，多個用「、」分開。<b>這是每支片各自決定的，不是固定規則</b> —— 例如荷蘭 day1 排除空拍，只是因為那批素材之前已經用過了。</p>
     <div class="row"><label>直式素材</label><span class="chips" id="vmode"></span></div>
     <p class="hint" style="margin-top:-.2rem">16:9 片子裡碰到直式（9:16）素材怎麼辦。<b>留黑邊</b>＝原樣兩側黑；<b>2~3 格拼貼</b>＝同場景直式併成一格（X 軸 −640/0/+640，scale 1.053，不裁構圖）—— ⚠️ 併格會讓<b>片長變短</b>（3 支變 1 段）；<b>裁中段</b>＝取畫面中間裁成 16:9，長度不變但構圖被切。</p>
     <div class="row"><label>接點</label><span class="chips" id="fade"></span></div>
@@ -269,7 +271,7 @@ function draw(){
   document.getElementById("spec").textContent =
 `長篇景色模板 ┃ 版式:${S.ratio} ┃ 出片:${S.deliv}
 片頭:變體 ${g("iVar")} · ${g("iOpen")} 秒
-素材:${g("iTrip")} · 平穩風景 · ${S.minlen} · 目標 ${g("iLen")} 分 · ${S.fade} · 直式${S.vmode}
+素材:${g("iTrip")} · 平穩風景 · ${S.minlen} · 目標 ${g("iLen")} 分 · ${S.fade} · 直式${S.vmode}${g("iSkip")?" · 排除 "+g("iSkip"):""}
 音樂:${S.msrc} · ${S.mpick} · ${g("iTrack")} · ${g("iDb")}dB
 元件:音波${S.wave?"開":"關"} 跑馬燈${S.led?"開":"關"} LOGO${S.logo?"開":"關"} 清單${S.scenes?"開":"關"}
 清單:${g("iLT")} ┃ ${g("iLI").split("\n").filter(x=>x.trim()).join(" / ")}`;
