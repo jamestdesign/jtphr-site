@@ -99,7 +99,11 @@
   <div class="group">
     <h2>④ 音樂</h2>
     <div class="row"><label>來源</label><span class="chips" id="msrc"></span></div>
-    <div class="row"><label>曲目／清單</label><input class="txt" id="iTrack" value="Warm Cup Morning / Photo Album Keys"></div>
+    <div class="row"><label>誰來挑</label><span class="chips" id="mpick"></span></div>
+    <p class="hint" style="margin-top:-.2rem">選<b>我的音樂素材庫</b>＝ <code>/Volumes/Crucial 8T/FCPX素材/MUSIC</code>（66 首，已全部分析過 BPM／段落／能量）。
+      要自己挑就去 <a href="./music-picker.html" style="color:var(--gold)">配樂選擇器 →</a> 篩（慢/中/快·長度·前奏·走勢·音色·動態），
+      本機版還能直接試聽；填「Robert 幫我挑」我就照片子的調性配好、拼到片長。</p>
+    <div class="row"><label>曲目／清單</label><input class="txt" id="iTrack" value="Robert 依調性挑" placeholder="留空＝Robert 挑"></div>
     <div class="row"><label>音量</label><input class="txt" id="iDb" value="-19" style="max-width:6rem"> <span style="font-size:.8rem;color:var(--muted)">dB（陪伴影片建議 −19）</span></div>
   </div>
 
@@ -243,7 +247,7 @@ config 範本：tools/templates/longview_config_範本.json
 </div>
 
 <script>
-const S={ratio:"16:9 橫",fade:"2.5 秒長溶接",msrc:"Irene 原創曲（可商用）",
+const S={ratio:"16:9 橫",fade:"2.5 秒長溶接",msrc:"我的音樂素材庫",mpick:"Robert 幫我挑",
          minlen:"≥10 秒",vmode:"留黑邊",
          deliv:"燒進成品",wave:true,led:true,logo:true,scenes:true};
 function chips(el,items,set){
@@ -255,6 +259,7 @@ function draw(){
   document.querySelectorAll("#ratio .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.ratio));
   document.querySelectorAll("#fade .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.fade));
   document.querySelectorAll("#msrc .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.msrc));
+  document.querySelectorAll("#mpick .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.mpick));
   document.querySelectorAll("#deliv .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.deliv));
   document.querySelectorAll("#minlen .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.minlen));
   document.querySelectorAll("#vmode .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.vmode));
@@ -265,7 +270,7 @@ function draw(){
 `長篇景色模板 ┃ 版式:${S.ratio} ┃ 出片:${S.deliv}
 片頭:變體 ${g("iVar")} · ${g("iOpen")} 秒
 素材:${g("iTrip")} · 平穩風景 · ${S.minlen} · 目標 ${g("iLen")} 分 · ${S.fade} · 直式${S.vmode}
-音樂:${S.msrc} · ${g("iTrack")} · ${g("iDb")}dB
+音樂:${S.msrc} · ${S.mpick} · ${g("iTrack")} · ${g("iDb")}dB
 元件:音波${S.wave?"開":"關"} 跑馬燈${S.led?"開":"關"} LOGO${S.logo?"開":"關"} 清單${S.scenes?"開":"關"}
 清單:${g("iLT")} ┃ ${g("iLI").split("\n").filter(x=>x.trim()).join(" / ")}`;
 }
@@ -273,7 +278,8 @@ chips(document.getElementById("ratio"),["16:9 橫","9:16 直"],k=>S.ratio=k);
 chips(document.getElementById("minlen"),["≥8 秒","≥10 秒","≥12 秒"],k=>S.minlen=k);
 chips(document.getElementById("vmode"),["留黑邊","2~3 格拼貼","裁中段"],k=>S.vmode=k);
 chips(document.getElementById("fade"),["2.5 秒長溶接","1.5 秒","硬切"],k=>S.fade=k);
-chips(document.getElementById("msrc"),["Irene 原創曲（可商用）","我的 AI 自創曲","純環境音（無音樂）"],k=>S.msrc=k);
+chips(document.getElementById("mpick"),["Robert 幫我挑","我自己指定"],k=>S.mpick=k);
+chips(document.getElementById("msrc"),["我的音樂素材庫","Irene 原創曲（可商用）","我的 AI 自創曲","純環境音（無音樂）"],k=>S.msrc=k);
 chips(document.getElementById("deliv"),["燒進成品","透明 ProRes（進 FCP）","出 fcpxml 我自己剪","透明元件＋fcpxml（元件式）"],k=>S.deliv=k);
 chips(document.getElementById("parts"),["音波","跑馬燈","LOGO","場景清單"],
   k=>{if(k==="音波")S.wave=!S.wave;else if(k==="跑馬燈")S.led=!S.led;
