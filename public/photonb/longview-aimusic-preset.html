@@ -108,7 +108,7 @@
     <div class="row"><label>排除場景</label><input class="txt" id="iSkip" value="" placeholder="留空＝全部都收（例：空拍、演唱會）"></div>
     <p class="hint" style="margin-top:-.2rem">這趟<b>不想收</b>的場景關鍵字，多個用「、」分開。<b>這是每支片各自決定的，不是固定規則</b> —— 例如荷蘭 day1 排除空拍，只是因為那批素材之前已經用過了。</p>
     <div class="row"><label>直式素材</label><span class="chips" id="vmode"></span></div>
-    <p class="hint" style="margin-top:-.2rem">16:9 片子裡碰到直式（9:16）素材怎麼辦。<b>留黑邊</b>＝原樣兩側黑；<b>2~3 格拼貼</b>＝同場景直式併成一格（X 軸 −640/0/+640，scale 1.053，不裁構圖）—— ⚠️ 併格會讓<b>片長變短</b>（3 支變 1 段）；<b>裁中段</b>＝取畫面中間裁成 16:9，長度不變但構圖被切。</p>
+    <p class="hint" style="margin-top:-.2rem">16:9 片子裡碰到直式（9:16）素材怎麼辦。<b>留黑邊</b>＝原樣兩側黑；<b>2~3 格拼貼</b>＝同場景直式併成一格（X 軸 −640/0/+640，<b>Scale 100%</b> 不放大不裁切——James 2026-08-25 拍板；格間會有約 32px 均勻黑縫，是刻意的）—— ⚠️ 併格會讓<b>片長變短</b>（3 支變 1 段）；<b>裁中段</b>＝取畫面中間裁成 16:9，長度不變但構圖被切。</p>
     <div class="row"><label>接點</label><span class="chips" id="fade"></span></div>
   </div>
 
@@ -148,7 +148,7 @@
       <b style="color:#eae0c8">燒進成品</b>　一支可以直接上傳的 mp4，圖層已經燒在畫面裡。<b>不能再改字。</b><br>
       <b style="color:#eae0c8">透明 ProRes（進 FCP）</b>　只有圖層、背景是<b>透明</b>的 .mov，拖到 FCP 疊在素材上面。
       <b>畫面 100% 跟預覽一樣</b>（字體、字距、霓虹光暈、音波緞帶、人物夾層都在），
-      但字是<b>畫上去的</b>，要改字得回來重算。<br>
+      但字是<b>畫上去的</b>，要改字得回來重算。<b>🆕 2026-08-24 起文字類不再走這條</b>——全部用 FCPX 內建 title（見 ②），這選項只給音波緞帶這種生成圖層。<br>
       <b style="color:#eae0c8">出 fcpxml</b>　匯進 FCP 變成<b>可以直接點開改字</b>的原生標題，改時間改位置都在 FCP 裡做。
       代價：<b>只做得出簡單的字</b> —— 霓虹光暈／自動拉滿寬／音波緞帶／點陣 LED／
       <b>文字夾在人物後面</b>這些 FCP 內建做不到，會掉光。<br>
@@ -179,7 +179,11 @@
     改成自己畫：44 條細線各疊三組正弦波、線間相位微差製造扭轉，<b>振幅跟著音樂音量走</b>，所以仍是跟著音樂在動。
   </div>
   <div class="tip">
-    💡 <b>點陣 LED 曲名</b> <code>led_marquee.py</code> —— 字先縮成 9 排低解析點陣，每格畫成圓點；
+    💡 <b>曲名跑馬燈（🆕 2026-08-25 改版）</b>：改用 <b>FCPX 內建 Ticker</b>（Build In/Out → Ticker，Synchro LET 288pt）——
+    你自己能改字改速度、檔案 0 MB。規則：每首歌開頭跑 8 秒一趟、往後接到換歌、不滿 8 秒捨棄（Ticker 不會自己循環，是拷貝延伸）。
+    版位大小照你調好的（scale 30%、距底 170px）自動帶。想要點陣燈板感 → 你在 FCP 調材質顏色就很像；
+    真要燈板網格再開 <code>led_grid.py</code> 的遮罩層。<br>
+    <span style="opacity:.55">（舊做法 <code>led_marquee.py</code> 點陣影片已退役：
     亮燈白色、暗燈保留很淡的白（看得到燈板網格）。歌名一格一格往左跑。
   </div>
 

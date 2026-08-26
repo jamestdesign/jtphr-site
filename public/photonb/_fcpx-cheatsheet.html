@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FCPX 撿片操作 Cheat Sheet</title>
-  <meta name="description" content="James 撿片工具：Star1~5（整支 MOV 類型）+ KP_R/Y/G/P（抽禎指令）+ Delete（NG）。自動化骨幹見影片 Schema 紀錄。" />
+  <meta name="description" content="James 撿片工具：Star1~5（整支 MOV 類型）+ KP（抽禎指令，色標 Robert 補）+ Delete（NG）。自動化骨幹見影片 Schema 紀錄。" />
   <meta name="date" content="2026-06-02" />
   <style>
     :root {
@@ -128,7 +128,7 @@
     <h1>FCPX 撿片操作 Cheat Sheet</h1>
     <div style="background:#3a1a1a;border-left:4px solid #e94560;border-radius:6px;padding:.8rem 1rem;margin:1rem 0;font-size:.9rem;color:#ffd0d6;line-height:1.7">🔒 <b>本頁已被取代</b> — 所有星等／關鍵字／快捷鍵的<b>現行定義</b>請看 <a href="./picking-keywords.html" style="color:#ffb3c0"><b>撿片關鍵字總表</b></a>。<br>本頁停在 2026-06-02：星等是<b>改版前的舊定義</b>（0★生活紀錄／4★精彩／5★史詩級…全部作廢）、資料夾結構也是舊的 <code>_MOV/_STILL/</code>。<b>僅供回溯，不要照著做。</b></div>
     <p class="date">2026-06-02</p>
-    <p class="lead">James 撿片工具：Star1~5（整支 MOV 類型）+ KP_R/Y/G/P（抽禎指令）+ Delete（NG）。兩層分開、互不干擾。</p>
+    <p class="lead">James 撿片工具：Star1~5（整支 MOV 類型）+ KP（抽禎指令，色標 Robert 補）+ Delete（NG）。兩層分開、互不干擾。</p>
 
     <div style="background:#fdf9ec;border-left:4px solid #b8830f;border-radius:6px;padding:12px 16px;margin:16px 0;font-size:14px;color:#4a3a0a;">
       ⚠️ <strong>歷史版本</strong>：本速查已整合進最新的 <a href="./video-editing-kb.html" style="color:#1e6b8f;font-weight:600;">影片剪輯攻略書 V2.1</a>（含 FCPX 操作 9V-a），平常請看那本。本頁保留供回溯。
@@ -137,7 +137,7 @@
     <div class="layer-box">
       <h4>🧠 兩層架構速覽</h4>
       <p><strong>自動化層（不變）：</strong>VLM 抽幀 → 評 STILL 品質 + colorLabel 投票 → 反推 KF → 走 schema NG/KP/HL/KF</p>
-      <p><strong>James 撿片層（本文）：</strong>FCPX 內手動標 <strong>Star1~5 整支 MOV 類型</strong> + <strong>KP_R/Y/G/P 抽禎指令</strong> + <strong>Delete NG 段</strong></p>
+      <p><strong>James 撿片層（本文）：</strong>FCPX 內手動標 <strong>Star1~5 整支 MOV 類型</strong> + <strong>KP 抽禎指令</strong> + <strong>Delete NG 段</strong></p>
     </div>
 
     <nav class="toc">
@@ -148,7 +148,7 @@
         <li><a href="#structure">③ 資料夾結構</a></li>
         <li><a href="#shortcuts">④ 快捷鍵總表</a></li>
         <li><a href="#star">⑤ Star1~5（整支 MOV 類型）</a></li>
-        <li><a href="#kp">⑥ KP_R/Y/G/P（抽禎指令）</a></li>
+        <li><a href="#kp">⑥ KP（抽禎指令）</a></li>
         <li><a href="#ng">⑦ Delete = NG 失誤段</a></li>
         <li><a href="#marker">⑧ Marker 用法</a></li>
         <li><a href="#export-xml">⑨ Export XML</a></li>
@@ -163,7 +163,7 @@
                 ↓
     撿片：看整支 MOV 判類型 → Ctrl+1~5 標 Star
             ↓
-    中途看到精彩禎 → I/O 標位置 + Ctrl+6~9 標 KP_R/Y/G/P
+    中途看到精彩禎 → I/O 標位置 + 打 KP（一個關鍵字就好）
             ↓
     看到失誤段 → I/O 框範圍 + Delete (NG)
                 ↓
@@ -389,36 +389,17 @@
       <p style="margin:.5rem 0 0;"><strong>Robert 腳本判斷「必出片候選」時看的是 <code>Star4</code> / <code>Star5</code> keyword，不是 F。</strong> 即使 James 撿片時忘了加 F，只要 keyword 有標 Star4/Star5 → 腳本一樣會識別 → 走必出片流程。F 純粹是給 James 自己 Browser 內視覺掃片用，<strong>不影響任何自動化判斷</strong>。</p>
     </div>
 
-    <h2 id="kp">⑥ KP_R/Y/G/P（抽禎指令）</h2>
+    <h2 id="kp">⑥ KP（抽禎指令）</h2>
 
-    <p>KP_R/Y/G/P keyword 是「<strong>James 給 Robert 的抽禎指令</strong>」：「這個時點請抽一張禎當 STILL，主題分類是 R/Y/G/P」。</p>
-
-    <h3>4 種主題</h3>
+    <p><strong>🆕 2026-08-23 改版：只打 <code>KP</code> 一個關鍵字，不用再分 R/Y/G/P</strong>——那四個快捷鍵拿回去自己用。
+    Robert 出圖後看畫面自動補色標（規則不變：<span class="pill red">紅=臉</span> <span class="pill yellow">黃=背影</span>
+    <span class="pill green">綠=風景</span> <span class="pill purple">紫=物件</span>），你進 LR 看到的跟以前一樣。</p>
+    <p>意思仍是「<strong>這個時點請抽一張禎當 STILL</strong>」：I/O 框好位置 → 打 <code>KP</code>。</p>
     <table>
-      <thead>
-        <tr><th>快捷鍵</th><th>Keyword</th><th>主題</th></tr>
-      </thead>
+      <thead><tr><th>動作</th><th>Keyword</th><th>誰判斷主題</th></tr></thead>
       <tbody>
-        <tr>
-          <td><kbd>Ctrl</kbd>+<kbd>6</kbd></td>
-          <td><span class="pill red">KP_R</span></td>
-          <td>人像五官明顯（臉清楚）</td>
-        </tr>
-        <tr>
-          <td><kbd>Ctrl</kbd>+<kbd>7</kbd></td>
-          <td><span class="pill yellow">KP_Y</span></td>
-          <td>背影 / 側臉 / 動作</td>
-        </tr>
-        <tr>
-          <td><kbd>Ctrl</kbd>+<kbd>8</kbd></td>
-          <td><span class="pill green">KP_G</span></td>
-          <td>風景</td>
-        </tr>
-        <tr>
-          <td><kbd>Ctrl</kbd>+<kbd>9</kbd></td>
-          <td><span class="pill purple">KP_P</span></td>
-          <td>食物 / 藝術品 / 物件</td>
-        </tr>
+        <tr><td>I/O ＋ 打關鍵字</td><td><code>KP</code></td><td>Robert 出圖後看畫面補 R/Y/G/P 色標</td></tr>
+        <tr><td colspan="3" style="color:#9a9ab0;font-size:.85em">舊的 KP_R/Y/G/P 照樣吃（之前的 trip 不會壞）；覺得哪張色標判錯，跟 Robert 講編號改單張。</td></tr>
       </tbody>
     </table>
 
