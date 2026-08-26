@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>風格檔庫（全量子頁）</title>
+  <meta name="description" content="272 個影片風格 LUT 全量目錄：切換 4 張德國樣本照看套用前後、依家族/色溫篩選、搜尋、每組特徵摘要。" />
+  <meta name="date" content="2026-07-18" />
+  <style>
+    :root{--bg:#0b0b12;--surf:#14141f;--line:#2a2a3a;--gold:#d8b65a;--ink:#f0eee6;--muted:#9a9ab0;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;margin:0;}
+    body{background:var(--bg);color:var(--ink);font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:1180px;margin:0 auto;padding:1.2rem 1.1rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.32em;font-size:.7rem;text-transform:uppercase;margin:1.3rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5vw,2.3rem);}
+    .lead{color:var(--muted);margin:.3rem 0 1rem;max-width:64ch;}
+    .picker{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:.7rem .8rem;margin:.6rem 0 .8rem;}
+    .picker .t{font-size:.78rem;color:var(--muted);margin-bottom:.5rem;}
+    .thumbs{display:flex;gap:.5rem;flex-wrap:wrap;}
+    .thumb{flex:none;width:120px;cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid transparent;position:relative;}
+    .thumb.on{border-color:var(--gold);}
+    .thumb img{width:120px;height:80px;object-fit:cover;display:block;}
+    .thumb .el{font-size:.64rem;color:#fff;background:rgba(0,0,0,.55);padding:.1rem .3rem;position:absolute;bottom:0;left:0;right:0;text-align:center;}
+    .controls{position:sticky;top:0;z-index:9;background:linear-gradient(var(--bg) 84%,transparent);padding:.5rem 0 .7rem;}
+    .search{width:100%;padding:.6rem .9rem;font-size:.95rem;color:var(--ink);background:var(--surf);border:1px solid var(--line);border-radius:10px;outline:none;margin-bottom:.5rem;}
+    .search:focus{border-color:var(--gold);}
+    .frow{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.2rem 0;}
+    .frow .k{color:var(--muted);font-size:.72rem;min-width:3.2em;}
+    .chip{border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:999px;padding:.22rem .65rem;font-size:.76rem;cursor:pointer;user-select:none;}
+    .chip:hover{border-color:var(--gold);} .chip.on{background:var(--gold);color:#161006;border-color:var(--gold);font-weight:600;}
+    .count{color:var(--muted);font-size:.8rem;margin:.5rem 0;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-top:.4rem;}
+    .card{background:var(--surf);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+    .ba{position:relative;width:100%;aspect-ratio:4/3;user-select:none;touch-action:none;cursor:ew-resize;overflow:hidden;background:#000;}
+    .ba .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+    .ba .rev-wrap{position:absolute;top:0;left:0;bottom:0;overflow:hidden;width:50%;}
+    .ba .rev-wrap img{position:absolute;top:0;left:0;height:100%;object-fit:cover;display:block;pointer-events:none;}
+    .ba .handle{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);left:50%;pointer-events:none;box-shadow:0 0 8px rgba(0,0,0,.6);}
+    .ba .handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--gold);color:#1a1a10;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+    .lbl{position:absolute;top:7px;padding:.12rem .45rem;font-size:.66rem;border-radius:5px;background:rgba(0,0,0,.55);color:#fff;z-index:2;}
+    .lbl.b{left:7px;} .lbl.a{right:7px;color:var(--gold);}
+    .meta{padding:.6rem .8rem .8rem;}
+    .meta h3{margin:.1rem 0 .25rem;font-size:.92rem;word-break:break-word;}
+    .fam{color:var(--muted);font-size:.72rem;}
+    .sig{margin-top:.35rem;font-size:.72rem;color:var(--muted);}
+    .sig b{color:var(--gold);}
+    .tags{margin-top:.35rem;} .tag{display:inline-block;font-size:.66rem;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:.08rem .4rem;margin:.12rem .22rem 0 0;}
+    footer{margin-top:2.6rem;color:var(--muted);font-size:.75rem;text-align:center;}
+    .loading{color:var(--muted);text-align:center;padding:3rem;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">風格檔庫 · 全量目錄</p>
+  <h1>風格檔庫 <span style="color:var(--gold);font-size:.6em;">272 影片風格</span></h1>
+  <p class="lead">FlexPresets 影片全部 <strong>272 個 LUT 風格</strong>，套在你挑的德國樣本上。上方切換照片、下面依家族/色溫篩選或搜尋。每組附「特徵」摘要（自動比對前後）。</p>
+
+  <div class="picker">
+    <div class="t">🖼️ 選樣本照片（切換即同步套用到全部）</div>
+    <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="🔎 搜尋風格名（例：富士 / 玩命 / 美食 / ACROS）" autocomplete="off">
+    <div class="frow"><span class="k">家族</span><span id="famChips"></span></div>
+    <div class="frow"><span class="k">色溫</span><span id="toneChips"></span></div>
+  </div>
+  <div class="count" id="count"></div>
+
+  <div class="grid" id="grid"></div>
+  <div class="loading" id="loading">載入中…</div>
+
+  <footer>PhotoNB · 風格檔庫全量目錄（272 影片 LUT）· ffmpeg lut3d 自動渲染 · 由 Robert 維護 · 2026-07-18</footer>
+</div>
+
+<script>
+const AP="./style-full-assets/";
+let DATA=null, curPhoto="pA", selFam=null, selTone=null, kw="";
+const FAM_ORDER=["膠片","電影","日系清新","人像","美食","暖陽日落","冷調","黑白","復古情緒","都市旅拍"];
+const TONES=["暖","中性","冷","黑白"];
+
+fetch(AP+"catalog.json").then(r=>r.json()).then(d=>{
+  DATA=d; curPhoto=d.photos[0].k;
+  document.getElementById('loading').style.display='none';
+  document.getElementById('thumbs').innerHTML=d.photos.map(p=>
+    `<div class="thumb${p.k===curPhoto?' on':''}" data-p="${p.k}"><img loading="lazy" src="${AP}${p.k}_base.jpg" alt="${p.d}"><span class="el">${p.el}</span></div>`).join('');
+  renderChips(); render();
+}).catch(e=>{document.getElementById('loading').textContent='載入失敗:'+e;});
+
+function famCount(f){return DATA.looks.filter(l=>l.fam===f).length;}
+function toneCount(t){return DATA.looks.filter(l=>l.tone===t).length;}
+function chip(txt,on,cnt){return `<span class="chip${on?' on':''}" data-v="${txt}">${txt}${cnt!=null?` <span style="opacity:.65">${cnt}</span>`:''}</span>`;}
+function renderChips(){
+  document.getElementById('famChips').innerHTML=chip("全部",!selFam,DATA.looks.length)+FAM_ORDER.map(f=>chip(f,selFam===f,famCount(f))).join('');
+  document.getElementById('toneChips').innerHTML=chip("全部",!selTone)+TONES.map(t=>chip(t,selTone===t,toneCount(t))).join('');
+}
+const grid=document.getElementById('grid');
+function render(){
+  const vis=DATA.looks.filter(l=>(!selFam||l.fam===selFam)&&(!selTone||l.tone===selTone)&&(!kw||l.name.toLowerCase().includes(kw)||l.famkey.includes(kw)));
+  document.getElementById('count').textContent=`顯示 ${vis.length} / ${DATA.looks.length} 組`;
+  grid.innerHTML=vis.map(l=>`<div class="card"><div class="ba">
+    <img class="bg" loading="lazy" src="${AP}${l.id}_${curPhoto}.jpg" alt="套用後 ${l.name}">
+    <div class="rev-wrap"><img loading="lazy" src="${AP}${curPhoto}_base.jpg" alt="原圖"></div>
+    <div class="handle"></div><span class="lbl b">原圖</span><span class="lbl a">套用後</span></div>
+    <div class="meta"><div class="fam">${l.famkey} · ${l.fam}</div><h3>${l.name}</h3>
+    <div class="sig"><b>特徵：</b>${l.sig[curPhoto]||''}</div>
+    <div class="tags"><span class="tag">${l.fam}</span><span class="tag">${l.tone}</span></div></div></div>`).join('');
+  bindBA();
+}
+function bindBA(){
+  grid.querySelectorAll('.ba').forEach(ba=>{
+    const wrap=ba.querySelector('.rev-wrap'),handle=ba.querySelector('.handle'),aimg=wrap.querySelector('img');
+    function fit(){aimg.style.width=ba.clientWidth+'px';}
+    fit();
+    function set(x){const r=ba.getBoundingClientRect();let p=(x-r.left)/r.width;p=Math.max(0,Math.min(1,p));wrap.style.width=(p*100)+'%';handle.style.left=(p*100)+'%';}
+    ba.addEventListener('mousemove',e=>set(e.clientX));
+    ba.addEventListener('touchstart',e=>set(e.touches[0].clientX),{passive:true});
+    ba.addEventListener('touchmove',e=>set(e.touches[0].clientX),{passive:true});
+  });
+}
+document.addEventListener('click',e=>{
+  const th=e.target.closest('.thumb');
+  if(th){curPhoto=th.dataset.p;document.querySelectorAll('.thumb').forEach(t=>t.classList.toggle('on',t.dataset.p===curPhoto));render();return;}
+  const c=e.target.closest('.chip'); if(!c)return;
+  const v=c.dataset.v;
+  if(c.closest('#famChips')) selFam=(v==="全部")?null:v; else selTone=(v==="全部")?null:v;
+  renderChips(); render();
+});
+document.getElementById('q').addEventListener('input',e=>{kw=e.target.value.trim().toLowerCase();render();});
+window.addEventListener('resize',()=>bindBA());
+</script>
+</body>
+</html>

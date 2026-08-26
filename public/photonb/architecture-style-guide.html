@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>建築風格辨識指南</title>
+  <title>建築風格（辨識＋生圖）</title>
   <meta name="description" content="旅遊拍建築的風格辨識攻略：12 風格史 + 11 大師語彙，含辨識重點與標註規則" />
   <meta name="date" content="2026-07-05" />
   <style>
@@ -46,6 +46,22 @@
   <div class="wrap">
     <a class="back" href="./">← 攝影筆記本</a>
     <h1>建築風格辨識指南 🏛️</h1>
+<div style="display:flex;gap:.5rem;margin:.8rem 0 1rem">
+ <button class="arctab on" data-t="guide" style="background:#e8c47a;color:#20180d;border:0;border-radius:999px;padding:.4rem 1rem;font-weight:700;cursor:pointer;font-family:inherit">🏛️ 辨識指南</button>
+ <button class="arctab" data-t="prompts" style="background:#1a1a2e;color:#ededf4;border:1px solid #2a2a44;border-radius:999px;padding:.4rem 1rem;cursor:pointer;font-family:inherit">🎨 生圖 Prompt</button>
+</div>
+<iframe id="arcPrompts" src="./_architecture-style-prompts.html" style="display:none;width:100%;height:78vh;border:1px solid #2a2a44;border-radius:12px;background:#0b0b1a"></iframe>
+<script>
+document.querySelectorAll('.arctab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.arctab').forEach(x=>{x.classList.remove('on');x.style.background='#1a1a2e';x.style.color='#ededf4';x.style.fontWeight='400';});
+  b.classList.add('on');b.style.background='#e8c47a';b.style.color='#20180d';b.style.fontWeight='700';
+  const pr=b.dataset.t==='prompts';
+  document.getElementById('arcPrompts').style.display=pr?'block':'none';
+  let n=document.getElementById('arcPrompts').nextElementSibling;
+  const hide=[]; while(n){ if(n.tagName!=='SCRIPT') hide.push(n); n=n.nextElementSibling; }
+  hide.forEach(el=>el.style.display=pr?'none':'');
+});
+</script>
     <p class="date">2026-07-05 · Robert 整理 · 供旅遊照歸檔標註 &amp; 現場辨識</p>
 
     <p class="lead">
