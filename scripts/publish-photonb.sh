@@ -57,3 +57,10 @@ git push origin main
 
 echo ""
 echo "✅ 已發佈！約 1 分鐘後可在 https://jtphr-site.vercel.app/photonb/ 看到更新。"
+
+# 2026-08-26：同步到 jtphr.mj-app.com.tw（James 的主機；Tailscale 不通時跳過，不擋 Vercel 發佈）
+if /Applications/Tailscale.app/Contents/MacOS/Tailscale status >/dev/null 2>&1 || ping -c1 -t3 100.91.38.104 >/dev/null 2>&1; then
+  "$(dirname "$0")/deploy-mjapp.sh" || echo "⚠️ mj-app 部署失敗（Vercel 不受影響），稍後可手動跑 scripts/deploy-mjapp.sh"
+else
+  echo "⚠️ Tailscale 不在線，略過 mj-app 同步（下次發佈會補上）"
+fi
