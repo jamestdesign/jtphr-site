@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>攝影筆記本 · PhotoNB</title>
+  <meta name="description" content="James 的攝影筆記本，隨時隨地用瀏覽器閱讀。" />
+  <style>
+    :root {
+      --surface: #0f0f23; --brand: #1a1a2e; --accent: #e94560;
+      --text: #eaeaea; --muted: #a0a0a0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--surface); color: var(--text);
+      font-family: 'Noto Sans TC', 'Helvetica Neue', system-ui, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 4rem 1.25rem 6rem; }
+    header { margin-bottom: 2.5rem; }
+    .eyebrow { color: var(--accent); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 .5rem; }
+    h1 { margin: 0; font-size: 2rem; }
+    .sub { color: var(--muted); margin: .5rem 0 0; }
+    .list { display: flex; flex-direction: column; gap: 1rem; }
+    .card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--brand); border: 1px solid #2a2a44; border-radius: 14px;
+      padding: 1.25rem 1.4rem; transition: border-color .15s, transform .15s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card .date { color: var(--muted); font-size: .78rem; letter-spacing: .04em; }
+    .card h2 { margin: .35rem 0 .25rem; font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .empty { color: var(--muted); }
+    footer { margin-top: 3rem; color: var(--muted); font-size: .8rem; }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">PhotoNB</p>
+      <h1>攝影筆記本</h1>
+      <p class="sub">隨時隨地用瀏覽器閱讀的攝影筆記。共 38 篇。</p>
+    </header>
+    <main class="list">
+      <a class="card" href="./dashboard.html">
+        <span class="date">2026-08-26</span>
+        <h2>攝影師儀表板 · PhotoNB</h2>
+        <p>關聯儀表板：依工作流程找工具、看進行中與未完成的進度。</p>
+      </a>
+      <a class="card" href="./notes-index.html">
+        <span class="date">2026-08-26</span>
+        <h2>攝影筆記本 · PhotoNB</h2>
+        <p>James 的攝影筆記本，隨時隨地用瀏覽器閱讀。</p>
+      </a>
+      <a class="card" href="./music-picker.html">
+        <span class="date">2026-08-23</span>
+        <h2>配樂選擇器 · music-picker · PhotoNB</h2>
+        <p>把音樂素材庫算成 BPM＋段落結構＋能量帶，六組篩選器交叉挑配樂。</p>
+      </a>
+      <a class="card" href="./export-specs.html">
+        <span class="date">2026-08-22</span>
+        <h2>出片規格總表 · PhotoNB</h2>
+        <p>YouTube／IG Reels／HL 片段／KP 單禎／縮時參考片／8K ProRes —— 每個用途一組規格，含踩過的坑。忘了就查這頁。</p>
+      </a>
+      <a class="card" href="./li-and-na.html">
+        <span class="date">2026-08-11</span>
+        <h2>Li&amp;amp;Na 專案 · 李寶與南湳 · PhotoNB</h2>
+        <p>李寶（角色）＋南湳（家貓）的生活分享頻道。漫畫線條、一句一格、語音驅動。畫風規格、角色設定表、製作流程與待辦。</p>
+      </a>
+      <a class="card" href="./toolbox.html">
+        <span class="date">2026-08-10</span>
+        <h2>Robert 的工具箱 · 裝了什麼 · PhotoNB</h2>
+        <p>這台工作電腦上，Robert 手邊有哪些工具：技能包、自己寫的腳本、指令列工具、外部軟體。你問「我們有沒有裝○○」時查這頁。</p>
+      </a>
+      <a class="card" href="./roadmap-longview.html">
+        <span class="date">2026-08-06</span>
+        <h2>長篇景色 ＋ AI 音樂 · 待完成清單 · PhotoNB</h2>
+        <p>長篇景色片型的待辦：版型已定稿、還缺 AI 音樂／場景清單自動亮／曲目時間／Loop／發佈包。每項可勾選、可留言。</p>
+      </a>
+      <a class="card" href="./autoedit-map.html">
+        <span class="date">2026-08-06</span>
+        <h2>自動剪輯 · 片型地圖 · PhotoNB</h2>
+        <p>自動剪輯是一條共用流程，上面可以掛很多種片型模組 —— 長篇景色、社群輪播、卡點剪輯、交通移動、口播、教學、開箱。這頁是總表：骨幹六步各用哪支工具、每個片型做到哪。</p>
+      </a>
+      <a class="card" href="./longview-aimusic-preset.html">
+        <span class="date">2026-08-05</span>
+        <h2>固定出片模板 · 長篇景色 ＋ AI 音樂 · PhotoNB</h2>
+        <p>對標 Abao Vision 的系列自動出片模板：素材＝平穩風景、版型參數鎖定、片頭套標題選擇器的變體、配 AI 音樂，一句話出整支。</p>
+      </a>
+      <a class="card" href="./title-picker.html">
+        <span class="date">2026-08-05</span>
+        <h2>標題選擇器 · title picker · PhotoNB</h2>
+        <p>長景 longview 一頁到底：版型選擇器（即時預覽、產規格字串）＋ 工具說明（平穩風景怎麼挑、音波緞帶與點陣LED原理、人物去背4K鐵則、踩過的坑）。</p>
+      </a>
+      <a class="card" href="./ai-music.html">
+        <span class="date">2026-08-05</span>
+        <h2>AI 音樂創作 · 長景的引擎 · PhotoNB</h2>
+        <p>給長景 longview 配自創音樂的入門整理：三個關鍵參數、AI 生成的可調項目、選型三重點（商用權/Content ID/分軌）、中文教學連結、現成可用的曲庫。</p>
+      </a>
+      <a class="card" href="./longview-teardown.html">
+        <span class="date">2026-08-04</span>
+        <h2>長景 longview · Abao Vision 全方位拆解 · PhotoNB</h2>
+        <p>拆解 Abao Vision（33.8萬訂閱／51支）的陪伴影片商業模式：雙頻道結構、一素材兩影片、Loop 機制、標題公式、描述模板、音樂上架導流。這是「長景 longview」工具要對標的模板。</p>
+      </a>
+      <a class="card" href="./picking-keywords.html">
+        <span class="date">2026-08-03</span>
+        <h2>撿片關鍵字總表 · 單一定義來源 · PhotoNB</h2>
+        <p>FCPX 撿片用的所有星等／關鍵字／快捷鍵的唯一定義來源。Star1~5、KP、NG、★2 效果關鍵字、Robert 自動標的 IR 關鍵字、場景名，全部集中在這裡，其他筆記一律引用不重寫。</p>
+      </a>
+      <a class="card" href="./kb-2026-07-27.html">
+        <span class="date">2026-07-27</span>
+        <h2>2026-07-27 知識更新 · PhotoNB</h2>
+        <p>這兩天談定的東西一次收齊：資料夾規矩、to_montage 定位、POST 社群輪播、星等改版、IR 挑片方法、Irene 技能包分工。</p>
+      </a>
+      <a class="card" href="./fcpxmld-export.html">
+        <span class="date">2026-07-27</span>
+        <h2>撿片批次出圖 · fcpxmld-export · PhotoNB</h2>
+        <p>影片工具：FCPX 撿完片交一個 .fcpxmld，一條指令自動切 HL 片段＋抽 KP 單禎，分場景輸出並寫好 LR 可讀色標。命名/轉檔/標註全自動。</p>
+      </a>
+      <a class="card" href="./roadmap-post.html">
+        <span class="date">2026-07-27</span>
+        <h2>POST・自動剪輯 待完成清單 · PhotoNB</h2>
+        <p>POST 工具、審片介面、收斂指標、規範固化、接到影片、蒙太奇 Ⓑ 路線 —— 六階段待完成清單，每項可勾選、可留言記錄進度節點。</p>
+      </a>
+      <a class="card" href="./irene-pack.html">
+        <span class="date">2026-07-27</span>
+        <h2>Irene 技能包 · 對照筆記 · PhotoNB</h2>
+        <p>Hello Irene 2.0 六支技能各做什麼、怎麼叫、跟我們自己的工具怎麼分工 —— 一頁看完可對照。</p>
+      </a>
+      <a class="card" href="./montage-auto-move.html">
+        <span class="date">2026-07-26</span>
+        <h2>進片照片自動分場景 · montage-auto-move · PhotoNB</h2>
+        <p>影片工具：把 LR 挑好（★4/★5＋特定場景）匯出的 5760px 照片，依母檔場景自動鏡射到創作夾的 _montage，供 FCP／剪映做 montage 使用。</p>
+      </a>
+      <a class="card" href="./post-template.html">
+        <span class="date">2026-07-26</span>
+        <h2>POST 工具 · 圖層模板（可改字·可換圖）· PhotoNB</h2>
+        <p>POST 社群輪播 7 頁圖層模板：HTML 直接改字、換圖、加區塊，改完複製設定給 Robert 出圖。</p>
+      </a>
+      <a class="card" href="./scene-build.html">
+        <span class="date">2026-07-20</span>
+        <h2>素材歸場景 · scene_build · PhotoNB</h2>
+        <p>Pipeline 第一步：倒卡素材（照片+影片）一口氣時區校正→分天分場景→VLM 評分/色標/關鍵字→寫 XMP→歸檔，並鋪好 LR 目錄與 FCP 資料庫工作檔，開卡即接手。</p>
+      </a>
+      <a class="card" href="./style-library.html">
+        <span class="date">2026-07-18</span>
+        <h2>風格檔庫 · 全量目錄 · PhotoNB</h2>
+        <p>272 個影片風格 LUT 全量目錄：切換 4 張德國樣本照看套用前後、依家族/色溫篩選、搜尋、每組特徵摘要。</p>
+      </a>
+      <a class="card" href="./style-library-sample.html">
+        <span class="date">2026-07-18</span>
+        <h2>風格檔庫 · 多照片樣本 + 篩選 · PhotoNB</h2>
+        <p>風格檔庫線上目錄：切換樣本照片（室內/戶外/人像/高反差）看每個 LUT 套用前後 + 篩選架構。延遲載入不吃資源。</p>
+      </a>
+      <a class="card" href="./trip-fcpx-build.html">
+        <span class="date">2026-07-18</span>
+        <h2>旅遊影片匯入fcpx · trip-fcpx-build · PhotoNB</h2>
+        <p>影片工具：把整趟 MOV_&lt;day&gt; 一次匯進 FCP，自動分好 event（每天）與場景關鍵字＋移動中/建築/飲食分類，James 開 Library 直接撿片。leave-in-place 不複製。</p>
+      </a>
+      <a class="card" href="./initcut-spec-picker.html">
+        <span class="date">2026-07-09</span>
+        <h2>初剪規格選擇器 · initcut spec picker · PhotoNB</h2>
+        <p>像 grid 照片一樣，勾選初剪的輸出規格＋拼貼版型＋時間線組裝＋描述標籤（預設檔／特定關鍵字兩模式），一鍵複製規格字串貼給 Robert。</p>
+      </a>
+      <a class="card" href="./fcpx-operations-guide.html">
+        <span class="date">2026-07-08</span>
+        <h2>FCPX 操作指南 · PhotoNB</h2>
+        <p>Final Cut Pro 怎麼操作的總入口：2026-06 新 AI 功能(Generate Captions/Edit Detection/Auto Mask/Match Color/Advanced Trimming)實操步驟＋接哪條旅拍流程，並整合既有撿片速查、影片攻略書、schema 深頁。</p>
+      </a>
+      <a class="card" href="./interior-design-prompts.html">
+        <span class="date">2026-07-08</span>
+        <h2>室內設計 AI Prompt 庫 · PhotoNB</h2>
+        <p>12 個室內設計 AI Prompt 的可複製範例庫：每張卡有用途、變數表、可一鍵複製的英文 prompt，加上 Robert 的強化建議。附 3 套路／3 弱點拆解導讀。</p>
+      </a>
+      <a class="card" href="./narrative-tag-tool.html">
+        <span class="date">2026-07-05</span>
+        <h2>描述標籤版型庫 · PhotoNB</h2>
+        <p>影片描述標籤的版型收藏：機票感移動中航跡、景點地名條…看樣挑款，設定去初剪規格選擇器。</p>
+      </a>
+      <a class="card" href="./architecture-style-prompts.html">
+        <span class="date">2026-07-05</span>
+        <h2>建築風格 生圖 Prompt 清單</h2>
+        <p>12 風格史 + 11 大師，各一張代表建築全景 + 一張細節辨識特寫的生圖 prompt（統一水彩圖鑑風）</p>
+      </a>
+      <a class="card" href="./architecture-style-guide.html">
+        <span class="date">2026-07-05</span>
+        <h2>建築風格辨識指南</h2>
+        <p>旅遊拍建築的風格辨識攻略：12 風格史 + 11 大師語彙，含辨識重點與標註規則</p>
+      </a>
+      <a class="card" href="./prompt-library.html">
+        <span class="date">2026-07-01</span>
+        <h2>Prompt 範例庫 · PhotoNB</h2>
+        <p>特殊生圖 prompt 收藏庫：每個編號有範例圖、拆解說明與可複製 prompt。用編號引用給 Robert 即可批次導出新內容。</p>
+      </a>
+      <a class="card" href="./export-auto-move.html">
+        <span class="date">2026-07-01</span>
+        <h2>產出自動分場景 · export-auto-move · PhotoNB</h2>
+        <p>出片工具：把 LR 匯出的成品 JPG 依母檔所在場景，自動分天分場景鏡射到 _export。catalog-free（A 方案）。</p>
+      </a>
+      <a class="card" href="./neuschwanstein-guide.html">
+        <span class="date">2026-06-30</span>
+        <h2>新天鵝堡 Neuschwanstein · 觀光導覽</h2>
+        <p>巴伐利亞童話城堡新天鵝堡的觀光導覽海報：城堡檔案、必看亮點、今日行程路線與拍攝建議。</p>
+      </a>
+      <a class="card" href="./grid-style-library.html">
+        <span class="date">2026-06-28</span>
+        <h2>to_grid 專案 第一版 · 拼貼風格資料庫</h2>
+        <p>to_grid 拼貼自動出片:指令 grid(拼貼輸出) = 樣式+格式+色調+標題+內文。三大風格(馬賽克/壁貼/剪貼簿)+影片馬賽克,全自動。</p>
+      </a>
+      <a class="card" href="./timelapse-ref-clips.html">
+        <span class="date">2026-06-24</span>
+        <h2>縮時參考片 · 整理完直接看拍攝狀況（1080p）</h2>
+        <p>Robert 把縮時素材整理完後，自動拼一支 1080p 最相容的參考片放進該趟的 _refs 資料夾，James 用任何裝置點開就能看當天拍攝狀況。檔名沿用英文場景夾名。</p>
+      </a>
+      <a class="card" href="./lrtimelapse-guide.html">
+        <span class="date">2026-06-21</span>
+        <h2>LRTimelapse 7 Pro 協同教程 · 縮時 RAW 直出 8K 素材</h2>
+        <p>LRTimelapse 7 Pro 純 RAW 工作流（免 Lightroom）：調曝光、去閃、聖杯漸變、直出 8K ProRes 422，加上 James↔Robert 協同分工與明早實作清單。</p>
+      </a>
+      <a class="card" href="./video-editing-kb.html">
+        <span class="date">2026-06-03</span>
+        <h2>影片剪輯知識庫 V2.1 完整版 | 2026-06-03</h2>
+        <p>從素材到出片的完整影片工序：智慧抽幀減量、FCPX 撿片、KP/HL 批次出圖、效率改善 6 條。</p>
+      </a>
+      <a class="card" href="./welcome.html">
+        <span class="date">2026-06-02</span>
+        <h2>攝影筆記本啟用</h2>
+        <p>這個筆記本現在會直接發佈到網站，外出時用任何瀏覽器就能讀。</p>
+      </a>
+      <a class="card" href="./pipeline-overview.html">
+        <span class="date">2026-05-16</span>
+        <h2>全 Pipeline 總覽 · 照片 + 影片（James / Robert / Opus 分工）</h2>
+        <p>三方分工全景地圖：照片+影片兩條流的共用核心與分歧分流，從 input 到雲端。</p>
+      </a>
+    </main>
+    <footer>
+      <a href="/">← 回 JTpHR 首頁</a>
+    </footer>
+  </div>
+</body>
+</html>

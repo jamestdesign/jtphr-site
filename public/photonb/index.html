@@ -1,238 +1,251 @@
 <!doctype html>
 <html lang="zh-TW">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>攝影筆記本 · PhotoNB</title>
-  <meta name="description" content="James 的攝影筆記本，隨時隨地用瀏覽器閱讀。" />
-  <style>
-    :root {
-      --surface: #0f0f23; --brand: #1a1a2e; --accent: #e94560;
-      --text: #eaeaea; --muted: #a0a0a0;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; background: var(--surface); color: var(--text);
-      font-family: 'Noto Sans TC', 'Helvetica Neue', system-ui, sans-serif;
-      line-height: 1.6; -webkit-font-smoothing: antialiased;
-    }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 4rem 1.25rem 6rem; }
-    header { margin-bottom: 2.5rem; }
-    .eyebrow { color: var(--accent); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 .5rem; }
-    h1 { margin: 0; font-size: 2rem; }
-    .sub { color: var(--muted); margin: .5rem 0 0; }
-    .list { display: flex; flex-direction: column; gap: 1rem; }
-    .card {
-      display: block; text-decoration: none; color: inherit;
-      background: var(--brand); border: 1px solid #2a2a44; border-radius: 14px;
-      padding: 1.25rem 1.4rem; transition: border-color .15s, transform .15s;
-    }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card .date { color: var(--muted); font-size: .78rem; letter-spacing: .04em; }
-    .card h2 { margin: .35rem 0 .25rem; font-size: 1.15rem; }
-    .card p { margin: 0; color: var(--muted); font-size: .92rem; }
-    .empty { color: var(--muted); }
-    footer { margin-top: 3rem; color: var(--muted); font-size: .8rem; }
-    footer a { color: var(--accent); }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <p class="eyebrow">PhotoNB</p>
-      <h1>攝影筆記本</h1>
-      <p class="sub">隨時隨地用瀏覽器閱讀的攝影筆記。共 37 篇。</p>
-    </header>
-    <main class="list">
-      <a class="card" href="./dashboard.html">
-        <span class="date">2026-08-26</span>
-        <h2>攝影師儀表板 · PhotoNB</h2>
-        <p>關聯儀表板：依工作流程找工具、看進行中與未完成的進度。</p>
-      </a>
-      <a class="card" href="./music-picker.html">
-        <span class="date">2026-08-23</span>
-        <h2>配樂選擇器 · music-picker · PhotoNB</h2>
-        <p>把音樂素材庫算成 BPM＋段落結構＋能量帶，六組篩選器交叉挑配樂。</p>
-      </a>
-      <a class="card" href="./export-specs.html">
-        <span class="date">2026-08-22</span>
-        <h2>出片規格總表 · PhotoNB</h2>
-        <p>YouTube／IG Reels／HL 片段／KP 單禎／縮時參考片／8K ProRes —— 每個用途一組規格，含踩過的坑。忘了就查這頁。</p>
-      </a>
-      <a class="card" href="./li-and-na.html">
-        <span class="date">2026-08-11</span>
-        <h2>Li&amp;amp;Na 專案 · 李寶與南湳 · PhotoNB</h2>
-        <p>李寶（角色）＋南湳（家貓）的生活分享頻道。漫畫線條、一句一格、語音驅動。畫風規格、角色設定表、製作流程與待辦。</p>
-      </a>
-      <a class="card" href="./toolbox.html">
-        <span class="date">2026-08-10</span>
-        <h2>Robert 的工具箱 · 裝了什麼 · PhotoNB</h2>
-        <p>這台工作電腦上，Robert 手邊有哪些工具：技能包、自己寫的腳本、指令列工具、外部軟體。你問「我們有沒有裝○○」時查這頁。</p>
-      </a>
-      <a class="card" href="./roadmap-longview.html">
-        <span class="date">2026-08-06</span>
-        <h2>長篇景色 ＋ AI 音樂 · 待完成清單 · PhotoNB</h2>
-        <p>長篇景色片型的待辦：版型已定稿、還缺 AI 音樂／場景清單自動亮／曲目時間／Loop／發佈包。每項可勾選、可留言。</p>
-      </a>
-      <a class="card" href="./autoedit-map.html">
-        <span class="date">2026-08-06</span>
-        <h2>自動剪輯 · 片型地圖 · PhotoNB</h2>
-        <p>自動剪輯是一條共用流程，上面可以掛很多種片型模組 —— 長篇景色、社群輪播、卡點剪輯、交通移動、口播、教學、開箱。這頁是總表：骨幹六步各用哪支工具、每個片型做到哪。</p>
-      </a>
-      <a class="card" href="./longview-aimusic-preset.html">
-        <span class="date">2026-08-05</span>
-        <h2>固定出片模板 · 長篇景色 ＋ AI 音樂 · PhotoNB</h2>
-        <p>對標 Abao Vision 的系列自動出片模板：素材＝平穩風景、版型參數鎖定、片頭套標題選擇器的變體、配 AI 音樂，一句話出整支。</p>
-      </a>
-      <a class="card" href="./title-picker.html">
-        <span class="date">2026-08-05</span>
-        <h2>標題選擇器 · title picker · PhotoNB</h2>
-        <p>長景 longview 一頁到底：版型選擇器（即時預覽、產規格字串）＋ 工具說明（平穩風景怎麼挑、音波緞帶與點陣LED原理、人物去背4K鐵則、踩過的坑）。</p>
-      </a>
-      <a class="card" href="./ai-music.html">
-        <span class="date">2026-08-05</span>
-        <h2>AI 音樂創作 · 長景的引擎 · PhotoNB</h2>
-        <p>給長景 longview 配自創音樂的入門整理：三個關鍵參數、AI 生成的可調項目、選型三重點（商用權/Content ID/分軌）、中文教學連結、現成可用的曲庫。</p>
-      </a>
-      <a class="card" href="./longview-teardown.html">
-        <span class="date">2026-08-04</span>
-        <h2>長景 longview · Abao Vision 全方位拆解 · PhotoNB</h2>
-        <p>拆解 Abao Vision（33.8萬訂閱／51支）的陪伴影片商業模式：雙頻道結構、一素材兩影片、Loop 機制、標題公式、描述模板、音樂上架導流。這是「長景 longview」工具要對標的模板。</p>
-      </a>
-      <a class="card" href="./picking-keywords.html">
-        <span class="date">2026-08-03</span>
-        <h2>撿片關鍵字總表 · 單一定義來源 · PhotoNB</h2>
-        <p>FCPX 撿片用的所有星等／關鍵字／快捷鍵的唯一定義來源。Star1~5、KP、NG、★2 效果關鍵字、Robert 自動標的 IR 關鍵字、場景名，全部集中在這裡，其他筆記一律引用不重寫。</p>
-      </a>
-      <a class="card" href="./kb-2026-07-27.html">
-        <span class="date">2026-07-27</span>
-        <h2>2026-07-27 知識更新 · PhotoNB</h2>
-        <p>這兩天談定的東西一次收齊：資料夾規矩、to_montage 定位、POST 社群輪播、星等改版、IR 挑片方法、Irene 技能包分工。</p>
-      </a>
-      <a class="card" href="./fcpxmld-export.html">
-        <span class="date">2026-07-27</span>
-        <h2>撿片批次出圖 · fcpxmld-export · PhotoNB</h2>
-        <p>影片工具：FCPX 撿完片交一個 .fcpxmld，一條指令自動切 HL 片段＋抽 KP 單禎，分場景輸出並寫好 LR 可讀色標。命名/轉檔/標註全自動。</p>
-      </a>
-      <a class="card" href="./roadmap-post.html">
-        <span class="date">2026-07-27</span>
-        <h2>POST・自動剪輯 待完成清單 · PhotoNB</h2>
-        <p>POST 工具、審片介面、收斂指標、規範固化、接到影片、蒙太奇 Ⓑ 路線 —— 六階段待完成清單，每項可勾選、可留言記錄進度節點。</p>
-      </a>
-      <a class="card" href="./irene-pack.html">
-        <span class="date">2026-07-27</span>
-        <h2>Irene 技能包 · 對照筆記 · PhotoNB</h2>
-        <p>Hello Irene 2.0 六支技能各做什麼、怎麼叫、跟我們自己的工具怎麼分工 —— 一頁看完可對照。</p>
-      </a>
-      <a class="card" href="./montage-auto-move.html">
-        <span class="date">2026-07-26</span>
-        <h2>進片照片自動分場景 · montage-auto-move · PhotoNB</h2>
-        <p>影片工具：把 LR 挑好（★4/★5＋特定場景）匯出的 5760px 照片，依母檔場景自動鏡射到創作夾的 _montage，供 FCP／剪映做 montage 使用。</p>
-      </a>
-      <a class="card" href="./post-template.html">
-        <span class="date">2026-07-26</span>
-        <h2>POST 工具 · 圖層模板（可改字·可換圖）· PhotoNB</h2>
-        <p>POST 社群輪播 7 頁圖層模板：HTML 直接改字、換圖、加區塊，改完複製設定給 Robert 出圖。</p>
-      </a>
-      <a class="card" href="./scene-build.html">
-        <span class="date">2026-07-20</span>
-        <h2>素材歸場景 · scene_build · PhotoNB</h2>
-        <p>Pipeline 第一步：倒卡素材（照片+影片）一口氣時區校正→分天分場景→VLM 評分/色標/關鍵字→寫 XMP→歸檔，並鋪好 LR 目錄與 FCP 資料庫工作檔，開卡即接手。</p>
-      </a>
-      <a class="card" href="./style-library.html">
-        <span class="date">2026-07-18</span>
-        <h2>風格檔庫 · 全量目錄 · PhotoNB</h2>
-        <p>272 個影片風格 LUT 全量目錄：切換 4 張德國樣本照看套用前後、依家族/色溫篩選、搜尋、每組特徵摘要。</p>
-      </a>
-      <a class="card" href="./style-library-sample.html">
-        <span class="date">2026-07-18</span>
-        <h2>風格檔庫 · 多照片樣本 + 篩選 · PhotoNB</h2>
-        <p>風格檔庫線上目錄：切換樣本照片（室內/戶外/人像/高反差）看每個 LUT 套用前後 + 篩選架構。延遲載入不吃資源。</p>
-      </a>
-      <a class="card" href="./trip-fcpx-build.html">
-        <span class="date">2026-07-18</span>
-        <h2>旅遊影片匯入fcpx · trip-fcpx-build · PhotoNB</h2>
-        <p>影片工具：把整趟 MOV_&lt;day&gt; 一次匯進 FCP，自動分好 event（每天）與場景關鍵字＋移動中/建築/飲食分類，James 開 Library 直接撿片。leave-in-place 不複製。</p>
-      </a>
-      <a class="card" href="./initcut-spec-picker.html">
-        <span class="date">2026-07-09</span>
-        <h2>初剪規格選擇器 · initcut spec picker · PhotoNB</h2>
-        <p>像 grid 照片一樣，勾選初剪的輸出規格＋拼貼版型＋時間線組裝＋描述標籤（預設檔／特定關鍵字兩模式），一鍵複製規格字串貼給 Robert。</p>
-      </a>
-      <a class="card" href="./fcpx-operations-guide.html">
-        <span class="date">2026-07-08</span>
-        <h2>FCPX 操作指南 · PhotoNB</h2>
-        <p>Final Cut Pro 怎麼操作的總入口：2026-06 新 AI 功能(Generate Captions/Edit Detection/Auto Mask/Match Color/Advanced Trimming)實操步驟＋接哪條旅拍流程，並整合既有撿片速查、影片攻略書、schema 深頁。</p>
-      </a>
-      <a class="card" href="./interior-design-prompts.html">
-        <span class="date">2026-07-08</span>
-        <h2>室內設計 AI Prompt 庫 · PhotoNB</h2>
-        <p>12 個室內設計 AI Prompt 的可複製範例庫：每張卡有用途、變數表、可一鍵複製的英文 prompt，加上 Robert 的強化建議。附 3 套路／3 弱點拆解導讀。</p>
-      </a>
-      <a class="card" href="./narrative-tag-tool.html">
-        <span class="date">2026-07-05</span>
-        <h2>描述標籤版型庫 · PhotoNB</h2>
-        <p>影片描述標籤的版型收藏：機票感移動中航跡、景點地名條…看樣挑款，設定去初剪規格選擇器。</p>
-      </a>
-      <a class="card" href="./architecture-style-prompts.html">
-        <span class="date">2026-07-05</span>
-        <h2>建築風格 生圖 Prompt 清單</h2>
-        <p>12 風格史 + 11 大師，各一張代表建築全景 + 一張細節辨識特寫的生圖 prompt（統一水彩圖鑑風）</p>
-      </a>
-      <a class="card" href="./architecture-style-guide.html">
-        <span class="date">2026-07-05</span>
-        <h2>建築風格辨識指南</h2>
-        <p>旅遊拍建築的風格辨識攻略：12 風格史 + 11 大師語彙，含辨識重點與標註規則</p>
-      </a>
-      <a class="card" href="./prompt-library.html">
-        <span class="date">2026-07-01</span>
-        <h2>Prompt 範例庫 · PhotoNB</h2>
-        <p>特殊生圖 prompt 收藏庫：每個編號有範例圖、拆解說明與可複製 prompt。用編號引用給 Robert 即可批次導出新內容。</p>
-      </a>
-      <a class="card" href="./export-auto-move.html">
-        <span class="date">2026-07-01</span>
-        <h2>產出自動分場景 · export-auto-move · PhotoNB</h2>
-        <p>出片工具：把 LR 匯出的成品 JPG 依母檔所在場景，自動分天分場景鏡射到 _export。catalog-free（A 方案）。</p>
-      </a>
-      <a class="card" href="./neuschwanstein-guide.html">
-        <span class="date">2026-06-30</span>
-        <h2>新天鵝堡 Neuschwanstein · 觀光導覽</h2>
-        <p>巴伐利亞童話城堡新天鵝堡的觀光導覽海報：城堡檔案、必看亮點、今日行程路線與拍攝建議。</p>
-      </a>
-      <a class="card" href="./grid-style-library.html">
-        <span class="date">2026-06-28</span>
-        <h2>to_grid 專案 第一版 · 拼貼風格資料庫</h2>
-        <p>to_grid 拼貼自動出片:指令 grid(拼貼輸出) = 樣式+格式+色調+標題+內文。三大風格(馬賽克/壁貼/剪貼簿)+影片馬賽克,全自動。</p>
-      </a>
-      <a class="card" href="./timelapse-ref-clips.html">
-        <span class="date">2026-06-24</span>
-        <h2>縮時參考片 · 整理完直接看拍攝狀況（1080p）</h2>
-        <p>Robert 把縮時素材整理完後，自動拼一支 1080p 最相容的參考片放進該趟的 _refs 資料夾，James 用任何裝置點開就能看當天拍攝狀況。檔名沿用英文場景夾名。</p>
-      </a>
-      <a class="card" href="./lrtimelapse-guide.html">
-        <span class="date">2026-06-21</span>
-        <h2>LRTimelapse 7 Pro 協同教程 · 縮時 RAW 直出 8K 素材</h2>
-        <p>LRTimelapse 7 Pro 純 RAW 工作流（免 Lightroom）：調曝光、去閃、聖杯漸變、直出 8K ProRes 422，加上 James↔Robert 協同分工與明早實作清單。</p>
-      </a>
-      <a class="card" href="./video-editing-kb.html">
-        <span class="date">2026-06-03</span>
-        <h2>影片剪輯知識庫 V2.1 完整版 | 2026-06-03</h2>
-        <p>從素材到出片的完整影片工序：智慧抽幀減量、FCPX 撿片、KP/HL 批次出圖、效率改善 6 條。</p>
-      </a>
-      <a class="card" href="./welcome.html">
-        <span class="date">2026-06-02</span>
-        <h2>攝影筆記本啟用</h2>
-        <p>這個筆記本現在會直接發佈到網站，外出時用任何瀏覽器就能讀。</p>
-      </a>
-      <a class="card" href="./pipeline-overview.html">
-        <span class="date">2026-05-16</span>
-        <h2>全 Pipeline 總覽 · 照片 + 影片（James / Robert / Opus 分工）</h2>
-        <p>三方分工全景地圖：照片+影片兩條流的共用核心與分歧分流，從 input 到雲端。</p>
-      </a>
-    </main>
-    <footer>
-      <a href="/">← 回 JTpHR 首頁</a>
-    </footer>
-  </div>
-</body>
-</html>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>攝影師儀表板 · PhotoNB</title>
+<meta name="description" content="關聯儀表板：依工作流程找工具、看進行中與未完成的進度。"/>
+<meta name="date" content="2026-08-26"/>
+<style>
+:root{--surface:#0b0b1a;--surface2:#12122a;--line:#2a2a44;--accent:#e94560;--text:#ededf4;--muted:#9a9ab0;
+--cmd:#36c5a8;--tpl:#e8c47a;--learn:#4aa3ff;--ref:#9b7be0;--proj:#f0a93b;--misc:#6a6a85;}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--text);font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:2.2rem 1.25rem 6rem}
+.hero{border:1px solid var(--line);border-radius:22px;padding:2rem 2rem 1.8rem;margin-bottom:1.4rem;
+ background:radial-gradient(120% 140% at 0% 0%,rgba(233,69,96,.2),transparent 55%),
+ radial-gradient(120% 160% at 100% 0%,rgba(74,163,255,.16),transparent 50%),linear-gradient(180deg,var(--surface2),#1a1a2e)}
+.eyebrow{color:var(--accent);font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin:0 0 .5rem}
+h1{margin:0;font-size:clamp(1.7rem,4vw,2.4rem)}
+.tag{color:var(--muted);margin:.6rem 0 0;font-size:.95rem}
+.searchbar{position:sticky;top:0;z-index:9;background:rgba(11,11,26,.94);backdrop-filter:blur(8px);
+ border:1px solid var(--line);border-radius:14px;padding:.7rem .8rem;margin:0 0 1.2rem}
+.searchbar input{width:100%;background:#07071a;border:1px solid var(--line);color:var(--text);
+ border-radius:999px;padding:.55rem 1.1rem;font-size:.95rem;font-family:inherit;outline:none}
+.stagebar{display:flex;gap:.4rem;flex-wrap:wrap;margin:.6rem 0 0}
+.stagebar button{background:var(--surface2);border:1px solid var(--line);color:var(--muted);border-radius:999px;
+ padding:.28rem .7rem;font-size:.76rem;cursor:pointer;font-family:inherit}
+.stagebar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+section{margin:2rem 0}
+h2{font-size:1.15rem;letter-spacing:.04em;margin:0 0 .7rem;border-bottom:1px solid var(--line);padding-bottom:.45rem}
+.secsub{color:var(--muted);font-size:.82rem;margin:-.2rem 0 .8rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:.8rem}
+.card{display:block;background:var(--surface2);border:1px solid var(--line);border-left:4px solid var(--line);
+ border-radius:14px;padding: .9rem 1rem .7rem;color:var(--text);text-decoration:none;transition:transform .12s,border-color .12s}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card h3{margin:0 0 .3rem;font-size:.98rem}
+.card p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.55;min-height:2.4em}
+.c-cmd{border-left-color:var(--cmd)} .c-tpl{border-left-color:var(--tpl)} .c-learn{border-left-color:var(--learn)}
+.c-ref{border-left-color:var(--ref)} .c-proj{border-left-color:var(--proj)} .c-misc{border-left-color:var(--misc)}
+.hotdot{color:var(--accent);margin-right:.35rem;font-size:.7rem;vertical-align:2px}
+.rels{margin-top:.55rem;display:flex;gap:.3rem;flex-wrap:wrap}
+.rel{font-size:.68rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.06rem .5rem;
+ text-decoration:none;transition:color .1s,border-color .1s}
+.rel:hover{color:var(--accent);border-color:var(--accent)}
+.plist{display:flex;flex-direction:column;gap:.45rem}
+.prow{display:flex;gap:.6rem;align-items:baseline;background:var(--surface2);border:1px solid var(--line);
+ border-radius:10px;padding:.55rem .8rem;font-size:.86rem;flex-wrap:wrap}
+.prow b{font-weight:600}
+.pdesc{color:var(--muted);font-size:.8rem;flex:1;min-width:12rem}
+.pdate{color:var(--muted);font-size:.72rem;font-family:ui-monospace,Menlo,monospace}
+.pdot{width:.55rem;height:.55rem;border-radius:50%;flex:none;align-self:center}
+.pdot.doing{background:#36c5a8;box-shadow:0 0 6px #36c5a8}
+.pdot.todo{background:transparent;border:1.5px solid var(--muted)}
+.pnote{color:var(--muted);font-size:.75rem;margin-top:.6rem}
+footer{margin-top:3rem;color:var(--muted);font-size:.78rem;text-align:center}
+footer a{color:var(--accent)}
+</style></head>
+<body><div class="wrap">
+<div class="hero">
+ <p class="eyebrow">PHOTOGRAPHER'S DASHBOARD</p>
+ <h1>攝影師儀表板</h1>
+ <p class="tag">依「你想做什麼」找工具：跑指令、挑模板、查規格、看學到哪。每張卡下面是它的關聯頁。</p>
+</div>
+<div class="searchbar">
+ <input id="q" placeholder="搜尋 42 頁筆記…（工具名、關鍵字、想做的事）"/>
+ <div class="stagebar"><button class="on" data-stage="all">全部</button><button data-stage="0">🧠 通用／知識</button><button data-stage="1">📥 ① 歸檔</button><button data-stage="2">🎬 ② 進 FCP</button><button data-stage="3">⭐ ③ 撿片出圖</button><button data-stage="4">📤 ④ 出片/調色</button><button data-stage="5">✂️ ⑤ 剪輯/模板</button><button data-stage="6">🚀 ⑥ 發佈</button></div>
+</div>
+<section id="sec-hot"><h2>🔥 最常用</h2><div class="grid"><div class="card c-cmd" data-href="./scene-build.html" data-s="1" data-cat="cmd hot"
+ data-kw="素材歸場景 scene_build倒卡素材 → 分天分場景＋評分＋xmp＋鋪好 lr/fcp 工作檔。一切的第一步。">
+  <h3><span class="hotdot" title="常用">●</span>素材歸場景 scene_build</h3><p>倒卡素材 → 分天分場景＋評分＋XMP＋鋪好 LR/FCP 工作檔。一切的第一步。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./pipeline-overview.html">全 Pipeline 總</a><a class="rel" href="./trip-fcpx-build.html">影片匯入 FCP tri</a><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a></div></div><div class="card c-cmd" data-href="./trip-fcpx-build.html" data-s="2" data-cat="cmd hot"
+ data-kw="影片匯入 fcp trip-fcpx-build整趟 mov_day 一次建 fcp library（event=天、場景=關鍵字、不複製原檔）。">
+  <h3><span class="hotdot" title="常用">●</span>影片匯入 FCP trip-fcpx-build</h3><p>整趟 MOV_day 一次建 FCP Library（event=天、場景=關鍵字、不複製原檔）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./scene-build.html">素材歸場景 scene_</a><a class="rel" href="./fcpx-operations-guide.html">FCPX 操作指南</a><a class="rel" href="./fcpxmld-export.html">撿片批次出圖 fcpxm</a></div></div><div class="card c-cmd" data-href="./fcpxmld-export.html" data-s="3" data-cat="cmd hot"
+ data-kw="撿片批次出圖 fcpxmld-exportfcp 撿完片（kp/hl）→ 批次出 kp 單禎＋hl 片段，色標關鍵字直接進 lr。">
+  <h3><span class="hotdot" title="常用">●</span>撿片批次出圖 fcpxmld-export</h3><p>FCP 撿完片（KP/HL）→ 批次出 KP 單禎＋HL 片段，色標關鍵字直接進 LR。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a><a class="rel" href="./_fcpx-cheatsheet.html">FCPX 撿片 Chea</a><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a></div></div><div class="card c-cmd" data-href="./export-auto-move.html" data-s="4" data-cat="cmd hot"
+ data-kw="出片自動分場景 export-auto-movelr 匯出的成品丟 to_export/ → 自動鏡射回各 day/場景（_export/）。">
+  <h3><span class="hotdot" title="常用">●</span>出片自動分場景 export-auto-move</h3><p>LR 匯出的成品丟 to_export/ → 自動鏡射回各 day/場景（_export/）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./scene-build.html">素材歸場景 scene_</a><a class="rel" href="./export-specs.html">出片規格總表</a><a class="rel" href="./montage-auto-move.html">進片照片分場景 mont</a></div></div><div class="card c-cmd" data-href="./music-picker.html" data-s="5" data-cat="cmd hot"
+ data-kw="配樂選擇器 music-picker音樂庫 66 首算好 bpm／段落／能量帶，六組篩選器挑配樂，免逐首試聽。">
+  <h3><span class="hotdot" title="常用">●</span>配樂選擇器 music-picker</h3><p>音樂庫 66 首算好 BPM／段落／能量帶，六組篩選器挑配樂，免逐首試聽。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./ai-music.html">AI 音樂創作（Suno</a><a class="rel" href="./longview-aimusic-preset.html">固定模板：長篇景色＋AI</a></div></div><div class="card c-tpl" data-href="./longview-aimusic-preset.html" data-s="5" data-cat="tpl hot"
+ data-kw="固定模板：長篇景色＋ai音樂長景陪伴影片的一鍵配方：素材門檻／直式處理／內建title文字／元件／音樂。">
+  <h3><span class="hotdot" title="常用">●</span>固定模板：長篇景色＋AI音樂</h3><p>長景陪伴影片的一鍵配方：素材門檻／直式處理／內建title文字／元件／音樂。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./title-picker.html">標題選擇器 title-</a><a class="rel" href="./music-picker.html">配樂選擇器 music-</a><a class="rel" href="./roadmap-longview.html">長景 Roadmap</a><a class="rel" href="./longview-teardown.html">Abao Vision </a></div></div><div class="card c-tpl" data-href="./initcut-spec-picker.html" data-s="5" data-cat="tpl hot"
+ data-kw="初剪規格選擇器勾一勾輸出規格＋拼貼＋時間線＋描述標籤 → 產規格字串貼給 robert。">
+  <h3><span class="hotdot" title="常用">●</span>初剪規格選擇器</h3><p>勾一勾輸出規格＋拼貼＋時間線＋描述標籤 → 產規格字串貼給 Robert。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./narrative-tag-tool.html">描述標籤版型庫（票＋地圖</a><a class="rel" href="./title-picker.html">標題選擇器 title-</a><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a></div></div><div class="card c-tpl" data-href="./narrative-tag-tool.html" data-s="5" data-cat="tpl hot"
+ data-kw="描述標籤版型庫（票＋地圖）移動中 overlay 六級距：票券＋ai地圖，方形 90%，選好編號直接帶。">
+  <h3><span class="hotdot" title="常用">●</span>描述標籤版型庫（票＋地圖）</h3><p>移動中 overlay 六級距：票券＋AI地圖，方形 90%，選好編號直接帶。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./prompt-library.html">Prompt 範例庫（A</a><a class="rel" href="./initcut-spec-picker.html">初剪規格選擇器</a></div></div><div class="card c-learn" data-href="./fcpx-operations-guide.html" data-s="3" data-cat="learn hot"
+ data-kw="fcpx 操作指南final cut 撿片、關鍵字、角色、匯出的操作寶典（學習中）。">
+  <h3><span class="hotdot" title="常用">●</span>FCPX 操作指南</h3><p>Final Cut 撿片、關鍵字、角色、匯出的操作寶典（學習中）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./_fcpx-cheatsheet.html">FCPX 撿片 Chea</a><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a><a class="rel" href="./trip-fcpx-build.html">影片匯入 FCP tri</a></div></div><div class="card c-ref" data-href="./pipeline-overview.html" data-s="0" data-cat="ref hot"
+ data-kw="全 pipeline 總覽照片＋影片從倒卡到上雲的完整流程圖（james/robert 分工）。">
+  <h3><span class="hotdot" title="常用">●</span>全 Pipeline 總覽</h3><p>照片＋影片從倒卡到上雲的完整流程圖（James/Robert 分工）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./scene-build.html">素材歸場景 scene_</a><a class="rel" href="./autoedit-map.html">自動剪輯片型地圖</a><a class="rel" href="./dashboard.html">dashboard.ht</a></div></div><div class="card c-ref" data-href="./picking-keywords.html" data-s="3" data-cat="ref hot"
+ data-kw="撿片關鍵字總表kp／星等／關鍵字的單一定義來源（2026-08-23 起只打裸 kp）。">
+  <h3><span class="hotdot" title="常用">●</span>撿片關鍵字總表</h3><p>KP／星等／關鍵字的單一定義來源（2026-08-23 起只打裸 KP）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./fcpxmld-export.html">撿片批次出圖 fcpxm</a><a class="rel" href="./fcpx-operations-guide.html">FCPX 操作指南</a><a class="rel" href="./_video-schema.html">影片 Schema 紀錄</a></div></div><div class="card c-ref" data-href="./export-specs.html" data-s="6" data-cat="ref hot"
+ data-kw="出片規格總表youtube 傳 4k／ig 重壓／hl 1080p crf20——六個坑一頁收。">
+  <h3><span class="hotdot" title="常用">●</span>出片規格總表</h3><p>YouTube 傳 4K／IG 重壓／HL 1080p CRF20——六個坑一頁收。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a><a class="rel" href="./post-template.html">社群輪播模板 POST</a></div></div></div></section><section id="sec-prog"><h2>🔄 進行中</h2><div class="plist"><div class="prow"><span class="pdot doing"></span><b>荷蘭 day1 三支剪輯</b><span class="pdesc">長景 v22＋Montage 精選＋實境秀已交付，等 James 匯入回饋</span><span class="pdate">2026-08-26</span></div><div class="prow"><span class="pdot doing"></span><b>套 B：移動中接 FCPXML</b><span class="pdesc">票＋地圖出 .mov 疊層已通，下一步接進可直接匯入的 XML</span><span class="pdate">2026-08-24</span></div><div class="prow"><span class="pdot doing"></span><b>蘇州 移動中 FCPXML</b><span class="pdesc">v2（方形地圖·90%）已出，待匯入 FCP 驗證</span><span class="pdate">2026-08-23</span></div><div class="prow"><span class="pdot doing"></span><b>明壽司 scene_build</b><span class="pdesc">歸檔完成 28 張，等 James 開 LR 匯入</span><span class="pdate">2026-08-26</span></div></div>
+<h2 style="margin-top:1.6rem">⬜ 未完成（backlog）</h2><div class="plist"><div class="prow"><span class="pdot todo"></span><b>整合出片模板</b><span class="pdesc">兩套固定模板（長景／移動中）都能快速出圖後，開發整合模板</span><span class="pdate">James 2026-08-24 定方向</span></div><div class="prow"><span class="pdot todo"></span><b>配樂選擇器：情緒標記欄位</b><span class="pdesc">James 聽的時候順手標，之後照分類挑不用猜曲名</span><span class="pdate">提案中</span></div><div class="prow"><span class="pdot todo"></span><b>蘇州縮時 → LRTimelapse</b><span class="pdesc">哪幾段 _refs 進 LRTimelapse 出 8K</span><span class="pdate">等 James 選</span></div><div class="prow"><span class="pdot todo"></span><b>長景：AI 音樂下一步</b><span class="pdesc">Suno 自創曲接進 music_scout 分析</span><span class="pdate">roadmap-longview</span></div><div class="prow"><span class="pdot todo"></span><b>POST 工具 4 點修正</b><span class="pdesc">首版（Augustiner）交付後 James 提的修正</span><span class="pdate">roadmap-post</span></div><div class="prow"><span class="pdot todo"></span><b>grid：壁貼花蝶素材／影片其他比例</b><span class="pdesc">拼貼風格庫的擴充項</span><span class="pdate">backlog</span></div><div class="prow"><span class="pdot todo"></span><b>ir_tag 分鏡關鍵字</b><span class="pdesc">荷蘭/蘇州影片要不要補跑（歸檔時預設關閉）</span><span class="pdate">等 James 點頭</span></div></div>
+<p class="pnote">這兩張表由 Robert 維護，每次交付／開新工都會更新。詳細待辦在各 Roadmap 頁。</p></section><section id="sec-cmd"><h2>⚡ 自動化指令</h2><p class="secsub">一句指令跑完一段流程</p><div class="grid"><div class="card c-cmd" data-href="./scene-build.html" data-s="1" data-cat="cmd hot"
+ data-kw="素材歸場景 scene_build倒卡素材 → 分天分場景＋評分＋xmp＋鋪好 lr/fcp 工作檔。一切的第一步。">
+  <h3><span class="hotdot" title="常用">●</span>素材歸場景 scene_build</h3><p>倒卡素材 → 分天分場景＋評分＋XMP＋鋪好 LR/FCP 工作檔。一切的第一步。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./pipeline-overview.html">全 Pipeline 總</a><a class="rel" href="./trip-fcpx-build.html">影片匯入 FCP tri</a><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a></div></div><div class="card c-cmd" data-href="./trip-fcpx-build.html" data-s="2" data-cat="cmd hot"
+ data-kw="影片匯入 fcp trip-fcpx-build整趟 mov_day 一次建 fcp library（event=天、場景=關鍵字、不複製原檔）。">
+  <h3><span class="hotdot" title="常用">●</span>影片匯入 FCP trip-fcpx-build</h3><p>整趟 MOV_day 一次建 FCP Library（event=天、場景=關鍵字、不複製原檔）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./scene-build.html">素材歸場景 scene_</a><a class="rel" href="./fcpx-operations-guide.html">FCPX 操作指南</a><a class="rel" href="./fcpxmld-export.html">撿片批次出圖 fcpxm</a></div></div><div class="card c-cmd" data-href="./fcpxmld-export.html" data-s="3" data-cat="cmd hot"
+ data-kw="撿片批次出圖 fcpxmld-exportfcp 撿完片（kp/hl）→ 批次出 kp 單禎＋hl 片段，色標關鍵字直接進 lr。">
+  <h3><span class="hotdot" title="常用">●</span>撿片批次出圖 fcpxmld-export</h3><p>FCP 撿完片（KP/HL）→ 批次出 KP 單禎＋HL 片段，色標關鍵字直接進 LR。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a><a class="rel" href="./_fcpx-cheatsheet.html">FCPX 撿片 Chea</a><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a></div></div><div class="card c-cmd" data-href="./export-auto-move.html" data-s="4" data-cat="cmd hot"
+ data-kw="出片自動分場景 export-auto-movelr 匯出的成品丟 to_export/ → 自動鏡射回各 day/場景（_export/）。">
+  <h3><span class="hotdot" title="常用">●</span>出片自動分場景 export-auto-move</h3><p>LR 匯出的成品丟 to_export/ → 自動鏡射回各 day/場景（_export/）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./scene-build.html">素材歸場景 scene_</a><a class="rel" href="./export-specs.html">出片規格總表</a><a class="rel" href="./montage-auto-move.html">進片照片分場景 mont</a></div></div><div class="card c-cmd" data-href="./montage-auto-move.html" data-s="4" data-cat="cmd"
+ data-kw="進片照片分場景 montage-auto-move要進剪輯的照片丟 to_montage/ → 鏡射進創作 wrapper 的 _montage/。">
+  <h3>進片照片分場景 montage-auto-move</h3><p>要進剪輯的照片丟 to_montage/ → 鏡射進創作 wrapper 的 _montage/。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a><a class="rel" href="./video-editing-kb.html">影片剪輯知識庫 V2.1</a></div></div><div class="card c-cmd" data-href="./music-picker.html" data-s="5" data-cat="cmd hot"
+ data-kw="配樂選擇器 music-picker音樂庫 66 首算好 bpm／段落／能量帶，六組篩選器挑配樂，免逐首試聽。">
+  <h3><span class="hotdot" title="常用">●</span>配樂選擇器 music-picker</h3><p>音樂庫 66 首算好 BPM／段落／能量帶，六組篩選器挑配樂，免逐首試聽。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./ai-music.html">AI 音樂創作（Suno</a><a class="rel" href="./longview-aimusic-preset.html">固定模板：長篇景色＋AI</a></div></div></div></section><section id="sec-tpl"><h2>🎛️ 模板與選擇器</h2><p class="secsub">勾一勾產規格，看樣挑款</p><div class="grid"><div class="card c-tpl" data-href="./longview-aimusic-preset.html" data-s="5" data-cat="tpl hot"
+ data-kw="固定模板：長篇景色＋ai音樂長景陪伴影片的一鍵配方：素材門檻／直式處理／內建title文字／元件／音樂。">
+  <h3><span class="hotdot" title="常用">●</span>固定模板：長篇景色＋AI音樂</h3><p>長景陪伴影片的一鍵配方：素材門檻／直式處理／內建title文字／元件／音樂。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./title-picker.html">標題選擇器 title-</a><a class="rel" href="./music-picker.html">配樂選擇器 music-</a><a class="rel" href="./roadmap-longview.html">長景 Roadmap</a><a class="rel" href="./longview-teardown.html">Abao Vision </a></div></div><div class="card c-tpl" data-href="./initcut-spec-picker.html" data-s="5" data-cat="tpl hot"
+ data-kw="初剪規格選擇器勾一勾輸出規格＋拼貼＋時間線＋描述標籤 → 產規格字串貼給 robert。">
+  <h3><span class="hotdot" title="常用">●</span>初剪規格選擇器</h3><p>勾一勾輸出規格＋拼貼＋時間線＋描述標籤 → 產規格字串貼給 Robert。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./narrative-tag-tool.html">描述標籤版型庫（票＋地圖</a><a class="rel" href="./title-picker.html">標題選擇器 title-</a><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a></div></div><div class="card c-tpl" data-href="./title-picker.html" data-s="5" data-cat="tpl"
+ data-kw="標題選擇器 title-picker片頭標題／字卡即時預覽，存成變體編號帶入其他模板。">
+  <h3>標題選擇器 title-picker</h3><p>片頭標題／字卡即時預覽，存成變體編號帶入其他模板。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./longview-aimusic-preset.html">固定模板：長篇景色＋AI</a><a class="rel" href="./initcut-spec-picker.html">初剪規格選擇器</a></div></div><div class="card c-tpl" data-href="./narrative-tag-tool.html" data-s="5" data-cat="tpl hot"
+ data-kw="描述標籤版型庫（票＋地圖）移動中 overlay 六級距：票券＋ai地圖，方形 90%，選好編號直接帶。">
+  <h3><span class="hotdot" title="常用">●</span>描述標籤版型庫（票＋地圖）</h3><p>移動中 overlay 六級距：票券＋AI地圖，方形 90%，選好編號直接帶。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./prompt-library.html">Prompt 範例庫（A</a><a class="rel" href="./initcut-spec-picker.html">初剪規格選擇器</a></div></div><div class="card c-tpl" data-href="./grid-style-library.html" data-s="4" data-cat="tpl"
+ data-kw="拼貼風格庫 to_grid照片拼貼三風格（馬賽克/壁貼/剪貼簿）＋影片馬賽克，看樣挑款。">
+  <h3>拼貼風格庫 to_grid</h3><p>照片拼貼三風格（馬賽克/壁貼/剪貼簿）＋影片馬賽克，看樣挑款。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./montage-auto-move.html">進片照片分場景 mont</a><a class="rel" href="./post-template.html">社群輪播模板 POST</a></div></div><div class="card c-tpl" data-href="./post-template.html" data-s="6" data-cat="tpl"
+ data-kw="社群輪播模板 post1080×1350 雜誌式七頁輪播（ig carousel），圖層可改字換圖。">
+  <h3>社群輪播模板 POST</h3><p>1080×1350 雜誌式七頁輪播（IG carousel），圖層可改字換圖。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./grid-style-library.html">拼貼風格庫 to_gri</a><a class="rel" href="./roadmap-post.html">POST Roadmap</a><a class="rel" href="./export-specs.html">出片規格總表</a></div></div><div class="card c-tpl" data-href="./prompt-library.html" data-s="0" data-cat="tpl"
+ data-kw="prompt 範例庫（ai 生圖）編號 pr-00x 的生圖配方：地圖／海報／票券，丟範例圖開新編號。">
+  <h3>Prompt 範例庫（AI 生圖）</h3><p>編號 PR-00X 的生圖配方：地圖／海報／票券，丟範例圖開新編號。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./narrative-tag-tool.html">描述標籤版型庫（票＋地圖</a><a class="rel" href="./architecture-style-prompts.html">建築風格生圖 Promp</a><a class="rel" href="./interior-design-prompts.html">室內設計 Prompt </a></div></div><div class="card c-tpl" data-href="./style-library.html" data-s="4" data-cat="tpl"
+ data-kw="風格檔庫 全量目錄576 個照片 preset ＋ 489 個影片 lut 的線上目錄與前後對比。">
+  <h3>風格檔庫 全量目錄</h3><p>576 個照片 preset ＋ 489 個影片 LUT 的線上目錄與前後對比。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./style-library-sample.html">風格檔庫 樣本篩選</a><a class="rel" href="./export-specs.html">出片規格總表</a></div></div><div class="card c-tpl" data-href="./style-library-sample.html" data-s="4" data-cat="tpl"
+ data-kw="風格檔庫 樣本篩選風格檔的多照片樣本比較版，先看小樣再決定全量。">
+  <h3>風格檔庫 樣本篩選</h3><p>風格檔的多照片樣本比較版，先看小樣再決定全量。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./style-library.html">風格檔庫 全量目錄</a></div></div></div></section><section id="sec-learn"><h2>📖 學習中</h2><p class="secsub">還沒完全掌握的軟體與技巧</p><div class="grid"><div class="card c-learn" data-href="./fcpx-operations-guide.html" data-s="3" data-cat="learn hot"
+ data-kw="fcpx 操作指南final cut 撿片、關鍵字、角色、匯出的操作寶典（學習中）。">
+  <h3><span class="hotdot" title="常用">●</span>FCPX 操作指南</h3><p>Final Cut 撿片、關鍵字、角色、匯出的操作寶典（學習中）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./_fcpx-cheatsheet.html">FCPX 撿片 Chea</a><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a><a class="rel" href="./trip-fcpx-build.html">影片匯入 FCP tri</a></div></div><div class="card c-learn" data-href="./lrtimelapse-guide.html" data-s="4" data-cat="learn"
+ data-kw="lrtimelapse 縮時教程raw 縮時 → lrtimelapse 去閃爍 → 8k prores 的完整工序。">
+  <h3>LRTimelapse 縮時教程</h3><p>RAW 縮時 → LRTimelapse 去閃爍 → 8K ProRes 的完整工序。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./timelapse-ref-clips.html">縮時參考片</a><a class="rel" href="./export-specs.html">出片規格總表</a></div></div><div class="card c-learn" data-href="./ai-music.html" data-s="5" data-cat="learn"
+ data-kw="ai 音樂創作（suno）長景的引擎：ai 生成可商用配樂的方法與風格詞。">
+  <h3>AI 音樂創作（Suno）</h3><p>長景的引擎：AI 生成可商用配樂的方法與風格詞。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./music-picker.html">配樂選擇器 music-</a><a class="rel" href="./longview-aimusic-preset.html">固定模板：長篇景色＋AI</a></div></div><div class="card c-learn" data-href="./architecture-style-guide.html" data-s="0" data-cat="learn"
+ data-kw="建築風格辨識指南12 風格史＋11 大師：旅遊建築照怎麼認、怎麼標關鍵字。">
+  <h3>建築風格辨識指南</h3><p>12 風格史＋11 大師：旅遊建築照怎麼認、怎麼標關鍵字。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./architecture-style-prompts.html">建築風格生圖 Promp</a><a class="rel" href="./scene-build.html">素材歸場景 scene_</a></div></div><div class="card c-learn" data-href="./longview-teardown.html" data-s="5" data-cat="learn"
+ data-kw="abao vision 拆解對標頻道的版型／節奏／元件全拆解，長景模板的源頭。">
+  <h3>Abao Vision 拆解</h3><p>對標頻道的版型／節奏／元件全拆解，長景模板的源頭。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./longview-aimusic-preset.html">固定模板：長篇景色＋AI</a><a class="rel" href="./roadmap-longview.html">長景 Roadmap</a></div></div><div class="card c-learn" data-href="./irene-pack.html" data-s="5" data-cat="learn"
+ data-kw="irene 技能包對照外部剪輯技能包六支跟我們自建 pipeline 的對照（說 hello irene 才走她）。">
+  <h3>Irene 技能包對照</h3><p>外部剪輯技能包六支跟我們自建 pipeline 的對照（說 hello irene 才走她）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./autoedit-map.html">自動剪輯片型地圖</a><a class="rel" href="./video-editing-kb.html">影片剪輯知識庫 V2.1</a></div></div></div></section><section id="sec-ref"><h2>📚 參考資料</h2><p class="secsub">規格表、關鍵字、知識庫</p><div class="grid"><div class="card c-ref" data-href="./pipeline-overview.html" data-s="0" data-cat="ref hot"
+ data-kw="全 pipeline 總覽照片＋影片從倒卡到上雲的完整流程圖（james/robert 分工）。">
+  <h3><span class="hotdot" title="常用">●</span>全 Pipeline 總覽</h3><p>照片＋影片從倒卡到上雲的完整流程圖（James/Robert 分工）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./scene-build.html">素材歸場景 scene_</a><a class="rel" href="./autoedit-map.html">自動剪輯片型地圖</a><a class="rel" href="./dashboard.html">dashboard.ht</a></div></div><div class="card c-ref" data-href="./picking-keywords.html" data-s="3" data-cat="ref hot"
+ data-kw="撿片關鍵字總表kp／星等／關鍵字的單一定義來源（2026-08-23 起只打裸 kp）。">
+  <h3><span class="hotdot" title="常用">●</span>撿片關鍵字總表</h3><p>KP／星等／關鍵字的單一定義來源（2026-08-23 起只打裸 KP）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./fcpxmld-export.html">撿片批次出圖 fcpxm</a><a class="rel" href="./fcpx-operations-guide.html">FCPX 操作指南</a><a class="rel" href="./_video-schema.html">影片 Schema 紀錄</a></div></div><div class="card c-ref" data-href="./export-specs.html" data-s="6" data-cat="ref hot"
+ data-kw="出片規格總表youtube 傳 4k／ig 重壓／hl 1080p crf20——六個坑一頁收。">
+  <h3><span class="hotdot" title="常用">●</span>出片規格總表</h3><p>YouTube 傳 4K／IG 重壓／HL 1080p CRF20——六個坑一頁收。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./export-auto-move.html">出片自動分場景 expo</a><a class="rel" href="./post-template.html">社群輪播模板 POST</a></div></div><div class="card c-ref" data-href="./toolbox.html" data-s="0" data-cat="ref"
+ data-kw="robert 工具箱清單這台機器裝了什麼、哪些實跑過（✅）哪些只是裝了（○）。">
+  <h3>Robert 工具箱清單</h3><p>這台機器裝了什麼、哪些實跑過（✅）哪些只是裝了（○）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./dashboard.html">dashboard.ht</a></div></div><div class="card c-ref" data-href="./autoedit-map.html" data-s="5" data-cat="ref"
+ data-kw="自動剪輯片型地圖自動剪輯是一個流程、多種片型：骨幹六步＋片型卡總表。">
+  <h3>自動剪輯片型地圖</h3><p>自動剪輯是一個流程、多種片型：骨幹六步＋片型卡總表。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./roadmap-longview.html">長景 Roadmap</a><a class="rel" href="./roadmap-post.html">POST Roadmap</a><a class="rel" href="./video-editing-kb.html">影片剪輯知識庫 V2.1</a></div></div><div class="card c-ref" data-href="./video-editing-kb.html" data-s="3" data-cat="ref"
+ data-kw="影片剪輯知識庫 v2.1ng/kp/hl schema、撿片工序、抽幀策略的完整版知識庫。">
+  <h3>影片剪輯知識庫 V2.1</h3><p>NG/KP/HL schema、撿片工序、抽幀策略的完整版知識庫。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./_video-schema.html">影片 Schema 紀錄</a><a class="rel" href="./_video-editing-kb-changelog.html">影片 KB 更新紀錄</a><a class="rel" href="./picking-keywords.html">撿片關鍵字總表</a></div></div><div class="card c-ref" data-href="./_video-schema.html" data-s="3" data-cat="ref"
+ data-kw="影片 schema 紀錄ng/kp/hl/kf 標記的原始 schema 設計紀錄。">
+  <h3>影片 Schema 紀錄</h3><p>NG/KP/HL/KF 標記的原始 schema 設計紀錄。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./video-editing-kb.html">影片剪輯知識庫 V2.1</a></div></div><div class="card c-ref" data-href="./_fcpx-cheatsheet.html" data-s="3" data-cat="ref"
+ data-kw="fcpx 撿片 cheat sheet撿片時鍵盤放旁邊的那張速查表。">
+  <h3>FCPX 撿片 Cheat Sheet</h3><p>撿片時鍵盤放旁邊的那張速查表。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./fcpx-operations-guide.html">FCPX 操作指南</a></div></div><div class="card c-ref" data-href="./architecture-style-prompts.html" data-s="0" data-cat="ref"
+ data-kw="建築風格生圖 prompt12 建築風格的 ai 生圖 prompt 清單。">
+  <h3>建築風格生圖 Prompt</h3><p>12 建築風格的 AI 生圖 prompt 清單。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./architecture-style-guide.html">建築風格辨識指南</a><a class="rel" href="./prompt-library.html">Prompt 範例庫（A</a></div></div><div class="card c-ref" data-href="./interior-design-prompts.html" data-s="0" data-cat="ref"
+ data-kw="室內設計 prompt 庫室內設計風格的 ai prompt 參考。">
+  <h3>室內設計 Prompt 庫</h3><p>室內設計風格的 AI prompt 參考。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./prompt-library.html">Prompt 範例庫（A</a></div></div></div></section><section id="sec-proj"><h2>🗂️ 專案與 Roadmap</h2><div class="grid"><div class="card c-proj" data-href="./li-and-na.html" data-s="0" data-cat="proj"
+ data-kw="li&amp;na 專案（李寶×南湳）貓咪頻道：角色卡、零件表、ai 生圖規範。">
+  <h3>Li&amp;Na 專案（李寶×南湳）</h3><p>貓咪頻道：角色卡、零件表、AI 生圖規範。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./prompt-library.html">Prompt 範例庫（A</a></div></div><div class="card c-proj" data-href="./roadmap-longview.html" data-s="5" data-cat="proj"
+ data-kw="長景 roadmap長篇景色＋ai音樂的待完成清單。">
+  <h3>長景 Roadmap</h3><p>長篇景色＋AI音樂的待完成清單。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./longview-aimusic-preset.html">固定模板：長篇景色＋AI</a><a class="rel" href="./autoedit-map.html">自動剪輯片型地圖</a></div></div><div class="card c-proj" data-href="./roadmap-post.html" data-s="6" data-cat="proj"
+ data-kw="post roadmap社群輪播／自動剪輯的待完成清單。">
+  <h3>POST Roadmap</h3><p>社群輪播／自動剪輯的待完成清單。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./post-template.html">社群輪播模板 POST</a><a class="rel" href="./autoedit-map.html">自動剪輯片型地圖</a></div></div></div></section><section id="sec-misc"><h2>🗄️ 紀錄與其他</h2><div class="grid"><div class="card c-misc" data-href="./welcome.html" data-s="0" data-cat="misc"
+ data-kw="攝影筆記本啟用這個站怎麼來的。">
+  <h3>攝影筆記本啟用</h3><p>這個站怎麼來的。</p>
+  <div class="rels" onclick="event.stopPropagation()"></div></div><div class="card c-misc" data-href="./kb-2026-07-27.html" data-s="0" data-cat="misc"
+ data-kw="2026-07-27 知識更新當日知識更新紀錄。">
+  <h3>2026-07-27 知識更新</h3><p>當日知識更新紀錄。</p>
+  <div class="rels" onclick="event.stopPropagation()"></div></div><div class="card c-misc" data-href="./_video-editing-kb-changelog.html" data-s="0" data-cat="misc"
+ data-kw="影片 kb 更新紀錄影片剪輯知識庫的歷次變更。">
+  <h3>影片 KB 更新紀錄</h3><p>影片剪輯知識庫的歷次變更。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./video-editing-kb.html">影片剪輯知識庫 V2.1</a></div></div><div class="card c-misc" data-href="./neuschwanstein-guide.html" data-s="0" data-cat="misc"
+ data-kw="新天鵝堡導覽旅遊導覽海報範本（深藍金版型首例）。">
+  <h3>新天鵝堡導覽</h3><p>旅遊導覽海報範本（深藍金版型首例）。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./prompt-library.html">Prompt 範例庫（A</a></div></div><div class="card c-misc" data-href="./timelapse-ref-clips.html" data-s="4" data-cat="misc"
+ data-kw="縮時參考片縮時素材整理完的 1080p 快速檢視頁。">
+  <h3>縮時參考片</h3><p>縮時素材整理完的 1080p 快速檢視頁。</p>
+  <div class="rels" onclick="event.stopPropagation()"><a class="rel" href="./lrtimelapse-guide.html">LRTimelapse </a></div></div></div></section>
+<footer>PhotoNB · Robert 全權維護 · <a href="./notes-index.html">全部筆記（時間序）</a> · 主站 <a href="https://jtphr.mj-app.com.tw">jtphr.mj-app.com.tw</a></footer>
+</div>
+<script>
+const q=document.getElementById('q');
+let stage='all';
+function apply(){
+  const s=q.value.trim().toLowerCase();
+  document.querySelectorAll('.card').forEach(c=>{
+    const okS = stage==='all' || c.dataset.s===stage;
+    const okQ = !s || c.dataset.kw.includes(s);
+    c.style.display=(okS&&okQ)?'':'none';
+  });
+  document.querySelectorAll('section').forEach(sec=>{
+    const g=sec.querySelector('.grid'); if(!g) return;
+    const any=[...g.children].some(c=>c.style.display!=='none');
+    sec.style.display=any?'':'none';
+  });
+}
+document.querySelectorAll('.stagebar button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.stagebar button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); stage=b.dataset.stage||'all'; apply();
+});
+q.oninput=apply;
+document.querySelectorAll('.card').forEach(c=>{
+  c.style.cursor='pointer';
+  c.addEventListener('click',()=>{ if(c.dataset.href) location.href=c.dataset.href; });
+});
+</script>
+</body></html>
