@@ -104,5 +104,10 @@ ${notes.length ? cards : empty}
 </html>
 `;
 
-writeFileSync(join(DIR, 'index.html'), page, 'utf8');
+// James 2026-08-26：「首頁就該是儀表板式導覽」
+// → 時間序清單降級成 notes-index.html（從儀表板 footer 可達）
+// → index.html ＝ dashboard.html 的內容（單一來源：編輯 dashboard.html 即可）
+writeFileSync(join(DIR, 'notes-index.html'), page, 'utf8');
+const dash = readFileSync(join(DIR, 'dashboard.html'), 'utf8');
+writeFileSync(join(DIR, 'index.html'), dash, 'utf8');
 console.log(`photonb index rebuilt: ${notes.length} note(s)`);
