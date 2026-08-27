@@ -58,9 +58,8 @@ git push origin main
 echo ""
 echo "✅ 已發佈！約 1 分鐘後可在 https://jtphr-site.vercel.app/photonb/ 看到更新。"
 
-# 2026-08-26：同步到 jtphr.mj-app.com.tw（James 的主機；Tailscale 不通時跳過，不擋 Vercel 發佈）
-if /Applications/Tailscale.app/Contents/MacOS/Tailscale status >/dev/null 2>&1 || ping -c1 -t3 100.91.38.104 >/dev/null 2>&1; then
-  "$(dirname "$0")/deploy-mjapp.sh" || echo "⚠️ mj-app 部署失敗（Vercel 不受影響），稍後可手動跑 scripts/deploy-mjapp.sh"
-else
-  echo "⚠️ Tailscale 不在線，略過 mj-app 同步（下次發佈會補上）"
-fi
+# 2026-08-27：mj-app 改由伺服器端新機制自動從 repo 同步（每 ~2 小時，root 部署，會把整棵
+# /var/www/jtphr chown 回 caddy → robert 的 rsync 寫不進去也不再需要）。
+# 本機 rsync 部署停用；若新機制哪天停了，再啟用下面這行（需先請 root 恢復 robert 擁有權）。
+# "$(dirname "$0")/deploy-mjapp.sh"
+echo "ℹ️ mj-app 由伺服器端自動同步（約 2 小時內跟上），本機不再 rsync"
