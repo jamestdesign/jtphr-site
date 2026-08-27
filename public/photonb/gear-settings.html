@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>設備與設定 · PhotoNB</title>
+  <meta name="description" content="現役機身的拍攝設定、色彩科學、時區行為、進 LR/FCP 的正確姿勢——全部是實戰驗證過的，不是說明書抄的。" />
+  <meta name="date" content="2026-08-27" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:780px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.05rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    h3{color:var(--gold2);font-size:.92rem;margin:1.1rem 0 .3rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.88em;}
+    table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.4rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;white-space:nowrap;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem;font-size:.86rem;margin:.7rem 0;}
+    .warn{border-color:rgba(233,117,138,.5);background:linear-gradient(180deg,rgba(233,117,138,.1),rgba(233,117,138,.02));}
+    ul{padding-left:1.2rem;} li{margin:.28rem 0;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.12rem .6rem;font-size:.72rem;color:var(--muted);margin:.1rem .2rem 0 0;}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./dashboard.html">← 回儀表板</a>
+<div class="eyebrow">GEAR</div>
+<h1>設備與設定</h1>
+<p class="lead">現役四台機身的拍攝設定、色彩科學、時區行為、進 LR／FCP 的正確姿勢。<b>每一條都是實戰踩過驗證過的</b>，不是說明書抄的。規則有變就回來更新這頁。</p>
+
+<h2>📱 OPPO Find X9 Ultra（主力手機）</h2>
+<h3>🎬 O-Log2 拍攝與上色（已落地 2026-08-05）</h3>
+<ul>
+<li><b>怎麼認 O-Log2 素材</b>：指紋＝<code>primaries bt2020</code>＋<b>10bit</b>。⚠️ <code>transfer</code> 會亂標成 bt709，<b>別信 transfer</b>。</li>
+<li><b>FCP 不會自動認</b> → 匯入後手動套：檢閱器 → 設定 → <b>相機 LUT → OPPO O-Log2</b>（官方 LUT 已裝機）。套完輸出不用再調。</li>
+<li><b>120fps 慢動作</b>：開 <b>30p 專案＋重新計時 25%</b>，❌ 別開 120p 專案。</li>
+<li>非 O-Log2 的一般錄影是 HLG 或 709，pipeline 工具（fcpxmld-export 等）會逐檔偵測自動分流。</li>
+</ul>
+<h3>📷 照片</h3>
+<ul>
+<li><b>實況照片藏在 JPG 裡</b>（MotionPhoto 內嵌），DNG 沒有；獨立的 <code>VID*.mp4</code> 是真錄影不是實況副產品。抽幀只對 VID。</li>
+<li><b>美肌偵測</b>：開過美肌的臉會在 JPG 尾端留 <code>facerestore.result</code> 段 → 歸檔時自動掃、打 <code>OPPO美肌</code> 關鍵字 → <b>這些不要再進 Evoto 磨第二次</b>。</li>
+<li><b>哈蘇大師色只存在機內 JPG</b>：RAW 進 LR 會被換成 Adobe Color，Adobe 沒有對應 profile 救不回 → 想要那個色就用機內 JPG。</li>
+</ul>
+<h3>🕐 時區</h3>
+<div class="note">✅ OPPO <b>會自動跟當地時區</b>，出國不用改。但注意：<b>檔名＝當地時間、CreateDate＝UTC</b>，跨機排序一律用 CreateDate(UTC)。</div>
+
+<h2>📱 iPhone 17 Pro Max（＋同型號第二台補充機）</h2>
+<h3>🎬 錄影</h3>
+<ul>
+<li>拍 <b>HLG（Rec.2020）</b> → 出圖／出片工具會自動 tonemap 到 709（一般螢幕直接看會偏灰是正常的，工具會處理）。</li>
+<li><b>旋轉旗標陷阱</b>：檔案常存成 1080×1920 但帶 rotation −90，<b>實際是橫的</b>——只看寬高會判反，pipeline 工具已全部旋轉感知。</li>
+</ul>
+<h3>📷 照片</h3>
+<ul>
+<li><code>IMG_E*</code> ＝手機的「另存編輯檔」，<b>不一定是人像模式</b>——照畫面實際內容標，別憑檔名。</li>
+</ul>
+<h3>🕐 時區（最常踩的坑）</h3>
+<div class="note warn">⚠️ iPhone 的照片時間<b>常停在 +08:00 台灣</b>不跟當地。歐洲 trip 要 <b>−6h</b>（CEST），但<b>出發前的台北照＋機上照維持 +08:00 別改</b>。CreationDate 也帶 +08:00 → 跨機排序一律用 <b>CreateDate(UTC)</b>，兩台自動對齊，不要手動加偏移。</div>
+<h3>👥 第二台（同型號）當補充機</h3>
+<ul>
+<li>關鍵字 <code>第二台iPhone</code> 區別；場景名<b>完全對齊主線</b>；資料夾巢狀進各主 trip。</li>
+<li>⚠️ 兩台時區<b>各自驗證</b>：實測過第二台設對了（+2）、主機還在 +8 要 −6h 的情況。</li>
+</ul>
+
+<h2>📷 Sony A7R V（ILCE-7RM5）</h2>
+<ul>
+<li><b>沒有 GPS</b> → 歸檔分場景靠時間分段＋看圖命名（其他兩台有 GPS 可反查地名）。</li>
+<li><b>時區常停 +08:00</b>（跟 iPhone 同病），出國 trip 記得校正；無 GPS 輔助 → 用「同 trip 哪天在哪」判斷。</li>
+<li><b>RAW 進 LR 會掉相機色</b>（被換成 Adobe Color）→ 用 <b>Camera Matching</b> profile 救回 Sony 機內色科學。</li>
+<li>61MP 大檔：外接編輯版走 <a href="./export-auto-move.html">round-trip 子資料夾 SOP</a>（Evoto → <code>Evotofu/</code>）。</li>
+</ul>
+
+<h2>🎥 insta360（型號待補）</h2>
+<div class="note">暫存夾目前是空的（<code>input/insta360/</code>）。下次倒卡進來我把型號跟設定補上這裡。</div>
+
+<h2>🖥️ FCP 這邊的固定配置</h2>
+<table>
+<tr><th>項目</th><th>設定</th></tr>
+<tr><td>撿片快捷鍵</td><td><code>Ctrl+1~5</code>＝Star1~5。<b>KP 抽禎打關鍵字 <code>KP</code> 就好</b>（2026-08-23 起不分色，Ctrl+6~9 已釋出自用）→ <a href="./_fcpx-cheatsheet.html">Cheat Sheet</a></td></tr>
+<tr><td>相機 LUT</td><td>OPPO O-Log2 官方 LUT 已裝；<b>要手動選</b>，FCP 不自動認</td></tr>
+<tr><td>轉場預設</td><td>長景 2.5 秒溶接（全選 ⌘T 一次套）；Montage／實境秀＝硬切不套</td></tr>
+<tr><td>角色 Roles</td><td><code>Video-H</code>橫式／<code>Video-V</code>直式／<code>Titles</code>疊層／Dialogue 原音／Music 配樂——XML 匯入自動帶</td></tr>
+<tr><td>慢動作</td><td>120fps 素材 → 30p 專案＋重新計時 25%</td></tr>
+<tr><td>保存</td><td>剪完留 <code>.fcpxmld</code>（MB 級）＋母帶；<code>.fcpbundle</code> 可刪（GB～百GB 級）→ 刪前先重匯驗證</td></tr>
+</table>
+
+<h2>🕐 跨機時區速查（出國 trip 歸檔第一步）</h2>
+<table>
+<tr><th>機身</th><th>行為</th><th>要做的事</th></tr>
+<tr><td>OPPO</td><td>✅ 自動跟當地</td><td>驗 GPS 確認即可</td></tr>
+<tr><td>iPhone ×2</td><td>⚠️ 常停 +08:00</td><td>看 GPS 經度：歐洲(lon&lt;15)→−6h；台灣照不動；<b>兩台各自驗</b></td></tr>
+<tr><td>Sony</td><td>⚠️ 常停 +08:00・無 GPS</td><td>按日期判斷人在哪天在哪 → 校正</td></tr>
+</table>
+<div class="note">💡 多來源同 trip：校正完全部<b>併同一套場景</b>（不分機身資料夾），排序用 CreateDate(UTC)。</div>
+
+<footer>PhotoNB · 設備與設定 · 內容隨實戰更新 · 2026-08-27</footer>
+</div>
+</body>
+</html>
