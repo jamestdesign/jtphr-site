@@ -435,6 +435,44 @@ Water in muted teal-green with fine engraved wave hatching, land in sand and och
 Plot the voyage as a red dashed route from Pingjiang Road to Shantang Street, with a small wooden canal boat drawn along it and anchor symbols at each landing. Along the banks, draw a few small 3D isometric buildings for the landmarks: whitewashed canal houses with dark grey tiled roofs, arched stone bridges, garden pavilions, the twin pagodas — recognisable by their real architecture.
 
 Water in muted teal-green with fine engraved wave hatching, land in sand and ochre, plenty of open water so the route reads clearly. Warm cinematic light, aged paper texture, subtle vignette. High detail, storybook cartography. 9:16 vertical.`
+    },
+    {
+      id: "PR-015",
+      title: "照片 × 建築藍圖 展覽海報",
+      titleEn: "Photo × Architectural Drawing Exhibition Poster",
+      styles: ["展覽海報","建築製圖","米白象牙","3:4直式"],
+      colorway: ["#f2ede3","#e8e2d4","#1a1a1a","#8a8a80","#b9c7c4"],
+      model: "ChatGPT 生圖（上傳照片＋prompt）",
+      ratio: "3:4 直式海報",
+      source: "FB 社團「ChatGPT x AI 融入教學」Emerson post（2026-08-30 James 收藏）— 系列前作為「真實照片 × 抽象幾何」",
+      images: [
+        {src:"prompt-assets/PR-015-havana.jpg", cap:"哈瓦那街角 — 老建築＋老爺車，製圖半有編號索引"},
+        {src:"prompt-assets/PR-015-dubai.jpg", cap:"杜拜夜景 — 軸測圖 site study＋色票列"},
+        {src:"prompt-assets/PR-015-lagoon.jpg", cap:"水上屋日落 — 立面圖＋標高線（風格最柔的一張）"},
+        {src:"prompt-assets/PR-015-aurora.jpg", cap:"極光瀑布 — 純風景也能轉（axonometric section＋色票圖例）"},
+        {src:"prompt-assets/PR-015-barcelona.jpg", cap:"巴塞隆納天際線 — 城市立面 elevation"}
+      ],
+      thumb: "prompt-assets/PR-015-havana-thumb.jpg",
+      breakdown: [
+        {h:"核心概念", d:"一張照片拆成「現場」與「圖面」：照片半保留原光影/質感/透視不重畫，另一半把同一場景抽成建築製圖（輪廓、軸線、路徑、開口）——不是濾鏡"},
+        {h:"分割規則", d:"3:4 直式；橫照上下 50:50、直照左右分割；人物照優先左右分割且分割線避開五官與主建築核心輪廓"},
+        {h:"照片半", d:"保留主體形式/比例/質感/自然光影/原色/透視；只做細微專業校色；需擴圖只自然延伸天空地面，不動主體"},
+        {h:"製圖半", d:"細製圖線＋半透明平面色塊＋軸線/開口/路徑＋極小編號＋大量負空間；可加克制的比例尺/圖號/高程標記；不做真施工圖、不寫實插圖、不 3D 感"},
+        {h:"對位檢查", d:"抽象半必須「對得回原圖」：樓體、道路、窗洞、地形轉折位置要能對回照片——這是此版的靈魂"},
+        {h:"排版", d:"米白/象牙淺色底＋寬裕邊距；極簡英文標題＋年份＋極小圖號；顏色只從原照片提取"},
+        {h:"選照片訣竅", d:"建築輪廓清楚、道路線條明顯、透視感強、畫面不雜；有「建築感/空間感/線條感」的照片最適合，一般風景照也可試（見極光瀑布例）"}
+      ],
+      note: "旅遊照大多符合「建築＋線條＋透視」條件，門司港、蘇州、德國城堡系列都很適合這版。四個變數：背景顏色（預設米色/象牙白）、英文標題（COURTYARD / FACADE / QUIET STREET 這類短字）、年份、圖號（PLAN 01 / SECTION 02）。",
+      prompt: `根據上傳的照片，創作一張高端極簡主義建築展覽海報。使用 3:4 直式格式。對於橫向照片，將構圖水平分成相等的 50:50 區塊。對於直向照片，將其垂直分成大致相等的左右區塊。人物照優先使用左右分割，且分割線必須避開五官與主建築的核心輪廓。在照片區塊中，保留原始影像，包括主體的形式、比例、逼真的質感、自然光影、原始色彩、透視關係，以及整體氛圍。只應用細微的專業色彩校正，以營造當代建築攝影與藝術展覽的精緻外觀。如果需要擴展畫面，只自然延伸天空、地面或周圍環境。不要扭曲、位移或改變主體。在圖形區塊中，將同一場景最易辨識的結構重新詮釋為建築製圖。使用細製圖線、半透明平面色塊、軸線、開口、路徑、極小編號，以及大量的負空間。可加入極克制的比例尺、圖號或高程標記，但不要做成真實施工圖，也不要出現過多註解。避免寫實插圖、繁複細節、卡通線稿和三維模型感。結果應感覺抽象卻能立即辨識，樓體、道路、窗洞或地形轉折必須對得回原圖。顏色只從原始照片中提取。使用淺色中性背景，如【背景顏色】，並配以寬裕的邊距和平衡的中央構圖。添加最少的排版元素：簡短的英文標題「【英文標題】」、年份「【年份】」，以及極小字「【圖號】」。
+
+整體方向應反映國際建築事務所圖面、當代建築展覽海報、博物館級藝術指導、低調奢華、精緻排版，以及大量的負空間。避免模板式的佈局、低品質商業設計、卡通風格、3D 渲染、過度裝飾、漸層效果、霓虹效果、過於複雜的插畫，以及對主體的任何扭曲。`,
+      promptAltLabel: "變數填寫（貼 prompt 後補這段）",
+      promptAlt: `請填寫以下變數與其他需求：
+背景顏色（預設：米色 或 象牙白，也可以指定其他顏色）
+英文標題（簡短英文，例如 COURTYARD / FACADE / QUIET STREET）
+年份（例如：2026）
+圖號（預設：PLAN 01，也可以改成 SECTION 02）
+其他需求（標題位置、線條疏密、抽象程度、要不要副標題…等）`
     }
   ];
 
