@@ -1,6 +1,7 @@
 ---
 title: "資金面每日觀測"
 date: 2026-09-02
+category: "股票-趨勢觀察"
 source: "liquidity-dashboard.py（FRED + 台灣證交所 open data + CoinGecko）"
 creator: claude_robin
 managed_by: claude_robin
@@ -8,7 +9,6 @@ auto_generated: true
 last_revised: 2026-09-02
 tags: [資金面, 流動性, 每日觀測, risk-on-off]
 ---
-sourceNote: "stocks__趨勢觀察__資金面每日觀測"
 
 ## 📅 2026-09-02
 
