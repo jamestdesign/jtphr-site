@@ -66,6 +66,18 @@ export-auto-move "&lt;trip&gt;" --to_export /path/in --export /path/out --go
 export-auto-move "&lt;trip&gt;" --to_export "&lt;trip&gt;/to_evoto" --ext jpg</pre>
   <p class="tag">別名 <code>to_export</code> 亦可</p><p class="tag">腳本 <code>tools/export_auto_move.py</code></p>
 
+  <h2>🆕 先烤再搬（2026-09-07 起）</h2>
+  <p>你匯出時勾了「加入目錄」，<code>to_export</code> 的 JPG 在 LR 裡是獨立項目，最後調的星等／色標／旗標打在它們身上、不在檔案裡。所以搬進 <code>_export</code> 之前，Robert 先從 catalog 讀出來<b>烤進 JPG</b>，讓 <code>_export</code> 的檔案自帶最新資料——你從 <code>_export</code> 同步、上雲端、重建 catalog 都吃得到，Robert 的審美學習也讀同一份。</p>
+  <pre># 1) 從 catalog 把最後的星等/色標/關鍵字/旗標寫進 JPG（旗標 → 關鍵字 _pick / _reject）
+lr_bake_to_jpg "&lt;trip&gt;.lrcat" "&lt;trip&gt;/to_export"
+
+# 2) 再鏡射
+export-auto-move "&lt;trip 根目錄&gt;" --go
+
+# 已經搬到 _export 之後又在 LR 改過？指 _export、用 --items-from 告訴它 catalog 項目記在哪
+lr_bake_to_jpg "&lt;trip&gt;.lrcat" "&lt;trip&gt;/_export" --items-from "&lt;trip&gt;/to_export"</pre>
+  <p class="tip">💡 小貼士：搬走後 LR 裡 to_export 那批項目會顯示「遺失」，直接從目錄移除就好；資料已在 JPG 裡。Robert 只讀 catalog（複製一份再開），不會寫它。首跑：宮古島 day1 81 張，讀回 81/81。</p>
+
   <h2>自動兼容結構</h2>
   <ul>
     <li><b>場景平鋪＋<code>_次</code>（2026-07-01 新）</b>：day 底下場景平鋪，次相機 = 主場景名＋<code>_次</code>（如 <code>08_…_次/</code>）→ 依母檔所在場景鏡射，<code>_次</code> 也照樣落 <code>_export/…/&lt;場景&gt;_次/</code>。</li>

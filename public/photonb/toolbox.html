@@ -100,7 +100,9 @@
     <tr><td>fcpxmld-export</td><td>從你撿好片的 <code>.fcpxmld</code> 抽 HL 片段與 KP 單禎，<b>該解碼的自動解碼</b></td></tr>
     <tr><td>ir_tag</td><td>影片分鏡抽幀 → 我讀圖標關鍵字（內容／景別／A-B-C roll）→ 產出可匯入的關鍵字</td></tr>
     <tr><td>camera_motion</td><td>判斷是「拍攝者在移動」還是「相機沒動」</td></tr>
-    <tr><td>export_auto_move</td><td>出片鏡射：自動分場景搬進 <code>_export</code></td></tr>
+    <tr><td>export_auto_move</td><td>出片鏡射：自動分場景搬進 <code>_export</code>（2026-09-07 起搬前先 lr_bake_to_jpg）</td></tr>
+    <tr><td>lr_bake_to_jpg</td><td><b>先烤再搬</b>：從 .lrcat 讀你最後調的星等／色標／關鍵字／旗標寫進 to_export 的 JPG，只讀 catalog 不寫它</td></tr>
+    <tr><td>lr_taste_diff</td><td><b>審美學習</b>：讀 .lrcat 三層（母檔／to_export／to_evoto）對上我的初選，產衝突報告（升降、色標、旗標、precision/recall）</td></tr>
     <tr><td>ir_merge_parts</td><td>大批量分身標記結果的合併</td></tr>
   </table></div>
 
