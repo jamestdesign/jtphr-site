@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>希臘神話・三代神權與人類的五次實驗</title>
+  <meta name="description" content="15 分鐘演講稿＋人物關聯圖：從混沌到宙斯的三代父子相殘、普羅米修斯造人、潘朵拉、五代人。整理自老高與小茉影片。" />
+  <meta name="date" content="2026-09-08" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+      --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--pink:#ff9ac4;--purple:#b39ddb;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:900px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5.5vw,2.4rem);line-height:1.2;
+      font-family:'Georgia','Noto Serif TC',serif;
+      background:linear-gradient(180deg,#fbeebc 0%,var(--gold2) 38%,#c79a3a 62%,#9c7322 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;}
+    .lead{color:var(--muted);margin:.2rem 0 1rem;font-size:.95rem;}
+    .meta{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.78rem;color:var(--muted);margin-bottom:1.2rem;}
+    .meta b{color:var(--gold2);font-weight:600;}
+    h2{color:var(--gold);font-size:1.08rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2.4rem 0 .9rem;}
+    h3{color:var(--gold2);font-size:.95rem;margin:1.4rem 0 .35rem;}
+    table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.42rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;white-space:nowrap;background:rgba(216,182,90,.06);}
+    .tablewrap{overflow-x:auto;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.75rem 1rem;font-size:.86rem;margin:.9rem 0;}
+    .note b{color:var(--gold2);}
+    .warn{border-color:rgba(233,117,138,.5);background:linear-gradient(180deg,rgba(233,117,138,.1),rgba(233,117,138,.02));}
+    ul{padding-left:1.2rem;} li{margin:.22rem 0;}
+    /* TL;DR tiles */
+    .tldr{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.6rem;}
+    .tile{border:1px solid var(--line);border-radius:12px;padding:.8rem .85rem;background:linear-gradient(180deg,rgba(216,182,90,.08),rgba(255,255,255,.02));}
+    .tile .ic{font-size:1.3rem;} .tile b{display:block;margin:.3rem 0 .15rem;font-size:.86rem;color:var(--gold2);}
+    .tile small{color:var(--muted);font-size:.76rem;line-height:1.5;display:block;}
+    /* diagram */
+    .figwrap{border:1px solid var(--line);border-radius:14px;background:#0a1330;padding:.6rem;overflow-x:auto;}
+    .figwrap svg{display:block;min-width:960px;width:100%;height:auto;}
+    .legend{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;font-size:.76rem;color:var(--muted);margin:.6rem 0 0;}
+    .legend span{display:inline-flex;align-items:center;gap:.35rem;}
+    .legend i{display:inline-block;width:26px;height:0;border-top:2px solid;}
+    .legend .l-parent{border-color:var(--gold);} .legend .l-marry{border-color:var(--pink);} .legend .l-affair{border-color:var(--pink);border-top-style:dashed;}
+    .legend .l-over{border-color:var(--red);} .legend .l-jail{border-color:#9aa3b8;border-top-style:dotted;} .legend .l-make{border-color:var(--green);}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid;}
+    /* timeline strip */
+    .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:.8rem;}
+    .strip div{border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;font-size:.8rem;background:var(--panel);}
+    .strip b{display:block;color:var(--gold2);font-size:.84rem;}
+    .strip small{color:var(--muted);}
+    /* speech */
+    .speech{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.3rem;}
+    .speech h3{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1px dashed rgba(255,255,255,.1);padding-bottom:.3rem;margin-top:1.8rem;}
+    .speech h3:first-of-type{margin-top:.2rem;}
+    .speech h3 .t{color:var(--muted);font-size:.74rem;font-weight:400;white-space:nowrap;letter-spacing:.05em;}
+    .speech p{margin:.6rem 0;font-size:.96rem;}
+    .speech .cue{color:var(--muted);font-size:.8rem;font-style:italic;}
+    .speech .q{color:var(--gold2);}
+    .speech .k{color:var(--gold2);font-weight:600;}
+    .gen{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;margin-top:.7rem;}
+    .gen div{border:1px solid var(--line);border-radius:10px;padding:.6rem .6rem;font-size:.78rem;background:var(--panel);}
+    .gen b{display:block;color:var(--gold2);font-size:.84rem;margin-bottom:.15rem;}
+    .gen small{color:var(--muted);display:block;line-height:1.45;}
+    .gen .tag{display:inline-block;margin-top:.35rem;font-size:.7rem;color:var(--green);border:1px solid rgba(91,212,138,.4);border-radius:999px;padding:.05rem .45rem;}
+    footer{margin-top:2.4rem;text-align:center;color:var(--muted);font-size:.74rem;line-height:1.8;}
+    footer .cred{color:var(--gold);}
+    @media(max-width:640px){.tldr{grid-template-columns:1fr 1fr;} .strip{grid-template-columns:1fr 1fr;} .gen{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本 · 儀表板</a>
+  <div class="eyebrow">知識頁 · 神話 · 演講稿</div>
+  <h1>希臘神話<br>三代神權與人類的五次實驗</h1>
+  <p class="lead">一場 15 分鐘的演講稿、一張人物關聯圖、一份人物速查表。把「誰生誰、誰推翻誰、人是怎麼來的」一次講清楚。</p>
+  <div class="meta">
+    <span>來源：<b><a href="https://youtu.be/Yyzb2uvihp4" target="_blank" rel="noopener">老高與小茉《27分鐘講完十二泰坦與眾神》</a></b></span>
+    <span>整理：<b>Robert</b></span>
+    <span>日期：<b>2026-09-08</b></span>
+    <span>演講長度：<b>約 15 分鐘 / 3,200 字</b></span>
+  </div>
+
+  <h2>⚡ 一頁看懂</h2>
+  <div class="tldr">
+    <div class="tile"><div class="ic">🌀</div><b>三代父子相殘</b><small>烏拉諾斯 → 克洛諾斯 → 宙斯。每一代都怕被孩子推翻，每一代都真的被推翻。</small></div>
+    <div class="tile"><div class="ic">⚡</div><b>宙斯靠「放出被囚的怪物」贏</b><small>閃電、三叉戟、隱身頭盔都是獨眼巨人給的。力量不在自己身上，在誰肯幫你。</small></div>
+    <div class="tile"><div class="ic">🏺</div><b>人是實驗品</b><small>普羅米修斯用神界泥土造人，雅典娜吹入智慧，潘朵拉帶來災難、盒底留希望。</small></div>
+    <div class="tile"><div class="ic">🧬</div><b>五代人＝五次嘗試</b><small>黃金、白銀、青銅、英雄、黑鐵。前四代都因「力量」毀滅，第五代只給智慧不給力量。</small></div>
+    <div class="tile"><div class="ic">🤖</div><b>老高的解讀：這是 AI 教材</b><small>先給弱的身體，再給智慧；力量一給就打起來。神話講的可能不是過去，是未來。</small></div>
+    <div class="tile"><div class="ic">🍽️</div><b>冥界不能吃東西</b><small>希臘、日本、中國三套神話同一條規則：吃了冥界的食物就回不來。</small></div>
+  </div>
+
+  <h2>🕸️ 人物關聯圖</h2>
+  <p class="lead" style="margin-bottom:.5rem">由上往下＝世代；金線＝親子、粉線＝夫妻、紅箭頭＝推翻、灰點線＝囚禁、綠箭頭＝創造。手機請左右滑動。</p>
+  <div class="figwrap">
+<svg class="rel" viewBox="0 0 1240 660" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans TC',system-ui,sans-serif" role="img" aria-label="希臘神話人物關聯圖">
+<defs>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e9758a"/></marker>
+<marker id="arr-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9aa3b8"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5bd48a"/></marker>
+</defs>
+<line x1="20" y1="40" x2="1220" y2="40" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="10" fill="#aeb6cc" font-size="11" letter-spacing="1.5">第 0 代・原始神</text>
+<line x1="20" y1="135" x2="1220" y2="135" stroke="#ffffff" stroke-opacity=".05"/>
+<line x1="20" y1="245" x2="1220" y2="245" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="215" fill="#aeb6cc" font-size="11" letter-spacing="1.5">第 1 代・泰坦與巨人</text>
+<line x1="20" y1="355" x2="1220" y2="355" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="325" fill="#aeb6cc" font-size="11" letter-spacing="1.5">第 2 代・奧林帕斯六神</text>
+<line x1="20" y1="470" x2="1220" y2="470" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="440" fill="#aeb6cc" font-size="11" letter-spacing="1.5">第 3 代・宙斯的子女</text>
+<line x1="20" y1="580" x2="1220" y2="580" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="550" fill="#aeb6cc" font-size="11" letter-spacing="1.5">人類</text>
+<rect x="383.0" y="198.0" width="582.0" height="86" rx="14" fill="none" stroke="#d8b65a" stroke-opacity=".35" stroke-dasharray="4 4"/>
+<text x="391.0" y="213.0" fill="#d8b65a" font-size="10.5">十二泰坦（六男六女，兄妹成對配偶）— 圖中只列故事用到的五位</text>
+<rect x="393.0" y="322.0" width="694.0" height="66" rx="14" fill="none" stroke="#f3df9b" stroke-opacity=".3" stroke-dasharray="4 4"/>
+<text x="399.0" y="400.0" fill="#f3df9b" font-size="10.5">↑ 前五個出生就被父親吞下，宙斯最小、被石頭掉包逃過</text>
+<path d="M640,63.0 C640,87.5 640,87.5 640,112.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,112.0 C640,52.0 950,52.0 950,112.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 450,190.0 450,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 562,190.0 562,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 674,190.0 674,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 786,190.0 786,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 898,190.0 898,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 1030,190.0 1030,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 1150,190.0 1150,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,158.0 C640,190.0 150,190.0 150,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<text x="390" y="192" fill="#d8b65a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">與塔爾塔羅斯所生</text>
+<path d="M330,158.0 C330,190.0 150,190.0 150,222.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M450,268.0 C450,300.0 460,300.0 460,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M450,268.0 C450,300.0 572,300.0 572,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M450,268.0 C450,300.0 684,300.0 684,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M450,268.0 C450,300.0 796,300.0 796,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M450,268.0 C450,300.0 908,300.0 908,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M450,268.0 C450,300.0 1020,300.0 1020,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M786,268.0 C786,300.0 330,300.0 330,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M898,268.0 C898,300.0 200,300.0 200,332.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M950,158.0 C950,302.5 1060,302.5 1060,447.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<text x="1165" y="428" fill="#d8b65a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">斷肢落海化泡沫而生</text>
+<path d="M1020,378.0 C1020,412.5 480,412.5 480,447.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<text x="790" y="404" fill="#d8b65a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">雅典娜自宙斯頭顱誕生</text>
+<path d="M1020,378.0 C1020,412.5 592,412.5 592,447.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M1020,378.0 C1020,412.5 704,412.5 704,447.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M1020,378.0 C1020,412.5 816,412.5 816,447.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M1020,378.0 C1020,412.5 928,412.5 928,447.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,112.0 C640,42.0 950,42.0 950,112.0" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<path d="M503.0,245 L509.0,245" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<path d="M967.0,355 L961.0,355" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<path d="M928,447.0 C928,377.0 1060,377.0 1060,447.0" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<path d="M1020,378.0 C1020,458.0 330,458.0 330,378.0" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<text x="760" y="437" fill="#ff9ac4" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">娶後吞入腹中</text>
+<path d="M1060,447.0 C1060,377.0 816,377.0 816,447.0" fill="none" style="stroke:#ff9ac4;stroke-width:1.6;stroke-dasharray:3 4;opacity:.9"/>
+<text x="940" y="430" fill="#ff9ac4" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">私通</text>
+<path d="M950,158.0 C950,190.0 1030,190.0 1030,222.0" fill="none" style="stroke:#9aa3b8;stroke-width:1.6;stroke-dasharray:2 5;marker-end:url(#arr-grey)"/>
+<text x="1075" y="192" fill="#9aa3b8" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">囚於塔爾塔羅斯</text>
+<path d="M200,378.0 C200,412.5 200,412.5 200,447.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="275" y="412" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">用神界泥土造人</text>
+<path d="M480,447.0 C480,387.0 200,387.0 200,447.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="340" y="432" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">吹入智慧</text>
+<path d="M928,493.0 C928,525.0 928,525.0 928,557.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="985" y="525" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">奉宙斯命造</text>
+<path d="M928,557.0 C928,525.0 200,525.0 200,493.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="560" y="540" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">送給人類・打開盒子</text>
+<path d="M450,222.0 C450,190.0 950,190.0 950,158.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="720" y="192" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">鐮刀閹割父親</text>
+<path d="M1020,332.0 L1020,322 Q1020,312 1010,312 L460,312 Q450,312 450,302 L450,268.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="735" y="306" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">催吐救兄姊＋泰坦之戰 → 囚泰坦於地獄</text>
+<path d="M1020,332.0 L1020,300 Q1020,290 1010,290 L160,290 Q150,290 150,280 L150,268.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="560" y="286" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">蓋亞派堤豐反撲 → 宙斯封印於西西里島下</text>
+<g class="node" data-id="chaos"><rect x="587.0" y="17.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="640" y="37" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">混沌</text>
+<text x="640" y="53" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Chaos · 一切之始</text></g>
+<g class="node" data-id="tartarus"><rect x="277.0" y="112.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="330" y="132" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">塔爾塔羅斯</text>
+<text x="330" y="148" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Tartarus · 地獄深淵</text></g>
+<g class="node" data-id="gaia"><rect x="587.0" y="112.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="640" y="132" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">蓋亞</text>
+<text x="640" y="148" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Gaia · 大地女神</text></g>
+<g class="node" data-id="uranus"><rect x="897.0" y="112.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="950" y="132" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">烏拉諾斯</text>
+<text x="950" y="148" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Uranus · 天空之神</text></g>
+<g class="node" data-id="typhon"><rect x="97.0" y="222.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="150" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">堤豐</text>
+<text x="150" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Typhon · 風暴巨怪</text></g>
+<g class="node" data-id="kronos"><rect x="397.0" y="222.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="450" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">克洛諾斯</text>
+<text x="450" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Kronos · 泰坦之王</text></g>
+<g class="node" data-id="rhea"><rect x="509.0" y="222.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="562" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">瑞亞</text>
+<text x="562" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Rhea · 克洛諾斯之妻</text></g>
+<g class="node" data-id="themis"><rect x="621.0" y="222.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="674" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">忒彌斯</text>
+<text x="674" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Themis · 律法</text></g>
+<g class="node" data-id="oceanus"><rect x="733.0" y="222.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="786" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">俄刻阿諾斯</text>
+<text x="786" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Oceanus · 大洋</text></g>
+<g class="node" data-id="iapetus"><rect x="845.0" y="222.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="898" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">伊阿珀托斯</text>
+<text x="898" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Iapetus</text></g>
+<g class="node" data-id="cyclopes"><rect x="977.0" y="222.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="1030" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">獨眼巨人 ×3</text>
+<text x="1030" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Cyclopes · 鍛造武器</text></g>
+<g class="node" data-id="hecaton"><rect x="1097.0" y="222.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="1150" y="242" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">百臂巨人 ×3</text>
+<text x="1150" y="258" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hecatoncheires</text></g>
+<g class="node" data-id="prometheus"><rect x="147.0" y="332.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="200" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">普羅米修斯</text>
+<text x="200" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">造人・盜火・被罰</text></g>
+<g class="node" data-id="metis"><rect x="277.0" y="332.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="330" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">墨提斯</text>
+<text x="330" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Metis · 宙斯首任妻</text></g>
+<g class="node" data-id="hestia"><rect x="407.0" y="332.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="460" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">赫斯提亞</text>
+<text x="460" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hestia · 爐灶</text></g>
+<g class="node" data-id="demeter"><rect x="519.0" y="332.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="572" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">狄蜜特</text>
+<text x="572" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Demeter · 農業</text></g>
+<g class="node" data-id="hades"><rect x="631.0" y="332.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="684" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">哈帝斯</text>
+<text x="684" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hades · 冥王</text></g>
+<g class="node" data-id="poseidon"><rect x="743.0" y="332.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="796" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">波塞頓</text>
+<text x="796" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Poseidon · 海王</text></g>
+<g class="node" data-id="hera"><rect x="855.0" y="332.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="908" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">赫拉</text>
+<text x="908" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hera · 婚姻・第七妻</text></g>
+<g class="node" data-id="zeus"><rect x="967.0" y="332.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="1020" y="352" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">宙斯</text>
+<text x="1020" y="368" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Zeus · 眾神之王</text></g>
+<g class="node" data-id="humans"><rect x="147.0" y="447.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="200" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">人類</text>
+<text x="200" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">神界泥土所造</text></g>
+<g class="node" data-id="athena"><rect x="427.0" y="447.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="480" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">雅典娜</text>
+<text x="480" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Athena · 智慧・戰爭</text></g>
+<g class="node" data-id="hermes"><rect x="539.0" y="447.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="592" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">荷米斯</text>
+<text x="592" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hermes · 商業</text></g>
+<g class="node" data-id="apollo"><rect x="651.0" y="447.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="704" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">阿波羅</text>
+<text x="704" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Apollo · 光明</text></g>
+<g class="node" data-id="ares"><rect x="763.0" y="447.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="816" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">阿瑞斯</text>
+<text x="816" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Ares · 戰爭</text></g>
+<g class="node" data-id="hephaestus"><rect x="875.0" y="447.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="928" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">赫菲斯托斯</text>
+<text x="928" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hephaestus · 工匠</text></g>
+<g class="node" data-id="aphrodite"><rect x="1007.0" y="447.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="1060" y="467" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">阿芙蘿黛蒂</text>
+<text x="1060" y="483" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Aphrodite · 愛與美</text></g>
+<g class="node" data-id="pandora"><rect x="875.0" y="557.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="928" y="577" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">潘朵拉</text>
+<text x="928" y="593" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Pandora · 第一個女人</text></g>
+</svg>
+  </div>
+  <div class="legend">
+    <span><i class="l-parent"></i>親子（生）</span>
+    <span><i class="l-marry"></i>夫妻</span>
+    <span><i class="l-affair"></i>私通</span>
+    <span><i class="l-over"></i>推翻／封印</span>
+    <span><i class="l-jail"></i>囚禁</span>
+    <span><i class="l-make"></i>創造／贈與</span>
+    <span><b class="sw" style="background:#3a2d5c;border-color:#b39ddb"></b>原始神</span>
+    <span><b class="sw" style="background:#4a3a1e;border-color:#d8b65a"></b>泰坦</span>
+    <span><b class="sw" style="background:#1e2f5c;border-color:#f3df9b"></b>奧林帕斯神</span>
+    <span><b class="sw" style="background:#4a1e28;border-color:#e9758a"></b>巨人／怪物</span>
+    <span><b class="sw" style="background:#1e4a30;border-color:#5bd48a"></b>人類</span>
+  </div>
+
+  <h3>權力更替時間軸</h3>
+  <div class="strip">
+    <div><b>① 烏拉諾斯時代</b>怕孩子奪權 → 把 18 個孩子全關進塔爾塔羅斯<small><br>被克洛諾斯用蓋亞給的鐮刀閹割</small></div>
+    <div><b>② 克洛諾斯時代</b>怕預言成真 → 孩子一出生就吞掉<small><br>宙斯被石頭掉包、在克里特島長大</small></div>
+    <div><b>③ 泰坦之戰</b>宙斯三兄弟 vs 五泰坦，本來必輸<small><br>蓋亞指點：放出獨眼巨人與百臂巨人</small></div>
+    <div><b>④ 宙斯時代</b>打贏堤豐後真正坐穩<small><br>吞掉墨提斯堵預言，雅典娜從頭裡出生</small></div>
+  </div>
+
+  <h2>🎤 演講稿（約 15 分鐘）</h2>
+  <div class="note">怎麼用：每段標題右邊是建議配速。<span class="cue">斜體灰字</span>是給講者的提示（停頓、互動），不用唸出來。<span class="q">金色句子</span>是設計好的「拋問」，講到那裡看一下觀眾。</div>
+  <div class="speech">
+
+    <h3>開場：最亂、也最好看的神話 <span class="t">0:00 – 1:00</span></h3>
+    <p>大家好。今天我想用十五分鐘，講一個很多人以為自己知道、其實只認得幾個名字的故事：希臘神話。</p>
+    <p>宙斯、雅典娜、阿波羅、潘朵拉，這些名字大家都聽過。但如果我問：<span class="q">宙斯是怎麼當上眾神之王的？他打贏的是誰？</span>大部分人會卡住。</p>
+    <p>希臘神話是所有神話裡最複雜、也最「八卦」的一套。可是把它拆開來看，骨架其實只有兩條線：<span class="k">第一條，三代父子相殘</span>，每一代都怕被孩子推翻，每一代都真的被推翻。<span class="k">第二條，神做了五次造人實驗</span>，我們是第五個版本。</p>
+    <p class="cue">（停一拍）今天就沿著這兩條線走。</p>
+
+    <h3>一、從混沌到十八個孩子 <span class="t">1:00 – 3:00</span></h3>
+    <p>幾乎所有古老神話都從一片混沌開始，希臘也不例外。混沌之中，第一個出現的不是男神，是一位女神：<span class="k">蓋亞</span>，名字的意思就是「大地」。</p>
+    <p>蓋亞自己創造了第一位男神，天空之神<span class="k">烏拉諾斯</span>。然後她和烏拉諾斯結合，生下了十八個孩子：十二位泰坦巨神、三個獨眼巨人、三個百臂巨人。</p>
+    <p>注意一個細節：十二位泰坦是六男六女，天生就是六對，兄妹同時也是夫妻。這在希臘神話裡是常態，先不要用今天的眼光去評價，記住這個設定，後面會一直用到。</p>
+    <p>問題來了。烏拉諾斯看著這十八個孩子，各個力量非凡，他開始害怕：<span class="q">如果他們聯手，我這個天地的主人還做得下去嗎？</span>於是他做了一件事，把所有孩子都關進地底最深的黑暗之地，塔爾塔羅斯。</p>
+    <p>蓋亞氣壞了。她跑到地底問孩子們：誰願意去對付你們的父親？十二泰坦裡最小的一個站出來，他叫<span class="k">克洛諾斯</span>。蓋亞交給他一把巨大的鐮刀。</p>
+    <p>克洛諾斯趁父親不注意，一刀，把烏拉諾斯閹割了。烏拉諾斯逃走的時候留下一句話：<span class="k">「你以後也會被你的孩子推翻。」</span></p>
+    <p class="cue">（停頓）這句話，是整部希臘神話的引擎。</p>
+    <p>順帶一提，烏拉諾斯被割下的部分掉進海裡，激起的泡沫生出了一位女神，愛與美之神<span class="k">阿芙蘿黛蒂</span>。所以她不是任何人的女兒，她是最原始的那一代，比宙斯還老。這個先記著。</p>
+
+    <h3>二、吞孩子的父親，和被掉包的石頭 <span class="t">3:00 – 5:30</span></h3>
+    <p>克洛諾斯成了新的主人，娶了自己的姐姐<span class="k">瑞亞</span>，生下六個孩子，三男三女。三個兒子大家都認識：冥王哈帝斯、海王波塞頓、天王宙斯。宙斯是最小的。</p>
+    <p>但父親那句預言一直在克洛諾斯腦子裡。所以瑞亞每生一個，他就吞一個。<span class="cue">（觀眾通常會笑，等一下）</span>對，不是殺，是吞。因為神不會死，吞下去只是把孩子關在自己身體裡。</p>
+    <p>吞到第六個，瑞亞受不了了。她用一塊石頭包上布，假裝是嬰兒交給克洛諾斯，他一口吞下。真正的宙斯被偷偷送到克里特島，希臘第一大島，交給島上的仙女養大。</p>
+    <p>宙斯長大以後，母親來找他：去救你的哥哥姐姐。宙斯找上他的表姐、智慧女神<span class="k">墨提斯</span>，拿到一種催吐的藥，混進父親的食物。克洛諾斯吃下去劇烈嘔吐，把五個孩子全吐了出來。</p>
+    <p>接下來就是<span class="k">泰坦之戰</span>。宙斯三兄弟對上克洛諾斯和他找來的五位泰坦。三打六，而且泰坦是最原始、最強大的力量。<span class="q">照理說，宙斯必輸。</span></p>
+    <p>這時候蓋亞又出現了。她說：你打不過泰坦，但有人打得過，他們現在還關在塔爾塔羅斯裡，三個獨眼巨人、三個百臂巨人。克洛諾斯當年趕走父親之後，並沒有把這六個兄弟放出來。</p>
+    <p>宙斯下去把他們放了。獨眼巨人是鍛造之神，一出來就打造了三件禮物：給宙斯<span class="k">雷霆閃電</span>，給波塞頓<span class="k">三叉戟</span>，給哈帝斯一頂<span class="k">隱身頭盔</span>，戴上之後沒有任何神看得見他。加上百臂巨人的助陣，宙斯這一邊終於贏了。</p>
+    <p>宙斯做的第一件事：把所有泰坦關進塔爾塔羅斯。<span class="cue">（停）</span>大家有沒有發現，他做的事，跟他爺爺一模一樣。</p>
+    <p>蓋亞不高興了。她幫宙斯不是為了讓他當王，是想救出自己所有的孩子，結果孩子又被關起來。她和塔爾塔羅斯結合，生出整部神話裡最可怕的怪物：風暴巨怪<span class="k">堤豐</span>。閃電打不動它，海浪淹不了它。最後是靠宙斯的指揮、全體眾神的合力，把堤豐困住，用一整塊陸地壓在它身上，那塊陸地就是西西里島。</p>
+    <p>打完堤豐，宙斯才算真正坐穩眾神之王。</p>
+
+    <h3>三、宙斯的家務事 <span class="t">5:30 – 7:30</span></h3>
+    <p>當了王之後，宙斯第一個娶的是墨提斯，就是給他催吐藥的那位表姐。可是蓋亞又留了一個預言：墨提斯生的第一個孩子如果是女兒，智慧和力量會和宙斯不相上下；如果是兒子，會推翻宙斯。</p>
+    <p>宙斯的解法非常「祖傳」：聽說墨提斯懷孕，直接把她整個吞掉。</p>
+    <p>但孩子還是生出來了，從宙斯的頭裡。一出生就全副盔甲、手拿武器，衝破宙斯的腦袋出來。她是女兒，智慧與戰爭女神<span class="k">雅典娜</span>。</p>
+    <p>後來宙斯又娶了很多位女神，婚姻之神<span class="k">赫拉</span>大概是第七任。<span class="cue">（可以笑）</span>婚姻之神排第七，這件事本身就很希臘。整部神話前半段，大概有一半篇幅在講宙斯的各種戀愛、赫拉的各種報復。</p>
+    <p>宙斯的孩子裡有幾位很有名：光明之神阿波羅、商業之神荷米斯、戰爭之神阿瑞斯，還有全奧林帕斯最醜的一位，工匠之神<span class="k">赫菲斯托斯</span>。</p>
+    <p>最醜的神，娶了最美的神。赫菲斯托斯的太太就是剛才說過的阿芙蘿黛蒂。然後阿芙蘿黛蒂和赫菲斯托斯的哥哥阿瑞斯私通。<span class="cue">（停）</span>對，希臘神話就是這樣，各種戀愛、劈腿、報復、戰爭，一本翻不完的八卦。</p>
+    <p><span class="q">那希臘人為什麼可以接受神這麼不堪？</span>因為在他們的理解裡，神就是另一種更高的存在，想做什麼都可以。而且正因為神充滿情感，希臘人才相信神是真的。神按照自己的樣子造了我們，所以我們像他們，很正常。</p>
+
+    <h3>四、人是怎麼來的 <span class="t">7:30 – 10:00</span></h3>
+    <p>希臘神話裡明確造人的神，是<span class="k">普羅米修斯</span>，宙斯的表哥。他用神界的泥土和水，照著神的樣子捏出人。注意，是神界的泥土，不是人間的。</p>
+    <p>捏好之後，他往裡面放進動物的靈魂，一正一邪，一對一起放。所以每個人裡面，同時住著正義和邪惡。</p>
+    <p>但這時候的人還沒有智慧。是雅典娜看到普羅米修斯的泥人，非常喜歡，往裡面吹了一口氣，泥人才變成真正的人。雅典娜的象徵是貓頭鷹，這也是為什麼在西方貓頭鷹代表智慧。</p>
+    <p>普羅米修斯很愛他造的人，可是宙斯不喜歡人。他頒了很多禁令，最重要的一條：<span class="k">人不准用火</span>。全世界只有奧林帕斯山上有火。</p>
+    <p>普羅米修斯上山，偷走火種，帶給人類。從此人類有了光、有了熱、可以吃熟食。也因為這樣，奧運聖火要從奧林帕斯山點燃，象徵人類文明的傳承。</p>
+    <p>宙斯的懲罰有兩層。對普羅米修斯：把他鎖在山上，讓老鷹每天啄食他的肝臟，晚上長回來，白天再被啄。對人類：他叫赫菲斯托斯用泥土做了一個女人，這是世界上第一個女人，<span class="k">潘朵拉</span>。</p>
+    <p>宙斯的太太赫拉給了潘朵拉一樣東西：好奇心。宙斯給了她一個盒子，叮嚀千萬不要打開。<span class="cue">（觀眾都知道結局，慢慢講）</span>潘朵拉到了人間，忍不住，打開了。疾病、災難、痛苦全都飛了出來。她趕緊把盒子蓋上，蓋住了最後一樣東西：<span class="k">希望</span>。</p>
+    <p>所以人類不管遇到多大的災難，盒底永遠留著希望。</p>
+
+    <h3>五、五代人：神做的五次實驗 <span class="t">10:00 – 13:30</span></h3>
+    <p>接下來是今天最有意思的部分。如果你把整部希臘神話攤開，會發現在普羅米修斯造人之前，「人」就已經出現過了。後來學者整理出來，希臘神話裡的人類一共有<span class="k">五代</span>。</p>
+    <p><span class="k">第一代，黃金時代。</span>克洛諾斯統治時出現的人。他們無憂無慮，不用工作，不會老，也沒有壽命上限。最後怎麼結束的？命運女神判定：你們活著沒有意義。這一代消失了，變成天空中無形的精靈。</p>
+    <p><span class="k">第二代，白銀時代。</span>身體強壯，但精神年齡像小孩，不把眾神放在眼裡。宙斯把他們滅了，死後變成鬼魂。所以我們今天說的「神」和「鬼」，其實是前兩代人的靈魂。</p>
+    <p><span class="k">第三代，青銅時代。</span>就是那些巨人，殘暴、互相殘殺。宙斯把他們打入地獄。</p>
+    <p><span class="k">第四代，英雄時代。</span>半神半人，有神的力量，精神也高貴，一開始發展得非常好。但最後還是陷入戰爭，宙斯用大洪水把他們滅了。不過他們死後被送到極樂島，也就是天堂。</p>
+    <p><span class="k">第五代，黑鐵時代。</span>就是我們。</p>
+    <p class="cue">（停兩拍，讓觀眾消化）</p>
+    <p>影片的老高提出一個很有意思的讀法：這五代，像不像一場實驗？神想造出一個完美的東西，每一代都在調整參數。</p>
+    <p>第一代，沒有情感、沒有壽命，像最原始的機器人。太無聊，重來。第二代，注入了大量情感，但不會學習、不會成長，又有大能量，危險，滅掉。第三代，情感少、肉體強，結果太殘暴。第四代，乾脆注入神自己的基因，效果很好，但神的劣根性也跟著進去了，最後還是打起來。</p>
+    <p>前四代得出一個結論：<span class="k">力量絕對不能給。</span>只要給力量，不管智商高低，一定會打起來，一定會毀滅。</p>
+    <p>所以第五代，我們，只有神的智慧，沒有神的力量，還配了一副整個動物界最弱的身體。為什麼要給弱的身體？因為不給身體，就沒辦法限制我們；給了弱的身體，我們就算打起來，也毀不了世界。</p>
+    <p><span class="q">講到這裡，大家有沒有想到什麼？</span></p>
+    <p>老高說：希臘神話與其說是過去的故事，不如說是未來即將發生的事。我們今天在做人工智慧，走的可能就是同一條路。神話在提醒我們：不要先給 AI 強大的身體。要試智慧，先給一個比人還弱的軀體，而且一定要給軀體，不能讓它只活在電腦裡永遠不死。</p>
+    <p class="cue">（這一段是全場高潮，講慢一點）</p>
+
+    <h3>結語：三句話帶走 <span class="t">13:30 – 15:00</span></h3>
+    <p>最後補一個小彩蛋。希臘神話對死後世界有一條規則：人到了冥界，只要吃了那裡的東西，就再也回不來。日本神話有一樣的設定，中國有孟婆湯。三套完全獨立的神話，講了同一件事。</p>
+    <p>所以要麼這些神話有共同的源頭，要麼，它們記錄的是同一段真實的歷史。<span class="cue">（笑）</span>大家以後有機會去冥界，記得什麼都不要吃。</p>
+    <p>回到今天的兩條線，我想請大家帶走三句話：</p>
+    <p><span class="k">第一，權力一定會被推翻。</span>烏拉諾斯、克洛諾斯、宙斯，每一代都在防，每一代都防不住。防的方式越極端，推翻來得越快。</p>
+    <p><span class="k">第二，智慧和力量，不能同時給。</span>這是神試了四次才學會的事，也是我們現在正在面對的問題。</p>
+    <p><span class="k">第三，盒底永遠留著希望。</span>災難放出來了，但希望還在。</p>
+    <p>謝謝大家。</p>
+  </div>
+
+  <h2>📋 人物速查表</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>名字</th><th>身份</th><th>象徵／武器</th><th>關鍵事件</th></tr>
+    <tr><td>蓋亞 Gaia</td><td>大地女神，第一位神</td><td>大地</td><td>造出烏拉諾斯；交鐮刀給克洛諾斯；指點宙斯放巨人；生堤豐反撲</td></tr>
+    <tr><td>烏拉諾斯 Uranus</td><td>天空之神，第一代神王</td><td>天空</td><td>囚 18 個孩子；被克洛諾斯閹割；留下「你也會被孩子推翻」預言</td></tr>
+    <tr><td>克洛諾斯 Kronos</td><td>十二泰坦最小，第二代神王</td><td>鐮刀</td><td>閹父奪權；吞下五個孩子；被宙斯催吐、打敗、囚禁</td></tr>
+    <tr><td>瑞亞 Rhea</td><td>克洛諾斯之妻、姐姐</td><td>—</td><td>用石頭掉包宙斯，送去克里特島</td></tr>
+    <tr><td>獨眼巨人 Cyclopes ×3</td><td>蓋亞之子，鍛造者</td><td>鍛造</td><td>被放出後打造閃電、三叉戟、隱身頭盔</td></tr>
+    <tr><td>百臂巨人 Hecatoncheires ×3</td><td>蓋亞之子，多頭多手</td><td>蠻力</td><td>助宙斯打贏泰坦之戰</td></tr>
+    <tr><td>宙斯 Zeus</td><td>克洛諾斯最小兒子，第三代神王</td><td>雷霆閃電（牛）</td><td>推翻父親；封印堤豐；吞墨提斯；七任妻子；不喜歡人類</td></tr>
+    <tr><td>波塞頓 Poseidon</td><td>宙斯之兄，海王</td><td>三叉戟（魚）</td><td>與宙斯並肩作戰</td></tr>
+    <tr><td>哈帝斯 Hades</td><td>宙斯之兄，冥王</td><td>隱身頭盔</td><td>戴上頭盔無人能見；之後很少出場</td></tr>
+    <tr><td>堤豐 Typhon</td><td>蓋亞＋塔爾塔羅斯之子</td><td>風暴</td><td>閃電海浪皆無效；被眾神合力困住，壓在西西里島下</td></tr>
+    <tr><td>墨提斯 Metis</td><td>宙斯表姐、首任妻，智慧</td><td>催吐藥</td><td>幫宙斯救兄姊；懷孕時被宙斯吞下</td></tr>
+    <tr><td>雅典娜 Athena</td><td>宙斯與墨提斯之女</td><td>貓頭鷹、盔甲</td><td>從宙斯頭顱全副武裝誕生；替泥人吹入智慧</td></tr>
+    <tr><td>赫拉 Hera</td><td>宙斯之姐、第七任妻，婚姻之神</td><td>—</td><td>給潘朵拉好奇心；不能動宙斯，就報復其他神</td></tr>
+    <tr><td>阿芙蘿黛蒂 Aphrodite</td><td>烏拉諾斯斷肢入海所生，愛與美</td><td>—</td><td>嫁最醜的赫菲斯托斯，與阿瑞斯私通</td></tr>
+    <tr><td>赫菲斯托斯 Hephaestus</td><td>宙斯與赫拉之子，工匠之神</td><td>鐵鎚</td><td>奉命用泥土造出潘朵拉</td></tr>
+    <tr><td>阿瑞斯 Ares</td><td>宙斯與赫拉之子，戰爭之神</td><td>—</td><td>與阿芙蘿黛蒂私通</td></tr>
+    <tr><td>普羅米修斯 Prometheus</td><td>泰坦伊阿珀托斯之子，宙斯表哥</td><td>火種</td><td>神界泥土造人；盜火；被鎖山上日日被啄肝</td></tr>
+    <tr><td>潘朵拉 Pandora</td><td>第一個女人</td><td>盒子</td><td>打開盒子放出災難，蓋住希望</td></tr>
+  </table>
+  </div>
+
+  <h2>🧬 五代人 vs 五次實驗（老高的解讀）</h2>
+  <div class="gen">
+    <div><b>① 黃金時代</b><small>克洛諾斯統治時期。無憂無慮、不老、不工作。</small><small>結局：命運女神判「活著無意義」→ 化為天空精靈</small><span class="tag">無情感・無壽命</span></div>
+    <div><b>② 白銀時代</b><small>強壯但幼稚，不敬眾神。</small><small>結局：宙斯滅之 → 化為鬼魂</small><span class="tag">有情感・不成長</span></div>
+    <div><b>③ 青銅時代</b><small>巨人，殘暴互殺。</small><small>結局：打入地獄</small><span class="tag">少情感・肉體強</span></div>
+    <div><b>④ 英雄時代</b><small>半神半人，有神力也高貴。</small><small>結局：陷入戰爭 → 大洪水 → 送極樂島</small><span class="tag">注入神的基因</span></div>
+    <div><b>⑤ 黑鐵時代</b><small>我們。只有神的智慧，沒有力量，配最弱的身體。</small><small>結局：未定</small><span class="tag">只給智慧・不給力量</span></div>
+  </div>
+  <div class="note"><b>四代得出的結論：</b>力量一給就毀滅，不論智商高低。所以第五代只給智慧，再配一副弱身體當保險。老高把它讀成 AI 教材：先給弱軀體，再試智慧；不能只活在電腦裡永遠不死。</div>
+
+  <h2>💡 小貼士：影片版 vs 原典，哪裡不一樣</h2>
+  <div class="note">
+    <ul>
+      <li><b>「十八個孩子」是對的。</b>赫西俄德《神譜》：12 泰坦＋3 獨眼巨人＋3 百臂巨人，正好 18。</li>
+      <li><b>「宙斯娶母親瑞亞」</b>不在《神譜》裡，那是奧菲斯教派的版本。演講稿已略過這句。</li>
+      <li><b>雅典娜不是「戰士」。</b>她是智慧與「戰略性戰爭」之神；阿瑞斯才是暴力戰爭。演講稿寫成「智慧與戰爭女神」。</li>
+      <li><b>潘朵拉的「盒子」原文是甕（pithos）。</b>16 世紀翻譯成「盒子」之後就一直叫盒子，演講時用盒子大家才聽得懂。</li>
+      <li><b>堤豐被壓在西西里島</b>，更精確是埃特納火山底下，所以火山會噴發。</li>
+      <li><b>「五代人＝AI 實驗」是老高的個人解讀</b>，原典只講五代的興衰，沒有實驗的說法。演講稿裡明確標了「老高提出」。</li>
+      <li><b>「牛＝宙斯、魚＝波塞頓」對應蘇美神話</b>是影片的延伸聯想，證據薄弱，演講稿未收，只留冥界食物那一條跨文化比較。</li>
+    </ul>
+  </div>
+
+  <footer>
+    <span class="cred">來源</span>：老高與小茉 Mr &amp; Mrs Gao《27分鐘講完十二泰坦與眾神，超越你想像的希臘神話》· <a href="https://youtu.be/Yyzb2uvihp4" target="_blank" rel="noopener">youtu.be/Yyzb2uvihp4</a><br>
+    整理／關聯圖／演講稿：Robert · 2026-09-08 · 考據補充依赫西俄德《神譜》
+  </footer>
+</div>
+</body>
+</html>
