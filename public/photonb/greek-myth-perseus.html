@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>希臘神話 第二講・珀爾修斯與美杜莎</title>
+  <meta name="description" content="15 分鐘演講稿＋人物關聯圖：英雄時代第一人珀爾修斯，金雨、美杜莎的冤案、四件神器、天馬與海怪、預言應驗、神為何離開人間。整理自老高與小茉影片。" />
+  <meta name="date" content="2026-09-08" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+      --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--pink:#ff9ac4;--purple:#b39ddb;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:900px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.6rem,5.5vw,2.4rem);line-height:1.2;font-family:'Georgia','Noto Serif TC',serif;
+      background:linear-gradient(180deg,#fbeebc 0%,var(--gold2) 38%,#c79a3a 62%,#9c7322 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .lead{color:var(--muted);margin:.2rem 0 1rem;font-size:.95rem;}
+    .meta{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.78rem;color:var(--muted);margin-bottom:1rem;}
+    .meta b{color:var(--gold2);font-weight:600;}
+    .series{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 1.2rem;font-size:.8rem;}
+    .series a,.series span{border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;text-decoration:none;color:var(--gold);}
+    .series span{background:rgba(216,182,90,.15);color:var(--gold2);}
+    h2{color:var(--gold);font-size:1.08rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2.4rem 0 .9rem;}
+    h3{color:var(--gold2);font-size:.95rem;margin:1.4rem 0 .35rem;}
+    table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.42rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;white-space:nowrap;background:rgba(216,182,90,.06);}
+    .tablewrap{overflow-x:auto;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.75rem 1rem;font-size:.86rem;margin:.9rem 0;}
+    .note b{color:var(--gold2);}
+    ul{padding-left:1.2rem;} li{margin:.22rem 0;}
+    .tldr{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.6rem;}
+    .tile{border:1px solid var(--line);border-radius:12px;padding:.8rem .85rem;background:linear-gradient(180deg,rgba(216,182,90,.08),rgba(255,255,255,.02));}
+    .tile .ic{font-size:1.3rem;} .tile b{display:block;margin:.3rem 0 .15rem;font-size:.86rem;color:var(--gold2);}
+    .tile small{color:var(--muted);font-size:.76rem;line-height:1.5;display:block;}
+    .figwrap{border:1px solid var(--line);border-radius:14px;background:#0a1330;padding:.6rem;overflow-x:auto;}
+    .figwrap svg{display:block;min-width:960px;width:100%;height:auto;}
+    .legend{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;font-size:.76rem;color:var(--muted);margin:.6rem 0 0;}
+    .legend span{display:inline-flex;align-items:center;gap:.35rem;}
+    .legend i{display:inline-block;width:26px;height:0;border-top:2px solid;}
+    .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid;}
+    .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:.8rem;}
+    .strip div{border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;font-size:.8rem;background:var(--panel);}
+    .strip b{display:block;color:var(--gold2);font-size:.84rem;} .strip small{color:var(--muted);}
+    .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:.4rem;margin:.6rem 0;}
+    .flow div{flex:1 1 150px;border:1px solid var(--line);border-radius:10px;padding:.55rem .65rem;font-size:.8rem;background:var(--panel);position:relative;}
+    .flow div b{display:block;color:var(--gold2);font-size:.82rem;}
+    .flow div:not(:last-child):after{content:"→";position:absolute;right:-.7rem;top:38%;color:var(--gold);font-size:1rem;}
+    .speech{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.3rem;}
+    .speech h3{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1px dashed rgba(255,255,255,.1);padding-bottom:.3rem;margin-top:1.8rem;}
+    .speech h3:first-of-type{margin-top:.2rem;}
+    .speech h3 .t{color:var(--muted);font-size:.74rem;font-weight:400;white-space:nowrap;letter-spacing:.05em;}
+    .speech p{margin:.6rem 0;font-size:.96rem;}
+    .speech .cue{color:var(--muted);font-size:.8rem;font-style:italic;}
+    .speech .q{color:var(--gold2);} .speech .k{color:var(--gold2);font-weight:600;}
+    .gear{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;margin-top:.7rem;}
+    .gear div{border:1px solid var(--line);border-radius:10px;padding:.6rem;font-size:.78rem;background:var(--panel);text-align:center;}
+    .gear .ic{font-size:1.4rem;} .gear b{display:block;color:var(--gold2);font-size:.84rem;margin:.2rem 0 .1rem;} .gear small{color:var(--muted);display:block;line-height:1.45;}
+    footer{margin-top:2.4rem;text-align:center;color:var(--muted);font-size:.74rem;line-height:1.8;} footer .cred{color:var(--gold);}
+    @media(max-width:640px){.tldr{grid-template-columns:1fr 1fr;} .strip{grid-template-columns:1fr 1fr;} .gear{grid-template-columns:1fr 1fr;} .flow div:not(:last-child):after{display:none;}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本 · 儀表板</a>
+  <div class="eyebrow">知識頁 · 神話 · 演講稿</div>
+  <h1>希臘神話 第二講<br>珀爾修斯與美杜莎</h1>
+  <p class="lead">英雄時代的第一個故事：一場「你會被外孫殺死」的預言、一樁美杜莎的冤案、四件借來的神器，和神為什麼離開人間。</p>
+  <div class="series"><a href="./greek-myth-talk.html">第一講 三代神權與五代人</a><span>第二講 珀爾修斯與美杜莎</span></div>
+  <div class="meta">
+    <span>來源：<b><a href="https://youtu.be/UiQCan3GSEs" target="_blank" rel="noopener">老高與小茉《千萬不要看她的眼睛，否則後果不堪想象》</a></b></span>
+    <span>整理：<b>Robert</b></span>
+    <span>日期：<b>2026-09-08</b></span>
+    <span>演講長度：<b>約 15 分鐘 / 3,500 字</b></span>
+  </div>
+
+  <h2>⚡ 一頁看懂</h2>
+  <div class="tldr">
+    <div class="tile"><div class="ic">🔮</div><b>預言躲不掉</b><small>外公把女兒鎖進塔、把母子裝箱丟海，最後還是死在外孫擲出的鐵餅下。</small></div>
+    <div class="tile"><div class="ic">🐍</div><b>美杜莎是受害者</b><small>波塞頓在雅典娜神殿侵犯她，受罰的卻是她：蛇髮、看一眼就石化。</small></div>
+    <div class="tile"><div class="ic">🛡️</div><b>英雄靠借來的四件神器</b><small>鏡面神盾、隱身盔、飛鞋、金剛鐮刀。從鏡子裡看，才砍得下那顆頭。</small></div>
+    <div class="tile"><div class="ic">🐎</div><b>一顆頭解決所有事</b><small>海怪、前未婚夫、島主、阿特拉斯，全被蛇頭石化。天馬從美杜莎的血裡誕生。</small></div>
+    <div class="tile"><div class="ic">🍎</div><b>支線：金蘋果</b><small>阿特拉斯守的金蘋果園，後來牽出「給最美女神」的紛爭、帕里斯的裁判、特洛伊戰爭。</small></div>
+    <div class="tile"><div class="ic">♍</div><b>神為什麼走了</b><small>英雄時代毀滅後，神放棄人類回天庭。最後離開的正義女神成了處女座。</small></div>
+  </div>
+
+  <h2>🕸️ 人物關聯圖</h2>
+  <p class="lead" style="margin-bottom:.5rem">金線＝親子、粉線＝夫妻／結合、紫點線＝加害／懲罰、綠箭頭＝贈與／幫助、紅箭頭＝殺／石化。手機請左右滑動。</p>
+  <div class="figwrap">
+<svg class="rel" viewBox="0 0 1240 480" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans TC',system-ui,sans-serif" role="img" aria-label="珀爾修斯與美杜莎 人物關聯圖">
+<defs>
+<marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e9758a"/></marker>
+<marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b39ddb"/></marker>
+<marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5bd48a"/></marker>
+</defs>
+<line x1="20" y1="45" x2="1220" y2="45" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="15" fill="#aeb6cc" font-size="11" letter-spacing="1.5">神界</text>
+<line x1="20" y1="150" x2="1220" y2="150" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="120" fill="#aeb6cc" font-size="11" letter-spacing="1.5">王室・原始海神</text>
+<line x1="20" y1="265" x2="1220" y2="265" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="235" fill="#aeb6cc" font-size="11" letter-spacing="1.5">英雄之旅</text>
+<line x1="20" y1="380" x2="1220" y2="380" stroke="#ffffff" stroke-opacity=".05"/>
+<text x="22" y="350" fill="#aeb6cc" font-size="11" letter-spacing="1.5">後代・結局</text>
+<rect x="45.0" y="228.0" width="400.0" height="74" rx="14" fill="none" stroke="#e9758a" stroke-opacity=".35" stroke-dasharray="4 4"/>
+<text x="53.0" y="340.0" fill="#e9758a" font-size="10.5">↑ 福耳庫斯＋刻托的六個女兒：格賴埃 ×3、戈爾工 ×3</text>
+<rect x="855.0" y="0.0" width="370.0" height="80" rx="14" fill="none" stroke="#5bd48a" stroke-opacity=".35" stroke-dasharray="4 4"/>
+<text x="863.0" y="14.0" fill="#5bd48a" font-size="10.5">宙斯派來的幫手：神器（＋金剛鐮刀）</text>
+<path d="M110,68.0 C110,97.5 110,97.5 110,127.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M230,68.0 C230,97.5 110,97.5 110,127.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M110,68.0 C110,97.5 230,97.5 230,127.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M230,68.0 C230,97.5 230,97.5 230,127.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M110,173.0 C110,207.5 110,207.5 110,242.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M110,173.0 C110,207.5 240,207.5 240,242.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M130,173.0 C130,207.5 380,207.5 380,242.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M620,173.0 C620,207.5 620,207.5 620,242.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M786,173.0 C786,207.5 906,207.5 906,242.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M610,288.0 C610,322.5 620,322.5 620,357.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M920,288.0 C920,322.5 634,322.5 634,357.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M360,288.0 C360,322.5 380,322.5 380,357.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<text x="340" y="335" fill="#d8b65a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">血中誕生</text>
+<path d="M533.0,150 L567.0,150" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75"/>
+<path d="M640,288.0 C640,322.5 810,322.5 810,357.0" fill="none" style="stroke:#d8b65a;stroke-width:1.3;opacity:.75;stroke-dasharray:6 4"/>
+<text x="740" y="338" fill="#d8b65a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">曾孫（隔兩代）</text>
+<path d="M163.0,150 L177.0,150" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<path d="M673.0,265 L867.0,265" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<path d="M620,68.0 L620,127.0" fill="none" style="stroke:#ff9ac4;stroke-width:2.2;opacity:.9"/>
+<text x="745" y="120" fill="#ff9ac4" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">化作金雨進塔 → 生下珀爾修斯</text>
+<path d="M920,68.0 L920,198 Q920,208 910,208 L660,208 Q650,208 650,218 L650,242.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="950" y="150" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">鏡面神盾</text>
+<path d="M1040,68.0 L1040,198 Q1040,208 1030,208 L660,208 Q650,208 650,218 L650,242.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="1060" y="150" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">飛鞋</text>
+<path d="M1160,68.0 L1160,198 Q1160,208 1150,208 L660,208 Q650,208 650,218 L650,242.0" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="1185" y="150" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">隱身盔</text>
+<path d="M533.0,265 L567.0,265" fill="none" style="stroke:#5bd48a;stroke-width:1.8;marker-end:url(#arr-green)"/>
+<text x="550" y="257" fill="#5bd48a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">收養</text>
+<path d="M814,173.0 C814,207.5 934,207.5 934,242.0" fill="none" style="stroke:#b39ddb;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#arr-purple)"/>
+<text x="1010" y="230" fill="#c9b6f0" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">誇口「女兒比海仙女美」→ 獻祭綁岩</text>
+<path d="M760,68.0 L760,90 Q760,100 750,100 L408,100 Q398,100 398,110 L398,242.0" fill="none" style="stroke:#b39ddb;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#arr-purple)"/>
+<text x="470" y="96" fill="#c9b6f0" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">在雅典娜神殿侵犯她</text>
+<path d="M920,68.0 L920,102 Q920,112 910,112 L372,112 Q362,112 362,122 L362,242.0" fill="none" style="stroke:#b39ddb;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#arr-purple)"/>
+<text x="470" y="124" fill="#c9b6f0" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">雅典娜卻罰美杜莎：蛇髮・石化之眼</text>
+<path d="M778,68.0 L778,82 Q778,92 788,92 L1036,92 Q1046,92 1046,102 L1046,242.0" fill="none" style="stroke:#b39ddb;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#arr-purple)"/>
+<text x="1000" y="86" fill="#c9b6f0" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">派海怪吃公主</text>
+<path d="M500,173.0 C500,207.5 608,207.5 608,242.0" fill="none" style="stroke:#b39ddb;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#arr-purple)"/>
+<text x="560" y="215" fill="#c9b6f0" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">裝箱丟海</text>
+<path d="M707.0,265 L673.0,265" fill="none" style="stroke:#b39ddb;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#arr-purple)"/>
+<text x="690" y="236" fill="#c9b6f0" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">逼他去取美杜莎頭</text>
+<path d="M598,288.0 L598,308 Q598,318 588,318 L120,318 Q110,318 110,308 L110,288.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="250" y="306" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">搶走獨眼逼供</text>
+<path d="M608,288.0 L608,320 Q608,330 598,330 L410,330 Q400,330 400,320 L400,288.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="500" y="344" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">鏡中反射・斬首</text>
+<path d="M632,288.0 L632,315 Q632,325 642,325 L750,325 Q760,325 760,315 L760,288.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="700" y="312" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">石化島主</text>
+<path d="M644,288.0 L644,335 Q644,345 654,345 L1034,345 Q1044,345 1044,335 L1044,288.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="900" y="357" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">用蛇頭石化海怪</text>
+<path d="M644,288.0 L644,335 Q644,345 654,345 L1050,345 Q1060,345 1060,355 L1060,357.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="1130" y="357" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">石化成阿特拉斯山</text>
+<path d="M644,288.0 L644,335 Q644,345 654,345 L1170,345 Q1180,345 1180,335 L1180,288.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="1190" y="326" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">石化</text>
+<path d="M590,242.0 C590,207.5 458,207.5 458,173.0" fill="none" style="stroke:#e9758a;stroke-width:2.2;marker-end:url(#arr-red)"/>
+<text x="430" y="215" fill="#e9758a" font-size="10" text-anchor="middle" paint-order="stroke" stroke="#0b1022" stroke-width="4" stroke-linejoin="round">擲鐵餅誤殺外公・預言應驗</text>
+<g class="node" data-id="gaia"><rect x="57.0" y="22.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="110" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">蓋亞</text>
+<text x="110" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Gaia · 大地</text></g>
+<g class="node" data-id="pontus"><rect x="177.0" y="22.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="230" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">蓬托斯</text>
+<text x="230" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Pontus · 原始大海</text></g>
+<g class="node" data-id="zeus"><rect x="567.0" y="22.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="620" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">宙斯</text>
+<text x="620" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Zeus · 眾神之王</text></g>
+<g class="node" data-id="poseidon"><rect x="707.0" y="22.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="760" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">波塞頓</text>
+<text x="760" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Poseidon · 海王</text></g>
+<g class="node" data-id="athena"><rect x="867.0" y="22.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="920" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">雅典娜</text>
+<text x="920" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">借神盾・最後嵌上蛇頭</text></g>
+<g class="node" data-id="hermes"><rect x="987.0" y="22.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="1040" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">荷米斯</text>
+<text x="1040" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hermes · 借飛鞋</text></g>
+<g class="node" data-id="hades"><rect x="1107.0" y="22.0" width="106" height="46" rx="9" fill="#1e2f5c" stroke="#f3df9b" stroke-width="1.2"/>
+<text x="1160" y="42" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">哈帝斯</text>
+<text x="1160" y="58" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Hades · 借隱身盔</text></g>
+<g class="node" data-id="phorcys"><rect x="57.0" y="127.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="110" y="147" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">福耳庫斯</text>
+<text x="110" y="163" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Phorcys · 海神</text></g>
+<g class="node" data-id="ceto"><rect x="177.0" y="127.0" width="106" height="46" rx="9" fill="#3a2d5c" stroke="#b39ddb" stroke-width="1.2"/>
+<text x="230" y="147" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">刻托</text>
+<text x="230" y="163" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Ceto · 海怪之母</text></g>
+<g class="node" data-id="acrisius"><rect x="427.0" y="127.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="480" y="147" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">阿克里西俄斯</text>
+<text x="480" y="163" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Acrisius · 阿爾戈斯王</text></g>
+<g class="node" data-id="danae"><rect x="567.0" y="127.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="620" y="147" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">達娜厄</text>
+<text x="620" y="163" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Danaë · 公主・被囚塔中</text></g>
+<g class="node" data-id="cassiopeia"><rect x="747.0" y="127.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="800" y="147" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">卡西歐佩亞</text>
+<text x="800" y="163" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Cassiopeia · 衣索比亞王后</text></g>
+<g class="node" data-id="graeae"><rect x="57.0" y="242.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="110" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">格賴埃 ×3</text>
+<text x="110" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Graeae · 共用一眼一牙</text></g>
+<g class="node" data-id="sisters"><rect x="187.0" y="242.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="240" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">斯忒諾・歐律阿勒</text>
+<text x="240" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">兩位不死的戈爾工</text></g>
+<g class="node" data-id="medusa"><rect x="327.0" y="242.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="380" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">美杜莎</text>
+<text x="380" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Medusa · 唯一會死的</text></g>
+<g class="node" data-id="dictys"><rect x="427.0" y="242.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="480" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">狄克堤斯</text>
+<text x="480" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Dictys · 漁夫養父</text></g>
+<g class="node" data-id="perseus"><rect x="567.0" y="242.0" width="106" height="46" rx="9" fill="#5a4410" stroke="#ffd34d" stroke-width="1.8"/>
+<text x="620" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">珀爾修斯</text>
+<text x="620" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Perseus · 半神英雄</text></g>
+<g class="node" data-id="polydectes"><rect x="707.0" y="242.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="760" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">波呂得克忒斯</text>
+<text x="760" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Polydectes · 島主</text></g>
+<g class="node" data-id="andromeda"><rect x="867.0" y="242.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="920" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">安德洛美達</text>
+<text x="920" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Andromeda · 公主</text></g>
+<g class="node" data-id="cetus"><rect x="1007.0" y="242.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="1060" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">海怪</text>
+<text x="1060" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Cetus · 波塞頓所派</text></g>
+<g class="node" data-id="phineus"><rect x="1127.0" y="242.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="1180" y="262" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">菲紐斯</text>
+<text x="1180" y="278" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Phineus · 前未婚夫</text></g>
+<g class="node" data-id="pegasus"><rect x="327.0" y="357.0" width="106" height="46" rx="9" fill="#4a1e28" stroke="#e9758a" stroke-width="1.2"/>
+<text x="380" y="377" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">珀伽索斯</text>
+<text x="380" y="393" fill="#aeb6cc" font-size="8.4" text-anchor="middle">天馬（波塞頓＋美杜莎）</text></g>
+<g class="node" data-id="perses"><rect x="567.0" y="357.0" width="106" height="46" rx="9" fill="#1e4a30" stroke="#5bd48a" stroke-width="1.2"/>
+<text x="620" y="377" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">佩爾瑟斯</text>
+<text x="620" y="393" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Perses · 波斯之名由來</text></g>
+<g class="node" data-id="heracles"><rect x="777.0" y="357.0" width="106" height="46" rx="9" fill="#5a4410" stroke="#ffd34d" stroke-width="1.8"/>
+<text x="830" y="377" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">海克力斯</text>
+<text x="830" y="393" fill="#aeb6cc" font-size="8.4" text-anchor="middle">宙斯＋阿爾克墨涅所生</text></g>
+<g class="node" data-id="atlas"><rect x="1007.0" y="357.0" width="106" height="46" rx="9" fill="#4a3a1e" stroke="#d8b65a" stroke-width="1.2"/>
+<text x="1060" y="377" fill="#f4f1e8" font-size="12.5" font-weight="700" text-anchor="middle">阿特拉斯</text>
+<text x="1060" y="393" fill="#aeb6cc" font-size="8.4" text-anchor="middle">Atlas · 扛天的泰坦</text></g>
+</svg>
+  </div>
+  <div class="legend">
+    <span><i style="border-color:#d8b65a"></i>親子</span>
+    <span><i style="border-color:#ff9ac4"></i>夫妻／結合</span>
+    <span><i style="border-color:#b39ddb;border-top-style:dashed"></i>加害／懲罰</span>
+    <span><i style="border-color:#5bd48a"></i>贈與／幫助</span>
+    <span><i style="border-color:#e9758a"></i>殺／石化</span>
+    <span><b class="sw" style="background:#5a4410;border-color:#ffd34d"></b>英雄</span>
+    <span><b class="sw" style="background:#1e2f5c;border-color:#f3df9b"></b>奧林帕斯神</span>
+    <span><b class="sw" style="background:#3a2d5c;border-color:#b39ddb"></b>原始神</span>
+    <span><b class="sw" style="background:#4a1e28;border-color:#e9758a"></b>怪物</span>
+    <span><b class="sw" style="background:#1e4a30;border-color:#5bd48a"></b>凡人</span>
+  </div>
+
+  <h3>英雄之旅 四段</h3>
+  <div class="strip">
+    <div><b>① 出生</b>宙斯化金雨進塔 → 外公裝箱丟海 → 漂到塞里福斯島<small><br>漁夫狄克堤斯收養</small></div>
+    <div><b>② 出發</b>島主想霸占母親，逼他去取美杜莎的頭<small><br>宙斯派雅典娜、荷米斯送神器</small></div>
+    <div><b>③ 斬首</b>搶格賴埃的眼逼供 → 鏡中看位置 → 隱身 → 一刀<small><br>血中生出天馬</small></div>
+    <div><b>④ 歸途</b>石化海怪救公主 → 石化阿特拉斯 → 石化島主 → 誤殺外公<small><br>把頭獻給雅典娜</small></div>
+  </div>
+
+  <h2>🎤 演講稿（約 15 分鐘）</h2>
+  <div class="note">怎麼用：段標右邊是建議配速。<span class="cue">斜體灰字</span>是給講者的提示，不唸出來。<span class="q">金色句子</span>是設計好的拋問。這一講可以獨立講，也可以接在第一講後面，開場已經寫了兩種接法。</div>
+  <div class="speech">
+
+    <h3>開場：從神的時代，走進英雄的時代 <span class="t">0:00 – 1:00</span></h3>
+    <p>大家好。<span class="cue">（若接第一講：「上一次我們講了希臘神話的前一半：神跟巨人的事。」若獨立講：「希臘神話前一半講神，後一半講英雄。」）</span>今天講後一半的開頭：英雄。</p>
+    <p>希臘神話裡的英雄，指的是半神半人：神跟人生下的孩子，有神的力量，沒有神的不死。這些故事情節特別強，所以電影、遊戲一直在拍。今天這一位，是所有英雄裡最早、也最有名的一個：<span class="k">珀爾修斯</span>。</p>
+    <p>名字可能陌生，但故事裡的角色你一定認識：<span class="q">頭髮是蛇、看一眼就變石頭的美杜莎，還有天馬。</span>電影《諸神之戰》講的就是他。</p>
+    <p class="cue">（停一拍）我們從一個預言開始。</p>
+
+    <h3>一、鎖進塔裡的公主，和一場金雨 <span class="t">1:00 – 3:00</span></h3>
+    <p>希臘有個城邦叫阿爾戈斯，國王<span class="k">阿克里西俄斯</span>一直沒有兒子。他跑去德爾菲神殿求神諭，神諭回答得很殘忍：你這輩子不會有兒子；但你的女兒會生一個兒子，而你，會死在這個外孫手裡。</p>
+    <p>國王的解法是：把女兒<span class="k">達娜厄</span>關進一座銅塔，永遠不讓任何人接近。沒有男人，就沒有外孫。</p>
+    <p>問題是，塔擋得住人，擋不住宙斯。宙斯看到這個關在塔裡的漂亮公主，化成一陣<span class="k">金雨</span>，從塔頂流進去，落到地上，變回宙斯。<span class="cue">（可以笑）</span>然後宙斯就走了，這是他的一貫作風。</p>
+    <p>達娜厄在塔裡生下一個男嬰。國王知道以後嚇壞了，但又不忍心親手殺女兒和外孫，於是把母子倆裝進一個木箱，扔進大海，自生自滅。</p>
+    <p>箱子漂到愛琴海上一個小島，塞里福斯島，被一個漁夫救起。這個漁夫叫<span class="k">狄克堤斯</span>，是波塞頓的後裔，身上有一點神的血統。他收養了這個孩子，取名珀爾修斯。</p>
+    <p>可是狄克堤斯有個哥哥，是島主<span class="k">波呂得克忒斯</span>，有錢，人壞。他看上了達娜厄，每次來調戲，都被長大的珀爾修斯擋下來。島主覺得這個少年太礙事，想了一個辦法把他支開。</p>
+    <p>他宣布自己要結婚，要求每戶送一匹馬當賀禮。漁夫家窮，交不出馬。島主說：沒關係，用別的東西代替也行。我聽說外面有個妖怪叫美杜莎，<span class="q">你把她的頭拿來，就抵一匹馬。</span></p>
+    <p class="cue">（停）島主的算盤很簡單：去了必死，死了媽媽就是我的。</p>
+
+    <h3>二、美杜莎為什麼會變成怪物 <span class="t">3:00 – 5:30</span></h3>
+    <p>講到這裡要先停下來，講美杜莎是誰。因為這個故事最讓人不舒服的地方，就在她身上。</p>
+    <p>美杜莎不是天生的怪物。她的家系很老：蓋亞和原始大海生了一位海神<span class="k">福耳庫斯</span>，福耳庫斯和妹妹刻托生了六個女兒。三個叫<span class="k">格賴埃</span>，生下來就是老太婆，三個人共用一隻眼睛、一顆牙齒。另外三個叫<span class="k">戈爾工</span>：斯忒諾、歐律阿勒、美杜莎。三姐妹裡只有美杜莎是會死的，另外兩個不死。</p>
+    <p>算一下輩分，美杜莎是蓋亞的孫女，跟宙斯同一輩，算是宙斯的遠房表妹，只是宙斯是天空系，她是大海系。</p>
+    <p>戈爾工三姐妹原本非常漂亮，美杜莎又是最漂亮的那一個，一頭長髮特別好看。海王波塞頓看上她，在<span class="k">雅典娜的神殿裡</span>強行占有了她。美杜莎不願意，但她對抗不了一個神。</p>
+    <p>接下來是整個故事最不公平的一段。在女神的神殿裡做這種事，是對雅典娜的褻瀆，雅典娜決定懲罰。<span class="q">罰誰？</span></p>
+    <p class="cue">（等觀眾回答，通常有人會說「波塞頓」）</p>
+    <p>罰美杜莎。理由有兩層：第一，波塞頓說「我是被她的頭髮迷惑的，不是出於本意」；第二，波塞頓是雅典娜的伯父，是自己人，美杜莎是外人。所以雅典娜把美杜莎那頭迷惑了波塞頓的長髮，全部變成蛇，眼睛變成看一眼就把對方石化的眼睛，順便把她兩個姐姐也變成怪物。</p>
+    <p>唯一做錯事的人，什麼事都沒有。受害者變成了全希臘最可怕的妖怪。</p>
+    <p>老高在影片裡補了一句很有意思的話：「石化」這件事其實有科學根據。人在極度恐懼的時候會<span class="k">僵直</span>，動不了，跟石頭一樣，嚴重的甚至會嚇死。所以美杜莎的眼睛，可能就是「恐怖到讓人動彈不得」的神話寫法。</p>
+
+    <h3>三、四件借來的神器 <span class="t">5:30 – 8:00</span></h3>
+    <p>回到珀爾修斯。他是個善良又有點愣的少年，聽說是為民除害，就答應了。可是他不知道美杜莎在哪裡。</p>
+    <p>知道的是格賴埃三姐妹，那三個共用一隻眼睛的老太婆。珀爾修斯找到她們，趁眼睛在三個人手裡傳遞的時候一把搶走，逼她們說出美杜莎的藏身處。</p>
+    <p>這時候宙斯也知道了。他平常不管兒子，但這次覺得太危險，派了兩位神下凡幫忙：雅典娜和荷米斯。<span class="cue">（停）</span>對，就是那位把美杜莎變成怪物的雅典娜，現在又來幫人殺她。</p>
+    <p>他們給珀爾修斯帶來四件神器：</p>
+    <p><span class="k">第一，雅典娜的神盾。</span>這面盾叫埃癸斯，宙斯有一面、雅典娜有一面，兩面是配對的。宙斯那面是赫菲斯托斯打造的，可以控制風暴、擋下所有物理攻擊。今天美國海軍的「神盾系統」，名字就從這裡來。雅典娜這面盾特別光亮，像鏡子，而這正是對付美杜莎的關鍵：<span class="q">你不能直接看她，但可以看鏡子裡的她。</span>反射不會石化。</p>
+    <p><span class="k">第二，一把金剛鐮刀</span>，什麼都砍得斷。</p>
+    <p><span class="k">第三，冥王哈帝斯的隱身頭盔</span>，第一講提過，戴上去沒有任何神看得見。</p>
+    <p><span class="k">第四，荷米斯的飛鞋</span>，鞋底有翅膀，可以飛。</p>
+    <p>珀爾修斯找到美杜莎住的山洞。他不看她，看盾牌上的反射，確認位置；戴上頭盔隱身，走近；拿出鐮刀，一刀，把美杜莎的頭砍下來。</p>
+    <p>美杜莎死了，但那顆頭還活著，眼睛還會石化人。而她的血流到地上，生出一匹會飛的白馬：<span class="k">珀伽索斯</span>，天馬。所以天馬是波塞頓和美杜莎的孩子，只是不是生的，是從血裡誕生的。</p>
+    <p>美杜莎的兩個不死姐姐追了出來，珀爾修斯騎上天馬、穿著飛鞋、戴著隱身盔，逃掉了。<span class="cue">（可以說）</span>他殺了人家的媽，又騎著人家的孩子跑，這也很希臘。</p>
+
+    <h3>四、海怪、公主，和一顆解決所有問題的頭 <span class="t">8:00 – 10:30</span></h3>
+    <p>回程飛過衣索比亞的時候，珀爾修斯看到海邊岩石上綁著一個女孩，在哭。她是衣索比亞的公主<span class="k">安德洛美達</span>。</p>
+    <p>為什麼被綁在那裡？因為她的母親、王后<span class="k">卡西歐佩亞</span>說了一句話：「海裡沒有任何一個仙女比我女兒漂亮。」波塞頓的太太們都是海仙女，這句話等於在說「你老婆不行」。波塞頓大怒，派海怪去吞掉這個女兒。王后嚇壞了，把女兒綁在岩石上獻祭，希望波塞頓息怒。</p>
+    <p>珀爾修斯騎著天馬降落，問清楚以後說：不就一隻海怪嗎？我幫你們解決，公主歸我。<span class="cue">（笑）</span>他是宙斯的兒子，看不得美女受苦，這一點完全遺傳。</p>
+    <p>海怪衝上來，珀爾修斯本來要拔劍，想了一下，換成美杜莎的頭。海怪當場石化。<span class="q">從這一刻開始，所有問題都是這顆頭解決的。</span></p>
+    <p>婚禮上，公主原本的未婚夫菲紐斯跳出來反對。獻祭的時候躲起來，打贏了才出現。珀爾修斯拿出頭，前未婚夫石化。</p>
+    <p>回到塞里福斯島，島主還在糾纏母親。拿出頭，島主石化。</p>
+    <p>飛回來的路上還有一站。夜裡他想找地方休息，落在一座果園，園裡種著金蘋果，是蓋亞送給宙斯和赫拉的結婚禮物。守園的是十二泰坦之一的<span class="k">阿特拉斯</span>，泰坦之戰後被罰站在世界西邊，用肩膀扛著天空，一扛幾萬年。珀爾修斯拿出頭，阿特拉斯石化，變成一座山，就是今天北非的阿特拉斯山脈。從此他不用再扛天了，山替他扛。</p>
+
+    <h3>五、支線：金蘋果怎麼引爆特洛伊戰爭 <span class="t">10:30 – 12:00</span></h3>
+    <p>既然講到金蘋果，順便講一段，因為它連到希臘神話最有名的一場戰爭。</p>
+    <p>神界辦了一場婚禮，邀了所有神，唯獨沒邀紛爭女神<span class="k">厄里斯</span>。她不請自來，在桌上放了一顆金蘋果，上面刻著：<span class="k">「給最美的女神」</span>。三位女神同時伸手：赫拉、雅典娜、阿芙蘿黛蒂。</p>
+    <p>宙斯不敢自己判，找了一個「世界上最帥的男人」來裁判：特洛伊王子<span class="k">帕里斯</span>。帕里斯出生時有預言說他會引發戰爭，被扔到山裡，牧羊人撿回來養，所以他當時只是個帥牧羊人，還不知道自己是王子。</p>
+    <p>三位女神各自賄賂。帕里斯最後把蘋果給了阿芙蘿黛蒂，因為她私下答應：給你世上最美的女人，<span class="k">海倫</span>。海倫是宙斯和斯巴達王后的女兒，半神半人，已經是斯巴達的王后。帕里斯把她帶走，斯巴達聯合全希臘打過去，這就是特洛伊戰爭。</p>
+    <p class="cue">（停）一顆蘋果、一句「誰最美」，十年戰爭。</p>
+
+    <h3>六、預言應驗，英雄的結局 <span class="t">12:00 – 13:30</span></h3>
+    <p>珀爾修斯成名以後，帶著母親和妻子回阿爾戈斯，想見外公。他沒打算報仇，只是回家。外公一聽外孫回來了，嚇得逃到另一個城市拉里薩。</p>
+    <p>拉里薩正好在辦運動會。珀爾修斯想，我是半神，去試試身手。他報了<span class="k">擲鐵餅</span>。力氣太大，技巧太差，鐵餅飛歪了，飛進觀眾席，砸死一個人。那個人，就是躲在那裡看熱鬧的外公。</p>
+    <p>預言應驗了。他不是故意的，外公也躲了一輩子。<span class="q">希臘神話裡的預言，從來沒有人躲得掉。</span></p>
+    <p>珀爾修斯很難過，沒有繼承阿爾戈斯，把王位讓給兒子。他跟安德洛美達的兒子叫佩爾瑟斯，希臘人說，這就是「波斯」這個名字的由來，波斯的第一代國王。</p>
+    <p>神器一一歸還。美杜莎的頭，他獻給了雅典娜。雅典娜把它嵌在自己的盾牌上，從此這面盾又能守又能攻，看一眼就死。後來歐洲士兵的盾牌上常刻一顆美杜莎的頭，就是從這裡來的：借神的力量。</p>
+    <p>珀爾修斯還有一個後代要提：他的孫女阿爾克墨涅，後來又跟宙斯生了一個孩子，那是希臘神話另一位超級英雄，海克力斯。<span class="cue">（可以說「那是下一講的事」）</span></p>
+
+    <h3>結語：神為什麼離開了 <span class="t">13:30 – 15:00</span></h3>
+    <p>最後回答一個問題：<span class="q">現在為什麼沒有神了？</span></p>
+    <p>第一講說過，人類有五代。英雄時代是神對人最有期待的一代，結果還是打起來，被大洪水滅掉。神對造人這件事徹底失望，勉強造了我們這一代，力量最弱、身體最弱，本來就是最不看好的一批。結果我們也打。宙斯一看，算了，眾神紛紛回天庭，不再管人間。這就是神話對「為什麼現在沒有神力」的解釋。</p>
+    <p>只有一位神留到最後：正義女神<span class="k">阿斯特賴亞</span>，宙斯和忒彌斯的女兒。她留在人間，希望人類停止戰爭。人類沒停，她也走了，升上天空，成為<span class="k">處女座</span>。</p>
+    <p>老高補了一個天文學的彩蛋：地球所在的星系群，剛好就叫室女座超星系團，室女座就是處女座。他說，這是最後一位包容人類的神，我們還在她懷裡；哪天離開了處女座，就真的被拋棄了。<span class="cue">（這是玩笑式的收尾，語氣輕）</span></p>
+    <p>影片最後有觀眾留言問：那奧運為什麼每四年辦一次？老高說：找英雄啊。跑最快、跳最遠的，說不定就是還活著的半神半人。</p>
+    <p>今天帶走三句話：<span class="k">預言躲不掉，躲的動作本身就是應驗的路。</span><span class="k">受害者常常被當成怪物，美杜莎是第一個。</span><span class="k">英雄的力量都是借來的，還回去的那一刻才算成人。</span></p>
+    <p>謝謝大家。</p>
+  </div>
+
+  <h2>🛡️ 四件神器 ＋ 一顆頭</h2>
+  <div class="gear">
+    <div><div class="ic">🪞</div><b>雅典娜神盾</b><small>埃癸斯，鏡面。從反射看美杜莎不會石化。美國海軍神盾系統的名字來源。</small></div>
+    <div><div class="ic">🗡️</div><b>金剛鐮刀</b><small>什麼都砍得斷。一刀斬首。</small></div>
+    <div><div class="ic">🪖</div><b>哈帝斯隱身盔</b><small>第一講獨眼巨人打造的那頂。戴上無人可見。</small></div>
+    <div><div class="ic">👟</div><b>荷米斯飛鞋</b><small>鞋底有翅膀，逃離戈爾工姐姐、飛越衣索比亞。</small></div>
+    <div><div class="ic">🐍</div><b>美杜莎的頭</b><small>死後眼睛仍能石化。海怪、菲紐斯、島主、阿特拉斯全靠它。最後嵌上雅典娜的盾。</small></div>
+  </div>
+
+  <h2>🍎 支線：金蘋果 → 特洛伊戰爭</h2>
+  <div class="flow">
+    <div><b>厄里斯沒被邀</b>紛爭女神在婚宴丟下金蘋果「給最美的女神」</div>
+    <div><b>三女神爭</b>赫拉・雅典娜・阿芙蘿黛蒂</div>
+    <div><b>帕里斯裁判</b>特洛伊王子，因預言被棄養成牧羊人</div>
+    <div><b>阿芙蘿黛蒂賄賂</b>答應給他世上最美的女人海倫</div>
+    <div><b>海倫被帶走</b>宙斯之女、斯巴達王后</div>
+    <div><b>特洛伊戰爭</b>全希臘出兵，打十年</div>
+  </div>
+
+  <h2>📋 人物速查表</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>名字</th><th>身份</th><th>關鍵事件</th></tr>
+    <tr><td>珀爾修斯 Perseus</td><td>宙斯＋達娜厄之子，半神英雄</td><td>斬美杜莎；石化海怪、菲紐斯、島主、阿特拉斯；誤殺外公；獻頭給雅典娜</td></tr>
+    <tr><td>達娜厄 Danaë</td><td>阿爾戈斯公主，珀爾修斯之母</td><td>被父親囚於銅塔；宙斯化金雨；母子裝箱丟海</td></tr>
+    <tr><td>阿克里西俄斯 Acrisius</td><td>阿爾戈斯國王，珀爾修斯外公</td><td>求神諭得「死於外孫」；囚女丟孫；躲到拉里薩仍被鐵餅砸死</td></tr>
+    <tr><td>狄克堤斯 Dictys</td><td>塞里福斯島漁夫，波塞頓後裔</td><td>救起母子、收養珀爾修斯</td></tr>
+    <tr><td>波呂得克忒斯 Polydectes</td><td>塞里福斯島主，狄克堤斯之兄</td><td>覬覦達娜厄；以「馬或美杜莎頭」逼走珀爾修斯；最後被石化</td></tr>
+    <tr><td>美杜莎 Medusa</td><td>戈爾工三姐妹中唯一會死的</td><td>在雅典娜神殿被波塞頓侵犯；被雅典娜變成蛇髮石化之怪；被斬首；血中生天馬</td></tr>
+    <tr><td>斯忒諾・歐律阿勒</td><td>美杜莎的兩位不死姐姐</td><td>一同被變成怪物；追殺珀爾修斯未果</td></tr>
+    <tr><td>格賴埃 Graeae ×3</td><td>福耳庫斯的另三個女兒</td><td>共用一眼一牙；被搶眼逼供，說出美杜莎所在</td></tr>
+    <tr><td>福耳庫斯・刻托</td><td>原始海神兄妹夫妻，蓋亞之孫輩</td><td>格賴埃與戈爾工的父母</td></tr>
+    <tr><td>波塞頓 Poseidon</td><td>海王</td><td>侵犯美杜莎卻無事；因王后誇口派海怪；天馬之父</td></tr>
+    <tr><td>雅典娜 Athena</td><td>智慧與戰爭女神</td><td>懲罰美杜莎；借鏡面神盾給珀爾修斯；最後把蛇頭嵌在盾上</td></tr>
+    <tr><td>荷米斯 Hermes</td><td>商業／信使之神</td><td>借飛鞋、送鐮刀與頭盔</td></tr>
+    <tr><td>珀伽索斯 Pegasus</td><td>天馬</td><td>從美杜莎的血中誕生；載珀爾修斯逃離、飛行</td></tr>
+    <tr><td>安德洛美達 Andromeda</td><td>衣索比亞公主</td><td>因母親誇口被獻祭；被珀爾修斯所救並成婚</td></tr>
+    <tr><td>卡西歐佩亞 Cassiopeia</td><td>衣索比亞王后</td><td>誇口女兒比海仙女美，惹怒波塞頓</td></tr>
+    <tr><td>菲紐斯 Phineus</td><td>安德洛美達前未婚夫</td><td>獻祭時躲藏，婚禮上反對，被石化</td></tr>
+    <tr><td>阿特拉斯 Atlas</td><td>泰坦，被罰扛天，守金蘋果園</td><td>被蛇頭石化成阿特拉斯山，從此不用再扛天</td></tr>
+    <tr><td>佩爾瑟斯 Perses</td><td>珀爾修斯與安德洛美達之子</td><td>繼承王位；希臘人說是「波斯」之名由來</td></tr>
+    <tr><td>海克力斯 Heracles</td><td>珀爾修斯曾孫（宙斯＋孫女阿爾克墨涅）</td><td>下一位超級英雄</td></tr>
+    <tr><td>阿斯特賴亞 Astraea</td><td>正義女神，宙斯＋忒彌斯之女</td><td>最後離開人間的神，化為處女座</td></tr>
+  </table>
+  </div>
+
+  <h2>💡 小貼士：影片版 vs 原典，哪裡不一樣</h2>
+  <div class="note">
+    <ul>
+      <li><b>「雅典娜懲罰美杜莎」是羅馬詩人奧維德《變形記》的版本。</b>更早的赫西俄德只說美杜莎與波塞頓「在春天的草地上」結合，沒有神殿、也沒有懲罰。演講稿沿用影片（奧維德）版，因為戲劇性強，但小貼士留這一筆。</li>
+      <li><b>狄克堤斯是收養，不是娶了達娜厄。</b>影片說「他們結婚了」，原典裡狄克堤斯只是庇護者；島主正因為達娜厄未婚才一直糾纏。演講稿寫成收養。</li>
+      <li><b>「波斯的名字來自佩爾瑟斯」是希臘人的說法</b>（希羅多德記載），是民間詞源，不是史實。</li>
+      <li><b>阿特拉斯被石化</b>也是奧維德版本；在其他故事裡（海克力斯十二功績）阿特拉斯後來還活著扛天，兩條線互相矛盾，古人自己也沒統一。</li>
+      <li><b>金蘋果那場婚禮</b>是海神女忒提斯和凡人珀琉斯的婚禮（阿基里斯的父母），不是「宙斯撮合的一對新人」那麼籠統。</li>
+      <li><b>神盾 Aegis 系統</b>確實以埃癸斯命名 ✅。</li>
+      <li><b>「石化＝僵直反應」「處女座超星系團＝最後包容人類的神」</b>都是老高的個人聯想，演講稿裡標明「老高說」，沒有當成原典。</li>
+    </ul>
+  </div>
+
+  <footer>
+    <span class="cred">來源</span>：老高與小茉 Mr &amp; Mrs Gao《千萬不要看她的眼睛，否則後果不堪想象》· <a href="https://youtu.be/UiQCan3GSEs" target="_blank" rel="noopener">youtu.be/UiQCan3GSEs</a><br>
+    整理／關聯圖／演講稿：Robert · 2026-09-08 · 考據補充依赫西俄德《神譜》、奧維德《變形記》、阿波羅多洛斯《書庫》<br>
+    <a href="./greek-myth-talk.html">← 第一講 三代神權與五代人</a>
+  </footer>
+</div>
+</body>
+</html>
