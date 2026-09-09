@@ -58,8 +58,6 @@ git push origin main
 echo ""
 echo "✅ 已發佈！約 1 分鐘後可在 https://jtphr-site.vercel.app/photonb/ 看到更新。"
 
-# 2026-08-27：mj-app 改由伺服器端新機制自動從 repo 同步（每 ~2 小時，root 部署，會把整棵
-# /var/www/jtphr chown 回 caddy → robert 的 rsync 寫不進去也不再需要）。
-# 本機 rsync 部署停用；若新機制哪天停了，再啟用下面這行（需先請 root 恢復 robert 擁有權）。
-# "$(dirname "$0")/deploy-mjapp.sh"
-echo "ℹ️ mj-app 由伺服器端自動同步（約 2 小時內跟上），本機不再 rsync"
+# 2026-09-09：查證伺服器上「自動同步機制」根本不存在（無 timer/cron，/var/www/jtphr 停在 8/27），
+# 恢復本機 rsync 部署。robert 已加入 caddy 群組 + 目錄 g+w/setgid，寫得進去。
+"$(dirname "$0")/deploy-mjapp.sh"

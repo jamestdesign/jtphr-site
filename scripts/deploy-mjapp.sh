@@ -13,7 +13,7 @@ KEY=~/.ssh/robert_mjapp_ed25519
 echo "🔨 build…"
 bun run build >/dev/null
 echo "📤 rsync → $SRV:/var/www/jtphr"
-rsync -az --delete \
+rsync -az --delete --omit-dir-times \
   -e "ssh -i $KEY -o StrictHostKeyChecking=no -o LogLevel=ERROR -o ServerAliveInterval=10" \
   --timeout=90 --partial \
   dist/ "$SRV":/var/www/jtphr/
