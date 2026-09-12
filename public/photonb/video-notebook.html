@@ -198,7 +198,7 @@
     </table></div>
     <div class="note"><b>整支沒有 Star／F／Delete＝「沒被你點名」</b>：你的流程不會主動用它；但自動化流程（初剪／長景／移動中）由我判斷 —— <b>片長不夠時可以把沒標的拉進來補</b>，優先順序仍是 你標的 ＞ 我補的（James 2026-09-12）。</div>
     <div class="note"><b>⚖️ 重疊時誰優先：</b>同一支同時有 ★3 和 ★4 → 時間軸帶 ★3 那段（長的），★4 只是裡面的精華點；★5 同理。初剪選擇器裡「⭐4 去重：被 ⭐3 包含就剔除」就是這條。</div>
-    <div class="note"><b>💡 顏色分不出來：</b>匯入時場景名已是藍色 keyword 條，再標 ★ 還是藍色。★4／★5 加一個 <span class="kbd">F</span>（Favorite）→ 多一條綠色蓋上去，一眼看出必出片候選。F 只是視覺，工具認的是 ★ 關鍵字。</div>
+    <div class="note"><b>🆕 F 現在有意義（2026-09-12）：</b><span class="kbd">F</span>（Favorite）＝★3。★4／★5 照舊各自成立，<b>不用再加 F 當視覺標記</b>（加了會被當成同時是 ★3，雖然依重疊規則不會出錯，但沒必要）。要在 Browser 一眼分出精華，用篩選 Star4／Star5 關鍵字即可。</div>
 
     <h2>② ★2 效果關鍵字</h2>
     <p class="lead">★2 ＋ 下面其中一個關鍵字，標在同一段範圍上。</p>
@@ -259,13 +259,13 @@
       <tr><td>打關鍵字 <code>KP</code></td><td>抽禎指令（不分色）</td></tr>
       <tr><td><span class="kbd">Ctrl+0</span></td><td>移除選取範圍所有 keyword</td></tr>
       <tr><td><span class="kbd">Delete</span></td><td>Reject＝NG 失誤段</td></tr>
-      <tr><td><span class="kbd">F</span>／<span class="kbd">U</span></td><td>Favorite（★4／★5 視覺加綠）／清除 Favorite・Reject</td></tr>
+      <tr><td><span class="kbd">F</span>／<span class="kbd">U</span></td><td>Favorite＝<b>★3 生活片段</b>（2026-09-12 起，與 Ctrl+3 等價）／清除 Favorite・Reject</td></tr>
       <tr><td><span class="kbd">M</span>／<span class="kbd">Option+M</span>／<span class="kbd">Ctrl+M</span></td><td>加 Marker／加並命名／刪。Marker 純標位置給自己看，不觸發任何自動化</td></tr>
       <tr><th colspan="2">瀏覽</th></tr>
       <tr><td><span class="kbd">Cmd+K</span>／<span class="kbd">Cmd+1</span>／<span class="kbd">Cmd+2</span>／<span class="kbd">Ctrl+H</span></td><td>Keyword Editor／Libraries 側欄／Browser／Filmstrip⇄List</td></tr>
     </table></div>
     <div class="note"><b>💡 手滑救援：</b>KP 的 I/O 不小心變成範圍（5.2 秒到 5.4 秒）沒關係，工具自動抽範圍第一禎，不用回去修。</div>
-    <div class="note"><b>💡 條色疊加：</b>任何 keyword＝藍條；Favorite＝綠條蓋在上面；Reject＝紅斜線；Marker＝白色小三角。F 是布林，按多次＝一次，清除用 U。</div>
+    <div class="note"><b>💡 條色疊加：</b>任何 keyword＝藍條；Favorite（＝★3）＝綠條蓋在上面；Reject＝紅斜線；Marker＝白色小三角。F 是布林，按多次＝一次，清除用 U。</div>
 
     <h2>③ 交件：輸出 XML</h2>
     <ol>
@@ -290,7 +290,7 @@
     <h2>⑤ 動手前 checklist</h2>
     <div class="note ok">
       <b>✅ 新 trip 開工前</b><br>☐ 我已跑完 Phase A＋B（庫建好、關鍵字在）　☐ Ctrl+1~5＋KP 綁好　☐ HDR 對話框選 SDR<br><br>
-      <b>📤 每支 MOV</b><br>☐ 先篩 建議HL／品質:不可用　☐ 框範圍或整支 → Ctrl+1~5　☐ ★4/★5 加 F　☐ 好單禎 I/O 同禎 + KP　☐ 失誤段 Delete　☐ 撿完 → 輸出 XML 給我
+      <b>📤 每支 MOV</b><br>☐ 先篩 建議HL／品質:不可用　☐ 框範圍或整支 → Ctrl+1~5（★3 可直接按 F）　☐ 好單禎 I/O 同禎 + KP　☐ 失誤段 Delete　☐ 撿完 → 輸出 XML 給我
     </div>
     <div class="note warn"><b>🚨 千萬不要</b><br>❌ 勾「Copy to library」　❌ 選 Switch to HDR　❌ 搬硬碟後逐支手動 reconnect（用 Locate All）　❌ MOV_ 搬完改名　❌ LR catalog 跟 FCP 庫放同一子資料夾　❌ 在 FCPX 幫單禎評分（進 LR 評）　❌ 短素材 NG 段切原檔（只標不切；★5 例外）　❌ 出片用 HEVC（LR 預覽灰畫面）</div>
   </section>
