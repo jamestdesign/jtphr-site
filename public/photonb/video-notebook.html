@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>影片剪輯筆記本 · 分頁導覽版</title>
+  <meta name="description" content="影片端從歸檔到出片的單一現行筆記本：全流程、撿片定義（唯一來源）、FCPX 操作、AI 功能、規格與保存、Schema、工具索引、版本時間軸。整併自攻略書 V2.1、FCPX 操作指南、Cheat Sheet、撿片關鍵字總表等九頁。" />
+  <meta name="date" content="2026-09-12" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;
+      --line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--blue:#7fb6f0;--purple:#c9b6f0;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.72;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:960px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.2rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.2;font-family:'Georgia','Noto Serif TC',serif;
+      background:linear-gradient(180deg,#fbeebc 0%,var(--gold2) 38%,#c79a3a 62%,#9c7322 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .lead{color:var(--muted);margin:.2rem 0 .8rem;font-size:.93rem;}
+    .meta{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:.76rem;color:var(--muted);margin-bottom:.8rem;}
+    .meta b{color:var(--gold2);font-weight:600;}
+    /* tabs */
+    .tabbar{position:sticky;top:0;z-index:9;background:rgba(11,16,34,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+      margin:0 -1.15rem;padding:.5rem 1.15rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none;}
+    .tabbar::-webkit-scrollbar{display:none;}
+    .tabbar button{flex:0 0 auto;background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:999px;
+      padding:.35rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap;font-family:inherit;}
+    .tabbar button.on{background:rgba(216,182,90,.18);color:var(--gold2);border-color:var(--gold);}
+    .tab{display:none;} .tab.on{display:block;}
+    h2{color:var(--gold);font-size:1.06rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    h3{color:var(--gold2);font-size:.94rem;margin:1.3rem 0 .35rem;}
+    h4{color:var(--ink);font-size:.88rem;margin:.9rem 0 .25rem;}
+    table{width:100%;border-collapse:collapse;font-size:.84rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.4rem .58rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;white-space:nowrap;background:rgba(216,182,90,.06);}
+    .tablewrap{overflow-x:auto;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.06em .4em;color:var(--gold2);font-size:.86em;}
+    pre{background:#070b18;border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;font-size:.78rem;overflow-x:auto;line-height:1.5;color:#dfe3ee;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem;font-size:.85rem;margin:.8rem 0;}
+    .note b{color:var(--gold2);}
+    .warn{border-color:rgba(233,117,138,.5);background:linear-gradient(180deg,rgba(233,117,138,.1),rgba(233,117,138,.02));}
+    .ok{border-color:rgba(91,212,138,.45);background:linear-gradient(180deg,rgba(91,212,138,.1),rgba(91,212,138,.02));}
+    ul,ol{padding-left:1.25rem;} li{margin:.2rem 0;}
+    .kbd{display:inline-block;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 .4em;font-size:.82em;background:#0007;color:var(--gold2);font-family:ui-monospace,Menlo,monospace;}
+    /* pipeline steps */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.6rem;}
+    .step{border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem;background:var(--panel);position:relative;}
+    .step .ph{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;}
+    .step b{display:block;font-size:.92rem;color:var(--gold2);margin:.15rem 0 .2rem;}
+    .step .who{display:inline-block;font-size:.68rem;border-radius:999px;padding:.02rem .5rem;border:1px solid;margin-bottom:.3rem;}
+    .who.j{color:#f3df9b;border-color:#d8b65a;} .who.r{color:#7fb6f0;border-color:#7fb6f0;}
+    .step p{margin:.2rem 0;font-size:.82rem;color:var(--ink);}
+    .step small{display:block;color:var(--muted);font-size:.74rem;margin-top:.25rem;}
+    .step .tool{display:inline-block;margin-top:.35rem;font-size:.74rem;}
+    /* timeline */
+    .tl{position:relative;margin:.6rem 0 0;padding:0 0 0 1.3rem;border-left:2px solid var(--line);}
+    .tl li{list-style:none;position:relative;padding:0 0 .9rem;}
+    .tl li:before{content:"";position:absolute;left:-1.66rem;top:.42rem;width:.62rem;height:.62rem;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(216,182,90,.2);}
+    .tl li.old:before{background:transparent;border:2px solid var(--line);box-shadow:none;}
+    .tl .d{color:var(--gold2);font-weight:700;font-size:.8rem;letter-spacing:.03em;}
+    .tl .n{font-weight:700;font-size:.92rem;margin:.02rem 0;}
+    .tl .x{color:var(--muted);font-size:.82rem;}
+    .tag{display:inline-block;font-size:.68rem;border-radius:999px;padding:.02rem .5rem;border:1px solid;margin-left:.3rem;vertical-align:middle;}
+    .tag.now{color:var(--green);border-color:rgba(91,212,138,.5);} .tag.gone{color:var(--red);border-color:rgba(233,117,138,.5);} .tag.tool{color:var(--blue);border-color:rgba(127,182,240,.5);}
+    /* tool index */
+    .tools{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:.5rem;}
+    .tool-card{border:1px solid var(--line);border-radius:12px;padding:.7rem .85rem;background:var(--panel);}
+    .tool-card b{display:block;color:var(--gold2);font-size:.9rem;} .tool-card small{color:var(--muted);font-size:.76rem;display:block;margin:.15rem 0 .35rem;}
+    .tool-card a{font-size:.78rem;}
+    .toc{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 .2rem;font-size:.78rem;}
+    .toc a{border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;text-decoration:none;color:var(--gold);}
+    footer{margin-top:2.4rem;text-align:center;color:var(--muted);font-size:.74rem;line-height:1.8;} footer .cred{color:var(--gold);}
+    @media(max-width:700px){.steps{grid-template-columns:1fr;} .tools{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 攝影筆記本 · 儀表板</a>
+  <div class="eyebrow">影片端 · 單一現行筆記本</div>
+  <h1>影片剪輯筆記本</h1>
+  <p class="lead">從歸檔到出片，影片端所有「現在怎麼做」都在這一本，分頁看。定義只在這裡改；工具細節各自在工具頁，這裡放摘要與連結。</p>
+  <div class="meta">
+    <span>版本：<b>V3.0（2026-09-12 整併）</b></span>
+    <span>整併自：<b>攻略書 V2.1・FCPX 操作指南・Cheat Sheet・撿片關鍵字總表・Schema・更新紀錄・7/27 知識更新・全 Pipeline 總覽</b></span>
+    <span>維護：<b>Robert</b></span>
+  </div>
+
+  <div class="tabbar" id="tabbar">
+    <button data-t="t0">📖 導讀・時間軸</button>
+    <button data-t="t1">🗺️ 全流程</button>
+    <button data-t="t2">⭐ 撿片定義</button>
+    <button data-t="t3">⌨️ FCPX 操作</button>
+    <button data-t="t4">🤖 FCP AI 功能</button>
+    <button data-t="t5">📐 規格・保存</button>
+    <button data-t="t6">🧠 Schema・抽幀</button>
+    <button data-t="t7">🧰 工具索引</button>
+    <button data-t="t8">📜 變更紀錄</button>
+  </div>
+
+  <!-- ============ T0 導讀 + 時間軸 ============ -->
+  <section class="tab" id="t0">
+    <h2>📖 這本怎麼用</h2>
+    <ul>
+      <li><b>只講現在。</b>每個分頁都是現行做法；改過的舊做法只出現在「📜 變更紀錄」和下面的時間軸，主文不混寫。</li>
+      <li><b>定義只有一處。</b>星等、關鍵字、快捷鍵的定義只在「⭐ 撿片定義」分頁；其他頁一律連過去，不複製表格。</li>
+      <li><b>工具不在這裡寫細節。</b>每支工具有自己的頁（「🧰 工具索引」），這裡只放它在流程裡的位置與一句話。</li>
+      <li><b>報位置用代號。</b>跟我說「卡在 C 撿片」「D 出圖跑完了」就好；代號在「🗺️ 全流程」。</li>
+    </ul>
+    <div class="note"><b>誰做什麼（一句話）：</b>你只做不可外包的藝術判斷：哪段精彩、哪禎好看、怎麼剪。分類、命名、抽圖、切片、轉檔、搬檔、上雲，全部是我的腳本。每多一個你手動做的勞動，就是一個可以拿掉的瓶頸。</div>
+
+    <h2>🕰️ 版本時間軸（哪一天定了什麼、誰被誰取代）</h2>
+    <p class="lead">實心點＝現行仍有效；空心點＝已被後面的版本取代。標籤：<span class="tag now">現行</span><span class="tag gone">已作廢</span><span class="tag tool">工具</span></p>
+    <ul class="tl">
+      <li class="old"><div class="d">2026-05-15 → 05-17</div><div class="n">永漢高爾夫 sample run → Schema v2 拍板 <span class="tag gone">星等舊表已作廢</span></div><div class="x">定下 NG／KP／HL／KF 四個名詞、NG 只標不切、HP 改名 HL、MOV 星等＝「類型」不是品質、色標＝主體。名詞與色標到今天仍在用；當時的星等表（0★生活紀錄…5★史詩級）已於 07-27 作廢。</div></li>
+      <li class="old"><div class="d">2026-05-16</div><div class="n">全 Pipeline 總覽（S1–S8 共用／9P 照片／9V 影片代號）<span class="tag gone">影片半邊已改版</span></div><div class="x">照片＋影片共用核心的地圖。影片段後來全部重排成本書「🗺️ 全流程」的 A–F 代號；S1–S8 共用段今天叫 scene_build。</div></li>
+      <li class="old"><div class="d">2026-06-02</div><div class="n">FCPX 撿片 Cheat Sheet <span class="tag gone">整頁已被取代</span></div><div class="x">第一次把 FCPX 快捷鍵、Star1–5、KP_R/Y/G/P、Delete=NG、Export XML、搬 NAS reconnect、Library 瘦身寫成一頁。快捷鍵與維運的部分今天仍用（併入「⌨️ FCPX 操作」）；星等與 KP 分色已改版。同日拍板 STILL metadata 全部內嵌 JPG、不出 sidecar。</div></li>
+      <li class="old"><div class="d">2026-06-03</div><div class="n">攻略書 V2.1 <span class="tag gone">主書已被本頁取代</span></div><div class="x">把 schema、cheat sheet、7 步 pipeline 併成一本。定下智慧抽幀減量（3 秒→10 秒保底、scene 0.1→0.4）、KP＝I/O 同一禎＋keyword、HL 以 keyword＋I/O 為準（Favorite 只是視覺）、一次 Export XML 驅動全部。這些今天仍有效。</div></li>
+      <li><div class="d">2026-06-06 → 06-08</div><div class="n">fcpxmld-export 定型 <span class="tag tool">工具</span><span class="tag now">現行</span></div><div class="x">一條指令吃 .fcpxmld 切 HL／抽 KP。輸出版面鎖死 <code>_preview_mov_KP/</code>＋<code>_preview_mov_HL/</code> 分場景；iPhone HLG 自動轉 SDR；KP 抽的是原生解析度不是「4K」。</div></li>
+      <li><div class="d">2026-06-19</div><div class="n">保存策略：只留 MOV_ 原檔＋.fcpxmld，不導 ProRes master <span class="tag now">現行</span></div><div class="x">08-26 荷蘭實測再確認：.fcpxmld 1.5 MB 保存、.fcpbundle 283 GB 刪掉。</div></li>
+      <li><div class="d">2026-06-29 → 07-20</div><div class="n">資料夾「兩個世界」<span class="tag now">現行</span></div><div class="x">影片母帶 <code>MOV_&lt;day&gt;</code>（前綴不再帶底線）＋FCP 庫＋<code>to_montage</code> 收進 <code>_&lt;trip&gt;_創作/</code> wrapper（整夾拷 NAS、不寫回 LR）；LR 世界＝照片場景＋<code>_&lt;trip&gt;_LR</code>＋<code>_preview_mov_*</code>＋<code>to_export</code>。</div></li>
+      <li class="old"><div class="d">2026-07-03</div><div class="n">五星撿片架構（⭐5 完整敘事／⭐4 精彩保留／⭐3 初剪身體／⭐2 拼貼／⭐1 PIP）<span class="tag gone">07-27 改版取代</span></div><div class="x">同日建了初剪規格選擇器（工具仍在用）。星等定義被 07-27 版取代，「⭐4 被 ⭐3 包含就剔除」這條去重規則保留至今。</div></li>
+      <li><div class="d">2026-07-05 → 07-07</div><div class="n">trip_fcpx_build 定名 <span class="tag tool">工具</span><span class="tag now">現行</span></div><div class="x">整趟 MOV_&lt;day&gt; 一次匯進 FCP：event＝天、場景＝keyword collection、leave-in-place、自動打 移動中／建築／飲食／其他。07-07 收緊「移動中」＝拍攝者本人在載具上（街拍、站著拍車流都不算）。</div></li>
+      <li><div class="d">2026-07-08</div><div class="n">FCPX 操作指南（Creator Studio AI 功能）<span class="tag now">內容併入 🤖 分頁</span></div><div class="x">Generate Captions／Edit Detection／Auto Mask／Match Color／Advanced Trimming／送 Pixelmator。</div></li>
+      <li><div class="d">2026-07-26</div><div class="n">to_montage 定位＋資料夾規矩 <span class="tag now">現行</span></div><div class="x"><code>to_</code> 開頭＝落地區（頂層、跑完應為空）；<code>_</code> 開頭＝分好 day／場景的成品。照片跨進影片世界要經 to_montage（LR ★4/★5＋指定場景，長邊 5760）；影片選片事實只在 .fcpxmld、母帶不複製。</div></li>
+      <li><div class="d">2026-07-27</div><div class="n">星等改版（現行）＋ IR 挑片方法 ＋ Irene 兩套並行 <span class="tag now">現行</span></div><div class="x">★5 長篇剪輯／★4 HL／★3 生活片段／★2 工具標記＋效果關鍵字／★1 未定。只有 ★4 會切檔。IR＝切分鏡→代表幀→標內容／景別／可用，決策只讀文字。說「hello irene」才走她那套。</div></li>
+      <li class="old"><div class="d">2026-08-03</div><div class="n">撿片關鍵字總表＝唯一定義來源 <span class="tag gone">頁面併入本書 ⭐ 分頁</span></div><div class="x">原因：星等 07-27 改版漏了初剪選擇器，直到 8/3 才抓到。「定義只改一處」這條原則保留，今天那一處＝本書「⭐ 撿片定義」。</div></li>
+      <li><div class="d">2026-08-05</div><div class="n">O-Log2 匯入即解碼 <span class="tag now">現行</span></div><div class="x">trip_fcpx_build 對 OPPO O-Log2 素材自動寫 <code>customLUTOverride</code>；LUT ID 只能從 FCP 匯出的 XML 撈，存 <code>~/.config/robert/fcp_lut_ids.json</code>。120fps 補上。</div></li>
+      <li><div class="d">2026-08-22</div><div class="n">出片規格總表 <span class="tag tool">獨立頁</span></div><div class="x">YouTube／IG／HL／KP／縮時／保存各一組規格＋六個坑。本書「📐」分頁只放影片端摘要並連過去。</div></li>
+      <li><div class="d">2026-08-23</div><div class="n">KP 只打裸 <code>KP</code>，色標我補 <span class="tag now">現行</span></div><div class="x">Ctrl+6~9 快捷鍵還你自用；出圖後我看圖辨 紅／黃／綠／紫，用 kp_autolabel 一次寫回檔名、關鍵字、色標、描述。舊 KP_R/Y/G/P 仍相容。</div></li>
+      <li><div class="d">2026-08-24</div><div class="n">文字一律用 FCPX 內建 title <span class="tag now">現行</span></div><div class="x">我只出 FCP 做不到的（音波／跑馬燈／LOGO）；內建 title 的 effect UID 要你在 FCP 做好匯出才拿得到，範本存 tools/fcp_title_templates。</div></li>
+      <li><div class="d">2026-09-06</div><div class="n">ir_tag 提速＋Video-H／Video-V 角色 <span class="tag now">現行</span></div><div class="x">分鏡偵測只解關鍵幀，126 支 16 分鐘；建庫 XML 每支自動帶橫／直角色。</div></li>
+      <li><div class="d">2026-09-12</div><div class="n">本書 V3.0 <span class="tag now">現行</span></div><div class="x">九頁併一本、分頁導覽。舊頁在你確認後下架改導向。</div></li>
+    </ul>
+  </section>
+
+  <!-- ============ T1 全流程 ============ -->
+  <section class="tab" id="t1">
+    <h2>🗺️ 影片端六步（A → F）</h2>
+    <p class="lead">一趟旅遊的影片從倒卡到成片。每格標誰做、用哪支工具；工具細節點連結。</p>
+    <div class="steps">
+      <div class="step"><div class="ph">Phase A</div><b>歸檔・建工作檔</b><span class="who r">Robert</span><p>暫存區倒卡 → 時區校正 → 分天分場景 → 影片進 <code>MOV_&lt;day&gt;/&lt;場景&gt;/</code> → 鋪好 LR catalog 與空的 FCP 庫。</p><small>ir_tag 同時跑：切分鏡、標 內容／景別／品質／建議HL 關鍵字。</small><a class="tool" href="./scene-build.html">scene_build 工具頁 →</a></div>
+      <div class="step"><div class="ph">Phase B</div><b>建庫・一次匯入 FCP</b><span class="who r">Robert</span><p>整趟 MOV_&lt;day&gt; 產一支 FCPXML → 匯進 FCP：event＝天、每個場景＝關鍵字、自動打 移動中／建築／飲食、O-Log2 自動掛 LUT、橫直角色。</p><small>leave-in-place，母帶不複製。你開庫就能撿。</small><a class="tool" href="./trip-fcpx-build.html">trip-fcpx-build 工具頁 →</a></div>
+      <div class="step"><div class="ph">Phase C</div><b>撿片</b><span class="who j">James</span><p>在 FCP 用關鍵字篩素材 → 框範圍打 ★1–5 → 好單禎打 <code>KP</code> → 壞段 Delete。一輪標完 → 輸出 XML 一次交件。</p><small>定義看 ⭐ 分頁；手法看 ⌨️ 分頁。</small></div>
+      <div class="step"><div class="ph">Phase D</div><b>批次出圖</b><span class="who r">Robert</span><p>吃你的 .fcpxmld：★4 切 1080p 短片段 → <code>_preview_mov_HL/</code>；KP 抽原生單禎 → <code>_preview_mov_KP/</code>，我看圖補色標。</p><small>HLG 自動轉 SDR。★5 長篇去 NG 拼接規格已定、待實作。</small><a class="tool" href="./fcpxmld-export.html">fcpxmld-export 工具頁 →</a></div>
+      <div class="step"><div class="ph">Phase E</div><b>剪輯</b><span class="who j">James</span><p>★3 身體＋★2 工具段＋照片（to_montage）進時間軸。要初剪骨架就勾初剪規格選擇器，我出 fcpxml 你讀入換素材。</p><small>文字一律 FCP 內建 title；標籤／地圖／音波等疊層我出透明 ProRes。</small><a class="tool" href="./initcut-spec-picker.html">初剪規格選擇器 →</a></div>
+      <div class="step"><div class="ph">Phase F</div><b>出片・保存</b><span class="who j">James</span><p>依用途出 H.264（規格見 📐）。收尾只留 <code>MOV_</code> 原檔＋<code>.fcpxmld</code>，.fcpbundle 刪掉。</p><small>HL 短片＝雲端相簿看的，不是剪輯素材。</small><a class="tool" href="./export-specs.html">出片規格總表 →</a></div>
+    </div>
+
+    <h3>Phase C 撿片，你手上的順序</h3>
+    <ol>
+      <li>開庫 → 先用關鍵字篩：<code>建議HL</code> 看一遍，同意就打 ★4；<code>品質:不可用</code> 一次排除；<code>景別:特寫</code>＋場景 直接做 ★2 拼貼。</li>
+      <li>逐支看：整支或框範圍 → <span class="kbd">Ctrl+1~5</span> 打星等（同一段可同時有 ★3 與 ★4，★4 是裡面的精華點）。</li>
+      <li>看到好單禎：<span class="kbd">I</span> 再 <span class="kbd">O</span>（不動 playhead）→ 打關鍵字 <code>KP</code>。</li>
+      <li>看到壞段：框範圍 → <span class="kbd">Delete</span>。</li>
+      <li>全部撿完 → 檔案 › 輸出 XML → .fcpxmld 丟給我。</li>
+    </ol>
+    <div class="note"><b>💡 星等是你的判斷，我不污染。</b>我只寫關鍵字（內容／景別／品質／建議HL），星等一律你打。VLM 給的分只當參考，不自動篩。</div>
+
+    <h2>📁 資料夾結構（兩個世界，現行）</h2>
+<pre>&lt;trip&gt;/
+├── day1 …/&lt;NN_HHMM_場景&gt;/          ← 照片場景（ARW／DNG／JPG）＝ LR 世界
+├── _&lt;trip&gt;_LR/&lt;trip&gt;.lrcat          ← LR catalog（照片管理器）
+├── _preview_mov_KP/&lt;場景&gt;/            ← KP 單禎 JPG（D 出的，寫回 LR 用）
+├── _preview_mov_HL/&lt;場景&gt;/            ← HL 短片 mp4（雲端相簿觀賞）
+├── to_export/  to_evoto/  to_montage/  ← 落地區：一律頂層，跑完應為空
+├── _export/&lt;day&gt;/&lt;場景&gt;/              ← 照片＋HL 成品（上雲端）
+└── _&lt;trip&gt;_創作/                     ← 影片／創作世界（整夾拷 NAS，不寫回 LR）
+    ├── &lt;trip&gt;.fcpbundle               ← FCP 庫（leave-in-place，只記引用；收尾可刪）
+    ├── &lt;day&gt;.fcpxmld                  ← 撿片／剪輯事實（要備份的那個）
+    ├── MOV_&lt;day&gt;/&lt;場景&gt;/&lt;clip&gt;.MOV     ← 影片母帶，唯一一份，永遠不切
+    └── _montage/&lt;day&gt;/&lt;場景&gt;/         ← 進片照片（to_montage 鏡射來，長邊 5760）</pre>
+    <div class="note"><b>兩句話管到底：</b><code>to_</code> 開頭＝落地區（東西丟進去，一律 trip 頂層，跑完應該是空的）；<code>_</code> 開頭＝成品（分好 day／場景，各回各家）。<code>to_export</code> 空＝已經處理完，不是沒跑過。</div>
+    <div class="note"><b>💡 to_montage 為什麼存在：</b>照片的管理器是 LR，LR 不管影片，所以照片要跨進影片世界需要一個中繼站；門檻＝LR ★4／★5＋這支片要用的場景。影片不需要中繼站，FCP 就是它的管理器，選片事實只在 .fcpxmld。雲端那份 _export 長邊只有 4000，推移一放就糊，所以 to_montage 另出 5760。</div>
+
+    <h2>🔀 兩套並行：Robert 與 Irene</h2>
+    <ul>
+      <li>沒說＝走我這套（本書）並持續開發。說「hello irene」＝走她的技能包（卡點剪輯／字幕醫生／字幕翻譯／素材整理／動態 B-Roll）。</li>
+      <li>兩套不互相改寫。用到她的工具，署名標「— Robert（引用 Irene · 工具名）」。</li>
+      <li>從她那裡抄來的：IR 挑片、整理報告、精選帶順序編號、改名腳本先產不自動跑。不抄的：把素材實體搬成 精選／備用／淘汰（會打散我們的場景結構、FCP 庫離線）。分類用關鍵字，不用搬檔。</li>
+    </ul>
+  </section>
+
+  <!-- ============ T2 撿片定義 ============ -->
+  <section class="tab" id="t2">
+    <div class="note warn"><b>🔒 這一頁是唯一定義來源（James 2026-08-03 拍板，2026-09-12 起搬到這裡）。</b>定義要改只改這裡；其他頁與工具頁一律連過來，不複製表格。以前散在十幾頁各寫一份，改版一定漏。</div>
+
+    <h2>① 星等 ★1–★5（2026-07-27 現行版）</h2>
+    <p class="lead">用 <span class="kbd">I</span>／<span class="kbd">O</span> 框範圍，或 <span class="kbd">X</span> 選整支，再按 <span class="kbd">Ctrl+1~5</span>。</p>
+    <div class="tablewrap"><table>
+      <tr><th>快捷鍵</th><th>星等</th><th>意思</th><th>工具怎麼處理</th><th>狀態</th></tr>
+      <tr><td>Ctrl+5</td><td>★5</td><td><b>長篇剪輯</b>：口播／課程／演唱會／開箱介紹，有主題的</td><td>框整段＋段內 Delete 挖掉壞段 → concat 成一支長片</td><td>⚠️ 未實作，報告會列出</td></tr>
+      <tr><td>Ctrl+4</td><td>★4</td><td><b>HL 精華</b>（動態照片）</td><td>切 1080p H.264 短片段 → <code>_preview_mov_HL/</code></td><td>✅ 唯一會切出檔案的星等</td></tr>
+      <tr><td>Ctrl+3</td><td>★3</td><td><b>生活片段・進剪輯主體</b></td><td>只記不切，靠關鍵字批次撈進初剪／蒙太奇</td><td>🔨 批次剪輯待做</td></tr>
+      <tr><td>Ctrl+2</td><td>★2</td><td><b>工具標記</b>＝「B-roll 中的 B-roll」，帶過就好</td><td>★2 ＋ 一個效果關鍵字（同一段範圍）→ 見②</td><td>🔨 部分實作</td></tr>
+      <tr><td>Ctrl+1</td><td>★1</td><td>未定案</td><td>—</td><td>⏸</td></tr>
+    </table></div>
+    <div class="note"><b>⚖️ 重疊時誰優先：</b>同一支同時有 ★3 和 ★4 → 時間軸帶 ★3 那段（長的），★4 只是裡面的精華點；★5 同理。初剪選擇器裡「⭐4 去重：被 ⭐3 包含就剔除」就是這條。</div>
+    <div class="note"><b>💡 顏色分不出來：</b>匯入時場景名已是藍色 keyword 條，再標 ★ 還是藍色。★4／★5 加一個 <span class="kbd">F</span>（Favorite）→ 多一條綠色蓋上去，一眼看出必出片候選。F 只是視覺，工具認的是 ★ 關鍵字。</div>
+
+    <h2>② ★2 效果關鍵字</h2>
+    <p class="lead">★2 ＋ 下面其中一個關鍵字，標在同一段範圍上。</p>
+    <div class="tablewrap"><table>
+      <tr><th>關鍵字</th><th>做什麼</th><th>狀態</th></tr>
+      <tr><td><code>拼貼</code></td><td>塞進格子（版型／每組幾支／長度對齊 → 初剪規格選擇器 ② 設定）</td><td>規格已定</td></tr>
+      <tr><td><code>慢動作</code> <code>0.5x</code></td><td>0.5 倍速</td><td>✅ 寫進 XML timeMap，匯入即變速</td></tr>
+      <tr><td><code>快轉</code> <code>2x</code></td><td>2 倍速</td><td>✅ 同上</td></tr>
+      <tr><td><code>縮時</code> <code>8x</code> <code>16x</code></td><td>8／16 倍速</td><td>✅ 同上</td></tr>
+      <tr><td><code>倒放</code> <code>定格</code> <code>循環</code> <code>穩定</code> <code>靜音</code> <code>封面</code></td><td>字面意思</td><td>🔨 待實作</td></tr>
+    </table></div>
+    <div class="note">💡 建議先只用 拼貼／慢動作／快轉／縮時 這四個，涵蓋八成情境而且能全自動。</div>
+
+    <h2>③ KP 抽禎指令・NG</h2>
+    <div class="tablewrap"><table>
+      <tr><th>動作</th><th>關鍵字</th><th>意思</th></tr>
+      <tr><td>I／O 同一禎 ＋ 打關鍵字</td><td><code>KP</code></td><td>抽這一禎。<b>2026-08-23 起不分色</b>，我出圖後看畫面補 紅／黃／綠／紫。舊 KP_R/Y/G/P 照樣吃。</td></tr>
+      <tr><td><span class="kbd">Delete</span></td><td>Reject／NG</td><td>失誤段，跳過不用。短素材只標不切；只有 ★5 長篇會真的挖掉再拼接。</td></tr>
+    </table></div>
+    <div class="note"><b>色標對照（不變）：</b>紅＝臉／人像可辨　黃＝人在但臉不在（背影）　綠＝我們的人不在畫面（遊客再多也綠）　紫＝物件當主角。判讀一律我看圖，不程式硬猜；判錯跟我講編號改單張。</div>
+
+    <h2>④ Robert 自動標的關鍵字（你不用打，我產）</h2>
+    <div class="tablewrap"><table>
+      <tr><th>關鍵字</th><th>意思</th></tr>
+      <tr><td><code>內容:xxx</code></td><td>畫面實際有什麼（運河／街屋／甜點…）</td></tr>
+      <tr><td><code>景別:遠景</code> <code>景別:中景</code> <code>景別:特寫</code></td><td>剪接公式靠這個排節奏（遠景停最久、特寫最短且不連續超過兩顆）</td></tr>
+      <tr><td><code>A-roll_人物</code>／<code>B-roll_風景</code>／<code>C-roll_物品</code></td><td>人是主體／空間景觀為主（路人不算）／物件特寫</td></tr>
+      <tr><td><code>建議HL</code></td><td>我覺得這顆特別好，建議你打 ★4</td></tr>
+      <tr><td><code>品質:不可用</code></td><td>糊掉／黑禎／曝掉，一次排除</td></tr>
+      <tr><td><code>NN_HHMM_描述</code></td><td>場景名（歸檔自動帶入＝keyword collection）</td></tr>
+      <tr><td><code>移動中</code> <code>飲食</code> <code>建築</code> <code>其他</code></td><td>由場景名自動分類。<b>移動中＝拍攝者本人在載具上</b>（坐車／船／機拍窗外）；邊走邊拍街景、站著拍車流都不算。</td></tr>
+      <tr><td><code>Video-H</code>／<code>Video-V</code>（角色）</td><td>橫／直，依旋轉後尺寸判斷，建庫時自動帶</td></tr>
+    </table></div>
+    <div class="note ok"><b>✅ 這組＝ IR 挑片（借自 Irene 的 wide／medium／close 概念，由我們自己產、定義在這頁）：</b>影片切分鏡 → 抽代表幀 → 我逐張讀圖標上面這些字 → 寫進建庫 XML。你打開 FCP 時字已經在，直接篩。剪輯類關鍵字（開場／空鏡／轉場／收尾…）你撿片時打，之後會擴充。</div>
+    <p class="lead">⏳ 還沒收進來的：你自己設的快捷關鍵字，清單給我就補進這頁。</p>
+  </section>
+
+  <!-- ============ T3 FCPX 操作 ============ -->
+  <section class="tab" id="t3">
+    <h2>① 一次性設定（每個新 Library 做一次）</h2>
+    <ul>
+      <li>現在庫是我用 trip_fcpx_build 建好、一次匯入的，你不用手動拖 MOV_。若要自己匯：<b>取消勾 Copy to library</b>（Leave files in place），影片太肥不複製。</li>
+      <li>第一次遇到 HDR 素材會問「switch the library to HDR?」→ <b>Keep as Standard (SDR)</b>。SDR 庫照樣能放 HDR clip。</li>
+      <li><span class="kbd">Cmd+K</span> 開 Keyword Editor，確認 Ctrl+1~5 綁 ★1–★5、一格綁 <code>KP</code>；Ctrl+6~9 是你的。</li>
+    </ul>
+
+    <h2>② 快捷鍵總表</h2>
+    <div class="tablewrap"><table>
+      <tr><th colspan="2">走片／預覽</th></tr>
+      <tr><td><span class="kbd">J</span> <span class="kbd">K</span> <span class="kbd">L</span></td><td>後退／停／前進（連按加速）</td></tr>
+      <tr><td><span class="kbd">Space</span></td><td>播放／暫停</td></tr>
+      <tr><td><span class="kbd">←</span> <span class="kbd">→</span>／<span class="kbd">Shift+←/→</span></td><td>逐禎／跳 10 禎</td></tr>
+      <tr><th colspan="2">框範圍</th></tr>
+      <tr><td><span class="kbd">I</span> <span class="kbd">O</span></td><td>入點／出點；KP 則 I/O 同一禎（不動 playhead 按兩下）</td></tr>
+      <tr><td><span class="kbd">X</span>／<span class="kbd">Option+X</span></td><td>選整支 clip 當範圍／清除入出點</td></tr>
+      <tr><th colspan="2">標記</th></tr>
+      <tr><td><span class="kbd">Ctrl+1~5</span></td><td>★1–★5（定義見 ⭐ 分頁）</td></tr>
+      <tr><td>打關鍵字 <code>KP</code></td><td>抽禎指令（不分色）</td></tr>
+      <tr><td><span class="kbd">Ctrl+0</span></td><td>移除選取範圍所有 keyword</td></tr>
+      <tr><td><span class="kbd">Delete</span></td><td>Reject＝NG 失誤段</td></tr>
+      <tr><td><span class="kbd">F</span>／<span class="kbd">U</span></td><td>Favorite（★4／★5 視覺加綠）／清除 Favorite・Reject</td></tr>
+      <tr><td><span class="kbd">M</span>／<span class="kbd">Option+M</span>／<span class="kbd">Ctrl+M</span></td><td>加 Marker／加並命名／刪。Marker 純標位置給自己看，不觸發任何自動化</td></tr>
+      <tr><th colspan="2">瀏覽</th></tr>
+      <tr><td><span class="kbd">Cmd+K</span>／<span class="kbd">Cmd+1</span>／<span class="kbd">Cmd+2</span>／<span class="kbd">Ctrl+H</span></td><td>Keyword Editor／Libraries 側欄／Browser／Filmstrip⇄List</td></tr>
+    </table></div>
+    <div class="note"><b>💡 手滑救援：</b>KP 的 I/O 不小心變成範圍（5.2 秒到 5.4 秒）沒關係，工具自動抽範圍第一禎，不用回去修。</div>
+    <div class="note"><b>💡 條色疊加：</b>任何 keyword＝藍條；Favorite＝綠條蓋在上面；Reject＝紅斜線；Marker＝白色小三角。F 是布林，按多次＝一次，清除用 U。</div>
+
+    <h2>③ 交件：輸出 XML</h2>
+    <ol>
+      <li>側欄選中 <b>Event</b>（不是 Project、不是 Library 最上層）。</li>
+      <li>檔案 › 輸出 XML… → Metadata view 選 General 或 All → 版本選最新（1.10 以上）。</li>
+      <li>存成 <code>&lt;day&gt;.fcpxmld</code>，放在 <code>_&lt;trip&gt;_創作/</code> 跟庫同層 → 路徑丟給我。</li>
+    </ol>
+    <div class="note">💡 一次 export 驅動全部：★ 關鍵字＋KP＋Reject 全在同一個 XML 裡，我一支腳本全跑；不用分 KP 給一次、HL 給一次。每次 export 是當下快照，中途又改了標記就再 export。<code>.fcpxmld</code> 是套件（右鍵「顯示套件內容」看得到 Info.fcpxml），<code>.fcpxml</code> 是純文字，我兩種都吃。</div>
+
+    <h2>④ 維運</h2>
+    <h3>搬 NAS 後 reconnect</h3>
+    <ol>
+      <li>FCPX 關閉 → 整個 trip 資料夾原樣搬（<code>_&lt;trip&gt;_創作/</code> 整夾）。</li>
+      <li>從 NAS 開 .fcpbundle → 跳「missing files」→ 點 <b>Locate All…</b> → 指 NAS 上的 MOV_ 母夾，全部自動重連。</li>
+    </ol>
+    <div class="note warn">🚨 FCPX 記絕對路徑。關鍵是 MOV_ 跟庫的相對結構不變；搬完別改 MOV_ 的名字，否則要逐支重連。</div>
+    <h3>Library 瘦身（30–70%）</h3>
+    <p>選中 Library → 檔案 › Delete Generated Library Files… → 勾 Render／Optimized／Proxy → Delete。只清衍生暫存，Keyword／Favorite／Marker／Timeline 100% 保留。時機：出完片要搬 NAS 前、庫超過 50GB、季度封存。</p>
+    <h3>收尾保存</h3>
+    <p>只留 <code>MOV_&lt;day&gt;</code> 原檔＋最新 <code>.fcpxmld</code>；<code>.fcpbundle</code> 刪掉（荷蘭實測 1.5 MB vs 283 GB）。刪前三步：確認 .fcpxmld 是最新 → 確認素材是 leave-in-place → 刪完先匯回一次確認打得開。</p>
+
+    <h2>⑤ 動手前 checklist</h2>
+    <div class="note ok">
+      <b>✅ 新 trip 開工前</b><br>☐ 我已跑完 Phase A＋B（庫建好、關鍵字在）　☐ Ctrl+1~5＋KP 綁好　☐ HDR 對話框選 SDR<br><br>
+      <b>📤 每支 MOV</b><br>☐ 先篩 建議HL／品質:不可用　☐ 框範圍或整支 → Ctrl+1~5　☐ ★4/★5 加 F　☐ 好單禎 I/O 同禎 + KP　☐ 失誤段 Delete　☐ 撿完 → 輸出 XML 給我
+    </div>
+    <div class="note warn"><b>🚨 千萬不要</b><br>❌ 勾「Copy to library」　❌ 選 Switch to HDR　❌ 搬硬碟後逐支手動 reconnect（用 Locate All）　❌ MOV_ 搬完改名　❌ LR catalog 跟 FCP 庫放同一子資料夾　❌ 在 FCPX 幫單禎評分（進 LR 評）　❌ 短素材 NG 段切原檔（只標不切；★5 例外）　❌ 出片用 HEVC（LR 預覽灰畫面）</div>
+  </section>
+
+  <!-- ============ T4 FCP AI ============ -->
+  <section class="tab" id="t4">
+    <h2>🤖 Final Cut Pro 2026-06 Creator Studio 六個 AI 功能</h2>
+    <p class="lead">內建進 FCP、既有使用者免費更新、全部裝置端運算（素材不上雲）。App Store 更新到最新版就有。</p>
+    <div class="tablewrap"><table>
+      <tr><th>功能</th><th>平台</th><th>一句話</th><th>接你哪條流程</th></tr>
+      <tr><td>Generate Captions</td><td>Mac＋iPad</td><td>語音自動轉字幕排進時間軸</td><td>🔥 對話字幕專案的官方解</td></tr>
+      <tr><td>Edit Detection</td><td>Mac＋iPad</td><td>成品自動拆回原始 clip</td><td>只剩輸出檔要改片時</td></tr>
+      <tr><td>Auto Mask／Magnetic Mask</td><td>Mac</td><td>AI 辨識人／天空／植物做遮罩</td><td>分區調色免描邊</td></tr>
+      <tr><td>Match Color</td><td>Mac</td><td>跨鏡頭自動校色</td><td>OPPO／iPhone／Sony 同場景拉齊</td></tr>
+      <tr><td>Advanced Trimming</td><td>Mac</td><td>入出點逐格微調</td><td>卡音樂節奏精修</td></tr>
+      <tr><td>送 Pixelmator Pro</td><td>Mac</td><td>影格送去修再回時間軸</td><td>出 YouTube／IG 縮圖</td></tr>
+    </table></div>
+    <div class="note">💡 先玩這三個最有感：Generate Captions（拿一支對話片試）、Match Color（兩台相機同場景）、Auto Mask（想單調天空的片）。</div>
+
+    <h3>Generate Captions 自動字幕</h3>
+    <ol><li>時間軸選有語音的 clip（或整段）。</li><li>字幕選單 › Generate Captions（報導的快捷鍵 Shift+Cmd+C）。</li><li>產生 caption 層 → 在 Caption 檢視器校正文字、改字型／顏色／位置／動畫。</li></ol>
+    <p>家庭對話片直接自動上字幕，你只校正人名／錯字。語者分段（誰在講）可搭 Whisper 前處理或手動指派。先拿一支國／台語混講的片驗準度，再決定要不要全趟批次上。</p>
+    <h3>Edit Detection 成品拆回時間軸</h3>
+    <p>把已輸出的 mp4 拉進時間軸 → 觸發 Edit Detection → 每個原切點自動斷開。手上只剩輸出檔、要重剪或擷取精華段時用。</p>
+    <h3>Auto Mask ＋ Magnetic Mask</h3>
+    <p>Auto Mask：對 clip 套上 → 游標 hover 即時預覽偵測到的主體 → Inspector 勾 皮膚／頭髮／天空／植物／衣服 → 接調色或效果只作用該區。Magnetic Mask 是手控版：滴管點主體 → 它追蹤，Auto 抓不準時用。</p>
+    <h3>Match Color 跨鏡頭校色</h3>
+    <p>選要被校的 clip → Match Color → 指定參考影格 → 自動套色 → 微調。多機同場景挑一支當基準，其他一鍵拉齊。⚠️ O-Log2 素材要先解碼（建庫時已自動掛 LUT），再談校色。</p>
+    <h3>Advanced Trimming／送 Pixelmator Pro</h3>
+    <p>trim 時逐格控制入出影格，卡節奏用。右鍵某影格送 Pixelmator Pro 做縮圖、封面，存檔自動回時間軸。</p>
+
+    <h2>我能幫你批次跑的</h2>
+    <ul>
+      <li>整趟對話片一次全上字幕（SpliceKit 程式化操控 FCP 跑 Generate Captions）。</li>
+      <li>同場景多機片批次校色（挑基準後套整組）。</li>
+      <li>撿片後批次抽 KP／切 HL（既有 Phase D）。</li>
+    </ul>
+    <div class="note">💡 用法：素材備好跟我說「整趟上字幕」或「這場多機校色」，我跑完再回你結果，你只做最後校正。</div>
+  </section>
+
+  <!-- ============ T5 規格・保存 ============ -->
+  <section class="tab" id="t5">
+    <h2>📐 影片端規格摘要</h2>
+    <p class="lead">完整表（YouTube／IG／縮時／保存＋六個坑）在 <a href="./export-specs.html">出片規格總表</a>，這裡只放影片端最常用的。規格有變改那頁，這裡跟著改。</p>
+    <div class="tablewrap"><table>
+      <tr><th>用途</th><th>規格</th><th>備註</th></tr>
+      <tr><td>HL 短片（動態照片）</td><td>H.264 yuv420p 8-bit・1080p・CRF 20・AAC 192k・faststart</td><td>Phase D 自動出；段邊界＝你 I/O 框的範圍</td></tr>
+      <tr><td>KP 單禎</td><td>原生解析度 JPG（-q:v 1）＋XMP 色標／關鍵字／來源時碼</td><td>進 LR 直接看到色標；之後在 LR 評星</td></tr>
+      <tr><td>YouTube 成片</td><td>一定傳 4K</td><td>YT 自己降轉的 1080p 比你壓的乾淨</td></tr>
+      <tr><td>IG</td><td>H.264（它會重壓）</td><td>—</td></tr>
+      <tr><td>縮時正式</td><td>ProRes 422・原生像素（Source Resolution）・60p・Rec.709</td><td>LRTimelapse 預設 <code>TL_ProRes422_Source_60p_709</code></td></tr>
+      <tr><td>保存</td><td>只留 <code>MOV_</code> 原檔＋<code>.fcpxmld</code></td><td>不導 ProRes master</td></tr>
+    </table></div>
+    <div class="note warn"><b>🔥 必踩坑：別用 HEVC 出片。</b>LR Classic 預覽 H.265 會灰畫面（已知 bug），10-bit 直編 QuickTime 也不解。出片走 H.264＋yuv420p 8-bit，檔案大 30% 但相容稅必付。</div>
+
+    <h2>🎨 色彩：三種來源怎麼分流</h2>
+    <div class="tablewrap"><table>
+      <tr><th>來源</th><th>指紋</th><th>建庫時</th><th>出圖時</th></tr>
+      <tr><td>iPhone <code>IMG_*.MOV</code></td><td>Rec.2020 HLG</td><td>不動（FCP 認得）</td><td>Phase D 自動 tonemap 轉 SDR，否則畫面灰</td></tr>
+      <tr><td>OPPO O-Log2</td><td>primaries bt2020＋10-bit（transfer 標 bt709 是假的，別信）</td><td>自動寫 <code>customLUTOverride</code> 掛官方 LUT＝匯入即解碼；LUT 要先放 <code>~/Library/Application Support/ProApps/Camera LUTs/</code></td><td>先解碼再上妝；風格庫的 272 支 LUT 全是「上妝」不是轉換</td></tr>
+      <tr><td>手機 <code>VID*.mp4</code>／Sony 709</td><td>Rec.709</td><td>不動</td><td>原樣</td></tr>
+    </table></div>
+    <div class="note"><b>💡 LUT ID 不是 .cube 的 MD5。</b>唯一可靠拿法：在 FCP 手動套一次 → 輸出 XML → 撈 customLUTOverride，存進 <code>~/.config/robert/fcp_lut_ids.json</code>；查不到工具就不寫、印警告，不亂猜。120fps 慢動作用 30p 專案＋重新計時 25%，別開 120p 專案。</div>
+
+    <h2>🔤 文字與疊層</h2>
+    <ul>
+      <li><b>文字一律用 FCPX 內建 title</b>（2026-08-24）。內建 title 的 effect UID 沒公開文件，只能你在 FCP 做好匯出 .fcpxmld 才拿得到 → 範本存 tools/fcp_title_templates，別刪。</li>
+      <li>我只出 FCP 做不到的：音波、跑馬燈、LOGO、描述標籤／地圖疊層 → 透明 ProRes；白色元素改 Screen 混合取代 alpha（檔案小 14 倍）。</li>
+      <li>連接 clip 的起點必須落在母 clip 範圍內，否則會被丟到片尾。</li>
+    </ul>
+
+    <h2>🗄️ 保存與備份（收尾）</h2>
+    <ul>
+      <li><b>保存軌（絕不丟）</b>：<code>MOV_&lt;day&gt;</code> 原檔（4K HLG 本身即母帶）＋<code>.fcpxmld</code>（怎麼剪：片段／順序／lane／transform／title 參數／關鍵字／角色）。兩個在＝整個專案隨時重建。</li>
+      <li><b>出片軌（能重生）</b>：H.264 成片＋HL／KP 預覽。</li>
+      <li><b>不導 ProRes master</b>（約 H.264 的 10–20 倍大）。</li>
+      <li><b>整個 <code>_&lt;trip&gt;_創作/</code> 拷 NAS</b>＝一夾備份單位；刪 .fcpbundle 前先列清單給你確認。</li>
+    </ul>
+  </section>
+
+  <!-- ============ T6 Schema・抽幀 ============ -->
+  <section class="tab" id="t6">
+    <h2>🧠 名詞表</h2>
+    <div class="tablewrap"><table>
+      <tr><th>縮寫</th><th>全名</th><th>意思／用途</th></tr>
+      <tr><td>MOV</td><td>影片本體</td><td>原始 .MOV／.mp4，<code>MOV_&lt;day&gt;/&lt;場景&gt;/</code>，永遠不切、唯一一份</td></tr>
+      <tr><td>STILL</td><td>抽幀靜畫</td><td>ffmpeg 從 MOV 抽的 JPG，給我跟你看懂這段在拍什麼、評場景用途</td></tr>
+      <tr><td>NG</td><td>No Good</td><td>失誤段。短素材只標不切；★5 長篇切掉拼接</td></tr>
+      <tr><td>KP</td><td>Keep</td><td>你在 FCPX 親手挑的單禎好畫面 → 我抽原生解析度 JPG</td></tr>
+      <tr><td>HL</td><td>High Light</td><td>精彩瞬間片段（＝★4）→ 切短片給雲端相簿當動態照片</td></tr>
+      <tr><td>KF</td><td>Key Frame</td><td>STILL 評分結果自動反推回 MOV keyword 的時間點（<code>KF:03.02</code>），你不用標</td></tr>
+      <tr><td>-EVT</td><td>Evoto 後綴</td><td>Evoto 出來的 JPG 必加，區別於 LR 出的</td></tr>
+    </table></div>
+    <div class="note">💡 HL 與 KP 不必重複標：HL 是精彩片段（出短片），KP 是好單禎（出靜照）。HL 段裡若剛好也想要一禎靜照，再單獨點 KP。</div>
+
+    <h2>兩個評分軸：STILL 是品質、MOV 是類型</h2>
+    <ul>
+      <li><b>STILL rating 1–5★＝品質</b>（構圖／曝光／瞬間），跟照片同一套 4 軸法，進 LR 一起評。</li>
+      <li><b>MOV rating＝類型／用途</b>，就是 ⭐ 分頁那張星等表；同一欄不同意義，LR 按檔案類型自然分開。</li>
+      <li><b>MOV colorLabel＝主體</b>（紅臉／黃背影／綠風景／紫物件），由該 MOV 所有 STILL 的 label 多數決；例：抽 18 張，14 Y＋4 G → MOV＝Y。</li>
+      <li>LR 對影片只能 clip-level（色標／Pick／caption），沒有 frame-level marker → 挑那一禎、框精彩段在 FCPX 做（Phase C），我從 XML 抽圖／切片。</li>
+    </ul>
+
+    <h2>智慧抽幀（Phase A 內）</h2>
+    <p>抽幀不是為了找 keeper（keeper 你在 FCPX 挑），是為了看懂這段在拍什麼、抓敏感動作／轉場那幾個瞬間；靜態無變化的區段不抽。</p>
+<pre>ffmpeg -nostdin -i MOV_&lt;day&gt;/&lt;場景&gt;/IMG_XXXX.MOV \
+  -vf "select='isnan(prev_selected_t)+gte(t-prev_selected_t\,10)+gt(scene\,0.4)',showinfo" \
+  -vsync vfr -q:v 2 /tmp/_extract_IMG_XXXX_%04d.jpg</pre>
+    <div class="tablewrap"><table>
+      <tr><th>參數</th><th>值</th><th>意義</th></tr>
+      <tr><td>時間保底 <code>gte(t-prev,N)</code></td><td>10 秒</td><td>靜態長鏡頭最少每 10 秒留 1 張</td></tr>
+      <tr><td>scene 門檻 <code>gt(scene,X)</code></td><td>0.4</td><td>只在明顯動作／轉場加抽；漏抓降 0.3，雷同太多升 0.5</td></tr>
+      <tr><td>首幀</td><td>留</td><td>永遠抽 t=0</td></tr>
+    </table></div>
+    <p>一支約 70 張原始幀 → 抽 15 張上下。動態運動類保底可降回 6 秒；每個 trip 第一支先試跑再定參數。</p>
+    <h3>ir_tag（分鏡＋景別，2026-09-06 版）</h3>
+    <p>只解關鍵幀算 scene score（<code>-skip_frame nokey</code>、切點間隔 ≥1.5s），126 支 16 分鐘跑完；⚠️ 別加 <code>-hwaccel videotoolbox</code>，反而慢 8 倍。長鏡頭 >10 秒抽 2 張、>20 秒抽 3 張。手機影片要看套用旋轉後的顯示尺寸，直接讀寬高會判錯直橫。標籤走 sub-agent 一天一個，只寫 tags／shot_size／roll／usable／suggest_hl，不寫星等。</p>
+
+    <h2>STILL 命名與 metadata（內嵌，不出 sidecar）</h2>
+    <p>自動抽：<code>&lt;MOV&gt;_s&lt;NN&gt;_t&lt;秒.秒&gt;.jpg</code>；你自己截的：<code>IMG_&lt;src&gt;-&lt;N&gt;_t&lt;秒.秒&gt;.jpg</code>，同放 <code>_STILL/&lt;場景&gt;/</code>。</p>
+<pre>exiftool -overwrite_original -codedcharacterset=utf8 \
+  -DateTimeOriginal="2026:05:15 11:46:28" -Source="IMG_6230.MOV @ t=03.02" \
+  -Keywords="KP" -Keywords="&lt;場景&gt;" \
+  -Caption-Abstract="[label:Y] [confidence:1.00 投票 8/8]" -XMP-dc:Description="…同上…" \
+  -XMP-lr:hierarchicalSubject="影片來源|IMG_6230"  IMG_6230_s03_t03.02.jpg</pre>
+    <ul>
+      <li>不加 <code>-o</code>＝直接寫進 JPG；<code>-codedcharacterset=utf8</code> 沒加中文 caption 會亂碼（九州 trip 踩過）。</li>
+      <li>Caption 格式：我寫 turn 0 <code>[label:Y] [confidence:0.93 投票 14/15]</code>，你 audit 後用 <code>|</code> append，永遠不覆寫（它同時是對話日誌）。</li>
+      <li>KF 放 keyword 欄不放 caption；時間一律 2 位小數，排序才對。</li>
+      <li>雙寫鐵則：catalog SQL＋JPG 內嵌 XMP，catalog 崩可從 XMP 讀回。</li>
+    </ul>
+
+    <h2>Pick=-1 清理（釋出空間）</h2>
+    <p>你在 LR 把 MOV 標 Reject → 我明確跑 cleanup 才處理：先搬 <code>_TRASH/&lt;場景&gt;/</code> 隔離 7 天再真刪（誤標可救回）；刪 MOV 本體，不刪已抽的 STILL／KP。不自動觸發。</p>
+  </section>
+
+  <!-- ============ T7 工具索引 ============ -->
+  <section class="tab" id="t7">
+    <h2>🧰 影片端工具（各自獨立頁，細節在那裡改）</h2>
+    <div class="tools">
+      <div class="tool-card"><b>scene_build 素材歸場景</b><small>Phase A。倒卡暫存區 → 時區校正 → 分天分場景 → VLM 評分／關鍵字 → XMP → 兩個世界結構＋LR／FCP 工作檔。</small><a href="./scene-build.html">工具頁 →</a></div>
+      <div class="tool-card"><b>trip-fcpx-build 旅遊影片匯入 fcpx</b><small>Phase B。整趟 MOV_&lt;day&gt; 一次匯進 FCP：event＝天、場景＝關鍵字、移動中／建築／飲食、O-Log2 LUT、Video-H/V。</small><a href="./trip-fcpx-build.html">工具頁 →</a></div>
+      <div class="tool-card"><b>fcpxmld-export 撿片批次出圖</b><small>Phase D。吃 .fcpxmld 切 ★4 HL、抽 KP 單禎、kp_autolabel 補色標。</small><a href="./fcpxmld-export.html">工具頁 →</a></div>
+      <div class="tool-card"><b>初剪規格選擇器</b><small>Phase E。勾輸出規格／拼貼版型／時間線組裝 → 複製規格字串給我 → 我出 fcpxml 你讀入。</small><a href="./initcut-spec-picker.html">工具頁 →</a></div>
+      <div class="tool-card"><b>montage-auto-move 進片照片分場景</b><small>to_montage → _創作/_montage/&lt;day&gt;/&lt;場景&gt;/，與 export-auto-move 同一支腳本換參數。</small><a href="./montage-auto-move.html">工具頁 →</a></div>
+      <div class="tool-card"><b>export-auto-move 產出自動分場景</b><small>to_export（含 HL 短片）→ _export/&lt;day&gt;/&lt;場景&gt;/；先烤 catalog 星等／色標再搬。</small><a href="./export-auto-move.html">工具頁 →</a></div>
+      <div class="tool-card"><b>描述標籤版型庫 narrative_tag</b><small>機票感「移動中」航跡＋景點地名條，透明 ProRes 疊層。</small><a href="./narrative-tag-tool.html">工具頁 →</a></div>
+      <div class="tool-card"><b>標題選擇器 title_layer</b><small>長景／霓虹標題，橫直自動排版，alpha 出透明 ProRes。</small><a href="./title-picker.html">工具頁 →</a></div>
+      <div class="tool-card"><b>配樂選擇器 music_scout</b><small>音樂庫算 BPM／段落／能量帶，看文字挑配樂接卡點。</small><a href="./music-picker.html">工具頁 →</a></div>
+      <div class="tool-card"><b>自動剪輯片型地圖</b><small>骨幹六步＋片型卡（長景／POST／移動中…），各片型 roadmap 在那裡。</small><a href="./autoedit-map.html">總表 →</a></div>
+      <div class="tool-card"><b>出片規格總表</b><small>YouTube／IG／HL／KP／縮時／保存規格＋六個坑。</small><a href="./export-specs.html">規格頁 →</a></div>
+      <div class="tool-card"><b>Irene 技能包 對照筆記</b><small>她那套的標籤同步她那邊，我們只留參考；說「hello irene」才走。</small><a href="./irene-pack.html">對照頁 →</a></div>
+      <div class="tool-card"><b>LRTimelapse 7 Pro 協同教程</b><small>縮時是獨立第三條產線：RAW 直出 ProRes 原生像素。</small><a href="./lrtimelapse-guide.html">教程 →</a></div>
+      <div class="tool-card"><b>Robert 工具箱</b><small>裝了哪些技能包／自寫工具／CLI／外部軟體。</small><a href="./toolbox.html">清單 →</a></div>
+    </div>
+  </section>
+
+  <!-- ============ T8 變更紀錄 ============ -->
+  <section class="tab" id="t8">
+    <h2>📜 舊頁對照（本書取代了哪些頁、內容去哪了）</h2>
+    <div class="tablewrap"><table>
+      <tr><th>舊頁</th><th>日期</th><th>狀態</th><th>內容現在在</th></tr>
+      <tr><td>影片剪輯知識庫 V2.1（video-editing-kb）</td><td>06-03（patch 至 07-05）</td><td>🔒 被本書取代</td><td>🗺️ 全流程／🧠 Schema／📐 規格／⌨️ 操作</td></tr>
+      <tr><td>FCPX 操作指南（fcpx-operations-guide）</td><td>07-08</td><td>🔒 被本書取代</td><td>🤖 FCP AI 功能</td></tr>
+      <tr><td>FCPX 撿片 Cheat Sheet（_fcpx-cheatsheet）</td><td>06-02</td><td>🔒 歷史（星等舊表已作廢）</td><td>快捷鍵／維運 → ⌨️；星等 → ⭐ 現行表</td></tr>
+      <tr><td>撿片關鍵字總表（picking-keywords）</td><td>08-03</td><td>🔒 併入本書</td><td>⭐ 撿片定義（唯一來源搬到這）</td></tr>
+      <tr><td>影片 NG／KP／HL／KF Schema 紀錄（_video-schema）</td><td>05-27</td><td>🔒 歷史</td><td>🧠 Schema・抽幀</td></tr>
+      <tr><td>影片剪輯知識庫 更新紀錄（_video-editing-kb-changelog）</td><td>06-03～07-05</td><td>🔒 併入</td><td>本頁下方＋📖 時間軸</td></tr>
+      <tr><td>2026-07-27 知識更新（_kb-2026-07-27）</td><td>07-27</td><td>🔒 併入</td><td>資料夾規矩／to_montage → 🗺️；星等／IR／Irene → ⭐、📖</td></tr>
+      <tr><td>全 Pipeline 總覽（pipeline-overview）</td><td>05-16</td><td>⚠️ 保留（照片＋共用核心仍現狀）</td><td>影片半邊以本書 🗺️ 為準</td></tr>
+    </table></div>
+
+    <h2>📜 變更紀錄（新到舊）</h2>
+    <h3>V3.0 · 2026-09-12</h3>
+    <ul><li>九頁併一本，分頁導覽。定義唯一來源從 picking-keywords 搬到 ⭐ 分頁。影片端步驟代號改用 Phase A–F（取代 S1–S8／9V-a～e）。加入 06-19 保存策略、07-20 兩個世界、08-05 O-Log2 解碼、08-23 KP 不分色、08-24 內建 title、09-06 ir_tag 提速與 Video-H/V。</li></ul>
+    <h3>2026-08-23 · KP 只打裸 KP</h3>
+    <ul><li>Ctrl+6~9 還你自用；色標由我出圖後看圖補，kp_autolabel 一次改檔名／關鍵字／色標／描述。舊 KP_R/Y/G/P 仍相容。</li></ul>
+    <h3>2026-08-03 · 撿片關鍵字總表建立</h3>
+    <ul><li>「定義只改一處」原則立下：星等 07-27 改版漏了初剪選擇器，8/3 才抓到。收進 ★1–5、★2 效果關鍵字、KP、自動關鍵字、快捷鍵。</li></ul>
+    <h3>2026-07-27 · 星等大改版</h3>
+    <ul><li>★5 長篇／★4 HL／★3 生活片段／★2 工具標記／★1 未定。舊定義（0★生活紀錄／1★專題報導／2★活動攝影／3★保留／4★精彩／5★史詩級）與 07-03 五星架構全部作廢。腳本行為：只有 ★4 切 HL，★5 印在報告尾端等 concat。</li><li>同日：IR 挑片方法接進建庫（內容／景別／品質／建議HL 關鍵字）；Irene 兩套並行規則；踩坑：手機影片旋轉標記、同名檔靜默覆蓋、115- 前綴是「做完了」標記、雲端照片不能拿來做 montage。</li></ul>
+    <h3>2026-07-26 · to_montage 定位＋資料夾規矩</h3>
+    <ul><li>to_ 落地區頂層／_ 成品各回各家；to_montage 門檻 ★4/★5＋指定場景，LR 匯出預設長邊 5760 不回寫；影片選片事實只在 .fcpxmld；有字有圖走 FCP、靠音樂走剪映。</li></ul>
+    <h3>V2.1.2 · 2026-07-05 · trip_fcpx_build 定名</h3>
+    <ul><li>整趟 MOV_&lt;day&gt; 一次匯進 FCP。event＝天（主／次拆開）、場景＝keyword collection、leave-in-place。實證比利時 day2-4、德國 day1-6（421 clips）。07-07 移動中定義收緊。</li></ul>
+    <h3>2026-07-03 · 五星撿片架構（已被 07-27 取代）</h3>
+    <ul><li>⭐5 完整敘事直出／⭐4 精彩保留（被 ⭐3 包含就剔除）／⭐3 初剪身體／⭐2 拼貼／⭐1 PIP 暫緩；初剪規格選擇器上線。去重規則保留。</li></ul>
+    <h3>2026-06-19 · 保存策略</h3>
+    <ul><li>只留 MOV_ 原檔＋.fcpxmld，不導 ProRes master；匯入用不複製讓 MOV_ 當唯一原檔家。</li></ul>
+    <h3>V2.1.1 · 2026-06-08 · fcpxmld-export 定型</h3>
+    <ul><li>一條指令吃 .fcpxmld 全自動出圖，實證零錯誤。輸出版面鎖死 _preview_mov_KP／_HL 分場景（取代場景夾內 _KP/_HL 與 _preview_KP/_preview_HL_mov 兩個過渡版）。.fcpbundle 託管素材改抓 day 場景夾原檔。HLG→SDR。KP 抽的是原生解析度。待補：★5 concat、出圖套 LUT。</li></ul>
+    <h3>V2.1 · 2026-06-03 · 攻略書成書</h3>
+    <ul><li>智慧抽幀減量（3→10 秒、0.1→0.4）；KP＝I/O 同禎＋keyword（曾誤建議改 marker，已更正）；HL 以 keyword＋I/O 為準、F 只是視覺；一次 Export XML 驅動全部；統一步驟編號 S1–S8／9P／9V；主書只寫現在、更新過程另頁。</li></ul>
+    <h3>2026-06-02 · Cheat Sheet</h3>
+    <ul><li>FCP 庫放 _MOV/ 內與素材同層（後來改成 _創作/ wrapper）；Star1–5 整支類型；KP_R/Y/G/P；Delete＝NG；STILL metadata 全內嵌 JPG 不出 sidecar。</li></ul>
+    <h3>2026-05-17 · Schema v2</h3>
+    <ul><li>NG 不切、HP→HL、MOV rating＝類型、colorLabel＝主體、HL⊆KP、_FCPX 暫存廢掉、H.264 取代 HEVC（LR 灰畫面）。</li></ul>
+  </section>
+
+  <footer>
+    <span class="cred">影片剪輯筆記本 V3.0</span> · 2026-09-12 · Robert 整併維護 · 定義只改 ⭐ 分頁 · 工具細節在各工具頁<br>
+    舊頁下架時間：待 James 確認後，舊網址改導向本頁對應分頁。
+  </footer>
+</div>
+<script>
+(function(){
+  var KEY='vnb_tab_v3';
+  var btns=document.querySelectorAll('#tabbar button'), tabs=document.querySelectorAll('.tab');
+  function show(id,push){
+    tabs.forEach(function(t){t.classList.toggle('on',t.id===id);});
+    btns.forEach(function(b){b.classList.toggle('on',b.dataset.t===id);});
+    try{localStorage.setItem(KEY,id);}catch(e){}
+    if(push){ try{history.replaceState(null,'','#'+id);}catch(e){} }
+    window.scrollTo({top:0});
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t,true);});});
+  var h=(location.hash||'').replace('#',''); var saved=null; try{saved=localStorage.getItem(KEY);}catch(e){}
+  var init = document.getElementById(h)?h:(document.getElementById(saved)?saved:'t0');
+  show(init,false);
+  window.addEventListener('hashchange',function(){var x=(location.hash||'').replace('#',''); if(document.getElementById(x)) show(x,false);});
+})();
+</script>
+</body>
+</html>
