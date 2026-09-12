@@ -50,12 +50,16 @@
 </p>
 
   <p style="font-size:.86rem;color:var(--muted);margin:.2rem 0 1rem;padding:.6rem .8rem;border-left:3px solid var(--gold);background:rgba(200,162,74,.07)">🔸 <b>下面的「片頭／中場／全場」只是建議時機</b>，不是規定。你要把片頭版型拿去片尾、把全場元件只放中間一段，在 <a href="./initcut-spec-picker.html" style="color:var(--gold)">初剪規格選擇器</a> 裡都能自由指定 —— 那邊的描述標籤是<b>動態清單，要幾層加幾層</b>。</p>
+  <h2 id="lcat" style="margin-top:1.2rem">🏷️ 圖層總目錄（T／G 編號 · 三頁同一張表）</h2>
+  <p style="font-size:.86rem;color:var(--muted)">James 2026-09-12 拍板：版型庫、初剪規格選擇器、長篇景色模板共用這張表。<b>T＝文字類</b>（FCPX 內建 title，你在 FCP 改字）／<b>G＝生成類</b>（我出透明 ProRes）。下面每個版型的標題都標了對應編號。</p>
+  <div id="layerCat"></div>
+  <script src="./layer-catalog.js"></script><script>renderLayerCat(document.getElementById('layerCat'));</script>
 <h2>🎬 片頭</h2>
   <div class="grid">
 <div class="card">
       <img class="zoom" src="narrative-assets/tpl_opening.jpg" alt="開場標題卡">
       <div class="body"><span class="tag">現行</span>
-        <h3>① 雜誌風格標題卡</h3>
+        <h3>T1＋T2 · ① 雜誌風格標題卡</h3>
         <p>影片最前面 5 秒的字幕卡，三層：<b>地名（滿版粗黑體）</b> ＋ <b>中文草寫一句（日記感）</b> ＋ 規格小字。<br>對標 Abao Vision 開頭那張。字體／配色跟長景同一套，開場接正片不會斷裂。</p>
         <div class="use">🎬 <b>片頭</b> · 16:9 與 9:16 兩版<br><a href="./title-picker.html?tpl=1&ratio=16:9">→ 16:9 進標題選擇器編輯</a> ｜ <a href="./title-picker.html?tpl=1&ratio=9:16">→ 9:16 進標題選擇器編輯</a><br>適用 <b>所有長片開頭</b> · 中文草寫＝行楷-繁（James 2026-08-05：「中文草寫比較有日記感」）· 之後可加「對話日記」訊息泡泡</div>
       </div>
@@ -86,66 +90,66 @@
   💡 小貼士：一開始訂 75%，實際疊到<b>亮底</b>畫面（機場大廳、白天外景）才發現會糊掉——尤其桌面去背後地圖少了深色底襯。<b>90% 是實測後的定案</b>。真的要讓某一段更透，跟 Robert 說哪一段就好，一段一段調不影響其他段。<br>
   💡 小貼士：<b>要方形就叫 AI 直接生方形，別拿直式裁</b>。市區圖裁成方形時掉了拙政園／觀前街／山塘街三個地標——裁掉的畫面救不回來，重生一張才 US$0.19。</div>
   <div class="tier">
-      <h3>②-A 機票 <span class="band">✈️ 洲際／長程</span></h3>
+      <h3>G1-A · ②-A 機票 <span class="band">✈️ 洲際／長程</span></h3>
       <div class="pair">
-        <figure><img class="zoom" src="narrative-assets/tier_A_9x16.jpg" alt="②-A 機票 9:16">
+        <figure><img class="zoom" src="narrative-assets/tier_A_9x16.jpg" alt="G1-A · ②-A 機票 9:16">
           <figcaption>📱 9:16 直式　票上左・地圖下右（方形）</figcaption></figure>
-        <figure><img class="zoom" src="narrative-assets/tier_A_16x9.jpg" alt="②-A 機票 16:9">
+        <figure><img class="zoom" src="narrative-assets/tier_A_16x9.jpg" alt="G1-A · ②-A 機票 16:9">
           <figcaption>🖥️ 16:9 橫式　票左・地圖右（方形）</figcaption></figure>
       </div>
       <p><b>🎫 票</b>（程式出）：Passage 白色極簡：班次＋起訖站＋當前地點＋時間<br><b>🗺️ 地圖</b>：程式版真實世界地圖（Natural Earth 國界，航跡照 GPS 走）</p>
       <div class="pr nop">程式畫的，沒有生圖提示詞</div>
     </div>
   <div class="tier">
-      <h3>②-B 遊覽車票 <span class="band">🚌 跨區／一天多段</span></h3>
+      <h3>G1-B · ②-B 遊覽車票 <span class="band">🚌 跨區／一天多段</span></h3>
       <div class="pair">
-        <figure><img class="zoom" src="narrative-assets/tier_B_9x16.jpg" alt="②-B 遊覽車票 9:16">
+        <figure><img class="zoom" src="narrative-assets/tier_B_9x16.jpg" alt="G1-B · ②-B 遊覽車票 9:16">
           <figcaption>📱 9:16 直式　票上左・地圖下右（方形）</figcaption></figure>
-        <figure><img class="zoom" src="narrative-assets/tier_B_16x9.jpg" alt="②-B 遊覽車票 16:9">
+        <figure><img class="zoom" src="narrative-assets/tier_B_16x9.jpg" alt="G1-B · ②-B 遊覽車票 16:9">
           <figcaption>🖥️ 16:9 橫式　票左・地圖右（方形）</figcaption></figure>
       </div>
       <p><b>🎫 票</b>（程式出）：復古米黃票根：左票根 Day／段次、線稿圖示、襯線大寫起訖＋朱紅箭頭、撕票口真的挖穿<br><b>🗺️ 地圖</b>：AI 復古手繪<b>區域</b>地圖（山林湖泊等級）</p>
       <div class="pr"><a href="./prompt-library.html#PR-002">🎨 這張地圖的生圖提示詞 → PR-002</a></div>
     </div>
   <div class="tier">
-      <h3>②-C 高鐵票 <span class="band">🚄 跨都市</span></h3>
+      <h3>G1-C · ②-C 高鐵票 <span class="band">🚄 跨都市</span></h3>
       <div class="pair">
-        <figure><img class="zoom" src="narrative-assets/tier_C_9x16.jpg" alt="②-C 高鐵票 9:16">
+        <figure><img class="zoom" src="narrative-assets/tier_C_9x16.jpg" alt="G1-C · ②-C 高鐵票 9:16">
           <figcaption>📱 9:16 直式　票上左・地圖下右（方形）</figcaption></figure>
-        <figure><img class="zoom" src="narrative-assets/tier_C_16x9.jpg" alt="②-C 高鐵票 16:9">
+        <figure><img class="zoom" src="narrative-assets/tier_C_16x9.jpg" alt="G1-C · ②-C 高鐵票 16:9">
           <figcaption>🖥️ 16:9 橫式　票左・地圖右（方形）</figcaption></figure>
       </div>
       <p><b>🎫 票</b>（程式出）：科技感 HUD：深色玻璃面板、青色發光細邊、四角準星、等寬字數據列、行程進度軌<br><b>🗺️ 地圖</b>：AI <b>立體浮空地形圖</b>：木桌上的浮雕模型，中間一台高鐵跑過去</p>
       <div class="pr"><a href="./prompt-library.html#PR-010">🎨 這張地圖的生圖提示詞 → PR-010</a></div>
     </div>
   <div class="tier">
-      <h3>②-D 市區捷運巴士 <span class="band">🚏 同一都市內</span></h3>
+      <h3>G1-D · ②-D 市區捷運巴士 <span class="band">🚏 同一都市內</span></h3>
       <div class="pair">
-        <figure><img class="zoom" src="narrative-assets/tier_D_9x16.jpg" alt="②-D 市區捷運巴士 9:16">
+        <figure><img class="zoom" src="narrative-assets/tier_D_9x16.jpg" alt="G1-D · ②-D 市區捷運巴士 9:16">
           <figcaption>📱 9:16 直式　票上左・地圖下右（方形）</figcaption></figure>
-        <figure><img class="zoom" src="narrative-assets/tier_D_16x9.jpg" alt="②-D 市區捷運巴士 16:9">
+        <figure><img class="zoom" src="narrative-assets/tier_D_16x9.jpg" alt="G1-D · ②-D 市區捷運巴士 16:9">
           <figcaption>🖥️ 16:9 橫式　票左・地圖右（方形）</figcaption></figure>
       </div>
       <p><b>🎫 票</b>（程式出）：牛皮巴士票（切角／粗黑體／票號直排）或剪票根（超大路線號＋剪票孔＋剪訖章）<br><b>🗺️ 地圖</b>：AI <b>水彩鳥瞰全景</b>：整座城市的空拍插畫，地標照真實建築畫，<b>標籤是程式疊的所以字不會錯</b></p>
       <div class="pr"><a href="./prompt-library.html#PR-014">🎨 這張地圖的生圖提示詞 → PR-014</a></div>
     </div>
   <div class="tier">
-      <h3>②-E 船票 <span class="band">⛴️ 渡輪／遊船</span></h3>
+      <h3>G1-E · ②-E 船票 <span class="band">⛴️ 渡輪／遊船</span></h3>
       <div class="pair">
-        <figure><img class="zoom" src="narrative-assets/tier_E_9x16.jpg" alt="②-E 船票 9:16">
+        <figure><img class="zoom" src="narrative-assets/tier_E_9x16.jpg" alt="G1-E · ②-E 船票 9:16">
           <figcaption>📱 9:16 直式　票上左・地圖下右（方形）</figcaption></figure>
-        <figure><img class="zoom" src="narrative-assets/tier_E_16x9.jpg" alt="②-E 船票 16:9">
+        <figure><img class="zoom" src="narrative-assets/tier_E_16x9.jpg" alt="G1-E · ②-E 船票 16:9">
           <figcaption>🖥️ 16:9 橫式　票左・地圖右（方形）</figcaption></figure>
       </div>
       <p><b>🎫 票</b>（程式出）：黑白高對比禮券感：左直排標籤、花體大標、日期方塊、右票根船身線稿＋條碼<br><b>🗺️ 地圖</b>：AI 古海圖：羅盤玫瑰、方位射線、朱紅虛線航線、錨點碼頭</p>
       <div class="pr"><a href="./prompt-library.html#PR-009">🎨 這張地圖的生圖提示詞 → PR-009</a></div>
     </div>
   <div class="tier">
-      <h3>②-F 復古蝕刻車票 <span class="band">🎟️ 任何交通工具</span></h3>
+      <h3>G1-F · ②-F 復古蝕刻車票 <span class="band">🎟️ 任何交通工具</span></h3>
       <div class="pair">
-        <figure><img class="zoom" src="narrative-assets/tier_F_9x16.jpg" alt="②-F 復古蝕刻車票 9:16">
+        <figure><img class="zoom" src="narrative-assets/tier_F_9x16.jpg" alt="G1-F · ②-F 復古蝕刻車票 9:16">
           <figcaption>📱 9:16 直式　票上左・地圖下右（方形）</figcaption></figure>
-        <figure><img class="zoom" src="narrative-assets/tier_F_16x9.jpg" alt="②-F 復古蝕刻車票 16:9">
+        <figure><img class="zoom" src="narrative-assets/tier_F_16x9.jpg" alt="G1-F · ②-F 復古蝕刻車票 16:9">
           <figcaption>🖥️ 16:9 橫式　票左・地圖右（方形）</figcaption></figure>
       </div>
       <p><b>🎫 票</b>（程式出）：維多利亞古董票：雙線外框、<b>月份＋日期格把出發日圈起來</b>、右上圓形紅印<br><b>🗺️ 地圖</b>：地圖任選（示範搭 PR-002 手繪區域圖）</p>
@@ -157,8 +161,8 @@
 <div class="card">
       <img class="zoom" src="narrative-assets/tpl_scene.jpg" alt="景點地名">
       <div class="body"><span class="tag">現行</span>
-        <h3>③ 景點極簡地名條</h3>
-        <p>英文小字寬字距 ＋「｜ 中文地名 ｜」細直線框，置中。乾淨編輯感（宮崎風）。</p>
+        <h3>T5 · ③ 景點極簡地名條</h3>
+        <p>英文小字寬字距 ＋「｜ 中文地名 ｜」細直線框，置中。乾淨編輯感（宮崎風）。<br><b>2026-09-12 起改用 FCPX 內建 title 出（T5）</b>：字能在 FCP 直接改；細直線框改用 title 內建線條，樣式略簡。</p>
         <div class="use">適用 <b>景點 / 地標</b> · 地名 Robert 從 GPS 自動帶<br><a href="./initcut-spec-picker.html">→ 去初剪規格選擇器設定</a></div>
       </div>
     </div>
@@ -169,7 +173,7 @@
 <div class="card">
       <img class="zoom" src="narrative-assets/tpl_wave_led.jpg" alt="音波緞帶與點陣LED">
       <div class="body"><span class="tag">現行</span>
-        <h3>④ 音波緞帶 ＋ 點陣 LED 曲名</h3>
+        <h3>G2 音波緞帶 ＋ T6 曲名跑馬燈（④）</h3>
         <p><b>音波緞帶</b>：44 條細線疊正弦波做出緞帶扭轉，<b>振幅跟著音樂音量走</b>
         （ffmpeg 的 showwaves 做不出來，自己畫的）。<br>
         <b>點陣 LED</b>：字縮成 9 排點陣、每格畫圓點，暗燈留很淡的白看得到燈板網格，曲名一格格往左跑。</p>
@@ -183,7 +187,7 @@
 <div class="card">
       <img class="zoom" src="narrative-assets/tpl_longview.jpg" alt="長景版型 橫式">
       <div class="body"><span class="tag">現行</span>
-        <h3>⑤ 長景版型（橫式 16:9）</h3>
+        <h3>⑤ 長景版型（橫式 16:9）＝ T1–T4＋T6＋G2＋G3 組合</h3>
         <p>風景陪伴長片用。<b>大標題滿版</b>＋左清單／右中文副標左右對稱＋底部音波緞帶／點陣 LED 曲名／JT 標。
         文字層只顯示 4 秒，底部效果全片保留。</p>
         <div class="use">適用 <b>長篇景色系列</b> · <a href="./longview-aimusic-preset.html">固定出片模板 →</a></div>
@@ -192,7 +196,7 @@
 <div class="card">
       <img class="zoom" src="narrative-assets/tpl_longview_v.jpg" alt="長景版型 直式">
       <div class="body"><span class="tag">現行</span>
-        <h3>⑤-B 長景版型（直式 9:16）</h3>
+        <h3>⑤-B 長景版型（直式 9:16）＝ 同組合直式</h3>
         <p>同一套版型的直式版，<b>不是把橫式壓扁</b>：左右兩欄改上下堆疊、副標置中、
         清單移到左下角齊頭靠左、字級各自放大。</p>
         <div class="use">適用 <b>Reels / Shorts</b> · 排版隨畫布自動切換 · <a href="./longview-aimusic-preset.html">固定出片模板 →</a></div>
@@ -201,7 +205,7 @@
 <div class="card">
       <img class="zoom" src="narrative-assets/tpl_neon_behind.jpg" alt="霓虹標題 文字在人後面">
       <div class="body"><span class="tag">現行</span>
-        <h3>⑥ 霓虹標題（文字夾在人物後面）</h3>
+        <h3>G4 · ⑥ 霓虹標題（文字夾在人物後面）</h3>
         <p>人像片用。四個字塊＋七款霓虹配色，<b>文字被人物擋住</b>——用 macOS Vision 逐幀去背，
         本機跑不用付費 API。🚨 一律拿原生 4K 去背，遮罩才細。</p>
         <div class="use">適用 <b>人像 / 有主體的畫面</b> · <a href="./title-picker.html">工具說明 →</a></div>
@@ -212,20 +216,20 @@
   <h2>規劃中（陸續補上）</h2>
   <div class="grid">
     <div class="card soon"><div class="ph">對話日記泡泡 · 待 James 決定語氣</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>🎞️ 中場 · 對話日記過場</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>G9 · 🎞️ 中場 · 對話日記過場</h3>
         <p>左下角訊息泡泡一句句跳出來（「嗨，我是 James」「現在是阿姆斯特丹的下午兩點」）。
         Abao Vision 最有效的一招：兩小時沒旁白的片，靠四句話就有「有人陪你」的感覺。</p>
         <div class="use">⏸ 待決定：中文還英文？語氣親切還是安靜？</div></div></div>
     <div class="card soon"><div class="ph">建築製圖感 · 範例待生</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>⑦ 建築卡</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>G6 · ⑦ 建築卡</h3>
         <p>建築名＋風格＋年代，接歸檔的建築風格關鍵字（例「哥德式｜科隆大教堂」）。</p>
         <div class="use">適用 <b>建築</b></div></div></div>
     <div class="card soon"><div class="ph">郵戳／明信片感 · 範例待生</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>⑧ 郵戳／明信片感</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>G7 · ⑧ 郵戳／明信片感</h3>
         <p>地名＋座標＋日期，像護照蓋章。</p>
         <div class="use">適用 <b>景點</b></div></div></div>
     <div class="card soon"><div class="ph">餐券／收據感 · 範例待生</div>
-      <div class="body"><span class="tag soont">規劃中</span><h3>⑨ 餐券／收據感</h3>
+      <div class="body"><span class="tag soont">規劃中</span><h3>G8 · ⑨ 餐券／收據感</h3>
         <p>店名／菜名，票根收據質感。</p>
         <div class="use">適用 <b>飲食</b></div></div></div>
   </div>

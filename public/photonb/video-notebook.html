@@ -192,10 +192,11 @@
       <tr><th>快捷鍵</th><th>星等</th><th>意思</th><th>工具怎麼處理</th><th>狀態</th></tr>
       <tr><td>Ctrl+5</td><td>★5</td><td><b>長篇剪輯</b>：口播／課程／演唱會／開箱介紹，有主題的</td><td>框整段＋段內 Delete 挖掉壞段 → concat 成一支長片</td><td>⚠️ 未實作，報告會列出</td></tr>
       <tr><td>Ctrl+4</td><td>★4</td><td><b>HL 精華</b>（動態照片）</td><td>切 1080p H.264 短片段 → <code>_preview_mov_HL/</code></td><td>✅ 唯一會切出檔案的星等</td></tr>
-      <tr><td>Ctrl+3</td><td>★3</td><td><b>生活片段・進剪輯主體</b></td><td>只記不切，靠關鍵字批次撈進初剪／蒙太奇</td><td>🔨 批次剪輯待做</td></tr>
+      <tr><td>Ctrl+3 或 <span class="kbd">F</span></td><td>★3</td><td><b>生活片段・進剪輯主體</b>　🆕 2026-09-12：F（Favorite）＝★3，兩者等價、過渡期並存、之後改用 F</td><td>只記不切，靠關鍵字批次撈進初剪／蒙太奇；工具把 Favorite 範圍當 ★3 讀</td><td>🔨 批次剪輯待做</td></tr>
       <tr><td>Ctrl+2</td><td>★2</td><td><b>工具標記</b>＝「B-roll 中的 B-roll」，帶過就好</td><td>★2 ＋ 一個效果關鍵字（同一段範圍）→ 見②</td><td>🔨 部分實作</td></tr>
       <tr><td>Ctrl+1</td><td>★1</td><td>未定案</td><td>—</td><td>⏸</td></tr>
     </table></div>
+    <div class="note"><b>🚫 整支沒有 Star／F／Delete＝不出彩</b>，不進任何流程（James 2026-09-12）。</div>
     <div class="note"><b>⚖️ 重疊時誰優先：</b>同一支同時有 ★3 和 ★4 → 時間軸帶 ★3 那段（長的），★4 只是裡面的精華點；★5 同理。初剪選擇器裡「⭐4 去重：被 ⭐3 包含就剔除」就是這條。</div>
     <div class="note"><b>💡 顏色分不出來：</b>匯入時場景名已是藍色 keyword 條，再標 ★ 還是藍色。★4／★5 加一個 <span class="kbd">F</span>（Favorite）→ 多一條綠色蓋上去，一眼看出必出片候選。F 只是視覺，工具認的是 ★ 關鍵字。</div>
 
@@ -437,7 +438,7 @@
       <div class="tool-card"><b>長篇景色＋AI 音樂 固定模板</b><small>「一個固定產品線」：不經撿片，自動挑平穩風景長溶接成陪伴長片，版型參數鎖死，你只挑片頭變體／素材批／曲子。跟初剪選擇器共用描述標籤、標題、配樂三個選擇器。</small><a href="./longview-aimusic-preset.html">工具頁 →</a></div>
       <div class="tool-card"><b>montage-auto-move 進片照片分場景</b><small>to_montage → _創作/_montage/&lt;day&gt;/&lt;場景&gt;/，與 export-auto-move 同一支腳本換參數。</small><a href="./montage-auto-move.html">工具頁 →</a></div>
       <div class="tool-card"><b>export-auto-move 產出自動分場景</b><small>to_export（含 HL 短片）→ _export/&lt;day&gt;/&lt;場景&gt;/；先烤 catalog 星等／色標再搬。</small><a href="./export-auto-move.html">工具頁 →</a></div>
-      <div class="tool-card"><b>描述標籤版型庫 narrative_tag</b><small>機票感「移動中」航跡＋景點地名條，透明 ProRes 疊層。</small><a href="./narrative-tag-tool.html">工具頁 →</a></div>
+      <div class="tool-card"><b>描述標籤版型庫 narrative_tag ＝ 圖層總目錄</b><small>🏷️ T／G 編號（2026-09-12）：T1–T6 文字類走 FCPX 內建 title、G1–G9 生成類我出透明 ProRes；初剪選擇器、長景模板、標題選擇器都用同一張表。</small><a href="./narrative-tag-tool.html#lcat">總目錄 →</a></div>
       <div class="tool-card"><b>標題選擇器 title_layer</b><small>長景／霓虹標題，橫直自動排版，alpha 出透明 ProRes。</small><a href="./title-picker.html">工具頁 →</a></div>
       <div class="tool-card"><b>配樂選擇器 music_scout</b><small>音樂庫算 BPM／段落／能量帶，看文字挑配樂接卡點。</small><a href="./music-picker.html">工具頁 →</a></div>
       <div class="tool-card"><b>自動剪輯片型地圖</b><small>骨幹六步＋片型卡（長景／POST／移動中…），各片型 roadmap 在那裡。</small><a href="./autoedit-map.html">總表 →</a></div>
@@ -464,6 +465,8 @@
     </table></div>
 
     <h2>📜 變更紀錄（新到舊）</h2>
+    <h3>V3.0.2 · 2026-09-12</h3>
+    <ul><li>圖層統一編號 T／G（James 拍板）：版型庫加總目錄、初剪選擇器 ④ 改成 T／G 勾選（規格字串 v3）、長景模板 ② 顯示同表並鎖定 T1–T4、標題選擇器變體改 G4-x／G5-x；T5 地名條改用 FCPX 內建 title。</li><li>撿片：James 宣告 F（Favorite）＝★3 生活片段，過渡期並存、之後改用 F；Delete＝NG；整支無 Star／F／D＝不出彩。★1/2/4/5 重定義待他續說。</li></ul>
     <h3>V3.0.1 · 2026-09-12</h3>
     <ul><li>🧰 工具索引補「初剪規格選擇器 vs 長景固定模板」一句話對照（James 問兩者差異）。</li></ul>
     <h3>V3.0 · 2026-09-12</h3>

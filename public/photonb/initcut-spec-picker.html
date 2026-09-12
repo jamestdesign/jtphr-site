@@ -143,7 +143,8 @@
 
   <!-- D 描述標籤 -->
   <div class="group" data-g="描述標籤">
-    <h2>④ 描述標籤</h2>
+    <h2>④ 圖層（描述標籤）— T／G 編號</h2>
+    <p class="hint">🏷️ 編號跟 <a href="./narrative-tag-tool.html#lcat" style="color:var(--gold)">版型庫總目錄</a>、<a href="./longview-aimusic-preset.html" style="color:var(--gold)">長景模板</a> 同一張表：<b>T＝文字類</b>（FCPX 內建 title，你在 FCP 改字）／<b>G＝生成類</b>（我出透明 ProRes）。</p>
     <p class="hint">疊畫面的 overlay <b>想加幾層就加幾層</b>，沒有上限。清單順序＝出場順序，可上下移動。<br>
       🔸 <b>時機只是建議</b>：版型庫把①②歸在「片頭」只是常見用法，你要把片頭版型拿去片尾、把全場元件只放中間，都可以。</p>
 
@@ -154,12 +155,12 @@
     <div id="ovList"></div>
     <button class="addbtn" id="addOv">＋ 新增描述標籤</button>
     <p class="hint" style="margin-top:.5rem">版型看樣：<a href="./narrative-tag-tool.html" style="color:var(--gold)">描述標籤版型庫 →</a>　
-      標題要自己調字體配色：<a href="./title-picker.html" style="color:var(--gold)">標題選擇器 →</a>（存成變體 ①-A 填編號帶入——僅特殊視覺如霓虹/手寫；一般文字 2026-08-24 起走 FCPX 內建 title）</p>
+      標題要自己調字體配色：<a href="./title-picker.html" style="color:var(--gold)">標題選擇器 →</a>（霓虹存成 G4-A、手寫存成 G5-A 填編號帶入；一般文字走 T 類內建 title）</p>
   </div>
 
   <!-- E LOGO -->
   <div class="group" data-g="LOGO">
-    <h2>⑤ LOGO</h2>
+    <h2>⑤ G3 LOGO</h2>
     <p class="hint">品牌標疊在畫面上。兩顆標同一套銀線語言、透明底，壓在任何畫面都不會擋住重要資訊。</p>
     <div class="row"><span class="lbl">要哪顆</span><div class="chips gold" data-k="LOGO標" data-def="圓形鏡頭標">
       <span class="chip">不放</span><span class="chip">圓形鏡頭標</span><span class="chip">橫式 JT|PHR</span><span class="chip">兩個都要</span></div></div>
@@ -186,7 +187,7 @@
     <button class="copy" id="copy">📋 複製規格</button>
   </div>
 
-  <footer>PhotoNB · 影片初剪規格選擇器 v2.1 — 由 Robert 維護 · 對接工具：initcut assembler · narrative_tag · logo_tag</footer>
+  <footer>PhotoNB · 影片初剪規格選擇器 v3（T／G 圖層編號 2026-09-12） — 由 Robert 維護 · 對接工具：initcut assembler · narrative_tag · logo_tag</footer>
 </div>
 
 <script>
@@ -256,14 +257,13 @@
   // 版型 → 樣圖（James 2026-08-23 要求：選了版型直接看縮圖，不用跳去版型庫）
   //   ②-A/②-B 有 16:9／9:16 兩版，會跟著①的輸出比例自動換；其餘只有一張。
   const SHOT={
-    '\u2460':{one:'narrative-assets/tpl_opening.jpg'},
-    '\u2461-A':{h:'narrative-assets/tier_A_16x9.jpg', v:'narrative-assets/tier_A_9x16.jpg'},
-    '\u2461-B':{h:'narrative-assets/tier_B_16x9.jpg', v:'narrative-assets/tier_B_9x16.jpg'},
-    '\u2462':{one:'narrative-assets/tpl_scene.jpg'},
-    '\u2463':{one:'narrative-assets/tpl_wave_led.jpg'},
-    '\u2464':{one:'narrative-assets/tpl_longview.jpg'},
-    '\u2464-B':{one:'narrative-assets/tpl_longview_v.jpg'},
-    '\u2465':{one:'narrative-assets/tpl_neon_behind.jpg'},
+    'T1':{one:'narrative-assets/tpl_opening.jpg'}, 'T2':{one:'narrative-assets/tpl_opening.jpg'},
+    'T3':{one:'narrative-assets/tpl_longview.jpg'}, 'T4':{one:'narrative-assets/tpl_longview.jpg'},
+    'T5':{one:'narrative-assets/tpl_scene.jpg'}, 'T6':{one:'narrative-assets/tpl_wave_led.jpg'},
+    'G1-A':{h:'narrative-assets/tier_A_16x9.jpg', v:'narrative-assets/tier_A_9x16.jpg'},
+    'G1-B':{h:'narrative-assets/tier_B_16x9.jpg', v:'narrative-assets/tier_B_9x16.jpg'},
+    'G2':{one:'narrative-assets/tpl_wave_led.jpg'},
+    'G4':{one:'narrative-assets/tpl_neon_behind.jpg'},
   };
   function shotFor(id){
     const m=SHOT[id]; if(!m) return null;
@@ -271,18 +271,27 @@
     return (val('\u6bd4\u4f8b')||'').indexOf('9:16')===0 ? m.v : m.h;
   }
   const TPL=[
-    {id:'\u2460',   n:'\u2460 \u96dc\u8a8c\u98a8\u683c\u6a19\u984c\u5361', f:['variant']},
-    {id:'\u2461-A', n:'\u2461-A \u6a5f\u7968\uff0f\u8eca\u7968\u611f', f:['move']},
-    {id:'\u2461-B', n:'\u2461-B \u904a\u89bd\u8eca\u7968\uff0b\u8def\u7dda\u5716', f:['move']},
-    {id:'\u2462',   n:'\u2462 \u666f\u9ede\u5730\u540d\u689d', f:['scale']},
-    {id:'\u2463',   n:'\u2463 \u97f3\u6ce2\u7dec\u5e36\uff0b\u9ede\u9663 LED', f:['parts']},
-    {id:'\u2464',   n:'\u2464 \u9577\u666f\u7248\u578b\uff08\u6a6b\uff09', f:['variant']},
-    {id:'\u2464-B', n:'\u2464-B \u9577\u666f\u7248\u578b\uff08\u76f4\uff09', f:['variant']},
-    {id:'\u2465',   n:'\u2465 \u9713\u8679\u6a19\u984c', f:['variant']},
-    {id:'\u2466',   n:'\u2466 \u5efa\u7bc9\u5361\uff08\u898f\u5283\u4e2d\uff09', f:[]},
-    {id:'\u2467',   n:'\u2467 \u90f5\u6233\uff08\u898f\u5283\u4e2d\uff09', f:[]},
-    {id:'\u2468',   n:'\u2468 \u9910\u5238\uff08\u898f\u5283\u4e2d\uff09', f:[]},
-    {id:'\u81ea\u8a02', n:'\u270d\ufe0f \u81ea\u8a02\u6587\u5b57', f:[]},
+    {id:'T1',   n:'T1 主標題（內建 title）', f:[]},
+    {id:'T2',   n:'T2 副標／中文草寫（內建 title）', f:[]},
+    {id:'T3',   n:'T3 場景字卡（內建 title）', f:[]},
+    {id:'T4',   n:'T4 SCENES 清單（內建 title）', f:[]},
+    {id:'T5',   n:'T5 地名條（內建 title，GPS 自動帶）', f:['scale']},
+    {id:'T6',   n:'T6 曲名跑馬燈（內建 Ticker）', f:[]},
+    {id:'G1-A', n:'G1-A ✈️ 洲際 機票＋世界地圖', f:['move']},
+    {id:'G1-B', n:'G1-B 🚌 跨區 遊覽車票＋手繪區域圖', f:['move']},
+    {id:'G1-C', n:'G1-C 🚄 跨都市 高鐵票＋立體地形圖', f:['move']},
+    {id:'G1-D', n:'G1-D 🚏 市內 巴士票＋鳥瞰圖', f:['move']},
+    {id:'G1-E', n:'G1-E ⛴️ 水路 船票＋古海圖', f:['move']},
+    {id:'G1-F', n:'G1-F 🎟️ 蝕刻車票（地圖任選）', f:['move']},
+    {id:'G2',   n:'G2 音波緞帶', f:['parts']},
+    {id:'G3',   n:'G3 LOGO 標（細節在 ⑤）', f:[]},
+    {id:'G4',   n:'G4 霓虹標題（填變體 G4-A）', f:['variant']},
+    {id:'G5',   n:'G5 手寫 write-on 標題（填變體 G5-A）', f:['variant']},
+    {id:'G6',   n:'G6 建築卡（規劃中）', f:[]},
+    {id:'G7',   n:'G7 郵戳／明信片（規劃中）', f:[]},
+    {id:'G8',   n:'G8 餐券／收據（規劃中）', f:[]},
+    {id:'G9',   n:'G9 對話日記泡泡（規劃中）', f:[]},
+    {id:'自訂', n:'✍️ 自訂文字（內建 title）', f:[]},
   ];
   const WHEN=['\u7247\u982d','\u4e2d\u5834','\u7247\u5c3e','\u5168\u5834\uff08\u6574\u652f\uff09','\u6307\u5b9a\u5834\u666f'];
   const TRIG=['\u5168\u90e8\u5957\u7528','\u95dc\u9375\u5b57','\u624b\u52d5\u6307\u5b9a'];
@@ -294,7 +303,7 @@
     const el=document.createElement('div'); el.className='grpCard';
     el.innerHTML=`
       <div class="grpHead">
-        <span class="gidx">\u{1F3AC} \u63cf\u8ff0\u6a19\u7c64 <span class="gnum"></span></span>
+        <span class="gidx">\u{1F3F7}\ufe0f \u5716\u5c64 <span class="gnum"></span></span>
         <span>
           <button class="del up"   title="\u4e0a\u79fb">\u25b2</button>
           <button class="del down" title="\u4e0b\u79fb">\u25bc</button>
@@ -314,7 +323,7 @@
       <div class="fld"><span class="fl">\u7248\u4f4d</span><select class="txt sel pos">${POS.map(o=>`<option>${o}</option>`).join('')}</select></div>
       <div class="fld"><span class="fl">\u6587\u5b57\u8f38\u51fa</span><select class="txt sel out">${OUT.map(o=>`<option>${o}</option>`).join('')}</select></div>
       <div class="fld f-variant" style="display:none"><span class="fl">\u6a19\u984c\u8b8a\u9ad4</span>
-        <input class="txt variant" type="text" placeholder="\u2460-A\uff08\u5728\u6a19\u984c\u9078\u64c7\u5668\u5b58\u7684\uff09" list="ovVars"></div>
+        <input class="txt variant" type="text" placeholder="G4-A\uff0fG5-A\uff08\u5728\u6a19\u984c\u9078\u64c7\u5668\u5b58\u7684\uff09" list="ovVars"></div>
       <div class="fld f-move" style="display:none"><span class="fl">\u4ea4\u901a</span>
         <select class="txt sel mv">${['\u2708\u98db\u6a5f','\u{1F684}\u706b\u8eca','\u{1F687}\u5730\u9435','\u{1F68C}\u5df4\u58eb','\u{1F6A2}\u8239'].map(o=>`<option>${o}</option>`).join('')}</select>
         <select class="txt sel mvL">${['\u5169\u5c64','\u53ea\u8cc7\u8a0a','\u53ea\u5730\u5716'].map(o=>`<option>${o}</option>`).join('')}</select></div>
@@ -322,7 +331,7 @@
         <select class="txt sel scale">${['\u5c0f','\u6a19\u6e96','\u5927'].map(o=>`<option ${o==='\u6a19\u6e96'?'selected':''}>${o}</option>`).join('')}</select></div>
       <div class="fld f-parts" style="display:none"><span class="fl">\u5143\u4ef6</span>
         <label class="poslbl"><input type="checkbox" class="pWave" checked> \u97f3\u6ce2</label>
-        <label class="poslbl"><input type="checkbox" class="pLed" checked> LED \u66f2\u540d</label>
+        <label class="poslbl"><input type="checkbox" class="pLed" checked> T6 \u8dd1\u99ac\u71c8</label>
         <label class="poslbl"><input type="checkbox" class="pLogo" checked> LOGO</label></div>
       <div class="fld"><span class="fl">\u6a19\u984c</span><input class="txt ttl" type="text" placeholder="\u7559\u7a7a\uff1dRobert \u4f9d\u5834\u666f\u81ea\u52d5\u586b"></div>
       <div class="fld"><span class="fl">\u5167\u6587</span><textarea class="txt bdy" placeholder="\u7559\u7a7a\uff1d\u81ea\u52d5\u751f"></textarea></div>`;
@@ -336,6 +345,8 @@
       q('.whenN').style.display = q('.when').value.indexOf('\u6307\u5b9a')===0?'':'none';
       q('.trigKw').style.display = q('.trig').value==='\u95dc\u9375\u5b57'?'':'none';
       q('.secs').disabled = q('.when').value.indexOf('\u5168\u5834')===0;
+      // T 類一律 FCPX 內建 title（可編輯）、G 類一律出圖（透明 ProRes）
+      const isT = /^T|^\u81ea/.test(q('.tpl').value); q('.out').value = isT ? OUT[1] : OUT[0]; q('.out').disabled = true;
       // 版型樣圖：有就顯示，沒有就說一聲（比跳去版型庫再回來快）
       const img=q('.shot'), na=q('.shotNa'), src=shotFor(q('.tpl').value);
       if(src){ img.src=src; img.style.display='block'; na.style.display='none'; }
@@ -374,7 +385,7 @@
 
   // ---- 生成規格字串 ----
   function build(){
-    let s=`【初剪規格 v2】`
+    let s=`【初剪規格 v3·T/G】`
       +`${val('解析度')}·${val('比例')}·${val('幀率')}·${val('色彩')}`
       +` ┃ 拼貼:${val('拼貼版型')}·${val('每組')}·${val('長度')}`
       +` ┃ 時間線:⭐3${val('排序')}·⭐4去重${val('Star4去重')}·${val('轉場')}`;
@@ -393,7 +404,7 @@
         if(vis('.f-parts')){
           const on=[];
           if(c.querySelector('.pWave').checked) on.push('音波');
-          if(c.querySelector('.pLed').checked)  on.push('LED');
+          if(c.querySelector('.pLed').checked)  on.push('T6跑馬燈');
           if(c.querySelector('.pLogo').checked) on.push('LOGO');
           t+=`｜${on.length?on.join('+'):'全關'}`;
         }
@@ -411,12 +422,12 @@
     }
     const mark=val('LOGO標');
     if(mark==='不放'){
-      s+=`\n┃ LOGO:不放`;
+      s+=`\n┃ G3 LOGO:不放`;
     }else if(mark==='兩個都要'){
-      s+=`\n┃ LOGO:橫式 JT|PHR[置中·標準·${val('LOGO透明度')}·掃光開·片頭3秒]`
+      s+=`\n┃ G3 LOGO:橫式 JT|PHR[置中·標準·${val('LOGO透明度')}·掃光開·片頭3秒]`
         +` ＋ 圓形鏡頭標[${val('LOGO版位')}·${val('LOGO大小')}·${val('LOGO透明度')}·掃光${val('LOGO掃光')}·全片]`;
     }else{
-      s+=`\n┃ LOGO:${mark}[${val('LOGO版位')}·${val('LOGO大小')}·${val('LOGO透明度')}·掃光${val('LOGO掃光')}·${val('LOGO時機')}]`;
+      s+=`\n┃ G3 LOGO:${mark}[${val('LOGO版位')}·${val('LOGO大小')}·${val('LOGO透明度')}·掃光${val('LOGO掃光')}·${val('LOGO時機')}]`;
     }
     document.getElementById('spec').textContent=s;
     return s;

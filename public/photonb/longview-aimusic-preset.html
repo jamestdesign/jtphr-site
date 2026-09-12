@@ -66,7 +66,7 @@
 
   <div class="lock">
     🔒 <b>這頁是「參數鎖定版」</b>，跟標題選擇器的分工：<br>
-    <b>標題選擇器</b>＝自由設計單一標題（存成 ①-A／①-B 變體）<br>
+    <b>標題選擇器</b>＝只做特殊視覺的變體（霓虹存 G4-A、手寫存 G5-A）<br>
     <b>這頁</b>＝整支長片的固定配方，只挑「用哪個變體、哪批素材、哪首曲子」。
   </div>
 
@@ -76,10 +76,13 @@
   </div>
 
   <div class="group">
-    <h2>② 文字圖層（FCPX 內建 title）</h2>
+    <h2>② 圖層（T／G 編號，跟初剪選擇器同一張表）</h2>
+    <div id="layerCat" style="margin:.4rem 0 .8rem"></div>
+    <script src="./layer-catalog.js"></script><script>renderLayerCat(document.getElementById('layerCat'),{lock:true});</script>
+    <p class="hint">🔒 長景是固定產品線：T1–T4 鎖定、T6／G2／G3 預設開可關，其餘不用。要改的只有下面的字跟 ⑤ 的開關。</p>
     <p class="hint">James 2026-08-24 拍板：<b>所有文字一律用 FCPX 內建 title</b> —— 你在 FCP 點開就能改字、檔案 0 MB、動畫走 FCP 原生。
       Robert 只出 FCP 做不到的生成類圖層（音波／跑馬燈／LOGO，見 ⑤）。<br>
-      <b>固定三層</b>：主標題 ／ 場景字卡（會跟著段落換）／ SCENES 清單（✦ 標現在這段，逐段下移）。</p>
+      <b>固定：T1 主標題 ／ T2 副標 ／ T3 場景字卡（跟著段落換）／ T4 SCENES 清單（✦ 標現在這段，逐段下移）</b>。</p>
     <div class="row"><label>版面參考</label>
       <span style="display:flex;gap:.6rem;flex-wrap:wrap">
         <a href="./narrative-assets/tpl_title_16x9.jpg" target="_blank"><img src="./narrative-assets/tpl_title_16x9.jpg" style="height:104px;border-radius:8px;border:1px solid var(--line,#3a3a55)" alt="16:9 文字版面"></a>
@@ -89,12 +92,12 @@
       版型與座標取自你自己在 FCP 排的 <code>文字板塊16:9／9:16排列測試</code>。<br>
       內建 title：<b>16:9</b> Custom 3D＋Line Reveal＋Zoom　<b>9:16</b> Custom 3D＋Zoom＋Fade</p>
 
-    <h2 style="margin-top:1.2rem">②-b 三層文字內容</h2>
+    <h2 style="margin-top:1.2rem">②-b 文字內容（T1／T2／T4）</h2>
     <p class="hint">留空＝<b>Robert 依你選的來源 trip 自動帶入</b>（場景名照歸檔的場景夾抓，中文字卡我先擬、你在 FCP 直接改）。</p>
-    <div class="row"><label>主標題</label><input class="txt" id="iT1" placeholder="例：AMSTERDAM（留空＝依 trip 帶入）"></div>
-    <div class="row"><label>次標題</label><input class="txt" id="iT2" placeholder="例：荷蘭 · 九街與運河"></div>
-    <div class="row"><label>清單標題</label><input class="txt" id="iLT" value="SCENES"></div>
-    <div class="row" style="align-items:flex-start"><label>場景內容</label>
+    <div class="row"><label>T1 主標題</label><input class="txt" id="iT1" placeholder="例：AMSTERDAM（留空＝依 trip 帶入）"></div>
+    <div class="row"><label>T2 副標</label><input class="txt" id="iT2" placeholder="例：荷蘭 · 九街與運河"></div>
+    <div class="row"><label>T4 清單標題</label><input class="txt" id="iLT" value="SCENES"></div>
+    <div class="row" style="align-items:flex-start"><label>T4 場景內容</label>
       <textarea class="txt" id="iLI" rows="4" style="min-height:4.6rem" placeholder="一行一段，留空＝Robert 依 trip 的場景自動列（✦ 會標現在這段）"></textarea></div>
     <div class="row"><label>片頭秒數</label><input class="txt" id="iOpen" value="5" style="max-width:6rem"></div>
   </div>
@@ -124,8 +127,8 @@
   </div>
 
   <div class="group">
-    <h2>⑤ 全場元件</h2>
-    <p class="hint">這裡只放 <b>Robert 生成的圖層</b>（FCP 內建做不到的）。文字類全部在 ② 設定。</p>
+    <h2>⑤ 全場元件（G2 音波・T6 跑馬燈・G3 LOGO）</h2>
+    <p class="hint">同 T／G 表：G2、G3 我出透明 ProRes；T6 是 FCP 內建 Ticker。點一下切開關。</p>
     <div class="chips" id="parts"></div>
   </div>
 
@@ -279,15 +282,15 @@ function draw(){
   document.querySelectorAll("#minlen .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.minlen));
   document.querySelectorAll("#vmode .chip").forEach(c=>c.classList.toggle("on",c.dataset.k===S.vmode));
   document.querySelectorAll("#parts .chip").forEach(c=>c.classList.toggle("on",
-    (c.dataset.k==="音波"&&S.wave)||(c.dataset.k==="跑馬燈"&&S.led)||
-    (c.dataset.k==="LOGO"&&S.logo)));
+    (c.dataset.k==="G2 音波"&&S.wave)||(c.dataset.k==="T6 跑馬燈"&&S.led)||
+    (c.dataset.k==="G3 LOGO"&&S.logo)));
   document.getElementById("spec").textContent =
 `長篇景色模板 ┃ 版式:${S.ratio} ┃ 出片:${S.deliv}
-文字:主標「${g("iT1")||"(依trip)"}」· 次標「${g("iT2")||"(依trip)"}」· 片頭 ${g("iOpen")} 秒
+圖層:T1「${g("iT1")||"(依trip)"}」· T2「${g("iT2")||"(依trip)"}」· T3 場景字卡(依段落) · T4 清單 · 片頭 ${g("iOpen")} 秒
 素材:${g("iTrip")} · 平穩風景 · ${S.minlen} · 目標 ${g("iLen")} 分 · ${S.fade} · 直式${S.vmode}${g("iSkip")?" · 排除 "+g("iSkip"):""}
 音樂:${S.msrc} · ${S.mpick} · ${g("iTrack")} · ${g("iDb")}dB
-元件:音波${S.wave?"開":"關"} 跑馬燈${S.led?"開":"關"} LOGO${S.logo?"開":"關"}
-清單:${g("iLT")} ┃ ${g("iLI").split("\n").filter(x=>x.trim()).join(" / ")||"(依trip自動列)"}`;
+元件:G2 音波${S.wave?"開":"關"} · T6 跑馬燈${S.led?"開":"關"} · G3 LOGO${S.logo?"開":"關"}
+T4 清單:${g("iLT")} ┃ ${g("iLI").split("\n").filter(x=>x.trim()).join(" / ")||"(依trip自動列)"}`;
 }
 chips(document.getElementById("ratio"),["16:9 橫","9:16 直"],k=>S.ratio=k);
 chips(document.getElementById("minlen"),["≥8 秒","≥10 秒","≥12 秒"],k=>S.minlen=k);
@@ -296,8 +299,8 @@ chips(document.getElementById("fade"),["2.5 秒長溶接","1.5 秒","硬切"],k=
 chips(document.getElementById("mpick"),["Robert 幫我挑","我自己指定"],k=>S.mpick=k);
 chips(document.getElementById("msrc"),["我的音樂素材庫","Irene 原創曲（可商用）","我的 AI 自創曲","純環境音（無音樂）"],k=>S.msrc=k);
 chips(document.getElementById("deliv"),["燒進成品","透明 ProRes（進 FCP）","出 fcpxml 我自己剪","透明元件＋fcpxml（元件式）"],k=>S.deliv=k);
-chips(document.getElementById("parts"),["音波","跑馬燈","LOGO"],
-  k=>{if(k==="音波")S.wave=!S.wave;else if(k==="跑馬燈")S.led=!S.led;
+chips(document.getElementById("parts"),["G2 音波","T6 跑馬燈","G3 LOGO"],
+  k=>{if(k==="G2 音波")S.wave=!S.wave;else if(k==="T6 跑馬燈")S.led=!S.led;
       else S.logo=!S.logo;});
 ["iT1","iT2","iOpen","iTrip","iLen","iTrack","iDb","iLT","iLI","iSkip"].forEach(id=>
   document.getElementById(id).addEventListener("input",draw));
