@@ -1,79 +1,8 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>影片剪輯知識庫 · 更新紀錄</title>
-<meta name="description" content="影片剪輯攻略書的版本演變歷史。">
-<meta name="date" content="2026-06-03">
-<style>
-  :root { --bg:#fafaf7; --fg:#1f2933; --muted:#5c6773; --accent:#d4441f; --accent-2:#1e6b8f; --border:#e3e0d6; --card:#fff; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg); font-family:"PingFang TC","Noto Sans TC",system-ui,sans-serif; line-height:1.7; }
-  .wrap { max-width:820px; margin:0 auto; padding:40px 28px 80px; }
-  a.back { color:var(--accent-2); text-decoration:none; font-size:14px; }
-  h1 { color:var(--accent); font-size:26px; margin:18px 0 4px; }
-  .sub { color:var(--muted); margin:0 0 28px; }
-  h2 { color:var(--accent); border-left:5px solid var(--accent); padding-left:12px; font-size:20px; margin:36px 0 12px; }
-  .ver { display:inline-block; background:var(--accent); color:#fff; font-size:12px; padding:2px 9px; border-radius:3px; margin-right:8px; }
-  .date { color:var(--muted); font-size:13px; }
-  ul { margin:10px 0; }
-  li { margin:6px 0; }
-  code { background:#f3efe6; padding:2px 6px; border-radius:3px; font-size:.9em; }
-  .card { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent-2); border-radius:8px; padding:16px 20px; margin:16px 0; }
-  footer { border-top:1px solid var(--border); margin-top:48px; padding-top:20px; color:var(--muted); font-size:13px; }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <a class="back" href="./video-editing-kb.html">← 回攻略書</a>
-  <h1>影片剪輯知識庫 · 更新紀錄</h1>
-  <p class="sub">這頁記錄攻略書版本怎麼演變。平常看主書即可，想知道「改了哪裡、為什麼改」再看這裡。</p>
-
-  <h2><span class="ver">V2.1.2</span><span class="date">2026-07-05</span></h2>
-  <ul>
-    <li><strong>工具定名 <code>旅遊影片匯入fcpx</code>（trip_fcpx_build）</strong>：整趟 <code>MOV_&lt;day&gt;</code> 一次匯進 FCP 建 Library。event=每天（主/次拆開）、每個場景=keyword collection、影片 leave-in-place（不複製）。新增 §8⁰。實證：比利時 day2-4、德國 day1-6（421 clips / 8 events）。轉正式（原草稿）。</li>
-    <li>新平鋪 <code>_次</code> 與舊主/次子夾兩種結構都吃；配套出圖端仍為 <code>fcpxmld-export</code>（§9）。</li>
-    <li><strong>微服更新不改版</strong>：主線維持 V2.1，此為 patch 紀錄。</li>
-  </ul>
-
-  <h2><span class="ver">V2.1.1</span><span class="date">2026-06-08</span></h2>
-  <p>9V-c 批次出圖從「待寫腳本」升格成<strong>已定型工具</strong>，並把輸出版面鎖死（James：「不要每次都不一樣」）：</p>
-  <ul>
-    <li><strong>工具定名 <code>fcpxmld-export</code></strong>：一條指令吃 <code>.fcpxmld</code> 全自動出圖。實證 day2（KP61+HL42）、day1/day4（HL31+KP11），零錯誤。</li>
-    <li><strong>🔒 輸出版面鎖死</strong>：<code>_preview_mov_KP/&lt;場景&gt;/</code>（單禎）+ <code>_preview_mov_HL/&lt;場景&gt;/</code>（片段），分場景、檔名一眼看出是 mov 導出預覽檔。先前 §10 誤寫成落 <code>_export/</code>，已更正。</li>
-    <li><strong>.fcpbundle 路徑修正</strong>：素材被 FCP 託管時，工具改抓 day 場景夾原檔，避免輸出套進 bundle 深層路徑。</li>
-    <li><strong>HLG→SDR</strong>：iPhone <code>IMG_*.MOV</code>（Rec.2020 HLG）自動 tonemap 轉 Rec.709，否則畫面會灰；手機 <code>VID*.mp4</code>（709）原樣。</li>
-    <li><strong>KP 抽圖更正</strong>：原寫「4K」實際是<strong>原生解析度</strong>（<code>-q:v 1</code>）。LR 標註含色標 Label + 關鍵字 + 來源時碼。</li>
-    <li><strong>待補</strong>：Star1「長篇發表（去 NG）」concat 拼接；出圖<strong>套 LUT 調色</strong>（James 2026-06-08「找時間來嘗試」）。</li>
-  </ul>
-  <p class="date">工作說明：<code>robert/skills/fcpxmld-export_撿片出圖工具.md</code>。未來方向：人工撿片 → AI 代理人自動撿片（調研中）。</p>
-
-  <h2><span class="ver">V2.1</span><span class="date">2026-06-03</span></h2>
-  <p>把散在三份文件（FCPX 操作速查、NG/KP/HL/KF schema、7 步 pipeline）彙整成<strong>一本完整攻略書</strong>，並依當天討論定下這些工序：</p>
-  <ul>
-    <li><strong>智慧抽幀減量</strong>：抽幀從「每 3 秒 + 場景偵測」改成「場景偵測為主、靜態 10 秒才保底 1 張」。一支約 70 張原始幀 → 抽 ~15 張。目的從「找 keeper」轉成「看懂這段是幹嘛用的」。</li>
-    <li><strong>KP（好單禎）操作確定</strong>：FCPX <code>i/o 同一禎 + keyword KP_R/Y/G/P</code>（位置 + 主體分類一鍵）。畫質無損（Robert 從原片抽 4K），分類寫進 XMP 讓 LR import 直接讀。
-      <br><span class="date">※ 過程中曾誤把此法當「螢幕截圖」建議改 marker，已更正：i/o+keyword 一鍵更省，維持原做法。</span></li>
-    <li><strong>HL（精彩瞬間）定義</strong>：以 <code>keyword + i/o 範圍</code>為準，Favorite(F) 只是 FCPX 綠色視覺輔助；clip 給 rating 4★/5★。Robert 切短片段放網路相簿當「動態照片」觀賞，段邊界 = i/o 框的範圍。</li>
-    <li><strong>1★ 改名「長篇發表（去 NG）」</strong>：i/o 框整段 + 段內壞鏡頭按 Delete(Reject) → Robert 去 NG 後把好段拼成一支完整檔。<br>※ 其他類型 NG 維持「只標不切」，只有 1★ 會真的切掉拼接。</li>
-    <li><strong>結構原則</strong>：主書 = 乾淨完整攻略書（只講現在怎麼做）；更新過程收進這頁。</li>
-    <li><strong>收斂整理</strong>：把多份重疊文件收成「總覽地圖 + 攻略書」兩本，全部套統一步驟編號 <strong>S1–S8 共用 / 9P-a~c 照片 / 9V-a~e 影片</strong>。舊的 schema 紀錄、FCPX cheatsheet 退成歷史（不再列在筆記本，內容已併入攻略書）。</li>
-  </ul>
-
-  <div class="card">
-    <strong>歷史版本（V2.1 的前身，已併入攻略書，保留供回溯）</strong>
-    <ul>
-      <li><a href="./_video-schema.html">影片 NG/KP/HL/KF Schema 紀錄</a> — 2026-05-27 永漢實證</li>
-      <li><a href="./_fcpx-cheatsheet.html">FCPX 撿片操作 Cheat Sheet</a> — 2026-06-02</li>
-    </ul>
-    <p class="date">內容都已整合進最新攻略書，這兩篇只保留供回溯，不再單獨列在筆記本首頁。</p>
-  </div>
-
-  <footer>
-    <p>整理：Robert ／ 對接：James</p>
-    <a class="back" href="./video-editing-kb.html">← 回攻略書</a>
-  </footer>
-</div>
-</body>
-</html>
+<!doctype html>
+<html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>已併入影片剪輯筆記本 · 影片剪輯知識庫 更新紀錄</title>
+<meta name="description" content="本頁已於 2026-09-12 併入影片剪輯筆記本 V3，自動轉向對應分頁。" />
+<meta name="date" content="2026-09-12" />
+<meta http-equiv="refresh" content="0; url=./video-notebook.html#t8">
+<style>body{margin:0;background:#0b1022;color:#f4f1e8;font-family:'Noto Sans TC',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}a{color:#d8b65a}</style></head>
+<body><div><p>「影片剪輯知識庫 更新紀錄」已併入 <b>影片剪輯筆記本 V3</b>，正在轉向…</p><p><a href="./video-notebook.html#t8">沒有自動跳轉請點這裡 →</a></p></div></body></html>
