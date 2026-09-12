@@ -44,6 +44,7 @@
   .s-half{color:var(--blue);border-color:rgba(127,182,240,.5);}
   .s-plan{color:var(--grey);border-color:rgba(139,147,168,.45);}
   .lnk{font-size:.8rem;}
+  .who{display:inline-block;font-size:.7rem;color:var(--gold2);border:1px dashed var(--line);border-radius:999px;padding:.05rem .55rem;margin-top:.1rem;}
   .callout{background:rgba(216,182,90,.08);border:1px solid var(--line);border-left:3px solid var(--gold);
            border-radius:10px;padding:.7rem .9rem;margin:1.1rem 0;font-size:.87rem;}
   footer{color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);margin-top:2.4rem;padding-top:.8rem;}
@@ -99,12 +100,13 @@
   </div>
 
   <h2>🎞️ 片型模組</h2>
-  <p class="sub">每一種片型 ＝ 骨幹上的一組參數。做過的有工具頁，還沒做的先列著。</p>
+  <p class="sub">每一種片型 ＝ 骨幹上的一組參數。做過的有工具頁，還沒做的先列著。<br><b>骨架＝初剪那條（你全挑）；片型＝支線，差別只在「素材誰挑、挑多少」</b>——每張卡的虛線標籤就是「誰挑」（James 2026-09-12 釐清）。</p>
   <div class="grid">
 
     <div class="card">
       <span class="st s-ok">已有工具</span>
       <h3>🪟 長篇景色 ＋ AI 音樂</h3>
+      <span class="who">🤖 我全挑（只挑風景）→ 你設片頭曲子</span>
       <p>平穩風景長溶接、音樂頻道版型，對標 Abao Vision 的系列自動出片。<b>還缺 AI 音樂</b>。</p>
       <div class="lnk"><a href="./longview-aimusic-preset.html">固定出片模板 →</a>　<a href="./roadmap-longview.html">待辦清單 →</a></div>
     </div>
@@ -112,6 +114,7 @@
     <div class="card">
       <span class="st s-ok">已有工具</span>
       <h3>📱 社群輪播 POST</h3>
+      <span class="who">🙋 你挑照片 → 我排版</span>
       <p>7 頁 1080×1350 雜誌式圖文輪播，config 驅動。第一版已交（Augustiner 啤酒館）。</p>
       <div class="lnk"><a href="./post-template.html">HTML 模板 →</a>　<a href="./roadmap-post.html">待辦清單 →</a></div>
     </div>
@@ -119,6 +122,7 @@
     <div class="card">
       <span class="st s-ok">已有工具</span>
       <h3>🎬 卡點剪輯</h3>
+      <span class="who">🙋 你撿片打星 → 我照拍切</span>
       <p>吃 <code>.fcpxmld</code> 的撿片結果，照音樂節拍切。阿里山首跑 16 刀 30 秒。<b>待調：套 LUT、照片混剪</b>。</p>
       <div class="lnk"><a href="./initcut-spec-picker.html">初剪規格選擇器 →</a></div>
     </div>
@@ -126,6 +130,7 @@
     <div class="card">
       <span class="st s-ok">已有工具</span>
       <h3>✈️ 交通移動</h3>
+      <span class="who">🤖 我依關鍵字挑好 → 你剪</span>
       <p>機票／車票感圖層＋真實航跡地圖，做過桃園→阿姆斯特丹整段。</p>
       <div class="lnk"><a href="./narrative-tag-tool.html">版型庫 ②-A / ②-B →</a></div>
     </div>
@@ -133,6 +138,7 @@
     <div class="card">
       <span class="st s-ok">已有工具</span>
       <h3>🧩 拼貼 grid</h3>
+      <span class="who">🙋 你打 ★2 拼貼 → 我拼</span>
       <p>★2 工具標記的去處：馬賽克／壁貼／剪貼簿三風格，影片拼貼全自動。</p>
       <div class="lnk"><a href="./grid-style-library.html">風格目錄 →</a></div>
     </div>
@@ -140,6 +146,7 @@
     <div class="card">
       <span class="st s-ok">已有工具</span>
       <h3>🌅 縮時 ProRes</h3>
+      <span class="who">🤖 我分段挑起點 → 你 LRTimelapse 調</span>
       <p>一資料夾 JPG 序列 → 一支 8K60p ProRes422 全幅縮時。</p>
       <div class="lnk"><span style="color:var(--muted)">工具已可用，尚未開獨立頁</span></div>
     </div>
@@ -147,6 +154,7 @@
     <div class="card">
       <span class="st s-half">部分做過</span>
       <h3>🌉 蒙太奇（剪映）</h3>
+      <span class="who">🙋 你挑照片（LR ★4/5）→ 我撈 clip 打包</span>
       <p>照片端已通（<code>to_montage</code> → <code>_montage</code>）；<b>影片端還缺「依關鍵字撈 clip 打包」</b>。</p>
       <div class="lnk"><a href="./roadmap-post.html">第 6 階段待辦 →</a></div>
     </div>
@@ -154,6 +162,7 @@
     <div class="card">
       <span class="st s-plan">規劃中</span>
       <h3>🎤 口播影片</h3>
+      <span class="who">🙋 你撿片（規劃中）</span>
       <p>有講話的素材：保留原聲、剪停頓吃螺絲、逐字稿自動上字幕、音樂墊底閃避人聲。</p>
       <div class="lnk"><span style="color:var(--muted)">缺：字幕規範（一行幾字、怎麼斷句）先定案</span></div>
     </div>
@@ -161,6 +170,7 @@
     <div class="card">
       <span class="st s-plan">規劃中</span>
       <h3>📚 教學影片</h3>
+      <span class="who">🙋 你撿片（規劃中）</span>
       <p>章節化、重點字卡、步驟編號、螢幕錄影與實拍混排。</p>
       <div class="lnk"><span style="color:var(--muted)">還沒開始，等你要做再談規格</span></div>
     </div>
@@ -168,6 +178,7 @@
     <div class="card">
       <span class="st s-plan">規劃中</span>
       <h3>📦 開箱影片</h3>
+      <span class="who">🙋 你撿片（規劃中）</span>
       <p>細節特寫節奏快、規格數字上字卡、質感光影。可沿用拼貼與卡點。</p>
       <div class="lnk"><span style="color:var(--muted)">還沒開始，等你要做再談規格</span></div>
     </div>
