@@ -90,6 +90,7 @@ lr_bake_to_jpg "&lt;trip&gt;.lrcat" "&lt;trip&gt;/_export" --items-from "&lt;tri
     <li><b>LR Export 檔名選「原始檔名」</b> → 成品 stem 才對得上母檔（例 <code>RKLU8425.jpg</code> ↔ 母檔 <code>RKLU8425.DNG</code>）。</li>
     <li>尾綴會<b>先 strip 再比對</b>：<code>-2</code> / <code>-Edit</code> / <code>-Enhanced</code> / <code>-NR</code> / <code>-HDR</code> / <code>-Pano</code> / <code>-EVT</code> / <code>-EVTO</code>…；但母檔本身真實的 <code>_01</code> 尾會<b>保留</b>不誤刪。</li>
     <li><b>對不上</b>（找不到母檔）的檔會<b>列清單、留在 to_export/</b>，不亂搬 → 你檢查檔名。</li>
+    <li><b>場景夾怎麼認</b>：資料夾名以兩位數字開頭、後面接 <code>_</code>、空白或 <code>-</code> 都算場景夾（例：<code>06_1751_瑰麗泳池</code>、<code>11-0000_縮時精選</code>）。你自己在 day 底下新建的精選夾照這規則命名就會自動對上。</li>
     <li>同名衝突（一個 stem 對到多場景）會在報告裡標 ⚠️（實務上 trip 內檔名唯一，通常 0 衝突）。</li>
   </ul>
 
