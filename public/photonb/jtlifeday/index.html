@@ -27,13 +27,14 @@ pre{white-space:pre-wrap;font-family:inherit;font-size:.86rem;background:transpa
 /* 文青：紙感、拍立得留白 */
 :root[data-skin="wenqing"] article{box-shadow:0 8px 24px rgba(80,60,30,.08);border-radius:2px} :root[data-skin="wenqing"] .hero{padding:10px 10px 0;background:#fff;border:1px solid var(--line);border-bottom:0} :root[data-skin="wenqing"] .herocap{background:#fff;border:1px solid var(--line);border-top:0;padding:.35rem 10px .6rem;font-size:.78rem;color:var(--muted);text-align:center;letter-spacing:.1em}
 /* 電影：寬銀幕、字幕、時間碼 */
-:root[data-skin="cinema"] article{border-radius:0;padding:0 0 1.1rem;border-left:0;border-right:0} :root[data-skin="cinema"] article>*:not(.herowrap){margin-left:1.1rem;margin-right:1.1rem}
+:root[data-skin="cinema"] article{border-radius:0;padding:0 0 1.1rem;border-left:0;border-right:0} :root[data-skin="cinema"] article>*:not(.herowrap){margin-left:1.1rem;margin-right:1.1rem} :root[data-skin="cinema"] article>.date:first-child{margin-top:1.1rem}
 :root[data-skin="cinema"] .herowrap{position:relative;background:#000;margin-bottom:1rem} :root[data-skin="cinema"] .hero{aspect-ratio:2.39/1;object-fit:cover;filter:contrast(1.06) saturate(.85)}
 :root[data-skin="cinema"] .herocap{position:absolute;left:0;right:0;bottom:8%;text-align:center;font-size:.92rem;color:#fff;text-shadow:0 1px 6px #000;letter-spacing:.08em;padding:0 1rem}
 :root[data-skin="cinema"] .date{font-family:ui-monospace,Menlo,monospace;letter-spacing:.18em;color:var(--accent)} :root[data-skin="cinema"] h2{font-weight:700;letter-spacing:.06em} :root[data-skin="cinema"] .thumbs img{aspect-ratio:16/9;filter:saturate(.85)}
 :root[data-skin="cinema"] .mood{border-left-color:var(--accent);font-style:italic;font-weight:300}
 figure.vid{position:relative} figure.vid::after{content:'▶';position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:18px;pointer-events:none}
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9;cursor:zoom-out} #lb img,#lb video{max-width:96vw;max-height:88vh;display:block} #lb .nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.14);color:#fff;border:0;width:46px;height:64px;font-size:26px;cursor:pointer;border-radius:8px} #lb .prev{left:8px} #lb .next{right:8px} #lb .x{position:fixed;top:10px;right:12px;background:transparent;border:0;color:#fff;font-size:30px;cursor:pointer} #lb .cap{position:fixed;left:0;right:0;bottom:12px;text-align:center;color:#ddd;font-size:.82rem;padding:0 3.5rem;font-family:'Noto Sans TC',sans-serif}
+.lock{margin-top:1rem;border:1px dashed var(--line);padding:.6rem .8rem;font-size:.86rem} .lock button{font-family:inherit;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:.15rem .8rem;font-size:.78rem;cursor:pointer} .lock table{border-collapse:collapse;width:100%;margin:.3rem 0} .lock td{border-bottom:1px solid var(--line);padding:.25rem .3rem;font-size:.86rem} .lock td.amt{text-align:right;font-family:ui-monospace,Menlo,monospace;white-space:nowrap} .lock .sum{font-weight:700;color:var(--accent)} .lock pre{display:block;border:0;padding:0;margin:.3rem 0 0;font-size:.84rem}
 footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
 </style></head><body><div class="wrap">
 <header><h1><small>JT LIFE DAY</small>生活記事</h1><div class="skins"><button data-s="wenqing">文青</button> <button data-s="cinema">電影</button></div></header>
@@ -53,22 +54,35 @@ function drawFilters(){const types=['全部',...new Set(E.filter(e=>cur==='全�
  F.querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{curT=b.dataset.t;drawFilters();render()});}
 const pass=e=>(cur==='全部'||(e.category||'生活')===cur)&&(curT==='全部'||e.type===curT);
 drawFilters();
-function render(){document.getElementById('list').innerHTML=E.filter(pass).map((e,i)=>{const base='img/'+e.date+'/';const hero=e.photos[0];
- return `<article><div class="herowrap"><img class="hero zoom" data-e="${i}" data-n="0" src="${base+hero.f}" alt=""><div class="herocap">${esc(hero.cap)}</div></div>
+function render(){document.getElementById('list').innerHTML=E.filter(pass).map((e,i)=>{const base='img/'+e.date+'/';e.photos=e.photos||[];const hero=e.photos[0];
+ return `<article>${hero?`<div class="herowrap"><img class="hero zoom" data-e="${i}" data-n="0" src="${base+hero.f}" alt=""><div class="herocap">${esc(hero.cap)}</div></div>`:''}
  <div class="date">${esc(e.date)}（${esc(e.weekday)}）${esc(e.time)}　·　${esc(e.category||'生活')}／${esc(e.type)}</div><h2>${esc(e.title)}</h2>
  <div class="meta">📍 ${esc(e.place)}${e.kcal_total?`　·　估 <b>${e.kcal_total}</b> 大卡`:''}${e.people?`　·　${e.type==='餐食'?'同行：':''}${esc(e.people)}`:''}${e.voiceover?'　·　🎙️ 口播素材':''}</div>
  <div class="thumbs">${e.photos.slice(1).map((p,k)=>`<figure class="${p.video?'vid':''}"><img class="zoom" data-e="${i}" data-n="${k+1}" src="${base+p.f}" alt="" loading="lazy"><figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}${e.grid?`<figure><img class="zoom" data-e="${i}" data-n="${e.photos.length}" src="${base+e.grid}" alt="" loading="lazy"><figcaption>拼貼（可直接發）</figcaption></figure>`:''}</div>
- <div class="mood">${esc(e.mood)}</div>
+ ${e.mood?`<div class="mood">${esc(e.mood)}</div>`:''}
  ${e.dishes?`<h3>吃了什麼</h3><ul>${e.dishes.map(d=>`<li><b>${esc(d.name)}</b><span class="kcal">約 ${d.kcal} 大卡</span><br>${esc(d.detail)}${d.confirm?`<div class="warn">⚠️ ${esc(d.confirm)}</div>`:''}</li>`).join('')}</ul>`:''}
  ${(e.sections||[]).map(sec=>`<h3>${esc(sec.h)}</h3><ul>${sec.items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`).join('')}
- <h3>${e.type==='餐食'?'評價':'我的結論'}</h3><div>${e.rating?('★'.repeat(e.rating)+'　'):''}${esc(e.verdict)}</div>
- <h3>照片裡的文字</h3>${(e.ocr||[]).map(o=>`<div class="ocr">${esc(o.src)}：${esc(o.jp)} → <span>${esc(o.zh)}</span></div>`).join('')}
- <h3>拿去發文</h3><div class="copy">${['ig','fb','threads'].map(k=>`<button data-i="${i}" data-k="${k}">複製 ${k==='ig'?'IG':k==='fb'?'FB':'Threads'} 文案</button>`).join('')}</div><pre id="pre${i}"></pre>
- <div class="tags">${e.tags.map(t=>`<span>#${esc(t)}</span>`).join('')}</div></article>`}).join('')||'<p>還沒有記事。</p>';
+ ${e.verdict?`<h3>${e.type==='餐食'?'評價':'我的結論'}</h3>`:''}<div>${e.rating?('★'.repeat(e.rating)+'　'):''}${esc(e.verdict||'')}</div>
+ ${(e.ocr||[]).length?'<h3>照片裡的文字</h3>':''}${(e.ocr||[]).map(o=>`<div class="ocr">${esc(o.src)}：${esc(o.jp)} → <span>${esc(o.zh)}</span></div>`).join('')}
+ ${e.social?'<h3>拿去發文</h3>':''}<div class="copy" ${e.social?'':'style="display:none"'}>${['ig','fb','threads'].map(k=>`<button data-i="${i}" data-k="${k}">複製 ${k==='ig'?'IG':k==='fb'?'FB':'Threads'} 文案</button>`).join('')}</div><pre id="pre${i}"></pre>
+ ${e.locked?`<div class="lock" id="lock${i}"><button data-i="${i}" class="unlock">🔒 私密區（花費／人名）— 輸入密碼展開</button></div>`:''}
+ <div class="tags">${(e.tags||[]).map(t=>`<span>#${esc(t)}</span>`).join('')}</div></article>`}).join('')||'<p>還沒有記事。</p>';
  const shown=E.filter(pass);
  document.querySelectorAll('.copy button').forEach(b=>b.onclick=()=>{const t=shown[b.dataset.i].social[b.dataset.k];const pre=document.getElementById('pre'+b.dataset.i);pre.textContent=t;pre.classList.add('show');
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{const o=b.textContent;b.textContent='✅ 已複製';setTimeout(()=>b.textContent=o,1400)}).catch(()=>{})});
- document.querySelectorAll('.zoom').forEach(im=>im.onclick=()=>openLB(shown[+im.dataset.e],+im.dataset.n));}
+ document.querySelectorAll('.zoom').forEach(im=>im.onclick=()=>openLB(shown[+im.dataset.e],+im.dataset.n));
+ let spw=null;try{spw=sessionStorage.getItem('lifeday_pw')}catch(e){} if(spw&&typeof unlockAll==='function')unlockAll(spw,true);}
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decryptLocked(L,pw){const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+ const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(L.salt),iterations:250000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+ return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(L.iv)},key,b64(L.ct))));}
+function privHTML(P){let h='';if(P.spend&&P.spend.length){const sum=P.spend.reduce((a,x)=>a+(+x.amount||0),0);
+  h+='<table>'+P.spend.map(x=>`<tr><td>${esc(x.item)}${x.invoice_no?` <span style="color:var(--muted)">${esc(x.invoice_no)}</span>`:''}${x.pay?` · ${esc(x.pay)}`:''}</td><td class="amt">NT$ ${(+x.amount).toLocaleString()}</td></tr>`).join('')+`<tr><td class="sum">合計</td><td class="amt sum">NT$ ${sum.toLocaleString()}</td></tr></table>`;}
+ if(P.partner)h+=`<div>🤝 ${esc(P.partner)}</div>`;if(P.background)h+=`<div style="margin-top:.4rem"><b>${esc(P.background.title)}</b><pre>${esc(P.background.text)}</pre></div>`;if(P.note)h+=`<div style="color:var(--muted);font-size:.78rem">${esc(P.note)}</div>`;return h||'（沒有內容）';}
+async function unlockAll(pw,quiet){let ok=0;const shown=E.filter(pass);for(let i=0;i<shown.length;i++){const e=shown[i];if(!e.locked)continue;const box=document.getElementById('lock'+i);if(!box)continue;
+  try{box.innerHTML='🔓 '+privHTML(await decryptLocked(e.locked,pw));ok++;}catch(err){if(!quiet){alert('密碼不對');}return 0;}}
+ if(ok){try{sessionStorage.setItem('lifeday_pw',pw)}catch(e){}}return ok;}
+document.addEventListener('click',ev=>{const b=ev.target.closest('.unlock');if(!b)return;const pw=prompt('私密區密碼');if(pw)unlockAll(pw,false);});
 const LB=document.getElementById('lb'),BOX=document.getElementById('lbbox'),CAP=document.getElementById('lbcap');let G=[],GI=0;
 function openLB(e,n){const base='img/'+e.date+'/';G=e.photos.map(p=>({src:base+p.f,video:p.video?base+p.video:null,cap:p.cap}));if(e.grid)G.push({src:base+e.grid,video:null,cap:'拼貼'});GI=n;LB.style.display='flex';showLB();}
 function showLB(){const g=G[GI];BOX.innerHTML=g.video?`<video src="${g.video}" poster="${g.src}" controls autoplay playsinline loop></video>`:`<img src="${g.src}" alt="">`;CAP.textContent=(GI+1)+' / '+G.length+'　'+g.cap;}
