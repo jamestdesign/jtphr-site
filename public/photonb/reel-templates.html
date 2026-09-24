@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Reel 三套模板</title>
+<meta name="description" content="TOD 卡拍字卡、口播版、相片模板：結構、口播公式、文字圖層、素材需求、跑法與交付檔位置">
+<style>
+:root{--bg:#0b1022;--card:rgba(255,255,255,.045);--ink:#f4f1e8;--muted:#aeb6cc;--gold:#d8b65a;--gold2:#f3df9b;--line:rgba(216,182,90,.28);--blue:#7fb3d5;--font:"PingFang TC","Noto Sans TC",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1022}}
+:root[data-theme="dark"]{--bg:#0b1022}
+*{box-sizing:border-box} html,body{overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.8}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:1.7rem;letter-spacing:.04em;margin:.2rem 0 .3rem} h1 small{display:block;font-size:.72rem;color:var(--gold);letter-spacing:.3em;font-weight:400}
+.lead{color:var(--muted);max-width:720px;margin:0 0 1.4rem}
+nav.top{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 1.6rem} nav.top a{color:var(--gold2);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.25rem .8rem;font-size:.84rem}
+section.t{border:1px solid var(--line);border-radius:14px;padding:18px 18px 8px;margin:0 0 22px;background:var(--card);scroll-margin-top:16px}
+section.t h2{margin:0 0 .2rem;font-size:1.25rem} section.t h2 b{color:var(--gold);font-weight:600;margin-right:.4rem}
+.src{font-size:.8rem;color:var(--muted);margin-bottom:.8rem} .src a{color:var(--blue)}
+.two{display:grid;grid-template-columns:280px 1fr;gap:18px;align-items:start}
+video{width:100%;max-width:280px;aspect-ratio:9/16;background:#000;border-radius:10px;display:block}
+h3{font-size:.95rem;margin:.9rem 0 .3rem;color:var(--gold2)} h3:first-child{margin-top:0}
+ul,ol{margin:.2rem 0 .6rem;padding-left:1.3rem} li{margin:.15rem 0} .muted{color:var(--muted)}
+.steps li{margin:.25rem 0}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.82rem;background:rgba(255,255,255,.08);padding:.05rem .35rem;border-radius:4px;word-break:break-all}
+pre{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:8px;padding:.7rem .9rem;font-size:.8rem;overflow:auto;white-space:pre-wrap}
+.tip{border-left:3px solid var(--gold);background:rgba(216,182,90,.08);padding:.5rem .9rem;border-radius:6px;font-size:.86rem;margin:.6rem 0}
+table{border-collapse:collapse;width:100%;font-size:.86rem;margin:.4rem 0 .8rem} th,td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left;vertical-align:top} th{color:var(--gold2);font-weight:600}
+audio{width:100%;max-width:420px;display:block;margin:.4rem 0}
+footer{color:var(--muted);font-size:.74rem;text-align:center;margin-top:2.4rem;letter-spacing:.1em}
+@media (max-width:640px){.two{grid-template-columns:1fr} video{max-width:100%}}
+</style>
+</head>
+<body><div class="wrap">
+<h1><small>REEL TEMPLATES</small>Reel 三套模板</h1>
+<p class="lead">三套都是同一個做法：一份 config（照片／鏡頭／口播稿）→ 一支預覽 mp4 ＋ 一份 FCPXML。文字全部是 FCP 內建「Custom 內容版」字卡（字型：標楷 30、Snell Roundhand 草寫、Telugu Sangam MN 英文），匯進 FCP 直接改。</p>
+<nav class="top"><a href="#t1">① TOD 卡拍字卡</a><a href="#t2">② 口播版</a><a href="#t3">③ 相片模板</a><a href="#sfx">快門聲</a><a href="#run">怎麼跑</a><a href="./tod-reel-study.html">TOD 拆解頁</a><a href="./dashboard.html">回儀表板</a></nav>
+
+<section class="t" id="t1">
+<h2><b>①</b>TOD 卡拍字卡版（Travel of the Day）</h2>
+<div class="src">對標：IG reel Dcu7_WpzRsT（@tra_otday, Lagos）· 試做：門司港 v1 · 詳細拆解見 <a href="./tod-reel-study.html">tod-reel-study</a></div>
+<div class="two">
+<video controls preload="metadata" src="./reel-assets/t1_mojiko_tod.mp4"></video>
+<div>
+<h3>結構</h3>
+<ul><li>22–26 秒、15 顆 × 1.5 秒（兩拍一刀，跟 BPM 走），全直式、無花俏轉場</li><li>四層文字：地名整版（城市小型大寫＋國家草寫）／口播字卡中英文（每 3–5 秒換一句）／手寫小標籤「必體驗」／簽名框</li><li>結尾 3 秒 CTA：追蹤＋留言「城市名」拿攻略懶人包</li></ul>
+<h3>素材需求</h3><ul><li>15 顆 2 秒以上的短鏡頭（A-roll 人／B-roll 景交錯）</li><li>5 句口播字卡＋1 句 CTA</li><li>配樂一首（BPM 定切點）</li></ul>
+<h3>交付</h3><ul><li>預覽：<code>photo-grade/2026-09-22_ig_reel_template/build/mojiko_reel_v1.mp4</code></li><li>FCPXML：<code>…福岡四天三夜_創作/門司港_reel_TOD版型_v5.fcpxml</code>（字卡＝James 匯出的 Custom 內容版）</li><li>工具：<code>tools/reel_tod.py</code>（預覽）／<code>tools/reel_tod_xml.py</code>（XML）</li></ul>
+</div></div>
+<div class="tip">💡 這套是「卡拍＋純字卡」，沒有口播；適合 15 顆好看鏡頭就能成片的一日遊。</div>
+</section>
+
+<section class="t" id="t2">
+<h2><b>②</b>口播版（一句口播一段畫面）</h2>
+<div class="src">對標：IG reel Db5pRfEvXOn（南法藝術小鎮 Saint-Paul de Vence）· 試做：宮古島 v1（49 秒）</div>
+<div class="two">
+<video controls preload="metadata" src="./reel-assets/t2_miyako_vo.mp4"></video>
+<div>
+<h3>結構</h3>
+<ul><li>0–3s 書法封面（兩行大標＋英文地名）→ 每句口播＝一段（1–2 顆短鏡頭，1.2 秒一顆）→ 結尾 Next Episode 預告卡</li><li>「快門閃光定格」：人像那段用 6 張照片，閃白 4 格＋快門聲＋定格 1 秒</li><li>文字四層：封面大標（前 3 秒）／草寫地名常駐上 1/4／每句中英字幕下 1/4（長句自動拆兩行）／章節小標</li><li>系列感：串上一集、預告下一集</li></ul>
+<h3>口播六段公式</h3>
+<ol><li>一句話定位（超美的○○小島）</li><li>「每個角落」的體感（配閃光定格）</li><li>它為什麼有名／怎麼到</li><li>三個生活小切片</li><li>一個意外彩蛋</li><li>一句收尾＋下集預告</li></ol>
+<p class="muted">每句 6–12 字，約 22 句／48 秒。</p>
+<h3>交付</h3><ul><li>預覽：<code>photo-grade/2026-09-23_reel_vo_miyako/build/miyako_reel_vo_v1.mp4</code></li><li>FCPXML：<code>…宮古島三日遊_創作/宮古島_reel_口播版_v1.fcpxml</code>＋<code>_config.json</code></li><li>工具：<code>tools/reel_vo.py</code>／<code>tools/reel_vo_xml.py</code></li></ul>
+</div></div>
+<div class="tip">💡 James 錄好口播 m4a 丟給 Robert，字幕切點就對聲音重出；配樂先墊底。下一集：瑰麗酒店開箱。</div>
+</section>
+
+<section class="t" id="t3">
+<h2><b>③</b>相片模板（連拍開場＋一句一張）</h2>
+<div class="src">對標：IG reel Ddn3M17hUIH（João Cabral 黑白街拍介紹）· 試做：宮古島「宮古島的藍」v1（44 秒）</div>
+<div class="two">
+<video controls preload="metadata" src="./reel-assets/t3_miyako_photo.mp4"></video>
+<div>
+<h3>結構</h3>
+<ul><li>0–1.6s 機關槍開場：24 張照片各 2 格＋連拍快門聲</li><li>放射推近模糊 → 主題卡（標題／副標／署名，可換 IG 個人頁截圖）</li><li>一句口播一張照片：每張 3 秒慢推近（Ken Burns）＋單發快門（小聲），字幕標楷下 1/3</li><li>結尾三句可照做的動作當 CTA</li></ul>
+<h3>口播六段公式（介紹一位攝影師／一種風格）</h3>
+<ol><li>今天要聊的是誰／是什麼</li><li>看作品的感覺（一句形容）</li><li>最標誌性的手法</li><li>擅長用的元素（陰影、拱門、積水…）</li><li>跟一般拍法的差別</li><li>總結成三個動作</li></ol>
+<h3>素材需求</h3><ul><li>24 張出片當開場（人像風景混）＋ 12 張對句子的照片</li><li>適合黑白街拍／建築線條系列，或一趟的精選</li></ul>
+<h3>交付</h3><ul><li>預覽：<code>photo-grade/2026-09-24_reel_photo_miyako/build/miyako_reel_photo_v1.mp4</code></li><li>FCPXML：<code>…宮古島三日遊_創作/宮古島_reel_相片模板_v1.fcpxml</code>＋<code>_config.json</code></li><li>工具：<code>tools/reel_photo.py</code>／<code>tools/reel_photo_xml.py</code></li></ul>
+</div></div>
+<div class="tip">💡 XML 裡每張照片是 3 秒靜圖，推近效果在 FCP 全選 → Ken Burns 一鍵套；不寫死關鍵影格，比較好調。</div>
+</section>
+
+<section class="t" id="sfx">
+<h2><b>🔊</b>快門聲（合成）</h2>
+<p class="muted">前 1.6 秒是 24 發連拍（間隔 65ms、每發音高音量微變、底下墊馬達嗡聲），後面一發是單張定格用。FCP 音效庫有更真的「Camera Shutter」可直接換，掛法一樣。</p>
+<audio controls src="./reel-assets/shutter_demo.mp3"></audio>
+<table><tr><th>檔</th><th>用途</th></tr><tr><td><code>2026-09-23_reel_vo_miyako/build/shutter_burst.wav</code></td><td>相片模板連拍開場</td></tr><tr><td><code>…/shutter_one.wav</code></td><td>口播版閃光定格、相片模板每張</td></tr></table>
+</section>
+
+<section class="t" id="run">
+<h2><b>▶</b>怎麼跑（Robert 用）</h2>
+<ol class="steps">
+<li>複製對應的 <code>build/config.json</code>，換照片／鏡頭路徑、口播稿（zh／en）、配樂、封面文字。</li>
+<li>預覽：<code>python3 tools/reel_vo.py build/config.json</code>（或 reel_tod／reel_photo）→ build/*.mp4。</li>
+<li>XML：<code>python3 tools/reel_vo_xml.py build/config.json "&lt;_創作&gt;/xxx.fcpxml" --library "&lt;.fcpbundle&gt;"</code>，DTD 驗證通過才交。</li>
+<li>James 在 FCP：檔案 → 匯入 → XML；字卡點哪張改哪張（單一字體，Font 不會顯示「－」）。</li>
+</ol>
+<div class="tip">⚠️ 直式 1080×1920 專案裡，內建字卡的字級與座標會 ×1.78（範本以畫布高 1080 為基準），工具已自動換算；手動加字卡時記得。連接元素一律掛在起點所在的那顆 clip 上。</div>
+</section>
+
+<footer>Reel 三套模板 · Robert 維護 · 2026-09-24</footer>
+</div></body></html>
