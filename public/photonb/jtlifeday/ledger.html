@@ -23,7 +23,7 @@ form.f{display:none;background:var(--card);border:1px solid var(--accent);paddin
 @media (max-width:560px){td.p,th.p{display:none}}
 footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
 </style></head><body><div class="wrap">
-<header><h1><small>JT LIFE DAY</small>帳務</h1><div><a href="./" style="font-size:.8rem;margin-right:.6rem">← 記事</a><button id="keybtn" class="key">🔑 登入</button></div></header>
+<header><h1><small>JT LIFE DAY</small>帳務</h1><div><a href="./" style="font-size:.8rem;margin-right:.6rem">← 記事</a><button id="rl" title="重新整理" style="display:none">↻</button> <button id="keybtn" class="key">🔑 登入</button></div></header>
 <div id="app"><p class="empty">讀取中…</p></div>
 <footer>發票從記事自動落帳 · 固定帳單每天早上 8 點提醒 · 只有 James 看得到</footer></div>
 <script>
@@ -106,4 +106,5 @@ function render(){
  A.querySelectorAll('button[data-pmdel]').forEach(b=>b.onclick=async()=>{if(!confirm('移除這個付款方式？（舊帳不受影響）'))return;try{await api('DELETE','/paymethods/'+b.dataset.pmdel);await reload();}catch(e){alert(e.message);}});
 }
 boot();
+if(navigator.standalone||matchMedia('(display-mode: standalone)').matches){const r=document.getElementById('rl');r.style.display='inline-block';r.onclick=()=>location.reload();}
 </script></body></html>
