@@ -2,52 +2,108 @@
 <meta name="robots" content="noindex,nofollow"/><title>JT Life Day · 帳務</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4efe6;--ink:#2d2a26;--muted:#8a8174;--line:#d9cfbf;--card:#fffdf8;--accent:#a4572b;--font:'Noto Serif TC',serif}
+:root{--bg:#f4efe6;--ink:#2d2a26;--muted:#8a8174;--line:#d9cfbf;--card:#fffdf8;--accent:#a4572b;--red:#b83b3b;--yel:#b8862b;--font:'Noto Serif TC',serif}
 *{box-sizing:border-box} html,body{overflow-x:hidden} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.8}
 .wrap{max-width:900px;margin:0 auto;padding:1.4rem 16px 4rem}
-header{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:1.4rem}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:1rem}
 h1{font-size:1.5rem;margin:0;letter-spacing:.12em;font-weight:900} h1 small{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.35em;font-weight:400}
-a{color:var(--accent)} button,select{font-family:inherit;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.8rem;cursor:pointer} button.on,button.key{color:var(--accent);border-color:var(--accent)}
-.bar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.4rem 0 1rem}
+a{color:var(--accent)} button,select,input,textarea{font-family:inherit;font-size:.86rem;color:var(--ink)} button{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap} button.on,button.key{color:var(--accent);border-color:var(--accent)} button.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)} button.danger{color:var(--red);border-color:var(--red)} button:disabled{opacity:.5;cursor:default}
+.tabs{display:flex;gap:.4rem;margin:.2rem 0 1rem} .tabs button{padding:.3rem 1rem} .tabs button.on{background:var(--accent);color:var(--bg)}
+.bar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.4rem 0 .8rem}
 .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:0 0 1.2rem}
 .sum div{background:var(--card);border:1px solid var(--line);padding:.6rem .8rem} .sum b{display:block;font-size:1.25rem;font-family:ui-monospace,Menlo,monospace;color:var(--accent)} .sum small{color:var(--muted);font-size:.72rem;letter-spacing:.1em}
-h3{font-size:.78rem;letter-spacing:.28em;color:var(--accent);margin:1.2rem 0 .4rem;font-weight:600}
+h3{font-size:.78rem;letter-spacing:.28em;color:var(--accent);margin:1.2rem 0 .4rem;font-weight:600;display:flex;justify-content:space-between;align-items:center}
 table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);font-size:.86rem} td,th{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:left;vertical-align:top} th{font-size:.72rem;color:var(--muted);letter-spacing:.1em;font-weight:400}
-td.amt,th.amt{text-align:right;font-family:ui-monospace,Menlo,monospace;white-space:nowrap} td.d{white-space:nowrap;color:var(--muted)} td.t a{text-decoration:none} .cat{font-size:.7rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:0 .4rem;margin-left:.3rem;white-space:nowrap}
-.bymonth td:first-child{white-space:nowrap} .empty{text-align:center;color:var(--muted);padding:3rem 0}
+td.amt,th.amt{text-align:right;font-family:ui-monospace,Menlo,monospace;white-space:nowrap} td.d{white-space:nowrap;color:var(--muted)} td.t a{text-decoration:none} .cat{font-size:.7rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:0 .4rem;margin-left:.3rem;white-space:nowrap} td.ops{white-space:nowrap;text-align:right} td.ops button{padding:.05rem .5rem;font-size:.74rem;margin-left:.2rem}
+.badge{display:inline-block;font-size:.72rem;border-radius:999px;padding:0 .5rem;white-space:nowrap} .b-red{background:var(--red);color:#fff} .b-yel{background:var(--yel);color:#fff} .b-ok{border:1px solid var(--line);color:var(--muted)} .b-off{border:1px dashed var(--line);color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:3rem 0}
 .sbox input{width:100%;font-family:inherit;font-size:.92rem;padding:.5rem .9rem;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);outline:none} .sbox input:focus{border-color:var(--accent)}
+form.f{display:none;background:var(--card);border:1px solid var(--accent);padding:.8rem;margin:.6rem 0 1rem} form.f.open{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem} form.f label{display:flex;flex-direction:column;font-size:.7rem;color:var(--muted);letter-spacing:.1em} form.f input,form.f select,form.f textarea{border:1px solid var(--line);border-radius:6px;padding:.35rem .5rem;background:transparent;margin-top:.15rem} form.f .full{grid-column:1/-1} form.f .ops{grid-column:1/-1;display:flex;gap:.5rem;justify-content:flex-end;align-items:center} form.f label.chk{flex-direction:row;align-items:center;gap:.4rem;font-size:.86rem;color:var(--ink);padding-top:1rem}
+.note{font-size:.76rem;color:var(--muted);margin:.4rem 0}
 @media (max-width:560px){td.p,th.p{display:none}}
 footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
 </style></head><body><div class="wrap">
 <header><h1><small>JT LIFE DAY</small>帳務</h1><div><a href="./" style="font-size:.8rem;margin-right:.6rem">← 記事</a><button id="keybtn" class="key">🔑 登入</button></div></header>
 <div id="app"><p class="empty">讀取中…</p></div>
-<footer>發票從記事自動落帳 · 只有 James 看得到</footer></div>
+<footer>發票從記事自動落帳 · 固定帳單每天早上 8 點提醒 · 只有 James 看得到</footer></div>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(+n).toLocaleString('zh-Hant-TW',{maximumFractionDigits:0});
-let ME=null,ROWS=[],BYM=[],year='全部',month='全部',cat='全部',cur='全部',q='';
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+let ME=null,ROWS=[],BILLS=[],PM=[],TAB=location.hash==='#bills'?'bills':location.hash==='#settings'?'settings':'ledger',showOff=false;
+let year='全部',month='全部',cat='全部',cur='全部',q='',editing=null,editingBill=null,formOpen=false,billFormOpen=false;
+const CATS=['生活','旅遊','商務','帳單','其他'],CURS=['NT$','JPY','USD','EUR','KRW','CNY','HKD'];
 const A=document.getElementById('app'),K=document.getElementById('keybtn');
-async function boot(){const m=await (await fetch('/api/me',{cache:'no-store'})).json();ME=m.name?m:null;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
+const api=async(m,p,b)=>{const r=await fetch('/api'+p,{method:m,headers:b?{'content-type':'application/json'}:{},body:b?JSON.stringify(b):undefined,cache:'no-store'});if(!r.ok){let t='';try{t=(await r.json()).detail||''}catch(e){}throw new Error(t||('HTTP '+r.status));}return r.json();};
+async function boot(){const m=await api('GET','/me');ME=m.name?m:null;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
  if(!ME||ME.role!=='admin'){A.innerHTML='<p class="empty">🔐 帳務只有 James 看得到。<br>按右上角「🔑 登入」。</p>';return;}
- const j=await (await fetch('/api/ledger',{cache:'no-store'})).json();ROWS=j.rows;BYM=j.by_month;render();}
+ await reload();}
+async function reload(){const [l,b]=await Promise.all([api('GET','/ledger'),api('GET','/bills?all=1')]);ROWS=l.rows;BILLS=b.bills;PM=b.pay_methods;render();}
 K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}
- const pw=prompt('輸入密碼登入');if(!pw)return;const r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({user:'',password:pw})});
- if(!r.ok){alert('密碼不對');return;}boot();};
+ const pw=prompt('輸入密碼登入');if(!pw)return;try{await api('POST','/login',{user:'',password:pw});boot();}catch(e){alert('密碼不對');}};
 const pass=r=>(year==='全部'||r.date.startsWith(year))&&(month==='全部'||r.date.slice(5,7)===month)&&(cat==='全部'||(r.category||'生活')===cat)&&(cur==='全部'||r.cur===cur)&&(!q||(r.item+' '+(r.place||'')+' '+(r.title||'')+' '+(r.invoice_no||'')+' '+(r.pay||'')+' '+(r.note||'')).toLowerCase().includes(q));
-function chips(name,vals,curv,set){return `<div class="bar"><span style="font-size:.72rem;color:var(--muted);letter-spacing:.1em">${name}</span>${vals.map(v=>`<button data-k="${set}" data-v="${esc(v)}" class="${v===curv?'on':''}">${esc(v)}</button>`).join('')}</div>`;}
-function render(){const years=['全部',...new Set(ROWS.map(r=>r.date.slice(0,4)))].sort().reverse();years.unshift(years.splice(years.indexOf('全部'),1)[0]);
- const months=['全部',...new Set(ROWS.filter(r=>year==='全部'||r.date.startsWith(year)).map(r=>r.date.slice(5,7)))].sort();months.unshift(months.splice(months.indexOf('全部'),1)[0]);
- const cats=['全部',...new Set(ROWS.map(r=>r.category||'生活'))],curs=['全部',...new Set(ROWS.map(r=>r.cur))];
- const rows=ROWS.filter(pass);const sums={};rows.forEach(r=>{sums[r.cur]=(sums[r.cur]||0)+r.amount});
- const byCat={};rows.forEach(r=>{const k=(r.category||'生活')+'／'+(r.type||'');byCat[k]=byCat[k]||{};byCat[k][r.cur]=(byCat[k][r.cur]||0)+r.amount});
- const bym={};rows.forEach(r=>{const k=r.date.slice(0,7);bym[k]=bym[k]||{};bym[k][r.cur]=(bym[k][r.cur]||0)+r.amount});
- A.innerHTML=chips('年',years,year,'year')+chips('月',months,month,'month')+chips('分類',cats,cat,'cat')+chips('幣別',curs,cur,'cur')+
-  `<div class="sbox"><input id="q" type="search" placeholder="🔍 搜品項、店家、發票號、付款方式…" value="${esc(q)}"></div>`+
-  `<div class="sum" style="margin-top:1rem">${Object.entries(sums).map(([c,v])=>`<div><small>${esc(c)} 合計</small><b>${fmt(v)}</b></div>`).join('')}<div><small>筆數</small><b>${rows.length}</b></div><div><small>涵蓋記事</small><b>${new Set(rows.map(r=>r.entry_id)).size}</b></div></div>`+
-  `<h3>每月</h3><table class="bymonth"><tr><th>月份</th>${curs.slice(1).map(c=>`<th class="amt">${esc(c)}</th>`).join('')}<th class="amt">筆</th></tr>${Object.keys(bym).sort().reverse().map(m=>`<tr><td>${m}</td>${curs.slice(1).map(c=>`<td class="amt">${bym[m][c]?fmt(bym[m][c]):'—'}</td>`).join('')}<td class="amt">${rows.filter(r=>r.date.startsWith(m)).length}</td></tr>`).join('')}</table>`+
-  `<h3>分類</h3><table><tr><th>分類／型態</th>${curs.slice(1).map(c=>`<th class="amt">${esc(c)}</th>`).join('')}</tr>${Object.entries(byCat).sort((a,b)=>Object.values(b[1]).reduce((x,y)=>x+y,0)-Object.values(a[1]).reduce((x,y)=>x+y,0)).map(([k,v])=>`<tr><td>${esc(k)}</td>${curs.slice(1).map(c=>`<td class="amt">${v[c]?fmt(v[c]):'—'}</td>`).join('')}</tr>`).join('')}</table>`+
-  `<h3>明細（${rows.length} 筆）</h3>${rows.length?`<table><tr><th>日期</th><th>品項</th><th class="p">店家／記事</th><th class="amt">金額</th></tr>${rows.map(r=>`<tr><td class="d">${r.date}</td><td>${esc(r.item)}${r.invoice_no?` <span class="cat">${esc(r.invoice_no)}</span>`:''}${r.pay?` <span class="cat">${esc(r.pay)}</span>`:''}</td><td class="p t"><a href="./#d-${r.date}">${esc(r.title||r.place||'')}</a><span class="cat">${esc(r.category||'生活')}／${esc(r.type||'')}</span></td><td class="amt">${esc(r.cur)} ${fmt(r.amount)}</td></tr>`).join('')}</table>`:'<p class="empty">沒有符合的帳</p>'}`;
+const chips=(name,vals,curv,set)=>`<div class="bar"><span style="font-size:.72rem;color:var(--muted);letter-spacing:.1em">${name}</span>${vals.map(v=>`<button data-k="${set}" data-v="${esc(v)}" class="${v===curv?'on':''}">${esc(v)}</button>`).join('')}</div>`;
+const sel=(name,vals,v,extra)=>`<select name="${name}">${vals.map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('')}${extra||''}</select>`;
+const payOpts=v=>`<select name="pay"><option value="">（不填）</option>${PM.map(p=>`<option ${p.name===v?'selected':''}>${esc(p.name)}</option>`).join('')}${v&&!PM.find(p=>p.name===v)?`<option selected>${esc(v)}</option>`:''}</select>`;
+const SRC={lifeday:'記事',manual:'手記',card:'信用卡',linepay:'Line Pay',bill:'帳單',other:'其他'};
+function ledgerForm(){const r=editing||{date:today(),cur:'NT$',category:'生活'};return `<form class="f ${formOpen?'open':''}" id="lf">
+ <label>日期<input name="date" type="date" value="${esc(r.date)}" required></label><label>品項<input name="item" value="${esc(r.item||'')}" required placeholder="全聯 食材"></label>
+ <label>金額<input name="amount" type="number" step="0.01" value="${r.amount??''}" required></label><label>幣別${sel('cur',CURS.includes(r.cur)?CURS:[r.cur,...CURS],r.cur)}</label>
+ <label>分類${sel('category',CATS.includes(r.category)?CATS:[r.category,...CATS],r.category)}</label><label>型態<input name="type" value="${esc(r.type||'')}" placeholder="餐食／購物／交通…"></label>
+ <label>付款方式${payOpts(r.pay)}</label><label>發票號<input name="invoice_no" value="${esc(r.invoice_no||'')}"></label>
+ <label class="full">店家／地點<input name="place" value="${esc(r.place||'')}"></label><label class="full">備註<input name="note" value="${esc(r.note||'')}"></label>
+ <div class="ops">${editing?`<span class="note">#${editing.id}${editing.source==='lifeday'?'（記事來的帳：品項／金額下次同步會照記事覆蓋，付款方式／備註會留）':''}</span>`:''}<button type="button" id="lfx">取消</button><button type="submit" class="pri">${editing?'儲存':'記一筆'}</button></div></form>`;}
+function billForm(){const b=editingBill||{cur:'NT$',cycle:'monthly',category:'帳單',next_due:today()};return `<form class="f ${billFormOpen?'open':''}" id="bf">
+ <label>名稱<input name="name" value="${esc(b.name||'')}" required placeholder="房租／電費／信用卡繳款…"></label><label>金額<input name="amount" type="number" step="0.01" value="${b.amount??''}"></label>
+ <label>幣別${sel('cur',CURS.includes(b.cur)?CURS:[b.cur,...CURS],b.cur)}</label><label>週期<select name="cycle">${[['monthly','每月'],['yearly','每年'],['once','單次']].map(([k,l])=>`<option value="${k}" ${k===b.cycle?'selected':''}>${l}</option>`).join('')}</select></label>
+ <label>下次到期<input name="next_due" type="date" value="${esc(b.next_due)}" required></label><label>付款方式${payOpts(b.pay)}</label>
+ <label>分類${sel('category',CATS.includes(b.category)?CATS:[b.category,...CATS],b.category)}</label><label class="chk"><input name="autopay" type="checkbox" ${b.autopay?'checked':''}>自動扣款</label>
+ <label class="full">備註<input name="note" value="${esc(b.note||'')}"></label>
+ <div class="ops"><button type="button" id="bfx">取消</button><button type="submit" class="pri">${editingBill?'儲存':'建立帳單'}</button></div></form>`;}
+function badge(b){if(!b.active)return '<span class="badge b-off">已停用</span>';const d=b.days_left;return d<0?`<span class="badge b-red">逾期 ${-d} 天</span>`:d===0?'<span class="badge b-yel">今天到期</span>':d<=7?`<span class="badge b-yel">${d} 天內</span>`:`<span class="badge b-ok">${d} 天後</span>`;}
+function render(){
+ const tabs=`<div class="tabs">${[['ledger','📒 帳'],['bills','📅 帳單'],['settings','⚙️ 設定']].map(([k,l])=>`<button data-tab="${k}" class="${TAB===k?'on':''}">${l}</button>`).join('')}</div>`;
+ let h='';
+ if(TAB==='ledger'){
+  const years=[...new Set(ROWS.map(r=>r.date.slice(0,4)))].sort().reverse();const months=[...new Set(ROWS.filter(r=>year==='全部'||r.date.startsWith(year)).map(r=>r.date.slice(5,7)))].sort();
+  const cats=[...new Set(ROWS.map(r=>r.category||'生活'))],curs=[...new Set(ROWS.map(r=>r.cur))];
+  const rows=ROWS.filter(pass);const sums={};rows.forEach(r=>{sums[r.cur]=(sums[r.cur]||0)+r.amount});
+  const byCat={};rows.forEach(r=>{const k=(r.category||'生活')+'／'+(r.type||'');byCat[k]=byCat[k]||{};byCat[k][r.cur]=(byCat[k][r.cur]||0)+r.amount});
+  const byPay={};rows.forEach(r=>{const k=r.pay||'（未填）';byPay[k]=byPay[k]||{};byPay[k][r.cur]=(byPay[k][r.cur]||0)+r.amount});
+  const bym={};rows.forEach(r=>{const k=r.date.slice(0,7);bym[k]=bym[k]||{};bym[k][r.cur]=(bym[k][r.cur]||0)+r.amount});
+  const tbl=(title,obj)=>`<h3>${title}</h3><table><tr><th>${title==='每月'?'月份':title}</th>${curs.map(c=>`<th class="amt">${esc(c)}</th>`).join('')}</tr>${Object.entries(obj).sort((a,b)=>title==='每月'?b[0].localeCompare(a[0]):Object.values(b[1]).reduce((x,y)=>x+y,0)-Object.values(a[1]).reduce((x,y)=>x+y,0)).map(([k,v])=>`<tr><td>${esc(k)}</td>${curs.map(c=>`<td class="amt">${v[c]?fmt(v[c]):'—'}</td>`).join('')}</tr>`).join('')}</table>`;
+  h+=`<div class="bar"><button id="addbtn" class="pri">＋ 記一筆</button><span class="note">收據／帳單截圖也可以直接丟群給 Robert 記</span></div>`+ledgerForm()+
+   chips('年',['全部',...years],year,'year')+chips('月',['全部',...months],month,'month')+chips('分類',['全部',...cats],cat,'cat')+chips('幣別',['全部',...curs],cur,'cur')+
+   `<div class="sbox"><input id="q" type="search" placeholder="🔍 搜品項、店家、發票號、付款方式…" value="${esc(q)}"></div>`+
+   `<div class="sum" style="margin-top:1rem">${Object.entries(sums).map(([c,v])=>`<div><small>${esc(c)} 合計</small><b>${fmt(v)}</b></div>`).join('')}<div><small>筆數</small><b>${rows.length}</b></div></div>`+
+   tbl('每月',bym)+tbl('分類',byCat)+tbl('付款方式',byPay)+
+   `<h3>明細（${rows.length} 筆）</h3>${rows.length?`<table><tr><th>日期</th><th>品項</th><th class="p">店家／記事</th><th class="amt">金額</th><th></th></tr>${rows.map(r=>`<tr><td class="d">${r.date}</td><td>${esc(r.item)}${r.invoice_no?` <span class="cat">${esc(r.invoice_no)}</span>`:''}${r.pay?` <span class="cat">${esc(r.pay)}</span>`:''}<span class="cat">${SRC[r.source]||r.source}</span></td><td class="p t">${r.entry_id?`<a href="./#d-${r.date}">${esc(r.title||r.place||'')}</a>`:esc(r.place||'')}<span class="cat">${esc(r.category||'生活')}／${esc(r.type||'')}</span>${r.note?`<div class="note">${esc(r.note)}</div>`:''}</td><td class="amt">${esc(r.cur)} ${fmt(r.amount)}</td><td class="ops"><button data-edit="${r.id}">✎</button>${r.source!=='lifeday'?`<button data-del="${r.id}" class="danger">🗑</button>`:''}</td></tr>`).join('')}</table>`:'<p class="empty">沒有符合的帳</p>'}`;
+ }else if(TAB==='bills'){
+  const list=BILLS.filter(b=>showOff||b.active);
+  h+=`<div class="bar"><button id="addbill" class="pri">＋ 新帳單</button><button id="toggleoff" class="${showOff?'on':''}">顯示停用的</button><span class="note">逾期或 3 天內到期，每天早上 8 點在群提醒</span></div>`+billForm()+
+   (list.length?`<table><tr><th>狀態</th><th>帳單</th><th class="p">週期／付款</th><th class="amt">金額</th><th></th></tr>${list.map(b=>`<tr><td>${badge(b)}<div class="note">${b.next_due}</div></td><td><b>${esc(b.name)}</b>${b.autopay?'<span class="cat">自動扣</span>':''}${b.note?`<div class="note">${esc(b.note)}</div>`:''}${b.last_paid?`<div class="note">上次 ${b.last_paid}</div>`:''}</td><td class="p">${{monthly:'每月',yearly:'每年',once:'單次'}[b.cycle]}${b.pay?`<span class="cat">${esc(b.pay)}</span>`:''}<span class="cat">${esc(b.category)}</span></td><td class="amt">${esc(b.cur)} ${fmt(b.amount)}</td><td class="ops">${b.active?`<button data-pay="${b.id}" class="pri">已付</button>`:''}<button data-bedit="${b.id}">✎</button><button data-bdel="${b.id}" class="danger">🗑</button></td></tr>`).join('')}</table>`:'<p class="empty">還沒有固定帳單。按「＋ 新帳單」建，或把清單丟群給 Robert 一次建好。</p>');
+ }else{
+  h+=`<h3>付款方式</h3><table>${PM.map(p=>`<tr><td>${esc(p.name)}<span class="cat">${{cash:'現金',card:'信用卡',bank:'銀行',wallet:'電子錢包',other:'其他'}[p.kind]}</span>${p.note?`<div class="note">${esc(p.note)}</div>`:''}</td><td class="ops"><button data-pmdel="${p.id}" class="danger">移除</button></td></tr>`).join('')}</table>
+   <form class="f open" id="pf" style="margin-top:.8rem"><label>名稱<input name="name" required placeholder="例：國泰 CUBE 卡"></label><label>種類<select name="kind">${[['card','信用卡'],['cash','現金'],['bank','銀行'],['wallet','電子錢包'],['other','其他']].map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></label><label>備註<input name="note" placeholder="卡末四碼／結帳日…"></label><div class="ops"><button type="submit" class="pri">新增</button></div></form>
+   <h3>帳號</h3><p class="note">james（管理員）＋ HU／LI／EVA（來賓，只看記事）。改密碼、加帳號跟 Robert 說。</p>`;
+ }
+ A.innerHTML=tabs+h;
+ A.querySelectorAll('button[data-tab]').forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;location.hash=TAB==='ledger'?'':'#'+TAB;render();});
  A.querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>{({year:v=>year=v,month:v=>month=v,cat:v=>cat=v,cur:v=>cur=v})[b.dataset.k](b.dataset.v);if(b.dataset.k==='year')month='全部';render();});
- const Q=document.getElementById('q');let t=null;Q.oninput=()=>{clearTimeout(t);t=setTimeout(()=>{q=Q.value.trim().toLowerCase();const pos=Q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos);},220);};}
+ const Q=document.getElementById('q');if(Q){let t=null;Q.oninput=()=>{clearTimeout(t);t=setTimeout(()=>{q=Q.value.trim().toLowerCase();const pos=Q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos);},220);};}
+ const fd=f=>{const o={};new FormData(f).forEach((v,k)=>o[k]=v);f.querySelectorAll('input[type=checkbox]').forEach(c=>o[c.name]=c.checked);return o;};
+ const ab=document.getElementById('addbtn');if(ab)ab.onclick=()=>{editing=null;formOpen=!formOpen;render();};
+ const lf=document.getElementById('lf');if(lf){document.getElementById('lfx').onclick=()=>{formOpen=false;editing=null;render();};lf.onsubmit=async ev=>{ev.preventDefault();const o=fd(lf);try{if(editing)await api('PATCH','/ledger/'+editing.id,o);else await api('POST','/ledger',{...o,source:'manual'});formOpen=false;editing=null;await reload();}catch(e){alert('沒存成功：'+e.message);}};}
+ A.querySelectorAll('button[data-edit]').forEach(b=>b.onclick=()=>{editing=ROWS.find(r=>r.id==b.dataset.edit);formOpen=true;render();document.getElementById('lf').scrollIntoView({behavior:'smooth'});});
+ A.querySelectorAll('button[data-del]').forEach(b=>b.onclick=async()=>{const r=ROWS.find(x=>x.id==b.dataset.del);if(!confirm(`刪掉「${r.item}」${r.cur} ${fmt(r.amount)}？`))return;try{await api('DELETE','/ledger/'+r.id);await reload();}catch(e){alert(e.message);}});
+ const abl=document.getElementById('addbill');if(abl)abl.onclick=()=>{editingBill=null;billFormOpen=!billFormOpen;render();};
+ const to=document.getElementById('toggleoff');if(to)to.onclick=()=>{showOff=!showOff;render();};
+ const bf=document.getElementById('bf');if(bf){document.getElementById('bfx').onclick=()=>{billFormOpen=false;editingBill=null;render();};bf.onsubmit=async ev=>{ev.preventDefault();const o=fd(bf);try{if(editingBill)await api('PATCH','/bills/'+editingBill.id,o);else await api('POST','/bills',o);billFormOpen=false;editingBill=null;await reload();}catch(e){alert('沒存成功：'+e.message);}};}
+ A.querySelectorAll('button[data-bedit]').forEach(b=>b.onclick=()=>{editingBill=BILLS.find(x=>x.id==b.dataset.bedit);billFormOpen=true;render();document.getElementById('bf').scrollIntoView({behavior:'smooth'});});
+ A.querySelectorAll('button[data-bdel]').forEach(b=>b.onclick=async()=>{const x=BILLS.find(y=>y.id==b.dataset.bdel);if(!confirm(`刪掉帳單「${x.name}」？（已付過的帳不會消失）`))return;try{await api('DELETE','/bills/'+x.id);await reload();}catch(e){alert(e.message);}});
+ A.querySelectorAll('button[data-pay]').forEach(b=>b.onclick=async()=>{const x=BILLS.find(y=>y.id==b.dataset.pay);const d=prompt(`「${x.name}」${x.cur} ${fmt(x.amount)} 標記已付\n付款日期：`,today());if(!d)return;const amt=prompt('實付金額（照原金額就直接按確定）：',x.amount);if(amt===null)return;try{await api('POST','/bills/'+x.id+'/pay',{date:d,amount:+amt});await reload();}catch(e){alert(e.message);}});
+ const pf=document.getElementById('pf');if(pf)pf.onsubmit=async ev=>{ev.preventDefault();try{await api('POST','/paymethods',fd(pf));await reload();}catch(e){alert(e.message);}};
+ A.querySelectorAll('button[data-pmdel]').forEach(b=>b.onclick=async()=>{if(!confirm('移除這個付款方式？（舊帳不受影響）'))return;try{await api('DELETE','/paymethods/'+b.dataset.pmdel);await reload();}catch(e){alert(e.message);}});
+}
 boot();
 </script></body></html>
