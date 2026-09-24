@@ -49,7 +49,7 @@ details.sec{margin-top:10px;border-top:1px solid var(--line)} details.sec>summar
 article[id^="d-"]{scroll-margin-top:12px}
 footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
 </style></head><body><div class="wrap">
-<header><h1><small>JT LIFE DAY</small>生活記事</h1><div class="skins"><button id="calbtn" title="月曆">📅</button> <button id="keybtn" class="key" title="登入／登出">🔑 登入</button></div></header>
+<header><h1><small>JT LIFE DAY</small>生活記事</h1><div class="skins"><a id="ledgerbtn" href="ledger.html" style="display:none;text-decoration:none;font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;color:var(--accent)">💰 帳務</a> <button id="calbtn" title="月曆">📅</button> <button id="keybtn" class="key" title="登入／登出">🔑 登入</button></div></header>
 <div class="sbox"><input id="q" type="search" placeholder="🔍 搜尋記事：店名、地點、菜色、人、標籤、內文…" autocomplete="off"><span id="qn"></span></div>
 <div id="cal" class="cal"></div><div id="pend"></div><div class="filters" id="filters"></div><main id="list"></main>
 <footer>拍照＋一句話，其餘交給 Robert · 私人記事，未列入索引</footer></div><div id="lb"><button class="x" aria-label="關閉">×</button><button class="nav prev" aria-label="上一張">‹</button><div id="lbbox"></div><button class="nav next" aria-label="下一張">›</button><div class="cap" id="lbcap"></div></div>
@@ -125,7 +125,7 @@ async function loadEntries(){const r=await fetch('/api/lifeday/entries',{cache:'
 async function login(user,pw,quiet){const r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({user:user||'',password:pw})});
  if(!r.ok){if(!quiet)alert('帳號或密碼不對');return false;}await loadEntries();return true;}
 async function logout(){await fetch('/api/logout',{method:'POST'});location.reload();}
-function keyUI(){const k=document.getElementById('keybtn');k.textContent=PW?('🔓 '+(ROLE==='admin'?'已登入 James':WHO)):'🔑 登入';k.classList.toggle('in',!!PW);}
+function keyUI(){document.getElementById('ledgerbtn').style.display=(ROLE==='admin')?'inline-block':'none';const k=document.getElementById('keybtn');k.textContent=PW?('🔓 '+(ROLE==='admin'?'已登入 James':WHO)):'🔑 登入';k.classList.toggle('in',!!PW);}
 document.getElementById('keybtn').onclick=()=>{if(PW){if(confirm('登出？'))logout();}else{const pw=prompt('輸入密碼登入（四個帳號各自的密碼）');if(pw)login('',pw,false);}};
 document.addEventListener('click',ev=>{const b=ev.target.closest('.unlock');if(!b)return;const pw=prompt('輸入密碼登入');if(pw)login('',pw,false);});
 

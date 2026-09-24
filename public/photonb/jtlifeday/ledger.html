@@ -1,0 +1,53 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"/><title>JT Life Day · 帳務</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe6;--ink:#2d2a26;--muted:#8a8174;--line:#d9cfbf;--card:#fffdf8;--accent:#a4572b;--font:'Noto Serif TC',serif}
+*{box-sizing:border-box} html,body{overflow-x:hidden} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.8}
+.wrap{max-width:900px;margin:0 auto;padding:1.4rem 16px 4rem}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:1.4rem}
+h1{font-size:1.5rem;margin:0;letter-spacing:.12em;font-weight:900} h1 small{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.35em;font-weight:400}
+a{color:var(--accent)} button,select{font-family:inherit;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.8rem;cursor:pointer} button.on,button.key{color:var(--accent);border-color:var(--accent)}
+.bar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.4rem 0 1rem}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:0 0 1.2rem}
+.sum div{background:var(--card);border:1px solid var(--line);padding:.6rem .8rem} .sum b{display:block;font-size:1.25rem;font-family:ui-monospace,Menlo,monospace;color:var(--accent)} .sum small{color:var(--muted);font-size:.72rem;letter-spacing:.1em}
+h3{font-size:.78rem;letter-spacing:.28em;color:var(--accent);margin:1.2rem 0 .4rem;font-weight:600}
+table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);font-size:.86rem} td,th{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:left;vertical-align:top} th{font-size:.72rem;color:var(--muted);letter-spacing:.1em;font-weight:400}
+td.amt,th.amt{text-align:right;font-family:ui-monospace,Menlo,monospace;white-space:nowrap} td.d{white-space:nowrap;color:var(--muted)} td.t a{text-decoration:none} .cat{font-size:.7rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:0 .4rem;margin-left:.3rem;white-space:nowrap}
+.bymonth td:first-child{white-space:nowrap} .empty{text-align:center;color:var(--muted);padding:3rem 0}
+.sbox input{width:100%;font-family:inherit;font-size:.92rem;padding:.5rem .9rem;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);outline:none} .sbox input:focus{border-color:var(--accent)}
+@media (max-width:560px){td.p,th.p{display:none}}
+footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
+</style></head><body><div class="wrap">
+<header><h1><small>JT LIFE DAY</small>帳務</h1><div><a href="./" style="font-size:.8rem;margin-right:.6rem">← 記事</a><button id="keybtn" class="key">🔑 登入</button></div></header>
+<div id="app"><p class="empty">讀取中…</p></div>
+<footer>發票從記事自動落帳 · 只有 James 看得到</footer></div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>(+n).toLocaleString('zh-Hant-TW',{maximumFractionDigits:0});
+let ME=null,ROWS=[],BYM=[],year='全部',month='全部',cat='全部',cur='全部',q='';
+const A=document.getElementById('app'),K=document.getElementById('keybtn');
+async function boot(){const m=await (await fetch('/api/me',{cache:'no-store'})).json();ME=m.name?m:null;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
+ if(!ME||ME.role!=='admin'){A.innerHTML='<p class="empty">🔐 帳務只有 James 看得到。<br>按右上角「🔑 登入」。</p>';return;}
+ const j=await (await fetch('/api/ledger',{cache:'no-store'})).json();ROWS=j.rows;BYM=j.by_month;render();}
+K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}
+ const pw=prompt('輸入密碼登入');if(!pw)return;const r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({user:'',password:pw})});
+ if(!r.ok){alert('密碼不對');return;}boot();};
+const pass=r=>(year==='全部'||r.date.startsWith(year))&&(month==='全部'||r.date.slice(5,7)===month)&&(cat==='全部'||(r.category||'生活')===cat)&&(cur==='全部'||r.cur===cur)&&(!q||(r.item+' '+(r.place||'')+' '+(r.title||'')+' '+(r.invoice_no||'')+' '+(r.pay||'')+' '+(r.note||'')).toLowerCase().includes(q));
+function chips(name,vals,curv,set){return `<div class="bar"><span style="font-size:.72rem;color:var(--muted);letter-spacing:.1em">${name}</span>${vals.map(v=>`<button data-k="${set}" data-v="${esc(v)}" class="${v===curv?'on':''}">${esc(v)}</button>`).join('')}</div>`;}
+function render(){const years=['全部',...new Set(ROWS.map(r=>r.date.slice(0,4)))].sort().reverse();years.unshift(years.splice(years.indexOf('全部'),1)[0]);
+ const months=['全部',...new Set(ROWS.filter(r=>year==='全部'||r.date.startsWith(year)).map(r=>r.date.slice(5,7)))].sort();months.unshift(months.splice(months.indexOf('全部'),1)[0]);
+ const cats=['全部',...new Set(ROWS.map(r=>r.category||'生活'))],curs=['全部',...new Set(ROWS.map(r=>r.cur))];
+ const rows=ROWS.filter(pass);const sums={};rows.forEach(r=>{sums[r.cur]=(sums[r.cur]||0)+r.amount});
+ const byCat={};rows.forEach(r=>{const k=(r.category||'生活')+'／'+(r.type||'');byCat[k]=byCat[k]||{};byCat[k][r.cur]=(byCat[k][r.cur]||0)+r.amount});
+ const bym={};rows.forEach(r=>{const k=r.date.slice(0,7);bym[k]=bym[k]||{};bym[k][r.cur]=(bym[k][r.cur]||0)+r.amount});
+ A.innerHTML=chips('年',years,year,'year')+chips('月',months,month,'month')+chips('分類',cats,cat,'cat')+chips('幣別',curs,cur,'cur')+
+  `<div class="sbox"><input id="q" type="search" placeholder="🔍 搜品項、店家、發票號、付款方式…" value="${esc(q)}"></div>`+
+  `<div class="sum" style="margin-top:1rem">${Object.entries(sums).map(([c,v])=>`<div><small>${esc(c)} 合計</small><b>${fmt(v)}</b></div>`).join('')}<div><small>筆數</small><b>${rows.length}</b></div><div><small>涵蓋記事</small><b>${new Set(rows.map(r=>r.entry_id)).size}</b></div></div>`+
+  `<h3>每月</h3><table class="bymonth"><tr><th>月份</th>${curs.slice(1).map(c=>`<th class="amt">${esc(c)}</th>`).join('')}<th class="amt">筆</th></tr>${Object.keys(bym).sort().reverse().map(m=>`<tr><td>${m}</td>${curs.slice(1).map(c=>`<td class="amt">${bym[m][c]?fmt(bym[m][c]):'—'}</td>`).join('')}<td class="amt">${rows.filter(r=>r.date.startsWith(m)).length}</td></tr>`).join('')}</table>`+
+  `<h3>分類</h3><table><tr><th>分類／型態</th>${curs.slice(1).map(c=>`<th class="amt">${esc(c)}</th>`).join('')}</tr>${Object.entries(byCat).sort((a,b)=>Object.values(b[1]).reduce((x,y)=>x+y,0)-Object.values(a[1]).reduce((x,y)=>x+y,0)).map(([k,v])=>`<tr><td>${esc(k)}</td>${curs.slice(1).map(c=>`<td class="amt">${v[c]?fmt(v[c]):'—'}</td>`).join('')}</tr>`).join('')}</table>`+
+  `<h3>明細（${rows.length} 筆）</h3>${rows.length?`<table><tr><th>日期</th><th>品項</th><th class="p">店家／記事</th><th class="amt">金額</th></tr>${rows.map(r=>`<tr><td class="d">${r.date}</td><td>${esc(r.item)}${r.invoice_no?` <span class="cat">${esc(r.invoice_no)}</span>`:''}${r.pay?` <span class="cat">${esc(r.pay)}</span>`:''}</td><td class="p t"><a href="./#d-${r.date}">${esc(r.title||r.place||'')}</a><span class="cat">${esc(r.category||'生活')}／${esc(r.type||'')}</span></td><td class="amt">${esc(r.cur)} ${fmt(r.amount)}</td></tr>`).join('')}</table>`:'<p class="empty">沒有符合的帳</p>'}`;
+ A.querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>{({year:v=>year=v,month:v=>month=v,cat:v=>cat=v,cur:v=>cur=v})[b.dataset.k](b.dataset.v);if(b.dataset.k==='year')month='全部';render();});
+ const Q=document.getElementById('q');let t=null;Q.oninput=()=>{clearTimeout(t);t=setTimeout(()=>{q=Q.value.trim().toLowerCase();const pos=Q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos);},220);};}
+boot();
+</script></body></html>
