@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>名古屋四天三夜・暖旅攝影攻略</title>
+  <meta name="description" content="2026-09-26～09-29 名古屋四天三夜攻略書：暖旅水彩總覽地圖＋Day 1–4 時程卡、逐日行程、三家住宿、航班與攝影提醒。" />
+  <meta name="date" content="2026-09-26" />
+  <style>
+    :root{
+      --paper:#f4efe6; --paper2:#ece4d3; --card:#fbf8f1;
+      --green:#2f5d4a; --green2:#1f4033; --red:#b23a2c; --gold:#c9a24a; --gold2:#a8862f;
+      --ink:#2b2620; --muted:#6f665a; --line:rgba(47,93,74,.22); --line2:rgba(201,162,74,.45);
+    }
+    *{box-sizing:border-box;}
+    html,body{overflow-x:hidden;}
+    body{margin:0; background:var(--paper); word-break:keep-all; overflow-wrap:anywhere;
+      background-image:radial-gradient(120% 60% at 50% -10%, #fbf7ee 0%, var(--paper) 55%, var(--paper2) 100%);
+      color:var(--ink); font-family:'Noto Sans TC','PingFang TC','Helvetica Neue',system-ui,sans-serif;
+      line-height:1.7; -webkit-font-smoothing:antialiased;}
+    a{color:var(--green);}
+    img{max-width:100%; height:auto; display:block;}
+    .wrap{max-width:980px; margin:0 auto; padding:1rem 16px 4rem;}
+    .nav{display:flex; justify-content:space-between; gap:.6rem; flex-wrap:wrap; font-size:.8rem; letter-spacing:.04em;}
+    .nav a{text-decoration:none; color:var(--green);}
+    .nav a:hover{color:var(--red);}
+
+    /* header */
+    header{text-align:center; margin:1.4rem 0 1.2rem;}
+    .eyebrow{color:var(--gold2); letter-spacing:.38em; font-size:.7rem; text-transform:uppercase; margin:0;}
+    h1{margin:.35rem 0 .2rem; font-size:clamp(1.65rem,6.2vw,2.7rem); line-height:1.25; color:var(--green2);
+      font-family:'Noto Serif TC','Songti TC','Georgia',serif; font-weight:700; letter-spacing:.02em;}
+    h1 .nw{white-space:nowrap; display:inline-block;}
+    .k{white-space:nowrap;}
+    @media(max-width:420px){ h1 .dot{display:none;} h1 .nw{display:block;} }
+    .dates{color:var(--red); font-weight:700; letter-spacing:.14em; font-size:.9rem; margin:.2rem 0 0;}
+    .mood{color:var(--muted); font-size:.92rem; max-width:560px; margin:.5rem auto 0;}
+    .rule{width:120px; height:1px; margin:.9rem auto 0; background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+    /* hero */
+    .hero{margin:.6rem 0 0; border:1px solid var(--line2); border-radius:14px; overflow:hidden; background:#fff;
+      box-shadow:0 14px 40px rgba(60,40,10,.14);}
+    .hero figcaption{padding:.55rem .9rem; font-size:.78rem; color:var(--muted); background:var(--card); border-top:1px solid var(--line);}
+
+    /* legend */
+    .legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.4rem .8rem; margin:.9rem 0 0;
+      padding:.9rem 1rem; background:var(--card); border:1px solid var(--line); border-radius:12px; font-size:.84rem;}
+    .legend div{display:flex; align-items:center; gap:.5rem; word-break:keep-all;}
+    .legend i{flex:0 0 auto; width:1.35rem; height:1.35rem; border-radius:50%; color:#fff; font-size:.72rem; font-weight:700;
+      display:inline-flex; align-items:center; justify-content:center; font-style:normal;}
+    .d0{background:#7a4f9a;} .d1{background:var(--red);} .d2{background:var(--green);} .d3{background:#2d5f9e;}
+
+    /* sections */
+    section{margin-top:2rem;}
+    h2{font-family:'Noto Serif TC','Songti TC','Georgia',serif; color:var(--green2); font-size:clamp(1.25rem,4.6vw,1.6rem);
+      margin:0 0 .15rem; display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap;}
+    h2 .day{color:var(--red); font-family:'Georgia',serif; font-size:.9em; letter-spacing:.06em;}
+    .sub{color:var(--muted); font-size:.84rem; margin:0 0 .8rem;}
+    .dayimg{border:1px solid var(--line2); border-radius:12px; overflow:hidden; background:#fff; box-shadow:0 8px 24px rgba(60,40,10,.1);}
+
+    /* timeline */
+    .tl{list-style:none; margin:1rem 0 0; padding:0 0 0 1.25rem; border-left:2px solid var(--line2);}
+    .tl li{position:relative; padding:0 0 .8rem; display:grid; grid-template-columns:4.2rem 1fr; gap:.15rem .6rem; align-items:baseline;}
+    .tl li:last-child{padding-bottom:0;}
+    .tl li:before{content:""; position:absolute; left:-1.63rem; top:.5rem; width:.62rem; height:.62rem; border-radius:50%;
+      background:var(--gold); box-shadow:0 0 0 3px rgba(201,162,74,.22);}
+    .tl li.meal:before{background:var(--red); box-shadow:0 0 0 3px rgba(178,58,44,.18);}
+    .tl li.photo:before{background:var(--green); box-shadow:0 0 0 3px rgba(47,93,74,.2);}
+    .tl .t{color:var(--red); font-weight:700; font-size:.82rem; letter-spacing:.03em; font-variant-numeric:tabular-nums;}
+    .tl .t.na{color:var(--muted); font-weight:500;}
+    .tl .n{font-weight:700; font-size:.95rem;}
+    .tl .d{grid-column:2; color:var(--muted); font-size:.82rem; line-height:1.55;}
+    .tag{display:inline-block; font-size:.68rem; padding:.05em .5em; border-radius:999px; border:1px solid var(--line2); color:var(--gold2); margin-left:.35rem; vertical-align:middle; font-weight:600;}
+    .tag.p{border-color:rgba(47,93,74,.4); color:var(--green);}
+
+    /* cards */
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.8rem;}
+    .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:.95rem 1rem;}
+    .card h3{margin:0 0 .3rem; font-size:1rem; color:var(--green2);}
+    .card .when{color:var(--red); font-size:.76rem; letter-spacing:.1em; font-weight:700; margin:0 0 .35rem;}
+    .card p{margin:.2rem 0; font-size:.86rem;}
+    .card p.loc{color:var(--muted); font-size:.8rem;}
+    .flights{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.8rem;}
+    .fl{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:.9rem 1rem;}
+    .fl .no{color:var(--gold2); font-weight:800; letter-spacing:.08em; font-size:.8rem;}
+    .fl .route{display:flex; align-items:center; gap:.6rem; margin:.3rem 0; flex-wrap:wrap;}
+    .fl .ap{font-family:'Georgia',serif; font-size:1.45rem; font-weight:700; color:var(--green2); line-height:1.1;}
+    .fl .ap small{display:block; font-family:inherit; font-size:.72rem; color:var(--muted); font-weight:500;}
+    .fl .arrow{color:var(--red); font-size:1.1rem; align-self:flex-start; line-height:1.55;}
+    .fl .note{color:var(--muted); font-size:.8rem; margin:.3rem 0 0;}
+
+    /* tips */
+    .tips{background:linear-gradient(180deg,rgba(201,162,74,.16),rgba(201,162,74,.04)); border:1px solid var(--line2); border-radius:12px; padding:1rem 1.1rem;}
+    .tips ul{margin:0; padding-left:1.1rem;}
+    .tips li{font-size:.88rem; margin:.35rem 0;}
+    .tips li b{color:var(--green2);}
+    .tips li .t{color:var(--red); font-weight:700;}
+
+    /* callout paper tag */
+    .tagnote{margin-top:.8rem; background:#fffdf7; border:1px dashed var(--line2); border-radius:8px; padding:.6rem .9rem; font-size:.82rem; color:var(--muted);}
+
+    footer{margin-top:2.4rem; text-align:center; color:var(--muted); font-size:.76rem; line-height:1.8; border-top:1px solid var(--line); padding-top:1rem;}
+    footer a{color:var(--green); text-decoration:none; font-weight:600;}
+    footer a:hover{color:var(--red);}
+    @media(max-width:560px){
+      .tl li{grid-template-columns:1fr;}
+      .tl .d{grid-column:1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav"><a href="./dashboard.html">← 儀表板</a><a href="./prompt-library.html#PR-016">Prompt 範例庫 PR-016 →</a></nav>
+
+    <header>
+      <p class="eyebrow">PhotoNB · Travel Guide</p>
+      <h1><span class="nw">名古屋四天三夜</span><span class="dot">・</span><span class="nw">暖旅攝影攻略</span></h1>
+      <p class="dates">2026.09.26（六）— 09.29（二）</p>
+      <p class="mood">三晚三家：市區、城旁、機場旁，一天一個節奏。中部國際機場 NGO 進出。</p>
+      <div class="rule"></div>
+    </header>
+
+    <figure class="hero">
+      <img src="prompt-assets/PR-016-map.jpg" width="1280" height="720" alt="名古屋四天三夜・暖旅攝影地圖（水彩總覽）" />
+      <figcaption>總覽地圖：桃園 → 中部國際機場 → 榮 → 愛知吉卜力公園 → 名古屋城 → 常滑 → 返程。James 以 AI 水彩生成，拆解見 <span class="k">PR-016</span>。</figcaption>
+    </figure>
+    <div class="legend">
+      <div><i class="d0">1</i>桃園機場</div>
+      <div><i class="d0">2</i>中部國際機場</div>
+      <div><i class="d1">3</i>榮商圈</div>
+      <div><i class="d2">4</i>愛知吉卜力公園</div>
+      <div><i class="d3">5</i>ESPACIO 名古屋城堡</div>
+      <div><i class="d3">6</i>常滑</div>
+      <div><i class="d0">7</i>中部國際機場</div>
+      <div><i class="d0">8</i>桃園機場</div>
+    </div>
+
+    <!-- DAY 1 -->
+    <section id="day1">
+      <h2><span class="day">Day 1</span>9/26（六）榮的藝術新地標</h2>
+      <p class="sub">抵達 → 入住榮商圈 → 美術館特展 → 商場 → 夜景。晚餐二選一。</p>
+      <div class="dayimg"><img src="prompt-assets/PR-016-day1.jpg" width="1280" height="720" alt="Day 1 時程卡" /></div>
+      <ul class="tl">
+        <li><span class="t">11:20</span><span class="n">抵達中部國際機場</span><span class="d">CI154 落地，名鐵 μSKY 進市區到榮。</span></li>
+        <li><span class="t na">午後</span><span class="n">入住 The Royal Park Hotel Iconic Nagoya</span><span class="d">中日大樓上，榮商圈正中心。</span></li>
+        <li><span class="t na">午後</span><span class="n">名古屋市美術館</span><span class="d">梵谷・光影交響（印象派）特展。</span></li>
+        <li><span class="t na">傍晚</span><span class="n">HAERA 商場</span><span class="d">榮的最新商場，就在住宿樓下。</span></li>
+        <li class="photo"><span class="t na">入夜</span><span class="n">Oasis 21 水之宇宙船＋MIRAI TOWER 夜景<span class="tag p">攝影點</span></span><span class="d">玻璃屋頂水盤與電視塔燈光，藍調時刻最好看。</span></li>
+        <li class="meal"><span class="t na">晚餐</span><span class="n">鰻魚飯三吃 或 THE 7th TERRACE 露台<span class="tag">二選一</span></span><span class="d">當天看體力與天氣決定。</span></li>
+      </ul>
+    </section>
+
+    <!-- DAY 2 -->
+    <section id="day2">
+      <h2><span class="day">Day 2</span>9/27（日）愛知吉卜力公園</h2>
+      <p class="sub">整天在園區，傍晚回榮取行李，換住名古屋城旁。</p>
+      <div class="dayimg"><img src="prompt-assets/PR-016-day2.jpg" width="1280" height="720" alt="Day 2 時程卡" /></div>
+      <ul class="tl">
+        <li class="meal"><span class="t">07:00</span><span class="n">早餐・退房・寄放行李</span></li>
+        <li><span class="t">08:00</span><span class="n">東山線 → 藤之丘</span></li>
+        <li><span class="t">08:50</span><span class="n">轉 Linimo 磁浮</span></li>
+        <li><span class="t">09:20</span><span class="n">抵達園區</span></li>
+        <li><span class="t">10:00</span><span class="n">吉卜力大倉庫入場<span class="tag">標準票</span></span><span class="d">指定日期時段；標準票不含指定建築內部。</span></li>
+        <li class="meal"><span class="t">12:30</span><span class="n">園區咖啡廳午餐</span></li>
+        <li><span class="t">14:00</span><span class="n">魔女之谷</span></li>
+        <li><span class="t">16:00</span><span class="n">魔法之里</span></li>
+        <li><span class="t">17:30</span><span class="n">回榮取行李</span></li>
+        <li><span class="t">18:30</span><span class="n">入住 ESPACIO NAGOYA CASTLE 城景房</span></li>
+        <li class="meal"><span class="t">19:00</span><span class="n">酒店季節料理晚餐</span></li>
+        <li><span class="t">20:30</span><span class="n">THE BAR CASTLE 調酒</span><span class="d">面對名古屋城夜景。</span></li>
+      </ul>
+    </section>
+
+    <!-- DAY 3 -->
+    <section id="day3">
+      <h2><span class="day">Day 3</span>9/28（一）城景慢旅與常滑</h2>
+      <p class="sub">早上留給城堡與飯店，下午移動到機場旁的常滑。</p>
+      <div class="dayimg"><img src="prompt-assets/PR-016-day3.jpg" width="1280" height="720" alt="Day 3 時程卡" /></div>
+      <ul class="tl">
+        <li class="photo"><span class="t">05:30</span><span class="n">城堡晨曦<span class="tag p">攝影點</span></span><span class="d">49.6㎡ 城景客房窗前，看名古屋城天守日出。</span></li>
+        <li class="meal"><span class="t na">早上</span><span class="n">早餐・藝術空間・泳池</span><span class="d">慢慢用飯店，不急著出門。</span></li>
+        <li class="meal"><span class="t">12:00</span><span class="n">THE BAR CASTLE 城景下午茶</span></li>
+        <li><span class="t na">午後</span><span class="n">HAERA・中日大樓</span><span class="d">回榮補逛。</span></li>
+        <li><span class="t na">午後</span><span class="n">名鐵 μSKY 前往常滑</span></li>
+        <li class="photo"><span class="t na">傍晚</span><span class="n">常滑陶瓷散步道<span class="tag p">攝影點</span></span><span class="d">土管坂、招財貓、陶管小徑。</span></li>
+        <li><span class="t na">傍晚</span><span class="n">入住 Spring Sunny Hotel Nagoya Tokoname</span><span class="d">大浴場・整理行李。</span></li>
+        <li class="meal"><span class="t na">晚餐</span><span class="n">常滑在地美食</span><span class="d">海鮮拼盤、炸蝦定食、きしめん。</span></li>
+      </ul>
+    </section>
+
+    <!-- DAY 4 -->
+    <section id="day4">
+      <h2><span class="day">Day 4</span>9/29（二）晨光與返程</h2>
+      <p class="sub">住在機場旁，早上不趕：拍完晨光、吃完早餐再走。</p>
+      <div class="dayimg"><img src="prompt-assets/PR-016-day4.jpg" width="1280" height="720" alt="Day 4 時程卡" /></div>
+      <ul class="tl">
+        <li class="photo"><span class="t">05:20</span><span class="n">晨光攝影<span class="tag p">攝影點</span></span><span class="d">房間看常滑與伊勢灣。</span></li>
+        <li class="meal"><span class="t">06:30</span><span class="n">早餐</span></li>
+        <li><span class="t">07:15</span><span class="n">退房</span><span class="d">步行 2 分鐘到常滑站。</span></li>
+        <li><span class="t na">隨後</span><span class="n">常滑站 → 中部國際機場</span><span class="d">名鐵 1 站，5–6 分鐘。</span></li>
+        <li><span class="t">07:45</span><span class="n">第一航廈報到</span></li>
+        <li><span class="t">09:55</span><span class="n">CI151 起飛</span></li>
+        <li><span class="t">11:55</span><span class="n">抵達桃園</span></li>
+        <li class="meal"><span class="t na">伴手禮</span><span class="n">常滑燒茶杯・蝦餅・外郎糕・機場咖啡</span></li>
+      </ul>
+    </section>
+
+    <!-- HOTELS -->
+    <section id="hotels">
+      <h2>🏨 住宿三家</h2>
+      <p class="sub">市區、城旁、機場旁，各住一晚。</p>
+      <div class="grid">
+        <div class="card">
+          <p class="when">9/26 · 第一晚</p>
+          <h3>The Royal Park Hotel Iconic Nagoya</h3>
+          <p>中日大樓高樓層，榮商圈正中心；HAERA 在樓下，Oasis 21 與電視塔步行可到。</p>
+          <p class="loc">位置：榮（名古屋市中區）</p>
+        </div>
+        <div class="card">
+          <p class="when">9/27 · 第二晚</p>
+          <h3>ESPACIO NAGOYA CASTLE</h3>
+          <p>面對名古屋城的景觀飯店，49.6㎡ 城景客房；早餐、藝術空間、泳池，THE BAR CASTLE 可看城喝下午茶與調酒。入住 12:00／退房 16:00，整個上午都留給城堡。</p>
+          <p class="loc">位置：名古屋城旁</p>
+        </div>
+        <div class="card">
+          <p class="when">9/28 · 第三晚</p>
+          <h3>Spring Sunny Hotel Nagoya Tokoname</h3>
+          <p>常滑站步行 2 分鐘、名鐵一站到機場；高樓房間看常滑與伊勢灣晨光，有大浴場。15:00 入住。</p>
+          <p class="loc">位置：常滑（中部國際機場旁）</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLIGHTS -->
+    <section id="flights">
+      <h2>✈️ 航班（華航）</h2>
+      <div class="flights">
+        <div class="fl">
+          <div class="no">CI 154 · 9/26（六）去程</div>
+          <div class="route"><span class="ap">TPE<small>桃園 07:30</small></span><span class="arrow">→</span><span class="ap">NGO<small>中部國際 11:20</small></span></div>
+          <p class="note">05:30 前到桃園機場。貴賓室：T1／T2 Plaza Premium（Dragonpass，以電子票卡據點查詢為準）。</p>
+        </div>
+        <div class="fl">
+          <div class="no">CI 151 · 9/29（二）回程</div>
+          <div class="route"><span class="ap">NGO<small>中部國際 09:55</small></span><span class="arrow">→</span><span class="ap">TPE<small>桃園 11:55</small></span></div>
+          <p class="note">前一晚住機場旁常滑，07:45 T1 報到。貴賓室：NGO T1 國際線 Plaza Premium＋Coral。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO TIPS -->
+    <section id="tips">
+      <h2>📷 攝影提醒</h2>
+      <div class="tips">
+        <ul>
+          <li><b>城堡晨曦</b> <span class="t">9/28 05:30</span>：ESPACIO 城景房正對天守，日出約 05:40，提早 20 分鐘就位；房內關燈、鏡頭貼玻璃防反光，長焦壓天守＋城市線，廣角收窗框當前景。</li>
+          <li><b>常滑晨光</b> <span class="t">9/29 05:20</span>：Spring Sunny 高樓看伊勢灣與機場跨海橋，日出方向在海面；拍完再吃早餐，時間很寬。</li>
+          <li><b>Oasis 21 夜景</b> <span class="t">9/26 入夜</span>：日落約 17:45，藍調 18:00–18:30 最佳；上到水之宇宙船屋頂拍水盤倒影＋MIRAI TOWER，再下到地面拍玻璃屋頂剪影。</li>
+          <li><b>吉卜力公園</b> <span class="t">9/27</span>：大倉庫內多處展示室禁止攝影，依現場標示；戶外建築、魔女之谷與魔法之里的房舍與植栽可拍。標準票不含指定建築內部，別排進拍攝清單。</li>
+          <li><b>常滑陶瓷散步道</b> <span class="t">9/28 傍晚</span>：土管坂與陶管牆午後側光最立體，招財貓與陶器小店適合中焦；天黑前到。</li>
+          <li><b>雙機分工</b>：OPPO 拍實況與街景，SONY 長焦收天守、電視塔與車窗外；名鐵 μSKY 與 Linimo 車窗可補「移動中」素材。</li>
+        </ul>
+        <div class="tagnote">小貼士：這一頁只講現狀。行程若更動，改這一頁；圖的產生方式與 prompt 收在 Prompt 範例庫 <span class="k">PR-016</span>。</div>
+      </div>
+    </section>
+
+    <footer>
+      <div>圖：James 2026-09-26 以 AI 水彩生成（總覽地圖＋Day 1–4）· 拆解與可複製 prompt → <a href="./prompt-library.html#PR-016">Prompt 範例庫 PR-016</a></div>
+      <div>Made by Robert × PhotoNB · 2026-09-26 · <a href="./dashboard.html">回儀表板</a></div>
+    </footer>
+  </div>
+</body>
+</html>

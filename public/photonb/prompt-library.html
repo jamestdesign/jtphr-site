@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prompt 範例庫 · PhotoNB</title>
   <meta name="description" content="特殊生圖 prompt 收藏庫：每個編號有範例圖、拆解說明與可複製 prompt。用編號引用給 Robert 即可批次導出新內容。" />
-  <meta name="date" content="2026-07-01" />
+  <meta name="date" content="2026-09-26" />
   <style>
     :root{
       --navy:#0b1022; --navy2:#121a35; --gold:#d8b65a; --gold2:#f3df9b;
@@ -473,6 +473,60 @@ Water in muted teal-green with fine engraved wave hatching, land in sand and och
 年份（例如：2026）
 圖號（預設：PLAN 01，也可以改成 SECTION 02）
 其他需求（標題位置、線條疏密、抽象程度、要不要副標題…等）`
+    },
+    {
+      id: "PR-016",
+      title: "暖旅水彩行程圖（總覽地圖＋逐日時程卡）",
+      titleEn: "Warm Watercolor Travel Itinerary Set (Overview Map + Daily Timeline Cards)",
+      styles: ["行程圖","水彩手繪","米黃紙質","16:9橫式","逐日時程"],
+      colorway: ["#f4efe6","#e6d9b8","#2f5d4a","#b23a2c","#c9a24a"],
+      model: "ChatGPT 生圖（一趟一組：1 張總覽地圖＋每天 1 張時程卡）",
+      ratio: "16:9 橫式（1280×720 web 版）",
+      source: "James 2026-09-26 名古屋四天三夜自生（總覽地圖＋Day 1–4 共 5 張）；攻略頁見 nagoya-2026-guide.html",
+      images: [
+        {src:"prompt-assets/PR-016-map.jpg", cap:"總覽地圖 — 手繪水彩地圖＋①–⑧ 編號路線＋建築插畫＋左下圖例"},
+        {src:"prompt-assets/PR-016-day1.jpg", cap:"Day 1 — 五格直式時程卡，左→右箭頭串接，底部美食二選一"},
+        {src:"prompt-assets/PR-016-day2.jpg", cap:"Day 2 — 兩排時間軸（07:00–20:30），下方時間刻度線，右下紙籤備註"},
+        {src:"prompt-assets/PR-016-day3.jpg", cap:"Day 3 — 三＋四格編號卡＋底部「晚餐：在地美食」四小圖"},
+        {src:"prompt-assets/PR-016-day4.jpg", cap:"Day 4 — 六格時間標籤卡＋一行說明＋伴手禮列＋右下手寫紙籤"}
+      ],
+      thumb: "prompt-assets/PR-016-map-thumb.jpg",
+      breakdown: [
+        {h:"畫布／氣質", d:"16:9 橫式、米黃紙質底（帶輕微紙紋與暈染邊），四角用淡墨綠藤蔓／楓葉／櫻花做裝飾角花；整體是「旅行手帳」感的水彩手繪，不是照片拼貼"},
+        {h:"標題列", d:"上方置中一行襯線體大標「Day N｜月日・當日主題」（總覽版為「城市＋天數・暖旅攝影地圖」），墨綠或深褐字，兩側加細線或小花飾"},
+        {h:"時間軸卡片列", d:"一天的行程拆成 5–7 張直式水彩小卡，左→右等距排列；每張卡上緣一個米白時間標籤（「① 11:20 抵達名古屋」或純「07:15 退房」），卡內是該景點／動作的水彩景物"},
+        {h:"卡片之間", d:"用朱紅或褐色小箭頭（→）串接，代表順序；行程多的日子拆成上下兩排，排底加一條帶刻度的時間線（07:00 · 08:00 · 08:50…）"},
+        {h:"一行說明", d:"卡片下方（或卡內）一至兩行小字：做什麼、要注意什麼（例：「退房完成，輕裝上路，步行約 2 分鐘前往車站」）"},
+        {h:"底部美食／伴手禮列", d:"最下方留一橫列 3–4 樣當地美食或伴手禮的水彩小圖（鰻魚飯三吃、炸蝦定食、常滑燒茶杯…），各配短名稱；二選一時用「或」分成兩張並列"},
+        {h:"右下手寫紙籤", d:"一張斜貼的米白紙籤／明信片 callout，手寫體寫備註或當日心情（「標準票不含指定建築內部」「輕裝・從容返程」），可加郵戳、麻繩、乾燥花"},
+        {h:"總覽地圖版", d:"整張是手繪水彩地圖：淺藍海＋米黃陸地＋淡淡街廓；起訖（機場／出發地）畫在角落用虛線箭頭連進來；主要節點用圓形編號徽章（①–⑧，紅／綠／藍分色）＋路線用同色虛線；每個節點旁放一張建築插畫（飯店、地標、車站）＋白底標籤；左下角一格「圖例」按編號列出地名"}
+      ],
+      note: "這組是 James 直接讓 AI 寫中文字（標題、時間標籤、說明小字全由模型畫），大字多半正確，但小字容易錯（例如 Day 1 的「HAERA 最新商場」招牌與 Day 4 退房小卡上的字都有走樣）。照本庫「AI 生圖一律不寫字」的規矩：建議大標／Day N 可留給 AI，時間標籤與說明小字改用 HTML 疊字或後製補（同 PR-002 地圖的 map_labels 兩層法），改字免重生。",
+      prompt: `A warm watercolor travel-itinerary infographic, 16:9 landscape, hand-painted travel-journal style on cream paper ({paper color, e.g. soft cream #f4efe6}) with subtle paper grain and soft washed edges. Corner decorations: light watercolor foliage / maple leaves / cherry blossoms in muted green and dusty pink.
+
+Layout for a DAILY CARD:
+- Top center: one elegant serif title line "Day {N} | {Month Day} · {theme of the day}" in deep green or dark brown, with thin ornamental lines on both sides.
+- Below: a row of {5–7} vertical watercolor cards arranged left to right, evenly spaced, each showing one stop or action of the day ({list the stops in order: e.g. airplane arriving at airport terminal, hotel tower in a city, art museum entrance with a painting banner, shopping mall atrium, TV tower at dusk over a glass water-spaceship structure}). Each card has a small cream label at its top edge for the time and stop name, and thin vermilion/brown arrows (→) between cards to show sequence. If the day has many stops, split into two rows and add a thin ruled time-scale line under each row.
+- Under each card: space for one or two short caption lines.
+- Bottom strip: {3–4} small watercolor food or souvenir vignettes with short name labels ({e.g. grilled eel rice set, fried shrimp set meal, flat kishimen noodles, ceramic teacup}).
+- Bottom right: a slightly tilted hand-written paper tag / postcard callout with twine, stamp and dried flowers, reserved for a note.
+
+Layout for the OVERVIEW MAP:
+- Whole canvas is a hand-painted watercolor map: pale blue sea with fine wash, cream land, faint street blocks; airports or departure city painted in a corner and connected with a dashed arrow.
+- Numbered round badges ①–⑧ at each stop (red / green / blue by day) joined by dashed routes of the same color; next to each stop a small watercolor building illustration (hotel, landmark, station) with a white label box.
+- Bottom left: a legend box listing the numbered stops.
+
+Palette: cream paper, ink green, vermilion red, antique gold accents, soft blue water. Soft daylight, gentle wash, slightly faded vintage feel, high detail, storybook illustration. No photographic textures, no harsh saturation.
+
+TEXT RULE: keep the canvas text-free except the large title line; leave clean cream label areas where captions will be added later in HTML / post-production. ABSOLUTELY NO small text.`,
+      promptAltLabel: "變數填寫（貼 prompt 後補這段）",
+      promptAlt: `請填寫以下變數：
+天數與日期（Day N｜月日）＋當日主題（例：榮的藝術新地標／愛知吉卜力公園／城景慢旅與常滑／晨光與返程）
+每天的停留點（依序 5–7 個，附時間，例：11:20 抵達機場 → 入住飯店 → 美術館特展 → 商場 → 夜景）
+底部美食／伴手禮（3–4 樣）
+右下紙籤要寫的備註（一句）
+總覽地圖：城市名、天數、①–⑧ 節點與分色（Day 1 紅／Day 2 綠／Day 3 藍／回程紫）
+紙色（預設米黃 #f4efe6）、角花（楓葉／櫻花／藤蔓）`
     }
   ];
 
