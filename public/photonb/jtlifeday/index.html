@@ -91,7 +91,7 @@ function render(){document.getElementById('list').innerHTML=E.filter(e=>pass(e)&
  <div class="date">${esc(e.date)}（${esc(e.weekday)}）${esc(e.time)}　·　<span class="cat">${esc(e.category||'生活')}／${esc(e.type)}</span></div><h2>${esc(e.title)}${visUI(e)}</h2>
  <div class="meta">📍 ${esc(e.place)}${e.kcal_total?`　·　估 <b>${e.kcal_total}</b> 大卡`:''}${e.people?`　·　${e.type==='餐食'?'同行：':''}${esc(e.people)}`:''}${e.voiceover?'　·　🎙️ 口播素材':''}</div>
  ${thumbsHTML(e,i,base)}
- ${(e.docs||[]).length?`<div class="docs">${e.docs.map(x=>`<div class="doc"><span class="dico">PDF</span><span class="dt">${esc(x.title)}</span><a href="${base+x.file}" target="_blank" rel="noopener">預覽</a><a href="${base+x.file}" download>下載</a></div>`).join('')}</div>`:''}
+ ${(e.docs||[]).length?`<div class="docs">${e.docs.map(x=>`<div class="doc"><span class="dico">${esc((x.file.split(".").pop()||"檔").toUpperCase())}</span><span class="dt">${esc(x.title)}</span><a href="${base+x.file}" target="_blank" rel="noopener">預覽</a><a href="${base+x.file}" download>下載</a></div>`).join('')}</div>`:''}
  ${(e.clips||[]).length?`<div class="clips">${e.clips.map((x,k)=>`<div class="clip"><img class="zoom" data-e="${i}" data-n="${(e.photos||[]).length+(e.grid?1:0)+(e.album||[]).length+k}" src="${base+x.f}" alt="" loading="lazy"><div class="ct"><span class="kind">${esc(x.kind||'')}</span><b>${esc(x.title||'')}</b><div class="sum">${esc(x.summary||'')}</div>${x.ocr?`<details class="ocr"><summary>文字內容</summary><pre>${esc(x.ocr)}</pre></details>`:''}${x.place?`<div class="pl">📍 ${esc(x.place)}</div>`:''}</div></div>`).join('')}</div>`:''}
  ${e.mood?`<div class="mood">${esc(e.mood)}</div>`:''}
  <div class="more" id="more${i}">

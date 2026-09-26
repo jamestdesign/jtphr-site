@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.10">
+  <resources>
+    <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1080" height="1920" colorSpace="1-1-1 (Rec. 709)"/>
+    <format id="r3" frameDuration="1/60s" width="2160" height="3840" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="r2" name="VID20260926170439" start="0s" duration="1282/15s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r3" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/11_1702_Royal%20Park%20Iconic%E6%88%BF%E9%96%93%E9%96%8B%E7%AE%B1%C2%B7%E7%AA%97%E6%99%AF/VID20260926170439.mp4"/>
+    </asset>
+    <asset id="r4" name="shutter" start="0s" duration="10/30s" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000"><media-rep kind="original-media" src="file:///Users/james/Desktop/Claude-Workspace/photo-grade/2026-09-26_reel_day1/vo/build/shutter.wav"/></asset>
+    <format id="r6" frameDuration="1001/24000s" width="2160" height="3840" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="r5" name="IMG_0289" start="0s" duration="257257/12000s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="3" audioRate="1" format="r6">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/01_0446_%E7%A7%BB%E5%8B%95%E4%B8%AD%C2%B7%E9%96%8B%E8%BB%8A%E5%BE%80%E6%A1%83%E5%9C%92%E6%A9%9F%E5%A0%B4%C2%B7%E4%B8%AD%E7%A7%8B%E6%BB%BF%E6%9C%88/IMG_0289.MOV"/>
+    </asset>
+    <format id="r8" frameDuration="1001/60000s" width="2160" height="3840" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="r7" name="VID20260926044907" start="0s" duration="881881/60000s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r8" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/01_0446_%E7%A7%BB%E5%8B%95%E4%B8%AD%C2%B7%E9%96%8B%E8%BB%8A%E5%BE%80%E6%A1%83%E5%9C%92%E6%A9%9F%E5%A0%B4%C2%B7%E4%B8%AD%E7%A7%8B%E6%BB%BF%E6%9C%88/VID20260926044907.mp4"/>
+    </asset>
+    <format id="r10" frameDuration="1/60s" width="3840" height="2160" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="r9" name="VID20260926075946" start="0s" duration="823/30s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r10" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/03_0744_%E7%A7%BB%E5%8B%95%E4%B8%AD%C2%B7%E9%A3%9B%E5%BE%80%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%A9%9F%E4%B8%8A/VID20260926075946.mp4"/>
+    </asset>
+    <asset id="r11" name="VID20260926080059" start="0s" duration="191/3s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r10" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/03_0744_%E7%A7%BB%E5%8B%95%E4%B8%AD%C2%B7%E9%A3%9B%E5%BE%80%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%A9%9F%E4%B8%8A/VID20260926080059.mp4"/>
+    </asset>
+    <asset id="r12" name="IMG_0309" start="0s" duration="587587/60000s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="3" audioRate="1" format="r8">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/04_1125_%E4%B8%AD%E9%83%A8%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%E6%8A%B5%E9%81%94%C2%B7%E5%90%8D%E9%90%B5%CE%BCSKY%E6%9C%88%E5%8F%B0/IMG_0309.MOV"/>
+    </asset>
+    <asset id="r13" name="IMG_0321" start="0s" duration="679/60s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="3" audioRate="1" format="r3">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/04_1125_%E4%B8%AD%E9%83%A8%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%E6%8A%B5%E9%81%94%C2%B7%E5%90%8D%E9%90%B5%CE%BCSKY%E6%9C%88%E5%8F%B0/IMG_0321.MOV"/>
+    </asset>
+    <asset id="r14" name="VID20260926120842" start="0s" duration="4607/60s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r3" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/05_1207_%E7%A7%BB%E5%8B%95%E4%B8%AD%C2%B7%E5%90%8D%E9%90%B5%CE%BCSKY%E5%BE%80%E9%87%91%E5%B1%B1/VID20260926120842.mp4"/>
+    </asset>
+    <asset id="r15" name="IMG_0353" start="0s" duration="571571/60000s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="3" audioRate="1" format="r8">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/08_1334_%E5%85%BC%E5%85%89%E9%B0%BB%E9%AD%9A%E9%A3%AF%E5%8D%88%E9%A4%90%C2%B7%E3%81%B2%E3%81%A4%E3%81%BE%E3%81%B6%E3%81%97/IMG_0353.MOV"/>
+    </asset>
+    <asset id="r16" name="IMG_0360" start="0s" duration="313/60s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="3" audioRate="1" format="r3">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/08_1334_%E5%85%BC%E5%85%89%E9%B0%BB%E9%AD%9A%E9%A3%AF%E5%8D%88%E9%A4%90%C2%B7%E3%81%B2%E3%81%A4%E3%81%BE%E3%81%B6%E3%81%97/IMG_0360.MOV"/>
+    </asset>
+    <asset id="r17" name="VID20260926143625" start="0s" duration="47/12s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r3" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/09_1431_%E6%A6%AE%E6%A4%8D%E7%89%A9%E8%8A%B1%E5%BA%97%C2%B7%E6%A3%AE%E4%B9%8B%E5%9C%B0%E4%B8%8B%E8%A1%97%C2%B7%E9%9B%A8%E4%B8%AD%E8%A1%97%E6%99%AF/VID20260926143625.mp4"/>
+    </asset>
+    <asset id="r18" name="VID20260926143639" start="0s" duration="67/10s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r3" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/09_1431_%E6%A6%AE%E6%A4%8D%E7%89%A9%E8%8A%B1%E5%BA%97%C2%B7%E6%A3%AE%E4%B9%8B%E5%9C%B0%E4%B8%8B%E8%A1%97%C2%B7%E9%9B%A8%E4%B8%AD%E8%A1%97%E6%99%AF/VID20260926143639.mp4"/>
+    </asset>
+    <format id="r20" frameDuration="1/30s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="r19" name="01 0926 1617-2022 S_ref1080" start="0s" duration="979/30s" hasVideo="1" videoSources="1" format="r20">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/115%20TL%E7%B8%AE%E6%99%82%E7%AE%A1%E7%90%86/115-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B_TL/_refs/01%200926%201617-2022%20S_ref1080.mp4"/>
+    </asset>
+    <format id="r22" frameDuration="1/30s" width="1080" height="1920" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="r21" name="IMG20260926192115" start="0s" duration="5/2s" hasVideo="1" videoSources="1" format="r22">
+      <media-rep kind="original-media" src="file:///Users/james/Desktop/Claude-Workspace/photo-grade/2026-09-26_reel_day1/vo/build/stills/IMG20260926192115.mp4"/>
+    </asset>
+    <asset id="r23" name="IMG20260926192127" start="0s" duration="5/2s" hasVideo="1" videoSources="1" format="r22">
+      <media-rep kind="original-media" src="file:///Users/james/Desktop/Claude-Workspace/photo-grade/2026-09-26_reel_day1/vo/build/stills/IMG20260926192127.mp4"/>
+    </asset>
+    <asset id="r24" name="VID20260926195810" start="0s" duration="47/12s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r3" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/13_1924_%E6%A6%AE%E7%B2%BE%E5%93%81%E8%A1%97%C2%B7%E4%B8%AD%E6%97%A5%E5%A4%A7%E6%A8%93%E9%BE%8D%E8%B2%93%C2%B7%E9%9B%BB%E5%BD%B1%E9%99%A2/VID20260926195810.mp4"/>
+    </asset>
+    <asset id="r25" name="VID20260926210909" start="0s" duration="1771/60s" hasVideo="1" videoSources="1" hasAudio="1" audioSources="1" audioChannels="2" audioRate="48000" format="r3" customLUTOverride="LUT:fd38c25aafed48849baeb3fa5263bce6 (O-Log2-to-Rec709_Gamma24-D65_65)">
+      <media-rep kind="original-media" src="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/MOV_2026-09-26%20day1%20%E5%90%8D%E5%8F%A4%E5%B1%8B/14_2035_LA%20BODEGA%E8%A5%BF%E7%8F%AD%E7%89%99%E9%A4%90%E9%85%92%E9%A4%A8%E6%99%9A%E9%A4%90%C2%B7%E6%B5%B7%E9%AE%AE%E7%87%89%E9%A3%AF/VID20260926210909.mp4"/>
+    </asset>
+    <asset id="r26" name="IMG20260926190236" start="0s" duration="0s" hasVideo="1" videoSources="1"><media-rep kind="original-media" src="file:///Volumes/Crucial%208T/JTlifedayweb/JTlifeDay/2026-09-26%2003_0446_%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9Cday1/_%E5%BE%8C%E8%A3%BD/web/IMG20260926190236.jpg"/></asset>
+    <asset id="r27" name="음악팀-꽃이-피면-when-the-flowers-acoustichappy-bgm무료음악브금" start="0s" duration="5027/30s" hasAudio="1" audioSources="1" audioChannels="2" audioRate="44100"><media-rep kind="original-media" src="file:///Volumes/Crucial%208T/FCPX%E7%B4%A0%E6%9D%90/MUSIC/%EC%9D%8C%EC%95%85%ED%8C%80-%EA%BD%83%EC%9D%B4-%ED%94%BC%EB%A9%B4-when-the-flowers-acoustichappy-bgm%EB%AC%B4%EB%A3%8C%EC%9D%8C%EC%95%85%EB%B8%8C%EA%B8%88.mp3"/></asset>
+    <effect id="r28" name="Custom" uid=".../Titles.localized/Build In:Out.localized/Custom.localized/Custom.moti"/>
+  </resources>
+  <library location="file:///Volumes/Crucial%208T/input/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C/_2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C_%E5%89%B5%E4%BD%9C/2026-09-26%20%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%9B%9B%E5%A4%A9%E4%B8%89%E5%A4%9C.fcpbundle">
+    <event name="Reel 模板">
+      <project name="名古屋 day1 reel v1（口播版）">
+        <sequence format="r1" duration="1203/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+          <spine>
+            <asset-clip ref="r2" name="封面底圖" offset="0s" start="76/1s" duration="3s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <asset-clip ref="r27" lane="-1" name="음악팀-꽃이-피면-when-the-flowers-acoustichappy-bgm무료음악브금" offset="76s" start="16s" duration="1203/30s" audioRole="music" tcFormat="NDF"><adjust-volume amount="-14dB"/></asset-clip>
+              <title ref="r28" lane="2" offset="76s" name="名古屋 - Custom" start="3600s" duration="3s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_1">名古屋</text-style>
+    </text>
+    <text-style-def id="ts1_1">
+        <text-style font="Xingkai TC" fontSize="64" fontFace="Light" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="3" offset="76s" name="雨天的第一天 - Custom" start="3600s" duration="3s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 70"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_2">雨天的第一天</text-style>
+    </text>
+    <text-style-def id="ts1_2">
+        <text-style font="Xingkai TC" fontSize="52" fontFace="Light" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="4" offset="76s" name="Nagoya, Day One - Custom" start="3600s" duration="3s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 10"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_3">Nagoya, Day One</text-style>
+    </text>
+    <text-style-def id="ts1_3">
+        <text-style font="Snell Roundhand" fontSize="26" fontFace="Regular" italic="1" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r5" name="IMG_0289" offset="3s" start="3003/500s" duration="2s" format="r6" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="5" offset="3003/500s" name="Nagoya, Japan - Custom" start="3600s" duration="1023/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 300"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_4">Nagoya, Japan</text-style>
+    </text>
+    <text-style-def id="ts1_4">
+        <text-style font="Snell Roundhand" fontSize="30" fontFace="Regular" italic="1" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="6" offset="3003/500s" name="凌晨四點半出門， - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_5">凌晨四點半出門，</text-style>
+    </text>
+    <text-style-def id="ts1_5">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="3003/500s" name="中秋的滿月一路跟著我們 - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_6">中秋的滿月一路跟著我們</text-style>
+    </text>
+    <text-style-def id="ts1_6">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="3003/500s" name="Out the door at 4:30 - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_7">Out the door at 4:30 am, the Mid-Autumn moon following us</text-style>
+    </text>
+    <text-style-def id="ts1_7">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r7" name="VID20260926044907" offset="5s" start="3003/1000s" duration="2s" format="r8" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r9" name="VID20260926075946" offset="7s" start="5/1s" duration="2s" format="r10" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-conform type="fill"/><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="6" offset="5s" name="華航飛名古屋， - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_8">華航飛名古屋，</text-style>
+    </text>
+    <text-style-def id="ts1_8">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="5s" name="雲海上面山頂剛好探出頭 - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_9">雲海上面山頂剛好探出頭</text-style>
+    </text>
+    <text-style-def id="ts1_9">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="5s" name="China Airlines to Na - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_10">China Airlines to Nagoya, peaks poking through the clouds</text-style>
+    </text>
+    <text-style-def id="ts1_10">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r11" name="VID20260926080059" offset="9s" start="4/1s" duration="2s" format="r10" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-conform type="fill"/><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r12" name="IMG_0309" offset="11s" start="1001/1000s" duration="45/30s" format="r8" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="6" offset="1001/1000s" name="中部國際機場落地， - Custom" start="3600s" duration="135/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_11">中部國際機場落地，</text-style>
+    </text>
+    <text-style-def id="ts1_11">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="1001/1000s" name="名鐵 μSKY 直達金山 - Custom" start="3600s" duration="135/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_12">名鐵 μSKY 直達金山</text-style>
+    </text>
+    <text-style-def id="ts1_12">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="1001/1000s" name="Landing at Centrair, - Custom" start="3600s" duration="135/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_13">Landing at Centrair, then the μSKY straight to Kanayama</text-style>
+    </text>
+    <text-style-def id="ts1_13">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r13" name="IMG_0321" offset="375/30s" start="7/1s" duration="45/30s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r14" name="VID20260926120842" offset="14s" start="34/1s" duration="45/30s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r15" name="IMG_0353" offset="465/30s" start="1001/400s" duration="68/30s" format="r8" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="6" offset="1001/400s" name="第一餐就是兼光的鰻魚飯， - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_14">第一餐就是兼光的鰻魚飯，</text-style>
+    </text>
+    <text-style-def id="ts1_14">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="1001/400s" name="木桶一開整桌都香了 - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_15">木桶一開整桌都香了</text-style>
+    </text>
+    <text-style-def id="ts1_15">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="1001/400s" name="First meal: Kanemits - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_16">First meal: Kanemitsu hitsumabushi, the whole table smells amazing</text-style>
+    </text>
+    <text-style-def id="ts1_16">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r16" name="IMG_0360" offset="533/30s" start="1/1s" duration="68/30s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r17" name="VID20260926143625" offset="601/30s" start="1/2s" duration="2s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="6" offset="1/2s" name="雨中的榮，我們躲進一家花店 - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -165"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_17">雨中的榮，我們躲進一家花店</text-style>
+    </text>
+    <text-style-def id="ts1_17">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="1/2s" name="Rainy Sakae, we duck - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -200"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_18">Rainy Sakae, we duck into a flower shop</text-style>
+    </text>
+    <text-style-def id="ts1_18">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r18" name="VID20260926143639" offset="661/30s" start="2/1s" duration="2s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r2" name="VID20260926170439" offset="721/30s" start="12/1s" duration="68/30s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="6" offset="12s" name="回飯店開箱， - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_19">回飯店開箱，</text-style>
+    </text>
+    <text-style-def id="ts1_19">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="12s" name="落地窗外的名古屋慢慢天黑 - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_20">落地窗外的名古屋慢慢天黑</text-style>
+    </text>
+    <text-style-def id="ts1_20">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="12s" name="Back to the hotel, N - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_21">Back to the hotel, Nagoya slowly going dark outside the window</text-style>
+    </text>
+    <text-style-def id="ts1_21">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r19" name="01 0926 1617-2022 S_ref1080" offset="789/30s" start="20/1s" duration="68/30s" format="r20" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-conform type="fill"/><adjust-volume amount="-96dB"/></asset-clip>
+            <asset-clip ref="r21" name="📷 IMG20260926192115" offset="857/30s" start="0s" duration="2s" format="r22" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <asset-clip ref="r4" lane="-2" name="快門" offset="0s" start="0s" duration="10/30s" audioRole="effects"><adjust-volume amount="-6dB"/></asset-clip>
+              <title ref="r28" lane="6" offset="0s" name="久屋大通公園的希望之泉， - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_22">久屋大通公園的希望之泉，</text-style>
+    </text>
+    <text-style-def id="ts1_22">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="0s" name="電視塔在雨夜裡亮著 - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_23">電視塔在雨夜裡亮著</text-style>
+    </text>
+    <text-style-def id="ts1_23">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="0s" name="Hope Fountain at His - Custom" start="3600s" duration="4s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_24">Hope Fountain at Hisaya Odori Park, the TV tower glowing in the rain</text-style>
+    </text>
+    <text-style-def id="ts1_24">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r23" name="📷 IMG20260926192127" offset="917/30s" start="0s" duration="2s" format="r22" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <asset-clip ref="r4" lane="-2" name="快門" offset="0s" start="0s" duration="10/30s" audioRole="effects"><adjust-volume amount="-6dB"/></asset-clip>
+            </asset-clip>
+            <asset-clip ref="r24" name="VID20260926195810" offset="977/30s" start="1/2s" duration="68/30s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/>
+              <title ref="r28" lane="6" offset="1/2s" name="跟中日大樓的龍貓打聲招呼， - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_25">跟中日大樓的龍貓打聲招呼，</text-style>
+    </text>
+    <text-style-def id="ts1_25">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="8" offset="1/2s" name="晚餐用一鍋螃蟹燉飯收尾 - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0.5 -186"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_26">晚餐用一鍋螃蟹燉飯收尾</text-style>
+    </text>
+    <text-style-def id="ts1_26">
+        <text-style font="BiauKaiTC" fontSize="30" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="1/2s" name="Say hi to Totoro, th - Custom" start="3600s" duration="136/30s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -218"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_27">Say hi to Totoro, then a pan of crab paella to end the day</text-style>
+    </text>
+    <text-style-def id="ts1_27">
+        <text-style font="Telugu Sangam MN" fontSize="13" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </asset-clip>
+            <asset-clip ref="r25" name="VID20260926210909" offset="1045/30s" start="8/1s" duration="68/30s" format="r3" audioRole="dialogue" videoRole="Video-V" tcFormat="NDF"><adjust-volume amount="-96dB"/></asset-clip>
+            <video ref="r26" name="Next Episode" offset="1113/30s" start="3600s" duration="3s"><adjust-conform type="fill"/>
+              <title ref="r28" lane="6" offset="3600s" name="Next Episode - Custom" start="3600s" duration="3s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 330"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_28">Next Episode</text-style>
+    </text>
+    <text-style-def id="ts1_28">
+        <text-style font="Snell Roundhand" fontSize="26" fontFace="Regular" italic="1" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+              <title ref="r28" lane="7" offset="3600s" name="第二天 吉卜力公園 - Custom" start="3600s" duration="3s">
+    <param name="Position" key="9999/10199/10201/1/100/101" value="0 -150"/>
+    <param name="Alignment" key="9999/10199/10201/2/354/1002961760/401" value="1 (Center)"/>
+    <param name="Out Sequencing" key="9999/10199/10201/4/10233/201/202" value="0 (To)"/>
+    <text>
+        <text-style ref="ts1_29">第二天 吉卜力公園</text-style>
+    </text>
+    <text-style-def id="ts1_29">
+        <text-style font="BiauKaiTC" fontSize="34" fontFace="Regular" fontColor="1 1 1 1" alignment="center"/>
+    </text-style-def>
+</title>
+
+            </video>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>
