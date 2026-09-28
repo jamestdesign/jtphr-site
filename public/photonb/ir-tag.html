@@ -72,8 +72,8 @@
     <p><b>原則：圖只看一次。</b>把最花錢的「看畫面」獨立成一組，其他需求全改讀文字。</p>
     <div class="flow"><b>🎥 看片組</b><i>→</i><b>watch.json 看片工作表</b><i>→</i><b>🛠 加工組 ×4（只讀文字）</b><i>→</i><b>📋 彙整 worksheet.csv</b></div>
     <ul>
-      <li><b>🎥 看片組</b>（唯一會看圖）：讀每支 12 格時間碼拼圖，逐格寫客觀描述——秒數、畫面裡有什麼（objects）、人（none／others／ours）、臉（none／partial／clear）、景別、鏡頭狀態（static／handheld／pan／walk／vehicle）、明暗、品質、notable（這格值得留，每支最多 3 格）。<b>不下判斷、不給星等。</b>範本 <code>tools/PROMPT_rbirr_watch.md</code>，輸出 <code>watch_&lt;day&gt;.json</code>。</li>
-      <li><b>🛠 加工組</b>（<code>tools/rbirr_derive.py</code>，規則、不看圖）：① FCP 關鍵字（內容詞＝objects 最常出現、景別＝多數格、A/B/C-roll、可用性、建議HL＝notable≥2 格、移動中＝vehicle＋GPS）② 評分 triage（色標＝我們的人臉 clear→紅／有人無臉→黃／食物特寫→紫／其餘綠；用途星等＝notable 數；片型；pick＝每場景 notable 最多前 2）③ reel 入點＝notable 且臉清楚且光線正常的那格 −0.5 秒 ④ 記事一句＝summary。</li>
+      <li><b>🎥 看片組</b>（唯一會看圖）：讀每支 <b>4×3 十二格</b>時間碼拼圖（400px 一格，取代舊 3×3 多支混排），一次做完兩件事：① 逐格客觀描述——秒數、畫面裡有什麼（objects）、人（none／others／ours）、臉（none／partial／clear）、景別、鏡頭狀態（static／handheld／pan／walk／vehicle）、明暗、品質、notable（每支最多 3 格）；② <b>照 prompt 寫明的規則直接標三組欄位</b>：ir（內容詞／景別／roll／可用／建議HL／移動中四詞＋seg）、reel（best_in 秒數＋理由＋備選）、triage（色標／用途星等／片型／pick）。James 2026-09-28：「看片組在看片時把 ir 跟 reel 需要的關鍵字規則都標明進去」。範本 <code>tools/PROMPT_rbirr_watch.md</code>，輸出 <code>watch_&lt;day&gt;.json</code>。</li>
+      <li><b>🛠 加工／彙整組</b>（<code>tools/rbirr_derive.py</code>，不看圖）：看片組有給的欄位直接用，沒給的才用規則補——① FCP 關鍵字（內容詞＝objects 最常出現、景別＝多數格、A/B/C-roll、可用性、建議HL＝notable≥2 格、移動中＝vehicle＋GPS）② 評分 triage（色標＝我們的人臉 clear→紅／有人無臉→黃／食物特寫→紫／其餘綠；用途星等＝notable 數；片型；pick＝每場景 notable 最多前 2）③ reel 入點＝notable 且臉清楚且光線正常的那格 −0.5 秒 ④ 記事一句＝summary。</li>
       <li><b>📋 彙整</b>：<code>_irtag/worksheet.csv</code>（一支一列：場景／秒數／直橫／色標／星等／片型／鏡頭／reel 入點／摘要／逐格描述）給人看；<code>keywords.json</code>／<code>VIDEO_classification.csv</code>／<code>reel_candidates.json</code>／<code>captions.json</code> 給工具吃。</li>
       <li>Robert 看 worksheet 微調（規則判不準的），<code>--merge</code> 寫回 ir.json → <code>--emit</code>。之後新需求（找某人出現的秒數、挑封面格）直接查表，不重看。</li>
     </ul>
@@ -137,6 +137,7 @@ trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import
 
   <h2>📜 變更紀錄</h2>
   <ul>
+    <li><b>2026-09-28（深夜）</b>：James 定案「看片組看片時就把 ir／reel 規則標進去」→ prompt 加判定規則區、每支直接出 ir／reel／triage；拼圖改 4×3 十二格（1600×2136）取代 3×3 sheets；derive 退成彙整（有給就用）。</li>
     <li><b>2026-09-28（夜）首測</b>：day2 四場景 42 支——色標與舊評分分身一致 35/42、星等差≤1 全數、片型 25/42；看片組回報 200px strips 太小 → 改 400px 兩排（2400×1424）。</li>
     <li><b>2026-09-28（夜）</b>：升級成「rbirr_tag 工作團隊」（Robert＋IR＋Reel，James 命名；ir_tag 本體不動）——看片組（唯一看圖，出逐格客觀描述 watch.json）＋加工組（rbirr_derive.py 規則推 FCP 關鍵字／評分／reel 入點／記事句）＋彙整 worksheet.csv。strips 改只解關鍵幀（4K60 一支 10 秒→2 秒）。</li>
     <li><b>2026-09-28（晚）</b>：影片評分分身併入——同一分身讀 strips 一次填分鏡關鍵字＋每支 triage（色標／用途星等／片型／pick），triage 只出 CSV 不進 FCP；新工具 <code>ir_merge_labels.py</code>、範本 <code>PROMPT_irtag_template.md</code>。scene_build 的影片 Phase A 抽 6 幀＋video-triage 分身自此停用。</li>
