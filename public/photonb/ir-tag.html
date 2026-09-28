@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>影片分鏡關鍵字 · ir_tag · PhotoNB</title>
+  <meta name="description" content="影片工具：歸檔時把每支影片切分鏡、抽代表幀、出拼圖，Robert 讀圖填內容／景別／A-B-C roll／建議HL／移動中四詞，產 keywords.json 給 trip-fcpx-build 帶進 FCP；2026-09-28 起每支另出 12 格時間軸拼圖給 reel 挑入點。" />
+  <meta name="date" content="2026-09-28" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--purple:#b9a3f0;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:760px;margin:0 auto;padding:1.2rem 1.15rem 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.5em;letter-spacing:.02em;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.02rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    h3{color:var(--gold2);font-size:.92rem;letter-spacing:.04em;margin:1.2rem 0 .4rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;
+      font-family:ui-monospace,Menlo,monospace;font-size:.83rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    ul{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.86rem;margin:.4rem 0 .2rem;}
+    .flow b{background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:.3rem .6rem;color:var(--gold2);}
+    .flow i{color:var(--gold);font-style:normal;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.74rem;color:var(--muted);margin:.15rem .2rem 0 0;}
+    .ok{color:var(--green);} .bad{color:var(--red);}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+    .kw{display:inline-block;border-radius:6px;padding:.05em .5em;font-size:.82rem;font-weight:600;margin:.1rem .15rem;}
+    .kw.move{background:rgba(74,163,255,.16);color:#8fc2ff;border:1px solid rgba(74,163,255,.4);}
+    .kw.arch{background:rgba(216,182,90,.16);color:var(--gold2);border:1px solid var(--line);}
+    .kw.food{background:rgba(233,117,138,.16);color:#f0a0b0;border:1px solid rgba(233,117,138,.4);}
+    .kw.other{background:rgba(174,182,204,.14);color:var(--muted);border:1px solid rgba(174,182,204,.3);}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+    .crumb{font-size:.78rem;color:var(--muted);margin:.3rem 0 0;}
+    .crumb a{text-decoration:none;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">← 攝影筆記本</a>
+  <p class="eyebrow">影片工具 · Ingest · Phase A 附掛</p>
+  <h1>影片分鏡關鍵字 <span class="en">ir_tag</span></h1>
+  <div style="background:#1f1a3a;border-left:4px solid #f0c860;border-radius:6px;padding:.65rem .9rem;margin:.9rem 0;font-size:.85rem;color:#f3e2b4;line-height:1.7">📌 星等／KP／關鍵字的<b>定義</b>一律以 <a href="./video-notebook.html#t2" style="color:#ffd98a"><b>撿片關鍵字總表</b></a> 為準；本頁只講這支工具做什麼、怎麼跑、產出什麼。</div>
+  <p class="lead">歸檔時對 <code>MOV_&lt;day&gt;</code> 裡每支影片<b>切分鏡、抽代表幀、拼成 3×3 拼圖</b>，由 Robert（分身）看圖填上<b>內容／景別／A-B-C roll／可用性／建議HL／移動中</b>，產出 <code>keywords.json</code>，建庫時自動帶進 FCP 當關鍵字。<b>只寫關鍵字，不寫星等</b>（星等是 James 的判斷）。方法借自 Irene 的 IR 法（切分鏡→只讀代表幀→寫成文字）。</p>
+  <p class="crumb">📄 本頁＝這支工具的<b>單一現行說明</b>。上游 <a href="./scene-build.html">scene_build</a>，下游 <a href="./trip-fcpx-build.html">trip-fcpx-build</a>；「移動中」四詞定義見 <a href="./video-notebook.html#t2">撿片關鍵字總表</a>。</p>
+
+  <h2>做什麼</h2>
+  <div class="flow">
+    <b>MOV_&lt;day&gt;/&lt;場景&gt;/*.mp4</b><i>→</i><b>① 切分鏡＋抽幀</b><i>→</i><b>② Robert 讀拼圖填標籤</b><i>→</i><b>③ --emit → keywords.json</b><i>→</i><b>trip-fcpx-build 帶進 FCP</b>
+  </div>
+  <ul>
+    <li><b>分鏡偵測</b>：ffmpeg 內建 scene score，只解關鍵幀（126 支約 16 分鐘）；切點間隔 ≥1.5 秒。長分鏡 >10 秒抽 2 張、>20 秒抽 3 張，避免一個長鏡頭只有一張代表幀。</li>
+    <li><b>GPS 佐證</b>：同場景前後支的 GPS 距離÷時間算速度，>15 km/h 標 <code>gps_moving</code>，給讀圖判「移動中鏡頭」當旁證；>60 秒且在動的整支自動加「長風景」。</li>
+    <li><b>拼圖</b>：<code>_irtag/sheets/</code> 3×3 一張 9 格，每格標 <code>#序號 檔名_sNN_k</code>，分身一次讀 2–3 張並行。</li>
+    <li><b>🆕 時間軸拼圖（2026-09-28）</b>：<code>_irtag/strips/&lt;檔名&gt;.jpg</code>，每支 12 格等距＋時間碼。剪 reel 挑入點直接讀這張，不再另抽幀；James 撿片前也能先掃一眼整支長什麼樣。</li>
+    <li><b>保留場景結構</b>：照 <code>MOV_&lt;day&gt;/&lt;NN_場景&gt;/</code> 走，不打散、不搬檔（母帶只有一份）；舊「主／次」子夾也吃。</li>
+  </ul>
+
+  <h2>怎麼用</h2>
+  <pre># ① 抽幀（機器，一天一跑）
+ir_tag.py "&lt;trip&gt;/_&lt;trip&gt;_創作/MOV_&lt;day&gt;"        → _irtag/{ir.json, frames/, sheets/, strips/}
+
+# ② Robert 派 shot-tagger 分身讀 sheets/ 填 labels.json → merge 進 ir.json
+#    （每個分鏡：tags / shot_size / roll / usable / suggest_hl / transit / vehicle / seg / conf）
+
+# ③ 產關鍵字檔
+ir_tag.py "&lt;MOV_day&gt;" --emit                          → _irtag/keywords.json
+
+# ④ 建庫自動帶入（同夾有 keywords.json 就不必指定）
+trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import.fcpxml</pre>
+  <p><span class="tag">腳本 <code>tools/ir_tag.py</code></span><span class="tag">預設<b>不</b>隨 scene_build 自動跑，歸檔完問一句 James 點頭才跑（Ⓒ 方案，2026-07-27）</span><span class="tag">⏱ 8–9 秒／支，4K60 大檔 20–25 分／100 支</span></p>
+
+  <h2>產出的關鍵字（進 FCP 的樣子）</h2>
+  <table>
+    <tr><th>關鍵字</th><th>來源</th><th>撿片怎麼用</th></tr>
+    <tr><td><code>內容:飛行船</code>、<code>內容:女</code>…</td><td>分鏡 tags（1–4 個只寫看得到的）</td><td>搜內容找片</td></tr>
+    <tr><td><code>景別:遠景／中景／特寫</code></td><td>shot_size</td><td>卡點剪輯公式直接吃景別</td></tr>
+    <tr><td><code>A-roll_人物／B-roll_風景／C-roll_物品</code></td><td>roll</td><td>A 給故事線、B 給空景轉場、C 給細節插入</td></tr>
+    <tr><td><code>品質:不可用</code></td><td>usable=false（誤觸、全黑、劇烈晃）</td><td>篩掉</td></tr>
+    <tr><td><code>建議HL</code></td><td>suggest_hl（每場景 1–3 支）</td><td>James 複核後自己打 ★4</td></tr>
+    <tr><td><span class="kw move">移動中鏡頭</span> <span class="kw move">移動中記憶點</span> <span class="kw move">移動中途中景點</span> <span class="kw move">移動中長風景抽段</span></td><td>transit（四詞，可只標一小段 seg=[s,e]）</td><td>移動中出片只搜這四個完整詞</td></tr>
+    <tr><td><code>載具:Linimo</code>、<code>航段:起飛</code>、<code>長風景</code>、<code>待確認</code></td><td>vehicle／flight_phase／is_long／conf&lt;0.7</td><td>待確認 = 給 James 篩一眼</td></tr>
+  </table>
+  <div class="note">🚨 <b>只寫關鍵字，絕不寫 rating</b>（Ⓐ 方案）。星等定義在<a href="./video-notebook.html#t2">撿片關鍵字總表</a>，James 在 FCP 篩「建議HL」複核後自己打星。</div>
+
+  <h2>前後銜接</h2>
+  <div class="flow">
+    <b><a href="./scene-build.html">scene_build</a> 歸檔</b><i>→</i><b>ir_tag（本頁）</b><i>→</i><b><a href="./trip-fcpx-build.html">trip-fcpx-build</a> 建庫</b><i>→</i><b>James 撿片</b><i>→</i><b><a href="./fcpxmld-export.html">fcpxmld-export</a></b>
+  </div>
+  <ul>
+    <li><b>reel 模板</b>（口播版／TOD／相片）挑鏡頭時：先用 VIDEO_classification 的 ★4＋pick 與這裡的關鍵字縮到十來支候選，再讀 <code>strips/</code> 定入點。</li>
+    <li><b>卡點剪輯 fcpxml_to_edl</b>：景別關鍵字直接餵剪接公式，免重跑 IR。</li>
+  </ul>
+
+  <h2>技術坑</h2>
+  <ul>
+    <li>❌ 別加 <code>-hwaccel videotoolbox</code>，關鍵幀解碼反而慢 8 倍。</li>
+    <li>手機影片要看套用旋轉後的顯示尺寸，直接讀寬高會判錯直橫。</li>
+    <li>OPPO 影片 <code>MediaCreateDate</code> 是 UTC，跨時區日期用檔名時間。</li>
+    <li>iPhone 只寫單一 GPS 定點沒有速度軌 → 前後支距離估速度只是旁證，「移動中」最終靠畫面判。</li>
+    <li>merge labels 時每支每個分鏡索引都要有一筆；conf&lt;0.7 自動掛「待確認」。</li>
+  </ul>
+
+  <h2>✅ 已實證</h2>
+  <ul>
+    <li>蘇州 day1（2026-09-06 提速版首跑，126 支 16 分鐘）</li>
+    <li>福岡 day1–3（2026-09-17「移動中」四詞首試）</li>
+    <li>名古屋 day1（69 支 76 分鏡）、day2（126 支 127 分鏡，2026-09-27；453 個內容關鍵字、建議HL 32、移動中鏡頭 5）</li>
+  </ul>
+
+  <h2>📜 變更紀錄</h2>
+  <ul>
+    <li><b>2026-09-28</b>：每支多出 12 格時間碼 strip（<code>_irtag/strips/</code>）給 reel 挑入點，歸檔時機器做、不再重看畫面。本頁新開（之前只在影片筆記本一小節）。</li>
+    <li><b>2026-09-17</b>：移動中四詞（鏡頭／記憶點／途中景點／長風景抽段）＋ seg 範圍標記＋ GPS 速度旁證＋ 長風景整支。</li>
+    <li><b>2026-09-06</b>：分鏡偵測改 ffmpeg 關鍵幀 scene score（取代 PySceneDetect），長分鏡多抽幀；接進 trip-fcpx-build 自動帶關鍵字。</li>
+    <li><b>2026-07-27</b>：立案（James 選 Ⓒ：併進歸檔但預設關閉、問過才跑；Ⓐ：只寫關鍵字不寫星等）。</li>
+  </ul>
+
+  <footer>PhotoNB · 影片工具 — 影片分鏡關鍵字（ir_tag）· 單一現行說明 · 由 Robert 維護 · 更新 2026-09-28</footer>
+</div>
+</body>
+</html>

@@ -407,7 +407,7 @@
       <tr><td>首幀</td><td>留</td><td>永遠抽 t=0</td></tr>
     </table></div>
     <p>一支約 70 張原始幀 → 抽 15 張上下。動態運動類保底可降回 6 秒；每個 trip 第一支先試跑再定參數。</p>
-    <h3>ir_tag（分鏡＋景別，2026-09-06 版）</h3>
+    <h3>ir_tag（分鏡＋景別）— 完整說明見 <a href="./ir-tag.html">工具頁 ir_tag →</a></h3>
     <p>只解關鍵幀算 scene score（<code>-skip_frame nokey</code>、切點間隔 ≥1.5s），126 支 16 分鐘跑完；⚠️ 別加 <code>-hwaccel videotoolbox</code>，反而慢 8 倍。長鏡頭 >10 秒抽 2 張、>20 秒抽 3 張。手機影片要看套用旋轉後的顯示尺寸，直接讀寬高會判錯直橫。標籤走 sub-agent 一天一個，只寫 tags／shot_size／roll／usable／suggest_hl，不寫星等。</p>
 
     <h2>STILL 命名與 metadata（內嵌，不出 sidecar）</h2>
