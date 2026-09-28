@@ -61,6 +61,7 @@
     <li><b>分鏡偵測</b>：ffmpeg 內建 scene score，只解關鍵幀（126 支約 16 分鐘）；切點間隔 ≥1.5 秒。長分鏡 >10 秒抽 2 張、>20 秒抽 3 張，避免一個長鏡頭只有一張代表幀。</li>
     <li><b>GPS 佐證</b>：同場景前後支的 GPS 距離÷時間算速度，>15 km/h 標 <code>gps_moving</code>，給讀圖判「移動中鏡頭」當旁證；>60 秒且在動的整支自動加「長風景」。</li>
     <li><b>拼圖</b>：<code>_irtag/sheets/</code> 3×3 一張 9 格，每格標 <code>#序號 檔名_sNN_k</code>，分身一次讀 2–3 張並行。</li>
+    <li><b>🆕 影片評分併入（2026-09-28 James 拍板）</b>：不再另開「評分分身」看 6 張抽幀。同一個分身讀 strips 一次填齊兩組欄位——分鏡關鍵字進 FCP；每支的 <code>triage</code>（色標／用途星等／片型／pick／描述）只進 <code>_irtag/VIDEO_classification.csv</code>，給生活記事挑影片、reel 選候選。進 FCP 的仍只有關鍵字、星等仍由 James 打。</li>
     <li><b>🆕 時間軸拼圖（2026-09-28）</b>：<code>_irtag/strips/&lt;檔名&gt;.jpg</code>，每支 12 格等距＋時間碼。剪 reel 挑入點直接讀這張，不再另抽幀；James 撿片前也能先掃一眼整支長什麼樣。</li>
     <li><b>保留場景結構</b>：照 <code>MOV_&lt;day&gt;/&lt;NN_場景&gt;/</code> 走，不打散、不搬檔（母帶只有一份）；舊「主／次」子夾也吃。</li>
   </ul>
@@ -69,11 +70,13 @@
   <pre># ① 抽幀（機器，一天一跑）
 ir_tag.py "&lt;trip&gt;/_&lt;trip&gt;_創作/MOV_&lt;day&gt;"        → _irtag/{ir.json, frames/, sheets/, strips/}
 
-# ② Robert 派 shot-tagger 分身讀 sheets/ 填 labels.json → merge 進 ir.json
-#    （每個分鏡：tags / shot_size / roll / usable / suggest_hl / transit / vehicle / seg / conf）
+# ② Robert 派一個分身讀 strips/ 填 labels.json（範本 tools/PROMPT_irtag_template.md）
+#    每個分鏡：tags / shot_size / roll / usable / suggest_hl / transit / vehicle / seg / conf
+#    每支影片：triage{label, rating, clip_type, pick, desc}（2026-09-28 起評分併入）
+ir_merge_labels.py "&lt;MOV_day&gt;" labels.json                → 合併進 _irtag/ir.json
 
 # ③ 產關鍵字檔
-ir_tag.py "&lt;MOV_day&gt;" --emit                          → _irtag/keywords.json
+ir_tag.py "&lt;MOV_day&gt;" --emit                          → _irtag/keywords.json ＋ VIDEO_classification.csv
 
 # ④ 建庫自動帶入（同夾有 keywords.json 就不必指定）
 trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import.fcpxml</pre>
@@ -119,6 +122,7 @@ trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import
 
   <h2>📜 變更紀錄</h2>
   <ul>
+    <li><b>2026-09-28（晚）</b>：影片評分分身併入——同一分身讀 strips 一次填分鏡關鍵字＋每支 triage（色標／用途星等／片型／pick），triage 只出 CSV 不進 FCP；新工具 <code>ir_merge_labels.py</code>、範本 <code>PROMPT_irtag_template.md</code>。scene_build 的影片 Phase A 抽 6 幀＋video-triage 分身自此停用。</li>
     <li><b>2026-09-28</b>：每支多出 12 格時間碼 strip（<code>_irtag/strips/</code>）給 reel 挑入點，歸檔時機器做、不再重看畫面。本頁新開（之前只在影片筆記本一小節）。</li>
     <li><b>2026-09-17</b>：移動中四詞（鏡頭／記憶點／途中景點／長風景抽段）＋ seg 範圍標記＋ GPS 速度旁證＋ 長風景整支。</li>
     <li><b>2026-09-06</b>：分鏡偵測改 ffmpeg 關鍵幀 scene score（取代 PySceneDetect），長分鏡多抽幀；接進 trip-fcpx-build 自動帶關鍵字。</li>
