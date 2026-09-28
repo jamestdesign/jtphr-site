@@ -137,6 +137,7 @@ trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import
 
   <h2>📜 變更紀錄</h2>
   <ul>
+    <li><b>2026-09-28（夜）首測</b>：day2 四場景 42 支——色標與舊評分分身一致 35/42、星等差≤1 全數、片型 25/42；看片組回報 200px strips 太小 → 改 400px 兩排（2400×1424）。</li>
     <li><b>2026-09-28（夜）</b>：升級成「rbirr_tag 工作團隊」（Robert＋IR＋Reel，James 命名；ir_tag 本體不動）——看片組（唯一看圖，出逐格客觀描述 watch.json）＋加工組（rbirr_derive.py 規則推 FCP 關鍵字／評分／reel 入點／記事句）＋彙整 worksheet.csv。strips 改只解關鍵幀（4K60 一支 10 秒→2 秒）。</li>
     <li><b>2026-09-28（晚）</b>：影片評分分身併入——同一分身讀 strips 一次填分鏡關鍵字＋每支 triage（色標／用途星等／片型／pick），triage 只出 CSV 不進 FCP；新工具 <code>ir_merge_labels.py</code>、範本 <code>PROMPT_irtag_template.md</code>。scene_build 的影片 Phase A 抽 6 幀＋video-triage 分身自此停用。</li>
     <li><b>2026-09-28</b>：每支多出 12 格時間碼 strip（<code>_irtag/strips/</code>）給 reel 挑入點，歸檔時機器做、不再重看畫面。本頁新開（之前只在影片筆記本一小節）。</li>
