@@ -73,7 +73,7 @@ const pass=e=>(cur==='全部'||(e.category||'生活')===cur)&&(curT==='全部'||
 const Q=document.getElementById('q');let qt=null;Q.oninput=()=>{clearTimeout(qt);qt=setTimeout(()=>{curQ=Q.value.trim().toLowerCase();render();drawCal();},180);};
 Q.onkeydown=ev=>{if(ev.key==='Escape'){Q.value='';curQ='';render();drawCal();}};
 drawFilters();
-const SECS=[['人像','👤 人像'],['風景','🌄 風景'],['食物','🍽 食物'],['其他','📎 其他']];
+const SECS=[['創作','🎬 創作'],['人像','👤 人像'],['風景','🌄 風景'],['食物','🍽 食物'],['其他','📎 其他']];  // James 2026-09-28：加「創作」＝Robert 剪的 reel/拼貼等成品
 const stars=r=>r?`<span class="star r${r}">${'★'.repeat(+r)}</span>`:'';
 const fig=(i,n,src,cap,r,cls)=>`<figure class="${cls||''}">${stars(r)}<img class="zoom" data-e="${i}" data-n="${n}" src="${src}" alt="" loading="lazy">${cap!==undefined?`<figcaption>${esc(cap)}</figcaption>`:''}</figure>`;
 function thumbsHTML(e,i,base){const rest=e.photos.slice(1),gridN=e.photos.length,albN=gridN+(e.grid?1:0);
