@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>影片分鏡關鍵字 · ir_tag · PhotoNB</title>
+  <title>影片分鏡關鍵字 · ir_tag → rbirr_tag 工作團隊 · PhotoNB</title>
   <meta name="description" content="影片工具：歸檔時把每支影片切分鏡、抽代表幀、出拼圖，Robert 讀圖填內容／景別／A-B-C roll／建議HL／移動中四詞，產 keywords.json 給 trip-fcpx-build 帶進 FCP；2026-09-28 起每支另出 12 格時間軸拼圖給 reel 挑入點。" />
   <meta name="date" content="2026-09-28" />
   <style>
@@ -48,7 +48,8 @@
 <div class="wrap">
   <a class="back" href="./">← 攝影筆記本</a>
   <p class="eyebrow">影片工具 · Ingest · Phase A 附掛</p>
-  <h1>影片分鏡關鍵字 <span class="en">ir_tag</span></h1>
+  <h1>影片分鏡關鍵字 <span class="en">ir_tag → rbirr_tag</span></h1>
+  <p class="crumb"><b>rbirr_tag</b> ＝ <b>R</b>o<b>b</b>ert ＋ <b>IR</b> ＋ <b>R</b>eel（James 2026-09-28 命名）：<code>ir_tag</code> 是借自 Irene 的 IR 法抽幀工具，維持原樣不動；<b>rbirr_tag</b> 是我們在它上面加的工作團隊層（看片組→加工組→彙整），輸出仍放 <code>_irtag/</code> 讓建庫工具直接吃。</p>
   <div style="background:#1f1a3a;border-left:4px solid #f0c860;border-radius:6px;padding:.65rem .9rem;margin:.9rem 0;font-size:.85rem;color:#f3e2b4;line-height:1.7">📌 星等／KP／關鍵字的<b>定義</b>一律以 <a href="./video-notebook.html#t2" style="color:#ffd98a"><b>撿片關鍵字總表</b></a> 為準；本頁只講這支工具做什麼、怎麼跑、產出什麼。</div>
   <p class="lead">歸檔時對 <code>MOV_&lt;day&gt;</code> 裡每支影片<b>切分鏡、抽代表幀、拼成 3×3 拼圖</b>，由 Robert（分身）看圖填上<b>內容／景別／A-B-C roll／可用性／建議HL／移動中</b>，產出 <code>keywords.json</code>，建庫時自動帶進 FCP 當關鍵字。<b>只寫關鍵字，不寫星等</b>（星等是 James 的判斷）。方法借自 Irene 的 IR 法（切分鏡→只讀代表幀→寫成文字）。</p>
   <p class="crumb">📄 本頁＝這支工具的<b>單一現行說明</b>。上游 <a href="./scene-build.html">scene_build</a>，下游 <a href="./trip-fcpx-build.html">trip-fcpx-build</a>；「移動中」四詞定義見 <a href="./video-notebook.html#t2">撿片關鍵字總表</a>。</p>
@@ -66,13 +67,13 @@
     <li><b>保留場景結構</b>：照 <code>MOV_&lt;day&gt;/&lt;NN_場景&gt;/</code> 走，不打散、不搬檔（母帶只有一份）；舊「主／次」子夾也吃。</li>
   </ul>
 
-  <h2>🧑‍🤝‍🧑 ir_tag 工作團隊（2026-09-28 James 拍板架構）</h2>
+  <h2>🧑‍🤝‍🧑 rbirr_tag 工作團隊（Robert＋IR＋Reel，2026-09-28 James 拍板）</h2>
   <div class="card">
     <p><b>原則：圖只看一次。</b>把最花錢的「看畫面」獨立成一組，其他需求全改讀文字。</p>
     <div class="flow"><b>🎥 看片組</b><i>→</i><b>watch.json 看片工作表</b><i>→</i><b>🛠 加工組 ×4（只讀文字）</b><i>→</i><b>📋 彙整 worksheet.csv</b></div>
     <ul>
-      <li><b>🎥 看片組</b>（唯一會看圖）：讀每支 12 格時間碼拼圖，逐格寫客觀描述——秒數、畫面裡有什麼（objects）、人（none／others／ours）、臉（none／partial／clear）、景別、鏡頭狀態（static／handheld／pan／walk／vehicle）、明暗、品質、notable（這格值得留，每支最多 3 格）。<b>不下判斷、不給星等。</b>範本 <code>tools/PROMPT_watch_template.md</code>，輸出 <code>watch_&lt;day&gt;.json</code>。</li>
-      <li><b>🛠 加工組</b>（<code>tools/ir_derive.py</code>，規則、不看圖）：① FCP 關鍵字（內容詞＝objects 最常出現、景別＝多數格、A/B/C-roll、可用性、建議HL＝notable≥2 格、移動中＝vehicle＋GPS）② 評分 triage（色標＝我們的人臉 clear→紅／有人無臉→黃／食物特寫→紫／其餘綠；用途星等＝notable 數；片型；pick＝每場景 notable 最多前 2）③ reel 入點＝notable 且臉清楚且光線正常的那格 −0.5 秒 ④ 記事一句＝summary。</li>
+      <li><b>🎥 看片組</b>（唯一會看圖）：讀每支 12 格時間碼拼圖，逐格寫客觀描述——秒數、畫面裡有什麼（objects）、人（none／others／ours）、臉（none／partial／clear）、景別、鏡頭狀態（static／handheld／pan／walk／vehicle）、明暗、品質、notable（這格值得留，每支最多 3 格）。<b>不下判斷、不給星等。</b>範本 <code>tools/PROMPT_rbirr_watch.md</code>，輸出 <code>watch_&lt;day&gt;.json</code>。</li>
+      <li><b>🛠 加工組</b>（<code>tools/rbirr_derive.py</code>，規則、不看圖）：① FCP 關鍵字（內容詞＝objects 最常出現、景別＝多數格、A/B/C-roll、可用性、建議HL＝notable≥2 格、移動中＝vehicle＋GPS）② 評分 triage（色標＝我們的人臉 clear→紅／有人無臉→黃／食物特寫→紫／其餘綠；用途星等＝notable 數；片型；pick＝每場景 notable 最多前 2）③ reel 入點＝notable 且臉清楚且光線正常的那格 −0.5 秒 ④ 記事一句＝summary。</li>
       <li><b>📋 彙整</b>：<code>_irtag/worksheet.csv</code>（一支一列：場景／秒數／直橫／色標／星等／片型／鏡頭／reel 入點／摘要／逐格描述）給人看；<code>keywords.json</code>／<code>VIDEO_classification.csv</code>／<code>reel_candidates.json</code>／<code>captions.json</code> 給工具吃。</li>
       <li>Robert 看 worksheet 微調（規則判不準的），<code>--merge</code> 寫回 ir.json → <code>--emit</code>。之後新需求（找某人出現的秒數、挑封面格）直接查表，不重看。</li>
     </ul>
@@ -83,10 +84,10 @@
   <pre># ① 抽幀（機器，一天一跑）
 ir_tag.py "&lt;trip&gt;/_&lt;trip&gt;_創作/MOV_&lt;day&gt;"        → _irtag/{ir.json, frames/, sheets/, strips/}
 
-# ② 看片組分身讀 strips/ → watch_&lt;day&gt;.json（範本 tools/PROMPT_watch_template.md；唯一看圖的一步）
+# ② rbirr 看片組分身讀 strips/ → watch_&lt;day&gt;.json（範本 tools/PROMPT_rbirr_watch.md；唯一看圖的一步）
 # ③ 加工＋彙整（規則，不看圖）
-ir_derive.py "&lt;MOV_day&gt;" watch_&lt;day&gt;.json            → worksheet.csv / reel_candidates.json / captions.json（dry-run）
-ir_derive.py "&lt;MOV_day&gt;" watch_&lt;day&gt;.json --merge    → 關鍵字＋triage 寫回 _irtag/ir.json
+rbirr_derive.py "&lt;MOV_day&gt;" watch_&lt;day&gt;.json         → worksheet.csv / reel_candidates.json / captions.json（dry-run）
+rbirr_derive.py "&lt;MOV_day&gt;" watch_&lt;day&gt;.json --merge → 關鍵字＋triage 寫回 _irtag/ir.json
 #    （備援：單分身直接填 labels.json → ir_merge_labels.py "&lt;MOV_day&gt;" labels.json）
 
 # ④ 產關鍵字檔
@@ -136,7 +137,7 @@ trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import
 
   <h2>📜 變更紀錄</h2>
   <ul>
-    <li><b>2026-09-28（夜）</b>：升級成「ir_tag 工作團隊」——看片組（唯一看圖，出逐格客觀描述 watch.json）＋加工組（ir_derive.py 規則推 FCP 關鍵字／評分／reel 入點／記事句）＋彙整 worksheet.csv。strips 改只解關鍵幀（4K60 一支 10 秒→2 秒）。</li>
+    <li><b>2026-09-28（夜）</b>：升級成「rbirr_tag 工作團隊」（Robert＋IR＋Reel，James 命名；ir_tag 本體不動）——看片組（唯一看圖，出逐格客觀描述 watch.json）＋加工組（rbirr_derive.py 規則推 FCP 關鍵字／評分／reel 入點／記事句）＋彙整 worksheet.csv。strips 改只解關鍵幀（4K60 一支 10 秒→2 秒）。</li>
     <li><b>2026-09-28（晚）</b>：影片評分分身併入——同一分身讀 strips 一次填分鏡關鍵字＋每支 triage（色標／用途星等／片型／pick），triage 只出 CSV 不進 FCP；新工具 <code>ir_merge_labels.py</code>、範本 <code>PROMPT_irtag_template.md</code>。scene_build 的影片 Phase A 抽 6 幀＋video-triage 分身自此停用。</li>
     <li><b>2026-09-28</b>：每支多出 12 格時間碼 strip（<code>_irtag/strips/</code>）給 reel 挑入點，歸檔時機器做、不再重看畫面。本頁新開（之前只在影片筆記本一小節）。</li>
     <li><b>2026-09-17</b>：移動中四詞（鏡頭／記憶點／途中景點／長風景抽段）＋ seg 範圍標記＋ GPS 速度旁證＋ 長風景整支。</li>
@@ -144,7 +145,7 @@ trip_fcpx_build.py "&lt;MOV_day&gt;" --library "&lt;….fcpbundle&gt;" -o import
     <li><b>2026-07-27</b>：立案（James 選 Ⓒ：併進歸檔但預設關閉、問過才跑；Ⓐ：只寫關鍵字不寫星等）。</li>
   </ul>
 
-  <footer>PhotoNB · 影片工具 — 影片分鏡關鍵字（ir_tag）· 單一現行說明 · 由 Robert 維護 · 更新 2026-09-28</footer>
+  <footer>PhotoNB · 影片工具 — 影片分鏡關鍵字（ir_tag → rbirr_tag 工作團隊）· 單一現行說明 · 由 Robert 維護 · 更新 2026-09-28</footer>
 </div>
 </body>
 </html>
