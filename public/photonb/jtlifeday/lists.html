@@ -1,0 +1,104 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"/><title>JT Life Day · 清單</title><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="JT Life Day"><meta name="theme-color" content="#f4efe6">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe6;--ink:#2d2a26;--muted:#8a8174;--line:#d9cfbf;--card:#fffdf8;--accent:#a4572b;--red:#b83b3b;--yel:#b8862b;--font:'Noto Serif TC',serif}
+*{box-sizing:border-box} html,body{overflow-x:hidden} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.8}
+.wrap{max-width:760px;margin:0 auto;padding:1.4rem 16px 4rem}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:1rem}
+h1{font-size:1.5rem;margin:0;letter-spacing:.12em;font-weight:900} h1 small{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.35em;font-weight:400}
+a{color:var(--accent)} button,select,input,textarea{font-family:inherit;font-size:.86rem;color:var(--ink)} button{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap} button.on,button.key{color:var(--accent);border-color:var(--accent)} button.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)} button.danger{color:var(--red);border-color:var(--red)} button:disabled{opacity:.5;cursor:default}
+header .nav a{font-size:.8rem;margin-right:.6rem;text-decoration:none}
+.sort{display:flex;gap:.4rem;margin:.2rem 0 .8rem} .sort button{padding:.3rem 1rem} .sort button.on{background:var(--accent);color:var(--bg)}
+.bar{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin:.3rem 0 .5rem} .bar .lb{font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin-right:.2rem}
+.sbox{margin:.6rem 0 .2rem} .sbox input{width:100%;font-family:inherit;font-size:.92rem;padding:.5rem .9rem;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);outline:none} .sbox input:focus{border-color:var(--accent)}
+.cnt{font-size:.74rem;color:var(--muted);letter-spacing:.1em;margin:.8rem 0 .5rem}
+.items{display:flex;flex-direction:column;gap:10px}
+.it{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px} .it.done{opacity:.6} .it.done .tt{text-decoration:line-through}
+.it img{width:72px;height:72px;object-fit:cover;object-position:top;border-radius:6px;flex:none;cursor:zoom-in}
+.it .ct{min-width:0;flex:1} .it .top{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;margin-bottom:.15rem}
+.kind{display:inline-block;font-size:.68rem;letter-spacing:.08em;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 .45rem} .who{display:inline-block;font-size:.68rem;letter-spacing:.05em;color:var(--bg);background:#5a6b9e;border-radius:999px;padding:0 .5rem}
+.badge{display:inline-block;font-size:.7rem;border-radius:999px;padding:0 .5rem;white-space:nowrap} .b-red{background:var(--red);color:#fff} .b-yel{background:var(--yel);color:#fff} .b-ok{border:1px solid var(--line);color:var(--muted)}
+.it .tt{font-size:.98rem;font-weight:600;line-height:1.45;word-break:keep-all;overflow-wrap:anywhere} .it .tt a{text-decoration:none} .it .pl{font-size:.78rem;color:var(--muted);margin-top:.1rem} .it .nt{font-size:.84rem;color:var(--muted);margin-top:.2rem;line-height:1.6;white-space:pre-wrap} .it .tg{font-size:.72rem;color:var(--muted);margin-top:.2rem} .it .tg span{margin-right:.5rem} .it .src{font-size:.74rem;margin-top:.2rem} .it .src a{text-decoration:none}
+.it .ops{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.45rem} .it .ops button{padding:.05rem .6rem;font-size:.74rem}
+.empty{text-align:center;color:var(--muted);padding:3rem 0}
+form.f{display:none;background:var(--card);border:1px solid var(--accent);padding:.8rem;margin:.6rem 0 1rem;border-radius:10px} form.f.open{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem} form.f label{display:flex;flex-direction:column;font-size:.7rem;color:var(--muted);letter-spacing:.1em} form.f input,form.f select,form.f textarea{border:1px solid var(--line);border-radius:6px;padding:.35rem .5rem;background:transparent;margin-top:.15rem;font-size:.9rem} form.f textarea{min-height:3.6rem;resize:vertical} form.f .full{grid-column:1/-1} form.f .ops{grid-column:1/-1;display:flex;gap:.5rem;justify-content:flex-end;align-items:center} form.f .whos{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem} form.f .whos label{flex-direction:row;align-items:center;gap:.25rem;font-size:.86rem;color:var(--ink);letter-spacing:0}
+.note{font-size:.76rem;color:var(--muted);margin:.4rem 0}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9;cursor:zoom-out} #lb img{max-width:96vw;max-height:90vh;display:block}
+footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
+</style></head><body><div class="wrap">
+<header><h1><small>JT LIFE DAY</small>清單</h1><div class="nav"><a href="./">← 記事</a><a id="ledgerlink" href="ledger.html" style="display:none">💰 帳務</a><button id="rl" title="重新整理" style="display:none">↻</button> <button id="keybtn" class="key">🔑 登入</button></div></header>
+<div id="app"><p class="empty">讀取中…</p></div>
+<footer>從記事長出來的清單 · 想去、想買、待辦、推薦、選品、已購 · 快到期的排前面</footer></div>
+<div id="lb"><img id="lbimg" alt=""></div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const KINDS=['想去','想買','待辦','推薦','選品','已購'],GUESTS=['EVA','LI','HU'];
+let ME=null,ITEMS=[],TODAY=today(),SORT='due',STATUS='open',kind='全部',who='全部',q='',formOpen=false,editing=null;
+try{SORT=localStorage.getItem('lists_sort')||'due';STATUS=localStorage.getItem('lists_status')||'open';}catch(e){}
+const A=document.getElementById('app'),K=document.getElementById('keybtn');
+const api=async(m,p,b)=>{const r=await fetch('/api'+p,{method:m,headers:b?{'content-type':'application/json'}:{},body:b?JSON.stringify(b):undefined,cache:'no-store'});if(!r.ok){let t='';try{t=(await r.json()).detail||''}catch(e){}throw new Error(t||('HTTP '+r.status));}return r.json();};
+async function boot(){const m=await api('GET','/me');ME=m.name?m:null;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';document.getElementById('ledgerlink').style.display=(ME&&ME.role==='admin')?'inline':'none';
+ if(!ME){A.innerHTML='<p class="empty">🔐 清單要登入才看得到。<br>按右上角「🔑 登入」。</p>';return;}
+ await reload();}
+async function reload(){const r=await api('GET','/lists?status='+(STATUS==='all'?'all':STATUS));ITEMS=r.items;TODAY=r.today||TODAY;render();}
+K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}
+ const pw=prompt('輸入密碼登入');if(!pw)return;try{await api('POST','/login',{user:'',password:pw});boot();}catch(e){alert('密碼不對');}};
+const isAdmin=()=>ME&&ME.role==='admin';
+const whoLabel=w=>w.length?w.map(x=>`<span class="who">to ${esc(x)}</span>`).join(''):(isAdmin()?'':'');
+function dueBadge(it){if(!it.due)return '';const d=it.days_left;const done=it.status!=='open';if(done)return `<span class="badge b-ok">${it.due}</span>`;return d<0?`<span class="badge b-red">逾期 ${-d} 天</span>`:d===0?'<span class="badge b-yel">今天到期</span>':d<=7?`<span class="badge b-yel">${d} 天內 · ${it.due.slice(5)}</span>`:`<span class="badge b-ok">${it.due}</span>`;}
+const pass=it=>(kind==='全部'||it.kind===kind)&&(who==='全部'||(who==='自己'?!it.who.length:it.who.includes(who)))&&(!q||(it.title+' '+(it.place||'')+' '+(it.note||'')+' '+it.tags.join(' ')+' '+it.who.join(' ')).toLowerCase().includes(q));
+function sorted(list){const a=list.slice();if(SORT==='due'){return a.sort((x,y)=>{if(x.due&&y.due)return x.due.localeCompare(y.due)||y.id-x.id;if(x.due)return -1;if(y.due)return 1;return (y.created_at||'').localeCompare(x.created_at||'')||y.id-x.id;});}
+ return a.sort((x,y)=>(y.created_at||'').localeCompare(x.created_at||'')||y.id-x.id);}
+const chips=(name,vals,curv,set)=>`<div class="bar"><span class="lb">${name}</span>${vals.map(v=>`<button data-k="${set}" data-v="${esc(v)}" class="${v===curv?'on':''}">${esc(v)}</button>`).join('')}</div>`;
+function form(){const r=editing||{kind:'想去',who:[],tags:[]};const w=r.who||[];return `<form class="f ${formOpen?'open':''}" id="lf">
+ <label>類型<select name="kind">${(KINDS.includes(r.kind)?KINDS:[r.kind,...KINDS]).map(k=>`<option ${k===r.kind?'selected':''}>${esc(k)}</option>`).join('')}</select></label>
+ <label>期限<input name="due" type="date" value="${esc(r.due||'')}"></label>
+ <label class="full">標題<input name="title" value="${esc(r.title||'')}" required placeholder="店名／東西／要做的事"></label>
+ <label class="full">地點<input name="place" value="${esc(r.place||'')}"></label>
+ <label class="full">連結<input name="url" value="${esc(r.url||'')}" placeholder="https://"></label>
+ <label class="full">對象<div class="whos">${GUESTS.map(g=>`<label><input type="checkbox" name="who_${g}" ${w.includes(g)?'checked':''}>${g}</label>`).join('')}<span class="note">都不勾＝自己的</span></div></label>
+ <label class="full">關鍵字<input name="tags" value="${esc(r.tags.join(', '))}" placeholder="逗號分隔"></label>
+ <label class="full">備註<textarea name="note">${esc(r.note||'')}</textarea></label>
+ <div class="ops">${editing?`<span class="note">#${editing.id}</span>`:''}<button type="button" id="lfx">取消</button><button type="submit" class="pri">${editing?'儲存':'新增'}</button></div></form>`;}
+function card(it){const adm=isAdmin();const done=it.status!=='open';const src=it.src_entry_id?`<div class="src"><a href="./#d-${esc(it.src_entry_id.slice(0,10))}">📓 記事 ${esc(it.src_entry_id.slice(0,10))}</a></div>`:'';
+ return `<div class="it ${done?'done':''}" data-id="${it.id}">${adm&&it.src_img?`<img src="${esc(it.src_img)}" loading="lazy" alt="">`:''}<div class="ct">
+  <div class="top"><span class="kind">${esc(it.kind)}</span>${whoLabel(it.who)}${dueBadge(it)}${it.status==='dropped'?'<span class="badge b-ok">放棄</span>':''}</div>
+  <div class="tt">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)} ↗</a>`:esc(it.title)}</div>
+  ${it.place?`<div class="pl">📍 ${esc(it.place)}</div>`:''}${it.note?`<div class="nt">${esc(it.note)}</div>`:''}
+  ${it.tags.length?`<div class="tg">${it.tags.map(t=>`<span>#${esc(t)}</span>`).join('')}</div>`:''}${src}
+  ${adm?`<div class="ops">${done?`<button data-reopen="${it.id}">↩ 恢復</button>`:`<button data-done="${it.id}" class="pri">✓ 完成</button><button data-drop="${it.id}">放棄</button>`}<button data-edit="${it.id}">✎</button><button data-del="${it.id}" class="danger">🗑</button></div>`:''}
+ </div></div>`;}
+function render(){const adm=isAdmin();
+ const kinds=[...new Set([...KINDS.filter(k=>ITEMS.some(i=>i.kind===k)),...ITEMS.map(i=>i.kind)])];
+ const list=sorted(ITEMS.filter(pass));
+ let h=`<div class="sort"><button data-s="due" class="${SORT==='due'?'on':''}">⏰ 快到期</button><button data-s="new" class="${SORT==='new'?'on':''}">🆕 最新新增</button></div>`;
+ if(adm)h+=`<div class="bar"><button id="addbtn" class="pri">＋ 新增</button><span class="note">或丟連結／截圖給 Robert，說「to LI 想去」就會進來</span></div>`+form();
+ h+=chips('狀態',[['open','進行中'],['done','完成'],['all','全部']].map(x=>x[1]),{open:'進行中',done:'完成',all:'全部'}[STATUS],'status');
+ h+=chips('類型',['全部',...kinds],kind,'kind');
+ if(adm)h+=chips('對象',['全部','自己',...GUESTS],who,'who');
+ h+=`<div class="sbox"><input id="q" type="search" placeholder="🔍 搜店名、地點、備註、關鍵字…" value="${esc(q)}"></div>`;
+ h+=`<div class="cnt">${list.length} 筆${!adm?' · to '+esc(ME.name):''}</div>`;
+ h+=list.length?`<div class="items">${list.map(card).join('')}</div>`:`<p class="empty">${adm?'這裡還沒有東西。按「＋ 新增」，或丟給 Robert。':'目前沒有 to '+esc(ME.name)+' 的項目。'}</p>`;
+ A.innerHTML=h;
+ A.querySelectorAll('button[data-s]').forEach(b=>b.onclick=()=>{SORT=b.dataset.s;try{localStorage.setItem('lists_sort',SORT)}catch(e){}render();});
+ A.querySelectorAll('button[data-k]').forEach(b=>b.onclick=async()=>{const v=b.dataset.v;if(b.dataset.k==='status'){STATUS={'進行中':'open','完成':'done','全部':'all'}[v];try{localStorage.setItem('lists_status',STATUS)}catch(e){}await reload();return;}if(b.dataset.k==='kind')kind=v;else who=v;render();});
+ const Q=document.getElementById('q');if(Q){let t=null;Q.oninput=()=>{clearTimeout(t);t=setTimeout(()=>{q=Q.value.trim().toLowerCase();const pos=Q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos);},220);};}
+ A.querySelectorAll('.it img').forEach(im=>im.onclick=()=>{document.getElementById('lbimg').src=im.src;document.getElementById('lb').style.display='flex';});
+ if(!adm)return;
+ const fd=f=>{const o={};new FormData(f).forEach((v,k)=>{if(!k.startsWith('who_'))o[k]=v;});o.who=GUESTS.filter(g=>f.querySelector(`input[name=who_${g}]`).checked);o.tags=(o.tags||'').split(/[,，]/).map(s=>s.trim()).filter(Boolean);if(!o.due)o.due=null;return o;};
+ document.getElementById('addbtn').onclick=()=>{editing=null;formOpen=!formOpen;render();if(formOpen)document.getElementById('lf').scrollIntoView({behavior:'smooth'});};
+ const lf=document.getElementById('lf');document.getElementById('lfx').onclick=()=>{formOpen=false;editing=null;render();};
+ lf.onsubmit=async ev=>{ev.preventDefault();const o=fd(lf);try{if(editing)await api('PATCH','/lists/'+editing.id,o);else await api('POST','/lists',o);formOpen=false;editing=null;await reload();}catch(e){alert('沒存成功：'+e.message);}};
+ const find=id=>ITEMS.find(x=>x.id==id);
+ A.querySelectorAll('button[data-edit]').forEach(b=>b.onclick=()=>{editing=find(b.dataset.edit);formOpen=true;render();document.getElementById('lf').scrollIntoView({behavior:'smooth'});});
+ A.querySelectorAll('button[data-done]').forEach(b=>b.onclick=async()=>{try{await api('PATCH','/lists/'+b.dataset.done,{status:'done'});await reload();}catch(e){alert(e.message);}});
+ A.querySelectorAll('button[data-drop]').forEach(b=>b.onclick=async()=>{const it=find(b.dataset.drop);if(!confirm(`「${it.title}」標成放棄？`))return;try{await api('PATCH','/lists/'+it.id,{status:'dropped'});await reload();}catch(e){alert(e.message);}});
+ A.querySelectorAll('button[data-reopen]').forEach(b=>b.onclick=async()=>{try{await api('PATCH','/lists/'+b.dataset.reopen,{status:'open'});await reload();}catch(e){alert(e.message);}});
+ A.querySelectorAll('button[data-del]').forEach(b=>b.onclick=async()=>{const it=find(b.dataset.del);if(!confirm(`刪掉「${it.title}」？`))return;try{await api('DELETE','/lists/'+it.id);await reload();}catch(e){alert(e.message);}});
+}
+document.getElementById('lb').onclick=()=>{document.getElementById('lb').style.display='none';};
+boot();
+if(navigator.standalone||matchMedia('(display-mode: standalone)').matches){const r=document.getElementById('rl');r.style.display='inline-block';r.onclick=()=>location.reload();}
+</script></body></html>
