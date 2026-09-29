@@ -1,0 +1,137 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"/><title>JT Life Day · 圖庫</title><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="JT Life Day"><meta name="theme-color" content="#f4efe6">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe6;--ink:#2d2a26;--muted:#8a8174;--line:#d9cfbf;--card:#fffdf8;--accent:#a4572b;--red:#b83b3b;--font:'Noto Serif TC',serif}
+*{box-sizing:border-box} html,body{overflow-x:hidden} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.7}
+.wrap{max-width:1000px;margin:0 auto;padding:1.4rem 16px 6rem}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:1rem}
+h1{font-size:1.5rem;margin:0;letter-spacing:.12em;font-weight:900} h1 small{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.35em;font-weight:400}
+a{color:var(--accent)} button,select,input,textarea{font-family:inherit;font-size:.86rem;color:var(--ink)} button{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap} button.on,button.key{color:var(--accent);border-color:var(--accent)} button.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)} button.danger{color:var(--red);border-color:var(--red)}
+header .nav a{font-size:.8rem;margin-right:.6rem;text-decoration:none}
+.tabs{display:flex;gap:.4rem;margin:.2rem 0 .8rem} .tabs button{padding:.3rem 1rem} .tabs button.on{background:var(--accent);color:var(--bg)}
+.bar{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin:.3rem 0 .6rem} .note{font-size:.76rem;color:var(--muted)}
+.months{position:sticky;top:0;z-index:3;background:var(--bg);display:flex;gap:.35rem;overflow-x:auto;padding:.5rem 0;margin:0 0 .4rem;scrollbar-width:none} .months::-webkit-scrollbar{display:none} .months button{flex:none;font-size:.74rem;padding:.1rem .7rem}
+section.m{margin:0 0 1.4rem} section.m h3{font-size:.95rem;letter-spacing:.15em;margin:.6rem 0 .3rem;font-weight:600;display:flex;justify-content:space-between;align-items:baseline} section.m h3 small{font-size:.72rem;color:var(--muted);letter-spacing:.1em;font-weight:400}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px} @media (min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}} @media (min-width:900px){.grid{grid-template-columns:repeat(5,1fr)}}
+.grid .day{grid-column:1/-1;font-size:.72rem;color:var(--muted);letter-spacing:.1em;padding:.5rem 2px .15rem;word-break:keep-all;overflow-wrap:anywhere} .grid .day b{color:var(--ink);font-weight:600;margin-right:.4rem}
+figure.t{margin:0;position:relative;aspect-ratio:1/1;background:var(--line);overflow:hidden;cursor:zoom-in} figure.t img{width:100%;height:100%;object-fit:cover;display:block} figure.t .star{position:absolute;top:5px;left:5px;font-size:.62rem;color:#ffd166;background:rgba(0,0,0,.55);padding:.05rem .35rem;border-radius:999px;pointer-events:none} figure.t .star.r5{color:#ff8fa3} figure.t .vid{position:absolute;right:6px;bottom:4px;color:#fff;font-size:.8rem;text-shadow:0 0 4px rgba(0,0,0,.8);pointer-events:none}
+body.selmode figure.t{cursor:pointer} figure.t .ck{display:none;position:absolute;right:5px;top:5px;width:20px;height:20px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.35);box-shadow:0 0 3px rgba(0,0,0,.5)} body.selmode figure.t .ck{display:block} figure.t.sel .ck{background:var(--accent);border-color:#fff} figure.t.sel .ck::after{content:'✓';color:#fff;font-size:.8rem;position:absolute;left:3px;top:-3px} figure.t.sel img{opacity:.7}
+.selbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--accent);padding:.6rem 16px calc(.6rem + env(safe-area-inset-bottom));display:none;gap:.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap} .selbar.open{display:flex} .selbar b{font-size:.9rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:.3rem 0 1rem} .card{cursor:pointer;min-width:0} .card .cv{aspect-ratio:1/1;background:var(--line);border-radius:10px;overflow:hidden;position:relative} .card .cv img{width:100%;height:100%;object-fit:cover;display:block} .card .cv .n{position:absolute;right:6px;bottom:4px;color:#fff;font-size:.7rem;text-shadow:0 0 4px rgba(0,0,0,.9)} .card .cv .empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.6rem} .card .nm{font-size:.86rem;margin-top:.3rem;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere;font-weight:600} .card .sb{font-size:.7rem;color:var(--muted);letter-spacing:.05em}
+.row{display:flex;gap:10px;overflow-x:auto;padding:.2rem 0 .6rem;scrollbar-width:thin} .row .card{flex:0 0 132px}
+h2.g{font-size:.78rem;letter-spacing:.28em;color:var(--accent);margin:1.2rem 0 .4rem;font-weight:600;display:flex;justify-content:space-between;align-items:center} h2.g small{font-weight:400;color:var(--muted);letter-spacing:.05em}
+.ah{margin:.2rem 0 .8rem} .ah h2{font-size:1.25rem;margin:.2rem 0 .1rem;font-weight:600} .ah .sb{font-size:.78rem;color:var(--muted)} .ah .nt{font-size:.9rem;margin-top:.3rem}
+.vis{display:inline-block;font-size:.68rem;border:1px solid var(--line);border-radius:999px;padding:0 .45rem;color:var(--muted);margin-left:.3rem;vertical-align:middle}
+.empty{text-align:center;color:var(--muted);padding:3rem 0}
+.modal{position:fixed;inset:0;background:rgba(45,42,38,.5);display:none;align-items:flex-end;justify-content:center;z-index:8} .modal.open{display:flex} .modal .box{background:var(--card);border:1px solid var(--accent);padding:1rem .9rem 1.1rem;width:100%;max-width:520px;max-height:88vh;overflow:auto;border-radius:16px 16px 0 0;box-shadow:0 -10px 40px rgba(60,40,20,.25)} .modal h3{margin:0 0 .5rem;font-size:.78rem;letter-spacing:.28em;color:var(--accent);font-weight:600} @media (min-width:600px){.modal{align-items:center;padding:1rem} .modal .box{border-radius:16px}}
+.modal label{display:flex;flex-direction:column;font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin:.4rem 0} .modal input,.modal textarea{border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;background:transparent;margin-top:.15rem;font-size:.92rem} .modal .ops{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.8rem} .modal .radios{display:flex;flex-direction:column;gap:.3rem;margin-top:.2rem} .modal .radios label,.modal .chks label{flex-direction:row;align-items:center;gap:.4rem;font-size:.9rem;color:var(--ink);letter-spacing:0;margin:0} .modal .chks{display:flex;gap:.8rem;margin:.2rem 0 0 1.6rem} .modal .chks.off{display:none}
+.modal .albs{display:flex;flex-direction:column;gap:.3rem;max-height:40vh;overflow:auto} .modal .albs button{text-align:left;border-radius:8px;padding:.45rem .7rem;font-size:.9rem;color:var(--ink);display:flex;justify-content:space-between} .modal .albs button:hover{border-color:var(--accent);color:var(--accent)}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:9} #lb.open{display:flex} #lb img,#lb video{max-width:96vw;max-height:88vh;display:block} #lb .nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.14);color:#fff;border:0;width:46px;height:64px;font-size:26px;cursor:pointer;border-radius:8px;padding:0} #lb .prev{left:8px} #lb .next{right:8px} #lb .x{position:fixed;top:10px;right:12px;background:transparent;border:0;color:#fff;font-size:30px;cursor:pointer} #lb .cap{position:fixed;left:0;right:0;bottom:12px;text-align:center;color:#ddd;font-size:.82rem;padding:0 3.5rem;font-family:'Noto Sans TC',sans-serif} #lb .cap a{color:#ffd166;text-decoration:none}
+.toast{position:fixed;left:50%;bottom:5rem;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.4rem 1rem;border-radius:999px;font-size:.84rem;z-index:10;display:none} .toast.show{display:block}
+footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
+</style></head><body><div class="wrap">
+<header><h1><small>JT LIFE DAY</small>圖庫</h1><div class="nav"><a href="./">← 記事</a><a id="listslink" href="lists.html" style="display:none">📋 清單</a><a id="ledgerlink" href="ledger.html" style="display:none">💰 帳務</a><button id="rl" title="重新整理" style="display:none">↻</button> <button id="keybtn" class="key">🔑 登入</button></div></header>
+<div id="app"><p class="empty">讀取中…</p></div>
+<footer>記事裡的照片依時間排在這裡 · 看得到的跟記事一樣 · 相簿可以另外分享</footer></div>
+<div class="selbar" id="selbar"><b id="seln">已選 0 張</b><div><button id="seladd" class="pri">加入相簿</button> <button id="selrm" class="danger" style="display:none">移出相簿</button> <button id="selcv" style="display:none">設為封面</button> <button id="selx">取消</button></div></div>
+<div class="modal" id="modal"><div class="box" id="mbox"></div></div>
+<div id="lb"><button class="x" aria-label="關閉">×</button><button class="nav prev" aria-label="上一張">‹</button><div id="lbbox"></div><button class="nav next" aria-label="下一張">›</button><div class="cap" id="lbcap"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const BASE='img/x/',GUESTS=['EVA','LI','HU'],VISL={public:'🌐 公開',login:'🔒 登入才看',audience:'👥 指定同行'},WD=['日','一','二','三','四','五','六'];
+let ME=null,E=[],PH=[],ALB=[],CUR=[],SEL=new Set(),selMode=false,LBI=-1,ALBUM=null;
+const A=document.getElementById('app'),K=document.getElementById('keybtn');
+const api=async(m,p,b)=>{const r=await fetch('/api'+p,{method:m,headers:b?{'content-type':'application/json'}:{},body:b?JSON.stringify(b):undefined,cache:'no-store'});if(!r.ok){let t='';try{t=(await r.json()).detail||''}catch(e){}throw new Error(t||('HTTP '+r.status));}return r.json();};
+const isAdmin=()=>ME&&ME.role==='admin';
+const toast=t=>{const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1800);};
+const dlabel=d=>{const dt=new Date(d+'T00:00:00');return `${+d.slice(5,7)}/${+d.slice(8,10)} 週${WD[dt.getDay()]}`;};
+async function boot(){const j=await api('GET','/lifeday/entries');ME=j.me&&j.me.name?j.me:null;E=j.entries;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
+ document.getElementById('listslink').style.display=ME?'inline':'none';document.getElementById('ledgerlink').style.display=isAdmin()?'inline':'none';
+ PH=[];E.forEach(e=>{const b=e.base||BASE;(e.photos||[]).forEach(p=>PH.push({eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.cap||'',face:!!p.face,video:p.video?b+p.video:null,vf:p.video||null,r:p.r||0,sec:p.sec||'其他',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));
+  (e.album||[]).forEach(p=>PH.push({eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.name||'',face:false,video:null,vf:null,r:p.r||0,sec:'相簿',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));});
+ PH.sort((a,b)=>b.date.localeCompare(a.date)||a.eid.localeCompare(b.eid));
+ try{ALB=(await api('GET','/albums')).albums;}catch(e){ALB=[];}
+ route();}
+K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}
+ const pw=prompt('輸入密碼登入');if(!pw)return;try{await api('POST','/login',{user:'',password:pw});location.reload();}catch(e){alert('密碼不對');}};
+window.addEventListener('hashchange',route);
+function route(){exitSel();const h=location.hash;ALBUM=null;
+ if(h.startsWith('#a/'))return viewAlbum(+h.slice(3));
+ if(h.startsWith('#auto/')){const [,,kind,...rest]=h.split('/');return viewAuto(kind,decodeURIComponent(rest.join('/')));}
+ if(h==='#albums')return viewAlbums();
+ viewTimeline();}
+const tabs=t=>`<div class="tabs"><button data-h="#tl" class="${t==='tl'?'on':''}">📅 時間軸</button><button data-h="#albums" class="${t==='albums'?'on':''}">📚 相簿</button></div>`;
+const tile=(p,i)=>`<figure class="t ${SEL.has(p.url)?'sel':''}" data-i="${i}"><img src="${esc(p.url)}" loading="lazy" alt="">${p.r?`<span class="star ${p.r>=5?'r5':''}">★${p.r}</span>`:''}${p.video?'<span class="vid">▶</span>':''}<span class="ck"></span></figure>`;
+function gridHTML(list,withDays){let h='',last='';list.forEach((p,i)=>{if(withDays&&p.date+p.eid!==last){last=p.date+p.eid;const n=list.filter(x=>x.date===p.date&&x.eid===p.eid).length;h+=`<div class="day"><b>${dlabel(p.date)}</b>${esc(p.title)} <span>· ${n} 張</span></div>`;}h+=tile(p,i);});return `<div class="grid">${h}</div>`;}
+function viewTimeline(){CUR=PH;const months=[];PH.forEach(p=>{const m=p.date.slice(0,7);if(!months.includes(m))months.push(m);});
+ let h=tabs('tl');if(!PH.length){h+='<p class="empty">還沒有看得到的照片。'+(ME?'':'登入後會多很多。')+'</p>';A.innerHTML=h;bind();return;}
+ h+=`<div class="bar"><span class="note">${PH.length} 張 · ${E.length} 篇記事${ME?'':' · 只看到公開篇'}</span>${isAdmin()?'<button id="selbtn">☑ 選取</button>':''}</div>`;
+ h+=`<div class="months">${months.map(m=>`<button data-m="${m}">${+m.slice(5,7)} 月<small style="opacity:.6"> ${m.slice(2,4)}</small></button>`).join('')}</div>`;
+ months.forEach(m=>{const list=PH.map((p,i)=>[p,i]).filter(([p])=>p.date.startsWith(m));h+=`<section class="m" id="m-${m}"><h3>${m.slice(0,4)} 年 ${+m.slice(5,7)} 月<small>${list.length} 張</small></h3><div class="grid">${(()=>{let g='',last='';list.forEach(([p,i])=>{if(p.date+p.eid!==last){last=p.date+p.eid;const n=list.filter(([x])=>x.date===p.date&&x.eid===p.eid).length;g+=`<div class="day"><b>${dlabel(p.date)}</b>${esc(p.title)} <span>· ${n} 張</span></div>`;}g+=tile(p,i);});return g;})()}</div></section>`;});
+ A.innerHTML=h;bind();
+ A.querySelectorAll('.months button').forEach(b=>b.onclick=()=>{const s=document.getElementById('m-'+b.dataset.m);if(s)s.scrollIntoView({behavior:'smooth',block:'start'});});}
+function autoGroups(){const by=(key,label)=>{const m={};PH.forEach(p=>{const k=key(p);if(!k)return;(m[k]=m[k]||[]).push(p);});return Object.entries(m).map(([k,v])=>({k,label:label?label(k):k,cover:v[0],n:v.length}));};
+ const entries=[];const seen=new Set();PH.forEach(p=>{if(seen.has(p.eid))return;seen.add(p.eid);const v=PH.filter(x=>x.eid===p.eid);entries.push({k:p.eid,label:p.title||p.date,sub:p.date,cover:v[0],n:v.length});});
+ const who=[];GUESTS.forEach(g=>{const v=PH.filter(p=>new RegExp('(^|[^A-Z])'+g+'([^A-Z]|$)').test(p.people));if(v.length)who.push({k:g,label:g,cover:v[0],n:v.length});});
+ return {e:entries,sec:by(p=>p.sec),who,trip:by(p=>p.trip),cat:by(p=>p.cat)};}
+function autoList(kind,key){if(kind==='e')return PH.filter(p=>p.eid===key);if(kind==='sec')return PH.filter(p=>p.sec===key);if(kind==='who')return PH.filter(p=>new RegExp('(^|[^A-Z])'+key+'([^A-Z]|$)').test(p.people));if(kind==='trip')return PH.filter(p=>p.trip===key);if(kind==='cat')return PH.filter(p=>p.cat===key);return [];}
+const card=(href,name,sub,coverUrl,n,extra)=>`<div class="card" data-h="${esc(href)}"><div class="cv">${coverUrl?`<img src="${esc(coverUrl)}" loading="lazy" alt="">`:'<span class="empty">📷</span>'}<span class="n">${n}</span></div><div class="nm">${esc(name)}${extra||''}</div>${sub?`<div class="sb">${esc(sub)}</div>`:''}</div>`;
+function viewAlbums(){const g=autoGroups();let h=tabs('albums');
+ h+=`<h2 class="g">📚 我的相簿${isAdmin()?'<button id="newalb">＋ 新相簿</button>':''}</h2>`;
+ h+=ALB.length?`<div class="cards">${ALB.map(a=>card('#a/'+a.id,a.name,a.note||'',a.cover?BASE+a.cover:'',a.n,isAdmin()?`<span class="vis">${VISL[a.visibility]}${a.visibility==='audience'&&a.audience.length?' '+a.audience.join('·'):''}</span>`:'')).join('')}</div>`:`<p class="note">${isAdmin()?'還沒有相簿。到時間軸按「☑ 選取」挑照片加入，或按「＋ 新相簿」。':'目前沒有分享給你的相簿。'}</p>`;
+ const row=(title,items,kind,sub)=>items.length?`<h2 class="g">${title}<small>${items.length}</small></h2><div class="row">${items.map(x=>card('#auto/'+kind+'/'+encodeURIComponent(x.k),x.label,sub?sub(x):'',x.cover.url,x.n)).join('')}</div>`:'';
+ h+=row('🗂 每篇記事',g.e,'e',x=>x.sub)+row('🏷 分類',g.sec,'sec')+row('👥 同行',g.who,'who')+row('✈️ 旅程',g.trip,'trip')+row('📂 類別',g.cat,'cat');
+ A.innerHTML=h;bind();
+ const nb=document.getElementById('newalb');if(nb)nb.onclick=()=>albumForm(null);}
+function viewAuto(kind,key){CUR=autoList(kind,key);const names={e:'記事',sec:'分類',who:'同行',trip:'旅程',cat:'類別'};const t=kind==='e'&&CUR[0]?CUR[0].title:key;
+ A.innerHTML=tabs('albums')+`<div class="ah"><div class="sb"><a href="#albums">‹ 相簿</a> · ${names[kind]||''}</div><h2>${esc(t)}</h2><div class="sb">${CUR.length} 張${kind==='e'&&CUR[0]?' · '+CUR[0].date+' · <a href="./#d-'+CUR[0].date+'">看記事 ›</a>':''}</div></div>`+
+  (isAdmin()?`<div class="bar"><button id="selbtn">☑ 選取</button></div>`:'')+gridHTML(CUR,false);bind();}
+async function viewAlbum(id){let a;try{a=await api('GET','/albums/'+id);}catch(e){A.innerHTML=tabs('albums')+`<p class="empty">${esc(e.message)}</p>`;bind();return;}
+ ALBUM=a;CUR=a.photos.map(p=>({eid:p.entry_id,date:p.taken||'',title:'',f:p.f,url:BASE+p.f,cap:p.cap||'',face:p.face,video:p.video?BASE+p.video:null,vf:p.video,r:p.r||0}));
+ A.innerHTML=tabs('albums')+`<div class="ah"><div class="sb"><a href="#albums">‹ 相簿</a></div><h2>${esc(a.name)}${isAdmin()?`<span class="vis">${VISL[a.visibility]}${a.visibility==='audience'&&a.audience.length?' '+a.audience.join('·'):''}</span>`:''}</h2><div class="sb">${a.n} 張</div>${a.note?`<div class="nt">${esc(a.note)}</div>`:''}</div>`+
+  (isAdmin()?`<div class="bar"><button id="selbtn">☑ 選取</button><button id="edalb">✎ 編輯／分享</button><button id="delalb" class="danger">🗑 刪相簿</button><span class="note">要加照片：去時間軸「☑ 選取」</span></div>`:'')+
+  (CUR.length?gridHTML(CUR,false):'<p class="empty">這本相簿還是空的。</p>');bind();
+ const ed=document.getElementById('edalb');if(ed)ed.onclick=()=>albumForm(a);
+ const dl=document.getElementById('delalb');if(dl)dl.onclick=async()=>{if(!confirm(`刪掉相簿「${a.name}」？（照片還在記事裡，不會不見）`))return;try{await api('DELETE','/albums/'+a.id);ALB=ALB.filter(x=>x.id!==a.id);location.hash='#albums';}catch(e){alert(e.message);}};}
+function bind(){A.querySelectorAll('button[data-h],.card[data-h]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.h;});
+ A.querySelectorAll('figure.t').forEach(f=>f.onclick=()=>{const p=CUR[+f.dataset.i];if(selMode){if(SEL.has(p.url))SEL.delete(p.url);else SEL.add(p.url);f.classList.toggle('sel',SEL.has(p.url));selUI();}else openLB(+f.dataset.i);});
+ const sb=document.getElementById('selbtn');if(sb)sb.onclick=()=>{selMode=!selMode;SEL.clear();document.body.classList.toggle('selmode',selMode);A.querySelectorAll('figure.t.sel').forEach(x=>x.classList.remove('sel'));sb.classList.toggle('on',selMode);selUI();};
+ if(location.hash.startsWith('#tl')||!location.hash){}}
+function selUI(){const bar=document.getElementById('selbar');bar.classList.toggle('open',selMode);document.getElementById('seln').textContent=`已選 ${SEL.size} 張`;
+ document.getElementById('selrm').style.display=ALBUM?'inline-block':'none';document.getElementById('selcv').style.display=ALBUM&&SEL.size===1?'inline-block':'none';document.getElementById('seladd').style.display=ALBUM?'none':'inline-block';}
+function exitSel(){selMode=false;SEL.clear();document.body.classList.remove('selmode');document.getElementById('selbar').classList.remove('open');}
+document.getElementById('selx').onclick=()=>{exitSel();const sb=document.getElementById('selbtn');if(sb)sb.classList.remove('on');A.querySelectorAll('figure.t.sel').forEach(x=>x.classList.remove('sel'));};
+const selected=()=>CUR.filter(p=>SEL.has(p.url));
+const photoPayload=p=>({entry_id:p.eid,f:p.f,cap:p.cap,face:p.face,video:p.vf,r:p.r,taken:p.date||null});
+document.getElementById('seladd').onclick=()=>{if(!SEL.size)return alert('先點幾張照片');openModal(`<h3>加入相簿</h3><p class="note">已選 ${SEL.size} 張</p><div class="albs">${ALB.map(a=>`<button data-a="${a.id}"><span>${esc(a.name)}</span><span class="note">${a.n} 張</span></button>`).join('')}</div>
+ <label style="margin-top:.8rem">或建一本新的<input id="nalb" placeholder="相簿名稱"></label><div class="ops"><button id="mx">取消</button><button id="mk" class="pri">建立並加入</button></div>`);
+ const box=document.getElementById('mbox');box.querySelectorAll('button[data-a]').forEach(b=>b.onclick=async()=>{try{const r=await api('POST','/albums/'+b.dataset.a+'/photos',{add:selected().map(photoPayload)});const a=ALB.find(x=>x.id==b.dataset.a);if(a)a.n=r.n;closeModal();toast(`已加入「${a?a.name:''}」，共 ${r.n} 張`);document.getElementById('selx').click();}catch(e){alert(e.message);}});
+ document.getElementById('mk').onclick=async()=>{const nm=document.getElementById('nalb').value.trim();if(!nm)return alert('給相簿一個名字');try{const a=await api('POST','/albums',{name:nm,visibility:'audience',audience:[],photos:selected().map(photoPayload)});a.cover=a.cover||selected()[0].f;ALB.unshift(a);closeModal();toast(`相簿「${nm}」建好，${a.n} 張`);document.getElementById('selx').click();}catch(e){alert(e.message);}};};
+document.getElementById('selrm').onclick=async()=>{if(!ALBUM||!SEL.size)return;if(!confirm(`從「${ALBUM.name}」移出 ${SEL.size} 張？`))return;try{await api('POST','/albums/'+ALBUM.id+'/photos',{remove:selected().map(p=>p.f)});toast('已移出');route();}catch(e){alert(e.message);}};
+document.getElementById('selcv').onclick=async()=>{if(!ALBUM||SEL.size!==1)return;try{await api('POST','/albums/'+ALBUM.id+'/photos',{cover:selected()[0].f});const a=ALB.find(x=>x.id===ALBUM.id);if(a)a.cover=selected()[0].f;toast('封面換好了');route();}catch(e){alert(e.message);}};
+function albumForm(a){const v=a?a.visibility:'audience',aud=a?a.audience:[];
+ openModal(`<h3>${a?'✎ 編輯／分享':'＋ 新相簿'}</h3><label>名稱<input id="fa_name" value="${esc(a?a.name:'')}" required></label><label>說明<textarea id="fa_note">${esc(a?a.note||'':'')}</textarea></label>
+ <label>誰看得到<div class="radios">${Object.entries(VISL).map(([k,l])=>`<label><input type="radio" name="fa_vis" value="${k}" ${k===v?'checked':''}>${l}<span class="note" style="margin-left:.4rem">${{public:'不用登入也看得到（有人臉的照片會自動藏）',login:'四個帳號登入都看得到',audience:'只有勾的人（沒勾＝只有你）'}[k]}</span></label>`).join('')}</div>
+ <div class="chks ${v==='audience'?'':'off'}" id="fa_aud">${GUESTS.map(g=>`<label><input type="checkbox" value="${g}" ${aud.includes(g)?'checked':''}>${g}</label>`).join('')}</div></label>
+ <div class="ops">${a?`<span class="note">#${a.id}</span>`:''}<button id="mx">取消</button><button id="mk" class="pri">${a?'儲存':'建立'}</button></div>`);
+ const box=document.getElementById('mbox');box.querySelectorAll('input[name=fa_vis]').forEach(r=>r.onchange=()=>document.getElementById('fa_aud').classList.toggle('off',r.value!=='audience'||!r.checked));
+ document.getElementById('mk').onclick=async()=>{const body={name:document.getElementById('fa_name').value.trim(),note:document.getElementById('fa_note').value.trim()||null,visibility:box.querySelector('input[name=fa_vis]:checked').value,audience:[...box.querySelectorAll('#fa_aud input:checked')].map(x=>x.value)};if(!body.name)return alert('名稱必填');
+  try{if(a){const r=await api('PATCH','/albums/'+a.id,body);Object.assign(a,r);const x=ALB.find(y=>y.id===a.id);if(x)Object.assign(x,r);}else{const r=await api('POST','/albums',body);r.n=0;ALB.unshift(r);}closeModal();toast(a?'存好了':'相簿建好了');route();}catch(e){alert('沒存成功：'+e.message);}};}
+function openModal(html){const m=document.getElementById('modal');document.getElementById('mbox').innerHTML=html;m.classList.add('open');const x=document.getElementById('mx');if(x)x.onclick=closeModal;}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').onclick=ev=>{if(ev.target.id==='modal')closeModal();};
+// ── 燈箱 ──
+const LB=document.getElementById('lb');
+function openLB(i){LBI=i;showLB();LB.classList.add('open');}
+function showLB(){const p=CUR[LBI];if(!p)return;document.getElementById('lbbox').innerHTML=p.video?`<video src="${esc(p.video)}" controls autoplay playsinline poster="${esc(p.url)}"></video>`:`<img src="${esc(p.url)}" alt="">`;
+ document.getElementById('lbcap').innerHTML=`${esc(p.cap)}${p.cap&&(p.title||p.date)?' · ':''}${p.title?esc(p.title)+' · ':''}${p.date?`<a href="./#d-${esc(p.date)}">${esc(p.date)} ›</a>`:''} <span style="opacity:.6">${LBI+1}/${CUR.length}</span>`;}
+const lbMove=d=>{if(!CUR.length)return;LBI=(LBI+d+CUR.length)%CUR.length;showLB();};
+LB.querySelector('.x').onclick=()=>LB.classList.remove('open');LB.querySelector('.prev').onclick=()=>lbMove(-1);LB.querySelector('.next').onclick=()=>lbMove(1);
+LB.onclick=ev=>{if(ev.target===LB||ev.target.id==='lbbox')LB.classList.remove('open');};
+document.addEventListener('keydown',ev=>{if(!LB.classList.contains('open')){if(ev.key==='Escape')closeModal();return;}if(ev.key==='Escape')LB.classList.remove('open');if(ev.key==='ArrowLeft')lbMove(-1);if(ev.key==='ArrowRight')lbMove(1);});
+let tx=null;LB.addEventListener('touchstart',ev=>{tx=ev.touches[0].clientX;},{passive:true});LB.addEventListener('touchend',ev=>{if(tx===null)return;const dx=ev.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>50)lbMove(dx<0?1:-1);},{passive:true});
+boot();
+if(navigator.standalone||matchMedia('(display-mode: standalone)').matches){const r=document.getElementById('rl');r.style.display='inline-block';r.onclick=()=>location.reload();}
+</script></body></html>
