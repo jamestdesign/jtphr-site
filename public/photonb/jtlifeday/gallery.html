@@ -41,7 +41,9 @@ footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;let
 <script>
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const BASE='img/x/',GUESTS=['EVA','LI','HU'],VISL={public:'🌐 公開',login:'🔒 登入才看',audience:'👥 指定同行'},WD=['日','一','二','三','四','五','六'];
-let ME=null,E=[],PH=[],ALB=[],CUR=[],SEL=new Set(),selMode=false,LBI=-1,ALBUM=null;
+let ME=null,E=[],PH=[],ALB=[],CUR=[],SEL=new Set(),selMode=false,LBI=-1,ALBUM=null,WHO='全部';
+try{WHO=localStorage.getItem('gal_who')||'全部';}catch(e){}
+const hasWho=(p,g)=>new RegExp('(^|[^A-Z])'+g+'([^A-Z]|$)').test(p.people||'');
 const A=document.getElementById('app'),K=document.getElementById('keybtn');
 const api=async(m,p,b)=>{const r=await fetch('/api'+p,{method:m,headers:b?{'content-type':'application/json'}:{},body:b?JSON.stringify(b):undefined,cache:'no-store'});if(!r.ok){let t='';try{t=(await r.json()).detail||''}catch(e){}throw new Error(t||('HTTP '+r.status));}return r.json();};
 const isAdmin=()=>ME&&ME.role==='admin';
@@ -65,18 +67,21 @@ function route(){exitSel();const h=location.hash;ALBUM=null;
 const tabs=t=>`<div class="tabs"><button data-h="#tl" class="${t==='tl'?'on':''}">📅 時間軸</button><button data-h="#albums" class="${t==='albums'?'on':''}">📚 相簿</button></div>`;
 const tile=(p,i)=>`<figure class="t ${SEL.has(p.url)?'sel':''}" data-i="${i}"><img src="${esc(p.url)}" loading="lazy" alt="">${p.r?`<span class="star ${p.r>=5?'r5':''}">★${p.r}</span>`:''}${p.video?'<span class="vid">▶</span>':''}<span class="ck"></span></figure>`;
 function gridHTML(list,withDays){let h='',last='';list.forEach((p,i)=>{if(withDays&&p.date+p.eid!==last){last=p.date+p.eid;const n=list.filter(x=>x.date===p.date&&x.eid===p.eid).length;h+=`<div class="day"><b>${dlabel(p.date)}</b>${esc(p.title)} <span>· ${n} 張</span></div>`;}h+=tile(p,i);});return `<div class="grid">${h}</div>`;}
-function viewTimeline(){CUR=PH;const months=[];PH.forEach(p=>{const m=p.date.slice(0,7);if(!months.includes(m))months.push(m);});
+function viewTimeline(){const whos=GUESTS.filter(g=>PH.some(p=>hasWho(p,g)));if(WHO!=='全部'&&!whos.includes(WHO))WHO='全部';
+ CUR=WHO==='全部'?PH:PH.filter(p=>hasWho(p,WHO));const months=[];CUR.forEach(p=>{const m=p.date.slice(0,7);if(!months.includes(m))months.push(m);});
  let h=tabs('tl');if(!PH.length){h+='<p class="empty">還沒有看得到的照片。'+(ME?'':'登入後會多很多。')+'</p>';A.innerHTML=h;bind();return;}
- h+=`<div class="bar"><span class="note">${PH.length} 張 · ${E.length} 篇記事${ME?'':' · 只看到公開篇'}</span>${isAdmin()?'<button id="selbtn">☑ 選取</button>':''}</div>`;
+ if(whos.length)h+=`<div class="bar"><span class="note">👥</span>${['全部',...whos].map(g=>`<button data-w="${g}" class="${g===WHO?'on':''}">${g}</button>`).join('')}</div>`;
+ h+=`<div class="bar"><span class="note">${CUR.length} 張${WHO==='全部'?' · '+E.length+' 篇記事':' · 跟 '+esc(WHO)+' 同行'}${ME?'':' · 只看到公開篇'}</span>${isAdmin()?'<button id="selbtn">☑ 選取</button>':''}</div>`;
  h+=`<div class="months">${months.map(m=>`<button data-m="${m}">${+m.slice(5,7)} 月<small style="opacity:.6"> ${m.slice(2,4)}</small></button>`).join('')}</div>`;
- months.forEach(m=>{const list=PH.map((p,i)=>[p,i]).filter(([p])=>p.date.startsWith(m));h+=`<section class="m" id="m-${m}"><h3>${m.slice(0,4)} 年 ${+m.slice(5,7)} 月<small>${list.length} 張</small></h3><div class="grid">${(()=>{let g='',last='';list.forEach(([p,i])=>{if(p.date+p.eid!==last){last=p.date+p.eid;const n=list.filter(([x])=>x.date===p.date&&x.eid===p.eid).length;g+=`<div class="day"><b>${dlabel(p.date)}</b>${esc(p.title)} <span>· ${n} 張</span></div>`;}g+=tile(p,i);});return g;})()}</div></section>`;});
+ months.forEach(m=>{const list=CUR.map((p,i)=>[p,i]).filter(([p])=>p.date.startsWith(m));h+=`<section class="m" id="m-${m}"><h3>${m.slice(0,4)} 年 ${+m.slice(5,7)} 月<small>${list.length} 張</small></h3><div class="grid">${(()=>{let g='',last='';list.forEach(([p,i])=>{if(p.date+p.eid!==last){last=p.date+p.eid;const n=list.filter(([x])=>x.date===p.date&&x.eid===p.eid).length;g+=`<div class="day"><b>${dlabel(p.date)}</b>${esc(p.title)} <span>· ${n} 張</span></div>`;}g+=tile(p,i);});return g;})()}</div></section>`;});
  A.innerHTML=h;bind();
- A.querySelectorAll('.months button').forEach(b=>b.onclick=()=>{const s=document.getElementById('m-'+b.dataset.m);if(s)s.scrollIntoView({behavior:'smooth',block:'start'});});}
+ A.querySelectorAll('.months button').forEach(b=>b.onclick=()=>{const s=document.getElementById('m-'+b.dataset.m);if(s)s.scrollIntoView({behavior:'smooth',block:'start'});});
+ A.querySelectorAll('button[data-w]').forEach(b=>b.onclick=()=>{WHO=b.dataset.w;try{localStorage.setItem('gal_who',WHO)}catch(e){}exitSel();viewTimeline();});}
 function autoGroups(){const by=(key,label)=>{const m={};PH.forEach(p=>{const k=key(p);if(!k)return;(m[k]=m[k]||[]).push(p);});return Object.entries(m).map(([k,v])=>({k,label:label?label(k):k,cover:v[0],n:v.length}));};
  const entries=[];const seen=new Set();PH.forEach(p=>{if(seen.has(p.eid))return;seen.add(p.eid);const v=PH.filter(x=>x.eid===p.eid);entries.push({k:p.eid,label:p.title||p.date,sub:p.date,cover:v[0],n:v.length});});
- const who=[];GUESTS.forEach(g=>{const v=PH.filter(p=>new RegExp('(^|[^A-Z])'+g+'([^A-Z]|$)').test(p.people));if(v.length)who.push({k:g,label:g,cover:v[0],n:v.length});});
+ const who=[];GUESTS.forEach(g=>{const v=PH.filter(p=>hasWho(p,g));if(v.length)who.push({k:g,label:g,cover:v[0],n:v.length});});
  return {e:entries,sec:by(p=>p.sec),who,trip:by(p=>p.trip),cat:by(p=>p.cat)};}
-function autoList(kind,key){if(kind==='e')return PH.filter(p=>p.eid===key);if(kind==='sec')return PH.filter(p=>p.sec===key);if(kind==='who')return PH.filter(p=>new RegExp('(^|[^A-Z])'+key+'([^A-Z]|$)').test(p.people));if(kind==='trip')return PH.filter(p=>p.trip===key);if(kind==='cat')return PH.filter(p=>p.cat===key);return [];}
+function autoList(kind,key){if(kind==='e')return PH.filter(p=>p.eid===key);if(kind==='sec')return PH.filter(p=>p.sec===key);if(kind==='who')return PH.filter(p=>hasWho(p,key));if(kind==='trip')return PH.filter(p=>p.trip===key);if(kind==='cat')return PH.filter(p=>p.cat===key);return [];}
 const card=(href,name,sub,coverUrl,n,extra)=>`<div class="card" data-h="${esc(href)}"><div class="cv">${coverUrl?`<img src="${esc(coverUrl)}" loading="lazy" alt="">`:'<span class="empty">📷</span>'}<span class="n">${n}</span></div><div class="nm">${esc(name)}${extra||''}</div>${sub?`<div class="sb">${esc(sub)}</div>`:''}</div>`;
 function viewAlbums(){const g=autoGroups();let h=tabs('albums');
  h+=`<h2 class="g">📚 我的相簿${isAdmin()?'<button id="newalb">＋ 新相簿</button>':''}</h2>`;
