@@ -22,7 +22,7 @@ header .nav a{font-size:.8rem;margin-right:.6rem;text-decoration:none}
 .it .tt{font-size:.98rem;font-weight:600;line-height:1.45;word-break:keep-all;overflow-wrap:anywhere} .it .tt a{text-decoration:none} .it .pl{font-size:.78rem;color:var(--muted);margin-top:.1rem} .it .nt{font-size:.84rem;color:var(--muted);margin-top:.2rem;line-height:1.6;white-space:pre-wrap} .it .tg{font-size:.72rem;color:var(--muted);margin-top:.2rem} .it .tg span{margin-right:.5rem} .it .src{font-size:.74rem;margin-top:.2rem} .it .src a{text-decoration:none}
 .it .ops{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.45rem} .it .ops button{padding:.05rem .6rem;font-size:.74rem}
 .empty{text-align:center;color:var(--muted);padding:3rem 0}
-form.f{display:none;background:var(--card);border:1px solid var(--accent);padding:.8rem;margin:.6rem 0 1rem;border-radius:10px} form.f.open{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem} form.f label{display:flex;flex-direction:column;font-size:.7rem;color:var(--muted);letter-spacing:.1em} form.f input,form.f select,form.f textarea{border:1px solid var(--line);border-radius:6px;padding:.35rem .5rem;background:transparent;margin-top:.15rem;font-size:.9rem} form.f textarea{min-height:3.6rem;resize:vertical} form.f .full{grid-column:1/-1} form.f .ops{grid-column:1/-1;display:flex;gap:.5rem;justify-content:flex-end;align-items:center} form.f .whos{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem} form.f .whos label{flex-direction:row;align-items:center;gap:.25rem;font-size:.86rem;color:var(--ink);letter-spacing:0}
+.modal{position:fixed;inset:0;background:rgba(45,42,38,.5);display:none;align-items:flex-end;justify-content:center;z-index:8;padding:0} .modal.open{display:flex} form.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem;background:var(--card);border:1px solid var(--accent);padding:1rem .9rem 1.1rem;width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:16px 16px 0 0;box-shadow:0 -10px 40px rgba(60,40,20,.25)} form.f h3{grid-column:1/-1;margin:0 0 .2rem;font-size:.78rem;letter-spacing:.28em;color:var(--accent);font-weight:600} @media (min-width:600px){.modal{align-items:center;padding:1rem} form.f{border-radius:16px}} form.f label{display:flex;flex-direction:column;font-size:.7rem;color:var(--muted);letter-spacing:.1em} form.f input,form.f select,form.f textarea{border:1px solid var(--line);border-radius:6px;padding:.35rem .5rem;background:transparent;margin-top:.15rem;font-size:.9rem} form.f textarea{min-height:3.6rem;resize:vertical} form.f .full{grid-column:1/-1} form.f .ops{grid-column:1/-1;display:flex;gap:.5rem;justify-content:flex-end;align-items:center} form.f .whos{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem} form.f .whos label{flex-direction:row;align-items:center;gap:.25rem;font-size:.86rem;color:var(--ink);letter-spacing:0}
 .note{font-size:.76rem;color:var(--muted);margin:.4rem 0}
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9;cursor:zoom-out} #lb img{max-width:96vw;max-height:90vh;display:block}
 footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
@@ -52,7 +52,7 @@ const pass=it=>(kind==='全部'||it.kind===kind)&&(who==='全部'||(who==='自�
 function sorted(list){const a=list.slice();if(SORT==='due'){return a.sort((x,y)=>{if(x.due&&y.due)return x.due.localeCompare(y.due)||y.id-x.id;if(x.due)return -1;if(y.due)return 1;return (y.created_at||'').localeCompare(x.created_at||'')||y.id-x.id;});}
  return a.sort((x,y)=>(y.created_at||'').localeCompare(x.created_at||'')||y.id-x.id);}
 const chips=(name,vals,curv,set)=>`<div class="bar"><span class="lb">${name}</span>${vals.map(v=>`<button data-k="${set}" data-v="${esc(v)}" class="${v===curv?'on':''}">${esc(v)}</button>`).join('')}</div>`;
-function form(){const r=editing||{kind:'想去',who:[],tags:[]};const w=r.who||[];return `<form class="f ${formOpen?'open':''}" id="lf">
+function form(){const r=editing||{kind:'想去',who:[],tags:[]};const w=r.who||[];return `<form class="f" id="lf"><h3>${editing?'✎ 編輯':'＋ 新增'}</h3>
  <label>類型<select name="kind">${(KINDS.includes(r.kind)?KINDS:[r.kind,...KINDS]).map(k=>`<option ${k===r.kind?'selected':''}>${esc(k)}</option>`).join('')}</select></label>
  <label>期限<input name="due" type="date" value="${esc(r.due||'')}"></label>
  <label class="full">標題<input name="title" value="${esc(r.title||'')}" required placeholder="店名／東西／要做的事"></label>
@@ -74,13 +74,14 @@ function render(){const adm=isAdmin();
  const kinds=[...new Set([...KINDS.filter(k=>ITEMS.some(i=>i.kind===k)),...ITEMS.map(i=>i.kind)])];
  const list=sorted(ITEMS.filter(pass));
  let h=`<div class="sort"><button data-s="due" class="${SORT==='due'?'on':''}">⏰ 快到期</button><button data-s="new" class="${SORT==='new'?'on':''}">🆕 最新新增</button></div>`;
- if(adm)h+=`<div class="bar"><button id="addbtn" class="pri">＋ 新增</button><span class="note">或丟連結／截圖給 Robert，說「to LI 想去」就會進來</span></div>`+form();
+ if(adm)h+=`<div class="bar"><button id="addbtn" class="pri">＋ 新增</button><span class="note">或丟連結／截圖給 Robert，說「to LI 想去」就會進來</span></div>`;
  h+=chips('狀態',[['open','進行中'],['done','完成'],['all','全部']].map(x=>x[1]),{open:'進行中',done:'完成',all:'全部'}[STATUS],'status');
  h+=chips('類型',['全部',...kinds],kind,'kind');
  if(adm)h+=chips('對象',['全部','自己',...GUESTS],who,'who');
  h+=`<div class="sbox"><input id="q" type="search" placeholder="🔍 搜店名、地點、備註、關鍵字…" value="${esc(q)}"></div>`;
  h+=`<div class="cnt">${list.length} 筆${!adm?' · to '+esc(ME.name):''}</div>`;
  h+=list.length?`<div class="items">${list.map(card).join('')}</div>`:`<p class="empty">${adm?'這裡還沒有東西。按「＋ 新增」，或丟給 Robert。':'目前沒有 to '+esc(ME.name)+' 的項目。'}</p>`;
+ if(adm)h+=`<div class="modal ${formOpen?'open':''}" id="modal">${form()}</div>`;
  A.innerHTML=h;
  A.querySelectorAll('button[data-s]').forEach(b=>b.onclick=()=>{SORT=b.dataset.s;try{localStorage.setItem('lists_sort',SORT)}catch(e){}render();});
  A.querySelectorAll('button[data-k]').forEach(b=>b.onclick=async()=>{const v=b.dataset.v;if(b.dataset.k==='status'){STATUS={'進行中':'open','完成':'done','全部':'all'}[v];try{localStorage.setItem('lists_status',STATUS)}catch(e){}await reload();return;}if(b.dataset.k==='kind')kind=v;else who=v;render();});
@@ -88,17 +89,20 @@ function render(){const adm=isAdmin();
  A.querySelectorAll('.it img').forEach(im=>im.onclick=()=>{document.getElementById('lbimg').src=im.src;document.getElementById('lb').style.display='flex';});
  if(!adm)return;
  const fd=f=>{const o={};new FormData(f).forEach((v,k)=>{if(!k.startsWith('who_'))o[k]=v;});o.who=GUESTS.filter(g=>f.querySelector(`input[name=who_${g}]`).checked);o.tags=(o.tags||'').split(/[,，]/).map(s=>s.trim()).filter(Boolean);if(!o.due)o.due=null;return o;};
- document.getElementById('addbtn').onclick=()=>{editing=null;formOpen=!formOpen;render();if(formOpen)document.getElementById('lf').scrollIntoView({behavior:'smooth'});};
- const lf=document.getElementById('lf');document.getElementById('lfx').onclick=()=>{formOpen=false;editing=null;render();};
+ const closeForm=()=>{formOpen=false;editing=null;render();};const openForm=()=>{formOpen=true;render();const t=document.querySelector('#lf input[name=title]');if(t&&!editing)t.focus();};
+ document.getElementById('addbtn').onclick=()=>{editing=null;openForm();};
+ const M=document.getElementById('modal');M.onclick=ev=>{if(ev.target===M)closeForm();};
+ const lf=document.getElementById('lf');document.getElementById('lfx').onclick=closeForm;
  lf.onsubmit=async ev=>{ev.preventDefault();const o=fd(lf);try{if(editing)await api('PATCH','/lists/'+editing.id,o);else await api('POST','/lists',o);formOpen=false;editing=null;await reload();}catch(e){alert('沒存成功：'+e.message);}};
  const find=id=>ITEMS.find(x=>x.id==id);
- A.querySelectorAll('button[data-edit]').forEach(b=>b.onclick=()=>{editing=find(b.dataset.edit);formOpen=true;render();document.getElementById('lf').scrollIntoView({behavior:'smooth'});});
+ A.querySelectorAll('button[data-edit]').forEach(b=>b.onclick=()=>{editing=find(b.dataset.edit);openForm();});
  A.querySelectorAll('button[data-done]').forEach(b=>b.onclick=async()=>{try{await api('PATCH','/lists/'+b.dataset.done,{status:'done'});await reload();}catch(e){alert(e.message);}});
  A.querySelectorAll('button[data-drop]').forEach(b=>b.onclick=async()=>{const it=find(b.dataset.drop);if(!confirm(`「${it.title}」標成放棄？`))return;try{await api('PATCH','/lists/'+it.id,{status:'dropped'});await reload();}catch(e){alert(e.message);}});
  A.querySelectorAll('button[data-reopen]').forEach(b=>b.onclick=async()=>{try{await api('PATCH','/lists/'+b.dataset.reopen,{status:'open'});await reload();}catch(e){alert(e.message);}});
  A.querySelectorAll('button[data-del]').forEach(b=>b.onclick=async()=>{const it=find(b.dataset.del);if(!confirm(`刪掉「${it.title}」？`))return;try{await api('DELETE','/lists/'+it.id);await reload();}catch(e){alert(e.message);}});
 }
 document.getElementById('lb').onclick=()=>{document.getElementById('lb').style.display='none';};
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&formOpen){formOpen=false;editing=null;render();}});
 boot();
 if(navigator.standalone||matchMedia('(display-mode: standalone)').matches){const r=document.getElementById('rl');r.style.display='inline-block';r.onclick=()=>location.reload();}
 </script></body></html>
