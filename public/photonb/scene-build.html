@@ -69,7 +69,7 @@
   <h2>全套步驟（一次跑完）</h2>
   <div class="stepn"><span class="n">1</span><div class="t"><b>時區校正</b> — 逐張按拍攝地。OPPO 自動跟時區；iPhone/Sony 常停 +08:00，到歐洲 −6h（出發前台北/機上照維持台灣時區不動）。用 GPS 經度判位置。</div></div>
   <div class="stepn"><span class="n">2</span><div class="t"><b>分天 + 分場景</b> — EXIF 分天 <code>dayN</code>；每天內時間聚類（gap&gt;30min＝新場景）＋GPS 反查地名。場景名 <code>NN_HHMM_描述</code>，每天序號從 01 起。rename 前先給你看場景 contact sheet。</div></div>
-  <div class="stepn"><span class="n">3</span><div class="t"><b>VLM 評分 + 分類</b>（Opus，防幻覺紅線）— 先客觀描述→再定 label（紅人臉／黃背影／綠景／紫物食藝）→評分。建築主體再跑一輪<b>建築風格標註</b>（<code>風格｜建築名</code>）。sub-agent 並行。</div></div>
+  <div class="stepn"><span class="n">3</span><div class="t"><b>VLM 評分 + 分類</b>（Opus，防幻覺紅線）— 先客觀描述→再定 label（<b>v2 2026-09-30</b>：紅＝我們的人正臉／黃＝側臉背影／綠＝景物／藍＝建物／紫＝藝術與物件，食物紫＋關鍵字「食物」；同套色標就是 <a href="./to-photoshop.html">to photoshop</a> 的主題對應）→評分。建築主體再跑一輪<b>建築風格標註</b>（<code>風格｜建築名</code>）。sub-agent 並行。</div></div>
   <div class="stepn"><span class="n">4</span><div class="t"><b>美肌偵測</b>（OPPO）— 掃 JPG 的 OnePlus 段，臉真的被磨 → 打關鍵字 <code>OPPO美肌</code>（Evoto 減量）。</div></div>
   <div class="stepn"><span class="n">5</span><div class="t"><b>影片 Phase A（2026-09-28 起併入 <a href="./ir-tag.html">ir_tag</a>）</b> — 每支切分鏡＋出 12 格時間碼拼圖，一個分身同時填分鏡關鍵字（進 FCP）與 triage（色標／用途星等／片型／pick，只進 <code>VIDEO_classification.csv</code>）。舊的 6 幀抽幀＋評分分身停用。keeper 最終你在 FCPX 自挑。</div></div>
   <div class="stepn"><span class="n">5.5</span><div class="t"><b>影片分鏡關鍵字（ir_tag）</b><span class="ok" style="font-size:.78em">　🆕 2026-07-27</span> — <b>預設不跑，歸檔完我問你一句</b>。要的話：把每支影片切分鏡、抽代表幀（長鏡頭多抽 2–3 張），我讀圖標好 <b>內容／景別（遠景·中景·特寫）／品質／建議HL</b>，建 FCP 庫時<b>關鍵字一起寫進去</b>。你在 FCPX 就從「從零撿片」變「複核」：篩 <code>建議HL</code> 打你的 ★4、篩 <code>景別:特寫</code> 做 ★2 拼貼、篩 <code>品質:不可用</code> 一次排除。<b>星等一律你自己打，我只寫關鍵字。</b>⏱ 每天多 15–25 分鐘（機器跑）。</div></div>
