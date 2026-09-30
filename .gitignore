@@ -2,3 +2,7 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+
+# 2026-09-30 lifeday 影片與 reel 素材不進 git（GitHub 單次推送 2GB 上限爆掉）；由 deploy-mjapp.sh 從本機 dist rsync 上主機，Vercel 備援不含這些
+public/photonb/jtlifeday/img/x/*.mp4
+public/photonb/jtlifeday/reel/
