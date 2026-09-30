@@ -31,7 +31,7 @@ h2.g{font-size:.78rem;letter-spacing:.28em;color:var(--accent);margin:1.2rem 0 .
 .toast{position:fixed;left:50%;bottom:5rem;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.4rem 1rem;border-radius:999px;font-size:.84rem;z-index:10;display:none} .toast.show{display:block}
 footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
 </style></head><body><div class="wrap">
-<header><h1><small>JT LIFE DAY</small>圖庫</h1><div class="nav"><a href="./">← 記事</a><a id="listslink" href="lists.html" style="display:none">📋 清單</a><a id="ledgerlink" href="ledger.html" style="display:none">💰 帳務</a><button id="rl" title="重新整理" style="display:none">↻</button> <button id="keybtn" class="key">🔑 登入</button></div></header>
+<header><h1><small>JT LIFE DAY</small>圖庫</h1><div class="nav"><a href="./">← 記事</a><a id="listslink" href="lists.html" style="display:none">📋 清單</a><a id="reellink" href="reel.html" style="display:none">🎬 Reel</a><a id="ledgerlink" href="ledger.html" style="display:none">💰 帳務</a><button id="rl" title="重新整理" style="display:none">↻</button> <button id="keybtn" class="key">🔑 登入</button></div></header>
 <div id="app"><p class="empty">讀取中…</p></div>
 <footer>記事裡的照片依時間排在這裡 · 看得到的跟記事一樣 · 相簿可以另外分享</footer></div>
 <div class="selbar" id="selbar"><b id="seln">已選 0 張</b><div><button id="seladd" class="pri">加入相簿</button> <button id="selrm" class="danger" style="display:none">移出相簿</button> <button id="selcv" style="display:none">設為封面</button> <button id="selx">取消</button></div></div>
@@ -50,7 +50,7 @@ const isAdmin=()=>ME&&ME.role==='admin';
 const toast=t=>{const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1800);};
 const dlabel=d=>{const dt=new Date(d+'T00:00:00');return `${+d.slice(5,7)}/${+d.slice(8,10)} 週${WD[dt.getDay()]}`;};
 async function boot(){const j=await api('GET','/lifeday/entries');ME=j.me&&j.me.name?j.me:null;E=j.entries;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
- document.getElementById('listslink').style.display=ME?'inline':'none';document.getElementById('ledgerlink').style.display=isAdmin()?'inline':'none';
+ document.getElementById('listslink').style.display=ME?'inline':'none';document.getElementById('ledgerlink').style.display=isAdmin()?'inline':'none';document.getElementById('reellink').style.display=isAdmin()?'inline':'none';
  PH=[];E.forEach(e=>{const b=e.base||BASE;(e.photos||[]).forEach(p=>PH.push({eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.cap||'',face:!!p.face,video:p.video?b+p.video:null,vf:p.video||null,r:p.r||0,sec:p.sec||'其他',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));
   (e.album||[]).forEach(p=>PH.push({eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.name||'',face:false,video:null,vf:null,r:p.r||0,sec:'相簿',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));});
  PH.sort((a,b)=>b.date.localeCompare(a.date)||a.eid.localeCompare(b.eid));

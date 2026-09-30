@@ -1,0 +1,103 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"/><title>JT Life Day · Reel 編輯</title><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JT Life Day"><meta name="theme-color" content="#f4efe6">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe6;--ink:#2d2a26;--muted:#8a8174;--line:#d9cfbf;--card:#fffdf8;--accent:#a4572b;--blue:#3b6fb8;--red:#b83b3b;--yel:#b8862b;--font:'Noto Serif TC',serif}
+*{box-sizing:border-box} html,body{overflow-x:hidden} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:1.2rem 16px 7rem}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.8rem;margin-bottom:1rem}
+h1{font-size:1.4rem;margin:0;letter-spacing:.12em;font-weight:900} h1 small{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.35em;font-weight:400}
+a{color:var(--accent)} button,select,input,textarea{font-family:inherit;font-size:.86rem;color:var(--ink)} button{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap} button.on,button.key{color:var(--accent);border-color:var(--accent)} button.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)} button.danger{color:var(--red);border-color:var(--red)} button:disabled{opacity:.45;cursor:default}
+header .nav a{font-size:.8rem;margin-right:.6rem;text-decoration:none}
+.empty{text-align:center;color:var(--muted);padding:3rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px} .rc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;cursor:pointer} .rc video,.rc .ph{width:100%;aspect-ratio:9/16;max-height:260px;object-fit:cover;border-radius:8px;background:#222;display:block} .rc .ph{display:flex;align-items:center;justify-content:center;color:#888;font-size:2rem} .rc .nm{font-weight:600;margin-top:.4rem;line-height:1.35} .rc .sb{font-size:.74rem;color:var(--muted)} .rc .ed{float:right;font-size:.74rem;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:0 .5rem}
+.badge{display:inline-block;font-size:.7rem;border-radius:999px;padding:0 .5rem;white-space:nowrap;border:1px solid var(--line);color:var(--muted)} .b-draft{border-color:var(--yel);color:var(--yel)} .b-recalc{background:var(--yel);color:#fff;border-color:var(--yel)} .b-done{border-color:#4a8a5a;color:#4a8a5a}
+.top{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start} @media (max-width:760px){.top{grid-template-columns:1fr}}
+.pv{background:#111;border-radius:12px;overflow:hidden;position:sticky;top:8px} .pv video{width:100%;display:block;max-height:70vh;background:#000} .pv .none{color:#aaa;padding:3rem 1rem;text-align:center;font-size:.86rem}
+.meta{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem;margin-bottom:.8rem} .meta .kv{display:grid;grid-template-columns:auto 1fr;gap:.15rem .7rem;font-size:.84rem} .meta b{color:var(--muted);font-weight:400;white-space:nowrap}
+.bar{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin:.4rem 0 .6rem} .note{font-size:.76rem;color:var(--muted)}
+h3{font-size:.78rem;letter-spacing:.28em;color:var(--accent);margin:1.2rem 0 .4rem;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.seg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.6rem .8rem;margin:0 0 8px;display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:.5rem} .seg.sel{border-color:var(--blue);box-shadow:0 0 0 2px rgba(59,111,184,.25)} .seg.off{opacity:.5}
+.seg .n{font-family:ui-monospace,Menlo,monospace;color:var(--muted);font-size:.8rem;padding-top:.4rem} .seg .n b{display:block;color:var(--ink)}
+.seg .row{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center} .seg input[type=text]{flex:1;min-width:160px;border:1px solid var(--line);border-radius:6px;padding:.3rem .5rem;background:transparent;font-size:.92rem} .seg input.en{font-family:'Noto Sans TC',sans-serif;font-size:.8rem;color:var(--muted)} .seg input.num{width:4.6rem;border:1px solid var(--line);border-radius:6px;padding:.3rem .4rem;background:transparent;text-align:right} .seg label{font-size:.7rem;color:var(--muted);letter-spacing:.08em;display:flex;align-items:center;gap:.25rem}
+.shots{display:flex;gap:6px;flex-wrap:wrap;margin-top:.3rem} .shot{position:relative;width:78px} .shot img{width:78px;height:78px;object-fit:cover;border-radius:6px;display:block;border:2px solid transparent} .shot .x{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;border:0;padding:0;font-size:.75rem;line-height:20px;text-align:center;cursor:pointer} .shot .in{width:100%;font-size:.68rem;border:1px solid var(--line);border-radius:4px;padding:.05rem .2rem;background:transparent;text-align:center;margin-top:2px} .shot .lb{font-size:.6rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .shot.photo img{border-color:var(--yel)}
+.seg .ops{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem} .seg .ops button{padding:.05rem .55rem;font-size:.74rem}
+.pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px} .pi{cursor:pointer;position:relative} .pi img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:6px;display:block;border:3px solid #cfc8bb} .pi.used img{border-color:var(--blue)} .pi.photo img{border-style:dashed} .pi .lb{font-size:.62rem;color:var(--muted);line-height:1.2;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .pi .d{position:absolute;right:5px;top:5px;font-size:.62rem;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:0 .35rem}
+.pchips{display:flex;gap:.35rem;flex-wrap:wrap;margin:.3rem 0 .6rem} .pchips button{font-size:.72rem;padding:.1rem .6rem}
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--accent);padding:.55rem 16px calc(.55rem + env(safe-area-inset-bottom));display:flex;gap:.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap} .savebar .st{font-size:.82rem} .savebar .dirty{color:var(--red)}
+.modal{position:fixed;inset:0;background:rgba(45,42,38,.5);display:none;align-items:flex-end;justify-content:center;z-index:8} .modal.open{display:flex} .modal .box{background:var(--card);border:1px solid var(--accent);padding:1rem .9rem 1.1rem;width:100%;max-width:520px;max-height:88vh;overflow:auto;border-radius:16px 16px 0 0} .modal h4{margin:0 0 .5rem;font-size:.78rem;letter-spacing:.28em;color:var(--accent)} .modal label{display:flex;flex-direction:column;font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin:.4rem 0} .modal input,.modal textarea{border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;background:transparent;margin-top:.15rem;font-size:.92rem} .modal .ops{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.8rem} @media (min-width:600px){.modal{align-items:center;padding:1rem} .modal .box{border-radius:16px}}
+.toast{position:fixed;left:50%;bottom:5.5rem;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.4rem 1rem;border-radius:999px;font-size:.84rem;z-index:10;display:none} .toast.show{display:block}
+footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;letter-spacing:.1em}
+</style></head><body><div class="wrap">
+<header><h1><small>JT LIFE DAY</small>Reel 編輯</h1><div class="nav"><a href="./">← 記事</a><a href="gallery.html">🖼️ 圖庫</a><button id="rl" title="重新整理" style="display:none">↻</button> <button id="keybtn" class="key">🔑 登入</button></div></header>
+<div id="app"><p class="empty">讀取中…</p></div>
+<footer>一段一列 · 改完存檔 → 按「重算預覽」 · Robert 重烤後這裡自動換新版</footer></div>
+<div class="savebar" id="savebar" style="display:none"><span class="st" id="st"></span><div><button id="addseg">＋ 段落</button> <button id="save" class="pri">儲存</button> <button id="recalc">🔁 重算預覽</button></div></div>
+<div class="modal" id="modal"><div class="box" id="mbox"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const A=document.getElementById('app'),K=document.getElementById('keybtn'),SB=document.getElementById('savebar');
+let ME=null,P=null,ITEMS=[],SEL=-1,DIRTY=false,POOLF='全部',POOLK='全部';
+const api=async(m,p,b)=>{const r=await fetch('/api'+p,{method:m,headers:b?{'content-type':'application/json'}:{},body:b?JSON.stringify(b):undefined,cache:'no-store'});if(!r.ok){let t='';try{t=(await r.json()).detail||''}catch(e){}throw new Error(t||('HTTP '+r.status));}return r.json();};
+const toast=t=>{const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1800);};
+const id=()=>+new URLSearchParams(location.search).get('id')||0;
+const STL={draft:'草稿',recalc:'重算中',done:'已烤好'};
+const fmt=n=>(Math.round(n*10)/10).toString();
+async function boot(){const m=await api('GET','/me');ME=m.name?m:null;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
+ if(!ME||ME.role!=='admin'){A.innerHTML='<p class="empty">🔐 Reel 編輯只有 James 看得到。<br>按右上角「🔑 登入」。</p>';return;}
+ if(id())await loadOne();else await loadList();}
+K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}const pw=prompt('輸入密碼登入');if(!pw)return;try{await api('POST','/login',{user:'',password:pw});location.reload();}catch(e){alert('密碼不對');}};
+async function loadList(){const r=await api('GET','/reels');SB.style.display='none';
+ A.innerHTML=r.reels.length?`<div class="cards">${r.reels.map(x=>`<div class="rc" data-id="${x.id}">${x.preview?`<video src="${esc(x.preview)}" muted playsinline preload="metadata"></video>`:'<div class="ph">🎬</div>'}<div class="nm"><span class="ed">✎ 編輯</span>${esc(x.name)}</div><div class="sb">${x.n} 段 · ${fmt(x.total)} 秒 · v${x.version} <span class="badge b-${x.status}">${STL[x.status]}</span></div><div class="sb">${esc(x.updated_at||'')}</div></div>`).join('')}</div>`:'<p class="empty">還沒有 reel。Robert 做好一支會出現在這裡。</p>';
+ A.querySelectorAll('.rc').forEach(c=>c.onclick=()=>{location.search='?id='+c.dataset.id;});}
+async function loadOne(){P=await api('GET','/reels/'+id());ITEMS=P.items.map(x=>({...x,shots:(x.shots||[]).map(s=>({...s}))}));DIRTY=false;SEL=ITEMS.length?0:-1;render();
+ if(P.status==='recalc')setTimeout(pollDone,20000);}
+async function pollDone(){try{const r=await api('GET','/reels/'+id());if(r.status!=='recalc'){toast('新版烤好了');P=r;ITEMS=r.items.map(x=>({...x,shots:(x.shots||[]).map(s=>({...s}))}));DIRTY=false;render();return;}}catch(e){}setTimeout(pollDone,20000);}
+const usedPaths=()=>new Set(ITEMS.flatMap(i=>i.shots.map(s=>s.path)));
+function segHTML(it,i){const sel=i===SEL;return `<div class="seg ${sel?'sel':''} ${it.enabled?'':'off'}" data-i="${i}">
+ <div class="n">${i+1}<b>${fmt(it.dur)}s</b></div><div>
+  <div class="row"><input type="text" data-k="zh" value="${esc(it.zh||'')}" placeholder="口播句（中文）"><label>秒<input class="num" type="number" step="0.5" min="1" data-k="dur" value="${it.dur}"></label><label>速<input class="num" type="number" step="0.25" min="0.25" max="4" data-k="speed" value="${it.speed}"></label><label><input type="checkbox" data-k="enabled" ${it.enabled?'checked':''}>上</label></div>
+  <div class="row"><input type="text" class="en" data-k="en" value="${esc(it.en||'')}" placeholder="English line"><input type="text" class="en" style="max-width:10rem" data-k="kw" value="${esc(it.kw||'')}" placeholder="放大關鍵詞"></div>
+  <div class="shots">${it.shots.map((s,j)=>`<div class="shot ${s.kind}" title="${esc(s.path)}"><img src="${esc(s.thumb||'')}" alt=""><button class="x" data-rm="${j}" title="移出">×</button>${s.kind==='video'?`<input class="in" type="number" step="0.5" min="0" data-in="${j}" value="${s.in??1}" title="入點（秒）">`:`<div class="in">照片</div>`}<div class="lb">${esc(s.label||'')}</div></div>`).join('')}${it.shots.length?'':'<span class="note">還沒有畫面：下面素材池點一下加進來</span>'}</div>
+  <div class="ops"><button data-up="${i}">↑</button><button data-dn="${i}">↓</button><button data-dup="${i}">複製</button><button data-del="${i}" class="danger">刪</button><span class="note">${it.shots.length} 顆 · 每顆 ${it.shots.length?fmt(it.dur/it.shots.length):'—'}s</span></div>
+ </div></div>`;}
+function render(){const c=P.config||{};const total=ITEMS.filter(i=>i.enabled).reduce((a,b)=>a+(+b.dur||0),0)+(+((c.title||{}).dur)||0);
+ let h=`<div class="top"><div>
+  <div class="meta"><div class="kv"><b>名稱</b><span>${esc(P.name)} <span class="badge b-${P.status}">${STL[P.status]}</span> v${P.version}</span><b>模板</b><span>${{vo:'口播版',tod:'Travel of the Day',photo:'相片版'}[P.template]||P.template}</span><b>長度</b><span>${ITEMS.filter(i=>i.enabled).length} 段 · 約 ${fmt(total)} 秒（含片頭 ${fmt((c.title||{}).dur||0)}s）</span>${c.music?`<b>配樂</b><span>${esc(String(c.music).split('/').pop())}${c.music_start?' · 從 '+c.music_start+'s':''}</span>`:''}${P.note?`<b>備註</b><span>${esc(P.note)}</span>`:''}</div>
+   <div class="bar"><button id="edtitle">✎ 片頭字卡</button><span class="note">${esc(((c.title||{}).zh||[]).join(' / '))}${(c.title||{}).en?' · '+esc(c.title.en):''}</span></div></div>
+  <h3>段落 <span class="note">點一列選它，再到素材池點畫面就加進那段</span></h3>
+  <div id="segs">${ITEMS.map(segHTML).join('')}</div>
+ </div>
+ <div class="pv">${P.preview?`<video src="${esc(P.preview)}" controls playsinline preload="metadata"></video>`:'<div class="none">還沒有預覽。存檔後按「重算預覽」，Robert 烤好會出現在這裡。</div>'}</div></div>`;
+ const days=[...new Set(P.pool.map(x=>x.day||''))].filter(Boolean);
+ h+=`<h3>素材池 <span class="note">藍框＝已用 · 虛線＝照片 · ${P.pool.length} 項</span></h3><div class="pchips"><button data-pk="全部" class="${POOLK==='全部'?'on':''}">全部</button><button data-pk="video" class="${POOLK==='video'?'on':''}">影片</button><button data-pk="photo" class="${POOLK==='photo'?'on':''}">照片</button><button data-pk="used" class="${POOLK==='used'?'on':''}">已用</button><button data-pk="unused" class="${POOLK==='unused'?'on':''}">未用</button> ${days.map(d=>`<button data-pd="${esc(d)}" class="${POOLF===d?'on':''}">${esc(d)}</button>`).join('')}${days.length?`<button data-pd="全部" class="${POOLF==='全部'?'on':''}">全部天</button>`:''}</div>`;
+ const used=usedPaths();const pool=P.pool.filter(x=>(POOLF==='全部'||x.day===POOLF)&&(POOLK==='全部'||(POOLK==='used'?used.has(x.path):POOLK==='unused'?!used.has(x.path):x.kind===POOLK)));
+ h+=`<div class="pool">${pool.map((x,k)=>`<div class="pi ${x.kind} ${used.has(x.path)?'used':''}" data-p="${esc(x.path)}" title="${esc(x.scene||'')}"><img src="${esc(x.thumb||'')}" loading="lazy" alt="">${x.dur?`<span class="d">${fmt(x.dur)}s</span>`:''}<div class="lb">${esc((x.scene||'').replace(/^\d+_\d+_/,''))}</div></div>`).join('')}</div>`;
+ A.innerHTML=h;SB.style.display='flex';setStatus();bind();}
+function setStatus(){document.getElementById('st').innerHTML=DIRTY?'<span class="dirty">● 有未存的修改</span>':'已存';document.getElementById('recalc').disabled=DIRTY||P.status==='recalc';document.getElementById('recalc').textContent=P.status==='recalc'?'⏳ 重算中…':'🔁 重算預覽';}
+function mark(){DIRTY=true;setStatus();}
+function bind(){
+ A.querySelectorAll('.seg').forEach(el=>{el.addEventListener('click',ev=>{if(ev.target.closest('button,input'))return;SEL=+el.dataset.i;A.querySelectorAll('.seg').forEach(s=>s.classList.toggle('sel',+s.dataset.i===SEL));});
+  el.querySelectorAll('[data-k]').forEach(inp=>inp.onchange=()=>{const it=ITEMS[+el.dataset.i];const k=inp.dataset.k;it[k]=inp.type==='checkbox'?inp.checked:(inp.type==='number'?+inp.value:inp.value);mark();if(k==='dur'||k==='enabled')render();});
+  el.querySelectorAll('[data-in]').forEach(inp=>inp.onchange=()=>{ITEMS[+el.dataset.i].shots[+inp.dataset.in].in=+inp.value;mark();});
+  el.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{ITEMS[+el.dataset.i].shots.splice(+b.dataset.rm,1);mark();render();});});
+ const mv=(i,d)=>{const j=i+d;if(j<0||j>=ITEMS.length)return;[ITEMS[i],ITEMS[j]]=[ITEMS[j],ITEMS[i]];SEL=j;mark();render();};
+ A.querySelectorAll('[data-up]').forEach(b=>b.onclick=()=>mv(+b.dataset.up,-1));A.querySelectorAll('[data-dn]').forEach(b=>b.onclick=()=>mv(+b.dataset.dn,1));
+ A.querySelectorAll('[data-dup]').forEach(b=>b.onclick=()=>{const i=+b.dataset.dup;const c=JSON.parse(JSON.stringify(ITEMS[i]));delete c.id;ITEMS.splice(i+1,0,c);SEL=i+1;mark();render();});
+ A.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const i=+b.dataset.del;if(!confirm(`刪掉第 ${i+1} 段「${ITEMS[i].zh||''}」？`))return;ITEMS.splice(i,1);SEL=Math.min(SEL,ITEMS.length-1);mark();render();});
+ A.querySelectorAll('[data-pk]').forEach(b=>b.onclick=()=>{POOLK=b.dataset.pk;render();});A.querySelectorAll('[data-pd]').forEach(b=>b.onclick=()=>{POOLF=b.dataset.pd;render();});
+ A.querySelectorAll('.pi').forEach(p=>p.onclick=()=>{if(SEL<0){alert('先點一個段落');return;}const x=P.pool.find(y=>y.path===p.dataset.p);if(!x)return;const it=ITEMS[SEL];if(it.shots.some(s=>s.path===x.path)){toast('這段已經有這顆');return;}it.shots.push({path:x.path,kind:x.kind,in:x.kind==='video'?1:undefined,thumb:x.thumb,label:x.scene});mark();render();document.querySelector('.seg.sel')?.scrollIntoView({behavior:'smooth',block:'center'});});
+ const et=document.getElementById('edtitle');if(et)et.onclick=titleForm;}
+document.getElementById('addseg').onclick=()=>{ITEMS.push({zh:'',en:'',kw:'',dur:3,speed:1,kind:'segment',enabled:true,shots:[]});SEL=ITEMS.length-1;mark();render();document.querySelector('.seg.sel')?.scrollIntoView({behavior:'smooth',block:'center'});};
+document.getElementById('save').onclick=async()=>{try{const r=await api('PUT','/reels/'+id()+'/items',{items:ITEMS,config:P.config});ITEMS=r.items.map(x=>({...x,shots:(x.shots||[]).map(s=>({...s}))}));P.status=P.status==='done'?'draft':P.status;DIRTY=false;render();toast('存好了');}catch(e){alert('沒存成功：'+e.message);}};
+document.getElementById('recalc').onclick=async()=>{if(DIRTY)return alert('先儲存');if(!confirm('把這版丟給 Robert 重烤預覽？（幾分鐘）'))return;try{const r=await api('POST','/reels/'+id()+'/recalc',{});P.status='recalc';setStatus();toast(r.notified?'已通知 Robert':'已標記重算（TG 沒送出，跟 Robert 說一聲）');setTimeout(pollDone,20000);}catch(e){alert(e.message);}};
+function titleForm(){const t=(P.config||{}).title||{};openModal(`<h4>片頭字卡</h4><label>主標（可兩行，用 / 分）<input id="t_zh" value="${esc((t.zh||[]).join(' / '))}"></label><label>英文<input id="t_en" value="${esc(t.en||'')}"></label><label>秒數<input id="t_dur" type="number" step="0.5" value="${t.dur||3}"></label><div class="ops"><button id="mx">取消</button><button id="mk" class="pri">套用</button></div>`);
+ document.getElementById('mk').onclick=()=>{P.config=P.config||{};P.config.title={...(P.config.title||{}),zh:document.getElementById('t_zh').value.split('/').map(s=>s.trim()).filter(Boolean),en:document.getElementById('t_en').value.trim(),dur:+document.getElementById('t_dur').value||3};closeModal();mark();render();};}
+function openModal(h){document.getElementById('mbox').innerHTML=h;document.getElementById('modal').classList.add('open');const x=document.getElementById('mx');if(x)x.onclick=closeModal;}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').onclick=ev=>{if(ev.target.id==='modal')closeModal();};
+window.addEventListener('beforeunload',ev=>{if(DIRTY){ev.preventDefault();ev.returnValue='';}});
+boot();
+if(navigator.standalone||matchMedia('(display-mode: standalone)').matches){const r=document.getElementById('rl');r.style.display='inline-block';r.onclick=()=>location.reload();}
+</script></body></html>
