@@ -49,7 +49,7 @@ async function boot(){const m=await api('GET','/me');ME=m.name?m:null;K.textCont
  if(id())await loadOne();else await loadList();}
 K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}const pw=prompt('輸入密碼登入');if(!pw)return;try{await api('POST','/login',{user:'',password:pw});location.reload();}catch(e){alert('密碼不對');}};
 async function loadList(){const r=await api('GET','/reels');SB.style.display='none';
- A.innerHTML=r.reels.length?`<div class="cards">${r.reels.map(x=>`<div class="rc" data-id="${x.id}">${x.preview?`<video src="${esc(x.preview)}" muted playsinline preload="metadata"></video>`:'<div class="ph">🎬</div>'}<div class="nm"><span class="ed">✎ 編輯</span>${esc(x.name)}</div><div class="sb">${x.n} 段 · ${fmt(x.total)} 秒 · v${x.version} <span class="badge b-${x.status}">${STL[x.status]}</span></div><div class="sb">${esc(x.updated_at||'')}</div></div>`).join('')}</div>`:'<p class="empty">還沒有 reel。Robert 做好一支會出現在這裡。</p>';
+ A.innerHTML=r.reels.length?`<div class="cards">${r.reels.map(x=>`<div class="rc" data-id="${x.id}">${x.preview?`<video src="${esc(x.preview)}?v=${x.version}" muted playsinline preload="metadata"></video>`:'<div class="ph">🎬</div>'}<div class="nm"><span class="ed">✎ 編輯</span>${esc(x.name)}</div><div class="sb">${x.n} 段 · ${fmt(x.total)} 秒 · v${x.version} <span class="badge b-${x.status}">${STL[x.status]}</span></div><div class="sb">${esc(x.updated_at||'')}</div></div>`).join('')}</div>`:'<p class="empty">還沒有 reel。Robert 做好一支會出現在這裡。</p>';
  A.querySelectorAll('.rc').forEach(c=>c.onclick=()=>{location.search='?id='+c.dataset.id;});}
 async function loadOne(){P=await api('GET','/reels/'+id());ITEMS=P.items.map(x=>({...x,shots:(x.shots||[]).map(s=>({...s}))}));DIRTY=false;SEL=ITEMS.length?0:-1;render();
  if(P.status==='recalc')setTimeout(pollDone,20000);}
@@ -69,7 +69,7 @@ function render(){const c=P.config||{};const total=ITEMS.filter(i=>i.enabled).re
   <h3>段落 <span class="note">點一列選它，再到素材池點畫面就加進那段</span></h3>
   <div id="segs">${ITEMS.map(segHTML).join('')}</div>
  </div>
- <div class="pv">${P.preview?`<video src="${esc(P.preview)}" controls playsinline preload="metadata"></video>`:'<div class="none">還沒有預覽。存檔後按「重算預覽」，Robert 烤好會出現在這裡。</div>'}</div></div>`;
+ <div class="pv">${P.preview?`<video src="${esc(P.preview)}?v=${P.version}" controls playsinline preload="metadata"></video>`:'<div class="none">還沒有預覽。存檔後按「重算預覽」，Robert 烤好會出現在這裡。</div>'}</div></div>`;
  const days=[...new Set(P.pool.map(x=>x.day||''))].filter(Boolean);
  h+=`<h3>素材池 <span class="note">藍框＝已用 · 虛線＝照片 · ${P.pool.length} 項</span></h3><div class="pchips"><button data-pk="全部" class="${POOLK==='全部'?'on':''}">全部</button><button data-pk="video" class="${POOLK==='video'?'on':''}">影片</button><button data-pk="photo" class="${POOLK==='photo'?'on':''}">照片</button><button data-pk="used" class="${POOLK==='used'?'on':''}">已用</button><button data-pk="unused" class="${POOLK==='unused'?'on':''}">未用</button> ${days.map(d=>`<button data-pd="${esc(d)}" class="${POOLF===d?'on':''}">${esc(d)}</button>`).join('')}${days.length?`<button data-pd="全部" class="${POOLF==='全部'?'on':''}">全部天</button>`:''}</div>`;
  const used=usedPaths();const pool=P.pool.filter(x=>(POOLF==='全部'||x.day===POOLF)&&(POOLK==='全部'||(POOLK==='used'?used.has(x.path):POOLK==='unused'?!used.has(x.path):x.kind===POOLK)));
