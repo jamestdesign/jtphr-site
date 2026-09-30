@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>主題修圖技能庫 · retouch-by-subject · PhotoNB</title>
+  <meta name="description" content="建築／風光／人像／食物／藝術 五個攝影主題各自的修圖配方：自動簡修引擎參數、LR 預設對應、Photoshop 動作與外掛、免費下載包、拍攝提醒。單一現行版。" />
+  <meta name="date" content="2026-09-30" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--tip:#ffd977;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);
+      font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);}
+    .wrap{max-width:820px;margin:0 auto;padding:1.2rem 16px 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;}
+    .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);}
+    h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.55em;letter-spacing:.02em;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.05rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2.2rem 0 .8rem;}
+    h3{font-size:.95rem;margin:1.1rem 0 .4rem;color:var(--gold2);}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;font-family:ui-monospace,Menlo,monospace;font-size:.82rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    ul{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .tag{display:inline-block;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.74rem;color:var(--muted);margin:.15rem .2rem 0 0;}
+    .ok{color:var(--green);} .bad{color:var(--red);}
+    table{width:100%;border-collapse:collapse;font-size:.84rem;margin:.5rem 0;}
+    td,th{border:1px solid var(--line);padding:.42rem .55rem;text-align:left;vertical-align:top;}
+    th{color:var(--gold);font-weight:600;white-space:nowrap;}
+    .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .note{background:linear-gradient(180deg,rgba(216,182,90,.1),rgba(216,182,90,.02));border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;margin:.8rem 0;}
+    .tip{background:rgba(255,217,119,.08);border:1px solid rgba(255,217,119,.45);border-radius:12px;padding:.7rem .9rem;font-size:.86rem;margin:.7rem 0;color:#fff3c9;}
+    .tip b{color:var(--tip);}
+    .toc{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 0;} .toc a{text-decoration:none;background:var(--navy2);border:1px solid var(--line);border-radius:999px;padding:.25rem .75rem;font-size:.82rem;}
+    figure{margin:.8rem 0;} figure img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line);} figcaption{color:var(--muted);font-size:.78rem;margin-top:.3rem;}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;} @media (max-width:560px){.two{grid-template-columns:1fr;}}
+    .kv{display:grid;grid-template-columns:auto 1fr;gap:.2rem .8rem;font-size:.88rem;} .kv b{color:var(--gold2);white-space:nowrap;}
+    .hd{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;} .hd .en{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:.78rem;}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 儀表板</a>
+  <div class="eyebrow">PhotoNB · Retouch Skills</div>
+  <h1>主題修圖技能庫 <span class="en">retouch-by-subject</span></h1>
+  <p class="lead">同一台相機拍出來的照片，建築、風光、人像、食物、藝術品要的修法不一樣。這一頁把五個主題各自的「配方」放在一起：自動引擎的參數、LR 預設對應、Photoshop 的動作與外掛、免費下載包、拍攝時就該注意的事。單一現行版，改配方只改這裡。</p>
+  <div class="toc"><a href="#how">怎麼運作</a><a href="#architecture">🏛 建築</a><a href="#landscape">🏞 風光</a><a href="#portrait">👤 人像</a><a href="#food">🍜 食物</a><a href="#art">🎨 藝術</a><a href="#packs">📦 下載包</a><a href="#cli">⌘ 指令</a><a href="#log">📜 變更紀錄</a></div>
+
+  <h2 id="how">怎麼運作：一張照片三條路</h2>
+  <div class="card">
+    <div class="tw"><table>
+      <tr><th>路</th><th>什麼時候</th><th>誰在修</th><th>主題怎麼對上</th></tr>
+      <tr><td><b>① 生活記事版 自動簡修</b></td><td>lifeday 上站的每一張圖</td><td>自動引擎 <code>LifedayEnhance</code>（macOS 內建 Core Image＋Vision，本機、免費、0.2 秒／張）</td><td>記事裡照片的分類 人像／風景／食物／創作 → 直接對到配方；沒分類的走「有臉美肌、沒臉清晰」</td></tr>
+      <tr><td><b>② 攝影師出片</b></td><td>PhotoNB 那套：scene_build 歸檔 → LR</td><td>Lightroom 預設（寫進 XMP／DNG，匯入就套好）</td><td>依色標／場景關鍵字選預設：紅＝人像、綠＝風景建築、黃＝折衷</td></tr>
+      <tr><td><b>③ 進階手修</b></td><td>要拿去發表、放大看的那幾張</td><td>Photoshop 動作＋外掛、Evoto、Luminar</td><td>照下面每個主題列的動作／外掛清單</td></tr>
+    </table></div>
+    <div class="tip">💡 <b>小貼士</b>：路 ① 是「拷貝壓縮上傳的圖就已經修過」，James 2026-09-30 拍板用內建引擎當預設（跟 Photoshop 自動色調比過，PS 偏拉滿、內建偏自然）。路 ② 的預設清單在 <a href="./gear-settings.html">設備與設定</a>，路 ③ 的資源在本頁 <a href="#packs">下載包</a>。</div>
+  </div>
+
+  <div class="card">
+    <h3>五主題配方總表（引擎參數）</h3>
+    <div class="tw"><table>
+      <tr><th>主題</th><th>自動增強</th><th>美肌</th><th>清晰度</th><th>鮮豔</th><th>飽和</th><th>對比</th><th>色溫</th><th>陰影↑</th><th>亮部回收</th></tr>
+      <tr><td>🏛 建築 architecture</td><td>85%</td><td>30%（有臉才）</td><td>45%</td><td>0</td><td>×0.92</td><td>×1.08</td><td>−120K 偏冷</td><td>5%</td><td>有</td></tr>
+      <tr><td>🏞 風光 landscape</td><td>90%</td><td>40%（有臉才）</td><td>35%</td><td>+15</td><td>×1.04</td><td>×1.04</td><td>0</td><td>12%</td><td>強</td></tr>
+      <tr><td>👤 人像 portrait</td><td>85%</td><td>70%</td><td>0</td><td>+5</td><td>×1.00</td><td>×1.00</td><td>+120K 微暖</td><td>8%</td><td>微</td></tr>
+      <tr><td>🍜 食物 food</td><td>85%</td><td>40%（有臉才）</td><td>20%</td><td>+20</td><td>×1.06</td><td>×1.02</td><td>+250K 暖</td><td>10%</td><td>微</td></tr>
+      <tr><td>🎨 藝術 art</td><td>55%</td><td>0</td><td>10%</td><td>0</td><td>×1.00</td><td>×1.00</td><td>0</td><td>0</td><td>無</td></tr>
+    </table></div>
+    <p style="color:var(--muted);font-size:.82rem;margin:.3rem 0 0">自動增強＝Apple「照片」App 的自動增強（臉部平衡／鮮豔度／色調曲線）混合比例。美肌＝頻率分離：只柔化膚色層，毛孔、髮絲、眼、唇原封不動。清晰度＝大半徑局部對比。</p>
+  </div>
+
+  <h2 id="architecture"><span class="hd">🏛 建築 <span class="en">architecture</span></span></h2>
+  <div class="card">
+    <div class="kv">
+      <b>修圖目標</b><span>線條乾淨、明暗有層次、顏色收斂。都市題材走「都市冷調」：低彩度、鋼藍天、深黑、中性白平衡。</span>
+      <b>常見毛病</b><span>手機夜景高光糊成一團；白天大面積玻璃／水泥偏灰；廣角建築垂直線往內倒。</span>
+      <b>引擎配方</b><span>清晰度 45%、對比 ×1.08、飽和 ×0.92、色溫 −120K、亮部回收。</span>
+      <b>LR 預設</b><span><code>Robert_UrbanCool_v1</code>（IG 建築線條系列用）＋ 鏡頭校正 ＋ 幾何校正「垂直」手動拉。</span>
+      <b>PS 動作／外掛</b><span>Camera Raw 濾鏡（去朦朧＋清晰度）、幾何校正 Upright、Retouch4me Clean Backdrop（清路人雜物）、移除工具清電線。</span>
+      <b>拍攝提醒</b><span>能站遠就站遠，少用超廣角仰拍；陰天比大太陽好修；夜景用 30 秒以內、ISO 壓低。</span>
+    </div>
+    <div class="two">
+      <figure><img src="./assets/retouch/architecture_1.jpg" loading="lazy" alt="建築配方前後 1"><figcaption>福岡塔與巨蛋剪影：左原本、右建築配方（對比與線條起來，夕空不爆）</figcaption></figure>
+      <figure><img src="./assets/retouch/architecture_2.jpg" loading="lazy" alt="建築配方前後 2"><figcaption>名古屋雨夜噴水池：燈光層次分開、偏冷、不糊</figcaption></figure>
+    </div>
+    <div class="tip">💡 <b>小貼士</b>：建築照如果有人入鏡，引擎會自動降到 30% 美肌只處理臉，其餘照建築配方走。都市冷調的量測與對標帳號在 <a href="./jl-urban-cool-study.html">JL 都市冷調拆解</a>。</div>
+  </div>
+
+  <h2 id="landscape"><span class="hd">🏞 風光 <span class="en">landscape</span></span></h2>
+  <div class="card">
+    <div class="kv">
+      <b>修圖目標</b><span>遠景通透、天空有細節、綠地和水面有活力，但不要「HDR 感」。</span>
+      <b>常見毛病</b><span>遠山霧濛濛；天空過曝；逆光地面全黑；手機把綠色推得太螢光。</span>
+      <b>引擎配方</b><span>自動增強 90%、清晰度 35%（等同去霧）、鮮豔 +15、亮部回收強、陰影 +12%。</span>
+      <b>LR 預設</b><span><code>Robert_AT_P</code> 自動曝光基準 → <code>Robert_HarborDiary_v1</code>（海港／水岸）；縮時走 LRTimelapse 那套（<a href="./lrtimelapse-guide.html">指南</a>）。</span>
+      <b>PS 動作／外掛</b><span>Camera Raw 自適應預設「天空」、Luminar Neo 換天空／Enhance AI、Nik Color Efex（Pro Contrast）。</span>
+      <b>拍攝提醒</b><span>RAW 一定要留（亮部回收全靠它）；日出日落前後 20 分鐘；有偏光鏡就上。</span>
+    </div>
+    <div class="two">
+      <figure><img src="./assets/retouch/landscape_1.jpg" loading="lazy" alt="風光配方前後 1"><figcaption>名古屋城燈光秀收尾：天守細節回來、護城河不死黑</figcaption></figure>
+      <figure><img src="./assets/retouch/landscape_2.jpg" loading="lazy" alt="風光配方前後 2"><figcaption>觀音山、河道與草地：去霧、綠地有活力、天空留層次</figcaption></figure>
+    </div>
+    <div class="tip">💡 <b>小貼士</b>：風光最怕過頭。引擎的清晰度是「大半徑局部對比」，不是銳利化，所以放大看不會有白邊；要更重就直接說「風光再清晰一點」。</div>
+  </div>
+
+  <h2 id="portrait"><span class="hd">👤 人像 <span class="en">portrait</span></span></h2>
+  <div class="card">
+    <div class="kv">
+      <b>修圖目標</b><span>膚色乾淨、有毛孔質感、眼睛有神；背景不搶戲。</span>
+      <b>常見毛病</b><span>泛紅、油光、小斑；室內色溫偏黃或偏綠；全圖加清晰度把毛孔和法令紋一起加深。</span>
+      <b>引擎配方</b><span>美肌 70%（頻率分離）、清晰度 0、微暖 +120K、陰影 +8%。臉寬小於畫面 4% 的不處理。</span>
+      <b>LR 預設</b><span><code>Robert_Skin_MilkPink／CoolBlue（Med／Strong）</code> 依膚色與場景；紅標人像出片走 Evoto（<a href="./gear-settings.html">外部編輯器 round-trip</a>）。</span>
+      <b>PS 動作／外掛</b><span>頻率分離 + Dodge &amp; Burn 動作（免費包見下）、Neural Filters 皮膚平滑、Retouch4me Heal／Skin Tone／Eye Brilliance、Portraiture 4。</span>
+      <b>拍攝提醒</b><span>順光或窗邊側光；離背景遠一點；OPPO 開了機內美肌的照片引擎會掃到、不重複修。</span>
+    </div>
+    <figure><img src="./assets/retouch/portrait_skin.jpg" loading="lazy" alt="人像皮膚局部前後" style="max-width:420px"><figcaption>臉頰皮膚局部（左原本、右 70%）：膚色勻了，毛孔紋理還在。整張人像對比只在 Telegram 群給 James 看，不放公開頁。</figcaption></figure>
+    <div class="tip">💡 <b>小貼士</b>：頻率分離＝把皮膚拆成「膚色明暗層」和「毛孔紋理層」，只柔化前者。Photoshop 免費動作包做的也是同一件事，只是手動；引擎是用 Vision 找臉、挖掉眼眉鼻唇後自動做。</div>
+  </div>
+
+  <h2 id="food"><span class="hd">🍜 食物 <span class="en">food</span></span></h2>
+  <div class="card">
+    <div class="kv">
+      <b>修圖目標</b><span>看起來熱、看起來新鮮：暖、鮮、有光澤，白盤要白。</span>
+      <b>常見毛病</b><span>餐廳黃光下整盤偏橘；暗店拍出來灰灰的；湯面反光過曝。</span>
+      <b>引擎配方</b><span>色溫 +250K、鮮豔 +20、飽和 ×1.06、清晰度 20%、陰影 +10%。</span>
+      <b>LR 預設</b><span><code>JT_F_室內優化</code>（James 自家）；白平衡用白盤點一下。</span>
+      <b>PS 動作／外掛</b><span>Camera Raw 局部：把主菜圈起來加曝光＋清晰；Retouch4me Mattifier 反用（去湯面高光）。</span>
+      <b>拍攝提醒</b><span>45° 俯角或正俯拍；關掉閃光；把手機拉近一點比事後裁好。</span>
+    </div>
+    <div class="two">
+      <figure><img src="./assets/retouch/food_1.jpg" loading="lazy" alt="食物配方前後 1"><figcaption>藍釉與青花小皿：魚肉有光澤、盤子還是白的</figcaption></figure>
+      <figure><img src="./assets/retouch/food_2.jpg" loading="lazy" alt="食物配方前後 2"><figcaption>雲合早餐雲吞麵：湯色暖起來、麵條有層次</figcaption></figure>
+    </div>
+    <div class="tip">💡 <b>小貼士</b>：食物配方在生活記事版直接對到「食物」分類；如果一張照片是人拿著食物，分類通常是人像，會走人像配方，這是對的。</div>
+  </div>
+
+  <h2 id="art"><span class="hd">🎨 藝術 <span class="en">art</span></span></h2>
+  <div class="card">
+    <div class="kv">
+      <b>修圖目標</b><span>忠實。作品是什麼顏色就什麼顏色，只把曝光和白平衡校正。</span>
+      <b>常見毛病</b><span>美術館暖光讓白牆變黃；玻璃反光；自動增強把畫作對比推高失真。</span>
+      <b>引擎配方</b><span>自動增強只混 55%、清晰度 10%、不動飽和與色溫、不美肌。</span>
+      <b>LR 預設</b><span><code>Robert_AT_Clear</code> 全歸零 → 只用相機描述檔 Camera Standard，白平衡對白牆。</span>
+      <b>PS 動作／外掛</b><span>幾何校正把畫框拉正；Camera Raw 去反光靠局部降亮部；不建議任何 AI 增強。</span>
+      <b>拍攝提醒</b><span>正對作品、鏡頭與畫面平行；關閃光；有標籤牌一起拍一張（記事會用到）。</span>
+    </div>
+    <div class="two">
+      <figure><img src="./assets/retouch/art_1.jpg" loading="lazy" alt="藝術配方前後 1"><figcaption>主機板拼成的裝置：幾乎不動，只把曝光校正</figcaption></figure>
+      <figure><img src="./assets/retouch/art_2.jpg" loading="lazy" alt="藝術配方前後 2"><figcaption>幻珠入口巨石裝置：暮色與燈光關係保留</figcaption></figure>
+    </div>
+    <div class="tip">💡 <b>小貼士</b>：生活記事版的「創作」分類走這條；James 自己的作品（老照片修復、AI 生圖）也算，不要被引擎二次上色。</div>
+  </div>
+
+  <h2 id="packs">📦 進階資源與下載包</h2>
+  <div class="card">
+    <h3>免費 Photoshop 動作包（.atn，雙擊就進 PS）</h3>
+    <ul>
+      <li><a href="https://www.creativepadmedia.com/4-free-high-end-retouching-photoshop-actions/" target="_blank" rel="noopener">Creative Pad Media · 4 Free High End Retouching Actions</a> — 頻率分離、Dodge &amp; Burn、頭髮整理、銳化。人像高階修圖標配。</li>
+      <li><a href="https://www.ninamacephotography.com/introduction-to-frequency-separation-includes-free-downloadable-action/" target="_blank" rel="noopener">Nina Mace · Frequency Separation Action</a> — 附教學，先學原理用這個。</li>
+      <li><a href="https://fixthephoto.com/frequency-separation-action" target="_blank" rel="noopener">FixThePhoto · Frequency Separation Collection</a> — 整組免費。</li>
+      <li><a href="https://photodiva.net/free-photoshop-actions-for-portraits.php" target="_blank" rel="noopener">PhotoDiva · 80 支人像動作</a> — 量多要挑。</li>
+    </ul>
+    <h3>付費 AI 外掛</h3>
+    <ul>
+      <li><b>Retouch4me</b>：單模組買 — Heal、Dodge &amp; Burn、Skin Tone、Mattifier、Eye Brilliance、White Teeth、Portrait Volumes、Clean Backdrop、Fabric、Stray Hair。全自動、可錄進動作批次。</li>
+      <li><b>Imagenomic Portraiture 4</b>：只做皮膚，一支搞定。</li>
+      <li><b>Luminar Neo</b>（已裝）：可當 PS 外掛，換天空／人像 AI。</li>
+    </ul>
+    <h3>PS 內建但很多人沒開</h3>
+    <ul><li>Neural Filters：皮膚平滑、超級縮放、照片修復、色彩轉移（第一次要按下載模型）。</li><li>Camera Raw 自適應預設：自己找人臉／天空／主體套設定。</li><li>移除工具＋生成填色。</li></ul>
+    <h3>腳本包（GitHub）</h3>
+    <ul>
+      <li><a href="https://github.com/creold/photoshop-scripts" target="_blank" rel="noopener">creold/photoshop-scripts</a> — 批次、圖層、匯出。</li>
+      <li><a href="https://github.com/mcgraths/camera-raw-reprocess" target="_blank" rel="noopener">mcgraths/camera-raw-reprocess</a> — 同一張 RAW 用 Camera Raw 出多版本疊圖層。</li>
+      <li><a href="https://github.com/iamakshk/Photoshop-Scripts" target="_blank" rel="noopener">iamakshk/Photoshop-Scripts</a> — 相容到 PS 2025 的批次腳本集。</li>
+    </ul>
+    <h3>LUT／預設</h3>
+    <p>風格檔庫已有 489 支 cube（影片）＋ 576 支 xmp（照片預設，Camera Raw 直接吃），不用另外找；線上目錄見 <a href="./grid-style-library.html">風格目錄</a>。</p>
+    <div class="tip">💡 <b>小貼士</b>：搜尋結果裡的「破解版」「Portable 版」一律跳過。要裝哪個免費動作包跟 Robert 說，會抓進風格檔庫並裝進你的 PS。</div>
+  </div>
+
+  <h2 id="cli">⌘ 引擎指令（給 Robert，James 不用記）</h2>
+  <div class="card">
+<pre>tools/bin/LifedayEnhance [--max 1280] [--q 0.8] --profile portrait|landscape|architecture|food|art|auto &lt;in&gt; &lt;out&gt;
+tools/bin/LifedayEnhance --list pairs.txt      # 每行「輸入&lt;TAB&gt;輸出[&lt;TAB&gt;主題]」，整批一個行程
+# lifeday_site.py 自動對應：人像→portrait 風景→landscape 食物→food 創作→art 其他→auto
+# 強度改了要全站重做：python3 lifeday_site.py --no-sync --rebuild-photos && ./lifeday_publish.sh</pre>
+    <p style="color:var(--muted);font-size:.84rem">Cloudflare 對圖片快取 4 小時，重跑後手機最晚 4 小時看到新圖。原始碼 <code>tools/bin/LifedayEnhance.swift</code>，配方表在 <code>PROFILES</code>。</p>
+  </div>
+
+  <h2 id="log">📜 變更紀錄</h2>
+  <div class="card">
+    <ul>
+      <li><b>2026-09-30</b> 初版。James：「攝影主題對應建築、風光、人像、食物、藝術，好好擴充這段技能」。引擎加五主題配方＋生活記事版分類自動對應；全站 1,228 張重跑；Photoshop 自動色調對比過後決定內建當預設；人像美肌改頻率分離（dennisbrian/retouch 的作法，該專案已下架）。</li>
+    </ul>
+  </div>
+
+  <footer>PhotoNB · 主題修圖技能庫 · 單一現行版，配方改了只改這一頁＋引擎 PROFILES · Robert 維護</footer>
+</div>
+</body>
+</html>
