@@ -3,6 +3,7 @@
 #
 # 走 Tailscale（100.91.38.104 = james-tang），不經公網。
 # 2026-08-27 起用專屬帳號 robert（金鑰 ~/.ssh/robert_mjapp_ed25519）：無 sudo、只能寫 /var/www/jtphr。
+# reel 素材預覽檔（proxy/）由 reel_sync.py 直接 rsync 上主機、不進 git，所以 --delete 要排除。
 # 群組 setgid 已設好，rsync 後不需 chown（root 已退場）。2026-09-30：新建資料夾要 g+w（--chmod），否則下次 rsync 進同一夾會 Permission denied（reel/ 縮圖夾踩過）。
 # 只碰 /var/www/jtphr —— 那台還有 rubykingland/jtai/jtkb 三個站，別動（James 2026-08-26 授權範圍）。
 # Vercel 照舊保留（publish-photonb.sh 推 GitHub 後 Vercel 自動更新），這支是第二條腿。
@@ -14,6 +15,7 @@ echo "🔨 build…"
 bun run build >/dev/null
 echo "📤 rsync → $SRV:/var/www/jtphr"
 rsync -rlz --delete --omit-dir-times --no-perms --no-owner --no-group --chmod=Dg+w,Fg+w \
+  --exclude 'photonb/jtlifeday/reel/*/proxy/' \
   -e "ssh -i $KEY -o StrictHostKeyChecking=no -o LogLevel=ERROR -o ServerAliveInterval=10" \
   --timeout=90 --partial \
   dist/ "$SRV":/var/www/jtphr/
