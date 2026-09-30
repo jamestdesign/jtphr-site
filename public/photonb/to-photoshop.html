@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>to photoshop（場景） · to_photoshop · PhotoNB</title>
+  <meta name="description" content="出片流程新工序：scene_build 後、to_export 前，James 在 LR 給色標＋_pick，Robert 把該場景 RAW 送進 Photoshop 自動化（Camera Raw 讀 LR 調整＋主題動作），TIFF 回 Photoshopfu/ 接回 LR。" />
+  <meta name="date" content="2026-09-30" />
+  <style>
+    :root{--navy:#0b1022;--navy2:#141c38;--gold:#d8b65a;--gold2:#f3df9b;--ink:#f4f1e8;--muted:#aeb6cc;--line:rgba(216,182,90,.3);--panel:rgba(255,255,255,.04);--green:#5bd48a;--red:#e9758a;--tip:#ffd977;}
+    *{box-sizing:border-box;} html,body{overflow-x:hidden;}
+    body{margin:0;background:radial-gradient(120% 80% at 50% -8%,#1a2447,var(--navy) 55%,#070b18);color:var(--ink);font-family:'Noto Sans TC','Helvetica Neue',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+    a{color:var(--gold);} .wrap{max-width:760px;margin:0 auto;padding:1.2rem 16px 5rem;}
+    .back{color:var(--gold);text-decoration:none;font-size:.82rem;} .eyebrow{color:var(--gold);letter-spacing:.34em;font-size:.7rem;text-transform:uppercase;margin:1.4rem 0 .2rem;}
+    h1{margin:.1rem 0 .3rem;font-size:clamp(1.7rem,5.5vw,2.3rem);} h1 .en{color:var(--gold2);font-family:ui-monospace,Menlo,monospace;font-size:.55em;letter-spacing:.02em;}
+    .lead{color:var(--muted);margin:.2rem 0 1.4rem;}
+    h2{color:var(--gold);font-size:1.02rem;letter-spacing:.06em;border-bottom:1px solid var(--line);padding-bottom:.45rem;margin:2rem 0 .8rem;}
+    code{background:#0007;border:1px solid var(--line);border-radius:6px;padding:.08em .45em;color:var(--gold2);font-size:.9em;}
+    pre{background:#060a16;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;overflow-x:auto;font-family:ui-monospace,Menlo,monospace;font-size:.83rem;color:#dfe6f2;line-height:1.55;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;margin:.8rem 0;}
+    ul,ol{padding-left:1.2rem;} li{margin:.3rem 0;}
+    .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.86rem;margin:.4rem 0 .2rem;} .flow b{background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:.3rem .6rem;color:var(--gold2);} .flow i{color:var(--gold);font-style:normal;}
+    .ok{color:var(--green);} .bad{color:var(--red);}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0;} td,th{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top;} th{color:var(--gold);font-weight:600;white-space:nowrap;} .tw{overflow-x:auto;}
+    .tip{background:rgba(255,217,119,.08);border:1px solid rgba(255,217,119,.45);border-radius:12px;padding:.7rem .9rem;font-size:.86rem;margin:.7rem 0;color:#fff3c9;} .tip b{color:var(--tip);}
+    footer{margin-top:2.4rem;color:var(--muted);font-size:.75rem;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./dashboard.html">← 儀表板</a>
+  <div class="eyebrow">PhotoNB · Pipeline Step</div>
+  <h1>to photoshop（場景） <span class="en">to_photoshop</span></h1>
+  <p class="lead">出片流程多一站：scene_build 歸檔後、to_export 前，James 在 LR 重評選片、給色標＋_pick，說一句「to photoshop 某場景」，Robert 把該場景的 RAW 送進 Photoshop 自動化，成品回到場景底下的 <code>Photoshopfu/</code>，James 回 LR 看效果決定出圖。James 2026-09-30 拍板。</p>
+
+  <h2>在流程裡的位置</h2>
+  <div class="card">
+    <div class="flow"><b>scene_build 歸檔</b><i>→</i><b>LR 重評選片・色標・_pick</b><i>→</i><b>Cmd+S 存中繼資料</b><i>→</i><b>to photoshop（場景）</b><i>→</i><b>LR 同步資料夾看 Photoshopfu 版</b><i>→</i><b>to_export</b></div>
+    <p style="color:var(--muted);font-size:.86rem">跟 <a href="./gear-settings.html">to_evoto</a> 同一層、同一種走法（編輯版放子資料夾、原檔去 P、新檔接 P）。差別是 Photoshop 直接吃 RAW，所以不用先出 JPG。</p>
+  </div>
+
+  <h2>James 要做的（每個場景）</h2>
+  <div class="card">
+    <ol>
+      <li>LR 裡看 Robert 的選片，照主題給<b>色標</b>、要修的打 <b>_pick</b> 關鍵字（可以順手做簡單調整：曝光、白平衡、裁切都行）。</li>
+      <li>選取這個場景的照片 → <b>Cmd+S</b>（中繼資料 → 儲存至檔案）。這步一定要，Photoshop 才吃得到你的調整；我們沒開自動寫回。</li>
+      <li>跟 Robert 說：<code>to photoshop 02_1435_金閣寺</code>（場景資料夾名）。</li>
+      <li>Robert 跑完回報 → 你在 LR 對這個場景「<b>同步資料夾</b>」＋「<b>從檔案讀取中繼資料</b>」，Photoshopfu 版就進來（帶原本的星等、色標、關鍵字，多一個 <code>photoshop</code>）。</li>
+      <li>滿意 → to_export；不滿意 → 說哪個主題要調什麼，Robert 改動作重跑。</li>
+    </ol>
+    <div class="tip">💡 <b>小貼士</b>：Photoshop 開 RAW 走的是 Camera Raw，跟 LR 同一顆顯影引擎、讀同一份 XMP，所以你在 LR 做的調整會原封不動帶進去，PS 只是在上面再加主題動作。</div>
+  </div>
+
+  <h2>色標 → 主題 → 動作</h2>
+  <div class="card">
+    <div class="tw"><table>
+      <tr><th>色標</th><th>主題</th><th>動作名（動作集 Lifeday）</th><th>動作內容（建議）</th></tr>
+      <tr><td>🔴 紅色</td><td>人像（正臉）</td><td><code>Portrait</code></td><td>Neural Filters 皮膚平滑 50／50 → 微暖</td></tr>
+      <tr><td>🟡 黃色</td><td>人物（側臉、背影）</td><td><code>People</code></td><td>輕度皮膚平滑 30 → 背景清晰度</td></tr>
+      <tr><td>🟢 綠色</td><td>景物（風光）</td><td><code>Landscape</code></td><td>Camera Raw 濾鏡：去朦朧 +15、清晰度 +15、亮部 −20</td></tr>
+      <tr><td>🔵 藍色</td><td>建物</td><td><code>Architecture</code></td><td>Camera Raw 濾鏡：清晰度 +25、飽和 −8、幾何校正垂直 → 都市冷調</td></tr>
+      <tr><td>🟣 紫色</td><td>藝術</td><td><code>Art</code></td><td>不加東西，只留 Camera Raw 顯影</td></tr>
+      <tr><td>關鍵字 <code>食物</code></td><td>食物（蓋過色標）</td><td><code>Food</code></td><td>Camera Raw 濾鏡：色溫 +5、鮮豔 +15、陰影 +10</td></tr>
+    </table></div>
+    <p style="color:var(--muted);font-size:.84rem">動作還沒錄的主題，工具只做 Camera Raw 顯影（不亂加）。錄法：視窗 → 動作 → 新增動作集 <code>Lifeday</code> → 新增動作（照上表取名）→ 記錄 → 做一次 → 停止。錄好一次，之後每個場景全自動。</p>
+    <div class="tip">💡 <b>小貼士</b>：每個主題「該修什麼」的完整說明在 <a href="./retouch-by-subject.html">主題修圖技能庫</a>；免費動作包也在那頁，要裝哪個跟 Robert 說。</div>
+  </div>
+
+  <h2>Robert 這邊做的</h2>
+  <div class="card">
+    <ul>
+      <li>讀場景每張的 XMP（RAW 看旁邊 <code>.xmp</code>，JPG／DNG 看內嵌）：色標、關鍵字、星等。只挑有 <code>_pick</code> 的。</li>
+      <li>Photoshop：Camera Raw 開 RAW（16-bit、ProPhoto RGB）→ 跑對應動作 → 存 <b>TIFF（ZIP 壓縮、無圖層、嵌描述檔）</b> 到 <code>&lt;場景&gt;/Photoshopfu/&lt;檔名&gt;.tif</code>。</li>
+      <li>新檔寫回星等／色標／關鍵字（＋<code>photoshop</code>、＋<code>_pick</code>），原檔的 .xmp 去掉 <code>_pick</code>。TIFF 裡不留 Camera Raw 調整參數（已烤進像素，留著 LR 會再套一次）。</li>
+      <li>回報：幾張完成、哪個主題動作有套／沒錄。</li>
+    </ul>
+<pre>tools/to_photoshop.py "&lt;場景資料夾&gt;" [--all] [--dry] [--keep-pick]
+  --all        整場景有色標的都做（不只 _pick）
+  --dry        只列要做哪些、對到哪個動作，不開 PS
+  --keep-pick  原檔 .xmp 的 _pick 不拿掉</pre>
+    <p style="color:var(--muted);font-size:.84rem">實測：A7R V 的 ARW（61MP）一張約 7 秒，TIFF 16-bit 約 260–290 MB／張。Photoshop 要開著。</p>
+  </div>
+
+  <h2>已知限制</h2>
+  <div class="card">
+    <ul>
+      <li>LR 的「旗標」（Pick）寫不進 XMP，所以用 <code>_pick</code> 關鍵字當交接記號（跟 A 方案一樣）。</li>
+      <li>Neural Filters 腳本叫不到，只能靠錄好的動作；第一次用要在 PS 裡按一次「下載模型」。</li>
+      <li>TIFF 16-bit 檔大；想小一點可以說改 8-bit 或 JPG。</li>
+    </ul>
+  </div>
+
+  <h2>📜 變更紀錄</h2>
+  <div class="card"><ul><li><b>2026-09-30</b> 初版。James 提出「scene build 後我在 LR 重評選片給色標＋_pick，先不出圖，給你 photoshop 自動化，回存 LR 我再看」→ 定義為 to photoshop（場景）；蘇州兩張 ARW 實測通過（紅→Portrait、綠→Landscape，動作未錄只做 Camera Raw）。</li></ul></div>
+
+  <footer>PhotoNB · to photoshop（場景） · 單一現行版 · Robert 維護</footer>
+</div>
+</body>
+</html>
