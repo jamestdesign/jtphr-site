@@ -173,7 +173,14 @@ function drawCal(){ if(!calOpen){CAL.classList.remove('open');return;} CAL.class
 }
 document.getElementById('calbtn').onclick=()=>{ calOpen=!calOpen; if(calOpen){ const days=[...daysWithPosts().keys()].sort(); if(days.length&&!curDay){ const last=days[days.length-1]; calY=+last.slice(0,4); calM=+last.slice(5,7)-1; } } drawCal(); };
 const LB=document.getElementById('lb'),BOX=document.getElementById('lbbox'),CAP=document.getElementById('lbcap');let G=[],GI=0;
-function openLB(e,n){const base=e.base||('img/'+e.date+'/');G=e.photos.map(p=>({src:base+p.f,video:p.video?base+p.video:null,cap:p.cap}));if(e.grid)G.push({src:base+e.grid,video:null,cap:'拼貼'});(e.album||[]).forEach(p=>G.push({src:base+p.f,video:null,cap:(p.r?'★'.repeat(+p.r)+'　':'')+(p.cap||p.name||'')}));(e.clips||[]).forEach(x=>G.push({src:base+x.f,video:null,cap:x.title||''}));GI=n;LB.style.display='flex';showLB();}
+function openLB(e,n){const base=e.base||('img/'+e.date+'/');const all=[];const hasSec=e.photos.slice(1).some(p=>p.sec);
+ // 2026-10-02 James「隱藏的打開大圖還是滑得到」：燈箱只串目前看得到的（初選合格＋已展開備選／編輯中的那群）
+ const vis=(p,g)=>p.pick!==false||SHOWBK.has(e.id+':'+g)||EDITG===e.id+':'+g;
+ e.photos.forEach((p,k)=>{const g=k===0?'':(hasSec?(p.sec||'其他'):'all');if(k===0||vis(p,g))all.push({n:k,src:base+p.f,video:p.video?base+p.video:null,cap:p.cap});});
+ const gN=e.photos.length;if(e.grid)all.push({n:gN,src:base+e.grid,video:null,cap:'拼貼'});const aN=gN+(e.grid?1:0);
+ (e.album||[]).forEach((p,k)=>{if(vis(p,'album'))all.push({n:aN+k,src:base+p.f,video:null,cap:(p.r?'★'.repeat(+p.r)+'　':'')+(p.cap||p.name||'')});});
+ const cN=aN+(e.album||[]).length;(e.clips||[]).forEach((x,k)=>all.push({n:cN+k,src:base+x.f,video:null,cap:x.title||''}));
+ G=all;GI=Math.max(0,all.findIndex(x=>x.n===n));LB.style.display='flex';showLB();}
 function showLB(){const g=G[GI];BOX.innerHTML=g.video?`<video src="${g.video}" poster="${g.src}" controls autoplay playsinline loop></video>`:`<img src="${g.src}" alt="">`;CAP.textContent=(GI+1)+' / '+G.length+'　'+g.cap;}
 function stepLB(d){GI=(GI+d+G.length)%G.length;showLB();}
 function closeLB(){LB.style.display='none';BOX.innerHTML='';}
