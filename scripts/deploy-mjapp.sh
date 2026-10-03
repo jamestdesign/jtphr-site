@@ -13,6 +13,8 @@ SRV=robert@100.91.38.104
 KEY=~/.ssh/robert_mjapp_ed25519
 echo "🔨 build…"
 bun run build >/dev/null
+# 2026-10-04：新資料夾的 ACL mask 會回到 r-x（rsync 建資料夾時的 mode）→ robert 下次寫不進去。rsync 前用 root 把 mask 拉回 rwx（只動 /var/www/jtphr）
+ssh -o ConnectTimeout=15 -o LogLevel=ERROR root@100.91.38.104 "setfacl -R -m m::rwx,g::rwx /var/www/jtphr/photonb 2>/dev/null; true" || true
 echo "📤 rsync → $SRV:/var/www/jtphr"
 rsync -rlz --delete --omit-dir-times --no-perms --no-owner --no-group --chmod=Dg+w,Fg+w \
   --exclude 'photonb/jtlifeday/reel/*/proxy/' \
