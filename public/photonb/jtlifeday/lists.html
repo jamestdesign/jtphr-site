@@ -55,6 +55,7 @@ const chips=(name,vals,curv,set)=>`<div class="bar"><span class="lb">${name}</sp
 function form(){const r=editing||{kind:'想去',who:[],tags:[]};const w=r.who||[];return `<form class="f" id="lf"><h3>${editing?'✎ 編輯':'＋ 新增'}</h3>
  <label>類型<select name="kind">${(KINDS.includes(r.kind)?KINDS:[r.kind,...KINDS]).map(k=>`<option ${k===r.kind?'selected':''}>${esc(k)}</option>`).join('')}</select></label>
  <label>期限<input name="due" type="date" value="${esc(r.due||'')}"></label>
+ <label>週期追蹤（天）<input name="repeat_days" type="number" min="0" step="1" value="${esc(r.repeat_days||'')}" placeholder="例：60＝每兩個月；空白＝一次性"></label>
  <label class="full">標題<input name="title" value="${esc(r.title||'')}" required placeholder="店名／東西／要做的事"></label>
  <label class="full">地點<input name="place" value="${esc(r.place||'')}"></label>
  <label class="full">連結<input name="url" value="${esc(r.url||'')}" placeholder="https://"></label>
@@ -64,11 +65,11 @@ function form(){const r=editing||{kind:'想去',who:[],tags:[]};const w=r.who||[
  <div class="ops">${editing?`<span class="note">#${editing.id}</span>`:''}<button type="button" id="lfx">取消</button><button type="submit" class="pri">${editing?'儲存':'新增'}</button></div></form>`;}
 function card(it){const adm=isAdmin();const done=it.status!=='open';const src=it.src_entry_id?`<div class="src"><a href="./#d-${esc(it.src_entry_id.slice(0,10))}">📓 記事 ${esc(it.src_entry_id.slice(0,10))}</a></div>`:'';
  return `<div class="it ${done?'done':''}" data-id="${it.id}">${adm&&it.src_img?`<img src="${esc(it.src_img)}" loading="lazy" alt="">`:''}<div class="ct">
-  <div class="top"><span class="kind">${esc(it.kind)}</span>${whoLabel(it.who)}${dueBadge(it)}${it.status==='dropped'?'<span class="badge b-ok">放棄</span>':''}</div>
+  <div class="top"><span class="kind">${esc(it.kind)}</span>${whoLabel(it.who)}${dueBadge(it)}${it.repeat_days?`<span class="badge b-ok">🔁 每 ${it.repeat_days} 天${it.last_done?' · 上次 '+esc(it.last_done.slice(5)):''}</span>`:''}${it.status==='dropped'?'<span class="badge b-ok">放棄</span>':''}</div>
   <div class="tt">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)} ↗</a>`:esc(it.title)}</div>
   ${it.place?`<div class="pl">📍 ${esc(it.place)}</div>`:''}${it.note?`<div class="nt">${esc(it.note)}</div>`:''}
   ${it.tags.length?`<div class="tg">${it.tags.map(t=>`<span>#${esc(t)}</span>`).join('')}</div>`:''}${src}
-  ${adm?`<div class="ops">${done?`<button data-reopen="${it.id}">↩ 恢復</button>`:`<button data-done="${it.id}" class="pri">✓ 完成</button><button data-drop="${it.id}">放棄</button>`}<button data-edit="${it.id}">✎</button><button data-del="${it.id}" class="danger">🗑</button></div>`:''}
+  ${adm?`<div class="ops">${done?`<button data-reopen="${it.id}">↩ 恢復</button>`:`<button data-done="${it.id}" class="pri">${it.repeat_days?'✓ 這次完成（下次 +'+it.repeat_days+' 天）':'✓ 完成'}</button><button data-drop="${it.id}">放棄</button>`}<button data-edit="${it.id}">✎</button><button data-del="${it.id}" class="danger">🗑</button></div>`:''}
  </div></div>`;}
 function render(){const adm=isAdmin();
  const kinds=[...new Set([...KINDS.filter(k=>ITEMS.some(i=>i.kind===k)),...ITEMS.map(i=>i.kind)])];
@@ -88,7 +89,7 @@ function render(){const adm=isAdmin();
  const Q=document.getElementById('q');if(Q){let t=null;Q.oninput=()=>{clearTimeout(t);t=setTimeout(()=>{q=Q.value.trim().toLowerCase();const pos=Q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos);},220);};}
  A.querySelectorAll('.it img').forEach(im=>im.onclick=()=>{document.getElementById('lbimg').src=im.src;document.getElementById('lb').style.display='flex';});
  if(!adm)return;
- const fd=f=>{const o={};new FormData(f).forEach((v,k)=>{if(!k.startsWith('who_'))o[k]=v;});o.who=GUESTS.filter(g=>f.querySelector(`input[name=who_${g}]`).checked);o.tags=(o.tags||'').split(/[,，]/).map(s=>s.trim()).filter(Boolean);if(!o.due)o.due=null;return o;};
+ const fd=f=>{const o={};new FormData(f).forEach((v,k)=>{if(!k.startsWith('who_'))o[k]=v;});o.who=GUESTS.filter(g=>f.querySelector(`input[name=who_${g}]`).checked);o.tags=(o.tags||'').split(/[,，]/).map(s=>s.trim()).filter(Boolean);if(!o.due)o.due=null;o.repeat_days=o.repeat_days?+o.repeat_days:null;return o;};
  const closeForm=()=>{formOpen=false;editing=null;render();};const openForm=()=>{formOpen=true;render();const t=document.querySelector('#lf input[name=title]');if(t&&!editing)t.focus();};
  document.getElementById('addbtn').onclick=()=>{editing=null;openForm();};
  const M=document.getElementById('modal');M.onclick=ev=>{if(ev.target===M)closeForm();};
@@ -96,7 +97,7 @@ function render(){const adm=isAdmin();
  lf.onsubmit=async ev=>{ev.preventDefault();const o=fd(lf);try{if(editing)await api('PATCH','/lists/'+editing.id,o);else await api('POST','/lists',o);formOpen=false;editing=null;await reload();}catch(e){alert('沒存成功：'+e.message);}};
  const find=id=>ITEMS.find(x=>x.id==id);
  A.querySelectorAll('button[data-edit]').forEach(b=>b.onclick=()=>{editing=find(b.dataset.edit);openForm();});
- A.querySelectorAll('button[data-done]').forEach(b=>b.onclick=async()=>{try{await api('PATCH','/lists/'+b.dataset.done,{status:'done'});await reload();}catch(e){alert(e.message);}});
+ A.querySelectorAll('button[data-done]').forEach(b=>b.onclick=async()=>{try{const r=await api('PATCH','/lists/'+b.dataset.done,{status:'done'});await reload();if(r.repeat_days)alert('記下這次完成，下次提醒 '+r.due);}catch(e){alert(e.message);}});
  A.querySelectorAll('button[data-drop]').forEach(b=>b.onclick=async()=>{const it=find(b.dataset.drop);if(!confirm(`「${it.title}」標成放棄？`))return;try{await api('PATCH','/lists/'+it.id,{status:'dropped'});await reload();}catch(e){alert(e.message);}});
  A.querySelectorAll('button[data-reopen]').forEach(b=>b.onclick=async()=>{try{await api('PATCH','/lists/'+b.dataset.reopen,{status:'open'});await reload();}catch(e){alert(e.message);}});
  A.querySelectorAll('button[data-del]').forEach(b=>b.onclick=async()=>{const it=find(b.dataset.del);if(!confirm(`刪掉「${it.title}」？`))return;try{await api('DELETE','/lists/'+it.id);await reload();}catch(e){alert(e.message);}});
