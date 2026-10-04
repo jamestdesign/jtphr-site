@@ -41,7 +41,7 @@ footer{color:var(--muted);font-size:.72rem;text-align:center;margin-top:3rem;let
 <script>
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const BASE='img/x/',GUESTS=['EVA','LI','HU'],VISL={public:'🌐 公開',login:'🔒 登入才看',audience:'👥 指定同行'},WD=['日','一','二','三','四','五','六'];
-let ME=null,E=[],PH=[],ALB=[],CUR=[],SEL=new Set(),selMode=false,LBI=-1,ALBUM=null,WHO='全部';
+let ALLPH=[],BKN=0,SHOWBKG=false,ME=null,E=[],PH=[],ALB=[],CUR=[],SEL=new Set(),selMode=false,LBI=-1,ALBUM=null,WHO='全部';
 try{WHO=localStorage.getItem('gal_who')||'全部';}catch(e){}
 const hasWho=(p,g)=>new RegExp('(^|[^A-Z])'+g+'([^A-Z]|$)').test(p.people||'');
 const A=document.getElementById('app'),K=document.getElementById('keybtn');
@@ -51,9 +51,10 @@ const toast=t=>{const x=document.getElementById('toast');x.textContent=t;x.class
 const dlabel=d=>{const dt=new Date(d+'T00:00:00');return `${+d.slice(5,7)}/${+d.slice(8,10)} 週${WD[dt.getDay()]}`;};
 async function boot(){const j=await api('GET','/lifeday/entries');ME=j.me&&j.me.name?j.me:null;E=j.entries;K.textContent=ME?('🔓 '+ME.name):'🔑 登入';
  document.getElementById('listslink').style.display=ME?'inline':'none';document.getElementById('ledgerlink').style.display=isAdmin()?'inline':'none';document.getElementById('reellink').style.display=isAdmin()?'inline':'none';
- PH=[];E.forEach(e=>{const b=e.base||BASE;(e.photos||[]).forEach(p=>PH.push({eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.cap||'',face:!!p.face,video:p.video?b+p.video:null,vf:p.video||null,r:p.r||0,sec:p.sec||'其他',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));
-  (e.album||[]).forEach(p=>PH.push({eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.name||'',face:false,video:null,vf:null,r:p.r||0,sec:'相簿',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));});
+ PH=[];E.forEach(e=>{const b=e.base||BASE;(e.photos||[]).forEach((p,k)=>PH.push({bk:k>0&&p.pick===false,eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.cap||'',face:!!p.face,video:p.video?b+p.video:null,vf:p.video||null,r:p.r||0,sec:p.sec||'其他',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));
+  (e.album||[]).forEach(p=>PH.push({bk:p.pick===false,eid:e.id,date:e.date,title:e.title||'',f:p.f,url:b+p.f,cap:p.name||'',face:false,video:null,vf:null,r:p.r||0,sec:'相簿',cat:e.category||'生活',trip:e.trip||'',people:e.people||''}));});
  PH.sort((a,b)=>b.date.localeCompare(a.date)||a.eid.localeCompare(b.eid));
+ ALLPH=PH;BKN=PH.filter(x=>x.bk).length;try{SHOWBKG=localStorage.getItem('gal_bk')==='1';}catch(e){}PH=SHOWBKG?ALLPH:ALLPH.filter(x=>!x.bk);   // 2026-10-04 James：圖庫跟記事一樣，備選不顯示不計數
  try{ALB=(await api('GET','/albums')).albums;}catch(e){ALB=[];}
  route();}
 K.onclick=async()=>{if(ME){if(confirm('登出？')){await fetch('/api/logout',{method:'POST'});location.reload();}return;}
@@ -71,11 +72,12 @@ function viewTimeline(){const whos=GUESTS.filter(g=>PH.some(p=>hasWho(p,g)));if(
  CUR=WHO==='全部'?PH:PH.filter(p=>hasWho(p,WHO));const months=[];CUR.forEach(p=>{const m=p.date.slice(0,7);if(!months.includes(m))months.push(m);});
  let h=tabs('tl');if(!PH.length){h+='<p class="empty">還沒有看得到的照片。'+(ME?'':'登入後會多很多。')+'</p>';A.innerHTML=h;bind();return;}
  if(whos.length)h+=`<div class="bar"><span class="note">👥</span>${['全部',...whos].map(g=>`<button data-w="${g}" class="${g===WHO?'on':''}">${g}</button>`).join('')}</div>`;
- h+=`<div class="bar"><span class="note">${CUR.length} 張${WHO==='全部'?' · '+E.length+' 篇記事':' · 跟 '+esc(WHO)+' 同行'}${ME?'':' · 只看到公開篇'}</span>${isAdmin()?'<button id="selbtn">☑ 選取</button>':''}</div>`;
+ h+=`<div class="bar">${BKN?`<button id="bkbtn" class="${SHOWBKG?'on':''}">${SHOWBKG?'隱藏備選':'顯示備選 '+BKN}</button>`:''}<span class="note">${CUR.length} 張${WHO==='全部'?' · '+E.length+' 篇記事':' · 跟 '+esc(WHO)+' 同行'}${ME?'':' · 只看到公開篇'}</span>${isAdmin()?'<button id="selbtn">☑ 選取</button>':''}</div>`;
  h+=`<div class="months">${months.map(m=>`<button data-m="${m}">${+m.slice(5,7)} 月<small style="opacity:.6"> ${m.slice(2,4)}</small></button>`).join('')}</div>`;
  months.forEach(m=>{const list=CUR.map((p,i)=>[p,i]).filter(([p])=>p.date.startsWith(m));h+=`<section class="m" id="m-${m}"><h3>${m.slice(0,4)} 年 ${+m.slice(5,7)} 月<small>${list.length} 張</small></h3><div class="grid">${(()=>{let g='',last='';list.forEach(([p,i])=>{if(p.date+p.eid!==last){last=p.date+p.eid;const n=list.filter(([x])=>x.date===p.date&&x.eid===p.eid).length;g+=`<div class="day"><b>${dlabel(p.date)}</b>${esc(p.title)} <span>· ${n} 張</span></div>`;}g+=tile(p,i);});return g;})()}</div></section>`;});
  A.innerHTML=h;bind();
  A.querySelectorAll('.months button').forEach(b=>b.onclick=()=>{const s=document.getElementById('m-'+b.dataset.m);if(s)s.scrollIntoView({behavior:'smooth',block:'start'});});
+ const bkb=document.getElementById('bkbtn');if(bkb)bkb.onclick=()=>{SHOWBKG=!SHOWBKG;try{localStorage.setItem('gal_bk',SHOWBKG?'1':'0')}catch(e){}PH=SHOWBKG?ALLPH:ALLPH.filter(x=>!x.bk);viewTimeline();};
  A.querySelectorAll('button[data-w]').forEach(b=>b.onclick=()=>{WHO=b.dataset.w;try{localStorage.setItem('gal_who',WHO)}catch(e){}exitSel();viewTimeline();});}
 function autoGroups(){const by=(key,label)=>{const m={};PH.forEach(p=>{const k=key(p);if(!k)return;(m[k]=m[k]||[]).push(p);});return Object.entries(m).map(([k,v])=>({k,label:label?label(k):k,cover:v[0],n:v.length}));};
  const entries=[];const seen=new Set();PH.forEach(p=>{if(seen.has(p.eid))return;seen.add(p.eid);const v=PH.filter(x=>x.eid===p.eid);entries.push({k:p.eid,label:p.title||p.date,sub:p.date,cover:v[0],n:v.length});});
